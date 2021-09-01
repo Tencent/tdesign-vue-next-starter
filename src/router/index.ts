@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import routeConfig from '@/config/routes';
 
 const layoutModules = import.meta.glob('../layouts/*');
@@ -35,13 +35,13 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(''),
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior() {
     return {
       el: '#app',
       top: 0,
       behavior: 'smooth',
-    }
+    };
   },
-})
-export default router
+});
+export default router;
 

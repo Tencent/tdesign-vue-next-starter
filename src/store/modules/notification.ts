@@ -53,8 +53,8 @@ const mutations = {
 };
 
 const getters = {
-  unreadMsg: (state) => state.msgData.filter((item) => item.status),
-  readMsg: (state) => state.msgData.filter((item) => !item.status),
+  unreadMsg: state => state.msgData.filter(item => item.status),
+  readMsg: state => state.msgData.filter(item => !item.status),
 };
 
 const actions = {};
