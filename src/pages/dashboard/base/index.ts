@@ -46,11 +46,9 @@ export function constructInitDataset(dateTime: Array<string> = []) {
       // console.log('dateAbsTime..', dateAbsTime, enhandTime);
       timeArray.push(dayjs(enhandTime).format('YYYY-MM-DD'));
     } else {
-      timeArray.push(
-        dayjs()
-          .subtract(divideNum - i, 'day')
-          .format('YYYY-MM-DD'),
-      );
+      timeArray.push(dayjs()
+        .subtract(divideNum - i, 'day')
+        .format('YYYY-MM-DD'));
     }
 
     inArray.push(getRandomNum().toString());
@@ -192,7 +190,7 @@ export function getAreaChartDataSet(text = ''): any {
     area: {
       smooth: true,
     },
-    injectOption: (option) => ({ ...option, color: chartListColor }),
+    injectOption: option => ({ ...option, color: chartListColor }),
   };
 }
 
@@ -222,7 +220,7 @@ export function getColumnChartDataSet(isMonth = false): any {
           getRandomNum(Math.random() * 100),
         ],
       ],
-      injectOption: (option) => ({ ...option, color: chartListColor }),
+      injectOption: option => ({ ...option, color: chartListColor }),
     };
   }
   return {
@@ -242,7 +240,7 @@ export function getColumnChartDataSet(isMonth = false): any {
         getRandomNum(Math.random() * 100),
       ],
     ],
-    injectOption: (option) => ({ ...option, color: chartListColor }),
+    injectOption: option => ({ ...option, color: chartListColor }),
   };
 }
 
@@ -262,7 +260,7 @@ export function getPieChartDataSet(radius = 42): any {
       ['状态', '审核中', '待履行', '履行中', '已完成'],
       ['数量', 67, 45, radius, 36],
     ],
-    injectOption: (option) => ({ ...option, color: chartListColor }),
+    injectOption: option => ({ ...option, color: chartListColor }),
     pie: {
       radius: ['45%', '60%'], // 设置内圆和外圆半径
     },

@@ -306,7 +306,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { prefix } from '@/config/global';
+import { Prefix as prefix } from '@/config/global';
 // 导入样式
 import './index.less';
 

@@ -25,12 +25,21 @@
   </card>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import Card from '@/components/card/index.vue';
 export default defineComponent({
   name: 'Result',
   components: { Card },
-  props: ['bgUrl', 'tip', 'linkUrl', 'pageHeader'],
+  props: {
+    bgUrl: {
+      type: String as PropType<string>,
+      default: '',
+    },
+    tip: {
+      type: String as PropType<string>,
+      default: '',
+    },
+  },
 });
 </script>
 <style lang="less" scoped>

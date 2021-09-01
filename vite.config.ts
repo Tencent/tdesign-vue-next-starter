@@ -1,12 +1,12 @@
-import { defineConfig } from 'vite'
-import { viteMockServe } from 'vite-plugin-mock';
-const HttpProxyAgent = require('http-proxy-agent');
+import { defineConfig } from 'vite';
+// import { viteMockServe } from 'vite-plugin-mock';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
-import vue from '@vitejs/plugin-vue'
-const path = require('path');
+import vue from '@vitejs/plugin-vue';
 
-import proxy from './src/config/proxy';
+// import proxy from './src/config/proxy';
+// const HttpProxyAgent = require('http-proxy-agent');
+const path = require('path');
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,9 +19,9 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    vueJsx()
+    vueJsx(),
   ],
   server: {
     port: 3002,
   },
-})
+});
