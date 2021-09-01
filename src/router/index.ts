@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import routeConfig from '@/config/routes';
 
-const layoutModules = import.meta.glob('../layouts/*');
+const layoutModules = import.meta.glob('../Layouts/*');
 const pagesModules = import.meta.glob('../pages/**/*.vue');
 const fristPagesModules = import.meta.glob('../pages/*.vue');
-
 const modules = Object.assign({}, layoutModules, fristPagesModules, pagesModules);
 
 const getMenuRoutes = (list) => {

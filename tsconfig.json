@@ -15,5 +15,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/config/proxy.ts", "src/pages/detail/base/index.js"]
+  "include": ["**/*.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/config/proxy.ts", "src/pages/detail/base/index.js"]
 }
