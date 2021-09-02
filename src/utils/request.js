@@ -17,7 +17,7 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-instance.interceptors.request.use((config) => config);
+instance.interceptors.request.use(config => config);
 
 instance.defaults.retry = 3;
 
