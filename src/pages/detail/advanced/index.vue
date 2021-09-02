@@ -173,10 +173,9 @@
             @click="deleteClickOp(slotProps)"
           >删除</a>
         </template>
-        <t-icon
-          slot="op-column"
-          name="descending-order"
-        />
+        <template #op-column>
+          <t-icon name="descending-order" />
+        </template>
       </t-table>
     </div>
     <t-dialog
@@ -184,7 +183,7 @@
       header="基本信息"
       @confirm="onConfirm"
     >
-      <div slot="body">
+      <template #body>
         <div class="dialog-info-block">
           <div
             v-for="(item, index) in baseInfoData"
@@ -203,14 +202,14 @@
             </span>
           </div>
         </div>
-      </div>
+      </template>
     </t-dialog>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
 import model from './index';
-import { Prefix as prefix } from '@/config/global';
+import { PREFIX as prefix } from '@/config/global';
 
 // 导入样式
 import './index.less';

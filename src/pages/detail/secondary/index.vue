@@ -225,7 +225,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapState, mapGetters } from 'vuex';
-import { Prefix as prefix } from '@/config/global';
+import { PREFIX as prefix } from '@/config/global';
 
 // 导入样式
 import './index.less';

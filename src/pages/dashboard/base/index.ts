@@ -97,7 +97,7 @@ export function getLineChartDataSet(dateTime: Array<string> = []): any {
   ];
 }
 /** 图表颜色 */
-export const chartListColor: Array<string> = ['#0052D9', '#00A870', '#7D46BD', '#0594FA', '#ED7B2F'];
+export const CHART_LIST_COLOR: Array<string> = ['#0052D9', '#00A870', '#7D46BD', '#0594FA', '#ED7B2F'];
 
 /**
  * 获取表头数据
@@ -190,7 +190,7 @@ export function getAreaChartDataSet(text = ''): any {
     area: {
       smooth: true,
     },
-    injectOption: option => ({ ...option, color: chartListColor }),
+    injectOption: option => ({ ...option, color: CHART_LIST_COLOR }),
   };
 }
 
@@ -220,7 +220,7 @@ export function getColumnChartDataSet(isMonth = false): any {
           getRandomNum(Math.random() * 100),
         ],
       ],
-      injectOption: option => ({ ...option, color: chartListColor }),
+      injectOption: option => ({ ...option, color: CHART_LIST_COLOR }),
     };
   }
   return {
@@ -240,7 +240,7 @@ export function getColumnChartDataSet(isMonth = false): any {
         getRandomNum(Math.random() * 100),
       ],
     ],
-    injectOption: option => ({ ...option, color: chartListColor }),
+    injectOption: option => ({ ...option, color: CHART_LIST_COLOR }),
   };
 }
 
@@ -260,7 +260,7 @@ export function getPieChartDataSet(radius = 42): any {
       ['状态', '审核中', '待履行', '履行中', '已完成'],
       ['数量', 67, 45, radius, 36],
     ],
-    injectOption: option => ({ ...option, color: chartListColor }),
+    injectOption: option => ({ ...option, color: CHART_LIST_COLOR }),
     pie: {
       radius: ['45%', '60%'], // 设置内圆和外圆半径
     },

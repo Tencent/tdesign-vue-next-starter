@@ -10,8 +10,8 @@ declare interface ImportMeta {
 }
 
 declare module '*.svg' {
-  const content: string;
-  export default content;
+  const CONTENT: string;
+  export default CONTENT;
 }
 
 
