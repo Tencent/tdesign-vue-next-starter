@@ -27,7 +27,6 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '',
     redirect: '/dashboard/base',
-    component: () => import('@/pages/dashboard/base/index.vue'),
   },
 ];
 
