@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import routeConfig from '@/config/routes';
 
 const layoutModules = import.meta.glob('../Layouts/*');
@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(''),
+  history: createWebHashHistory(),
   routes,
   scrollBehavior() {
     return {
