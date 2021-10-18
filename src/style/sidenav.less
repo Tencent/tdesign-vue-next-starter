@@ -1,96 +1,92 @@
 @import './variables.less';
+
 @import './font-family.less';
 
 .@{prefix} {
-    &-sidebar-layout {
-        height: 100%;
+
+  &-sidebar-layout {
+    height: 100%;
+  }
+
+  &-sidebar-compact {
+    width: 64px;
+  }
+
+  &-sidebar-layout-side {
+    z-index: 100;
+  }
+
+  &-sidenav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    transition: all .3s;
+    min-height: 100%;
+
+    &-mix {
+      top: 64px;
+
+      &-fixed {
+        top: 64px;
+        z-index: 0;
+      }
     }
-
-    &-sidebar-compact {
-        width: 64px;
-        .@{prefix}-sidenav-logo-wrapper {
-            padding-left: 16px;
-        }
-    }
-    &-sidebar-layout-side {
-        z-index: 100;
-    }
-
-    &-sidenav{
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        z-index: 10;
-        transition: all .3s;
-        min-height: 100%;
-
-        &-mix {
-            top: 64px;
-
-            &-fixed {
-                top:  64px;
-                z-index: 0;
-            }
-        }
         
-        &-no-fixed {
-            position: relative;
-            z-index: 1;
-        }
-
-        &-no-logo {
-            z-index: 1;
-        }
-
-        &-logo-wrapper {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-        &-logo-t-logo {
-            width: 32px;
-        }
-        &-logo-tdesign-logo {
-            width: 112px;
-        }
-        &-logo-normal {
-            font-family: TencentSansKoreanW7;
-            color: @primary-color;
-            font-size: @font-size-l;
-            transition: all .3s;
-        }
+    &-no-fixed {
+      position: relative;
+      z-index: 1;
     }
 
-
-    &-sidenav-placeholder {
-        flex: 1 1 232px;
-        min-width: 232px;
-        transition: all .3s;
-
-        &-hidden {
-            flex: 1 1 72px;
-            min-width: 72px;
-            transition: all .3s;
-        }
+    &-no-logo {
+      z-index: 1;
     }
+
+    &-logo-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    &-logo-t-logo {
+      width: 32px;
+      margin-left: 16px;
+    }
+
+    &-logo-tdesign-logo {
+      width: 112px;
+    }
+
+    &-logo-normal {
+      font-family: TencentSansKoreanW7;
+      color: @brand-color;
+      font-size: @font-size-l;
+      transition: all .3s;
+    }
+  }
+
+
+  &-sidenav-placeholder {
+    flex: 1 1 232px;
+    min-width: 232px;
+    transition: all .3s;
+
+    &-hidden {
+      flex: 1 1 72px;
+      min-width: 72px;
+      transition: all .3s;
+    }
+  }
 
 }
+
 .t-menu--dark .t-menu__options:not(:empty) .t-icon-menu-unfold {
-    color: rgba(255, 255, 255, 0.55)
+  color: rgba(255, 255, 255, .55)
 }
 
 .logo-container {
-    cursor: pointer;
-    display: inline-flex;
-    height: 64px;
-    margin-left: 24px;
-  }
-  
-  .optional-icon {
-    color: #000000;
-    cursor: pointer;
-  
-    &:hover {
-      color: @primary-color;
-    }
-  }
+  cursor: pointer;
+  display: inline-flex;
+  height: 64px;
+  margin-left: 24px;
+}

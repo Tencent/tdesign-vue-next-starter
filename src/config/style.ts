@@ -9,4 +9,6 @@ export default {
   isSidebarFixed: true,
   isHeaderFixed: true,
   showHeader: true,
+  backgroundTheme: 'blueGrey',
+  brandTheme: 'default',
 };

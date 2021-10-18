@@ -27,6 +27,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import Card from '@/components/card/index.vue';
+
 export default defineComponent({
   name: 'Result',
   components: { Card },
@@ -44,7 +45,9 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 @import url('@/style/index.less');
+
 .result {
+
   &-link {
     color: @primary-color;
     text-decoration: none;

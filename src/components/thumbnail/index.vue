@@ -5,7 +5,7 @@
   >
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 export default defineComponent({
   name: 'Thumbnail',
@@ -19,22 +19,26 @@ export default defineComponent({
       default: 'layout',
     },
   },
-  computed: {
-    className() {
+  setup(props) {
+    const className = computed(() => {
+      const { type } = props;
       return [
         'thumbnail-container',
         {
-          'thumbnail-circle': this.type === 'circle',
-          'thumbnail-layout': this.type === 'layout',
+          'thumbnail-circle': type === 'circle',
+          'thumbnail-layout': type === 'layout',
         },
       ];
-    },
+    });
+    return { className };
   },
 });
 </script>
 <style lang="less" scoped>
 @import url('@/style/index.less');
+
 .thumbnail {
+
   &-container {
     display: inline-block;
   }

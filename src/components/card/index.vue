@@ -1,10 +1,7 @@
 <template>
   <div :class="containerCls">
-    <div
-      v-show="title || describe"
-      class="card-title"
-    >
-      <span>
+    <div :class="titleCls">
+      <span :class="titleTextCls">
         {{ title }}
         <span
           v-if="describe"
@@ -18,42 +15,87 @@
     <div class="card-content">
       <slot />
     </div>
+    <div
+      v-if="size !== 'small'"
+      class="card-spacer-bottom"
+    />
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType, computed } from 'vue';
 
 export default defineComponent({
   name: 'Card',
   props: {
-    title: String,
+    title: String as PropType<string>,
     compact: {
-      type: Boolean,
+      type: Boolean as PropType<boolean>,
       default: false,
     },
-    describe: String,
-  },
-  computed: {
-    containerCls() {
-      return ['card-container', { 'card-container-compact': this.compact }];
+    describe: String as PropType<string>,
+    size: {
+      type: String as PropType<string>,
+      default: 'default',
     },
+  },
+  setup(props) {
+    const containerCls = computed(() => {
+      const { compact } = props;
+      return ['card-container', { 'card-container-compact': compact }];
+    });
+
+    const titleCls = computed(() => {
+      const { size } = props;
+      return [
+        'card-title',
+        {
+          'card-title-small': size === 'small',
+          'card-title-default': size !== 'small',
+        },
+      ];
+    });
+
+    const titleTextCls = computed(() => {
+      const { size } = props;
+      return [
+        {
+          'card-title-text-small': size === 'small',
+          'card-title-text-default': size !== 'small',
+        },
+      ];
+    });
+
+    return {
+      containerCls,
+      titleCls,
+      titleTextCls,
+    };
   },
 });
 </script>
 <style lang="less" scoped>
 @import url('@/style/index.less');
+
+.t-col > .card-container {
+  margin: 0;
+}
+
 .card {
+
   &-option {
-    position: absolute;
-    top: 20px;
-    right: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
   &-container {
-    padding: 24px;
+    padding: 24px 32px;
     margin: 16px 0;
     background: #fff;
     border-radius: @border-radius;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 
     &-compact {
       padding: 16px 16px 0;
@@ -65,17 +107,32 @@ export default defineComponent({
   &-title {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
-    line-height: 24px;
-    font-family: PingFangSC-Medium;
-    margin-bottom: 16px;
+    font-size: 20px;
+    line-height: 22px;
+    font-family: PingFangSC-Regular;
     font-weight: 500;
-    color: @text-level-1-color;
+    color: @text-color-primary;
+
+    &-small {
+      margin-bottom: 8px;
+    }
+
+    &-default {
+      margin-bottom: 16px;
+    }
+
+    &-text {
+      display: inline-flex;
+
+      &-default {
+        margin: @spacer 0;
+      }
+    }
   }
 
   &-describe {
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, .6);
     line-height: 22px;
   }
 
@@ -83,6 +140,11 @@ export default defineComponent({
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    flex: 1;
+  }
+
+  &-spacer-bottom {
+    height: @spacer;
   }
 }
 </style>
