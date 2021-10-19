@@ -4,23 +4,28 @@
   background-color: white;
   border-radius: @border-radius;
   margin-top: 16px;
+  padding: 32px;
 
   .t-tabs__content {
     padding-top: 0;
   }
 }
+
 .secondary-msg-list {
   min-height: 443px;
   max-height: calc(100vh - 400px);
 
   .t-list-item {
     cursor: pointer;
+    padding: 16px 24px 16px 0;
 
     &:hover {
       background-color: @bg-color-container-hover;
+
       .msg-date {
         display: none;
       }
+
       .msg-action {
         display: flex;
         align-items: center;
@@ -32,10 +37,11 @@
       }
     }
   }
+
   .content {
     font-family: PingFangSC-Medium;
     font-size: 14px;
-    color:@text-color-placeholder;
+    color: @text-color-placeholder;
     text-align: left;
     line-height: 22px;
     overflow: hidden;
@@ -46,9 +52,11 @@
       font-family: PingFangSC-Regular;
     }
   }
+
   .unread {
     color: @brand-color-8;
   }
+
   .msg-action {
     display: none;
 
@@ -56,6 +64,7 @@
       margin-right: 24px;
     }
   }
+
   &__empty-list {
     min-height: 443px;
     padding-top: 170px;

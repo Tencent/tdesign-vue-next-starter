@@ -1,6 +1,5 @@
 <template>
   <div>
-    <t-page-header> 合同基础详情 </t-page-header>
     <div :class="prefix + '-panel'">
       <div class="base-info">
         <t-row

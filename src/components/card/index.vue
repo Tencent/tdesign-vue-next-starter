@@ -86,6 +86,9 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
+    // position: absolute;
+    // top: 30px;
+    // right: 32px;
   }
 
   &-container {

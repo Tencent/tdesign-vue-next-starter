@@ -1,12 +1,14 @@
 @import '@/style/index';
+
 .t-tabs__content {
   padding-top: @spacer-3;
 }
 
 .@{prefix} {
+
   &-panel {
     background-color: white;
-    padding: @spacer-3;
+    padding: @spacer-4;
     border-radius: @border-radius;
   }
 
@@ -15,9 +17,13 @@
   }
 
   &-operater-title {
-    font-size: 16px;
+    font-weight: 400;
     color: @text-color-primary;
     font-family: PingFangSC-Medium;
+
+    .t-steps-item-title {
+      font-size: @font-size-base;
+    }
   }
 }
 
@@ -28,18 +34,33 @@
     padding: 12px 0;
     display: flex;
 
+    @media (max-width: @screen-sm-max) {
+
+      h1 {
+        width: 80px;
+      }
+    }
+
+    @media (min-width: @screen-md-min) {
+
+      h1 {
+        width: 200px;
+      }
+    }
+
     h1 {
       font-weight: normal;
-      width: 84px;
       font-family: PingFangSC-Regular;
-      font-size: 14px;
+      font-size: @font-size-base;
       color: @text-color-secondary;
       text-align: left;
       line-height: 22px;
     }
+
     span {
       margin-left: 24px;
     }
+
     i {
       display: inline-block;
       width: 8px;
@@ -47,9 +68,11 @@
       border-radius: @border-radius-50;
       background: @success-color-5;
     }
+
     .inProgress {
       color: @success-color-5;
     }
+
     .pdf {
       color: @brand-color-8;
     }

@@ -19,12 +19,19 @@
               :class="['content', { unread: item.status }]"
               @click="setReadStatus(item)"
             >
-              {{ item.content }}<span> - {{ item.type }}</span>
+              <t-tag
+                class="operater-title-tag"
+                size="small"
+                :theme="NOTIFICATION_TYPES[item.priorty]"
+                variant="light"
+              >
+                {{ item.type }}
+              </t-tag>
+              {{ item.content }}
             </p>
             <template #action>
-              <p class="msg-date">
-                {{ item.date }}
-              </p>
+              <span class="msg-date">{{ item.date }}</span>
+
               <div class="msg-action">
                 <t-tooltip
                   class="set-read-icon"
@@ -55,16 +62,20 @@
                       <path
                         d="M11.7786 14.9286L15.3536 11.3535L14.6464 10.6465L11.7786 13.5144L10.1318 11.8677L9.42471 12.5748L11.7786 14.9286Z"
                         fill="black"
-                      /></svg></span>
+                      />
+                    </svg>
+                  </span>
                 </t-tooltip>
                 <t-tooltip
                   content="删除通知"
                   :overlay-style="{ margin: '6px' }"
                 >
-                  <span @click="handleClickDeleteBtn(item)"><t-icon
-                    name="delete"
-                    size="16px"
-                  /></span>
+                  <span @click="handleClickDeleteBtn(item)">
+                    <t-icon
+                      name="delete"
+                      size="16px"
+                    />
+                  </span>
                 </t-tooltip>
               </div>
             </template>
@@ -98,7 +109,15 @@
               :class="['content', { unread: item.status }]"
               @click="setReadStatus(item)"
             >
-              {{ item.content }}<span> - {{ item.type }}</span>
+              <t-tag
+                class="operater-title-tag"
+                size="small"
+                :theme="NOTIFICATION_TYPES[item.priorty]"
+                variant="light"
+              >
+                {{ item.type }}
+              </t-tag>
+              {{ item.content }}
             </p>
             <template #action>
               <p class="msg-date">
@@ -121,10 +140,12 @@
                   content="删除通知"
                   :overlay-style="{ margin: '6px' }"
                 >
-                  <span @click="handleClickDeleteBtn(item)"><t-icon
-                    name="delete"
-                    size="16px"
-                  /></span>
+                  <span @click="handleClickDeleteBtn(item)">
+                    <t-icon
+                      name="delete"
+                      size="16px"
+                    />
+                  </span>
                 </t-tooltip>
               </div>
             </template>
@@ -155,7 +176,15 @@
             :key="index"
           >
             <p :class="['content', { unread: item.status }]">
-              {{ item.content }}<span> - {{ item.type }}</span>
+              <t-tag
+                class="operater-title-tag"
+                size="small"
+                :theme="NOTIFICATION_TYPES[item.priorty]"
+                variant="light"
+              >
+                {{ item.type }}
+              </t-tag>
+              {{ item.content }}
             </p>
             <template #action>
               <p class="msg-date">
@@ -193,10 +222,12 @@
                   content="删除通知"
                   :overlay-style="{ margin: '6px' }"
                 >
-                  <span @click="handleClickDeleteBtn(item)"><t-icon
-                    name="delete"
-                    size="16px"
-                  /></span>
+                  <span @click="handleClickDeleteBtn(item)">
+                    <t-icon
+                      name="delete"
+                      size="16px"
+                    />
+                  </span>
                 </t-tooltip>
               </div>
             </template>
@@ -226,6 +257,7 @@
 import { defineComponent } from 'vue';
 import { mapState, mapGetters } from 'vuex';
 import { PREFIX as prefix } from '@/config/global';
+import { NOTIFICATION_TYPES } from '@/constants';
 
 // 导入样式
 import './index.less';
@@ -235,6 +267,7 @@ export default defineComponent({
   components: {},
   data() {
     return {
+      NOTIFICATION_TYPES,
       prefix,
       data: [],
       value: 'frist',

@@ -45,6 +45,7 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   height: 75vh;
+
   &-icon {
     font-size: 64px;
     color: @success-color;
@@ -53,7 +54,7 @@ export default defineComponent({
   &-title {
     margin-top: 16px;
     font-size: 20px;
-    color: rgba(0, 0, 0, 0.9);
+    color: rgba(0, 0, 0, .9);
     text-align: center;
     line-height: 22px;
   }
@@ -61,7 +62,7 @@ export default defineComponent({
   &-describe {
     margin: 8px 0 32px;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, .6);
     line-height: 22px;
   }
 }

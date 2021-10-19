@@ -1,9 +1,11 @@
 @import '@/style/index';
+
 .t-tabs__content {
   padding-top: @spacer-3;
 }
 
 .@{prefix} {
+
   &-panel {
     background-color: white;
 
@@ -11,13 +13,15 @@
       padding: 0;
     }
   }
+
   &-step {
     padding: 14px 0 24px 0;
   }
+
   &-form {
     padding-right: 50px;
     padding-top: 30px;
-    border-top: solid 1px #eeeeee;
+    border-top: solid 1px #eee;
   }
 }
 
@@ -27,7 +31,7 @@
 
 .step-top {
   padding: 24px;
-  border-bottom: #eeeeee solid 1px;
+  border-bottom: #eee solid 1px;
 }
 
 .step-form {
@@ -46,17 +50,19 @@
   .t-icon {
     margin: 6px;
   }
+
   .text {
     margin: 16px 0 8px 0;
     font-weight: bold;
     font-size: 20px;
-    color: @text-level-1-color;
+    color: @text-color-primary;
     line-height: 30px;
   }
+
   .tips {
     margin-bottom: 24px;
     font-size: 14px;
-    color: @text-level-2-color;
+    color: @text-color-secondary;
     line-height: 22px;
   }
 }

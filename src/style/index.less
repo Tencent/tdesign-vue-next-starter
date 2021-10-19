@@ -9,13 +9,12 @@
 @import './sidenav.less';
 
 body {
-  color: @text-level-2-color;
+  color: @text-color-secondary;
   font-family: -apple-system, BlinkMacSystemFont, @font-family;
   font-size: @font-size-base;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   padding: 0;
-  min-width: @screen-sm-min;
 }
 
 pre {
@@ -57,7 +56,7 @@ p {
   
 .@{prefix}-text-tip {
   font-size: 12px;
-  color: @text-level-3-color;
+  color: @text-color-placeholder;
 }
   
 .@{prefix}-pic {
@@ -67,16 +66,16 @@ p {
 }
   
 .@{prefix}-main-link {
-  color: @text-level-1-color;
+  color: @text-color-primary;
   text-decoration: none;
   cursor: pointer;
   
   &:hover {
-    color: @text-level-1-color;
+    color: @text-color-primary;
   }
   
   &:active {
-    color: @text-level-1-color;
+    color: @text-color-primary;
   }
   
   &--active {
@@ -89,7 +88,7 @@ p {
 }
   
 .@{prefix}-link {
-  color: @primary-color;
+  color: @brand-color;
 
   text-decoration: none;
   margin-right: @spacer-3;
@@ -97,15 +96,15 @@ p {
   cursor: pointer;
     
   &:hover {
-    color: @primary-color;
+    color: @brand-color;
   }
   
   &:active {
-    color: @primary-color;
+    color: @brand-color;
   }
   
   &--active {
-    color: @primary-color;
+    color: @brand-color;
   }
   
   &:focus {
@@ -160,7 +159,7 @@ p {
   height: 0;
   border-style: solid;
   border-width: 0 6px 8px 6px;
-  border-color: transparent transparent #00A870 transparent;
+  border-color: transparent transparent #00a870 transparent;
 }
 
 .@{prefix}-down-triangle {
@@ -168,5 +167,5 @@ p {
   height: 0;
   border-style: solid;
   border-width: 8px 6px 0 6px;
-  border-color: #E34D59 transparent transparent transparent;
+  border-color: #e34d59 transparent transparent transparent;
 }
