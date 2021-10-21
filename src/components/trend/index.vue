@@ -49,8 +49,14 @@ import { defineComponent, computed, PropType } from 'vue';
 export default defineComponent({
   name: 'Trend',
   props: {
-    type: String as PropType<string>,
-    describe: [String, Number] as PropType<string | number>,
+    type: {
+      type: String as PropType<string>,
+      default: '',
+    },
+    describe: {
+      type: [String, Number] as PropType<string | number>,
+      default: '',
+    },
     isReverseColor: Boolean as PropType<boolean>,
   },
   setup(props) {
