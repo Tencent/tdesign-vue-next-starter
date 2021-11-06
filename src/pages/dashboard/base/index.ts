@@ -1,5 +1,5 @@
 import { getBrandColor } from '@/config/color';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 /** 图表颜色 */
 let chartListColor: Array<string> = ['#0052D9', '#BCC4D0', '#7D46BD', '#0594FA', '#ED7B2F'];
@@ -130,7 +130,7 @@ export function constructInitDashbordDataset(type: string) {
 }
 
 /** 柱状图数据源 */
-export function constructInitDataset(dateTime: Array<string> = []) {
+export function constructInitDataset(dateTime: Array<Dayjs> = []) {
   // const dataset: Array<Array<string>> = [['时间'], ['入库'], ['出库']];
   const divideNum = 10;
   const timeArray = [];
@@ -139,8 +139,8 @@ export function constructInitDataset(dateTime: Array<string> = []) {
   for (let i = 0; i < divideNum; i++) {
     // const [timeArray, inArray, outArray] = dataset;
     if (dateTime.length > 0) {
-      const dateAbsTime: number = (new Date(dateTime[1]).getTime() - new Date(dateTime[0]).getTime()) / divideNum;
-      const enhandTime: number = new Date(dateTime[0]).getTime() + dateAbsTime * i;
+      const dateAbsTime: number = (dateTime[1].valueOf() - dateTime[0].valueOf()) / divideNum;
+      const enhandTime: number = dateTime[0].valueOf() + dateAbsTime * i;
       // console.log('dateAbsTime..', dateAbsTime, enhandTime);
       timeArray.push(dayjs(enhandTime).format('YYYY-MM-DD'));
     } else {
