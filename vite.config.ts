@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 import { viteThemePlugin } from 'vite-plugin-theme';
 import createVuePlugin from '@vitejs/plugin-vue';
-import createSvgPlugin from 'vite-plugin-vue-svg';
+import svgLoader from 'vite-svg-loader'
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 // import HttpProxyAgent from 'http-proxy-agent';
@@ -44,7 +44,7 @@ export default defineConfig({
     viteThemePlugin({
       colorVariables: getColorList([getGreyColor(backgroundTheme), getBrandColor(brandTheme)]),
     }),
-    createSvgPlugin(),
+    svgLoader()
   ],
 
   server: {

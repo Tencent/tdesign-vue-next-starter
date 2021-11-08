@@ -5,14 +5,14 @@
   />
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, PropType } from 'vue';
 import { getBrandColor } from '@/config/color';
 
 export default defineComponent({
   name: 'Color',
   props: {
     value: {
-      type: String,
+      type: String as PropType<string>,
       default: 'default',
     },
   },
@@ -23,7 +23,10 @@ export default defineComponent({
         backgroundColor: getBrandColor(value)['@brand-color'],
       };
     });
-    return { style };
+
+    return {
+      style,
+    };
   },
 });
 </script>

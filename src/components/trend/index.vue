@@ -57,7 +57,10 @@ export default defineComponent({
       type: [String, Number] as PropType<string | number>,
       default: '',
     },
-    isReverseColor: Boolean as PropType<boolean>,
+    isReverseColor: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
   },
   setup(props) {
     const containerCls = computed(() => {

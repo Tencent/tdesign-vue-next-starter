@@ -27,12 +27,18 @@ import { defineComponent, PropType, computed } from 'vue';
 export default defineComponent({
   name: 'Card',
   props: {
-    title: String as PropType<string>,
+    title: {
+      type: String as PropType<string>,
+      default: '',
+    },
     compact: {
       type: Boolean as PropType<boolean>,
       default: false,
     },
-    describe: String as PropType<string>,
+    describe: {
+      type: String as PropType<string>,
+      default: '',
+    },
     size: {
       type: String as PropType<string>,
       default: 'default',
@@ -86,9 +92,6 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-    // position: absolute;
-    // top: 30px;
-    // right: 32px;
   }
 
   &-container {
