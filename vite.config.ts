@@ -5,10 +5,10 @@ import createVuePlugin from '@vitejs/plugin-vue';
 import createSvgPlugin from 'vite-plugin-vue-svg';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
-import HttpProxyAgent from 'http-proxy-agent';
+// import HttpProxyAgent from 'http-proxy-agent';
 import path from 'path';
 
-import proxy from './src/config/proxy';
+// import proxy from './src/config/proxy';
 import { getColorList, getGreyColor, getBrandColor } from './src/config/color';
 import USER_CONFIG from './src/config/style';
 
