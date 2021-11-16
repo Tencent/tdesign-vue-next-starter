@@ -1,8 +1,5 @@
 <template>
-  <div
-    :style="style"
-    class="color-container"
-  />
+  <div :style="style" class="color-container" />
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
@@ -19,7 +16,7 @@ export default defineComponent({
   setup(props) {
     const style = computed(() => {
       const { value } = props;
-      return  {
+      return {
         backgroundColor: getBrandColor(value)['@brand-color'],
       };
     });
@@ -37,4 +34,3 @@ export default defineComponent({
   display: inline-block;
 }
 </style>
-

@@ -8,13 +8,19 @@
   color: rgba(0, 0, 0, .6) !important;
 }
 
+.t-table.t-size-l th,
+.t-table.t-size-l td {
+  padding: 13px 13px 12px 24px;
+  line-height: 22px;
+}
+
 .row-padding {
   padding-top: 30px;
   padding-left: 20px;
 }
 
-.operater-block-container {
-  padding: 10px 0 30px;
+.t-tag.t-size-s {
+  margin-left: 8px;
 }
 
 .operater-add {
@@ -26,6 +32,14 @@
   padding: 20px 10px 24px 20px;
   border: dashed 1px #dedede;
   border-radius: 3px;
+
+  .operater-sub-icon {
+    background: #ecf2fe;
+    color: @brand-color;
+    font-size: 33px;
+    padding: 8px;
+    border-radius: 100%;
+  }
 
   .operater-sub {
     font-size: 14px;
@@ -41,7 +55,7 @@
     svg {
 
       rect {
-        fill: @brand-color-2;
+        fill: @brand-color-1;
       }
 
       path {
@@ -68,7 +82,15 @@
   .operater-content {
     padding: 20px 32px 24px 32px;
     height: 256px;
-
+    
+    .operater-title-icon {
+      background: #ecf2fe;
+      color: @brand-color;
+      font-size: 56px;
+      padding: 14px;
+      border-radius: 100%;
+    }
+    
     .operater-title {
       margin-bottom: 25px;
       position: relative;
@@ -88,7 +110,10 @@
       }
 
       &-tag {
-        margin-right: 8px;
+        margin-right: 4px;
+        margin-top: 8px;
+        margin-left: unset;
+        border: unset
       }
 
       &-icon {
@@ -124,7 +149,7 @@
 
       &-icon {
         position: absolute;
-        bottom: 0;
+        bottom: 8px;
         right: 0;
       }
     }
@@ -134,6 +159,7 @@
     position: absolute;
     width: 100%;
     bottom: 0px;
+    left: 0;
 
     .t-progress--thin {
       display: unset;
@@ -152,9 +178,8 @@
 
   &-panel {
     background-color: white;
-    padding: @spacer-3;
+    padding: @spacer-3 @spacer-4 @spacer-4 @spacer-4;
     border-radius: @border-radius;
-    margin-top: 16px;
   }
 
   &-search-input {
@@ -163,13 +188,12 @@
   }
 
   &-operater-row {
-    margin-bottom: 12px;
+    margin-bottom: 32px;
   }
 
   &-operater-title {
     font-size: 20px;
     color: rgba(0, 0, 0, .9);
-    font-weight: bold;
   }
 
   &-operater-label {
@@ -178,8 +202,17 @@
   }
 }
 
+.advanced-card {
+  margin-top: 0 !important;
+
+  .card-title-default {
+    margin-bottom: 12px;
+  }
+}
+
 .info-block {
   column-count: 2;
+  margin-bottom: 12px;
 
   .info-item {
     padding: 12px 0;

@@ -1,10 +1,7 @@
 <template>
   <card>
     <div class="result-success">
-      <t-icon
-        class="result-success-icon"
-        name="close-circle-filled"
-      />
+      <t-icon class="result-success-icon" name="close-circle-filled" />
       <div class="result-success-title">
         项目创建失败
       </div>

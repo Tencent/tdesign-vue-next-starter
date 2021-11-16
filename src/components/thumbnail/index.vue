@@ -1,8 +1,5 @@
 <template>
-  <img
-    :class="className"
-    :src="url"
-  >
+  <img :class="className" :src="url">
 </template>
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
@@ -38,7 +35,6 @@ export default defineComponent({
 @import url('@/style/index.less');
 
 .thumbnail {
-
   &-container {
     display: inline-block;
   }

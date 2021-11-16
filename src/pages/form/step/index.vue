@@ -1,12 +1,8 @@
 <template>
-  <t-page-header>分步表单页</t-page-header>
-  <div :class="`${prefix}-panel ${prefix}-step-panel`">
+  <div :class="`${PREFIX}-panel ${PREFIX}-step-panel`">
     <!-- 简单步骤条 -->
-    <div :class="`${prefix}-step step-top`">
-      <t-steps
-        :current="activeForm"
-        status="process"
-      >
+    <div :class="`${PREFIX}-step step-top`">
+      <t-steps :current="activeForm" status="process">
         <t-step-item title="提交开票申请" />
         <t-step-item title="填写发票信息" />
         <t-step-item title="确认邮寄地址" />
@@ -15,15 +11,8 @@
     </div>
 
     <!-- 分步表单1 -->
-    <div
-      v-show="activeForm === 0"
-      class="rule-tips"
-    >
-      <t-alert
-        theme="info"
-        title="发票开具规则："
-        :close="true"
-      >
+    <div v-show="activeForm === 0" class="rule-tips">
+      <t-alert theme="info" title="发票开具规则：" :close="true">
         <template #message>
           <p>
             1、申请开票后，电子发票在1～3个工作日内开具；增值税专用发票（纸质）如资质审核通过，将在电子发票开具后10个工作日内为您寄出；
@@ -37,46 +26,20 @@
       v-show="activeForm === 0"
       class="step-form"
       :data="formData1"
-      :rules="rules"
+      :rules="FORM_RULES"
       label-align="left"
-      @submit="onSubmit1"
+      @submit="({ validateResult }) => onSubmit({ validateResult }, 1)"
     >
-      <t-form-item
-        label="合同名称"
-        name="name"
-      >
-        <t-select
-          v-model="formData1.name"
-          :style="{ width: '480px' }"
-          class="demo-select-base"
-          clearable
-        >
-          <t-option
-            v-for="(item, index) in nameOptions"
-            :key="index"
-            :value="item.value"
-            :label="item.label"
-          >
+      <t-form-item label="合同名称" name="name">
+        <t-select v-model="formData1.name" :style="{ width: '480px' }" class="demo-select-base" clearable>
+          <t-option v-for="(item, index) in NAME_OPTIONS" :key="index" :value="item.value" :label="item.label">
             {{ item.label }}
           </t-option>
         </t-select>
       </t-form-item>
-      <t-form-item
-        label="发票类型"
-        name="type"
-      >
-        <t-select
-          v-model="formData1.type"
-          :style="{ width: '480px' }"
-          class="demo-select-base"
-          clearable
-        >
-          <t-option
-            v-for="(item, index) in typeOptions"
-            :key="index"
-            :value="item.value"
-            :label="item.label"
-          >
+      <t-form-item label="发票类型" name="type">
+        <t-select v-model="formData1.type" :style="{ width: '480px' }" class="demo-select-base" clearable>
+          <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
             {{ item.label }}
           </t-option>
         </t-select>
@@ -85,10 +48,7 @@
         {{ amount }} 元
       </t-form-item>
       <t-form-item>
-        <t-button
-          theme="primary"
-          type="submit"
-        >
+        <t-button theme="primary" type="submit">
           提交申请
         </t-button>
       </t-form-item>
@@ -99,93 +59,37 @@
       v-show="activeForm === 1"
       class="step-form"
       :data="formData2"
-      :rules="rules"
+      :rules="FORM_RULES"
       label-align="left"
-      @reset="onReset2"
-      @submit="onSubmit2"
+      @reset="onReset(0)"
+      @submit="({ validateResult }) => onSubmit({ validateResult }, 2)"
     >
-      <t-form-item
-        label="发票抬头"
-        name="title"
-      >
-        <t-input
-          v-model="formData2.title"
-          :style="{ width: '480px' }"
-          placeholder="请输入发票抬头"
-        />
+      <t-form-item label="发票抬头" name="title">
+        <t-input v-model="formData2.title" :style="{ width: '480px' }" placeholder="请输入发票抬头" />
       </t-form-item>
-      <t-form-item
-        label="纳税人识别号"
-        name="taxNum"
-      >
-        <t-input
-          v-model="formData2.taxNum"
-          :style="{ width: '480px' }"
-          placeholder="请输入纳税人识别号"
-        />
+      <t-form-item label="纳税人识别号" name="taxNum">
+        <t-input v-model="formData2.taxNum" :style="{ width: '480px' }" placeholder="请输入纳税人识别号" />
       </t-form-item>
-      <t-form-item
-        label="单位地址"
-        name="address"
-      >
-        <t-input
-          v-model="formData2.address"
-          :style="{ width: '480px' }"
-          placeholder="请输入单位地址"
-        />
+      <t-form-item label="单位地址" name="address">
+        <t-input v-model="formData2.address" :style="{ width: '480px' }" placeholder="请输入单位地址" />
       </t-form-item>
-      <t-form-item
-        label="开户行"
-        name="bank"
-      >
-        <t-input
-          v-model="formData2.bank"
-          :style="{ width: '480px' }"
-          placeholder="请输入开户行"
-        />
+      <t-form-item label="开户行" name="bank">
+        <t-input v-model="formData2.bank" :style="{ width: '480px' }" placeholder="请输入开户行" />
       </t-form-item>
-      <t-form-item
-        label="银行账号"
-        name="bankAccount"
-      >
-        <t-input
-          v-model="formData2.bankAccount"
-          :style="{ width: '480px' }"
-          placeholder="请输入银行账号"
-        />
+      <t-form-item label="银行账号" name="bankAccount">
+        <t-input v-model="formData2.bankAccount" :style="{ width: '480px' }" placeholder="请输入银行账号" />
       </t-form-item>
-      <t-form-item
-        label="通知邮箱"
-        name="email"
-      >
-        <t-input
-          v-model="formData2.email"
-          :style="{ width: '480px' }"
-          placeholder="请输入通知邮箱"
-        />
+      <t-form-item label="通知邮箱" name="email">
+        <t-input v-model="formData2.email" :style="{ width: '480px' }" placeholder="请输入通知邮箱" />
       </t-form-item>
-      <t-form-item
-        label="通知手机"
-        name="tel"
-      >
-        <t-input
-          v-model="formData2.tel"
-          :style="{ width: '480px' }"
-          placeholder="请输入通知手机"
-        />
+      <t-form-item label="通知手机" name="tel">
+        <t-input v-model="formData2.tel" :style="{ width: '480px' }" placeholder="请输入通知手机" />
       </t-form-item>
       <t-form-item>
-        <t-button
-          type="reset"
-          theme="default"
-          variant="base"
-        >
+        <t-button type="reset" theme="default" variant="base">
           上一步
         </t-button>
-        <t-button
-          theme="primary"
-          type="submit"
-        >
+        <t-button theme="primary" type="submit">
           下一步
         </t-button>
       </t-form-item>
@@ -196,35 +100,18 @@
       v-show="activeForm === 2"
       class="step-form"
       :data="formData3"
-      :rules="rules"
+      :rules="FORM_RULES"
       label-align="left"
-      @reset="onReset3"
-      @submit="onSubmit3"
+      @reset="onReset(1)"
+      @submit="({ validateResult }) => onSubmit({ validateResult }, 6)"
     >
-      <t-form-item
-        label="收货人"
-        name="consignee"
-      >
-        <t-input
-          v-model="formData3.consignee"
-          :style="{ width: '480px' }"
-          placeholder="请输入收货人"
-        />
+      <t-form-item label="收货人" name="consignee">
+        <t-input v-model="formData3.consignee" :style="{ width: '480px' }" placeholder="请输入收货人" />
       </t-form-item>
-      <t-form-item
-        label="手机号码"
-        name="mobileNum"
-      >
-        <t-input
-          v-model="formData3.mobileNum"
-          :style="{ width: '480px' }"
-          placeholder="请输入手机号码"
-        />
+      <t-form-item label="手机号码" name="mobileNum">
+        <t-input v-model="formData3.mobileNum" :style="{ width: '480px' }" placeholder="请输入手机号码" />
       </t-form-item>
-      <t-form-item
-        label="收货地址"
-        name="deliveryAddress"
-      >
+      <t-form-item label="收货地址" name="deliveryAddress">
         <t-select
           v-model="formData3.deliveryAddress"
           :style="{ width: '480px' }"
@@ -232,53 +119,27 @@
           class="demo-select-base"
           clearable
         >
-          <t-option
-            v-for="(item, index) in addressOptions"
-            :key="index"
-            :value="item.value"
-            :label="item.label"
-          >
+          <t-option v-for="(item, index) in ADDRESS_OPTIONS" :key="index" :value="item.value" :label="item.label">
             {{ item.label }}
           </t-option>
         </t-select>
       </t-form-item>
-      <t-form-item
-        label="详细地址"
-        name="fullAddress"
-      >
-        <t-textarea
-          v-model="formData3.fullAddress"
-          :style="{ width: '480px' }"
-          placeholder="请输入详细地址"
-        />
+      <t-form-item label="详细地址" name="fullAddress">
+        <t-textarea v-model="formData3.fullAddress" :style="{ width: '480px' }" placeholder="请输入详细地址" />
       </t-form-item>
       <t-form-item>
-        <t-button
-          type="reset"
-          theme="default"
-          variant="base"
-        >
+        <t-button type="reset" theme="default" variant="base">
           上一步
         </t-button>
-        <t-button
-          theme="primary"
-          type="submit"
-        >
+        <t-button theme="primary" type="submit">
           下一步
         </t-button>
       </t-form-item>
     </t-form>
 
     <!-- 分步表单4 -->
-    <div
-      v-show="activeForm === 6"
-      class="step-form-4"
-    >
-      <t-icon
-        name="check-circle-filled"
-        style="color: green"
-        size="52px"
-      />
+    <div v-show="activeForm === 6" class="step-form-4">
+      <t-icon name="check-circle-filled" style="color: green" size="52px" />
       <p class="text">
         完成开票申请
       </p>
@@ -286,17 +147,10 @@
         预计1～3个工作日会将电子发票发至邮箱，发票邮寄请耐心等待
       </p>
       <div class="button-group">
-        <t-button
-          theme="primary"
-          @click="onReset4"
-        >
+        <t-button theme="primary" @click="onReset(0)">
           再次申请
         </t-button>
-        <t-button
-          variant="base"
-          theme="default"
-          @click="onSubmit4"
-        >
+        <t-button variant="base" theme="default" @click="complete">
           查看进度
         </t-button>
       </div>
@@ -304,117 +158,62 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-import { PREFIX as prefix } from '@/config/global';
+import { PREFIX } from '@/config/global';
+import { FORM_RULES, NAME_OPTIONS, TYPE_OPTIONS, ADDRESS_OPTIONS, INITIAL_DATA1, INITIAL_DATA2, INITIAL_DATA3 } from './constants';
 // 导入样式
 import './index.less';
 
-const INITIAL_DATA1 = {
-  name: '',
-  type: '',
-};
-const INITIAL_DATA2 = {
-  title: '',
-  taxNum: '',
-  address: '',
-  bank: '',
-  bankAccount: '',
-  email: '',
-  tel: '',
-};
-const INITIAL_DATA3 = {
-  consignee: '',
-  mobileNum: '',
-  deliveryAddress: '',
-  fullAddress: '',
-};
-
 export default defineComponent({
   name: 'FormStep',
-  data() {
-    return {
-      prefix,
-      formData1: { ...INITIAL_DATA1 },
-      formData2: { ...INITIAL_DATA2 },
-      formData3: { ...INITIAL_DATA3 },
-      nameOptions: [
-        { label: '合同A', value: '1' },
-        { label: '合同B', value: '2' },
-        { label: '合同C', value: '3' },
-      ],
-      typeOptions: [
-        { label: '类型A', value: '1' },
-        { label: '类型B', value: '2' },
-        { label: '类型C', value: '3' },
-      ],
-      addressOptions: [
-        { label: '广东省深圳市南山区', value: '1' },
-        { label: '北京市海淀区', value: '2' },
-        { label: '上海市徐汇区', value: '3' },
-        { label: '四川省成都市高新区', value: '4' },
-        { label: '广东省广州市天河区', value: '5' },
-        { label: '陕西省西安市高新区', value: '6' },
-      ],
-      rules: {
-        name: [{ required: true, message: '请选择合同名称', type: 'error' }],
-        type: [{ required: true, message: '请选择发票类型', type: 'error' }],
-        title: [{ required: true, message: '请输入发票抬头', type: 'error' }],
-        taxNum: [{ required: true, message: '请输入纳税人识别号', type: 'error' }],
-        consignee: [{ required: true, message: '请输入收货人', type: 'error' }],
-        mobileNum: [{ required: true, message: '请输入手机号码', type: 'error' }],
-        deliveryAddress: [{ required: true, message: '请选择收货地址', type: 'error' }],
-        fullAddress: [{ required: true, message: '请输入详细地址', type: 'error' }],
-      },
-      activeForm: 0,
-    };
-  },
-  computed: {
-    amount() {
-      if (this.formData1.name === '1') {
+  setup() {
+    const formData1 = ref({ ...INITIAL_DATA1 });
+    const formData2 = ref({ ...INITIAL_DATA2 });
+    const formData3 = ref({ ...INITIAL_DATA3 });
+    const activeForm = ref(0);
+
+    const amount = computed(() => {
+      if (formData1.value.name === '1') {
         return '565421';
       }
-      if (this.formData1.name === '2') {
+      if (formData1.value.name === '2') {
         return '278821';
       }
-      if (this.formData1.name === '3') {
+      if (formData1.value.name === '3') {
         return '109824';
       }
       return '--';
-    },
-  },
-  methods: {
-    onSubmit1({ validateResult }) {
-      if (validateResult === true) {
-        this.activeForm = 1;
-      }
-    },
-    onSubmit2({ validateResult }) {
-      if (validateResult === true) {
-        this.activeForm = 2;
-      }
-    },
-    onReset2() {
-      this.activeForm = 0;
-    },
-    onSubmit3({ validateResult }) {
-      if (validateResult === true) {
-        this.activeForm = 6;
-      }
-    },
-    onReset3() {
-      this.activeForm = 1;
-    },
-    onSubmit4() {
-      this.$router.replace({ path: '/detail/advanced' });
-    },
-    onReset4() {
-      this.activeForm = 0;
-    },
+    });
+
+    return {
+      PREFIX,
+      NAME_OPTIONS,
+      TYPE_OPTIONS,
+      ADDRESS_OPTIONS,
+      FORM_RULES,
+      formData1,
+      formData2,
+      formData3,
+      activeForm,
+      amount,
+      onSubmit({ validateResult }, val) {
+        if (validateResult === true) {
+          activeForm.value = val;
+        }
+      },
+      onReset(val) {
+        activeForm.value = val;
+      },
+      complete() {
+        const router = useRouter();
+        router.replace({ path: '/detail/advanced' });
+      },
+    };
   },
 });
-
 </script>
-<style>
-
+<style lang="less" scoped>
+@import url('./index.less');
 </style>

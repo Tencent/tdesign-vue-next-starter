@@ -3,8 +3,7 @@
 .secondary-notification {
   background-color: white;
   border-radius: @border-radius;
-  margin-top: 16px;
-  padding: 32px;
+  padding: @spacer-3 @spacer-4;
 
   .t-tabs__content {
     padding-top: 0;
@@ -12,12 +11,11 @@
 }
 
 .secondary-msg-list {
-  min-height: 443px;
-  max-height: calc(100vh - 400px);
+  height: 70vh;
 
   .t-list-item {
     cursor: pointer;
-    padding: 16px 24px 16px 0;
+    padding: 13px 24px 13px 0;
 
     &:hover {
       background-color: @bg-color-container-hover;
@@ -35,6 +33,11 @@
           align-items: center;
         }
       }
+    }
+
+    .t-tag.t-size-s {
+      margin-right: @spacer-1;
+      margin-left: 0;
     }
   }
 

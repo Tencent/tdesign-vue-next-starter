@@ -1,22 +1,13 @@
 <template>
   <card>
     <div class="result-container">
-      <img
-        class="result-bg-img"
-        :src="bgUrl"
-      >
+      <img class="result-bg-img" :src="bgUrl">
       <div class="result-tip">
         {{ tip }}
       </div>
       <div>
-        <router-link
-          class="tdesign-pro-main-link"
-          to="/"
-        >
-          <t-button
-            theme="primary"
-            variant="text"
-          >
+        <router-link class="tdesign-pro-main-link" to="/">
+          <t-button theme="primary" variant="text">
             返回首页
           </t-button>
         </router-link>
@@ -47,7 +38,6 @@ export default defineComponent({
 @import url('@/style/index.less');
 
 .result {
-
   &-link {
     color: @brand-color;
     text-decoration: none;

@@ -9,16 +9,8 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M11.5 8L8 11.5L4.5 8"
-          stroke="currentColor"
-          stroke-width="1.5"
-        />
-        <path
-          d="M8 11L8 4"
-          stroke="currentColor"
-          stroke-width="1.5"
-        />
+        <path d="M11.5 8L8 11.5L4.5 8" stroke="currentColor" stroke-width="1.5" />
+        <path d="M8 11L8 4" stroke="currentColor" stroke-width="1.5" />
       </svg>
       <svg
         v-else
@@ -28,16 +20,8 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M4.5 8L8 4.5L11.5 8"
-          stroke="currentColor"
-          stroke-width="1.5"
-        />
-        <path
-          d="M8 5V12"
-          stroke="currentColor"
-          stroke-width="1.5"
-        />
+        <path d="M4.5 8L8 4.5L11.5 8" stroke="currentColor" stroke-width="1.5" />
+        <path d="M8 5V12" stroke="currentColor" stroke-width="1.5" />
       </svg>
     </span>
     <span>{{ describe }}</span>
@@ -87,9 +71,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .trend {
-
   &-container {
-
     &__up {
       color: #e34d59 !important;
       display: inline-flex;

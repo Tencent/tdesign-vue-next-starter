@@ -4,27 +4,44 @@
   padding-top: @spacer-3;
 }
 
-.@{prefix} {
+.t-steps .t-steps-item-title {
+  font-size: @font-size-base;
+}
 
-  &-panel {
-    background-color: white;
-    padding: @spacer-4;
-    border-radius: @border-radius;
-  }
+.@{prefix} {
 
   &-operater-row {
     margin-bottom: 12px;
   }
+}
 
-  &-operater-title {
-    font-weight: 400;
-    color: @text-color-primary;
-    font-family: PingFangSC-Medium;
-
-    .t-steps-item-title {
-      font-size: @font-size-base;
-    }
+.detail-base-panel {
+  background-color: white;
+  padding: @spacer-3 @spacer-4 @spacer-4 @spacer-4;
+  border-radius: @border-radius;
+  margin-top: 0;
+  
+  &-row {
+    margin-bottom: 12px;
   }
+
+}
+
+.detail-base-info {
+  margin-bottom: 12px;
+}
+
+.detail-base-info-title {
+  margin: @spacer-1 0;
+  font-size: @font-size-xl;
+  font-weight: 500;
+  line-height: 28px;
+  color: @text-color-primary;
+  font-family: PingFangSC-Regular;
+}
+
+.detail-base-info-steps {
+  padding-top: 12px;
 }
 
 .info-block {

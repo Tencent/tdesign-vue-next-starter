@@ -11,12 +11,10 @@ export default defineComponent({
     ListCommonTable,
   },
 });
-
 </script>
 <style lang="less" scoped>
 @import '@/style/index';
 .@{prefix} {
-
   &-panel {
     background-color: white;
     padding: @spacer-3;

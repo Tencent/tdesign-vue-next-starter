@@ -1,10 +1,7 @@
 <template>
   <card>
     <div class="result-success">
-      <t-icon
-        class="result-success-icon"
-        name="check-circle-filled"
-      />
+      <t-icon class="result-success-icon" name="check-circle-filled" />
       <div class="result-success-title">
         项目已创建成功
       </div>
@@ -12,10 +9,7 @@
         可以联系负责人分发应用
       </div>
       <div>
-        <t-button
-          theme="default"
-          @click="() => $router.push('/detail/advanced')"
-        >
+        <t-button theme="default" @click="() => $router.push('/detail/advanced')">
           查看进度
         </t-button>
         <t-button @click="() => $router.push('/form/base')">
@@ -54,7 +48,7 @@ export default defineComponent({
   &-title {
     margin-top: 16px;
     font-size: 20px;
-    color: rgba(0, 0, 0, .9);
+    color: rgba(0, 0, 0, 0.9);
     text-align: center;
     line-height: 22px;
   }
@@ -62,7 +56,7 @@ export default defineComponent({
   &-describe {
     margin: 8px 0 32px;
     font-size: 14px;
-    color: rgba(0, 0, 0, .6);
+    color: rgba(0, 0, 0, 0.6);
     line-height: 22px;
   }
 }

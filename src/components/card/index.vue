@@ -3,10 +3,7 @@
     <div :class="titleCls">
       <span :class="titleTextCls">
         {{ title }}
-        <span
-          v-if="describe"
-          class="card-describe"
-        >{{ describe }}</span>
+        <span v-if="describe" class="card-describe">{{ describe }}</span>
       </span>
       <span class="card-option">
         <slot name="option" />
@@ -15,10 +12,7 @@
     <div class="card-content">
       <slot />
     </div>
-    <div
-      v-if="size !== 'small'"
-      class="card-spacer-bottom"
-    />
+    <div v-if="size !== 'small'" class="card-spacer-bottom" />
   </div>
 </template>
 <script lang="ts">
@@ -87,7 +81,6 @@ export default defineComponent({
 }
 
 .card {
-
   &-option {
     display: flex;
     align-items: center;
@@ -138,7 +131,7 @@ export default defineComponent({
 
   &-describe {
     font-size: 14px;
-    color: rgba(0, 0, 0, .6);
+    color: rgba(0, 0, 0, 0.6);
     line-height: 22px;
   }
 
