@@ -46,121 +46,156 @@
   }
 }
 
-.login-step1 {
+.item-container {
 
   .input-container {
-    margin-top: 72px;
+    margin-top: 64px;
 
-    .t-input {
-      display: block;
+    .tip-container {
+      margin-bottom: 16px;
+  
+      .tip1 {
+        font-size: 14px;
+        color: rgba(0,0,0,.60);
+      }
+  
+      .tip2 {
+        float: right;
+        font-size: 14px;
+        color: @brand-color-8;
+  
+        .t-icon {
+          height: 20px;
+          vertical-align: text-bottom;
+        }
+      }
     }
-
-    .t-popup-reference {
-      margin: 24px 0;
+  
+    .button-container {
+      margin-top: 16px;
     }
-  }
-
-  .check-container {
-
-    .t-checkbox__label {
-      color: @text-color-secondary;
-
-      span {
+  
+    .check-container {
+      font-size: 14px;
+      color: rgba(0,0,0,.60);
+  
+      .tip {
+        float: right;
+        font-size: 14px;
         color: @brand-color-8;
       }
     }
   }
-}
 
-.login-step3 {
-
-  .input-container {
-    margin-top: 34px;
+  .t-input {
+    display: block;
   }
-}
 
-.input-container {
+  .check-container {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
 
-  .tip-container {
-    margin-bottom: 16px;
-
-    .tip1 {
-      font-size: 14px;
-      color: rgba(0,0,0,.60);
+    .t-checkbox__label {
+      color: @text-color-secondary;
     }
 
-    .tip2 {
-      float: right;
-      font-size: 14px;
+    span {
       color: @brand-color-8;
 
-      .t-icon {
-        height: 20px;
-        vertical-align: text-bottom;
+      &:hover {
+        cursor: pointer;
       }
     }
   }
 
-  .button-container {
-    margin-top: 16px;
+  .t-popup-reference {
+    margin-top: 24px;
   }
 
-  .check-container {
-    font-size: 14px;
-    color: rgba(0,0,0,.60);
+  .verification-code {
+    margin-top: 24px;
 
-    .tip {
-      float: right;
-      font-size: 14px;
-      color: @brand-color-8;
+    .t-input {
+      display: inline-block;
+    }
+
+    button {
+      width: 102px;
+      height: 40px;
+      margin-left: 11px;
     }
   }
-}
-
-.login-step1 {
 
   .bottom-container {
-    margin-top: 72px;
-  }
-}
-
-.login-step3 {
-
-  .bottom-container {
-    margin-top: 32px;
-  }
-
-  .input-container .tip-container {
-    width: 192px;
-  }
-}
-
-.login-step2 {
-
-  .input-container {
-    margin-top: 108.9px;
-
-    .tip1 {
+    margin-top: 66px;
+  
+    .tip {
+      font-size: 14px;
+      color: @brand-color-8; 
       cursor: pointer;
     }
+  
+    i {
+      font-style: normal;
+      color: @gray-color-3;
+      margin: 0 14px;
+    }
   }
-}
+  
 
-.bottom-container {
-  margin-top: 66px;
+  &.login-pwd {
 
-  .tip {
-    font-size: 14px;
-    color: @brand-color-8; 
-    cursor: pointer;
+    .input-container {
+      margin-top: 72px;
+    }
+
+    .bottom-container {
+      margin-top: 72px;
+    }  
+  }
+  
+  &.login-qrcode {
+    
+    .input-container {
+      margin-top: 34px;
+    }
+
+    .tip-container {
+      width: 192px;
+
+      .refresh {
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .bottom-container {
+      margin-top: 32px;
+    }
   }
 
-  i {
-    font-style: normal;
-    color: @gray-color-3;
-    margin: 0 14px;
+  &.login-phone {
+  
+    .bottom-container {
+      margin-top: 66px;
+    }
   }
 
+  &.register-phone {
+
+    .input-container {
+      margin-top: 64px;
+  
+      .t-select-popup-reference {
+        margin: 0;
+      }
+    }
+  }
 }
 
 .rex-check {
@@ -178,124 +213,3 @@
   }
 }
 
-.login-step4 {
-
-  .input-container {
-    margin-top: 64px;
-
-    .t-input {
-      display: block;
-    }
-
-    .t-popup-reference {
-      margin: 24px 0;
-    }
-
-    .verification-code {
-      margin-bottom: 24px;
-
-      .t-input {
-        display: inline-block;
-      }
-
-      button {
-        width: 102px;
-        height: 40px;
-        margin-left: 11px;
-      }
-    }
-  }
-
-  .bottom-container {
-    margin-top: 66px;
-  }
-
-  .check-container {
-
-    .t-checkbox__label {
-      color: @text-color-secondary;
-
-      span {
-        color: @brand-color-8;
-      }
-    }
-  }
-}
-
-.login-step5 {
-
-  .input-container {
-    margin-top: 64px;
-
-    .t-input {
-      display: block;
-    }
-
-    .t-popup-reference {
-      margin: 24px 0;
-    }
-
-    .t-select-popup-reference {
-      margin: 0;
-    }
-  }
-
-  .bottom-container {
-    margin-top: 66px;
-  }
-
-  .check-container {
-
-    .t-checkbox__label {
-      color: @text-color-secondary;
-
-      span {
-        color: @brand-color-8;
-      }
-    }
-  }
-}
-
-.login-step6 {
-
-  .input-container {
-    margin-top: 64px;
-
-    .t-input {
-      display: block;
-    }
-
-    .t-popup-reference {
-      margin: 24px 0;
-    }
-
-    .verification-code {
-      margin: 24px 0;
-
-      .t-input {
-        display: inline-block;
-      }
-
-      button {
-        width: 102px;
-        height: 40px;
-        margin-left: 11px;
-      }
-    }
-  }
-
-  .bottom-container {
-    margin-top: 66px;
-  }
-
-  .check-container {
-
-    .t-checkbox__label {
-      color: @text-color-secondary;
-
-      span {
-        color: @brand-color-8;
-      }
-    }
-  }
-}

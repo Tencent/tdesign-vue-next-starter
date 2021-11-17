@@ -1,9 +1,14 @@
-import { Ref, onUnmounted, onMounted } from 'vue';
+import { ref, Ref, onUnmounted, onMounted } from 'vue';
 import * as echarts from 'echarts/core';
 
-export const useChart = (domId: string, chart: Ref) => {
+/**
+ * eChart hook
+ * @param domId 
+ * @param chart 
+ */
+export const useChart = (domId: string) => {
   let chartContainer: HTMLCanvasElement;
-  const selfChart = chart;
+  const selfChart = ref<echarts.ECharts>();
   const updateContainer = () => {
     selfChart.value.resize({
       width: chartContainer.clientWidth,
@@ -24,4 +29,34 @@ export const useChart = (domId: string, chart: Ref) => {
   onUnmounted(() => {
     window.removeEventListener('resize', updateContainer);
   });
+
+  return selfChart
 };
+
+/**
+ * counter utils
+ * @param duration 
+ * @returns 
+ */
+export const useCounter = (duration: number = 60): [
+  Ref<number>, () => void
+] => {
+  let intervalTimer = null;
+  onMounted(() => {
+    clearInterval(intervalTimer)
+  })
+  const countDown = ref(0);
+
+  return [countDown, () => {
+    countDown.value = duration;
+    intervalTimer = setInterval(() => {
+      if (countDown.value > 0) {
+        countDown.value -= 1;
+      } else {
+        clearInterval(intervalTimer);
+        countDown.value = 0;
+        intervalTimer = null;
+      }
+    }, 1000)
+  }];
+}

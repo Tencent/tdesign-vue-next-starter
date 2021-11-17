@@ -1,14 +1,14 @@
 <template>
-  <list-common-table />
+  <common-table />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ListCommonTable from '@/components/list-common/list-table.vue';
+import CommonTable from '../components/Table.vue';
 
 export default defineComponent({
   name: 'ListBase',
   components: {
-    ListCommonTable,
+    CommonTable,
   },
 });
 </script>

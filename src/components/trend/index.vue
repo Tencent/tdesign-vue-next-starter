@@ -2,7 +2,7 @@
   <span :class="containerCls">
     <span :class="iconCls">
       <svg
-        v-if="type === 'up'"
+        v-if="type === 'down'"
         width="16"
         height="16"
         viewBox="0 0 16 16"
