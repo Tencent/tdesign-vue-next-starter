@@ -37,8 +37,8 @@ export default [
       },
       {
         title: '筛选列表页',
-        path: 'select',
-        component: '../pages/list/select/index.vue',
+        path: 'filter',
+        component: '../pages/list/filter/index.vue',
       },
       {
         title: '树状筛选列表页',
