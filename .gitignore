@@ -18,6 +18,7 @@ test-report.html
 .idea/
 yarn.lock
 yarn-error.log
+package-lock.json
 *.zip
 .history
 .stylelintcache
