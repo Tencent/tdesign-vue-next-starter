@@ -103,6 +103,10 @@ export default defineComponent({
     }
   }
 
+  &.main-color {
+    background: @brand-color;
+  }
+
   &-title {
     display: flex;
     justify-content: space-between;
