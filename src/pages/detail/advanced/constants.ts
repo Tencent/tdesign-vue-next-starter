@@ -139,7 +139,7 @@ export const PRODUCT_LIST = [
     memory: 'RAM 16GB',
     info: '最高可选配 16GB 内存 · 最高可选配 2TB 存储设备 电池续航最长达 18 小时',
     use: 1420,
-    stock: 1500
+    stock: 1500,
   },
   {
     name: 'Surface Laptop Go',
@@ -149,6 +149,6 @@ export const PRODUCT_LIST = [
     memory: 'RAM 16GB',
     info: '常规使用 Surface，续航时间最长可达13小时 随时伴您工作',
     use: 120,
-    stock: 2000
-  }
-]
+    stock: 2000,
+  },
+];

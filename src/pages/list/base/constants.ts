@@ -45,4 +45,4 @@ export const COLUMNS = [
     colKey: 'op',
     title: '操作',
   },
-]
+];

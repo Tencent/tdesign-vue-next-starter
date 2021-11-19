@@ -2,29 +2,29 @@ export const PANE_LIST_DATA = [
   {
     title: '总申请数（次）',
     count: 1126,
-    percent: 10
+    percent: 10,
   }, {
     title: '供应商数量（个）',
     count: 1126,
-    percent: -13
+    percent: -13,
   }, {
     title: '采购商品品类（类）',
     count: 1126,
-    percent: 10
+    percent: 10,
   }, {
     title: '申请人数量（人）',
     count: 1126,
-    percent: 44
+    percent: 44,
   }, {
     title: '申请完成率（%）',
     count: 1126,
-    percent: 70
+    percent: 70,
   }, {
     title: '到货及时率（%）',
     count: 78,
-    percent: 16
-  }
-]
+    percent: 16,
+  },
+];
 
 export const  PRODUCT_LIST = [
   {
@@ -41,4 +41,4 @@ export const  PRODUCT_LIST = [
     name: 'SSL证书',
     type: 4,
   },
-]
+];

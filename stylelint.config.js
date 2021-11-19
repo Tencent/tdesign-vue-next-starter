@@ -1,3 +1,4 @@
+// style-lint config
 module.exports = {
   defaultSeverity: 'error',
   extends: ['stylelint-config-airbnb'],

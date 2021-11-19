@@ -75,4 +75,4 @@ export const BASE_INFO_DATA = [
     value: '2020-12-22 10:00:00',
     type: null,
   },
-]
+];

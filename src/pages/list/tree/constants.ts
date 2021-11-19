@@ -83,4 +83,4 @@ export const TREE_DATA = [
     label: '湖北',
     value: 4,
   },
-]
+];

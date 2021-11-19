@@ -159,7 +159,7 @@ export function getBrandColor(type: string): ColorToken {
 
 export function getColorList(colorArray: [ColorToken]): string[] {
   const pureColorList = [];
-  colorArray.map((colorToken) => Object.keys(colorToken).map((key) => pureColorList.push(colorToken[key])));
+  colorArray.map(colorToken => Object.keys(colorToken).map(key => pureColorList.push(colorToken[key])));
 
   return pureColorList;
 }

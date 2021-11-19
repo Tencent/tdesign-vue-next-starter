@@ -3,7 +3,7 @@ import { viteMockServe } from 'vite-plugin-mock';
 import { viteThemePlugin } from 'vite-plugin-theme';
 import createVuePlugin from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import svgLoader from 'vite-svg-loader'
+import svgLoader from 'vite-svg-loader';
 
 // import HttpProxyAgent from 'http-proxy-agent';
 import path from 'path';
