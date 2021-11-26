@@ -1,0 +1,206 @@
+<template>
+  <div class="list-card-operation">
+    <t-button @click="formDialogVisible = true"> 新建产品 </t-button>
+    <div :class="PREFIX + '-search-input'">
+      <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
+        <template #suffix-icon>
+          <t-icon-search v-if="searchValue === ''" size="20px" />
+        </template>
+      </t-input>
+    </div>
+  </div>
+
+  <dialog-form v-model:visible="formDialogVisible" :data="formData" />
+
+  <template v-if="pagination.total > 0 && !dataLoading">
+    <div class="list-card-items">
+      <t-row :gutter="[16, 12]">
+        <t-col
+          v-for="product in productList.slice(
+            pagination.pageSize * (pagination.current - 1),
+            pagination.pageSize * pagination.current,
+          )"
+          :key="product.index"
+          :lg="4"
+          :xs="6"
+          :xl="3"
+        >
+          <card
+            class="list-card-item"
+            :product="product"
+            @delete-item="handleDeleteItem"
+            @manage-product="handleManageProduct"
+          />
+        </t-col>
+      </t-row>
+    </div>
+    <div class="list-card-pagination">
+      <t-pagination
+        v-model="pagination.current"
+        v-model:page-size="pagination.pageSize"
+        :total="pagination.total"
+        :page-size-options="[12, 24, 36]"
+        @page-size-change="onPageSizeChange"
+        @current-change="onCurrentChange"
+      />
+    </div>
+  </template>
+  <div v-else-if="dataLoading" class="list-card-loading">
+    <t-loading size="large" text="加载数据中..." />
+  </div>
+  <t-dialog
+    v-model:visible="confirmVisible"
+    header="是否确认删除产品"
+    :body="confirmBody"
+    :on-cancel="onCancel"
+    @confirm="onConfirmDelete"
+  />
+</template>
+<script lang="ts">
+import { defineComponent, ref, computed, onMounted } from 'vue';
+import TIconSearch from 'tdesign-vue-next/lib/icon/search';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { PREFIX } from '@/config/global';
+import Card from './components/Card.vue';
+import DialogForm from './components/DialogForm.vue';
+import request from '@/utils/request';
+import { ResDataType } from '@/interface';
+
+const INITIAL_DATA = {
+  name: '',
+  status: '',
+  description: '',
+  type: '',
+  mark: '',
+  amount: 0,
+};
+
+export default defineComponent({
+  name: 'ListBase',
+  components: {
+    TIconSearch,
+    Card,
+    DialogForm,
+  },
+  setup() {
+    const pagination = ref({ current: 1, pageSize: 12, total: 0 });
+    const deleteProduct = ref(undefined);
+
+    const productList = ref([]);
+    const dataLoading = ref(true);
+
+    const fetchData = async () => {
+      try {
+        const res: ResDataType = await request.get('/api/get-card-list');
+        if (res.code === 0) {
+          const { list = [] } = res.data;
+          productList.value = list;
+          pagination.value = {
+            ...pagination.value,
+            total: list.length,
+          };
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        dataLoading.value = false;
+      }
+    };
+
+    const confirmBody = computed(() =>
+      deleteProduct.value ? `产品名称:${deleteProduct.value.name}, 产品描述: ${deleteProduct.value?.description}` : '',
+    );
+
+    onMounted(() => {
+      fetchData();
+    });
+
+    const formDialogVisible = ref(false);
+    const searchValue = ref('');
+    const confirmVisible = ref(false);
+    const formData = ref({ ...INITIAL_DATA });
+
+    return {
+      PREFIX,
+      pagination,
+      productList,
+      dataLoading,
+      formDialogVisible,
+      confirmBody,
+      searchValue,
+      confirmVisible,
+      formData,
+      onPageSizeChange(size: number) {
+        pagination.value.pageSize = size;
+        pagination.value.current = 1;
+      },
+      onCurrentChange(current: number) {
+        pagination.value.current = current;
+      },
+      handleDeleteItem(product) {
+        confirmVisible.value = true;
+        deleteProduct.value = product;
+      },
+      onConfirmDelete() {
+        const { index } = deleteProduct.value;
+        productList.value.splice(index - 1, 1);
+        confirmVisible.value = false;
+        MessagePlugin.success('删除成功');
+      },
+      onCancel() {
+        deleteProduct.value = undefined;
+        formData.value = { ...INITIAL_DATA };
+      },
+      handleManageProduct(product) {
+        formDialogVisible.value = true;
+        formData.value = { ...product, status: product?.isSetup ? '1' : '0' };
+      },
+    };
+  },
+});
+</script>
+<style lang="less" scoped>
+@import '@/style/variables.less';
+
+.list-card {
+  height: 100%;
+
+  &-operation {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-items {
+    margin-top: 14px;
+    margin-bottom: 24px;
+  }
+
+  &-pagination {
+    padding: 16px;
+  }
+
+  &-loading {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.@{prefix} {
+  &-panel {
+    background-color: @bg-color-container;
+    padding: @spacer-3;
+    border-radius: @border-radius;
+  }
+
+  &-search-input {
+    width: 360px;
+  }
+
+  &-operater-row {
+    margin-bottom: 16px;
+  }
+}
+</style>

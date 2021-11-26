@@ -1,0 +1,320 @@
+<template>
+  <div :class="`${PREFIX}-list-table`">
+    <t-form
+      ref="form"
+      :data="formData"
+      scroll-to-first-error="smooth"
+      layout="inline"
+      :class="`${PREFIX}-list-table-form`"
+      :style="{ height: isExpand ? '' : '32px' }"
+      :label-width="39"
+      colon
+      @reset="onReset"
+      @submit="onSubmit"
+    >
+      <div>
+        <t-form-item label="合同名称" name="name">
+          <t-input
+            v-model="formData.name"
+            :class="`${PREFIX}-form-item-content`"
+            type="search"
+            placeholder="请输入合同名称"
+          />
+        </t-form-item>
+        <t-form-item label="合同状态" name="status">
+          <t-select
+            v-model="formData.status"
+            :class="`${PREFIX}-form-item-content`"
+            :options="CONTRACT_STATUS_OPTIONS"
+            placeholder="请选择合同状态"
+          />
+        </t-form-item>
+        <t-form-item label="合同编号" name="no">
+          <t-input v-model="formData.no" :class="`${PREFIX}-form-item-content`" placeholder="请输入合同编号" />
+        </t-form-item>
+        <t-form-item label="合同类型" name="type">
+          <t-select
+            v-model="formData.type"
+            :class="`${PREFIX}-form-item-content`"
+            :options="CONTRACT_TYPE_OPTIONS"
+            placeholder="请选择合同类型"
+          />
+        </t-form-item>
+      </div>
+      <div :class="`${PREFIX}-list-table-form-operation`">
+        <t-form-item :style="operationStyle">
+          <t-button theme="primary" type="submit"> 查询 </t-button>
+          <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
+          <div class="expand" @click="toggleExpand">
+            {{ isExpand ? '收起' : '展开'
+            }}<t-icon-chevron-down size="20" :style="{ transform: `rotate(${isExpand ? '180deg' : '0'}` }" />
+          </div>
+        </t-form-item>
+      </div>
+    </t-form>
+
+    <div class="table-container">
+      <t-table
+        :data="data"
+        :columns="COLUMNS"
+        :row-key="rowKey"
+        :vertical-align="verticalAlign"
+        :hover="hover"
+        :pagination="pagination"
+        :loading="dataLoading"
+        @page-change="rehandlePageChange"
+        @change="rehandleChange"
+      >
+        <template #status="{ row }">
+          <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light"> 审核失败 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light"> 待审核 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light"> 待履行 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light"> 履行中 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light"> 已完成 </t-tag>
+        </template>
+        <template #contractType="{ row }">
+          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">审核失败</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUB">待审核</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">待履行</p>
+        </template>
+        <template #paymentType="{ row }">
+          <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
+            付款<trend class="dashboard-item-trend" type="up" />
+          </p>
+          <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
+            收款<trend class="dashboard-item-trend" type="down" />
+          </p>
+        </template>
+        <template #op="slotProps">
+          <a :class="PREFIX + '-link'" @click="rehandleClickOp(slotProps)">管理</a>
+          <a :class="PREFIX + '-link'" @click="handleClickDelete(slotProps)">删除</a>
+        </template>
+      </t-table>
+      <t-dialog
+        v-model:visible="confirmVisible"
+        header="是否确认删除该产品"
+        :body="confirmBody"
+        :on-cancel="onCancel"
+        @confirm="onConfirmDelete"
+      />
+    </div>
+  </div>
+</template>
+<script lang="ts">
+import { defineComponent, ref, computed, onMounted } from 'vue';
+import TIconChevronDown from 'tdesign-vue-next/lib/icon/chevron-down';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { PREFIX } from '@/config/global';
+import Trend from '@/components/trend/index.vue';
+import { COLUMNS } from './constants';
+import request from '@/utils/request';
+import { ResDataType } from '@/interface';
+
+import {
+  CONTRACT_STATUS,
+  CONTRACT_STATUS_OPTIONS,
+  CONTRACT_TYPES,
+  CONTRACT_TYPE_OPTIONS,
+  CONTRACT_PAYMENT_TYPES,
+} from '@/constants';
+
+const searchForm = {
+  name: '',
+  no: undefined,
+  status: undefined,
+  type: '',
+};
+
+export default defineComponent({
+  name: 'ListTable',
+  components: {
+    Trend,
+    TIconChevronDown,
+  },
+  setup() {
+    const formData = ref({ ...searchForm });
+    const tableConfig = {
+      rowKey: 'index',
+      verticalAlign: 'top',
+      hover: true,
+    };
+    const pagination = ref({
+      defaultPageSize: 20,
+      total: 100,
+      defaultCurrent: 1,
+    });
+    const confirmVisible = ref(false);
+    const isExpand = ref(false);
+    const toggleExpand = () => {
+      isExpand.value = !isExpand.value;
+    };
+
+    const operationStyle = computed(() => {
+      const basisStyle = {
+        position: 'absolute',
+      };
+      return isExpand.value ? { ...basisStyle, bottom: '24px' } : { ...basisStyle, top: 0 };
+    });
+
+    const data = ref([]);
+
+    const dataLoading = ref(false);
+    const fetchData = async () => {
+      dataLoading.value = true;
+      try {
+        const res: ResDataType = await request.get('/api/get-list');
+        if (res.code === 0) {
+          const { list = [] } = res.data;
+          data.value = list;
+          pagination.value = {
+            ...pagination.value,
+            total: list.length,
+          };
+        }
+      } catch (e) {
+        console.log(e);
+      } finally {
+        dataLoading.value = false;
+      }
+    };
+
+    const deleteIdx = ref(-1);
+    const confirmBody = computed(() => {
+      if (deleteIdx.value > -1) {
+        const { no, name } = data.value[deleteIdx.value];
+        return `产品编号:${no}, 产品名称: ${name}`;
+      }
+      return '';
+    });
+
+    const resetIdx = () => {
+      deleteIdx.value = -1;
+    };
+
+    const onConfirmDelete = () => {
+      // 真实业务请发起请求
+      data.value.splice(deleteIdx.value - 1, 1);
+      pagination.value.total = data.value.length;
+      confirmVisible.value = false;
+      MessagePlugin.success('删除成功');
+      resetIdx();
+    };
+
+    const onCancel = () => {
+      resetIdx();
+    };
+
+    onMounted(() => {
+      fetchData();
+    });
+
+    return {
+      PREFIX,
+      data,
+      COLUMNS,
+      CONTRACT_STATUS,
+      CONTRACT_STATUS_OPTIONS,
+      CONTRACT_TYPES,
+      CONTRACT_TYPE_OPTIONS,
+      CONTRACT_PAYMENT_TYPES,
+      formData,
+      pagination,
+      confirmVisible,
+      operationStyle,
+      confirmBody,
+      ...tableConfig,
+      onConfirmDelete,
+      onCancel,
+      dataLoading,
+      handleClickDelete({ row }) {
+        deleteIdx.value = row.index;
+        confirmVisible.value = true;
+      },
+      onReset(val) {
+        console.log(val);
+      },
+      onSubmit(val) {
+        console.log(val);
+      },
+      rehandlePageChange(curr, pageInfo) {
+        console.log('分页变化', curr, pageInfo);
+      },
+      rehandleChange(changeParams, triggerAndData) {
+        console.log('统一Change', changeParams, triggerAndData);
+      },
+      rehandleClickOp({ text, row }) {
+        console.log(text, row);
+      },
+      isExpand,
+      toggleExpand,
+    };
+  },
+});
+</script>
+
+<style lang="less" scoped>
+@import '@/style/index';
+.@{prefix} {
+  &-list-table {
+    background-color: @bg-color-container;
+    padding: 30px 32px;
+    border-radius: @border-radius;
+
+    &-form {
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      padding-left: 24px;
+
+      > div:first-child {
+        flex: 1;
+
+        .t-form__item {
+          display: inline-flex;
+        }
+      }
+
+      &-operation {
+        width: 280px;
+        position: relative;
+
+        > * {
+          margin: 0 8px;
+        }
+
+        .expand {
+          margin-left: 16px;
+          color: @brand-color;
+          line-height: 22px;
+          height: 22px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .table-container {
+      margin-top: 30px;
+    }
+  }
+
+  &-operater-row {
+    margin-bottom: 16px;
+  }
+
+  &-form-item-content {
+    width: 240px;
+    display: inline-block;
+    margin-right: 40px;
+  }
+}
+
+.payment-col {
+  display: flex;
+
+  .trend-container {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+  }
+}
+</style>

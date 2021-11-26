@@ -1,0 +1,240 @@
+<template>
+  <div :class="cardClass">
+    <div class="list-card-item_detail">
+      <t-row justify="space-between">
+        <div :class="cardLogoClass">
+          <t-icon-shop v-if="product.type === 1" />
+          <t-icon-calendar v-if="product.type === 2" />
+          <t-icon-service v-if="product.type === 3" />
+          <t-icon-user-avatar v-if="product.type === 4" />
+          <t-icon-laptop v-if="product.type === 5" />
+        </div>
+        <p :class="cardStatusClass">
+          {{ product.isSetup ? '已启用' : '已停用' }}
+        </p>
+      </t-row>
+      <p class="list-card-item_detail--name">
+        {{ product.name }}
+      </p>
+      <p class="list-card-item_detail--desc">
+        {{ product.description }}
+      </p>
+      <t-row justify="space-between" align="middle" :class="cardControlClass">
+        <div>
+          <t-button shape="circle" :disabled="!product.isSetup">
+            {{ typeMap[product.type - 1] }}
+          </t-button>
+          <t-button shape="circle" :disabled="!product.isSetup">
+            <t-icon-add />
+          </t-button>
+        </div>
+        <t-dropdown
+          :disabled="!product.isSetup"
+          :options="[
+            {
+              content: '管理',
+              value: 'manage',
+              onClick: () => handleClickManage(product),
+            },
+            {
+              content: '删除',
+              value: 'delete',
+              onClick: () => handleClickDelete(product),
+            },
+          ]"
+        >
+          <t-icon-more />
+        </t-dropdown>
+      </t-row>
+    </div>
+  </div>
+</template>
+<script lang="ts">
+import { computed, defineComponent, PropType } from 'vue';
+import TIconShop from 'tdesign-vue-next/lib/icon/shop';
+import TIconCalendar from 'tdesign-vue-next/lib/icon/calendar';
+import TIconService from 'tdesign-vue-next/lib/icon/service';
+import TIconUserAvatar from 'tdesign-vue-next/lib/icon/user-avatar';
+import TIconLaptop from 'tdesign-vue-next/lib/icon/laptop';
+import TIconMore from 'tdesign-vue-next/lib/icon/more';
+import TIconAdd from 'tdesign-vue-next/lib/icon/add';
+
+export interface CardProductType {
+  type: number;
+  isSetup: boolean;
+  description: string;
+  name: string;
+}
+
+export default defineComponent({
+  name: 'ListCardComponent',
+  components: {
+    TIconShop,
+    TIconCalendar,
+    TIconService,
+    TIconUserAvatar,
+    TIconLaptop,
+    TIconMore,
+    TIconAdd,
+  },
+  props: {
+    product: {
+      type: Object as PropType<CardProductType>,
+      default: () => {
+        return {};
+      },
+    },
+  },
+  emits: ['manage-product', 'delete-item'],
+  setup(props, ctx) {
+    const { emit } = ctx;
+    const cardClass = computed(() => [
+      'list-card-item',
+      {
+        'list-card-item__disabled': !props.product.isSetup,
+      },
+    ]);
+
+    const cardLogoClass = computed(() => [
+      'list-card-item_detail--logo',
+      {
+        'list-card-item_detail--logo__disabled': !props.product.isSetup,
+      },
+    ]);
+
+    const cardStatusClass = computed(() => [
+      'list-card-item_detail--status',
+      {
+        'list-card-item_detail--status__disabled': !props.product.isSetup,
+        'list-card-item_detail--status__setup': props.product.isSetup,
+      },
+    ]);
+
+    const cardControlClass = computed(() => [
+      'list-card-item_detail--control',
+      {
+        'list-card-item_detail--control__disabled': !props.product.isSetup,
+      },
+    ]);
+
+    return {
+      cardClass,
+      cardLogoClass,
+      cardStatusClass,
+      cardControlClass,
+      typeMap: ['A', 'B', 'C', 'D', 'E'],
+      handleClickManage(product) {
+        emit('manage-product', product);
+      },
+      handleClickDelete(product) {
+        emit('delete-item', product);
+      },
+    };
+  },
+});
+</script>
+
+<style lang="less" scoped>
+@import '@/style/index';
+
+.list-card-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: @border-radius;
+  overflow: hidden;
+  cursor: pointer;
+  color: @text-color-secondary;
+
+  &_detail {
+    flex: 1;
+    background: @bg-color-container;
+    padding: 24px 32px;
+    min-height: 140px;
+
+    &--logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: @brand-color-1;
+      font-size: 32px;
+      color: @brand-color;
+
+      &__disabled {
+        color: @text-color-disabled;
+      }
+    }
+
+    &--name {
+      margin: 24px 0 8px 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    &--status {
+      border-radius: @border-radius;
+      width: 52px;
+      height: 24px;
+      line-height: 24px;
+      font-size: 12px;
+      text-align: center;
+      font-weight: 400;
+
+      &__disabled {
+        background: @gray-color-2;
+      }
+
+      &__setup {
+        background: @success-color-5;
+        color: @text-color-anti;
+      }
+    }
+
+    &--desc {
+      font-size: 14px;
+      line-height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      margin-bottom: 24px;
+      height: 40px;
+    }
+
+    &--control {
+      > div:first-child {
+        position: relative;
+
+        > button:last-child {
+          position: absolute;
+          left: 18px;
+          background-color: @brand-color-2;
+          --ripple-color: @brand-color-2;
+          color: @brand-color;
+        }
+      }
+
+      &__disabled {
+        > div:first-child {
+          > button:first-child {
+            background-color: @gray-color-6;
+            color: @text-color-anti;
+          }
+
+          > button:last-child {
+            background-color: @gray-color-2;
+            color: @text-color-disabled;
+          }
+        }
+      }
+    }
+  }
+
+  &__disabled {
+    color: @text-color-disabled;
+  }
+}
+</style>
