@@ -2,9 +2,7 @@
   <div>
     <div class="detail-base-panel">
       <t-row class="detail-base-info" justify="space-between">
-        <p class="detail-base-info-title">
-          基本信息
-        </p>
+        <p class="detail-base-info-title">基本信息</p>
       </t-row>
       <div class="info-block">
         <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
@@ -23,9 +21,7 @@
       <t-divider style="margin-top: 24px; margin-bottom: 23px; border-top-color: rgba(255, 255, 255, 0)" />
       <div class="update-history">
         <t-row class="detail-base-info" justify="space-between">
-          <p class="detail-base-info-title">
-            变更记录
-          </p>
+          <p class="detail-base-info-title">变更记录</p>
         </t-row>
         <t-steps class="detail-base-info-steps" direction="vertical" theme="dot" :current="1">
           <t-step-item title="上传合同附件" content="这里是提示文字" />

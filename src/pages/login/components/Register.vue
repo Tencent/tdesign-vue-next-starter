@@ -48,9 +48,7 @@
       <div class="check-container">
         <t-checkbox>我已阅读并同意 </t-checkbox><span>TDesign服务协议</span> 和 <span>TDesign 隐私声明</span>
       </div>
-      <t-button class="button-container" style="width: 400px" size="large" @click="handleRegister">
-        注册
-      </t-button>
+      <t-button class="button-container" style="width: 400px" size="large" @click="handleRegister"> 注册 </t-button>
     </div>
     <div class="bottom-container">
       <span class="tip" @click="type = 'eamil'">使用手机号注册</span>
@@ -103,9 +101,7 @@
       <div class="check-container">
         <t-checkbox>我已阅读并同意 </t-checkbox> <span>TDesign服务协议</span> 和 <span>TDesign 隐私声明</span>
       </div>
-      <t-button class="button-container" style="width: 400px" size="large" @click="handleRegister">
-        注册
-      </t-button>
+      <t-button class="button-container" style="width: 400px" size="large" @click="handleRegister"> 注册 </t-button>
     </div>
     <div class="bottom-container">
       <span class="tip" @click="type = 'phone'">使用邮箱注册</span>
@@ -117,7 +113,7 @@
 import { defineComponent, ref } from 'vue';
 import { useCounter } from '@/utils/hooks';
 
-const getEmails = (search:string) => [
+const getEmails = (search: string) => [
   {
     value: `${search}@qq.com`,
     label: `${search}@qq.com`,

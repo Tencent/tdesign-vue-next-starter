@@ -12,14 +12,7 @@
         <path d="M11.5 8L8 11.5L4.5 8" stroke="currentColor" stroke-width="1.5" />
         <path d="M8 11L8 4" stroke="currentColor" stroke-width="1.5" />
       </svg>
-      <svg
-        v-else
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg v-else width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4.5 8L8 4.5L11.5 8" stroke="currentColor" stroke-width="1.5" />
         <path d="M8 5V12" stroke="currentColor" stroke-width="1.5" />
       </svg>
@@ -70,6 +63,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
+@import '@/style/variables.less';
 .trend {
   &-container {
     &__up {

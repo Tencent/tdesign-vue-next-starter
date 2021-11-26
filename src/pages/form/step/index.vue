@@ -27,8 +27,8 @@
       class="step-form"
       :data="formData1"
       :rules="FORM_RULES"
-      label-align="left"
-      @submit="({ validateResult }) => onSubmit({ validateResult }, 1)"
+      label-align="right"
+      @submit="(result) => onSubmit(result, 1)"
     >
       <t-form-item label="合同名称" name="name">
         <t-select v-model="formData1.name" :style="{ width: '480px' }" class="demo-select-base" clearable>
@@ -44,13 +44,9 @@
           </t-option>
         </t-select>
       </t-form-item>
-      <t-form-item label="开票金额">
-        {{ amount }} 元
-      </t-form-item>
+      <t-form-item label="开票金额"> {{ amount }} 元 </t-form-item>
       <t-form-item>
-        <t-button theme="primary" type="submit">
-          提交申请
-        </t-button>
+        <t-button theme="primary" type="submit"> 提交申请 </t-button>
       </t-form-item>
     </t-form>
 
@@ -62,7 +58,7 @@
       :rules="FORM_RULES"
       label-align="left"
       @reset="onReset(0)"
-      @submit="({ validateResult }) => onSubmit({ validateResult }, 2)"
+      @submit="(result) => onSubmit(result, 2)"
     >
       <t-form-item label="发票抬头" name="title">
         <t-input v-model="formData2.title" :style="{ width: '480px' }" placeholder="请输入发票抬头" />
@@ -86,12 +82,8 @@
         <t-input v-model="formData2.tel" :style="{ width: '480px' }" placeholder="请输入通知手机" />
       </t-form-item>
       <t-form-item>
-        <t-button type="reset" theme="default" variant="base">
-          上一步
-        </t-button>
-        <t-button theme="primary" type="submit">
-          下一步
-        </t-button>
+        <t-button type="reset" theme="default" variant="base"> 上一步 </t-button>
+        <t-button theme="primary" type="submit"> 下一步 </t-button>
       </t-form-item>
     </t-form>
 
@@ -103,7 +95,7 @@
       :rules="FORM_RULES"
       label-align="left"
       @reset="onReset(1)"
-      @submit="({ validateResult }) => onSubmit({ validateResult }, 6)"
+      @submit="(result) => onSubmit(result, 6)"
     >
       <t-form-item label="收货人" name="consignee">
         <t-input v-model="formData3.consignee" :style="{ width: '480px' }" placeholder="请输入收货人" />
@@ -128,31 +120,19 @@
         <t-textarea v-model="formData3.fullAddress" :style="{ width: '480px' }" placeholder="请输入详细地址" />
       </t-form-item>
       <t-form-item>
-        <t-button type="reset" theme="default" variant="base">
-          上一步
-        </t-button>
-        <t-button theme="primary" type="submit">
-          下一步
-        </t-button>
+        <t-button type="reset" theme="default" variant="base"> 上一步 </t-button>
+        <t-button theme="primary" type="submit"> 下一步 </t-button>
       </t-form-item>
     </t-form>
 
     <!-- 分步表单4 -->
     <div v-show="activeForm === 6" class="step-form-4">
       <t-icon name="check-circle-filled" style="color: green" size="52px" />
-      <p class="text">
-        完成开票申请
-      </p>
-      <p class="tips">
-        预计1～3个工作日会将电子发票发至邮箱，发票邮寄请耐心等待
-      </p>
+      <p class="text">完成开票申请</p>
+      <p class="tips">预计1～3个工作日会将电子发票发至邮箱，发票邮寄请耐心等待</p>
       <div class="button-group">
-        <t-button theme="primary" @click="onReset(0)">
-          再次申请
-        </t-button>
-        <t-button variant="base" theme="default" @click="complete">
-          查看进度
-        </t-button>
+        <t-button theme="primary" @click="onReset(0)"> 再次申请 </t-button>
+        <t-button variant="base" theme="default" @click="complete"> 查看进度 </t-button>
       </div>
     </div>
   </div>
@@ -160,11 +140,18 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-
+import { ValidateResultContext } from 'tdesign-vue-next';
 import { PREFIX } from '@/config/global';
-import { FORM_RULES, NAME_OPTIONS, TYPE_OPTIONS, ADDRESS_OPTIONS, INITIAL_DATA1, INITIAL_DATA2, INITIAL_DATA3 } from './constants';
-// 导入样式
-import './index.less';
+
+import {
+  FORM_RULES,
+  NAME_OPTIONS,
+  TYPE_OPTIONS,
+  ADDRESS_OPTIONS,
+  INITIAL_DATA1,
+  INITIAL_DATA2,
+  INITIAL_DATA3,
+} from './constants';
 
 export default defineComponent({
   name: 'FormStep',
@@ -198,12 +185,12 @@ export default defineComponent({
       formData3,
       activeForm,
       amount,
-      onSubmit({ validateResult }, val) {
-        if (validateResult === true) {
+      onSubmit(result: ValidateResultContext<FormData>, val: number) {
+        if (result.validateResult === true) {
           activeForm.value = val;
         }
       },
-      onReset(val) {
+      onReset(val: number) {
         activeForm.value = val;
       },
       complete() {

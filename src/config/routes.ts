@@ -3,7 +3,7 @@ export default [
     path: '/dashboard',
     icon: 'dashboard',
     title: '仪表盘',
-    component: '../Layouts/index.tsx',
+    component: '../layouts/index.tsx',
     redirect: '/dashboard/base',
     children: [
       {
@@ -22,7 +22,7 @@ export default [
     path: '/list',
     icon: 'view-module',
     title: '列表页',
-    component: '../Layouts/index.tsx',
+    component: '../layouts/index.tsx',
     redirect: '/list/base',
     children: [
       {
@@ -51,7 +51,7 @@ export default [
     path: '/form',
     icon: 'queue',
     title: '表单页',
-    component: '../Layouts/index.tsx',
+    component: '../layouts/index.tsx',
     redirect: '/form/base',
     children: [
       {
@@ -70,7 +70,7 @@ export default [
     path: '/detail',
     icon: 'layers',
     title: '详情页',
-    component: '../Layouts/index.tsx',
+    component: '../layouts/index.tsx',
     redirect: '/detail/base',
     children: [
       {
@@ -101,7 +101,7 @@ export default [
     path: '/result',
     icon: 'check-circle',
     title: '结果页',
-    component: '../Layouts/index.tsx',
+    component: '../layouts/index.tsx',
     redirect: '/result/success',
     children: [
       {
@@ -145,7 +145,7 @@ export default [
     path: '/user',
     icon: 'user-circle',
     title: '个人页',
-    component: '../Layouts/index.tsx',
+    component: '../layouts/index.tsx',
     redirect: '/user/index',
     children: [
       {
@@ -159,7 +159,7 @@ export default [
   {
     path: '/login',
     title: '登录页',
-    component: '../Layouts/blank.vue',
+    component: '../layouts/blank.vue',
     icon: 'chevron-right-rectangle',
     redirect: '/login/index',
     children: [

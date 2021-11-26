@@ -1,0 +1,169 @@
+:root,
+:root[theme-mode='light'] {
+  --td-brand-color-8: #0052D9;
+  --td-brand-color-1: #ECF2FE;
+  --td-brand-color-2: #D4E3FC;
+  --td-brand-color-3: #BBD3FB;
+  --td-brand-color-4: #96BBF8;
+  --td-brand-color-5: #699EF5;
+  --td-brand-color-6: #4787F0;
+  --td-brand-color-7: #266FE8;
+  --td-brand-color-8: #0052D9;
+  --td-brand-color-9: #0034B5;
+  --td-brand-color-10: #001F97;
+
+  --td-warning-color-1: #FEF3E6;
+  --td-warning-color-2: #F9E0C7;
+  --td-warning-color-3: #F7C797;
+  --td-warning-color-4: #F2995F;
+  --td-warning-color-5: #ED7B2F;
+  --td-warning-color-6: #D35A21;
+  --td-warning-color-7: #BA431B;
+  --td-warning-color-8: #9E3610;
+  --td-warning-color-9: #842B0B;
+  --td-warning-color-10: #5A1907;
+
+  --td-error-color-1: #FDECEE;
+  --td-error-color-2: #F9D7D9;
+  --td-error-color-3: #F8B9BE;
+  --td-error-color-4: #F78D94;
+  --td-error-color-5: #F36D78;
+  --td-error-color-6: #E34D59;
+  --td-error-color-7: #C9353F;
+  --td-error-color-8: #B11F26;
+  --td-error-color-9: #951114;
+  --td-error-color-10: #680506;
+
+  --td-success-color-1: #E8F8F2;
+  --td-success-color-2: #BCEBDC;
+  --td-success-color-3: #85DBBE;
+  --td-success-color-4: #48C79C;
+  --td-success-color-5: #00A870;
+  --td-success-color-6: #078D5C;
+  --td-success-color-7: #067945;
+  --td-success-color-8: #056334;
+  --td-success-color-9: #044F2A;
+  --td-success-color-10: #033017;
+
+  --td-gray-color-1: #F3F3F3;
+  --td-gray-color-2: #EEEEEE;
+  --td-gray-color-3: #E7E7E7;
+  --td-gray-color-4: #DCDCDC;
+  --td-gray-color-5: #C5C5C5;
+  --td-gray-color-6: #A6A6A6;
+  --td-gray-color-7: #8B8B8B;
+  --td-gray-color-8: #777777;
+  --td-gray-color-9: #5E5E5E;
+  --td-gray-color-10: #4B4B4B;
+  --td-gray-color-11: #383838;
+  --td-gray-color-12: #2C2C2C;
+  --td-gray-color-13: #242424;
+  --td-gray-color-14: #181818;
+
+  // 文字 & 图标 颜色
+  --td-font-white-1: rgba(255, 255, 255, 1);
+  --td-font-white-2: rgba(255, 255, 255, .55);
+  --td-font-white-3: rgba(255, 255, 255, .35);
+  --td-font-white-4: rgba(255, 255, 255, .22);
+
+  --td-font-gray-1: rgba(0, 0, 0, .9);
+  --td-font-gray-2: rgba(0, 0, 0, .6);
+  --td-font-gray-3: rgba(0, 0, 0, .4);
+  --td-font-gray-4: rgba(0, 0, 0, .26);
+
+  // 基础颜色
+  --td-brand-color: var(--td-brand-color-8);     // 色彩-品牌-可操作
+  --td-warning-color: var(--td-warning-color-5); // 色彩-功能-警告
+  --td-error-color: var(--td-error-color-6);     // 色彩-功能-失败
+  --td-success-color: var(--td-success-color-5); // 色彩-功能-成功
+
+
+  // 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态
+  --td-brand-color-hover: var(--td-brand-color-7);     // hover态
+  --td-brand-color-focus: var(--td-brand-color-2);     // focus态，包括鼠标和键盘
+  --td-brand-color-active: var(--td-brand-color-9);    // 点击态
+  --td-brand-color-disabled: var(--td-brand-color-3);  // 禁用态
+  --td-brand-color-light: var(--td-brand-color-1);     // 浅色的选中态
+
+  // 警告色扩展
+  --td-warning-color-hover: var(--td-warning-color-4);
+  --td-warning-color-focus: var(--td-warning-color-2);
+  --td-warning-color-active: var(--td-warning-color-6);
+  --td-warning-color-disabled: var(--td-warning-color-3);
+  --td-warning-color-light: var(--td-warning-color-1);
+
+  // 失败/错误色扩展
+  --td-error-color-hover: var(--td-error-color-5);
+  --td-error-color-focus: var(--td-error-color-2);
+  --td-error-color-active: var(--td-error-color-7);
+  --td-error-color-disabled: var(--td-error-color-3);
+  --td-error-color-light: var(--td-error-color-1);
+
+  // 成功色扩展
+  --td-success-color-hover: var(--td-success-color-4);
+  --td-success-color-focus: var(--td-success-color-2);
+  --td-success-color-active: var(--td-success-color-6);
+  --td-success-color-disabled: var(--td-success-color-3);
+  --td-success-color-light: var(--td-success-color-1);
+
+  // 遮罩
+  --td-mask-active: rgba(0, 0, 0, .6); // 遮罩-弹出
+  --td-mask-disabled: rgba(255, 255, 255, .6); // 遮罩-禁用
+
+  // 背景色
+  --td-bg-color-page: var(--td-gray-color-2);                        // 色彩 - page
+  --td-bg-color-container: #fff;                                // 色彩 - 容器                       
+  --td-bg-color-container-hover: var(--td-gray-color-1);             // 色彩 - 容器 - hover
+  --td-bg-color-container-active: var(--td-gray-color-3);            // 色彩 - 容器 - active
+  --td-bg-color-container-select: #fff;                         // 色彩 - 容器 - select
+
+  --td-bg-color-secondarycontainer: var(--td-gray-color-1);          // 色彩 - 次级容器
+  --td-bg-color-secondarycontainer-hover: var(--td-gray-color-2);    // 色彩 - 次级容器 - hover
+  --td-bg-color-secondarycontainer-active: var(--td-gray-color-4);   // 色彩 - 次级容器 - active
+
+  --td-bg-color-component: var(--td-gray-color-3);                   // 色彩 - 组件
+  --td-bg-color-component-hover: var(--td-gray-color-4);             // 色彩 - 组件 - hover
+  --td-bg-color-component-active: var(--td-gray-color-6);            // 色彩 - 组件 - active
+  --td-bg-color-component-disabled: var(--td-gray-color-2);          // 色彩 - 组件 - disabled
+
+  // 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
+  --td-bg-color-specialcomponent: #fff;        
+
+  // 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
+  --td-bg-color-specialcomponent: #fff;        
+
+  // 文本颜色
+  --td-text-color-primary: var(--td-font-gray-1);      // 色彩-文字-主要
+  --td-text-color-secondary: var(--td-font-gray-2);    // 色彩-文字-次要
+  --td-text-color-placeholder: var(--td-font-gray-3);  // 色彩-文字-占位符/说明
+  --td-text-color-disabled: var(--td-font-gray-4);    // 色彩-文字-禁用
+  --td-text-color-anti: #fff;                      // 色彩-文字-反色
+  --td-text-color-brand: var(--td-brand-color-8);           // 色彩-文字-品牌
+  --td-text-color-link: var(--td-brand-color-8);            // 色彩-文字-链接
+
+  // 分割线
+  --td-border-level-1-color: var(--td-gray-color-3);
+  --td-component-stroke: var(--td-gray-color-3);
+  // 边框
+  --td-border-level-2-color: var(--td-gray-color-4);
+  --td-component-border: var(--td-gray-color-4);
+
+  // 基础/下层 投影 hover 使用的组件包括：表格 /
+  --td-shadow-1: 0px 1px 10px rgba(0, 0, 0, .05), 0px 4px 5px rgba(0, 0, 0, .08), 0px 2px 4px -1px rgba(0, 0, 0, .12);
+  // 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
+  --td-shadow-2: 0px 3px 14px 2px rgba(0, 0, 0, .05), 0px 8px 10px 1px rgba(0, 0, 0, .06), 0px 5px 5px -3px rgba(0, 0, 0, .1);
+  // 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
+  --td-shadow-3: 0px 6px 30px 5px rgba(0, 0, 0, .05), 0px 16px 24px 2px rgba(0, 0, 0, .04), 0px 8px 10px -5px rgba(0, 0, 0, .08);
+
+  // 内投影 用于弹窗类组件（气泡确认框 / 全局提示 / 消息通知）的内描边
+  --td-shadow-inset-top: inset 0px .5px 0px #DCDCDC;
+  --td-shadow-inset-right: inset .5px 0px 0px #DCDCDC;
+  --td-shadow-inset-bottom: inset 0px -.5px 0px #DCDCDC;
+  --td-shadow-inset-left: inset -.5px 0px 0px #DCDCDC;
+  
+  // table 特定阴影
+  --td-table-shadow-color: rgba(0, 0, 0, .08);
+
+  // 滚动条颜色
+  --td-scrollbar-color: rgba(0, 0, 0, .1);
+}

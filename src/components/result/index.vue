@@ -1,29 +1,26 @@
 <template>
-  <card>
-    <div class="result-container">
-      <img class="result-bg-img" :src="bgUrl">
-      <div class="result-tip">
-        {{ tip }}
-      </div>
-      <div>
-        <router-link class="tdesign-pro-main-link" to="/">
-          <t-button theme="primary" variant="text">
-            返回首页
-          </t-button>
-        </router-link>
-      </div>
+  <div class="result-container">
+    <img class="result-bg-img" :src="bgUrl" />
+    <div class="result-title">
+      {{ title }}
     </div>
-  </card>
+    <div class="result-tip">
+      {{ tip }}
+    </div>
+    <slot />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import Card from '@/components/card/index.vue';
 
 export default defineComponent({
   name: 'Result',
-  components: { Card },
   props: {
     bgUrl: {
+      type: String as PropType<string>,
+      default: '',
+    },
+    title: {
       type: String as PropType<string>,
       default: '',
     },

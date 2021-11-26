@@ -90,7 +90,7 @@ export default defineComponent({
   &-container {
     padding: 24px 32px;
     margin: 16px 0;
-    background: #fff;
+    background: @bg-color-container;
     border-radius: @border-radius;
     width: 100%;
     display: flex;
@@ -135,7 +135,7 @@ export default defineComponent({
 
   &-describe {
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+    color: @bg-color-container;
     line-height: 22px;
   }
 

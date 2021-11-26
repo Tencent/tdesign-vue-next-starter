@@ -34,7 +34,7 @@
           </t-list-item>
         </t-list>
         <div v-else class="secondary-msg-list__empty-list">
-          <img src="https://tdesign.gtimg.com/pro-template/personal/nothing.png" alt="空">
+          <img src="https://tdesign.gtimg.com/pro-template/personal/nothing.png" alt="空" />
           <p>暂无通知</p>
         </div>
       </t-tab-panel>
@@ -48,10 +48,11 @@
   />
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, ComputedRef } from 'vue';
 import { useStore } from 'vuex';
 import { NOTIFICATION_TYPES } from '@/constants';
 import ReadIcon from '@/assets/read.svg?component';
+import { NotificationItem } from '@/store/interface';
 
 const TAB_LIST = [
   {
@@ -75,27 +76,27 @@ export default defineComponent({
     const tabValue = ref('msgData');
 
     const visible = ref(false);
-    const selectedItem = ref(undefined);
+    const selectedItem = ref<NotificationItem>();
 
     const store = useStore();
 
     const { msgData } = store.state.notification;
 
-    const msgDataList = computed(() => {
+    const msgDataList: ComputedRef<NotificationItem[]> = computed(() => {
       if (tabValue.value === 'msgData') return msgData;
       if (tabValue.value === 'unreadMsg') return store.getters['notification/unreadMsg'];
       if (tabValue.value === 'readMsg') return store.getters['notification/readMsg'];
       return [];
     });
 
-    const handleClickDeleteBtn = (item) => {
+    const handleClickDeleteBtn = (item: NotificationItem) => {
       visible.value = true;
       selectedItem.value = item;
     };
 
-    const setReadStatus = (item) => {
+    const setReadStatus = (item: NotificationItem) => {
       const changeMsg = msgData;
-      changeMsg.forEach((e) => {
+      changeMsg.forEach((e: NotificationItem) => {
         if (e.id === item.id) {
           e.status = !e.status;
         }
@@ -106,8 +107,8 @@ export default defineComponent({
     const deleteMsg = () => {
       const item = selectedItem.value;
       const changeMsg = msgData;
-      changeMsg.forEach((e, index) => {
-        if (e.id === item.id) {
+      changeMsg.forEach((e: NotificationItem, index: number) => {
+        if (e.id === item?.id) {
           changeMsg.splice(index, 1);
         }
       });

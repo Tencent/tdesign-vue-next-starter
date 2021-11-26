@@ -52,8 +52,8 @@ const COLOR_TOKEN: ColorSeries = {
   },
   CYAN: {
     '@brand-color': '#0594FA',
-    '@brand-color-1': '#ECF2FE',
-    '@brand-color-2': '#D4E3FC',
+    '@brand-color-1': '#D6F7FF',
+    '@brand-color-2': '#85DAFF',
     '@brand-color-3': '#BBD3FB',
     '@brand-color-4': '#96BBF8',
     '@brand-color-5': '#699EF5',
@@ -159,7 +159,7 @@ export function getBrandColor(type: string): ColorToken {
 
 export function getColorList(colorArray: ColorToken[]): string[] {
   const pureColorList = [];
-  colorArray.map(colorToken => Object.keys(colorToken).map(key => pureColorList.push(colorToken[key])));
+  colorArray.map((colorToken) => Object.keys(colorToken).map((key) => pureColorList.push(colorToken[key])));
 
   return pureColorList;
 }

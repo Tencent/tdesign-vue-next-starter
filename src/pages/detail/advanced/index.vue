@@ -33,12 +33,8 @@
     <card title="产品目录">
       <template #option>
         <t-radio-group default-value="dateVal">
-          <t-radio-button value="dateVal">
-            季度
-          </t-radio-button>
-          <t-radio-button value="monthVal">
-            月份
-          </t-radio-button>
+          <t-radio-button value="dateVal"> 季度 </t-radio-button>
+          <t-radio-button value="monthVal"> 月份 </t-radio-button>
         </t-radio-group>
       </template>
       <t-row class="operater-block-container">
@@ -150,7 +146,7 @@ export default defineComponent({
 
     const fetchData = async () => {
       try {
-        const res:ResDataType = await request.get('/api/get-purchase-list');
+        const res: ResDataType = await request.get('/api/get-purchase-list');
         if (res.code === 0) {
           const { list = [] } = res.data;
           data.value = list;

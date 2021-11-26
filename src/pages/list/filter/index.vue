@@ -14,9 +14,10 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 @import '@/style/index';
+
 .@{prefix} {
   &-panel {
-    background-color: white;
+    background-color: @bg-color-container;
     padding: @spacer-3;
     border-radius: @border-radius;
   }

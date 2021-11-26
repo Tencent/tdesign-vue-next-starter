@@ -3,12 +3,12 @@ import * as echarts from 'echarts/core';
 
 /**
  * eChart hook
- * @param domId 
- * @param chart 
+ * @param domId
+ * @param chart
  */
-export const useChart = (domId: string) => {
+export const useChart = (domId: string): Ref<echarts.ECharts> => {
   let chartContainer: HTMLCanvasElement;
-  const selfChart = ref<echarts.ECharts>();
+  const selfChart = ref<echarts.ECharts | any>();
   const updateContainer = () => {
     selfChart.value.resize({
       width: chartContainer.clientWidth,
@@ -23,40 +23,39 @@ export const useChart = (domId: string) => {
     selfChart.value = echarts.init(chartContainer);
   });
 
-
   window.addEventListener('resize', updateContainer, false);
 
   onUnmounted(() => {
     window.removeEventListener('resize', updateContainer);
   });
 
-  return selfChart
+  return selfChart;
 };
 
 /**
  * counter utils
- * @param duration 
- * @returns 
+ * @param duration
+ * @returns
  */
-export const useCounter = (duration: number = 60): [
-  Ref<number>, () => void
-] => {
-  let intervalTimer = null;
+export const useCounter = (duration = 60): [Ref<number>, () => void] => {
+  let intervalTimer: NodeJS.Timer;
   onMounted(() => {
-    clearInterval(intervalTimer)
-  })
+    clearInterval(intervalTimer);
+  });
   const countDown = ref(0);
 
-  return [countDown, () => {
-    countDown.value = duration;
-    intervalTimer = setInterval(() => {
-      if (countDown.value > 0) {
-        countDown.value -= 1;
-      } else {
-        clearInterval(intervalTimer);
-        countDown.value = 0;
-        intervalTimer = null;
-      }
-    }, 1000)
-  }];
-}
+  return [
+    countDown,
+    () => {
+      countDown.value = duration;
+      intervalTimer = setInterval(() => {
+        if (countDown.value > 0) {
+          countDown.value -= 1;
+        } else {
+          clearInterval(intervalTimer);
+          countDown.value = 0;
+        }
+      }, 1000);
+    },
+  ];
+};

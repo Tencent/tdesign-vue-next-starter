@@ -8,7 +8,12 @@ export const COLUMNS = [
     ellipsis: true,
     colKey: 'name',
   },
-  { title: '合同状态', colKey: 'status', width: 150, cell: { col: 'status' } },
+  {
+    title: '合同状态',
+    colKey: 'status',
+    width: 150,
+    cell: { col: 'status' },
+  },
   {
     title: '合同编号',
     minWidth: '100',

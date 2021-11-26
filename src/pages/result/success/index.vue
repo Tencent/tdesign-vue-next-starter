@@ -2,19 +2,11 @@
   <card>
     <div class="result-success">
       <t-icon class="result-success-icon" name="check-circle-filled" />
-      <div class="result-success-title">
-        项目已创建成功
-      </div>
-      <div class="result-success-describe">
-        可以联系负责人分发应用
-      </div>
+      <div class="result-success-title">项目已创建成功</div>
+      <div class="result-success-describe">可以联系负责人分发应用</div>
       <div>
-        <t-button theme="default" @click="() => $router.push('/detail/advanced')">
-          查看进度
-        </t-button>
-        <t-button @click="() => $router.push('/form/base')">
-          再次创建
-        </t-button>
+        <t-button theme="default" @click="() => $router.push('/detail/advanced')"> 查看进度 </t-button>
+        <t-button @click="() => $router.push('/form/base')"> 再次创建 </t-button>
       </div>
     </div>
   </card>
@@ -24,6 +16,7 @@
 import { defineComponent } from 'vue';
 
 import Card from '@/components/card/index.vue';
+
 export default defineComponent({
   name: 'ResultSuccess',
   components: { Card },
@@ -48,7 +41,7 @@ export default defineComponent({
   &-title {
     margin-top: 16px;
     font-size: 20px;
-    color: rgba(0, 0, 0, 0.9);
+    color: @text-color-primary;
     text-align: center;
     line-height: 22px;
   }
@@ -56,7 +49,7 @@ export default defineComponent({
   &-describe {
     margin: 8px 0 32px;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+    color: @text-color-primary;
     line-height: 22px;
   }
 }

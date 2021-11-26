@@ -1,4 +1,6 @@
 // 定义的state初始值
+import { NotificationItem } from '../interface'
+
 const state = {
   msgData: [
     {
@@ -58,15 +60,18 @@ const state = {
   ],
 };
 
+type NotificationStateType = typeof state;
+type MsgDataType = typeof state.msgData;
+
 const mutations = {
-  setMsgData(state, data) {
+  setMsgData(state: NotificationStateType, data: MsgDataType) {
     state.msgData = data;
   },
 };
 
 const getters = {
-  unreadMsg: state => state.msgData.filter(item => item.status),
-  readMsg: state => state.msgData.filter(item => !item.status),
+  unreadMsg: (state: NotificationStateType) => state.msgData.filter((item: NotificationItem) => item.status),
+  readMsg: (state: NotificationStateType) => state.msgData.filter((item: NotificationItem) => !item.status),
 };
 
 const actions = {};

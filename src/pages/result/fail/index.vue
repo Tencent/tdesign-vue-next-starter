@@ -2,16 +2,10 @@
   <card>
     <div class="result-success">
       <t-icon class="result-success-icon" name="close-circle-filled" />
-      <div class="result-success-title">
-        项目创建失败
-      </div>
-      <div class="result-success-describe">
-        企业微信联系检查创建者权限，或返回修改
-      </div>
+      <div class="result-success-title">项目创建失败</div>
+      <div class="result-success-describe">企业微信联系检查创建者权限，或返回修改</div>
       <div>
-        <t-button @click="() => $router.push('/form/base')">
-          返回修改
-        </t-button>
+        <t-button @click="() => $router.push('/form/base')"> 返回修改 </t-button>
       </div>
     </div>
   </card>
@@ -38,13 +32,13 @@ export default defineComponent({
   height: 75vh;
   &-icon {
     font-size: 64px;
-    color: @error-color;
+    color: @text-color-secondary;
   }
 
   &-title {
     margin-top: 16px;
     font-size: 20px;
-    color: rgba(0, 0, 0, 0.9);
+    color: @text-color-primary;
     text-align: center;
     line-height: 22px;
   }
@@ -52,7 +46,7 @@ export default defineComponent({
   &-describe {
     margin: 8px 0 32px;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+    color: @text-color-secondary;
     line-height: 22px;
   }
 }

@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import routeConfig from '@/config/routes';
 
-const layoutModules = import.meta.glob('../Layouts/*');
+const layoutModules = import.meta.glob('../layouts/*');
 const pagesModules = import.meta.glob('../pages/**/*.vue');
 const fristPagesModules = import.meta.glob('../pages/*.vue');
-const modules = Object.assign({}, layoutModules, fristPagesModules, pagesModules);
+const modules = { ...layoutModules, ...fristPagesModules, ...pagesModules };
 
 const getMenuRoutes = (list) => {
   if (!list) {
@@ -42,4 +42,3 @@ const router = createRouter({
   },
 });
 export default router;
-

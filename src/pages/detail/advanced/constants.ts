@@ -1,3 +1,10 @@
+interface TableRowType {
+  index: number;
+  pdName: string;
+  purchaseNum: number;
+  updateTime: string;
+}
+
 export const BASE_INFO_DATA = [
   {
     name: '合同名称',
@@ -84,14 +91,14 @@ export const TABLE_COLUMNS_DATA = [
     ellipsis: true,
     colKey: 'index',
     title: '申请号',
-    sorter: (a, b) => a.index.substr(3) - b.index.substr(3),
+    sorter: (a: TableRowType, b: TableRowType) => a.index - b.index,
   },
   {
     minWidth: '100',
     ellipsis: true,
     colKey: 'pdName',
     title: '产品名称',
-    sorter: (a, b) => a.pdName.length - b.pdName.length,
+    sorter: (a: TableRowType, b: TableRowType) => a.pdName.length - b.pdName.length,
   },
   {
     minWidth: '250',
@@ -104,7 +111,7 @@ export const TABLE_COLUMNS_DATA = [
     ellipsis: true,
     colKey: 'purchaseNum',
     title: '采购数量',
-    sorter: (a, b) => a.purchaseNum - b.purchaseNum,
+    sorter: (a: TableRowType, b: TableRowType) => a.purchaseNum - b.purchaseNum,
   },
   {
     minWidth: '100',
@@ -118,7 +125,7 @@ export const TABLE_COLUMNS_DATA = [
     ellipsis: true,
     colKey: 'updateTime',
     title: '创建时间',
-    sorter: (a, b) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
+    sorter: (a: TableRowType, b: TableRowType) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
   },
   {
     align: 'left',

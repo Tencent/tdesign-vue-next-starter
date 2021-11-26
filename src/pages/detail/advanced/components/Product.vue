@@ -21,12 +21,7 @@
       </div>
       <div class="operater-item">
         <span class="operater-item-info">{{ data.info }}</span>
-        <t-icon
-          class="operater-item-icon"
-          name="chevron-right"
-          size="small"
-          style="color: rgba(0, 0, 0, 0.26)"
-        />
+        <t-icon class="operater-item-icon" name="chevron-right" size="small" style="color: rgba(0, 0, 0, 0.26)" />
       </div>
     </div>
     <div class="operater-footer">
@@ -36,8 +31,8 @@
         theme="line"
         :percentage="(data.use / data.stock) * 100"
         :label="false"
-        :color="(data.use / data.stock) < 0.5 ? '#E24D59' : ''"
-        :track-color="(data.use / data.stock) < 0.5 ? '#FCD4D4' : '#D4E3FC'"
+        :color="data.use / data.stock < 0.5 ? '#E24D59' : ''"
+        :track-color="data.use / data.stock < 0.5 ? '#FCD4D4' : '#D4E3FC'"
       />
     </div>
   </div>
@@ -50,6 +45,9 @@ export default defineComponent({
   props: {
     data: {
       type: Object,
+      default: () => {
+        return {};
+      },
     },
   },
 });

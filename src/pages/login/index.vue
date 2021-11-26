@@ -2,13 +2,13 @@
   <div class="login-wrapper">
     <div class="login-container">
       <div class="title-container">
-        <img class="icon" src="https://tdesign.gtimg.com/pro-template/logo%402x.png">
+        <img class="icon" src="https://tdesign.gtimg.com/pro-template/logo%402x.png" />
         <div class="side-title">
           <p class="tip1">
-            {{ type == 'register' ? '没有账号吗?' : "已有账号?" }}
+            {{ type == 'register' ? '没有账号吗?' : '已有账号?' }}
           </p>
           <p class="tip2" @click="switchType(type == 'register' ? 'login' : 'register')">
-            {{ type == 'register' ? '登录' : "注册新账号" }}
+            {{ type == 'register' ? '登录' : '注册新账号' }}
           </p>
         </div>
       </div>
@@ -33,7 +33,7 @@ export default defineComponent({
   setup() {
     const type = ref('login');
 
-    const switchType = (val:string) => {
+    const switchType = (val: string) => {
       type.value = val;
     };
 

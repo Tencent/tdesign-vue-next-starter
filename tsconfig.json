@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    "strict": false,
+    "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -12,8 +12,9 @@
     "noEmit": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["**/*.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["**/*.ts", "src/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "compileOnSave": false
 }
