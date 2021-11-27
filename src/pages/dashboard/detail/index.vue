@@ -45,7 +45,7 @@
           theme="primary"
           mode="date"
           range
-          @change="onHappinesChange"
+          @change="onSatisfyChange"
         />
         <t-button class="card-date-button"> 导出数据 </t-button>
       </template>
@@ -63,7 +63,7 @@ import { LineChart, ScatterChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import ProductCard from '@/pages/list/card/components/Card.vue';
 
-import { changeChartsTheme, getFolderlineDataSet, getScattlerDataSet } from '../base/index';
+import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../base/index';
 import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
 import { useChart } from '@/utils/hooks';
 import { LAST_7_DAYS } from '@/utils/date';
@@ -87,24 +87,24 @@ export default defineComponent({
     const store = useStore();
     watch(
       () => store.state.setting.brandTheme,
-      (val) => {
-        changeChartsTheme([lineChart.value, scatterChart.value], val);
+      () => {
+        changeChartsTheme([lineChart.value, scatterChart.value]);
       },
     );
 
     onMounted(() => {
-      lineChart.value.setOption(getFolderlineDataSet());
-      scatterChart.value.setOption(getScattlerDataSet());
+      lineChart.value.setOption(getFolderLineDataSet());
+      scatterChart.value.setOption(getScatterDataSet());
     });
     return {
       LAST_7_DAYS,
       PRODUCT_LIST,
       PANE_LIST_DATA,
-      onHappinesChange() {
-        scatterChart.value.setOption(getScattlerDataSet());
+      onSatisfyChange() {
+        scatterChart.value.setOption(getScatterDataSet());
       },
-      onMaterialChange(value) {
-        lineChart.value.setOption(getFolderlineDataSet(value));
+      onMaterialChange(value: string[]) {
+        lineChart.value.setOption(getFolderLineDataSet(value));
       },
     };
   },

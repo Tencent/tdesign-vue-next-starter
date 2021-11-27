@@ -135,7 +135,7 @@ export default defineComponent({
 
     const updateCurrent = ref(0);
 
-    const setpUpdate = () => {
+    const stepUpdate = () => {
       setInterval(() => {
         if (updateCurrent.value > 5) {
           updateCurrent.value = -1;
@@ -161,7 +161,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      setpUpdate();
+      stepUpdate();
       fetchData();
     });
 

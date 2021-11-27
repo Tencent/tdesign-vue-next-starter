@@ -47,119 +47,11 @@
 }
 
 .item-container {
+  width: 400px;
+  margin-top: 64px;
 
-  .input-container {
-    margin-top: 64px;
-
-    .tip-container {
-      margin-bottom: 16px;
-  
-      .tip1 {
-        font-size: 14px;
-        color: rgba(0,0,0,.60);
-      }
-  
-      .tip2 {
-        float: right;
-        font-size: 14px;
-        color: @brand-color-8;
-  
-        .t-icon {
-          height: 20px;
-          vertical-align: text-bottom;
-        }
-      }
-    }
-  
-    .button-container {
-      margin-top: 16px;
-    }
-  
-    .check-container {
-      font-size: 14px;
-      color: rgba(0,0,0,.60);
-  
-      .tip {
-        float: right;
-        font-size: 14px;
-        color: @brand-color-8;
-      }
-    }
-  }
-
-  .t-input {
-    display: block;
-  }
-
-  .check-container {
-    margin-top: 24px;
-    display: flex;
-    align-items: center;
-
-    .t-checkbox__label {
-      color: @text-color-secondary;
-    }
-
-    span {
-      color: @brand-color-8;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
-  .t-popup-reference {
-    margin-top: 24px;
-  }
-
-  .verification-code {
-    margin-top: 24px;
-
-    .t-input {
-      display: inline-block;
-    }
-
-    button {
-      width: 102px;
-      height: 40px;
-      margin-left: 11px;
-    }
-  }
-
-  .bottom-container {
-    margin-top: 66px;
-  
-    .tip {
-      font-size: 14px;
-      color: @brand-color-8; 
-      cursor: pointer;
-    }
-  
-    i {
-      font-style: normal;
-      color: @gray-color-3;
-      margin: 0 14px;
-    }
-  }
-  
-
-  &.login-pwd {
-
-    .input-container {
-      margin-top: 72px;
-    }
-
-    .bottom-container {
-      margin-top: 72px;
-    }  
-  }
-  
   &.login-qrcode {
-    
-    .input-container {
-      margin-top: 34px;
-    }
+    margin-top: 34px;
 
     .tip-container {
       width: 192px;
@@ -187,14 +79,110 @@
   }
 
   &.register-phone {
+    margin-top: 64px;
 
-    .input-container {
-      margin-top: 64px;
-  
-      .t-select-popup-reference {
-        margin: 0;
+    .t-select-popup-reference {
+      margin: 0;
+    }
+  }
+
+  .check-container {
+    display: flex;
+    align-items: center;
+
+    &.remember-pwd {
+      margin-bottom: 16px;
+      justify-content: space-between;
+    }
+
+    .t-checkbox__label {
+      color: @text-color-secondary;
+    }
+
+    span {
+      color: @brand-color-8;
+
+      &:hover {
+        cursor: pointer;
       }
     }
+  }
+
+  .tip-container {
+    margin-bottom: 16px;
+
+    .tip1 {
+      font-size: 14px;
+      color: rgba(0,0,0,.60);
+    }
+
+    .tip2 {
+      float: right;
+      font-size: 14px;
+      color: @brand-color-8;
+
+      .t-icon {
+        height: 20px;
+        vertical-align: text-bottom;
+      }
+    }
+  }
+
+  .verification-code {
+    display: flex;
+    align-items: center;
+
+    .t-form__controls {
+      width: 100%;
+  
+      button {
+        flex-shrink: 0;
+        width: 102px;
+        height: 40px;
+        margin-left: 11px;
+      }
+    }
+    
+  }
+}
+
+.switch-container {
+  margin-top: 66px;
+
+  .tip {
+    font-size: 14px;
+    color: @brand-color-8; 
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 14px;
+
+    &:last-child {
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 12px;
+      background: @gray-color-3;
+      margin-left: 14px;
+    }
+  }
+}
+
+.check-container {
+  font-size: 14px;
+  color: rgba(0,0,0,.60);
+
+  .tip {
+    float: right;
+    font-size: 14px;
+    color: @brand-color-8;
   }
 }
 

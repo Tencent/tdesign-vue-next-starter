@@ -1,8 +1,8 @@
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import * as echarts from 'echarts/core';
 import { getBrandColor } from '@/config/color';
 import store from '@/store';
-
+import { CommonObjType } from '@/interface';
 const { state } = store;
 
 /**
@@ -349,9 +349,9 @@ export function getSmoothLineDataSet(dateTime = []) {
 }
 
 /** 折线图数据 */
-export function getFolderlineDataSet(dateTime?: []) {
+export function getFolderLineDataSet(dateTime?: string[]) {
   let dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-  if (dateTime.length > 0) {
+  if (dateTime && dateTime.length > 0) {
     const devideNum = 7;
     dateArray = getDateArray(dateTime, devideNum);
   }
@@ -637,7 +637,7 @@ export function getSelftItemList(productName: string, devideNum: number): string
  * @export
  * @returns {}
  */
-export function getScattlerDataSet(dateTime: Array<string> = []) {
+export function getScatterDataSet(dateTime: Array<string> = []) {
   const divideNum = 10;
   const timeArray = [];
   const inArray = [];
@@ -774,7 +774,7 @@ export function getAreaChartDataSet() {
         emphasis: {
           focus: 'series',
         },
-        animationDelay(idx) {
+        animationDelay(idx: number) {
           return idx * 10;
         },
       },
@@ -785,13 +785,13 @@ export function getAreaChartDataSet() {
         emphasis: {
           focus: 'series',
         },
-        animationDelay(idx) {
+        animationDelay(idx: number) {
           return idx * 10 + 100;
         },
       },
     ],
     animationEasing: 'elasticOut',
-    animationDelayUpdate(idx) {
+    animationDelayUpdate(idx: number) {
       return idx * 5;
     },
   };
@@ -994,8 +994,7 @@ export function get2ColBarChartDataSet(isMonth = false) {
         barWidth: '30%',
         data: thisYearListCopy,
         itemStyle: {
-          color: (params) => {
-            // console.log('chartListColor', chartListColor());
+          color: (params: CommonObjType) => {
             if (params.value >= 200) {
               return '#E34D59';
             }

@@ -96,7 +96,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, watch } from 'vue';
-import { DateValue } from 'tdesign-vue-next';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -107,7 +106,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { LAST_7_DAYS } from '@/utils/date';
 import { useChart } from '@/utils/hooks';
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
-import { changeChartsTheme, getFolderlineDataSet } from '@/pages/dashboard/base/index';
+import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
 
@@ -115,8 +114,8 @@ export default defineComponent({
   setup() {
     const lineChart = useChart('lineContainer');
 
-    const onLineChange = (value: DateValue) => {
-      lineChart.value.setOption(getFolderlineDataSet(value));
+    const onLineChange = (value: string[]) => {
+      lineChart.value.setOption(getFolderLineDataSet(value));
     };
 
     onMounted(() => {
@@ -127,15 +126,15 @@ export default defineComponent({
           x2: 10, // 默认80px
           y2: 30, // 默认60px
         },
-        ...getFolderlineDataSet(),
+        ...getFolderLineDataSet(),
       });
     });
 
     const store = useStore();
     watch(
       () => store.state.setting.brandTheme,
-      (val) => {
-        changeChartsTheme([lineChart.value], val);
+      () => {
+        changeChartsTheme([lineChart.value]);
       },
     );
 

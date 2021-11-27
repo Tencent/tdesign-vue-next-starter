@@ -17,3 +17,7 @@ export type ModeType = 'dark' | 'light';
 export type SettingType = typeof STYLE_CONFIG;
 
 export type ClassName = { [className: string]: any } | ClassName[] | string;
+
+export type CommonObjType = {
+  [key: string]: string | number
+}

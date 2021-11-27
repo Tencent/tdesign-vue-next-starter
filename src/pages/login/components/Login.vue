@@ -1,21 +1,29 @@
 <template>
   <!-- 密码登陆 -->
-  <div v-if="type == 'pwd'" class="item-container login-pwd">
-    <div class="input-container">
-      <t-input v-model="userInfo.EngName" style="width: 400px" size="large" placeholder="请输入您的邮箱/手机号">
-        <template #prefix-icon>
-          <t-icon name="user" />
-        </template>
-      </t-input>
-      <t-popup placement="right" trigger="focus" show-arrow>
+  <t-form
+    ref="form"
+    :class="['item-container', `login-${type}`]"
+    :data="formData"
+    :rules="FORM_RULES"
+    label-width="0"
+    @submit="onSubmit"
+  >
+    <template v-if="type == 'password'">
+      <t-form-item name="account">
+        <t-input v-model="formData.account" size="large" placeholder="请输入您的邮箱/手机号">
+          <template #prefix-icon>
+            <t-icon name="user" />
+          </template>
+        </t-input>
+      </t-form-item>
+
+      <t-form-item name="password">
         <t-input
-          v-model="psw"
-          style="width: 400px"
+          v-model="formData.password"
           size="large"
           :type="showPsw ? 'text' : 'password'"
-          clearablec
-          placeholder="请输入密码"
-          @keyup="checkPsw"
+          clearable
+          placeholder="请输入登录密码"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
@@ -24,70 +32,51 @@
             <t-icon :name="showPsw ? 'browse' : 'browse-off'" @click="showPsw = !showPsw" />
           </template>
         </t-input>
-        <template #content>
-          <div>
-            <div :class="['rex-check', { 'format-correct': check1 }]">
-              <t-icon name="check-circle-filled" size="large" />
-              <span>1-20个英文字符</span>
-            </div>
-            <div :class="['rex-check', { 'format-correct': check2 }]">
-              <t-icon name="check-circle-filled" size="large" />
-              <span>需包含下划线</span>
-            </div>
-          </div>
-        </template>
-      </t-popup>
-      <div class="check-container">
+      </t-form-item>
+
+      <div class="check-container remember-pwd">
         <t-checkbox>记住账号</t-checkbox>
         <span class="tip">忘记账号？</span>
       </div>
-      <t-button class="button-container" style="width: 400px" size="large" @click="handleClickToLogIn"> 登录 </t-button>
-    </div>
-    <div class="bottom-container">
-      <span class="tip" @click="switchType('qrcode')">使用微信扫码登录</span>
-      <i>|</i>
-      <span class="tip" @click="switchType('phone')">使用短信登录</span>
-    </div>
-  </div>
+    </template>
 
-  <!-- 扫码登陆 -->
-  <div v-else-if="type == 'qrcode'" class="item-container login-qrcode">
-    <div class="input-container">
+    <!-- 扫码登陆 -->
+    <template v-else-if="type == 'qrcode'">
       <div class="tip-container">
         <span class="tip1">请使用微信扫一扫登录</span>
         <span class="tip2 refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
       </div>
       <qrcode-vue value="" :size="192" level="H" />
-    </div>
-    <div class="bottom-container">
-      <span class="tip" @click="switchType('pwd')">使用账号密码登录</span>
-      <i>|</i>
-      <span class="tip" @click="switchType('phone')">使用短信登录</span>
-    </div>
-  </div>
+    </template>
 
-  <!-- 手机号登陆 -->
-  <div v-else class="item-container login-phone">
-    <div class="input-container">
-      <t-input v-model="userInfo.EngName" style="width: 400px" size="large" placeholder="请输入您的手机号">
-        <template #prefix-icon>
-          <t-icon name="user" />
-        </template>
-      </t-input>
-      <div class="verification-code">
-        <t-input style="width: 282px" size="large" placeholder="请输入验证码" />
+    <!-- 手机号登陆 -->
+    <template v-else>
+      <t-form-item name="phone">
+        <t-input v-model="formData.phone" size="large" placeholder="请输入您的手机号">
+          <template #prefix-icon>
+            <t-icon name="user" />
+          </template>
+        </t-input>
+      </t-form-item>
+
+      <t-form-item class="verification-code" name="verifyCode">
+        <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
         <t-button variant="outline" :disabled="countDown > 0" @click="handleCounter">
           {{ countDown == 0 ? '发送验证码' : `${countDown}秒后可重发` }}
         </t-button>
-      </div>
-      <t-button class="button-container" style="width: 400px" size="large" @click="handleClickToLogIn"> 登录 </t-button>
+      </t-form-item>
+    </template>
+
+    <t-form-item v-if="type !== 'qrcode'">
+      <t-button block size="large" type="submit"> 登录 </t-button>
+    </t-form-item>
+
+    <div class="switch-container">
+      <span v-if="type !== 'password'" class="tip" @click="switchType('password')">使用账号密码登录</span>
+      <span v-if="type !== 'qrcode'" class="tip" @click="switchType('qrcode')">使用微信扫码登录</span>
+      <span v-if="type !== 'phone'" class="tip" @click="switchType('phone')">使用手机号登录</span>
     </div>
-    <div class="bottom-container">
-      <span class="tip" @click="switchType('pwd')">使用账号密码登录</span>
-      <i>|</i>
-      <span class="tip" @click="switchType('qrcode')">使用微信扫码登录</span>
-    </div>
-  </div>
+  </t-form>
 </template>
 
 <script lang="ts">
@@ -98,36 +87,32 @@ import QrcodeVue from 'qrcode.vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { useCounter } from '@/utils/hooks';
 
+import { passwordValidator } from '../helper';
+
 const INITIAL_DATA = {
-  EngName: '',
+  phone: '',
+  account: '',
+  password: '',
+  verifyCode: '',
+  checked: false,
+};
+
+const FORM_RULES = {
+  phone: [{ required: true, message: '手机号必填', type: 'error' }],
+  account: [{ required: true, message: '账号必填', type: 'error' }],
+  password: [{ required: true, message: '密码必填', type: 'error' }, { validator: passwordValidator }],
+  verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
 
 export default defineComponent({
   components: { QrcodeVue },
   setup() {
-    const type = ref('pwd');
-    const psw = ref('');
-    const check1 = ref(false);
-    const check2 = ref(false);
+    const type = ref('password');
 
-    const userInfo = ref({ ...INITIAL_DATA });
+    const formData = ref({ ...INITIAL_DATA });
     const showPsw = ref(false);
 
     const [countDown, handleCounter] = useCounter();
-
-    const checkPsw = () => {
-      const regExp = /^[a-z0-9_]{1,20}$/;
-      if (regExp.test(psw.value)) {
-        check1.value = true;
-      } else {
-        check1.value = false;
-      }
-      if (psw.value.indexOf('_') !== -1) {
-        check2.value = true;
-      } else {
-        check2.value = false;
-      }
-    };
 
     const switchType = (val: string) => {
       type.value = val;
@@ -136,28 +121,27 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
 
-    const handleClickToLogIn = () => {
-      store.commit('user/SET_USER_INFO', userInfo.value);
+    const onSubmit = ({ validateResult }) => {
+      if (validateResult === true) {
+        store.commit('user/SET_USER_INFO', formData.value);
 
-      MessagePlugin.success('登录成功');
+        MessagePlugin.success('登录成功');
 
-      router.push({
-        path: '/',
-      });
+        router.push({
+          path: '/',
+        });
+      }
     };
 
     return {
+      FORM_RULES,
+      formData,
       showPsw,
-      psw,
-      userInfo,
-      checkPsw,
-      check1,
-      check2,
       type,
       switchType,
       countDown,
       handleCounter,
-      handleClickToLogIn,
+      onSubmit,
     };
   },
 });

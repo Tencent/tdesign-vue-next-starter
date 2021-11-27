@@ -32,17 +32,20 @@
     ]
   },
   "rules": {
-    "import/extensions": "off",
-    "import/no-unresolved": "off",
-    "@typescript-eslint/no-explicit-any": "off",
+    "no-console": "off",
     "no-continue": "off",
     "no-restricted-syntax": "off",
+    "no-plusplus": "off",
+    "no-param-reassign":  "off",
+    "no-shadow":  "off",
     "guard-for-in": "off",
+
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
-    "no-plusplus": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "no-param-reassign":  "off",
-    "no-shadow":  "off"
+
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }

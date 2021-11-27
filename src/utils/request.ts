@@ -19,7 +19,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => config);
 
-instance.defaults.retry = 3;
+instance.defaults.timeout = 5000;
 
 instance.interceptors.response.use(
   (response) => {
@@ -46,7 +46,7 @@ instance.interceptors.response.use(
 
     const backoff = new Promise((resolve) => {
       setTimeout(() => {
-        resolve();
+        resolve(null);
       }, config.retryDelay || 1);
     });
 

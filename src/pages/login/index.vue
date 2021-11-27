@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import Login from './components/Login.vue';
-import Register from './components/register.vue';
+import Register from './components/Register.vue';
 
 /** 高级详情 */
 export default defineComponent({

@@ -149,8 +149,8 @@ export default defineComponent({
     const store = useStore();
     watch(
       () => store.state.setting.brandTheme,
-      (val) => {
-        changeChartsTheme([monitorChart.value, dataChart.value], val);
+      () => {
+        changeChartsTheme([monitorChart.value, dataChart.value]);
       },
     );
 
