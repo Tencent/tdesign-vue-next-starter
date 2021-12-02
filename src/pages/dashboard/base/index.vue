@@ -109,6 +109,9 @@
                 <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
               </span>
             </template>
+            <template #operation="slotProps">
+              <a class="link" @click="rehandleClickOp(slotProps)">操作</a>
+            </template>
           </t-table>
         </card>
       </t-col>
@@ -312,6 +315,6 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import url('./index.less');
 </style>

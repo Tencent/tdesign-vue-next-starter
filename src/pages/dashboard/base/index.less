@@ -1,8 +1,5 @@
 @import '@/style/index';
 
-@media (max-width: @screen-md-max) {
-}
-
 .t-tabs__content {
   padding-top: @spacer-3;
 }
@@ -13,9 +10,7 @@
 }
 
 .card-option {
-  display: flex;
   width: 100%;
-  align-items: center !important;
   justify-content: right !important;
 
   .dashboard-chart-title-left {
@@ -23,7 +18,7 @@
     justify-content: left;
     align-self: left;
     width: 100%;
-    color: rgba(0, 0, 0, .4);
+    color: rgb(0 0 0 / 40%);
     font-size: 15px;
     padding-left: 8px;
   }
@@ -38,9 +33,7 @@
   }
 
   .card-container {
-
     .card-content {
-
       &-label-title {
         color: @text-color-primary;
         padding-bottom: 4px;
@@ -65,7 +58,6 @@
 .dashboard-item-perfix {
   margin-right: 0 !important;
 }
-
 
 .dashboard-item {
   display: flex;
@@ -99,14 +91,12 @@
   }
 }
 
-
-
 .dashboard-bottom {
   margin-top: 16px;
   display: flex;
   flex-direction: row;
 
-  // 左边图表
+  /* 左边图表 */
   .dashboard-bottom-left {
     width: 100%;
     height: 100%;
@@ -117,7 +107,7 @@
       width: 100%;
       height: 100%;
 
-      // 计量统计
+      /* 计量统计 */
       .dashboard-bottom-left-top-count-chart {
         padding: 20px 24px;
         background-color: white;
@@ -126,7 +116,8 @@
         min-width: 300px;
         height: 320px;
       }
-      // 动态监测
+
+      /* 动态监测 */
       .dashboard-bottom-left-top-monitor-chart {
         padding: 20px 24px;
         background-color: white;
@@ -137,7 +128,7 @@
       }
     }
 
-    // 出入库概览（）
+    /* 出入库概览（） */
     .dashboard-bottom-left-bottom {
       background-color: white;
       padding: 20px 24px;
@@ -151,7 +142,7 @@
     }
   }
 
-  // 右边列表-实时热度趋势
+  /* 右边列表-实时热度趋势 */
   .dashboard-bottom-right {
     padding: 20px 24px;
     background-color: white;
@@ -164,13 +155,12 @@
       padding-top: 16px;
 
       li {
-
         .dashboard-chart-tend-item-title {
           color: grey !important;
         }
 
         .dashboard-chart-tend-sep {
-          padding: 0 0 17px 0 !important;
+          padding: 0 0 17px !important;
         }
 
         .dashboard-chart-tend-item-line {
@@ -201,7 +191,7 @@
   }
 }
 
-// 标题内容
+/* 标题内容 */
 .dashboard-chart-title {
   display: flex;
   flex-direction: row;
@@ -211,13 +201,12 @@
 
   &-describe {
     font-size: 14px !important;
-    color: rgba(0,0,0,.60) !important;
+    color: rgb(0 0 0 / 60%) !important;
     text-align: left;
     line-height: 22px;
   }
 
   &-container {
-
     .t-date-picker {
       width: 240px;
     }
@@ -225,7 +214,7 @@
 
   span {
     font-size: 16px;
-    color: rgba(0,0,0,.90);
+    color: rgb(0 0 0 / 90%);
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -233,7 +222,7 @@
   .dashboard-chart-title-search {
     display: flex;
     flex-direction: row;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #ddd;
     border-radius: @border-radius;
     padding: 0;
     align-items: center;
@@ -241,7 +230,7 @@
     font-weight: normal;
 
     input {
-      border: solid 0px #ffffff !important;
+      border: solid 0 #fff !important;
     }
   }
 
@@ -275,7 +264,7 @@
   position: absolute;
   top: 32px;
   right: 32px;
-  
+
   > span {
     display: inline-flex;
     align-items: center;
@@ -304,11 +293,9 @@
   justify-content: center;
   font-weight: 700;
 
-
   &__top {
     background: @brand-color;
   }
-
 }
 
 .row-container {
@@ -322,7 +309,7 @@
 
 .card-container.main-color {
   background: @brand-color;
-  color: white;
+  color: @text-color-primary;
 
   .card-describe {
     color: white;
@@ -333,6 +320,10 @@
   }
 
   .dashboard-item-block {
-    color: rgba(255,255,255,.55);
+    color: rgb(255 255 255 / 55%);
+  }
+
+  .dashboard-item-bottom {
+    color: white;
   }
 }

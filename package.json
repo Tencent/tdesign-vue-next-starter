@@ -6,7 +6,7 @@
     "start": "vite --open --mode development",
     "build:test": "vite build --mode test",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0",
     "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
     "stylelint": "stylelint src/**/*.{html,vue,sass,less}",
@@ -45,19 +45,19 @@
     "husky": "^7.0.4",
     "less": "^4.1.1",
     "mockjs": "^1.1.0",
+    "postcss-less": "^5.0.0",
     "prettier": "^2.4.1",
     "stylelint": "^14.1.0",
-    "stylelint-config-airbnb": "^0.0.0",
+    "stylelint-config-standard": "^24.0.0",
     "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^3.20.0",
+    "stylelint-scss": "^4.0.0",
     "typescript": "^4.4.3",
     "vite": "^2.4.4",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-svg-sprite-component": "^1.0.10",
     "vite-svg-loader": "^3.1.0",
     "vue-clipboard3": "^1.0.1",
-    "vue-tsc": "^0.2.2",
-    "vuex-router-sync": "^5.0.0"
+    "vue-tsc": "^0.2.2"
   },
   "config": {
     "commitizen": {

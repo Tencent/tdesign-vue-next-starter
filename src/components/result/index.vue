@@ -73,7 +73,7 @@ export default defineComponent({
   }
 
   &-tip {
-    margin: 16px 0 8px;
+    margin: 8px 0 32px;
     font-size: @font-size-base;
     color: @text-color-secondary;
     line-height: 22px;

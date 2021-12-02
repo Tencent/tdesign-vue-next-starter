@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import TDesign from 'tdesign-vue-next/esm';
+import TDesign from 'tdesign-vue-next';
 import VueClipboard from 'vue3-clipboard';
 
 import App from './App.vue';

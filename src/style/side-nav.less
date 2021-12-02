@@ -1,9 +1,7 @@
 @import './variables.less';
-
 @import './font-family.less';
 
 .@{prefix} {
-
   &-sidebar-layout {
     height: 100%;
   }
@@ -21,7 +19,7 @@
     top: 0;
     bottom: 0;
     z-index: 10;
-    transition: all .3s;
+    transition: all 0.3s;
     min-height: 100%;
 
     &-mix {
@@ -32,7 +30,7 @@
         z-index: 0;
       }
     }
-        
+
     &-no-fixed {
       position: relative;
       z-index: 1;
@@ -46,6 +44,9 @@
       display: flex;
       align-items: center;
       width: 100%;
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     &-logo-t-logo {
@@ -54,39 +55,45 @@
     }
 
     &-logo-tdesign-logo {
-      width: 112px;
+      height: 32px;
     }
 
     &-logo-normal {
       font-family: TencentSansKoreanW7;
       color: @brand-color;
       font-size: @font-size-l;
-      transition: all .3s;
+      transition: all 0.3s;
     }
   }
-
 
   &-sideNav-placeholder {
     flex: 1 1 232px;
     min-width: 232px;
-    transition: all .3s;
+    transition: all 0.3s;
 
     &-hidden {
       flex: 1 1 72px;
       min-width: 72px;
-      transition: all .3s;
+      transition: all 0.3s;
     }
   }
-
 }
 
-.t-menu--dark .t-menu__options:not(:empty) .t-icon-menu-unfold {
-  color: rgba(255, 255, 255, .55)
+.t-menu--dark .t-menu__operations .t-icon {
+  color: rgba(255, 255, 255, .55);
+  &:hover {
+    cursor: pointer;
+  }
 }
+
 
 .logo-container {
   cursor: pointer;
   display: inline-flex;
   height: 64px;
   margin-left: 24px;
+}
+
+.t-default-menu.t-menu--dark {
+  background: #232A35
 }

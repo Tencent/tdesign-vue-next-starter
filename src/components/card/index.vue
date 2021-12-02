@@ -103,10 +103,6 @@ export default defineComponent({
     }
   }
 
-  &.main-color {
-    background: @brand-color;
-  }
-
   &-title {
     display: flex;
     justify-content: space-between;
@@ -131,11 +127,17 @@ export default defineComponent({
         margin: @spacer 0;
       }
     }
+
+    &-text-small {
+      display: inline-block;
+      width: 100%;
+    }
   }
 
   &-describe {
     font-size: 14px;
-    color: @bg-color-container;
+    color: @brand-color;
+    color: @text-color-primary;
     line-height: 22px;
   }
 

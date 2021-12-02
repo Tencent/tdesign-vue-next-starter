@@ -2,7 +2,7 @@
   <div class="login-wrapper">
     <div class="login-container">
       <div class="title-container">
-        <img class="icon" src="https://tdesign.gtimg.com/pro-template/logo%402x.png" />
+        <img class="icon" src="https://tdesign.gtimg.com/starter/logo%402x.png" />
         <div class="side-title">
           <p class="tip1">
             {{ type == 'register' ? '没有账号吗?' : '已有账号?' }}
