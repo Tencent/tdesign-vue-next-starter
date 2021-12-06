@@ -1,19 +1,27 @@
 name: All_ON_PUSH
 
 on: push
+
 jobs:
   All_ON_PUSH:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/install-dep@develop
-      - run: echo '${{ github.ref }} ...  ${{ github.sha }}''
-      - name: build
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+        shell: bash
+      - run: echo '${{ github.ref }} ...  ${{ github.sha }}'
+      - name: build-site
         run: npm run build
-      - name: upload surge service
+      - name: upload surge service and generate preview URL
         id: deploy
         run: |
-          export DEPLOY_DOMAIN=https://preview-${{ github.ref }}-tdesign-vue.surge.sh
-          npx surge --project dist --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
-      - run: echo 'https://preview-${{ github.ref }}-tdesign-vue.surge.sh'
+          export GITHUB_SHA=${{ github.sha }}
+          export GITHUB_SHA_SUB=${GITHUB_SHA: 0: 7 }
+          export DEPLOY_DOMAIN=https://preview-$GITHUB_SHA_SUB-tdesign-vue-next-starter.surge.sh
+          npx surge --project ./dist --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
+          echo the preview URL is $DEPLOY_DOMAIN
         if: ${{ success() }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "🚀 This job's status is ${{ job.status }}."

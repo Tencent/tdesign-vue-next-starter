@@ -1,5 +1,5 @@
 // 定义的state初始值
-import { NotificationItem } from '../interface'
+import { NotificationItem } from '../interface';
 
 const state = {
   msgData: [

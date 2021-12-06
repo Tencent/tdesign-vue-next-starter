@@ -3,6 +3,7 @@ import * as echarts from 'echarts/core';
 import { getBrandColor } from '@/config/color';
 import store from '@/store';
 import { CommonObjType } from '@/interface';
+
 const { state } = store;
 
 /**
@@ -177,9 +178,11 @@ export function constructInitDataset(dateTime: Array<string> = []) {
       // console.log('dateAbsTime..', dateAbsTime, enhandTime);
       timeArray.push(dayjs(enhandTime).format('YYYY-MM-DD'));
     } else {
-      timeArray.push(dayjs()
-        .subtract(divideNum - i, 'day')
-        .format('YYYY-MM-DD'));
+      timeArray.push(
+        dayjs()
+          .subtract(divideNum - i, 'day')
+          .format('YYYY-MM-DD'),
+      );
     }
 
     inArray.push(getRandomArray().toString());

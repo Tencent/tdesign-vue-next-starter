@@ -6,7 +6,7 @@ export const passwordValidator = (val) => {
     return { result: false, message: '需包含下划线_', type: 'warning' };
   }
   return { result: true };
-}
+};
 
 export const getEmails = (search) => [
   {
@@ -37,5 +37,5 @@ export const getEmails = (search) => [
 
 export default {
   passwordValidator,
-  getEmails
-}
+  getEmails,
+};

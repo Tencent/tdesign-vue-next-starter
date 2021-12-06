@@ -5,7 +5,8 @@ declare interface ImportMeta {
   env: {
     MODE: 'mock' | 'development' | 'test' | 'release';
   };
-  glob: (url: string) => {};
+  // eslint-disable-next-line no-unused-vars
+  glob: (url: string) => { url };
 }
 
 declare module '*.svg' {

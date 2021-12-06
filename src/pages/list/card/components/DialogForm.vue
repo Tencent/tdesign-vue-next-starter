@@ -59,7 +59,12 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    data: Object,
+    data: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
   },
   setup(props, ctx) {
     const formVisible = ref(false);

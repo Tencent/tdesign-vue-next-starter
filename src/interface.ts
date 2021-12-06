@@ -19,5 +19,5 @@ export type SettingType = typeof STYLE_CONFIG;
 export type ClassName = { [className: string]: any } | ClassName[] | string;
 
 export type CommonObjType = {
-  [key: string]: string | number
-}
+  [key: string]: string | number;
+};

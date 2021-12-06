@@ -38,7 +38,7 @@ export const useChart = (domId: string): Ref<echarts.ECharts> => {
  * @returns
  */
 export const useCounter = (duration = 60): [Ref<number>, () => void] => {
-  let intervalTimer: NodeJS.Timer;
+  let intervalTimer;
   onUnmounted(() => {
     clearInterval(intervalTimer);
   });
