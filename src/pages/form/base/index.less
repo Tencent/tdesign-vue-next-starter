@@ -1,4 +1,4 @@
-@import '@/style/index';
+@import '@/style/variables.less';
 
 .t-tabs__content {
   padding-top: @spacer-3;
@@ -52,26 +52,15 @@
   }
 
   .form-basic-item {
-    // padding: 0 60px 0 160px;
 
     .form-basic-container-title {
       font-style: normal;
       font-weight: normal;
       font-size: 20px;
       line-height: 22px;
-      color: rgba(0, 0, 0, .9);
+      color: @text-color-primary;
       padding: 64px 0 32px 0;
     }
-
-    // .t-size-m {
-    //   width: 100% !important;
-    //   min-width: 280px;
-    // }
-
-    // .t-form-item__type {
-    //   // width: 100% !important;
-    //   min-width: 280px;
-    // }
   }
 
   .tdesign-pro-panel {
@@ -84,7 +73,7 @@
 
   .form-cretifier {
     font-size: 14px;
-    color: #000000;
+    color: @text-color-primary;;
     padding-top: 24px;
     padding-bottom: 130px;
 
@@ -147,7 +136,7 @@
       .form-submit-upload-span {
         font-size: 14px;
         line-height: 22px;
-        color: rgba(0, 0, 0, .4);
+        color: @text-color-placeholder;
         padding-top: 8px;
         display: inline-block;
       }

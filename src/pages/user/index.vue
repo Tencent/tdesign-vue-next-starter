@@ -5,8 +5,10 @@
         <t-col class="user-left-panel" :flex="3">
           <div class="user-top">
             <div class="user-left-greeting">
-              Hi，Image
-              <span class="regular"> 下午好，今天是你加入鹅厂的第 100 天～</span>
+              <div class="user-left-content">
+                Hi，Image
+                <span class="regular"> 下午好，今天是你加入鹅厂的第 100 天～</span>
+              </div>
               <img src="../../assets/tencent-logo.png" class="user-left-logo" />
             </div>
             <div class="user-right-info">
@@ -46,7 +48,7 @@
                         @change="onLineChange"
                       />
                     </div>
-                    <div id="lineContainer" style="width: 100%; height: 330px" />
+                    <!-- <div id="lineContainer" style="width: 100%; height: 330px" /> -->
                   </div>
                 </t-tab-panel>
                 <t-tab-panel value="third" label="内容列表">
@@ -60,7 +62,7 @@
         <t-col class="user-right-panel" :flex="1">
           <div class="user-top">
             <div class="account">
-              <img class="img" src="https://tdesign.gtimg.com/pro-template/personal/avatar4.png" />
+              <t-avatar size="90px">T</t-avatar>
               <div class="name">My Account</div>
               <div class="position">XXG 港澳业务拓展组员工 直客销售</div>
             </div>
@@ -95,7 +97,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, watch } from 'vue';
+import { defineComponent, onMounted, watch, nextTick } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -112,22 +114,25 @@ echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendC
 
 export default defineComponent({
   setup() {
-    const lineChart = useChart('lineContainer');
+    let lineChart;
+    // nextTick(() => {
+    //   lineChart = useChart('lineContainer');
+    // });
 
     const onLineChange = (value: string[]) => {
-      lineChart.value.setOption(getFolderLineDataSet(value));
+      // lineChart.value.setOption(getFolderLineDataSet(value));
     };
 
     onMounted(() => {
-      lineChart.value.setOption({
-        grid: {
-          x: 30, // 默认是80px
-          y: 30, // 默认是60px
-          x2: 10, // 默认80px
-          y2: 30, // 默认60px
-        },
-        ...getFolderLineDataSet(),
-      });
+      // lineChart.value.setOption({
+      //   grid: {
+      //     x: 30, // 默认是80px
+      //     y: 30, // 默认是60px
+      //     x2: 10, // 默认80px
+      //     y2: 30, // 默认60px
+      //   },
+      //   ...getFolderLineDataSet(),
+      // });
     });
 
     const store = useStore();

@@ -1,4 +1,4 @@
-@import '@/style/index';
+@import '@/style/variables.less';
 
 .t-tabs__content {
   padding-top: @spacer-3;
@@ -72,7 +72,7 @@
 
     > span {
       display: inline-block;
-      color: black;
+      color: @text-color-primary;
       font-size: 36px;
       line-height: 44px;
     }
@@ -110,7 +110,7 @@
       /* 计量统计 */
       .dashboard-bottom-left-top-count-chart {
         padding: 20px 24px;
-        background-color: white;
+        background-color: @bg-color-container;
         border-radius: @border-radius;
         width: 100%;
         min-width: 300px;
@@ -120,7 +120,7 @@
       /* 动态监测 */
       .dashboard-bottom-left-top-monitor-chart {
         padding: 20px 24px;
-        background-color: white;
+        background-color: @bg-color-container;
         border-radius: @border-radius;
         margin-left: 16px;
         width: 100%;
@@ -130,7 +130,7 @@
 
     /* 出入库概览（） */
     .dashboard-bottom-left-bottom {
-      background-color: white;
+      background-color: @bg-color-container;
       padding: 20px 24px;
       border-radius: @border-radius;
       margin-top: 16px;
@@ -145,7 +145,7 @@
   /* 右边列表-实时热度趋势 */
   .dashboard-bottom-right {
     padding: 20px 24px;
-    background-color: white;
+    background-color: @bg-color-container;
     border-radius: @border-radius;
     margin-left: 16px;
     width: 426px;
@@ -307,23 +307,7 @@
   border-radius: 3px;
 }
 
-.card-container.main-color {
-  background: @brand-color;
-  color: @text-color-primary;
-
-  .card-describe {
-    color: white;
-  }
-
-  .dashboard-item-top span {
-    color: white;
-  }
-
-  .dashboard-item-block {
-    color: rgb(255 255 255 / 55%);
-  }
-
-  .dashboard-item-bottom {
-    color: white;
-  }
+.inner-card {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

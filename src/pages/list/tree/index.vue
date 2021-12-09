@@ -4,7 +4,7 @@
       <div class="list-tree-operator">
         <t-input v-model="filterText" placeholder="请输入关键词" @input="onInput">
           <template #suffix-icon>
-            <t-icon-search size="20px" />
+            <search-icon size="20px" />
           </template>
         </t-input>
         <t-tree :data="TREE_DATA" hover expand-on-click-node :default-expanded="expanded" :filter="filterByText" />
@@ -17,7 +17,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import TIconSearch from 'tdesign-vue-next/lib/icon/search';
+import { SearchIcon } from 'tdesign-icons-vue-next';
 import { PREFIX } from '@/config/global';
 
 import { TREE_DATA } from './constants';
@@ -26,7 +26,7 @@ import ListCommonTable from '../components/Table.vue';
 export default defineComponent({
   name: 'ListTree',
   components: {
-    TIconSearch,
+    SearchIcon,
     ListCommonTable,
   },
   setup() {

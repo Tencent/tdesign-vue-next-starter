@@ -47,7 +47,7 @@
           <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
           <div class="expand" @click="toggleExpand">
             {{ isExpand ? '收起' : '展开'
-            }}<t-icon-chevron-down size="20" :style="{ transform: `rotate(${isExpand ? '180deg' : '0'}` }" />
+            }}<chevron-down-icon size="20" :style="{ transform: `rotate(${isExpand ? '180deg' : '0'}` }" />
           </div>
         </t-form-item>
       </div>
@@ -102,8 +102,8 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import TIconChevronDown from 'tdesign-vue-next/lib/icon/chevron-down';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { ChevronDownIcon } from 'tdesign-icons-vue-next';
 import { PREFIX } from '@/config/global';
 import Trend from '@/components/trend/index.vue';
 import { COLUMNS } from './constants';
@@ -129,7 +129,7 @@ export default defineComponent({
   name: 'ListTable',
   components: {
     Trend,
-    TIconChevronDown,
+    ChevronDownIcon,
   },
   setup() {
     const formData = ref({ ...searchForm });

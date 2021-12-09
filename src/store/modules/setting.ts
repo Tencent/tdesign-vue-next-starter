@@ -65,18 +65,36 @@ const getters = {
   },
   showFooter: (state) => state.showFooter,
   showSettingBtn: (state) => !state.showHeader,
+  mode: (state) => {
+    if (state.mode === 'auto') {
+      const media = window.matchMedia('(prefers-color-scheme:dark)');
+      if (media.matches) {
+        return 'dark';
+      }
+      return 'light';
+    }
+    return state.mode
+  }
 };
 
 const actions = {
   async changeTheme({ commit, dispatch }, payload) {
-    console.log(payload);
     dispatch('changeMode', payload);
     dispatch('changeBrandTheme', payload);
     commit('update', payload);
   },
   changeMode({ state }, payload) {
-    if (payload.mode !== state.mode) {
-      document.documentElement.setAttribute('theme-mode', payload.mode === 'dark' ? 'dark' : '');
+    let theme = payload.mode;
+    if (payload.mode === 'auto') {
+      const media = window.matchMedia('(prefers-color-scheme:dark)');
+      if (media.matches) {
+        theme = 'dark';
+      } else {
+        theme = 'light';
+      }
+    }
+    if (theme !== state.mode) {
+      document.documentElement.setAttribute('theme-mode', theme === 'dark' ? 'dark' : '');
     }
   },
   changeBrandTheme({ state }, payload) {

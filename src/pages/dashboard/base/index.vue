@@ -98,7 +98,7 @@
               <t-radio-button value="monthVal"> 季度 </t-radio-button>
             </t-radio-group>
           </template>
-          <t-table :data="SALE_TEND_LIST" :columns="SALE_COLUMNS" row-key="productName">
+          <t-table :data="SALE_TEND_LIST" :columns="SALE_COLUMNS" row-key="productName" :style="{ overflow: 'scroll' }">
             <template #index="{ rowIndex }">
               <span :class="getRankClass(rowIndex)">
                 {{ rowIndex + 1 }}
@@ -123,7 +123,7 @@
               <t-radio-button value="monthVal"> 季度 </t-radio-button>
             </t-radio-group>
           </template>
-          <t-table :data="BUY_TEND_LIST" :columns="BUY_COLUMNS" row-key="productName">
+          <t-table :data="BUY_TEND_LIST" :columns="BUY_COLUMNS" row-key="productName" :style="{ overflow: 'scroll' }">
             <template #index="{ rowIndex }">
               <span :class="getRankClass(rowIndex)">
                 {{ rowIndex + 1 }}
@@ -167,15 +167,14 @@
           </card>
         </t-col>
         <t-col :xs="12" :xl="3">
-          <div>
-            <card :style="{ margin: '0 0 -40px 0' }">
-              <template #option>
-                <t-button>导出数据</t-button>
-              </template>
-            </card>
+          <card :style="{ margin: '0 0 -40px 0' }">
+            <template #option>
+              <t-button>导出数据</t-button>
+            </template>
+
             <t-row>
               <t-col :xs="6" :xl="12">
-                <card describe="本月出库总计（件）" :style="{ height: '168px' }" size="small">
+                <card describe="本月出库总计（件）" class="inner-card" size="small">
                   <div class="dashboard-item">
                     <div class="dashboard-item-top">
                       <span>1726</span>
@@ -191,7 +190,7 @@
               </t-col>
 
               <t-col :xs="6" :xl="12">
-                <card describe="本月入库总计（件）" :style="{ height: '168px' }" size="small">
+                <card describe="本月入库总计（件）" class="inner-card" size="small">
                   <div class="dashboard-item">
                     <div class="dashboard-item-top">
                       <span>226</span>
@@ -206,7 +205,7 @@
                 </card>
               </t-col>
             </t-row>
-          </div>
+          </card>
         </t-col>
       </t-row>
     </div>
@@ -315,6 +314,32 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="less" scoped>
+@import './index.less';
+</style>
+
 <style lang="less">
-@import url('./index.less');
+@import '@/style/variables.less';
+
+.card-container.main-color {
+  background: @brand-color;
+  color: @text-color-primary;
+
+  .card-describe {
+    color: @text-color-anti;
+  }
+
+  .dashboard-item-top span {
+    color: @text-color-anti;
+  }
+
+  .dashboard-item-block {
+    color: @text-color-anti;
+    opacity: 0.6;
+  }
+
+  .dashboard-item-bottom {
+    color: @text-color-anti;
+  }
+}
 </style>

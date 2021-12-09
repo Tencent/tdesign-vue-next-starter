@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-panel-detail">
     <card title="本月采购申请情况">
-      <t-row :gutter="16">
+      <t-row :gutter="[16, 16]">
         <t-col v-for="(item, index) in PANE_LIST_DATA" :key="index" :xs="6" :xl="3">
           <div class="dashboard-detail-container-item">
             <span>{{ item.title }}</span>

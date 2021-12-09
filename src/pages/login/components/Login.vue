@@ -1,5 +1,4 @@
 <template>
-  <!-- 密码登陆 -->
   <t-form
     ref="form"
     :class="['item-container', `login-${type}`]"
@@ -43,8 +42,8 @@
     <!-- 扫码登陆 -->
     <template v-else-if="type == 'qrcode'">
       <div class="tip-container">
-        <span class="tip1">请使用微信扫一扫登录</span>
-        <span class="tip2 refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
+        <span class="tip">请使用微信扫一扫登录</span>
+        <span class="refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
       </div>
       <qrcode-vue value="" :size="192" level="H" />
     </template>
@@ -67,7 +66,7 @@
       </t-form-item>
     </template>
 
-    <t-form-item v-if="type !== 'qrcode'">
+    <t-form-item v-if="type !== 'qrcode'" class="btn-container">
       <t-button block size="large" type="submit"> 登录 </t-button>
     </t-form-item>
 

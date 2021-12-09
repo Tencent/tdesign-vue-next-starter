@@ -3,11 +3,11 @@
     <div class="list-card-item_detail">
       <t-row justify="space-between">
         <div :class="cardLogoClass">
-          <t-icon-shop v-if="product.type === 1" />
-          <t-icon-calendar v-if="product.type === 2" />
-          <t-icon-service v-if="product.type === 3" />
-          <t-icon-user-avatar v-if="product.type === 4" />
-          <t-icon-laptop v-if="product.type === 5" />
+          <shop-icon v-if="product.type === 1" />
+          <calendar-icon v-if="product.type === 2" />
+          <service-icon v-if="product.type === 3" />
+          <user-avatar-icon v-if="product.type === 4" />
+          <laptop-icon v-if="product.type === 5" />
         </div>
         <p :class="cardStatusClass">
           {{ product.isSetup ? '已启用' : '已停用' }}
@@ -25,7 +25,7 @@
             {{ typeMap[product.type - 1] }}
           </t-button>
           <t-button shape="circle" :disabled="!product.isSetup">
-            <t-icon-add />
+            <add-icon />
           </t-button>
         </div>
         <t-dropdown
@@ -43,7 +43,7 @@
             },
           ]"
         >
-          <t-icon-more />
+          <more-icon />
         </t-dropdown>
       </t-row>
     </div>
@@ -51,13 +51,15 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
-import TIconShop from 'tdesign-vue-next/lib/icon/shop';
-import TIconCalendar from 'tdesign-vue-next/lib/icon/calendar';
-import TIconService from 'tdesign-vue-next/lib/icon/service';
-import TIconUserAvatar from 'tdesign-vue-next/lib/icon/user-avatar';
-import TIconLaptop from 'tdesign-vue-next/lib/icon/laptop';
-import TIconMore from 'tdesign-vue-next/lib/icon/more';
-import TIconAdd from 'tdesign-vue-next/lib/icon/add';
+import {
+  ShopIcon,
+  CalendarIcon,
+  ServiceIcon,
+  UserAvatarIcon,
+  LaptopIcon,
+  MoreIcon,
+  AddIcon,
+} from 'tdesign-icons-vue-next';
 
 export interface CardProductType {
   type: number;
@@ -69,13 +71,13 @@ export interface CardProductType {
 export default defineComponent({
   name: 'ListCardComponent',
   components: {
-    TIconShop,
-    TIconCalendar,
-    TIconService,
-    TIconUserAvatar,
-    TIconLaptop,
-    TIconMore,
-    TIconAdd,
+    ShopIcon,
+    CalendarIcon,
+    ServiceIcon,
+    UserAvatarIcon,
+    LaptopIcon,
+    MoreIcon,
+    AddIcon,
   },
   props: {
     product: {

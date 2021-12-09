@@ -9,7 +9,7 @@
       <div :class="`${PREFIX}-search-input`">
         <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
           <template #suffix-icon>
-            <t-icon-search size="20px" />
+            <search-icon size="20px" />
           </template>
         </t-input>
       </div>
@@ -67,7 +67,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import TIconSearch from 'tdesign-vue-next/lib/icon/search';
+import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
 
 import { PREFIX } from '@/config/global';
@@ -81,7 +81,7 @@ import { COLUMNS } from './constants';
 export default defineComponent({
   name: 'ListBaseCard',
   components: {
-    TIconSearch,
+    SearchIcon,
     Trend,
   },
   setup() {

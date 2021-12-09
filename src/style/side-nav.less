@@ -1,6 +1,9 @@
 @import './variables.less';
 @import './font-family.less';
 
+@menu-bg-color: #232A35;
+@menu-bg-hover-color: #2c3645;
+
 .@{prefix} {
   &-sidebar-layout {
     height: 100%;
@@ -94,6 +97,32 @@
   margin-left: 24px;
 }
 
-.t-default-menu.t-menu--dark {
-  background: #232A35
+.light {
+  .t-default-menu.t-menu--dark {
+    background: @menu-bg-color
+  }
+  
+  .t-menu--dark .t-menu__item:hover:not(.t-is-active):not(.t-is-opened):not(.t-is-disabled) {
+    background: @menu-bg-hover-color;
+  }
+  .t-default-menu.t-menu--dark .t-menu__item:hover:not(.t-is-active):not(.t-is-disabled) {
+    background: @menu-bg-hover-color;
+  }
 }
+
+.dark {
+  .t-default-menu.t-menu--dark {
+    background: @bg-color-container;
+  }
+}
+
+.version-container {
+  color: @text-color-anti;
+  opacity: 0.4;
+}
+.t-default-menu__inner .t-menu-group-title {
+  color: @text-color-anti;
+  opacity: 0.3;
+};
+
+

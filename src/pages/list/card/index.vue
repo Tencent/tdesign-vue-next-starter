@@ -4,7 +4,7 @@
     <div :class="PREFIX + '-search-input'">
       <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
         <template #suffix-icon>
-          <t-icon-search v-if="searchValue === ''" size="20px" />
+          <search-icon v-if="searchValue === ''" size="20px" />
         </template>
       </t-input>
     </div>
@@ -58,7 +58,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import TIconSearch from 'tdesign-vue-next/lib/icon/search';
+import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { PREFIX } from '@/config/global';
 import Card from './components/Card.vue';
@@ -78,7 +78,7 @@ const INITIAL_DATA = {
 export default defineComponent({
   name: 'ListBase',
   components: {
-    TIconSearch,
+    SearchIcon,
     Card,
     DialogForm,
   },

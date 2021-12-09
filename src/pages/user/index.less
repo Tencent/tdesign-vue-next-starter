@@ -2,21 +2,19 @@
 
 .user-panel {
   @media (max-width: @screen-sm-max) {
-
     .user-right {
       min-width: 100%;
     }
   }
 
   @media (min-width: @screen-md-min) {
-
     .user-right {
       min-width: 33.33%;
     }
   }
 
   .user-right {
-    transition: width .3s linear;
+    transition: width 0.3s linear;
 
     &-greeting {
       margin-bottom: 16px;
@@ -52,7 +50,7 @@
 
     .t-icon {
       font-size: 16px;
-      color: rgba(0, 0, 0, .9);
+      color: rgb(0 0 0 / 90%);
     }
 
     .more {
@@ -77,7 +75,6 @@
   }
 
   .user-right-panel {
-
     .user-top {
       padding: 48px;
       margin: 0 0 16px 16px;
@@ -139,7 +136,7 @@
     }
 
     .user-middle {
-      padding: 28px 32px 5px 32px;
+      padding: 28px 32px 5px;
       margin: 0 0 16px 16px;
       background: #fff;
       border-radius: @border-radius;
@@ -150,7 +147,7 @@
 
       .t-list-item {
         padding: 15px 0;
-        
+
         .t-list-item__meta-avatar {
           height: 50px;
           width: 50px;
@@ -159,21 +156,21 @@
 
         .t-list-item__meta-description {
           display: inline-block;
-          color: rgba(0, 0, 0, .4);
+          color: rgb(0 0 0 / 40%);
           font-size: 14px;
         }
       }
     }
 
     .user-bottom {
-      padding: 24px 24px 5px 24px;
+      padding: 24px 24px 5px;
       margin: 0 0 16px 16px;
       background: #fff;
       border-radius: @border-radius;
 
       .content {
         width: 70%;
-        margin: 24px 0 12px 0;
+        margin: 24px 0 12px;
       }
 
       .user-right-logo {
@@ -183,9 +180,7 @@
   }
 
   .user-left-panel {
-
     .user-top {
-
       .user-left-greeting {
         padding: 28px 32px;
         line-height: 28px;
@@ -195,6 +190,13 @@
         text-align: left;
         background-color: #fff;
         border-radius: @border-radius;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .user-left-content {
+          overflow: hidden;
+        }
 
         .regular {
           margin: 0 0 0 15px;
@@ -218,24 +220,24 @@
         .content {
           width: 90%;
         }
-        
+
         .contract {
           width: 340px;
           height: 88px;
           border-radius: @border-radius;
           margin: 8px 0;
-  
+
           &-title {
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
             line-height: 24px;
-            margin: 20px 0 6px 0;
+            margin: 20px 0 6px;
             font-family: PingFangSC-Regular;
             font-size: 14px;
-            color: rgba(0, 0, 0, .4);
+            color: rgb(0 0 0 / 40%);
           }
-  
+
           &-detail {
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -243,10 +245,10 @@
             line-height: 40px;
             font-family: PingFangSC-Regular;
             font-size: 14px;
-            color: rgba(0, 0, 0, .9);
+            color: rgb(0 0 0 / 90%);
           }
         }
-  
+
         .contract:last-child {
           margin-bottom: 0;
         }
@@ -254,7 +256,7 @@
     }
 
     .user-bottom {
-      margin: 0 0 16px 0;
+      margin: 0 0 16px;
       padding: 28px 32px;
       background: #fff;
       border-radius: @border-radius;
@@ -265,9 +267,9 @@
         .unit {
           font-size: 14px;
           font-family: PingFangSC-Regular;
-          color: rgba(0, 0, 0, .4);
+          color: rgb(0 0 0 / 40%);
         }
-        
+
         .time-picker {
           float: right;
           width: 250px;
@@ -276,4 +278,3 @@
     }
   }
 }
-
