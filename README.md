@@ -45,7 +45,7 @@ TDesign Starter 基于 TDesign UI 组件，旨在提供项目开箱即用的、�
 npm install
 
 // 启动项目
-npm run start
+npm run dev
 
 // 项目构建 - 体验环境
 npm run build:test
