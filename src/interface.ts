@@ -10,6 +10,7 @@ export interface MenuRoute {
   title?: string;
   icon?: string;
   children: MenuRoute[];
+  meta: any;
 }
 
 export type ModeType = 'dark' | 'light';
@@ -21,3 +22,13 @@ export type ClassName = { [className: string]: any } | ClassName[] | string;
 export type CommonObjType = {
   [key: string]: string | number;
 };
+
+export interface NotificationItem {
+  id: string;
+  content: string;
+  type: string;
+  status: boolean;
+  collected: boolean;
+  date: string;
+  quality: 'high' | 'low' | 'middle';
+}

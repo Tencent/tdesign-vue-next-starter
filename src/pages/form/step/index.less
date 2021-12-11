@@ -1,68 +1,17 @@
-@import '@/style/index';
+@import '@/style/variables';
 
-.t-tabs__content {
-  padding-top: @spacer-3;
-}
-
-.@{prefix} {
-
-  &-panel {
-    background-color: @bg-color-container;
-
-    &.@{prefix}-step-panel {
-      padding: 0;
-    }
-  }
-
-  &-step {
-    padding: 14px 0 24px 0;
-  }
-
-  &-form {
-    padding-right: 50px;
-    padding-top: 30px;
-    border-top: solid 1px #eee;
-  }
+.form-step-container {
+  background-color: @bg-color-container;
 }
 
 .rule-tips {
-  padding: 24px 24px 0 24px;
+  margin: 8px 24px 0;
 }
 
-.step-top {
-  padding: 24px;
-  border-bottom: #eee solid 1px;
+.step-container {
+  padding: 8px 24px 0;
 }
 
 .step-form {
   padding: 24px;
-
-  .t-form__label {
-    min-width: 108px;
-  }
-}
-
-.step-form-4 {
-  height: 365px;
-  margin-top: 72px;
-  text-align: center;
-
-  .t-icon {
-    margin: 6px;
-  }
-
-  .text {
-    margin: 16px 0 8px 0;
-    font-weight: bold;
-    font-size: 20px;
-    color: @text-color-primary;
-    line-height: 30px;
-  }
-
-  .tips {
-    margin-bottom: 24px;
-    font-size: 14px;
-    color: @text-color-secondary;
-    line-height: 22px;
-  }
 }

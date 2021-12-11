@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import routeConfig from '@/config/routes';
 
-const layoutModules = import.meta.glob('../layouts/*');
+const layoutModules = import.meta.glob('../layout/*');
 const pagesModules = import.meta.glob('../pages/**/*.vue');
 const fristPagesModules = import.meta.glob('../pages/*.vue');
 const modules = { ...layoutModules, ...fristPagesModules, ...pagesModules };
@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
   ...getMenuRoutes(routeConfig),
   {
     path: '',
-    redirect: '/dashboard/base',
+    redirect: '/login/index',
   },
 ];
 

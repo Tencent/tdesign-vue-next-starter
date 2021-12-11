@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
-import LogoFullIcon from '@/assets/logo-full.svg?component';
+import LogoFullIcon from '@/assets/assets-logo-full.svg?component';
 
 export default defineComponent({
   components: { LogoFullIcon },

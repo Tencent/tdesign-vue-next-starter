@@ -1,29 +1,7 @@
-@import '@/style/index';
+@import '@/style/variables.less';
+@import '../base//index.less';
 
-.t-tabs__content {
-  padding-top: @spacer-3;
-}
-
-.t-layout--content-replace {
-  color: rgba(0, 0, 0, .6) !important;
-}
-
-.t-table.t-size-l th,
-.t-table.t-size-l td {
-  padding: 13px 13px 12px 24px;
-  line-height: 22px;
-}
-
-.row-padding {
-  padding-top: 30px;
-  padding-left: 20px;
-}
-
-.t-tag.t-size-s {
-  margin-left: 8px;
-}
-
-.operater-add {
+.product-add {
   width: 100%;
   height: 256px;
   display: flex;
@@ -33,7 +11,7 @@
   border: dashed 1px #dedede;
   border-radius: 3px;
 
-  .operater-sub-icon {
+  .product-sub-icon {
     background: #ecf2fe;
     color: @brand-color;
     font-size: 33px;
@@ -41,7 +19,7 @@
     border-radius: 100%;
   }
 
-  .operater-sub {
+  .product-sub {
     font-size: 14px;
     color: @text-color-secondary;
     margin: 0 auto;
@@ -53,7 +31,6 @@
     cursor: pointer;
 
     svg {
-
       rect {
         fill: @brand-color-1;
       }
@@ -66,235 +43,5 @@
 
   span {
     padding-top: 12px;
-  }
-}
-
-.operater-gap {
-  margin-left: 20px;
-}
-
-.operater-block {
-  position: relative;
-  background-color: #fff;
-  border: 1px solid #e3e6eb;
-  border-radius: 3px;
-
-  .operater-content {
-    padding: 20px 32px 24px 32px;
-    height: 256px;
-    
-    .operater-title-icon {
-      background: #ecf2fe;
-      color: @brand-color;
-      font-size: 56px;
-      padding: 14px;
-      border-radius: 100%;
-    }
-    
-    .operater-title {
-      margin-bottom: 25px;
-      position: relative;
-
-      h1 {
-        display: inline-block;
-        font-weight: 500;
-        font-size: 24px;
-      }
-
-      &-subtitle {
-        display: block;
-        font-weight: 400;
-        font-size: 14px;
-        width: 60%;
-        color: rgba(0, 0, 0, .4);
-      }
-
-      &-tag {
-        margin-right: 4px;
-        margin-top: 8px;
-        margin-left: unset;
-        border: unset
-      }
-
-      &-icon {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-      }
-
-      svg {
-
-        circle {
-          fill: @brand-color-2;
-        }
-
-        path {
-          fill: @brand-color;
-        }
-      }
-    }
-
-    .operater-item {
-      position: relative;
-      padding-top: 8px;
-      padding-bottom: 8px;
-
-      &-info {
-        display: inline-block;
-        width: 60%;
-        text-align: left;
-        font-size: 14px;
-        color: rgba(0, 0, 0, .4);
-      }
-
-      &-icon {
-        position: absolute;
-        bottom: 8px;
-        right: 0;
-      }
-    }
-  }
-
-  .operater-footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0px;
-    left: 0;
-
-    .t-progress--thin {
-      display: unset;
-    }
-
-    &-percentage {
-      position: absolute;
-      bottom: 15px;
-      right: 32px;
-      color: rgba(0, 0, 0, .4);
-    }
-  }
-}
-
-.@{prefix} {
-
-  &-panel {
-    background-color: white;
-    padding: @spacer-3 @spacer-4 @spacer-4 @spacer-4;
-    border-radius: @border-radius;
-  }
-
-  &-search-input {
-    width: 360px;
-    margin-right: 8px;
-  }
-
-  &-operater-row {
-    margin-bottom: 32px;
-  }
-
-  &-operater-title {
-    font-size: 20px;
-    color: rgba(0, 0, 0, .9);
-  }
-
-  &-operater-label {
-    color: #000;
-    padding-left: 112px;
-  }
-}
-
-.advanced-card {
-  margin-top: 0 !important;
-
-  .card-title-default {
-    margin-bottom: 12px;
-  }
-}
-
-.info-block {
-  column-count: 2;
-  margin-bottom: 12px;
-
-  .info-item {
-    padding: 12px 0;
-    display: flex;
-
-    @media (max-width: @screen-sm-max) {
-
-      h1 {
-        width: 80px;
-      }
-    }
-
-    @media (min-width: @screen-md-min) {
-
-      h1 {
-        width: 200px;
-      }
-    }
-
-    h1 {
-      font-family: PingFangSC-Regular;
-      font-size: 14px;
-      color: @text-color-secondary;
-      text-align: left;
-      line-height: 22px;
-    }
-
-    span {
-      margin-left: 24px;
-    }
-
-    i {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: @border-radius-50;
-      background: @success-color-5;
-    }
-
-    .inProgress {
-      color: @success-color-5;
-    }
-
-    .pdf {
-      color: @brand-color-8;
-    }
-  }
-}
-
-.dialog-info-block {
-
-  .info-item {
-    padding: 12px 0;
-    display: flex;
-
-    h1 {
-      width: 84px;
-      font-family: PingFangSC-Regular;
-      font-size: 14px;
-      color: @text-color-secondary;
-      text-align: left;
-      line-height: 22px;
-    }
-
-    span {
-      margin-left: 24px;
-    }
-
-    i {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: @border-radius-50;
-      background: @success-color-5;
-    }
-
-    .green {
-      color: @success-color-5;
-    }
-
-    .blue {
-      color: @brand-color-8;
-    }
   }
 }

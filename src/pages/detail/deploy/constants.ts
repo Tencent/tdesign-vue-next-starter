@@ -1,8 +1,3 @@
-interface TableRowType {
-  name: string;
-  updateTime: string;
-}
-
 export const BASE_INFO_DATA = [
   {
     name: '集群名',
@@ -88,32 +83,33 @@ export const BASE_INFO_DATA = [
 
 export const TABLE_COLUMNS = [
   {
-    minWidth: '250',
+    minWidth: '448',
     ellipsis: true,
     colKey: 'name',
     title: '项目名称',
-    sorter: (a: TableRowType, b: TableRowType) => a.name.length - b.name.length,
+    sorter: (a, b) => a.name.substr(10) - b.name.substr(10),
   },
   {
-    minWidth: '200',
+    width: '448',
     ellipsis: true,
     colKey: 'adminName',
     title: '管理员',
   },
   {
-    minWidth: '100',
+    width: '448',
     className: 'test',
     ellipsis: true,
     colKey: 'updateTime',
     title: '创建时间',
-    sorter: (a: TableRowType, b: TableRowType) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
+    sorter: (a, b) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
   },
   {
     align: 'left',
-    width: 200,
+    width: '200',
     className: 'test2',
     ellipsis: true,
     colKey: 'op',
+    fixed: 'right',
     title: '操作',
   },
 ];

@@ -1,10 +1,50 @@
 @import './variables.less';
 @import './font-family.less';
 
-@menu-bg-color: #232A35;
-@menu-bg-hover-color: #2c3645;
+
+// layout rewrite
+
+.t-layout--sider {
+  width: fit-content;
+}
+
+.t-button + .t-button {
+  margin-left: @spacer;
+}
+
+.t-layout.t-layout-has-sider {
+
+  > .t-layout {
+    flex: 1;
+    min-width: 760px; // 992 - 232
+  }
+}
 
 .@{prefix} {
+
+  // 布局元素调整
+  &-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-side-nav-layout {
+    &-relative {
+      height: 100%;
+    }
+  }
+
+  &-content-layout {
+    margin: @spacer-3;
+  }
+
+  &-footer-layout {
+    padding: 0;
+    margin-bottom: @spacer-2;
+  }
+
+  // slideBar
   &-sidebar-layout {
     height: 100%;
   }
@@ -17,7 +57,7 @@
     z-index: 100;
   }
 
-  &-sideNav {
+  &-side-nav {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -46,6 +86,8 @@
     &-logo-wrapper {
       display: flex;
       align-items: center;
+      justify-content: center;
+      padding: 0 24px;
       width: 100%;
       &:hover {
         cursor: pointer;
@@ -54,11 +96,11 @@
 
     &-logo-t-logo {
       width: 32px;
-      margin-left: 16px;
     }
 
     &-logo-tdesign-logo {
       height: 32px;
+      color: @text-color-anti;
     }
 
     &-logo-normal {
@@ -69,7 +111,7 @@
     }
   }
 
-  &-sideNav-placeholder {
+  &-side-nav-placeholder {
     flex: 1 1 232px;
     min-width: 232px;
     transition: all 0.3s;
@@ -97,24 +139,6 @@
   margin-left: 24px;
 }
 
-.light {
-  .t-default-menu.t-menu--dark {
-    background: @menu-bg-color
-  }
-  
-  .t-menu--dark .t-menu__item:hover:not(.t-is-active):not(.t-is-opened):not(.t-is-disabled) {
-    background: @menu-bg-hover-color;
-  }
-  .t-default-menu.t-menu--dark .t-menu__item:hover:not(.t-is-active):not(.t-is-disabled) {
-    background: @menu-bg-hover-color;
-  }
-}
-
-.dark {
-  .t-default-menu.t-menu--dark {
-    background: @bg-color-container;
-  }
-}
 
 .version-container {
   color: @text-color-anti;

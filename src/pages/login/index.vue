@@ -4,7 +4,6 @@
 
     <div class="login-container">
       <div class="title-container">
-        <img class="icon" src="../../assets/t-logo.svg" />
         <h1 class="title margin-no">登录到</h1>
         <h1 class="title">TDesign Starter</h1>
         <div class="sub-title">

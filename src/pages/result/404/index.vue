@@ -2,7 +2,7 @@
   <result
     page-header="404"
     tip="抱歉，您访问的页面不存在"
-    bg-url="https://tdesign.gtimg.com/pro-template/result-page/404.png"
+    bg-url="https://tdesign.gtimg.com/starter/result-page/404.png"
   >
     <t-button @click="() => $router.push('/')">返回首页</t-button>
   </result>

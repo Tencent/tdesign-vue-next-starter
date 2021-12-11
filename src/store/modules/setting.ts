@@ -73,8 +73,8 @@ const getters = {
       }
       return 'light';
     }
-    return state.mode
-  }
+    return state.mode;
+  },
 };
 
 const actions = {

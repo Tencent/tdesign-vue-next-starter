@@ -1,18 +1,10 @@
-@import '@/style/index';
+@import '@/style/variables.less';
 
-.t-tabs__content {
-  padding-top: @spacer-3;
-}
-
-.list-card-item + .list-card-item {
+.card-container-margin {
   margin-top: 16px;
 }
 
-.dashboard-panel-detail {
-  margin-top: -16px;
-}
-
-.card-date-picker {
+.card-date-picker-container {
   width: 240px;
 }
 
@@ -20,30 +12,39 @@
   margin-left: 8px;
 }
 
-.dashboard-detail-container-item {
-  height: 168px;
-  border: solid 1px #ebebeb;
-  padding: 24px 32px;
-  box-sizing: border-box;
-  border-radius: @border-radius;
+.dark {
+  .dashboard-detail-container-item {
+    &:hover {
+      background: @gray-color-14;
+      cursor: pointer;
+    }
+  }
+}
 
-  &:hover {
-    background: @gray-color-1;
-    cursor: pointer;
+.light {
+  .dashboard-detail-container-item {
+    &:hover {
+      background: @gray-color-1;
+      cursor: pointer;
+    }
+  }
+}
+
+.dashboard-detail-container-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  height: 170px;
+
+  .title {
+    color: @text-color-secondary;
   }
 
-  h1 {
+  .number {
     font-size: 36px;
-    color: rgb(0 0 0 / 90%);
-    font-weight: 500;
-    padding-top: 8px;
-    padding-bottom: 24px;
-
-    span {
-      font-size: 14px;
-      color: rgb(0 0 0 / 30%);
-      padding-left: 8px;
-    }
+    line-height: 44px;
+    color: @text-color-primary;
   }
 
   .dashboard-detail-container-item-text {
@@ -52,25 +53,25 @@
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    color: rgb(0 0 0 / 40%);
+    color: @text-color-placeholder;
     text-align: left;
-    line-height: 22px;
+    line-height: 18px;
 
-    > span {
+    &-left {
       display: flex;
+
+      .icon {
+        margin: 0 8px;
+      }
     }
   }
 }
 
-
-.dashboard-detail-bottom-container {
-  padding: 20px 24px;
-  background-color: white;
-  border-radius: @border-radius;
-  margin-top: 16px;
-  min-height: 400px;
-}
-
-.trend-container {
-  margin-left: 4px;
+.dashboard-chart-title-left {
+  display: flex;
+  width: 100%;
+  color: @text-color-placeholder;
+  justify-content: left;
+  font-size: 15px;
+  padding-left: 8px;
 }

@@ -21,7 +21,7 @@
   </t-row>
 
   <!-- 项目列表 -->
-  <card title="项目列表">
+  <card title="项目列表" class="container-base-margin-top">
     <t-table
       :columns="columns"
       :data="data"
@@ -34,7 +34,7 @@
       <template #adminName="{ row }">
         <span>
           {{ row.adminName }}
-          <t-tag v-if="row.adminPhone" size="small" style="color: rgba(0, 0, 0, 0.4)">{{ row.adminPhone }}</t-tag>
+          <t-tag v-if="row.adminPhone" size="small">{{ row.adminPhone }}</t-tag>
         </span>
       </template>
       <template #op="slotProps">
@@ -182,5 +182,5 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@import url('./index.less');
+@import url('../base/index.less');
 </style>

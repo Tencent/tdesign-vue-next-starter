@@ -67,38 +67,38 @@ export default defineComponent({
 .trend {
   &-container {
     &__up {
-      color: #e34d59 !important;
+      color: @error-color;
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
-        background: #f9d7d9;
-        margin-right: 4px;
+        background: @error-color-2;
+        margin-right: 8px;
       }
     }
 
     &__down {
-      color: #00a870 !important;
+      color: @success-color;
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
-        background: #bcebdc;
-        margin-right: 4px;
+        background: @success-color-2;
+        margin-right: 8px;
       }
     }
 
     &__reverse {
-      color: #ffffff !important;
+      color: #ffffff;
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
         background: @brand-color-5;
-        margin-right: 4px;
+        margin-right: 8px;
       }
     }
 

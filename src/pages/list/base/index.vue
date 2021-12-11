@@ -1,61 +1,59 @@
 <template>
-  <div :class="`${PREFIX}-panel`">
-    <t-row :class="`${PREFIX}-operater-row`" justify="space-between">
-      <div>
+  <card class="list-card-container">
+    <t-row justify="space-between">
+      <div class="left-operation-container">
         <t-button @click="handleSetupContract"> 新建合同 </t-button>
         <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length"> 导出合同 </t-button>
-        <p v-if="!!selectedRowKeys.length" :class="`${PREFIX}-selected-count`">已选{{ selectedRowKeys.length }}项</p>
+        <p v-if="!!selectedRowKeys.length" class="selected-count">已选{{ selectedRowKeys.length }}项</p>
       </div>
-      <div :class="`${PREFIX}-search-input`">
-        <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
-          <template #suffix-icon>
-            <search-icon size="20px" />
-          </template>
-        </t-input>
-      </div>
+      <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
+        <template #suffix-icon>
+          <search-icon size="20px" />
+        </template>
+      </t-input>
     </t-row>
-    <div class="table-container">
-      <t-table
-        :data="data"
-        :columns="COLUMNS"
-        :row-key="rowKey"
-        vertical-align="top"
-        :hover="true"
-        :pagination="pagination"
-        :selected-row-keys="selectedRowKeys"
-        :loading="dataLoading"
-        @page-change="rehandlePageChange"
-        @change="rehandleChange"
-        @select-change="rehandleSelectChange"
-      >
-        <template #status="{ row }">
-          <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light"> 审核失败 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light"> 待审核 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light"> 待履行 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light"> 履行中 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light"> 已完成 </t-tag>
-        </template>
-        <template #contractType="{ row }">
-          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">审核失败</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUB">待审核</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">待履行</p>
-        </template>
-        <template #paymentType="{ row }">
-          <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-            付款<trend class="dashboard-item-trend" type="up" />
-          </p>
-          <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
-            收款<trend class="dashboard-item-trend" type="down" />
-          </p>
-        </template>
 
-        <template #op="slotProps">
-          <a :class="`${PREFIX}-link`" @click="handleClickDetail()">详情</a>
-          <a :class="`${PREFIX}-link`" @click="handleClickDelete(slotProps)">删除</a>
-        </template>
-      </t-table>
-    </div>
-  </div>
+    <t-table
+      :data="data"
+      :columns="COLUMNS"
+      :row-key="rowKey"
+      vertical-align="top"
+      :hover="true"
+      :pagination="pagination"
+      :selected-row-keys="selectedRowKeys"
+      :loading="dataLoading"
+      @page-change="rehandlePageChange"
+      @change="rehandleChange"
+      @select-change="rehandleSelectChange"
+    >
+      <template #status="{ row }">
+        <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light"> 审核失败 </t-tag>
+        <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light"> 待审核 </t-tag>
+        <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light"> 待履行 </t-tag>
+        <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light"> 履行中 </t-tag>
+        <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light"> 已完成 </t-tag>
+      </template>
+      <template #contractType="{ row }">
+        <p v-if="row.contractType === CONTRACT_TYPES.MAIN">审核失败</p>
+        <p v-if="row.contractType === CONTRACT_TYPES.SUB">待审核</p>
+        <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">待履行</p>
+      </template>
+      <template #paymentType="{ row }">
+        <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
+          付款<trend class="dashboard-item-trend" type="up" />
+        </div>
+        <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
+          收款<trend class="dashboard-item-trend" type="down" />
+        </div>
+      </template>
+
+      <template #op="slotProps">
+        <a class="t-button-link" @click="handleClickDetail()">详情</a>
+        <a class="t-button-link" @click="handleClickDelete(slotProps)">删除</a>
+      </template>
+    </t-table>
+  </card>
+
   <t-dialog
     v-model:visible="confirmVisible"
     header="是否确认删除"
@@ -70,9 +68,9 @@ import { useRouter } from 'vue-router';
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
 
-import { PREFIX } from '@/config/global';
 import { CONTRACT_STATUS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
 import Trend from '@/components/trend/index.vue';
+import Card from '@/components/card/index.vue';
 import { ResDataType } from '@/interface';
 import request from '@/utils/request';
 
@@ -81,6 +79,7 @@ import { COLUMNS } from './constants';
 export default defineComponent({
   name: 'ListBaseCard',
   components: {
+    Card,
     SearchIcon,
     Trend,
   },
@@ -159,7 +158,6 @@ export default defineComponent({
       CONTRACT_TYPES,
       CONTRACT_PAYMENT_TYPES,
       COLUMNS,
-      PREFIX,
       data,
       searchValue,
       dataLoading,
@@ -195,5 +193,30 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@import url('./index.less');
+@import '@/style/variables';
+
+.payment-col {
+  display: flex;
+
+  .trend-container {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+  }
+}
+
+.left-operation-container {
+  padding: 6px 0;
+  margin-bottom: 16px;
+
+  .selected-count {
+    display: inline-block;
+    margin-left: 8px;
+    color: @text-color-secondary;
+  }
+}
+
+.search-input {
+  width: 360px;
+}
 </style>

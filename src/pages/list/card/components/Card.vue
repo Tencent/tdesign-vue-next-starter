@@ -9,9 +9,9 @@
           <user-avatar-icon v-if="product.type === 4" />
           <laptop-icon v-if="product.type === 5" />
         </div>
-        <p :class="cardStatusClass">
-          {{ product.isSetup ? '已启用' : '已停用' }}
-        </p>
+        <t-tag :theme="product.isSetup ? 'success' : 'default'" :disabled="!product.isSetup">{{
+          product.isSetup ? '已启用' : '已停用'
+        }}</t-tag>
       </t-row>
       <p class="list-card-item_detail--name">
         {{ product.name }}
@@ -30,6 +30,7 @@
         </div>
         <t-dropdown
           :disabled="!product.isSetup"
+          trigger="click"
           :options="[
             {
               content: '管理',
@@ -43,7 +44,9 @@
             },
           ]"
         >
-          <more-icon />
+          <t-button theme="default" :disabled="!product.isSetup" shape="square" variant="text">
+            <more-icon />
+          </t-button>
         </t-dropdown>
       </t-row>
     </div>
@@ -104,14 +107,6 @@ export default defineComponent({
       },
     ]);
 
-    const cardStatusClass = computed(() => [
-      'list-card-item_detail--status',
-      {
-        'list-card-item_detail--status__disabled': !props.product.isSetup,
-        'list-card-item_detail--status__setup': props.product.isSetup,
-      },
-    ]);
-
     const cardControlClass = computed(() => [
       'list-card-item_detail--control',
       {
@@ -122,7 +117,6 @@ export default defineComponent({
     return {
       cardClass,
       cardLogoClass,
-      cardStatusClass,
       cardControlClass,
       typeMap: ['A', 'B', 'C', 'D', 'E'],
       handleClickManage(product) {
@@ -137,7 +131,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import '@/style/index';
+@import '@/style/variables';
 
 .list-card-item {
   display: flex;
@@ -173,25 +167,6 @@ export default defineComponent({
       margin: 24px 0 8px 0;
       font-size: 16px;
       font-weight: bold;
-    }
-
-    &--status {
-      border-radius: @border-radius;
-      width: 52px;
-      height: 24px;
-      line-height: 24px;
-      font-size: 12px;
-      text-align: center;
-      font-weight: 400;
-
-      &__disabled {
-        background: @gray-color-2;
-      }
-
-      &__setup {
-        background: @success-color-5;
-        color: @text-color-anti;
-      }
     }
 
     &--desc {

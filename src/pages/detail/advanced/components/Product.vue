@@ -54,5 +54,109 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import url('../index.less');
+@import '@/style/variables.less';
+.operater-gap {
+  margin-left: 20px;
+}
+
+.operater-block {
+  position: relative;
+  background-color: @bg-color-container;
+  border: 1px solid #e3e6eb;
+  border-radius: 3px;
+
+  .operater-content {
+    padding: 20px 32px 24px 32px;
+    height: 256px;
+
+    .operater-title-icon {
+      background: #ecf2fe;
+      color: @brand-color;
+      font-size: 56px;
+      padding: 14px;
+      border-radius: 100%;
+    }
+
+    .operater-title {
+      margin-bottom: 25px;
+      position: relative;
+
+      h1 {
+        display: inline-block;
+        font-weight: 500;
+        font-size: 24px;
+        color: @text-color-primary;
+      }
+
+      &-subtitle {
+        display: block;
+        font-weight: 400;
+        font-size: 14px;
+        width: 60%;
+        color: @text-color-placeholder;
+      }
+
+      &-tag {
+        margin-right: 4px;
+        margin-top: 8px;
+        margin-left: unset;
+        border: unset;
+      }
+
+      &-icon {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+
+      svg {
+        circle {
+          fill: @brand-color-2;
+        }
+
+        path {
+          fill: @brand-color;
+        }
+      }
+    }
+
+    .operater-item {
+      position: relative;
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+      &-info {
+        display: inline-block;
+        width: 60%;
+        text-align: left;
+        font-size: 14px;
+        color: @text-color-placeholder;
+      }
+
+      &-icon {
+        position: absolute;
+        bottom: 8px;
+        right: 0;
+      }
+    }
+  }
+
+  .operater-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    left: 0;
+
+    .t-progress--thin {
+      display: unset;
+    }
+
+    &-percentage {
+      position: absolute;
+      bottom: 15px;
+      right: 32px;
+      color: @text-color-placeholder;
+    }
+  }
+}
 </style>

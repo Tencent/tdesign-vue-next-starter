@@ -1,103 +1,96 @@
 <template>
-  <div>
-    <div class="user-panel">
-      <t-row>
-        <t-col class="user-left-panel" :flex="3">
-          <div class="user-top">
-            <div class="user-left-greeting">
-              <div class="user-left-content">
-                Hi，Image
-                <span class="regular"> 下午好，今天是你加入鹅厂的第 100 天～</span>
-              </div>
-              <img src="../../assets/tencent-logo.png" class="user-left-logo" />
-            </div>
-            <div class="user-right-info">
-              <div class="head-bar">
-                <div class="title">个人信息</div>
-                <t-icon name="edit" size="18" />
-              </div>
-              <t-row class="content" justify="space-between">
-                <t-col v-for="(item, index) in USER_INFO_LIST" :key="index" class="contract" :span="item.span || 3">
-                  <div class="contract-title">
-                    {{ item.title }}
-                  </div>
-                  <div class="contract-detail">
-                    {{ item.content }}
-                  </div>
-                </t-col>
-              </t-row>
-            </div>
-          </div>
+  <t-row :gutter="16">
+    <t-col :flex="3">
+      <div class="user-left-greeting">
+        <div>
+          Hi，Image
+          <span class="regular"> 下午好，今天是你加入鹅厂的第 100 天～</span>
+        </div>
+        <img src="@/assets/assets-tencent-logo.png" class="logo" />
+      </div>
 
-          <div class="user-bottom">
-            <div class="t-demo-tabs">
-              <t-tabs default-value="second">
-                <t-tab-panel value="first" label="内容列表">
-                  <p style="padding: 25px">内容列表</p>
-                </t-tab-panel>
-                <t-tab-panel value="second" label="内容列表">
-                  <div class="user-bottom-container">
-                    <div class="head-bar">
-                      <div class="title">主页访问数据<span class="unit">（次）</span></div>
-                      <t-date-picker
-                        class="time-picker"
-                        :default-value="LAST_7_DAYS"
-                        theme="primary"
-                        mode="date"
-                        range
-                        @change="onLineChange"
-                      />
-                    </div>
-                    <!-- <div id="lineContainer" style="width: 100%; height: 330px" /> -->
-                  </div>
-                </t-tab-panel>
-                <t-tab-panel value="third" label="内容列表">
-                  <p style="padding: 25px">内容列表</p>
-                </t-tab-panel>
-              </t-tabs>
+      <card class="user-info-list" size="small" title="个人信息">
+        <template #option>
+          <t-button theme="default" shape="square" variant="text">
+            <t-icon name="edit" size="18" />
+          </t-button>
+        </template>
+        <t-row class="content" justify="space-between">
+          <t-col v-for="(item, index) in USER_INFO_LIST" :key="index" class="contract" :span="item.span || 3">
+            <div class="contract-title">
+              {{ item.title }}
             </div>
-          </div>
-        </t-col>
+            <div class="contract-detail">
+              {{ item.content }}
+            </div>
+          </t-col>
+        </t-row>
+      </card>
 
-        <t-col class="user-right-panel" :flex="1">
-          <div class="user-top">
-            <div class="account">
-              <t-avatar size="90px">T</t-avatar>
-              <div class="name">My Account</div>
-              <div class="position">XXG 港澳业务拓展组员工 直客销售</div>
-            </div>
-          </div>
+      <card class="content-container">
+        <t-tabs default-value="second">
+          <t-tab-panel value="first" label="内容列表">
+            <p>内容列表</p>
+          </t-tab-panel>
+          <t-tab-panel value="second" label="内容列表">
+            <card class="card-padding-no" title="主页访问数据" describe="（次）">
+              <template #options>
+                <t-date-picker
+                  class="time-picker"
+                  :default-value="LAST_7_DAYS"
+                  theme="primary"
+                  mode="date"
+                  range
+                  @change="onLineChange"
+                />
+              </template>
+              <div id="lineContainer" style="width: 100%; height: 330px" />
+            </card>
+          </t-tab-panel>
+          <t-tab-panel value="third" label="内容列表">
+            <p>内容列表</p>
+          </t-tab-panel>
+        </t-tabs>
+      </card>
+    </t-col>
 
-          <div class="user-middle">
-            <div class="head-bar">
-              <div class="title">团队成员</div>
-              <t-icon name="edit" size="18" />
-            </div>
-            <t-list :split="false">
-              <t-list-item v-for="(item, index) in TEAM_MEMBERS" :key="index">
-                <t-list-item-meta :image="item.avatar" :title="item.title" :description="item.description" />
-              </t-list-item>
-            </t-list>
-          </div>
+    <t-col :flex="1">
+      <card class="user-intro">
+        <t-avatar size="90px">T</t-avatar>
+        <div class="name">My Account</div>
+        <div class="position">XXG 港澳业务拓展组员工 直客销售</div>
+      </card>
 
-          <div class="user-bottom">
-            <div class="head-bar">
-              <div class="title">服务产品</div>
-              <t-icon name="edit" size="18" />
-            </div>
-            <t-row class="content" justify="space-between">
-              <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" class="contract" :span="4">
-                <img :src="item.logo" class="user-right-logo" />
-              </t-col>
-            </t-row>
-          </div>
-        </t-col>
-      </t-row>
-    </div>
-  </div>
+      <card title="团队成员" class="user-team" size="small">
+        <template #option>
+          <t-button theme="default" shape="square" variant="text">
+            <t-icon name="edit" size="18" />
+          </t-button>
+        </template>
+        <t-list :split="false">
+          <t-list-item v-for="(item, index) in TEAM_MEMBERS" :key="index">
+            <t-list-item-meta :image="item.avatar" :title="item.title" :description="item.description" />
+          </t-list-item>
+        </t-list>
+      </card>
+
+      <card title="服务产品" class="product-container" size="small">
+        <template #option>
+          <t-button theme="default" shape="square" variant="text">
+            <t-icon name="edit" size="18" />
+          </t-button>
+        </template>
+        <t-row class="content" :getters="16">
+          <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :span="4">
+            <img :src="item.logo" class="logo" />
+          </t-col>
+        </t-row>
+      </card>
+    </t-col>
+  </t-row>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, watch, nextTick } from 'vue';
+import { defineComponent, onMounted, watch } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -106,20 +99,21 @@ import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 
 import { LAST_7_DAYS } from '@/utils/date';
-import { useChart } from '@/utils/hooks';
+// import { useChart } from '@/utils/hooks';
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
-import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
+// import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
+import Card from '@/components/card/index.vue';
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
 
 export default defineComponent({
+  components: {
+    Card,
+  },
   setup() {
-    let lineChart;
-    // nextTick(() => {
-    //   lineChart = useChart('lineContainer');
-    // });
+    // const lineChart = useChart('lineContainer');
 
-    const onLineChange = (value: string[]) => {
+    const onLineChange = () => {
       // lineChart.value.setOption(getFolderLineDataSet(value));
     };
 
@@ -139,7 +133,7 @@ export default defineComponent({
     watch(
       () => store.state.setting.brandTheme,
       () => {
-        changeChartsTheme([lineChart.value]);
+        // changeChartsTheme([lineChart.value]);
       },
     );
 

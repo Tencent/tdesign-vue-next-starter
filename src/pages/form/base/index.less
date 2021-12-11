@@ -1,114 +1,20 @@
 @import '@/style/variables.less';
 
-.t-tabs__content {
-  padding-top: @spacer-3;
-}
-
-.@{prefix} {
-
-  &-panel {
-    background-color: @bg-color-container;
-    padding: @spacer-3;
-    border-radius: @border-radius;
-  }
-
-  &-form {
-    padding-right: 50px;
-    padding-top: 30px;
-    border-top: solid 1px #eee;
-  }
-}
-
-.upload-tips {
-  margin-left: 16px;
-  font-size: 12px;
-  color: @text-color-secondary;
-  line-height: 20px;
-}
-
-.form-item-container {
-  display: flex;
-  // align-items: center;
-  justify-content: center;
-}
-
 .form-basic-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-
-  .span-item {
-    width: 12px;
-  }
-
-  .form-gap {
-    padding-left: 32px;
-  }
-
-  .row-gap {
-    padding-bottom: 24px;
-  }
+  background-color: @bg-color-container;
+  padding-bottom: 134px;
 
   .form-basic-item {
+    width: 676px;
 
     .form-basic-container-title {
-      font-style: normal;
-      font-weight: normal;
       font-size: 20px;
-      line-height: 22px;
+      line-height: 24px;
       color: @text-color-primary;
-      padding: 64px 0 32px 0;
-    }
-  }
-
-  .tdesign-pro-panel {
-    margin-top: 0px !important;
-  }
-
-  .t-textarea__inner {
-    height: 124px !important;
-  }
-
-  .form-cretifier {
-    font-size: 14px;
-    color: @text-color-primary;;
-    padding-top: 24px;
-    padding-bottom: 130px;
-
-    .form-cretifier-container {
-      padding-top: 12px;
-
-      .form-cretifier-circle {
-        background: #0052d9;
-        border: 1px solid #a7a4a4;
-        border-radius: 40px;
-        width: 32px;
-        height: 32px;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        text-align: center;
-        line-height: 22px;
-        font-weight: 500;
-        position: absolute;
-      }
-
-      .form-cretifier-gap1 {
-        margin-left: 25px;
-      }
-
-      .form-cretifier-gap2 {
-        margin-left: 50px;
-      }
-
-      .form-cretifier-blure {
-        background: #d4e3fc;
-        color: #0052d9;
-      }
+      margin: 64px 0 32px;
     }
   }
 }
@@ -120,47 +26,23 @@
   justify-content: center;
   padding-top: 30px;
   padding-bottom: 28px;
-  background-color: #e3e6eb;
-  border-bottom: solid 1px #d8dadf;
+  background-color: @bg-color-component;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 
-  .form-submint-sub {
+  .form-submit-sub {
     width: 676px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     .form-submit-left {
-
       .form-submit-upload-span {
         font-size: 14px;
         line-height: 22px;
         color: @text-color-placeholder;
         padding-top: 8px;
         display: inline-block;
-      }
-    }
-
-    .form-submit-upload-btn {
-      width: 144px;
-      height: 40px;
-    }
-
-    .form-submit-right {
-
-      .form-submit-cancel {
-        font-size: 16px !important;
-        color: #0052d9 !important;
-        background-color: #ebedf100 !important;
-      }
-
-      .form-submit-confirm {
-        font-size: 16px !important;
-        background: #0052d9 !important;
-        border-radius: 3px !important;
-        width: 80px !important;
-        height: 40px !important;
       }
     }
   }

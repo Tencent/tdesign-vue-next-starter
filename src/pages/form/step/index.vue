@@ -1,14 +1,14 @@
 <template>
-  <div :class="`${PREFIX}-panel ${PREFIX}-step-panel`">
+  <div class="form-step-container">
     <!-- 简单步骤条 -->
-    <div :class="`${PREFIX}-step step-top`">
-      <t-steps :current="activeForm" status="process">
+    <card title="基本信息">
+      <t-steps class="step-container" :current="activeForm" status="process">
         <t-step-item title="提交开票申请" />
         <t-step-item title="填写发票信息" />
         <t-step-item title="确认邮寄地址" />
         <t-step-item title="完成" />
       </t-steps>
-    </div>
+    </card>
 
     <!-- 分步表单1 -->
     <div v-show="activeForm === 0" class="rule-tips">
@@ -141,7 +141,7 @@
 import { defineComponent, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { ValidateResultContext } from 'tdesign-vue-next';
-import { PREFIX } from '@/config/global';
+import Card from '@/components/card/index.vue';
 
 import {
   FORM_RULES,
@@ -155,6 +155,7 @@ import {
 
 export default defineComponent({
   name: 'FormStep',
+  components: { Card },
   setup() {
     const formData1 = ref({ ...INITIAL_DATA1 });
     const formData2 = ref({ ...INITIAL_DATA2 });
@@ -175,7 +176,6 @@ export default defineComponent({
     });
 
     return {
-      PREFIX,
       NAME_OPTIONS,
       TYPE_OPTIONS,
       ADDRESS_OPTIONS,

@@ -1,25 +1,20 @@
 <template>
-  <card>
-    <div class="result-success">
-      <t-icon class="result-success-icon" name="check-circle-filled" />
-      <div class="result-success-title">项目已创建成功</div>
-      <div class="result-success-describe">可以联系负责人分发应用</div>
-      <div>
-        <t-button theme="default" @click="() => $router.push('/detail/advanced')"> 查看进度 </t-button>
-        <t-button @click="() => $router.push('/form/base')"> 再次创建 </t-button>
-      </div>
+  <div class="result-success">
+    <t-icon class="result-success-icon" name="check-circle" />
+    <div class="result-success-title">创建成功</div>
+    <div class="result-success-describe">可以联系负责人分发应用</div>
+    <div>
+      <t-button theme="default" @click="() => $router.push('/detail/advanced')"> 查看进度 </t-button>
+      <t-button @click="() => $router.push('/form/base')"> 再次创建 </t-button>
     </div>
-  </card>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import Card from '@/components/card/index.vue';
-
 export default defineComponent({
   name: 'ResultSuccess',
-  components: { Card },
 });
 </script>
 
@@ -44,6 +39,7 @@ export default defineComponent({
     color: @text-color-primary;
     text-align: center;
     line-height: 22px;
+    font-weight: 500;
   }
 
   &-describe {

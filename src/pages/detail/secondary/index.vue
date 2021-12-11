@@ -5,7 +5,7 @@
         <t-list v-if="msgDataList.length > 0" class="secondary-msg-list" :split="true">
           <t-list-item v-for="(item, index) in msgDataList" :key="index">
             <p :class="['content', { unread: item.status }]" @click="setReadStatus(item)">
-              <t-tag class="operater-title-tag" size="small" :theme="NOTIFICATION_TYPES[item.priorty]" variant="light">
+              <t-tag size="small" :theme="NOTIFICATION_TYPES[item.quality]" variant="light">
                 {{ item.type }}
               </t-tag>
               {{ item.content }}
@@ -21,7 +21,7 @@
                 >
                   <span class="msg-action-icon" @click="setReadStatus(item)">
                     <t-icon v-if="!!item.status" name="queue" size="16px" />
-                    <read-icon v-else />
+                    <t-icon v-else name="chat" />
                   </span>
                 </t-tooltip>
                 <t-tooltip content="删除通知" :overlay-style="{ margin: '6px' }">
@@ -51,8 +51,7 @@
 import { defineComponent, ref, computed, ComputedRef } from 'vue';
 import { useStore } from 'vuex';
 import { NOTIFICATION_TYPES } from '@/constants';
-import ReadIcon from '@/assets/read.svg?component';
-import { NotificationItem } from '@/store/interface';
+import { NotificationItem } from '@/interface';
 
 const TAB_LIST = [
   {
@@ -71,7 +70,6 @@ const TAB_LIST = [
 
 export default defineComponent({
   name: 'DetailSecondary',
-  components: { ReadIcon },
   setup() {
     const tabValue = ref('msgData');
 
