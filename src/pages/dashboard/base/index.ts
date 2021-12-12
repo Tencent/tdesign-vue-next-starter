@@ -32,7 +32,7 @@ export function getColorFromTheme(theme: string) {
 /** 图表颜色 */
 function chartListColor(): Array<string> {
   const colorList: Array<string> = ['#0052D9', '#BCC4D0', '#7D46BD', '#0594FA', '#ED7B2F'];
-  const { setting } = state;
+  const { setting } = state as any;
 
   return getColorFromTheme(setting.brandTheme) || colorList;
 }
@@ -1020,13 +1020,16 @@ export function getPieChartDataSet(radius = 42) {
   return {
     color: chartListColor(),
     tooltip: {
-      trigger: 'item',
+      show: false,
+      trigger: 'axis',
+      position: null,
     },
     grid: {
       top: '0',
       right: '0',
     },
     legend: {
+      selectedMode: false,
       itemWidth: 12,
       itemHeight: 4,
       textStyle: {
@@ -1042,7 +1045,10 @@ export function getPieChartDataSet(radius = 42) {
         name: '销售渠道',
         type: 'pie',
         radius: ['48%', '60%'],
-        avoidLabelOverlap: false,
+        avoidLabelOverlap: true,
+        selectedMode: true,
+        hoverAnimation: true,
+        silent: true,
         label: {
           show: true,
           position: 'center',
@@ -1050,13 +1056,13 @@ export function getPieChartDataSet(radius = 42) {
           rich: {
             value: {
               color: '#303133',
-              fontSize: 36,
+              fontSize: 28,
               fontWeight: 'normal',
               lineHeight: 46,
             },
             name: {
               color: '#909399',
-              fontSize: 14,
+              fontSize: 12,
               lineHeight: 14,
             },
           },
@@ -1068,7 +1074,7 @@ export function getPieChartDataSet(radius = 42) {
             rich: {
               value: {
                 color: '#303133',
-                fontSize: 36,
+                fontSize: 28,
                 fontWeight: 'normal',
                 lineHeight: 46,
               },

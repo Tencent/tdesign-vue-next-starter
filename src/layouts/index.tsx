@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue';
 import { mapGetters } from 'vuex';
-import TdesignHeader from './header/index.vue';
+import TdesignHeader from './components/Header.vue';
 import TdesignBreadcrumb from './components/Breadcrumb.vue';
 import TdesignFooter from './components/Footer.vue';
 import TdesignSideNav from './components/SideNav';
+import TdesignContent from './components/Content.vue';
 
 import { PREFIX } from '@/config/global';
 import TdesignSetting from './setting.vue';
@@ -20,6 +21,7 @@ export default defineComponent({
     TdesignSideNav,
     TdesignSetting,
     TdesignBreadcrumb,
+    TdesignContent,
   },
   computed: {
     ...mapGetters({
@@ -27,10 +29,9 @@ export default defineComponent({
       showHeader: 'setting/showHeader',
       showHeaderLogo: 'setting/showHeaderLogo',
       showSidebarLogo: 'setting/showSidebarLogo',
-      headerMenu: 'setting/headerMenu',
-      sideMenu: 'setting/sideMenu',
       showFooter: 'setting/showFooter',
       mode: 'setting/mode',
+      menuRouters: 'permission/routers',
     }),
     setting(): SettingType {
       return this.$store.state.setting;
@@ -41,6 +42,34 @@ export default defineComponent({
           't-layout-has-sider': this.showSidebar,
         },
       ];
+    },
+    headerMenu() {
+      const { layout, splitMenu } = this.$store.state.setting;
+      const { menuRouters } = this;
+      if (layout === 'mix') {
+        if (splitMenu) {
+          return menuRouters.map((menu) => ({
+            ...menu,
+            children: [],
+          }));
+        }
+        return [];
+      }
+      return menuRouters;
+    },
+    sideMenu() {
+      const { layout, splitMenu } = this.$store.state.setting;
+      const { menuRouters } = this;
+      if (layout === 'mix' && splitMenu) {
+        let index;
+        for (index = 0; index < menuRouters.length; index++) {
+          const item = menuRouters[index];
+          if (item.children && item.children.length > 0) {
+            return item.children.map((menuRouter) => ({ ...menuRouter, path: `${item.path}/${menuRouter.path}` }));
+          }
+        }
+      }
+      return menuRouters;
     },
   },
   methods: {
@@ -90,10 +119,10 @@ export default defineComponent({
       const { showBreadcrumb } = this.setting;
       const { showFooter } = this;
       return (
-        <t-layout>
+        <t-layout class={[`${PREFIX}-layout`, 'narrow-scrollbar']}>
           <t-content class={`${PREFIX}-content-layout`}>
             {showBreadcrumb && <tdesign-breadcrumb />}
-            <router-view />
+            <TdesignContent />
           </t-content>
           {showFooter && this.renderFooter()}
         </t-layout>
@@ -120,7 +149,7 @@ export default defineComponent({
       <div class={`${PREFIX}-wrapper`}>
         {layout === 'side' ? (
           <t-layout class={this.mainLayoutCls} key="side">
-            <t-aside style={{ width: 'fit-content' }}>{sidebar}</t-aside>
+            <t-aside>{sidebar}</t-aside>
             <t-layout>{[header, content]}</t-layout>
           </t-layout>
         ) : (

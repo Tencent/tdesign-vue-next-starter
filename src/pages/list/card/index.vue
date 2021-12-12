@@ -1,59 +1,62 @@
 <template>
-  <div class="list-card-operation">
-    <t-button @click="formDialogVisible = true"> 新建产品 </t-button>
-    <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
-      <template #suffix-icon>
-        <search-icon v-if="searchValue === ''" size="20px" />
-      </template>
-    </t-input>
-  </div>
-
-  <dialog-form v-model:visible="formDialogVisible" :data="formData" />
-
-  <template v-if="pagination.total > 0 && !dataLoading">
-    <div class="list-card-items">
-      <t-row :gutter="[16, 12]">
-        <t-col
-          v-for="product in productList.slice(
-            pagination.pageSize * (pagination.current - 1),
-            pagination.pageSize * pagination.current,
-          )"
-          :key="product.index"
-          :lg="4"
-          :xs="6"
-          :xl="3"
-        >
-          <card
-            class="list-card-item"
-            :product="product"
-            @delete-item="handleDeleteItem"
-            @manage-product="handleManageProduct"
-          />
-        </t-col>
-      </t-row>
+  <div>
+    <div class="list-card-operation">
+      <t-button @click="formDialogVisible = true"> 新建产品 </t-button>
+      <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
+        <template #suffix-icon>
+          <search-icon v-if="searchValue === ''" size="20px" />
+        </template>
+      </t-input>
     </div>
-    <div class="list-card-pagination">
-      <t-pagination
-        v-model="pagination.current"
-        v-model:page-size="pagination.pageSize"
-        :total="pagination.total"
-        :page-size-options="[12, 24, 36]"
-        @page-size-change="onPageSizeChange"
-        @current-change="onCurrentChange"
-      />
-    </div>
-  </template>
-  <div v-else-if="dataLoading" class="list-card-loading">
-    <t-loading size="large" text="加载数据中..." />
-  </div>
 
-  <t-dialog
-    v-model:visible="confirmVisible"
-    header="是否确认删除产品"
-    :body="confirmBody"
-    :on-cancel="onCancel"
-    @confirm="onConfirmDelete"
-  />
+    <dialog-form v-model:visible="formDialogVisible" :data="formData" />
+
+    <template v-if="pagination.total > 0 && !dataLoading">
+      <div class="list-card-items">
+        <t-row :gutter="[16, 12]">
+          <t-col
+            v-for="product in productList.slice(
+              pagination.pageSize * (pagination.current - 1),
+              pagination.pageSize * pagination.current,
+            )"
+            :key="product.index"
+            :lg="4"
+            :xs="6"
+            :xl="3"
+          >
+            <card
+              class="list-card-item"
+              :product="product"
+              @delete-item="handleDeleteItem"
+              @manage-product="handleManageProduct"
+            />
+          </t-col>
+        </t-row>
+      </div>
+      <div class="list-card-pagination">
+        <t-pagination
+          v-model="pagination.current"
+          v-model:page-size="pagination.pageSize"
+          :total="pagination.total"
+          :page-size-options="[12, 24, 36]"
+          @page-size-change="onPageSizeChange"
+          @current-change="onCurrentChange"
+        />
+      </div>
+    </template>
+
+    <div v-else-if="dataLoading" class="list-card-loading">
+      <t-loading size="large" text="加载数据中..." />
+    </div>
+
+    <t-dialog
+      v-model:visible="confirmVisible"
+      header="是否确认删除产品"
+      :body="confirmBody"
+      :on-cancel="onCancel"
+      @confirm="onConfirmDelete"
+    />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';

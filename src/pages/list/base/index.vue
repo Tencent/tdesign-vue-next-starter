@@ -1,66 +1,68 @@
 <template>
-  <card class="list-card-container">
-    <t-row justify="space-between">
-      <div class="left-operation-container">
-        <t-button @click="handleSetupContract"> 新建合同 </t-button>
-        <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length"> 导出合同 </t-button>
-        <p v-if="!!selectedRowKeys.length" class="selected-count">已选{{ selectedRowKeys.length }}项</p>
-      </div>
-      <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
-        <template #suffix-icon>
-          <search-icon size="20px" />
+  <div>
+    <card class="list-card-container">
+      <t-row justify="space-between">
+        <div class="left-operation-container">
+          <t-button @click="handleSetupContract"> 新建合同 </t-button>
+          <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length"> 导出合同 </t-button>
+          <p v-if="!!selectedRowKeys.length" class="selected-count">已选{{ selectedRowKeys.length }}项</p>
+        </div>
+        <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
+          <template #suffix-icon>
+            <search-icon size="20px" />
+          </template>
+        </t-input>
+      </t-row>
+
+      <t-table
+        :data="data"
+        :columns="COLUMNS"
+        :row-key="rowKey"
+        vertical-align="top"
+        :hover="true"
+        :pagination="pagination"
+        :selected-row-keys="selectedRowKeys"
+        :loading="dataLoading"
+        @page-change="rehandlePageChange"
+        @change="rehandleChange"
+        @select-change="rehandleSelectChange"
+      >
+        <template #status="{ row }">
+          <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light"> 审核失败 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light"> 待审核 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light"> 待履行 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light"> 履行中 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light"> 已完成 </t-tag>
         </template>
-      </t-input>
-    </t-row>
+        <template #contractType="{ row }">
+          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">审核失败</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUB">待审核</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">待履行</p>
+        </template>
+        <template #paymentType="{ row }">
+          <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
+            付款<trend class="dashboard-item-trend" type="up" />
+          </div>
+          <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
+            收款<trend class="dashboard-item-trend" type="down" />
+          </div>
+        </template>
 
-    <t-table
-      :data="data"
-      :columns="COLUMNS"
-      :row-key="rowKey"
-      vertical-align="top"
-      :hover="true"
-      :pagination="pagination"
-      :selected-row-keys="selectedRowKeys"
-      :loading="dataLoading"
-      @page-change="rehandlePageChange"
-      @change="rehandleChange"
-      @select-change="rehandleSelectChange"
-    >
-      <template #status="{ row }">
-        <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light"> 审核失败 </t-tag>
-        <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light"> 待审核 </t-tag>
-        <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light"> 待履行 </t-tag>
-        <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light"> 履行中 </t-tag>
-        <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light"> 已完成 </t-tag>
-      </template>
-      <template #contractType="{ row }">
-        <p v-if="row.contractType === CONTRACT_TYPES.MAIN">审核失败</p>
-        <p v-if="row.contractType === CONTRACT_TYPES.SUB">待审核</p>
-        <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">待履行</p>
-      </template>
-      <template #paymentType="{ row }">
-        <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-          付款<trend class="dashboard-item-trend" type="up" />
-        </div>
-        <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
-          收款<trend class="dashboard-item-trend" type="down" />
-        </div>
-      </template>
+        <template #op="slotProps">
+          <a class="t-button-link" @click="handleClickDetail()">详情</a>
+          <a class="t-button-link" @click="handleClickDelete(slotProps)">删除</a>
+        </template>
+      </t-table>
+    </card>
 
-      <template #op="slotProps">
-        <a class="t-button-link" @click="handleClickDetail()">详情</a>
-        <a class="t-button-link" @click="handleClickDelete(slotProps)">删除</a>
-      </template>
-    </t-table>
-  </card>
-
-  <t-dialog
-    v-model:visible="confirmVisible"
-    header="是否确认删除"
-    :body="confirmBody"
-    :on-cancel="onCancel"
-    @confirm="onConfirmDelete"
-  />
+    <t-dialog
+      v-model:visible="confirmVisible"
+      header="是否确认删除"
+      :body="confirmBody"
+      :on-cancel="onCancel"
+      @confirm="onConfirmDelete"
+    />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, onMounted, computed } from 'vue';

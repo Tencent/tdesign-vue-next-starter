@@ -1,17 +1,13 @@
 <template>
   <div class="tdesign-wrapper">
     <router-view />
-    <tdesign-setting />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import TdesignSetting from './setting.vue';
 
 export default defineComponent({
-  components: {
-    TdesignSetting,
-  },
+  components: {},
 });
 </script>
 <style lang="less">

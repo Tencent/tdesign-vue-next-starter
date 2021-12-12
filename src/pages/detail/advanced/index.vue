@@ -1,96 +1,7 @@
 <template>
-  <card title="基本信息">
-    <div class="info-block">
-      <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
-        <h1>{{ item.name }}</h1>
-        <span
-          :class="{
-            ['inProgress']: item.type && item.type.value === 'inProgress',
-            ['pdf']: item.type && item.type.value === 'pdf',
-          }"
-        >
-          <i v-if="item.type && item.type.key === 'contractStatus'" />
-          {{ item.value }}
-        </span>
-      </div>
-    </div>
-  </card>
-
-  <!-- 发票进度 -->
-  <card title="发票进度" class="container-base-margin-top">
-    <t-row justify="space-between">
-      <t-steps :current="updateCurrent">
-        <t-step-item title="申请提交" content="已于12月21日提交" />
-        <t-step-item title="电子发票" content="预计1～3个工作日" />
-        <t-step-item title="发票已邮寄" content="电子发票开出后7个工作日联系" />
-        <t-step-item title="完成" content />
-      </t-steps>
-    </t-row>
-  </card>
-
-  <!-- 产品目录 -->
-  <card title="产品目录" class="container-base-margin-top">
-    <template #option>
-      <t-radio-group default-value="dateVal">
-        <t-radio-button value="dateVal"> 季度 </t-radio-button>
-        <t-radio-button value="monthVal"> 月份 </t-radio-button>
-      </t-radio-group>
-    </template>
-    <t-row class="product-block-container">
-      <t-col :flex="1">
-        <div class="product-add">
-          <div class="product-sub">
-            <t-icon name="add" class="product-sub-icon" />
-            <span>新增产品</span>
-          </div>
-        </div>
-      </t-col>
-      <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :flex="1">
-        <product :data="item" />
-      </t-col>
-    </t-row>
-  </card>
-
-  <!-- 产品采购明细 -->
-  <card title="产品采购明细" class="container-base-margin-top">
-    <t-table
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      :hover="true"
-      row-key="index"
-      size="large"
-      @sort-change="sortChange"
-      @change="rehandleChange"
-    >
-      <template #pdName="{ row }">
-        <span>
-          {{ row.pdName }}
-          <t-tag v-if="row.pdType" size="small">{{ row.pdType }}</t-tag>
-        </span>
-      </template>
-
-      <template #purchaseNum="{ row }">
-        <span>
-          {{ row.purchaseNum }}
-          <t-tag v-if="row.purchaseNum > 50" theme="danger" variant="light" size="small">超预算</t-tag>
-        </span>
-      </template>
-
-      <template #op="slotProps">
-        <a :class="PREFIX + '-link'" @click="listClick()">管理</a>
-        <a :class="PREFIX + '-link'" @click="deleteClickOp(slotProps)">删除</a>
-      </template>
-
-      <template #op-column>
-        <t-icon name="descending-order" />
-      </template>
-    </t-table>
-  </card>
-
-  <t-dialog v-model:visible="visible" header="基本信息" @confirm="onConfirm">
-    <template #body>
-      <div class="dialog-info-block">
+  <div>
+    <card title="基本信息">
+      <div class="info-block">
         <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
           <h1>{{ item.name }}</h1>
           <span
@@ -104,8 +15,99 @@
           </span>
         </div>
       </div>
-    </template>
-  </t-dialog>
+    </card>
+
+    <!-- 发票进度 -->
+    <card title="发票进度" class="container-base-margin-top">
+      <t-row justify="space-between">
+        <t-steps :current="updateCurrent">
+          <t-step-item title="申请提交" content="已于12月21日提交" />
+          <t-step-item title="电子发票" content="预计1～3个工作日" />
+          <t-step-item title="发票已邮寄" content="电子发票开出后7个工作日联系" />
+          <t-step-item title="完成" content />
+        </t-steps>
+      </t-row>
+    </card>
+
+    <!-- 产品目录 -->
+    <card title="产品目录" class="container-base-margin-top">
+      <template #option>
+        <t-radio-group default-value="dateVal">
+          <t-radio-button value="dateVal"> 季度 </t-radio-button>
+          <t-radio-button value="monthVal"> 月份 </t-radio-button>
+        </t-radio-group>
+      </template>
+      <t-row class="product-block-container">
+        <t-col :flex="1">
+          <div class="product-add">
+            <div class="product-sub">
+              <t-icon name="add" class="product-sub-icon" />
+              <span>新增产品</span>
+            </div>
+          </div>
+        </t-col>
+        <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :flex="1">
+          <product :data="item" />
+        </t-col>
+      </t-row>
+    </card>
+
+    <!-- 产品采购明细 -->
+    <card title="产品采购明细" class="container-base-margin-top">
+      <t-table
+        :columns="columns"
+        :data="data"
+        :pagination="pagination"
+        :hover="true"
+        row-key="index"
+        size="large"
+        @sort-change="sortChange"
+        @change="rehandleChange"
+      >
+        <template #pdName="{ row }">
+          <span>
+            {{ row.pdName }}
+            <t-tag v-if="row.pdType" size="small">{{ row.pdType }}</t-tag>
+          </span>
+        </template>
+
+        <template #purchaseNum="{ row }">
+          <span>
+            {{ row.purchaseNum }}
+            <t-tag v-if="row.purchaseNum > 50" theme="danger" variant="light" size="small">超预算</t-tag>
+          </span>
+        </template>
+
+        <template #op="slotProps">
+          <a :class="PREFIX + '-link'" @click="listClick()">管理</a>
+          <a :class="PREFIX + '-link'" @click="deleteClickOp(slotProps)">删除</a>
+        </template>
+
+        <template #op-column>
+          <t-icon name="descending-order" />
+        </template>
+      </t-table>
+    </card>
+
+    <t-dialog v-model:visible="visible" header="基本信息" @confirm="onConfirm">
+      <template #body>
+        <div class="dialog-info-block">
+          <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
+            <h1>{{ item.name }}</h1>
+            <span
+              :class="{
+                ['inProgress']: item.type && item.type.value === 'inProgress',
+                ['pdf']: item.type && item.type.value === 'pdf',
+              }"
+            >
+              <i v-if="item.type && item.type.key === 'contractStatus'" />
+              {{ item.value }}
+            </span>
+          </div>
+        </div>
+      </template>
+    </t-dialog>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';

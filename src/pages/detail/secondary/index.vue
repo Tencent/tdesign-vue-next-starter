@@ -1,51 +1,53 @@
 <template>
-  <div class="secondary-notification">
-    <t-tabs v-model="tabValue">
-      <t-tab-panel v-for="(tab, tabIndex) in TAB_LIST" :key="tabIndex" :value="tab.value" :label="tab.label">
-        <t-list v-if="msgDataList.length > 0" class="secondary-msg-list" :split="true">
-          <t-list-item v-for="(item, index) in msgDataList" :key="index">
-            <p :class="['content', { unread: item.status }]" @click="setReadStatus(item)">
-              <t-tag size="small" :theme="NOTIFICATION_TYPES[item.quality]" variant="light">
-                {{ item.type }}
-              </t-tag>
-              {{ item.content }}
-            </p>
-            <template #action>
-              <span class="msg-date">{{ item.date }}</span>
+  <div>
+    <div class="secondary-notification">
+      <t-tabs v-model="tabValue">
+        <t-tab-panel v-for="(tab, tabIndex) in TAB_LIST" :key="tabIndex" :value="tab.value" :label="tab.label">
+          <t-list v-if="msgDataList.length > 0" class="secondary-msg-list" :split="true">
+            <t-list-item v-for="(item, index) in msgDataList" :key="index">
+              <p :class="['content', { unread: item.status }]" @click="setReadStatus(item)">
+                <t-tag size="small" :theme="NOTIFICATION_TYPES[item.quality]" variant="light">
+                  {{ item.type }}
+                </t-tag>
+                {{ item.content }}
+              </p>
+              <template #action>
+                <span class="msg-date">{{ item.date }}</span>
 
-              <div class="msg-action">
-                <t-tooltip
-                  class="set-read-icon"
-                  :overlay-style="{ margin: '6px' }"
-                  :content="item.status ? '设为已读' : '设为未读'"
-                >
-                  <span class="msg-action-icon" @click="setReadStatus(item)">
-                    <t-icon v-if="!!item.status" name="queue" size="16px" />
-                    <t-icon v-else name="chat" />
-                  </span>
-                </t-tooltip>
-                <t-tooltip content="删除通知" :overlay-style="{ margin: '6px' }">
-                  <span @click="handleClickDeleteBtn(item)">
-                    <t-icon name="delete" size="16px" />
-                  </span>
-                </t-tooltip>
-              </div>
-            </template>
-          </t-list-item>
-        </t-list>
-        <div v-else class="secondary-msg-list__empty-list">
-          <img src="https://tdesign.gtimg.com/pro-template/personal/nothing.png" alt="空" />
-          <p>暂无通知</p>
-        </div>
-      </t-tab-panel>
-    </t-tabs>
+                <div class="msg-action">
+                  <t-tooltip
+                    class="set-read-icon"
+                    :overlay-style="{ margin: '6px' }"
+                    :content="item.status ? '设为已读' : '设为未读'"
+                  >
+                    <span class="msg-action-icon" @click="setReadStatus(item)">
+                      <t-icon v-if="!!item.status" name="queue" size="16px" />
+                      <t-icon v-else name="chat" />
+                    </span>
+                  </t-tooltip>
+                  <t-tooltip content="删除通知" :overlay-style="{ margin: '6px' }">
+                    <span @click="handleClickDeleteBtn(item)">
+                      <t-icon name="delete" size="16px" />
+                    </span>
+                  </t-tooltip>
+                </div>
+              </template>
+            </t-list-item>
+          </t-list>
+          <div v-else class="secondary-msg-list__empty-list">
+            <img src="https://tdesign.gtimg.com/pro-template/personal/nothing.png" alt="空" />
+            <p>暂无通知</p>
+          </div>
+        </t-tab-panel>
+      </t-tabs>
+    </div>
+    <t-dialog
+      v-model:visible="visible"
+      header="删除通知"
+      :body="`确认删除通知：${selectedItem && selectedItem.content}吗？`"
+      :on-confirm="deleteMsg"
+    />
   </div>
-  <t-dialog
-    v-model:visible="visible"
-    header="删除通知"
-    :body="`确认删除通知：${selectedItem && selectedItem.content}吗？`"
-    :on-confirm="deleteMsg"
-  />
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, ComputedRef } from 'vue';

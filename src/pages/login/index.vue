@@ -16,6 +16,7 @@
 
       <login v-if="type === 'login'" />
       <register v-else @register-success="switchType('login')" />
+      <tdesign-setting />
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@ import { useStore } from 'vuex';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 import LoginHeader from './components/Header.vue';
+import TdesignSetting from '@/layouts/setting.vue';
 
 /** 高级详情 */
 export default defineComponent({
@@ -34,6 +36,7 @@ export default defineComponent({
     Login,
     Register,
     LoginHeader,
+    TdesignSetting,
   },
   setup() {
     const type = ref('login');

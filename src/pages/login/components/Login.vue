@@ -9,7 +9,7 @@
   >
     <template v-if="type == 'password'">
       <t-form-item name="account">
-        <t-input v-model="formData.account" size="large" placeholder="请输入您的邮箱/手机号">
+        <t-input v-model="formData.account" size="large" placeholder="请输入您的账号:td">
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -22,7 +22,7 @@
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
-          placeholder="请输入登录密码"
+          placeholder="请输入登录密码:main_/dev_"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
@@ -50,14 +50,6 @@
 
     <!-- 手机号登陆 -->
     <template v-else>
-      <t-form-item name="phone">
-        <t-input v-model="formData.phone" size="large" placeholder="请输入您的手机号">
-          <template #prefix-icon>
-            <t-icon name="user" />
-          </template>
-        </t-input>
-      </t-form-item>
-
       <t-form-item class="verification-code" name="verifyCode">
         <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
         <t-button variant="outline" :disabled="countDown > 0" @click="handleCounter">
@@ -97,8 +89,11 @@ const INITIAL_DATA = {
 };
 
 const FORM_RULES = {
-  phone: [{ required: true, message: '手机号必填', type: 'error' }],
   account: [{ required: true, message: '账号必填', type: 'error' }],
+  phone: [
+    { required: true, message: '手机号必填', type: 'error' },
+    { telnumber: true, message: '请输入正确的手机号', type: 'warning' },
+  ],
   password: [{ required: true, message: '密码必填', type: 'error' }, { validator: passwordValidator }],
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
@@ -120,15 +115,18 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
 
-    const onSubmit = ({ validateResult }) => {
+    const onSubmit = async ({ validateResult }) => {
       if (validateResult === true) {
-        store.commit('user/SET_USER_INFO', formData.value);
-
-        MessagePlugin.success('登录成功');
-
-        router.push({
-          path: '/',
-        });
+        try {
+          await store.dispatch('user/login', formData.value);
+          MessagePlugin.success('登陆成功');
+          router.push({
+            path: '/dashboard/base',
+          });
+        } catch (e) {
+          console.log(e);
+          MessagePlugin.error(e.message);
+        }
       }
     };
 

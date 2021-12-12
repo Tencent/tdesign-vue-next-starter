@@ -1,22 +1,23 @@
 @import '@/style/variables.less';
 
-&.light {
-  .login-wrapper {
+.light {
+  &.login-wrapper {
     background-color: white;
     background-image: url('@/assets/assets-login-bg-white.png');
   }
 }
 
-&.dark {
-  .login-wrapper {
+.dark {
+  &.login-wrapper {
     background-color: @bg-color-page;
     background-image: url('@/assets/assets-login-bg-black.png');
   }
 }
 
 .login-wrapper {
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-size: cover;
   background-position: 50%;
   position: relative;

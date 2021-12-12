@@ -29,7 +29,7 @@
               @change="onMaterialChange"
             />
           </template>
-          <div id="lineContainer" style="width: 100%; height: 416px" />
+          <div id="lineContainer" style="width: 100%; height: 406px" />
         </card>
       </t-col>
       <t-col :xs="12" :xl="3">

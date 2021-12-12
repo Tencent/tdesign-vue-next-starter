@@ -2,9 +2,6 @@ import { defineComponent, PropType, computed } from 'vue';
 import { PREFIX as prefix } from '@/config/global';
 import { MenuRoute } from '@/interface';
 
-// utils
-const isSingleNav = (list: Array<MenuRoute>) => list.every((item) => !item.children || item.children.length === 0);
-
 const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
   if (!list) {
     return [];
@@ -13,55 +10,39 @@ const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
     const path = basePath ? `${basePath}/${item.path}` : item.path;
     return {
       path,
-      title: item.title,
-      icon: item.icon || '',
+      title: item.meta?.title,
+      icon: item.meta?.icon || '',
       children: getMenuList(item.children, path),
-      meta: item.meta || {},
+      meta: item.meta,
+      redirect: item.redirect,
     };
   });
 };
 
-const useRenderNav = (list: Array<MenuRoute>, deep = 0, maxLevel = 2) => {
-  if (isSingleNav(list)) {
-    return list.map((item) => (
-      <t-menu-item
-        key={item.path}
-        value={item.path}
-        to={item.path}
-        icon={() => item.icon && <t-icon name={item.icon} />}
-      >
-        {item.title}
-      </t-menu-item>
-    ));
-  }
-
+const useRenderNav = (list: Array<MenuRoute>) => {
   return list.map((item) => {
-    if (deep < maxLevel) {
-      if (deep === 0) {
-        return (
-          <t-submenu
-            name={item.path}
-            value={item.path}
-            title={item.title}
-            icon={() => item.icon && <t-icon name={item.icon} />}
-          >
-            {item.children && useRenderNav(item.children, deep + 1)}
-          </t-submenu>
-        );
-      }
+    if (!item.children || !item.children.length || item.meta?.single) {
       return (
         <t-menu-item
           name={item.path}
-          value={item.path}
+          value={item.meta?.single ? item.redirect : item.path}
           to={item.path}
           icon={() => item.icon && <t-icon name={item.icon} />}
         >
           {item.title}
-          {item.children && useRenderNav(item.children, deep + 1)}
         </t-menu-item>
       );
     }
-    return '';
+    return (
+      <t-submenu
+        name={item.path}
+        value={item.path}
+        title={item.title}
+        icon={() => item.icon && <t-icon name={item.icon} />}
+      >
+        {item.children && useRenderNav(item.children)}
+      </t-submenu>
+    );
   });
 };
 

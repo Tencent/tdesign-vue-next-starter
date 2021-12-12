@@ -9,6 +9,7 @@ export interface MenuRoute {
   path: string;
   title?: string;
   icon?: string;
+  redirect?: string;
   children: MenuRoute[];
   meta: any;
 }

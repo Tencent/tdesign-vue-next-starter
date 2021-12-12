@@ -1,5 +1,4 @@
 import STYLE_CONFIG from '@/config/style';
-import MENU_CONFIG from '@/config/routes';
 
 // 定义的state初始值
 const state = {
@@ -37,32 +36,6 @@ const getters = {
   showSidebar: (state) => state.layout !== 'top',
   showSidebarLogo: (state) => state.layout === 'side',
   showHeaderLogo: (state) => state.layout !== 'side',
-  headerMenu: (state) => {
-    if (state.layout === 'mix') {
-      if (state.splitMenu) {
-        return MENU_CONFIG.map((menu) => ({
-          ...menu,
-          children: [],
-        }));
-      }
-      return [];
-    }
-    return MENU_CONFIG;
-  },
-  sideMenu: (state, getters, rootState) => {
-    if (state.layout === 'mix' && state.splitMenu) {
-      let index;
-      for (index = 0; index < MENU_CONFIG.length; index++) {
-        const item = MENU_CONFIG[index];
-        if (item.children && item.children.length > 0) {
-          if (rootState.route.path.indexOf(item.path) === 0) {
-            return item.children.map((menuRouter) => ({ ...menuRouter, path: `${item.path}/${menuRouter.path}` }));
-          }
-        }
-      }
-    }
-    return MENU_CONFIG;
-  },
   showFooter: (state) => state.showFooter,
   showSettingBtn: (state) => !state.showHeader,
   mode: (state) => {
