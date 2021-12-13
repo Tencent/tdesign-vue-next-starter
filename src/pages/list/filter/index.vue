@@ -3,7 +3,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CommonTable from '../components/Table.vue';
+import CommonTable from '../components/CommonTable.vue';
 
 export default defineComponent({
   name: 'ListBase',
@@ -13,7 +13,7 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@import '@/style/index';
+@import '@/style/variables';
 
 .@{prefix} {
   &-panel {

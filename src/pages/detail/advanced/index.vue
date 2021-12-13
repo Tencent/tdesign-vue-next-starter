@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card title="基本信息" class="advanced-card">
+    <card title="基本信息">
       <div class="info-block">
         <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
           <h1>{{ item.name }}</h1>
@@ -18,30 +18,30 @@
     </card>
 
     <!-- 发票进度 -->
-    <card title="发票进度">
-      <t-row :class="PREFIX + '-operater-row row-padding'" justify="space-between">
-        <t-steps theme="dot" :current="updateCurrent">
+    <card title="发票进度" class="container-base-margin-top">
+      <t-row justify="space-between">
+        <t-steps :current="updateCurrent">
           <t-step-item title="申请提交" content="已于12月21日提交" />
           <t-step-item title="电子发票" content="预计1～3个工作日" />
-          <t-step-item title="发票已邮寄" content="电子发票开出后7个工作日内联系" />
+          <t-step-item title="发票已邮寄" content="电子发票开出后7个工作日联系" />
           <t-step-item title="完成" content />
         </t-steps>
       </t-row>
     </card>
 
     <!-- 产品目录 -->
-    <card title="产品目录">
+    <card title="产品目录" class="container-base-margin-top">
       <template #option>
         <t-radio-group default-value="dateVal">
           <t-radio-button value="dateVal"> 季度 </t-radio-button>
           <t-radio-button value="monthVal"> 月份 </t-radio-button>
         </t-radio-group>
       </template>
-      <t-row class="operater-block-container">
+      <t-row class="product-block-container">
         <t-col :flex="1">
-          <div class="operater-add">
-            <div class="operater-sub">
-              <t-icon name="add" class="operater-sub-icon" />
+          <div class="product-add">
+            <div class="product-sub">
+              <t-icon name="add" class="product-sub-icon" />
               <span>新增产品</span>
             </div>
           </div>
@@ -53,7 +53,7 @@
     </card>
 
     <!-- 产品采购明细 -->
-    <card title="产品采购明细">
+    <card title="产品采购明细" class="container-base-margin-top">
       <t-table
         :columns="columns"
         :data="data"

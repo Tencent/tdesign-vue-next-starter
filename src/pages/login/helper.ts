@@ -8,34 +8,6 @@ export const passwordValidator = (val) => {
   return { result: true };
 };
 
-export const getEmails = (search) => [
-  {
-    value: `${search}@qq.com`,
-    label: `${search}@qq.com`,
-  },
-  {
-    value: `${search}@gmail.com`,
-    label: `${search}@gmail.com`,
-  },
-  {
-    value: `${search}@126.com`,
-    label: `${search}@126.com`,
-  },
-  {
-    value: `${search}@163.com`,
-    label: `${search}@163.com`,
-  },
-  {
-    value: `${search}@21cn.com`,
-    label: `${search}@21cn.com`,
-  },
-  {
-    value: `${search}@yahoo.com`,
-    label: `${search}@yahoo.com`,
-  },
-];
-
 export default {
   passwordValidator,
-  getEmails,
 };

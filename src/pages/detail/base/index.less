@@ -1,44 +1,4 @@
-@import '@/style/index';
-
-.t-tabs__content {
-  padding-top: @spacer-3;
-}
-
-.t-steps .t-steps-item-title {
-  font-size: @font-size-base;
-}
-
-.@{prefix} {
-
-  &-operater-row {
-    margin-bottom: 12px;
-  }
-}
-
-.detail-base-panel {
-  background-color: @bg-color-container;
-  padding: @spacer-3 @spacer-4 @spacer-4 @spacer-4;
-  border-radius: @border-radius;
-  margin-top: 0;
-  
-  &-row {
-    margin-bottom: 12px;
-  }
-
-}
-
-.detail-base-info {
-  margin-bottom: 12px;
-}
-
-.detail-base-info-title {
-  margin: @spacer-1 0;
-  font-size: @font-size-xl;
-  font-weight: 500;
-  line-height: 28px;
-  color: @text-color-primary;
-  font-family: PingFangSC-Regular;
-}
+@import '@/style/variables.less';
 
 .detail-base-info-steps {
   padding-top: 12px;
@@ -50,16 +10,15 @@
   .info-item {
     padding: 12px 0;
     display: flex;
+    color: @text-color-primary;
 
     @media (max-width: @screen-sm-max) {
-
       h1 {
         width: 80px;
       }
     }
 
     @media (min-width: @screen-md-min) {
-
       h1 {
         width: 200px;
       }
@@ -67,7 +26,6 @@
 
     h1 {
       font-weight: normal;
-      font-family: PingFangSC-Regular;
       font-size: @font-size-base;
       color: @text-color-secondary;
       text-align: left;
@@ -91,6 +49,46 @@
     }
 
     .pdf {
+      color: @brand-color;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.dialog-info-block {
+  .info-item {
+    padding: 12px 0;
+    display: flex;
+
+    h1 {
+      width: 84px;
+      font-family: PingFangSC-Regular;
+      font-size: 14px;
+      color: @text-color-secondary;
+      text-align: left;
+      line-height: 22px;
+    }
+
+    span {
+      margin-left: 24px;
+    }
+
+    i {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: @border-radius-50;
+      background: @success-color-5;
+    }
+
+    .green {
+      color: @success-color-5;
+    }
+
+    .blue {
       color: @brand-color-8;
     }
   }

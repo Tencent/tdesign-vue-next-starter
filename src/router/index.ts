@@ -1,38 +1,35 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import routeConfig from '@/config/routes';
 
-const layoutModules = import.meta.glob('../layouts/*');
-const pagesModules = import.meta.glob('../pages/**/*.vue');
-const fristPagesModules = import.meta.glob('../pages/*.vue');
-const modules = { ...layoutModules, ...fristPagesModules, ...pagesModules };
+import baseRouters from './modules/base';
+import componentsRouters from './modules/components';
+import othersRouters from './modules/others';
 
-const getMenuRoutes = (list) => {
-  if (!list) {
-    return [];
-  }
-  return list.map((item) => {
-    const { path = '', component, meta = { title: item.title }, redirect = '' } = item;
-    return {
-      path,
-      component: modules[component],
-      children: getMenuRoutes(item.children),
-      meta,
-      redirect,
-    };
-  });
-};
+// 存放动态路由
+export const asyncRouterList: Array<RouteRecordRaw> = [...baseRouters, ...componentsRouters, ...othersRouters];
 
-const routes: Array<RouteRecordRaw> = [
-  ...getMenuRoutes(routeConfig),
+// 存放固定的路由
+const defaultRouterList: Array<RouteRecordRaw> = [
   {
-    path: '',
-    redirect: '/dashboard/base',
+    path: '/login',
+    name: 'login',
+    component: () => import('@/pages/login/index.vue'),
+  },
+  {
+    path: '/',
+    redirect: '/login',
+    component: () => import('@/layouts/blank.vue'),
   },
 ];
 
+export const page404 = {
+  path: '/:w+',
+  name: '404Page',
+  redirect: '/result/404',
+};
+
 const router = createRouter({
   history: createWebHashHistory(),
-  routes,
+  routes: defaultRouterList,
   scrollBehavior() {
     return {
       el: '#app',
@@ -41,4 +38,5 @@ const router = createRouter({
     };
   },
 });
+
 export default router;

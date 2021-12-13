@@ -9,13 +9,7 @@
   >
     <template v-if="type == 'phone'">
       <t-form-item name="phone">
-        <t-input
-          v-model="formData.phone"
-          :maxlength="11"
-          style="width: 400px"
-          size="large"
-          placeholder="请输入您的手机号"
-        >
+        <t-input v-model="formData.phone" :maxlength="11" size="large" placeholder="请输入您的手机号">
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -25,19 +19,11 @@
 
     <template v-if="type == 'email'">
       <t-form-item name="email">
-        <t-select
-          v-model="formData.email"
-          placeholder="请输入您的邮箱"
-          filterable
-          size="large"
-          :empty="''"
-          :options="emailOptions"
-          :on-search="remoteMethod"
-        >
-          <template #t-input>
-            <t-icon name="lock-on" />
+        <t-input v-model="formData.email" type="text" size="large" placeholder="请输入您的邮箱">
+          <template #prefix-icon>
+            <t-icon name="mail" />
           </template>
-        </t-select>
+        </t-input>
       </t-form-item>
     </template>
 
@@ -88,7 +74,7 @@
 import { defineComponent, ref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { useCounter } from '@/utils/hooks';
-import { passwordValidator, getEmails } from '../helper';
+import { passwordValidator } from '../helper';
 
 const INITIAL_DATA = {
   phone: '',
@@ -100,7 +86,10 @@ const INITIAL_DATA = {
 
 const FORM_RULES = {
   phone: [{ required: true, message: '手机号必填', type: 'error' }],
-  email: [{ required: true, email: true, message: '邮箱必填', type: 'error' }],
+  email: [
+    { required: true, message: '邮箱必填', type: 'error' },
+    { email: true, message: '请输入正确的邮箱', type: 'warning' },
+  ],
   password: [{ required: true, message: '密码必填', type: 'error' }, { validator: passwordValidator }],
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
@@ -109,11 +98,6 @@ export default defineComponent({
   setup(props, ctx) {
     const type = ref('phone');
     const emailOptions = ref([]);
-    const remoteMethod = (search: string) => {
-      if (search && search.indexOf('@') === -1) {
-        emailOptions.value = getEmails(search);
-      }
-    };
 
     const form = ref();
     const formData = ref({ ...INITIAL_DATA });
@@ -146,7 +130,6 @@ export default defineComponent({
       form,
       type,
       emailOptions,
-      remoteMethod,
       countDown,
       handleCounter,
       onSubmit,

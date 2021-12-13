@@ -1,14 +1,13 @@
 <template>
-  <div class="dashboard-panel">
-    <!-- 顶部 card  -->
-    <t-row :gutter="16" class="row-container">
+  <div>
+    <t-row :gutter="[16, 16]">
       <t-col v-for="(item, index) in PANE_LIST" :key="item.title" :xs="6" :xl="3">
-        <card :describe="item.title" :style="{ height: '168px' }" :class="{ 'main-color': index == 0 }" size="small">
+        <card :subtitle="item.title" :style="{ height: '168px' }" :class="{ 'main-color': index == 0 }" size="small">
           <div class="dashboard-item">
             <div class="dashboard-item-top">
               <span>{{ item.number }}</span>
             </div>
-            <div class="dashbord-item-left">
+            <div class="dashboard-item-left">
               <div v-if="index === 0">
                 <div
                   id="moneyContainer"
@@ -51,12 +50,11 @@
     <!-- 中部图表  -->
     <t-row :gutter="16" class="row-container">
       <t-col :xs="12" :xl="9">
-        <card title="统计数据">
+        <card title="统计数据" :describe="`(万元)${currentMonth}`">
           <template #option>
-            <div class="dashboard-chart-title-left">(万元) {{ currentMonth }}</div>
             <div class="dashboard-chart-title-container">
               <t-date-picker
-                class="card-date-picker-slig"
+                class="card-date-picker-container"
                 theme="primary"
                 mode="date"
                 range
@@ -74,10 +72,7 @@
         </card>
       </t-col>
       <t-col :xs="12" :xl="3">
-        <card title="销售渠道">
-          <template #option>
-            <div class="dashboard-chart-title-left">{{ currentMonth }}</div>
-          </template>
+        <card title="销售渠道" :describe="currentMonth">
           <div
             id="countContainer"
             ref="countContainer"
@@ -110,7 +105,7 @@
               </span>
             </template>
             <template #operation="slotProps">
-              <a class="link" @click="rehandleClickOp(slotProps)">操作</a>
+              <a class="t-button-link" @click="rehandleClickOp(slotProps)">操作</a>
             </template>
           </t-table>
         </card>
@@ -132,9 +127,8 @@
             <template #growUp="{ row }">
               <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
             </template>
-
             <template #operation="slotProps">
-              <a class="link" @click="rehandleClickOp(slotProps)">操作</a>
+              <a class="t-button-link" @click="rehandleClickOp(slotProps)">操作</a>
             </template>
           </t-table>
         </card>
@@ -142,21 +136,19 @@
     </t-row>
 
     <!-- 出入库概览 -->
-    <div class="overview-pannel">
+    <div class="row-container overview-panel">
       <t-row>
         <t-col :xs="12" :xl="9">
-          <card title="出入库概览">
+          <card title="出入库概览" describe="(件)">
             <template #option>
-              <div class="dashboard-chart-title-left">(件)</div>
-              <div class="dashboard-chart-title-container">
-                <t-date-picker
-                  theme="primary"
-                  mode="date"
-                  range
-                  :default-value="LAST_7_DAYS"
-                  @change="onWharehouseChange"
-                />
-              </div>
+              <t-date-picker
+                class="card-date-picker-container"
+                theme="primary"
+                mode="date"
+                range
+                :default-value="LAST_7_DAYS"
+                @change="onWharehouseChange"
+              />
             </template>
             <div
               id="stokeContainer"
@@ -167,15 +159,13 @@
           </card>
         </t-col>
         <t-col :xs="12" :xl="3">
-          <div>
-            <card :style="{ margin: '0 0 -40px 0' }">
-              <template #option>
-                <t-button>导出数据</t-button>
-              </template>
-            </card>
+          <card>
+            <template #option>
+              <t-button>导出数据</t-button>
+            </template>
             <t-row>
               <t-col :xs="6" :xl="12">
-                <card describe="本月出库总计（件）" :style="{ height: '168px' }" size="small">
+                <card describe="本月出库总计（件）" class="inner-card" size="small">
                   <div class="dashboard-item">
                     <div class="dashboard-item-top">
                       <span>1726</span>
@@ -191,7 +181,7 @@
               </t-col>
 
               <t-col :xs="6" :xl="12">
-                <card describe="本月入库总计（件）" :style="{ height: '168px' }" size="small">
+                <card describe="本月入库总计（件）" class="inner-card" size="small">
                   <div class="dashboard-item">
                     <div class="dashboard-item-top">
                       <span>226</span>
@@ -206,7 +196,7 @@
                 </card>
               </t-col>
             </t-row>
-          </div>
+          </card>
         </t-col>
       </t-row>
     </div>
@@ -309,12 +299,37 @@ export default defineComponent({
         console.log(val);
       },
       getRankClass(index: number) {
-        return ['dashbord-rank', { 'dashbord-rank__top': index < 3 }];
+        return ['dashboard-rank', { 'dashboard-rank__top': index < 3 }];
       },
     };
   },
 });
 </script>
+<style lang="less" scoped>
+@import './index.less';
+</style>
 <style lang="less">
-@import url('./index.less');
+@import '@/style/variables.less';
+
+.card-container.main-color {
+  background: @brand-color !important;
+  color: @text-color-primary !important;
+
+  .card-describe {
+    color: @text-color-anti !important;
+  }
+
+  .dashboard-item-top span {
+    color: @text-color-anti !important;
+  }
+
+  .dashboard-item-block {
+    color: @text-color-anti !important;
+    opacity: 0.6;
+  }
+
+  .dashboard-item-bottom {
+    color: @text-color-anti !important;
+  }
+}
 </style>

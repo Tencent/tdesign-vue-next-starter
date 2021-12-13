@@ -1,46 +1,50 @@
 <template>
   <div class="dashboard-panel-detail">
     <card title="本月采购申请情况">
-      <t-row :gutter="16">
+      <t-row :gutter="[16, 16]">
         <t-col v-for="(item, index) in PANE_LIST_DATA" :key="index" :xs="6" :xl="3">
-          <div class="dashboard-detail-container-item">
-            <span>{{ item.title }}</span>
-            <h1>{{ item.count }}</h1>
+          <card border class="dashboard-detail-container-item" size="small" :subtitle="item.title">
+            <div class="number">{{ item.number }}</div>
             <div class="dashboard-detail-container-item-text">
-              <span
-                >环比<trend :type="item.percent > 0 ? 'up' : 'down'" :describe="`${Math.abs(item.percent)}%`"
-              /></span>
+              <div class="dashboard-detail-container-item-text-left">
+                环比
+                <trend class="icon" :type="item.upTrend ? 'up' : 'down'" :describe="item.upTrend || item.downTrend" />
+              </div>
               <t-icon name="chevron-right" />
             </div>
-          </div>
+          </card>
         </t-col>
       </t-row>
     </card>
-    <t-row :gutter="16">
+    <t-row :gutter="16" class="card-container-margin">
       <t-col :xs="12" :xl="9">
-        <card title="采购商品申请趋势">
+        <card title="采购商品申请趋势" describe="(件)">
           <template #option>
-            <div class="card-date-picker">
-              <t-date-picker
-                :default-value="LAST_7_DAYS"
-                theme="primary"
-                mode="date"
-                range
-                @change="onMaterialChange"
-              />
-            </div>
+            <t-date-picker
+              class="card-date-picker-container"
+              :default-value="LAST_7_DAYS"
+              theme="primary"
+              mode="date"
+              range
+              @change="onMaterialChange"
+            />
           </template>
-          <div id="lineContainer" style="width: 100%; height: 418px" />
+          <div id="lineContainer" style="width: 100%; height: 406px" />
         </card>
       </t-col>
       <t-col :xs="12" :xl="3">
-        <product-card v-for="(item, index) in PRODUCT_LIST" :key="index" :product="item" />
+        <product-card
+          v-for="(item, index) in PRODUCT_LIST"
+          :key="index"
+          :product="item"
+          :class="{ 'card-container-margin': index !== 0 }"
+        />
       </t-col>
     </t-row>
-    <card title="采购商品满意度分布">
+    <card title="采购商品满意度分布" class="card-container-margin">
       <template #option>
         <t-date-picker
-          class="card-date-picker"
+          class="card-date-picker-container"
           :default-value="LAST_7_DAYS"
           theme="primary"
           mode="date"

@@ -1,70 +1,72 @@
 <template>
-  <t-row :gutter="16">
-    <t-col :span="6">
-      <card title="部署趋势">
-        <div class="deploy-panel-left">
-          <div id="monitorContainer" style="width: 100%; height: 265px" />
-        </div>
-      </card>
-    </t-col>
-    <t-col :span="6">
-      <card title="告警情况">
-        <template #option>
-          <t-radio-group default-value="dateVal" @change="onAlertChange">
-            <t-radio-button value="dateVal"> 本周 </t-radio-button>
-            <t-radio-button value="monthVal"> 本月 </t-radio-button>
-          </t-radio-group>
+  <div>
+    <t-row :gutter="16">
+      <t-col :span="6">
+        <card title="部署趋势">
+          <div class="deploy-panel-left">
+            <div id="monitorContainer" style="width: 100%; height: 265px" />
+          </div>
+        </card>
+      </t-col>
+      <t-col :span="6">
+        <card title="告警情况">
+          <template #option>
+            <t-radio-group default-value="dateVal" @change="onAlertChange">
+              <t-radio-button value="dateVal"> 本周 </t-radio-button>
+              <t-radio-button value="monthVal"> 本月 </t-radio-button>
+            </t-radio-group>
+          </template>
+          <div id="dataContainer" style="width: 100%; height: 265px" />
+        </card>
+      </t-col>
+    </t-row>
+
+    <!-- 项目列表 -->
+    <card title="项目列表" class="container-base-margin-top">
+      <t-table
+        :columns="columns"
+        :data="data"
+        :pagination="pagination"
+        :hover="true"
+        row-key="index"
+        @sort-change="sortChange"
+        @change="rehandleChange"
+      >
+        <template #adminName="{ row }">
+          <span>
+            {{ row.adminName }}
+            <t-tag v-if="row.adminPhone" size="small">{{ row.adminPhone }}</t-tag>
+          </span>
         </template>
-        <div id="dataContainer" style="width: 100%; height: 265px" />
-      </card>
-    </t-col>
-  </t-row>
+        <template #op="slotProps">
+          <a :class="PREFIX + '-link'" @click="listClick()">管理</a>
+          <a :class="PREFIX + '-link'" @click="deleteClickOp(slotProps)">删除</a>
+        </template>
+        <template #op-column>
+          <t-icon name="descending-order" />
+        </template>
+      </t-table>
+    </card>
 
-  <!-- 项目列表 -->
-  <card title="项目列表">
-    <t-table
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      :hover="true"
-      row-key="index"
-      @sort-change="sortChange"
-      @change="rehandleChange"
-    >
-      <template #adminName="{ row }">
-        <span>
-          {{ row.adminName }}
-          <t-tag v-if="row.adminPhone" size="small" style="color: rgba(0, 0, 0, 0.4)">{{ row.adminPhone }}</t-tag>
-        </span>
-      </template>
-      <template #op="slotProps">
-        <a :class="PREFIX + '-link'" @click="listClick()">管理</a>
-        <a :class="PREFIX + '-link'" @click="deleteClickOp(slotProps)">删除</a>
-      </template>
-      <template #op-column>
-        <t-icon name="descending-order" />
-      </template>
-    </t-table>
-  </card>
-
-  <t-dialog v-model:visible="visible" header="基本信息" @confirm="onConfirm">
-    <template #body>
-      <div class="dialog-info-block">
+    <t-dialog v-model:visible="visible" header="基本信息" @confirm="onConfirm">
+      <template #body>
         <div class="dialog-info-block">
-          <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
-            <h1>{{ item.name }}</h1>
-            <span
-              :class="{
-                ['green']: item.type && item.type.value === 'green',
-                ['blue']: item.type && item.type.value === 'blue',
-              }"
-              >{{ item.value }}</span
-            >
+          <div class="dialog-info-block">
+            <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
+              <h1>{{ item.name }}</h1>
+              <span
+                :class="{
+                  ['green']: item.type && item.type.value === 'green',
+                  ['blue']: item.type && item.type.value === 'blue',
+                }"
+                >{{ item.value }}</span
+              >
+            </div>
           </div>
         </div>
-      </div>
-    </template>
-  </t-dialog>
+      </template>
+    </t-dialog>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue';
@@ -182,5 +184,5 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@import url('./index.less');
+@import url('../base/index.less');
 </style>

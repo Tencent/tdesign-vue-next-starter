@@ -1,56 +1,54 @@
 <template>
-  <div :class="`${PREFIX}-list-table`">
-    <t-form
-      ref="form"
-      :data="formData"
-      scroll-to-first-error="smooth"
-      layout="inline"
-      :class="`${PREFIX}-list-table-form`"
-      :style="{ height: isExpand ? '' : '32px' }"
-      :label-width="39"
-      colon
-      @reset="onReset"
-      @submit="onSubmit"
-    >
-      <div>
-        <t-form-item label="合同名称" name="name">
-          <t-input
-            v-model="formData.name"
-            :class="`${PREFIX}-form-item-content`"
-            type="search"
-            placeholder="请输入合同名称"
-          />
-        </t-form-item>
-        <t-form-item label="合同状态" name="status">
-          <t-select
-            v-model="formData.status"
-            :class="`${PREFIX}-form-item-content`"
-            :options="CONTRACT_STATUS_OPTIONS"
-            placeholder="请选择合同状态"
-          />
-        </t-form-item>
-        <t-form-item label="合同编号" name="no">
-          <t-input v-model="formData.no" :class="`${PREFIX}-form-item-content`" placeholder="请输入合同编号" />
-        </t-form-item>
-        <t-form-item label="合同类型" name="type">
-          <t-select
-            v-model="formData.type"
-            :class="`${PREFIX}-form-item-content`"
-            :options="CONTRACT_TYPE_OPTIONS"
-            placeholder="请选择合同类型"
-          />
-        </t-form-item>
-      </div>
-      <div :class="`${PREFIX}-list-table-form-operation`">
-        <t-form-item :style="operationStyle">
+  <div class="list-common-table">
+    <t-form ref="form" :data="formData" :label-width="80" colon @reset="onReset" @submit="onSubmit">
+      <t-row>
+        <t-col :span="8">
+          <t-row :gutter="[16, 16]">
+            <t-col :span="4">
+              <t-form-item label="合同名称" name="name">
+                <t-input v-model="formData.name" class="form-item-content" type="search" placeholder="请输入合同名称" />
+              </t-form-item>
+            </t-col>
+            <t-col :span="4">
+              <t-form-item label="合同状态" name="status">
+                <t-select
+                  v-model="formData.status"
+                  class="form-item-content`"
+                  :options="CONTRACT_STATUS_OPTIONS"
+                  placeholder="请选择合同状态"
+                />
+              </t-form-item>
+            </t-col>
+            <t-col :span="4">
+              <t-form-item label="合同编号" name="no">
+                <t-input v-model="formData.no" class="form-item-content" placeholder="请输入合同编号" />
+              </t-form-item>
+            </t-col>
+
+            <template v-if="isExpand">
+              <t-col :span="4">
+                <t-form-item label="合同类型" name="type">
+                  <t-select
+                    v-model="formData.type"
+                    class="form-item-content`"
+                    :options="CONTRACT_TYPE_OPTIONS"
+                    placeholder="请选择合同类型"
+                  />
+                </t-form-item>
+              </t-col>
+            </template>
+          </t-row>
+        </t-col>
+
+        <t-col :span="4" class="operation-container">
           <t-button theme="primary" type="submit"> 查询 </t-button>
           <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
-          <div class="expand" @click="toggleExpand">
-            {{ isExpand ? '收起' : '展开'
-            }}<t-icon-chevron-down size="20" :style="{ transform: `rotate(${isExpand ? '180deg' : '0'}` }" />
-          </div>
-        </t-form-item>
-      </div>
+          <t-button theme="primary" variant="text" class="expand" @click="toggleExpand">
+            {{ isExpand ? '收起' : '展开' }}
+            <chevron-down-icon size="20" :style="{ transform: `rotate(${isExpand ? '180deg' : '0'}` }" />
+          </t-button>
+        </t-col>
+      </t-row>
     </t-form>
 
     <div class="table-container">
@@ -86,8 +84,8 @@
           </p>
         </template>
         <template #op="slotProps">
-          <a :class="PREFIX + '-link'" @click="rehandleClickOp(slotProps)">管理</a>
-          <a :class="PREFIX + '-link'" @click="handleClickDelete(slotProps)">删除</a>
+          <a class="t-button-link" @click="rehandleClickOp(slotProps)">管理</a>
+          <a class="t-button-link" @click="handleClickDelete(slotProps)">删除</a>
         </template>
       </t-table>
       <t-dialog
@@ -102,11 +100,9 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import TIconChevronDown from 'tdesign-vue-next/lib/icon/chevron-down';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { PREFIX } from '@/config/global';
+import { ChevronDownIcon } from 'tdesign-icons-vue-next';
 import Trend from '@/components/trend/index.vue';
-import { COLUMNS } from './constants';
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';
 
@@ -117,6 +113,49 @@ import {
   CONTRACT_TYPE_OPTIONS,
   CONTRACT_PAYMENT_TYPES,
 } from '@/constants';
+
+const COLUMNS = [
+  {
+    title: '合同名称',
+    fixed: 'left',
+    minWidth: '300',
+    align: 'left',
+    ellipsis: true,
+    colKey: 'name',
+  },
+  { title: '合同状态', colKey: 'status', width: 200, cell: { col: 'status' } },
+  {
+    title: '合同编号',
+    width: 200,
+    ellipsis: true,
+    colKey: 'no',
+  },
+  {
+    title: '合同类型',
+    width: 200,
+    ellipsis: true,
+    colKey: 'contractType',
+  },
+  {
+    title: '合同收付类型',
+    width: 200,
+    ellipsis: true,
+    colKey: 'paymentType',
+  },
+  {
+    title: '合同金额 (元)',
+    width: 200,
+    ellipsis: true,
+    colKey: 'amount',
+  },
+  {
+    align: 'left',
+    fixed: 'right',
+    width: 200,
+    colKey: 'op',
+    title: '操作',
+  },
+];
 
 const searchForm = {
   name: '',
@@ -129,7 +168,7 @@ export default defineComponent({
   name: 'ListTable',
   components: {
     Trend,
-    TIconChevronDown,
+    ChevronDownIcon,
   },
   setup() {
     const formData = ref({ ...searchForm });
@@ -148,13 +187,6 @@ export default defineComponent({
     const toggleExpand = () => {
       isExpand.value = !isExpand.value;
     };
-
-    const operationStyle = computed(() => {
-      const basisStyle = {
-        position: 'absolute',
-      };
-      return isExpand.value ? { ...basisStyle, bottom: '24px' } : { ...basisStyle, top: 0 };
-    });
 
     const data = ref([]);
 
@@ -209,7 +241,6 @@ export default defineComponent({
     });
 
     return {
-      PREFIX,
       data,
       COLUMNS,
       CONTRACT_STATUS,
@@ -220,7 +251,6 @@ export default defineComponent({
       formData,
       pagination,
       confirmVisible,
-      operationStyle,
       confirmBody,
       ...tableConfig,
       onConfirmDelete,
@@ -252,59 +282,35 @@ export default defineComponent({
 });
 </script>
 
-<style lang="less" scoped>
-@import '@/style/index';
-.@{prefix} {
-  &-list-table {
-    background-color: @bg-color-container;
-    padding: 30px 32px;
-    border-radius: @border-radius;
+<style lang="less">
+@import '@/style/variables.less';
+.list-common-table {
+  background-color: @bg-color-container;
+  padding: 30px 32px;
+  border-radius: @border-radius;
 
-    &-form {
+  .table-container {
+    margin-top: 30px;
+  }
+}
+
+.form-item-content {
+  width: 100%;
+}
+
+.operation-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .expand {
+    .t-button__text {
       display: flex;
-      position: relative;
-      overflow: hidden;
-      padding-left: 24px;
-
-      > div:first-child {
-        flex: 1;
-
-        .t-form__item {
-          display: inline-flex;
-        }
-      }
-
-      &-operation {
-        width: 280px;
-        position: relative;
-
-        > * {
-          margin: 0 8px;
-        }
-
-        .expand {
-          margin-left: 16px;
-          color: @brand-color;
-          line-height: 22px;
-          height: 22px;
-          cursor: pointer;
-        }
-      }
+      align-items: center;
     }
-
-    .table-container {
-      margin-top: 30px;
+    .t-icon {
+      margin-left: 4px;
+      transition: transform 0.3s ease;
     }
-  }
-
-  &-operater-row {
-    margin-bottom: 16px;
-  }
-
-  &-form-item-content {
-    width: 240px;
-    display: inline-block;
-    margin-right: 40px;
   }
 }
 

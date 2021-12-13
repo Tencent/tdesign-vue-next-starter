@@ -1,9 +1,23 @@
-@import '@/style/index';
+@import '@/style/variables.less';
+
+.light {
+  &.login-wrapper {
+    background-color: white;
+    background-image: url('@/assets/assets-login-bg-white.png');
+  }
+}
+
+.dark {
+  &.login-wrapper {
+    background-color: @bg-color-page;
+    background-image: url('@/assets/assets-login-bg-black.png');
+  }
+}
 
 .login-wrapper {
-  width: 100%;
-  height: 100%;
-  background-image: url('https://tdesign.gtimg.com/pro-template/login-bg-img.jpg');
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-size: cover;
   background-position: 50%;
   position: relative;
@@ -11,53 +25,68 @@
 
 .login-container {
   position: absolute;
-  top: 28%;
-  left: 12%;
+  top: 22%;
+  left: 5%;
   min-height: 500px;
   line-height: 22px;
 }
 
 .title-container {
-  .icon {
-    width: 290px;
-    height: 40px;
+  .title {
+    font-size: 36px;
+    line-height: 44px;
+    color: @text-color-primary;
+    margin-top: 4px;
+
+    &.margin-no {
+      margin-top: 0;
+    }
   }
 
-  .side-title {
-    margin-top: 24.9px;
+  .sub-title {
+    margin-top: 16px;
 
-    .tip1,
-    .tip2 {
+    .tip {
       display: inline-block;
       margin-right: 8px;
-    }
-
-    .tip1 {
       font-size: 14px;
-      color: rgb(0 0 0 / 60%);
-    }
 
-    .tip2 {
-      font-size: 14px;
-      color: @brand-color-8;
-      cursor: pointer;
+      &:first-child {
+        color: @text-color-secondary;
+      }
+
+      &:last-child {
+        color: @text-color-primary;
+        cursor: pointer;
+      }
     }
   }
 }
 
 .item-container {
   width: 400px;
-  margin-top: 64px;
+  margin-top: 48px;
 
   &.login-qrcode {
-    margin-top: 34px;
-
     .tip-container {
       width: 192px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+
+      .tip {
+        color: @text-color-primary;
+      }
 
       .refresh {
         display: flex;
         align-items: center;
+        color: @brand-color;
+
+        .t-icon {
+          font-size: 14px;
+        }
 
         &:hover {
           cursor: pointer;
@@ -76,14 +105,6 @@
     }
   }
 
-  &.register-phone {
-    margin-top: 64px;
-
-    .t-select-popup-reference {
-      margin: 0;
-    }
-  }
-
   .check-container {
     display: flex;
     align-items: center;
@@ -98,30 +119,10 @@
     }
 
     span {
-      color: @brand-color-8;
+      color: @brand-color;
 
       &:hover {
         cursor: pointer;
-      }
-    }
-  }
-
-  .tip-container {
-    margin-bottom: 16px;
-
-    .tip1 {
-      font-size: 14px;
-      color: rgb(0 0 0 / 60%);
-    }
-
-    .tip2 {
-      float: right;
-      font-size: 14px;
-      color: @brand-color-8;
-
-      .t-icon {
-        height: 20px;
-        vertical-align: text-bottom;
       }
     }
   }
@@ -141,10 +142,14 @@
       }
     }
   }
+
+  .btn-container {
+    margin-top: 48px;
+  }
 }
 
 .switch-container {
-  margin-top: 66px;
+  margin-top: 24px;
 
   .tip {
     font-size: 14px;
@@ -173,7 +178,7 @@
 
 .check-container {
   font-size: 14px;
-  color: rgb(0 0 0 / 60%);
+  color: @text-color-secondary;
 
   .tip {
     float: right;

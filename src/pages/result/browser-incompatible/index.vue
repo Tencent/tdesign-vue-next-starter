@@ -2,7 +2,7 @@
   <result
     page-header="浏览器不兼容"
     tip="抱歉，您正在使用的浏览器版本过低，无法打开当前网页"
-    bg-url="https://tdesign.gtimg.com/pro-template/result-page/browser-incompatible.png"
+    bg-url="https://tdesign.gtimg.com/starter/result-page/browser-incompatible.png"
   >
     <div class="result-slot-container">
       <t-button class="result-button" @click="() => $router.push('/')">返回首页</t-button>

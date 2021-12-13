@@ -1,5 +1,5 @@
 // 定义的state初始值
-import { NotificationItem } from '../interface';
+import { NotificationItem } from '@/interface';
 
 const state = {
   msgData: [
@@ -10,7 +10,7 @@ const state = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'high',
+      quality: 'high',
     },
     {
       id: '124',
@@ -19,7 +19,7 @@ const state = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'low',
+      quality: 'low',
     },
     {
       id: '125',
@@ -28,7 +28,7 @@ const state = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'middle',
+      quality: 'middle',
     },
     {
       id: '126',
@@ -37,7 +37,7 @@ const state = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'low',
+      quality: 'low',
     },
     {
       id: '127',
@@ -46,7 +46,7 @@ const state = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'low',
+      quality: 'low',
     },
     {
       id: '128',
@@ -55,7 +55,7 @@ const state = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'low',
+      quality: 'low',
     },
   ],
 };

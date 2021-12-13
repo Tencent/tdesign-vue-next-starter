@@ -7,6 +7,7 @@ import { store } from './store';
 import router from './router';
 
 import '@/style/index.less';
+import './permission';
 
 const app = createApp(App);
 

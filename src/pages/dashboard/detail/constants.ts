@@ -1,33 +1,34 @@
 export const PANE_LIST_DATA = [
   {
     title: '总申请数（次）',
-    count: 1126,
-    percent: 10,
+    number: '1126',
+    upTrend: '10%',
   },
   {
     title: '供应商数量（个）',
-    count: 1126,
-    percent: -13,
+    number: '13',
+    downTrend: '13%',
   },
   {
     title: '采购商品品类（类）',
-    count: 1126,
-    percent: 10,
+    number: '4',
+    upTrend: '10%',
   },
   {
     title: '申请人数量（人）',
-    count: 1126,
-    percent: 44,
+    number: 90,
+    downTrend: '44%',
+    leftType: 'icon-file-paste',
   },
   {
     title: '申请完成率（%）',
-    count: 1126,
-    percent: 70,
+    number: 80.5,
+    upTrend: '70%',
   },
   {
     title: '到货及时率（%）',
-    count: 78,
-    percent: 16,
+    number: 78,
+    upTrend: '16%',
   },
 ];
 

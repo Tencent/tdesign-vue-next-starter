@@ -1,12 +1,8 @@
 <template>
   <div class="result-container">
     <img class="result-bg-img" :src="bgUrl" />
-    <div class="result-title">
-      {{ title }}
-    </div>
-    <div class="result-tip">
-      {{ tip }}
-    </div>
+    <div class="result-title">{{ title }}</div>
+    <div class="result-tip">{{ tip }}</div>
     <slot />
   </div>
 </template>
@@ -32,7 +28,7 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@import url('@/style/index.less');
+@import '@/style/variables';
 
 .result {
   &-link {
@@ -68,15 +64,23 @@ export default defineComponent({
   }
 
   &-bg-img {
-    width: 256px;
-    height: 256px;
+    width: 200px;
+  }
+
+  &-title {
+    font-style: normal;
+    font-weight: 500;
+    margin-top: 8px;
+    color: @text-color-primary;
+    font-size: @font-size-xl;
+    line-height: @text-line-height-xl;
   }
 
   &-tip {
     margin: 8px 0 32px;
     font-size: @font-size-base;
     color: @text-color-secondary;
-    line-height: 22px;
+    line-height: @text-line-height-base;
   }
 }
 </style>

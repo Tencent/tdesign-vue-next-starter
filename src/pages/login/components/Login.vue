@@ -1,5 +1,4 @@
 <template>
-  <!-- 密码登陆 -->
   <t-form
     ref="form"
     :class="['item-container', `login-${type}`]"
@@ -10,7 +9,7 @@
   >
     <template v-if="type == 'password'">
       <t-form-item name="account">
-        <t-input v-model="formData.account" size="large" placeholder="请输入您的邮箱/手机号">
+        <t-input v-model="formData.account" size="large" placeholder="请输入您的账号:td">
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -23,7 +22,7 @@
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
-          placeholder="请输入登录密码"
+          placeholder="请输入登录密码:main_/dev_"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
@@ -43,22 +42,14 @@
     <!-- 扫码登陆 -->
     <template v-else-if="type == 'qrcode'">
       <div class="tip-container">
-        <span class="tip1">请使用微信扫一扫登录</span>
-        <span class="tip2 refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
+        <span class="tip">请使用微信扫一扫登录</span>
+        <span class="refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
       </div>
       <qrcode-vue value="" :size="192" level="H" />
     </template>
 
     <!-- 手机号登陆 -->
     <template v-else>
-      <t-form-item name="phone">
-        <t-input v-model="formData.phone" size="large" placeholder="请输入您的手机号">
-          <template #prefix-icon>
-            <t-icon name="user" />
-          </template>
-        </t-input>
-      </t-form-item>
-
       <t-form-item class="verification-code" name="verifyCode">
         <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
         <t-button variant="outline" :disabled="countDown > 0" @click="handleCounter">
@@ -67,7 +58,7 @@
       </t-form-item>
     </template>
 
-    <t-form-item v-if="type !== 'qrcode'">
+    <t-form-item v-if="type !== 'qrcode'" class="btn-container">
       <t-button block size="large" type="submit"> 登录 </t-button>
     </t-form-item>
 
@@ -98,8 +89,11 @@ const INITIAL_DATA = {
 };
 
 const FORM_RULES = {
-  phone: [{ required: true, message: '手机号必填', type: 'error' }],
   account: [{ required: true, message: '账号必填', type: 'error' }],
+  phone: [
+    { required: true, message: '手机号必填', type: 'error' },
+    { telnumber: true, message: '请输入正确的手机号', type: 'warning' },
+  ],
   password: [{ required: true, message: '密码必填', type: 'error' }, { validator: passwordValidator }],
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
@@ -121,15 +115,18 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
 
-    const onSubmit = ({ validateResult }) => {
+    const onSubmit = async ({ validateResult }) => {
       if (validateResult === true) {
-        store.commit('user/SET_USER_INFO', formData.value);
-
-        MessagePlugin.success('登录成功');
-
-        router.push({
-          path: '/',
-        });
+        try {
+          await store.dispatch('user/login', formData.value);
+          MessagePlugin.success('登陆成功');
+          router.push({
+            path: '/dashboard/base',
+          });
+        } catch (e) {
+          console.log(e);
+          MessagePlugin.error(e.message);
+        }
       }
     };
 

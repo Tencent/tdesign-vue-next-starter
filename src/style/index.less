@@ -1,13 +1,5 @@
-@import './common.less';
-
 @import './variables.less';
-
-@import './rewrite.less';
-
 @import './font-family.less';
-
-@import './side-nav.less';
-
 @import './theme/index.less';
 
 body {
@@ -22,7 +14,7 @@ body {
 pre {
   font-family: @font-family;
 }
-  
+
 ul,
 dl,
 li,
@@ -32,7 +24,7 @@ dt {
   padding: 0;
   list-style: none;
 }
-  
+
 figure,
 h1,
 h2,
@@ -43,129 +35,43 @@ h6,
 p {
   margin: 0;
 }
-  
+
 * {
   box-sizing: border-box;
 }
-  
-.@{prefix}-text-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-  
-.@{prefix}-text-tip {
-  font-size: 12px;
-  color: @text-color-placeholder;
-}
-  
-.@{prefix}-pic {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-  
-.@{prefix}-main-link {
-  color: @text-color-primary;
-  text-decoration: none;
-  cursor: pointer;
-  
-  &:hover {
-    color: @text-color-primary;
-  }
-  
-  &:active {
-    color: @text-color-primary;
-  }
-  
-  &--active {
-    color: #000;
-  }
-  
-  &:focus {
-    text-decoration: none;
-  }
-}
-  
-.@{prefix}-link {
-  color: @brand-color;
 
+.t-button-link {
+  color: @brand-color;
   text-decoration: none;
   margin-right: @spacer-3;
-
   cursor: pointer;
-    
+  transition: color @anim-duration-base @anim-time-fn-easing;
+
   &:hover {
-    color: @brand-color;
+    color: @brand-color-hover;
   }
-  
+
   &:active {
-    color: @brand-color;
+    color: @brand-color-active;
   }
-  
+
   &--active {
-    color: @brand-color;
+    color: @brand-color-active;
   }
-  
+
   &:focus {
     text-decoration: none;
   }
-}
-  
-// 布局元素调整
-.@{prefix}-wrapper {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.@{prefix}-sideNav-layout {
 
-  &-relative {
-    height: 100%;
+  &:last-child {
+    margin-right: 0;
   }
 }
-.@{prefix}-content-layout {
-  margin: @spacer-3;
+
+.t-button + .t-button {
+  margin-left: @spacer;
 }
 
-.@{prefix}-footer-layout {
-  padding: 0;
-  margin-bottom: @spacer-2;
-}
-
-.@{prefix}-footer {
-  color: rgba(0, 0, 0, .3);
-  line-height: 20px;
-  text-align: center;
-}
-
-.@{prefix}-icon-container {
-  width: 16px;
-  height: 16px;
-  margin-left: 4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.@{prefix}-flat-icon {
-  width: 10px;
-  height: 3px;
-  background: rgba(0,0,0,.60);
-}
-
-.@{prefix}-up-triangle {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 6px 8px 6px;
-  border-color: transparent transparent #00a870 transparent;
-}
-
-.@{prefix}-down-triangle {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 8px 6px 0 6px;
-  border-color: #e34d59 transparent transparent transparent;
+.container-base-margin-top {
+  margin-top: 16px;
 }

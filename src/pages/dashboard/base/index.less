@@ -1,63 +1,4 @@
-@import '@/style/index';
-
-.t-tabs__content {
-  padding-top: @spacer-3;
-}
-
-.card-title-text-default {
-  display: inline-block;
-  white-space: nowrap;
-}
-
-.card-option {
-  width: 100%;
-  justify-content: right !important;
-
-  .dashboard-chart-title-left {
-    display: flex;
-    justify-content: left;
-    align-self: left;
-    width: 100%;
-    color: rgb(0 0 0 / 40%);
-    font-size: 15px;
-    padding-left: 8px;
-  }
-}
-
-.dashboard-panel {
-  padding: 0;
-  border-radius: @border-radius;
-
-  >div {
-    padding: 4px;
-  }
-
-  .card-container {
-    .card-content {
-      &-label-title {
-        color: @text-color-primary;
-        padding-bottom: 4px;
-      }
-
-      .t-table-content {
-        overflow: auto;
-      }
-    }
-
-    .t-table th,
-    .t-table td {
-      padding: 10px 8px;
-    }
-
-    .t-table tr {
-      color: @text-color-primary;
-    }
-  }
-}
-
-.dashboard-item-perfix {
-  margin-right: 0 !important;
-}
+@import '@/style/variables.less';
 
 .dashboard-item {
   display: flex;
@@ -72,10 +13,14 @@
 
     > span {
       display: inline-block;
-      color: black;
+      color: @text-color-primary;
       font-size: 36px;
       line-height: 44px;
     }
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -87,165 +32,7 @@
 
   > .t-icon {
     cursor: pointer;
-    color: inherit;
   }
-}
-
-.dashboard-bottom {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: row;
-
-  /* 左边图表 */
-  .dashboard-bottom-left {
-    width: 100%;
-    height: 100%;
-
-    .dashboard-bottom-left-top {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      height: 100%;
-
-      /* 计量统计 */
-      .dashboard-bottom-left-top-count-chart {
-        padding: 20px 24px;
-        background-color: white;
-        border-radius: @border-radius;
-        width: 100%;
-        min-width: 300px;
-        height: 320px;
-      }
-
-      /* 动态监测 */
-      .dashboard-bottom-left-top-monitor-chart {
-        padding: 20px 24px;
-        background-color: white;
-        border-radius: @border-radius;
-        margin-left: 16px;
-        width: 100%;
-        height: 320px;
-      }
-    }
-
-    /* 出入库概览（） */
-    .dashboard-bottom-left-bottom {
-      background-color: white;
-      padding: 20px 24px;
-      border-radius: @border-radius;
-      margin-top: 16px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 366px;
-    }
-  }
-
-  /* 右边列表-实时热度趋势 */
-  .dashboard-bottom-right {
-    padding: 20px 24px;
-    background-color: white;
-    border-radius: @border-radius;
-    margin-left: 16px;
-    width: 426px;
-    min-height: 690px;
-
-    ul {
-      padding-top: 16px;
-
-      li {
-        .dashboard-chart-tend-item-title {
-          color: grey !important;
-        }
-
-        .dashboard-chart-tend-sep {
-          padding: 0 0 17px !important;
-        }
-
-        .dashboard-chart-tend-item-line {
-          border-bottom: solid 1px #dedede;
-          padding: 9px 0;
-        }
-
-        .dashboard-chart-tend-item {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-
-          .dashboard-chart-tend-left {
-            display: flex;
-            flex-direction: row;
-
-            .dashboard-chart-tend-num {
-              width: 48px;
-            }
-
-            .dashboard-chart-tend-rante {
-              width: 48px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-/* 标题内容 */
-.dashboard-chart-title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: bold;
-
-  &-describe {
-    font-size: 14px !important;
-    color: rgb(0 0 0 / 60%) !important;
-    text-align: left;
-    line-height: 22px;
-  }
-
-  &-container {
-    .t-date-picker {
-      width: 240px;
-    }
-  }
-
-  span {
-    font-size: 16px;
-    color: rgb(0 0 0 / 90%);
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .dashboard-chart-title-search {
-    display: flex;
-    flex-direction: row;
-    border: 1px solid #ddd;
-    border-radius: @border-radius;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
-    font-weight: normal;
-
-    input {
-      border: solid 0 #fff !important;
-    }
-  }
-
-  label {
-    font-weight: normal !important;
-    padding: 5px 15px !important;
-
-    .t-radio-button__label {
-      font-size: 10px !important;
-    }
-  }
-}
-
-.dashboard-chart-container {
-  margin: 0 auto;
 }
 
 .dashboard-item-block {
@@ -257,10 +44,10 @@
 }
 
 .dashboard-item-trend {
-  margin-left: 4px;
+  margin-left: 8px;
 }
 
-.dashbord-item-left {
+.dashboard-item-left {
   position: absolute;
   top: 32px;
   right: 32px;
@@ -281,7 +68,7 @@
   }
 }
 
-.dashbord-rank {
+.dashboard-rank {
   display: inline-flex;
   width: 24px;
   height: 24px;
@@ -298,32 +85,15 @@
   }
 }
 
-.row-container {
-  margin-bottom: 8px !important;
-}
-
-.overview-pannel {
+.overview-panel {
   background-color: @bg-color-container;
   border-radius: 3px;
 }
 
-.card-container.main-color {
-  background: @brand-color;
-  color: @text-color-primary;
+.row-container {
+  margin-top: 16px;
+}
 
-  .card-describe {
-    color: white;
-  }
-
-  .dashboard-item-top span {
-    color: white;
-  }
-
-  .dashboard-item-block {
-    color: rgb(255 255 255 / 55%);
-  }
-
-  .dashboard-item-bottom {
-    color: white;
-  }
+.card-date-picker-container {
+  width: 240px;
 }

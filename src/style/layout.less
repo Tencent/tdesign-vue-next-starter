@@ -1,7 +1,60 @@
 @import './variables.less';
 @import './font-family.less';
 
+
+// layout rewrite
+
+.t-layout--sider {
+  width: fit-content;
+}
+
+.t-button + .t-button {
+  margin-left: @spacer;
+}
+
+.t-layout.t-layout-has-sider {
+
+  > .t-layout {
+    flex: 1;
+    min-width: 760px;
+  }
+}
+
 .@{prefix} {
+
+  // 布局元素调整
+  &-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &-main-wrapper{
+    height: 500px;
+    overflow: scroll;
+  }
+
+  &-side-nav-layout {
+    &-relative {
+      height: 100%;
+    }
+  }
+
+  &-layout{
+    height: calc(100vh - 64px);
+    overflow-y: scroll;
+  }
+
+  &-content-layout {
+    padding: @spacer-3;
+  }
+
+  &-footer-layout {
+    padding: 0;
+    margin-bottom: @spacer-2;
+  }
+
+  // slideBar
   &-sidebar-layout {
     height: 100%;
   }
@@ -14,7 +67,7 @@
     z-index: 100;
   }
 
-  &-sideNav {
+  &-side-nav {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -43,6 +96,8 @@
     &-logo-wrapper {
       display: flex;
       align-items: center;
+      justify-content: center;
+      padding: 0 24px;
       width: 100%;
       &:hover {
         cursor: pointer;
@@ -51,11 +106,11 @@
 
     &-logo-t-logo {
       width: 32px;
-      margin-left: 16px;
     }
 
     &-logo-tdesign-logo {
       height: 32px;
+      color: @text-color-anti;
     }
 
     &-logo-normal {
@@ -66,7 +121,7 @@
     }
   }
 
-  &-sideNav-placeholder {
+  &-side-nav-placeholder {
     flex: 1 1 232px;
     min-width: 232px;
     transition: all 0.3s;
@@ -94,6 +149,14 @@
   margin-left: 24px;
 }
 
-.t-default-menu.t-menu--dark {
-  background: #232A35
+
+.version-container {
+  color: @text-color-anti;
+  opacity: 0.4;
 }
+.t-default-menu__inner .t-menu-group-title {
+  color: @text-color-anti;
+  opacity: 0.3;
+};
+
+

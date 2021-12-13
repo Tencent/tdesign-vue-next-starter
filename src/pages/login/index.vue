@@ -1,27 +1,33 @@
 <template>
   <div class="login-wrapper">
+    <login-header />
+
     <div class="login-container">
       <div class="title-container">
-        <img class="icon" src="https://tdesign.gtimg.com/starter/logo%402x.png" />
-        <div class="side-title">
-          <p class="tip1">
-            {{ type == 'register' ? '没有账号吗?' : '已有账号?' }}
-          </p>
-          <p class="tip2" @click="switchType(type == 'register' ? 'login' : 'register')">
+        <h1 class="title margin-no">登录到</h1>
+        <h1 class="title">TDesign Starter</h1>
+        <div class="sub-title">
+          <p class="tip">{{ type == 'register' ? '已有账号?' : '没有账号吗?' }}</p>
+          <p class="tip" @click="switchType(type == 'register' ? 'login' : 'register')">
             {{ type == 'register' ? '登录' : '注册新账号' }}
           </p>
         </div>
       </div>
 
       <login v-if="type === 'login'" />
-      <register v-else @registerSuccess="switchType('login')" />
+      <register v-else @register-success="switchType('login')" />
+      <tdesign-setting />
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
+import { useStore } from 'vuex';
+
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
+import LoginHeader from './components/Header.vue';
+import TdesignSetting from '@/layouts/setting.vue';
 
 /** 高级详情 */
 export default defineComponent({
@@ -29,17 +35,24 @@ export default defineComponent({
   components: {
     Login,
     Register,
+    LoginHeader,
+    TdesignSetting,
   },
   setup() {
     const type = ref('login');
-
+    const store = useStore();
     const switchType = (val: string) => {
       type.value = val;
     };
 
+    const mode = computed(() => {
+      return store.state.setting.mode;
+    });
+
     return {
       type,
       switchType,
+      mode,
     };
   },
 });

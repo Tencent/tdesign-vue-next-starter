@@ -1,10 +1,3 @@
-interface TableRowType {
-  index: number;
-  pdName: string;
-  purchaseNum: number;
-  updateTime: string;
-}
-
 export const BASE_INFO_DATA = [
   {
     name: '合同名称',
@@ -86,52 +79,50 @@ export const BASE_INFO_DATA = [
 
 export const TABLE_COLUMNS_DATA = [
   {
-    align: 'center',
-    minWidth: '250',
+    width: 300,
     ellipsis: true,
     colKey: 'index',
     title: '申请号',
-    sorter: (a: TableRowType, b: TableRowType) => a.index - b.index,
+    sorter: (a, b) => a.index.substr(3) - b.index.substr(3),
   },
   {
-    minWidth: '100',
+    width: 200,
     ellipsis: true,
     colKey: 'pdName',
     title: '产品名称',
-    sorter: (a: TableRowType, b: TableRowType) => a.pdName.length - b.pdName.length,
+    sorter: (a, b) => a.pdName.length - b.pdName.length,
   },
   {
-    minWidth: '250',
+    width: 200,
     ellipsis: true,
     colKey: 'pdNum',
     title: '产品编号',
   },
   {
-    minWidth: '100',
+    width: 200,
     ellipsis: true,
     colKey: 'purchaseNum',
     title: '采购数量',
-    sorter: (a: TableRowType, b: TableRowType) => a.purchaseNum - b.purchaseNum,
+    sorter: (a, b) => a.purchaseNum - b.purchaseNum,
   },
   {
-    minWidth: '100',
+    width: 200,
     ellipsis: true,
     colKey: 'adminName',
     title: '申请部门',
   },
   {
-    minWidth: '250',
-    className: 'test',
+    width: 200,
     ellipsis: true,
     colKey: 'updateTime',
     title: '创建时间',
-    sorter: (a: TableRowType, b: TableRowType) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
+    sorter: (a, b) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
   },
   {
     align: 'left',
+    fixed: 'right',
     width: 200,
     className: 'test2',
-    ellipsis: true,
     colKey: 'op',
     title: '操作',
   },
@@ -139,8 +130,8 @@ export const TABLE_COLUMNS_DATA = [
 
 export const PRODUCT_LIST = [
   {
-    name: 'Macbook Pro 2021',
-    subTitle: 'Macbook Pro 2021',
+    name: 'MacBook Pro 2021',
+    subTitle: 'MacBook Pro 2021',
     size: '13.3 英寸',
     cpu: 'Apple M1',
     memory: 'RAM 16GB',

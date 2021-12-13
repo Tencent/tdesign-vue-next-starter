@@ -1,10 +1,11 @@
 <template>
   <div :class="containerCls">
-    <div :class="titleCls">
-      <span :class="titleTextCls">
+    <div v-if="title || $slots.title || $slots.option || subtitle || describe" :class="titleCls">
+      <div :class="titleTextCls">
         {{ title }}
         <span v-if="describe" class="card-describe">{{ describe }}</span>
-      </span>
+        <span v-if="subtitle" class="card-subtitle">{{ subtitle }}</span>
+      </div>
       <span class="card-option">
         <slot name="option" />
       </span>
@@ -25,6 +26,10 @@ export default defineComponent({
       type: String as PropType<string>,
       default: '',
     },
+    subtitle: {
+      type: String as PropType<string>,
+      default: '',
+    },
     compact: {
       type: Boolean as PropType<boolean>,
       default: false,
@@ -37,11 +42,15 @@ export default defineComponent({
       type: String as PropType<string>,
       default: 'default',
     },
+    border: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const containerCls = computed(() => {
-      const { compact } = props;
-      return ['card-container', { 'card-container-compact': compact }];
+      const { compact, border } = props;
+      return ['card-container', { 'card-container-compact': compact, 'card-container--border': border }];
     });
 
     const titleCls = computed(() => {
@@ -49,8 +58,8 @@ export default defineComponent({
       return [
         'card-title',
         {
-          'card-title-small': size === 'small',
-          'card-title-default': size !== 'small',
+          'card-title--small': size === 'small',
+          'card-title--default': size !== 'small',
         },
       ];
     });
@@ -59,8 +68,8 @@ export default defineComponent({
       const { size } = props;
       return [
         {
-          'card-title-text-small': size === 'small',
-          'card-title-text-default': size !== 'small',
+          'card-title__text--small': size === 'small',
+          'card-title__text--default': size !== 'small',
         },
       ];
     });
@@ -74,12 +83,29 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@import url('@/style/index.less');
+@import '@/style/variables';
 
-.t-col > .card-container {
-  margin: 0;
+.main-color {
+  background: @brand-color;
+  color: @text-color-primary;
+
+  .card-subtitle {
+    color: @text-color-anti;
+  }
+
+  .dashboard-item-top span {
+    color: @text-color-anti;
+  }
+
+  .dashboard-item-block {
+    color: @text-color-anti;
+    opacity: 0.6;
+  }
+
+  .dashboard-item-bottom {
+    color: @text-color-anti;
+  }
 }
-
 .card {
   &-option {
     display: flex;
@@ -89,7 +115,6 @@ export default defineComponent({
 
   &-container {
     padding: 24px 32px;
-    margin: 16px 0;
     background: @bg-color-container;
     border-radius: @border-radius;
     width: 100%;
@@ -101,44 +126,56 @@ export default defineComponent({
       margin-top: 24px;
       margin-bottom: 16px;
     }
+
+    &--border {
+      border: solid 1px @component-border;
+    }
   }
 
   &-title {
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-    line-height: 22px;
+    line-height: 24px;
     font-family: PingFangSC-Regular;
     font-weight: 500;
     color: @text-color-primary;
 
-    &-small {
+    &--small {
       margin-bottom: 8px;
     }
 
-    &-default {
-      margin-bottom: 16px;
+    &--default {
+      margin-bottom: 24px;
     }
 
-    &-text {
+    &__text {
       display: inline-flex;
 
-      &-default {
+      &--default {
         margin: @spacer 0;
       }
-    }
 
-    &-text-small {
-      display: inline-block;
-      width: 100%;
+      &--small {
+        display: inline-block;
+        width: 100%;
+      }
     }
   }
 
   &-describe {
     font-size: 14px;
     color: @brand-color;
-    color: @text-color-primary;
+    color: @text-color-placeholder;
     line-height: 22px;
+    margin-left: 4px;
+  }
+  &-subtitle {
+    font-size: 14px;
+    color: @brand-color;
+    color: @text-color-secondary;
+    line-height: 22px;
+    margin-left: 4px;
   }
 
   &-content {
