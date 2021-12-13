@@ -22,7 +22,7 @@
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
-          placeholder="请输入登录密码"
+          placeholder="请输入登录密码:main_/dev_"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
