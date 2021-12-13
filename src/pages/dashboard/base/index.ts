@@ -76,8 +76,8 @@ export function getRandomArray(num = 100) {
   return resultNum;
 }
 
-/** 首页 dashbord 折线图 */
-export function constructInitDashbordDataset(type: string) {
+/** 首页 dashboard 折线图 */
+export function constructInitDashboardDataset(type: string) {
   const dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
   const datasetAxis = {
     xAxis: {
@@ -355,8 +355,8 @@ export function getSmoothLineDataSet(dateTime = []) {
 export function getFolderLineDataSet(dateTime?: string[]) {
   let dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
   if (dateTime && dateTime.length > 0) {
-    const devideNum = 7;
-    dateArray = getDateArray(dateTime, devideNum);
+    const divideNum = 7;
+    dateArray = getDateArray(dateTime, divideNum);
   }
 
   return {
@@ -1107,18 +1107,18 @@ export function getPieChartDataSet(radius = 42) {
  */
 export function changeChartsTheme(chartsList: echarts.EChartsType[]) {
   if (chartsList && chartsList.length) {
-    const chartChangeColor: any = chartListColor();
+    const chartChangeColor = chartListColor();
 
     for (let index = 0; index < chartsList.length; index++) {
-      const elementChart: any = chartsList[index];
+      const elementChart = chartsList[index];
 
       if (elementChart) {
-        const optionVal: any = elementChart.getOption();
+        const optionVal = elementChart.getOption();
 
         // 更改主题颜色
         optionVal.color = chartChangeColor;
 
-        elementChart.setOption(optionVal);
+        elementChart.setOption(optionVal, true);
       }
     }
   }

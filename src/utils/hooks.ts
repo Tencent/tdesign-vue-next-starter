@@ -10,10 +10,11 @@ export const useChart = (domId: string): Ref<echarts.ECharts> => {
   let chartContainer: HTMLCanvasElement;
   const selfChart = ref<echarts.ECharts | any>();
   const updateContainer = () => {
-    // selfChart.value.resize({
-    //   width: chartContainer.clientWidth,
-    //   height: chartContainer.clientHeight,
-    // });
+    // TODO resize 报错，响应式的问题，待处理
+    selfChart.value.resize({
+      width: chartContainer.clientWidth,
+      height: chartContainer.clientHeight,
+    });
   };
 
   onMounted(() => {

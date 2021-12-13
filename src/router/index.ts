@@ -16,7 +16,7 @@ const defaultRouterList: Array<RouteRecordRaw> = [
   },
   {
     path: '/',
-    redirect: '/login',
+    redirect: '/dashboard/base',
     component: () => import('@/layouts/blank.vue'),
   },
 ];

@@ -84,7 +84,6 @@ import { PREFIX } from '@/config/global';
 import Card from '@/components/card/index.vue';
 import { ResDataType } from '@/interface';
 import request from '@/utils/request';
-import { useChart } from '@/utils/hooks';
 
 echarts.use([
   TitleComponent,
@@ -125,37 +124,61 @@ export default defineComponent({
     };
     const visible = ref(false);
 
-    const monitorChart = useChart('monitorContainer');
-    const dataChart = useChart('dataContainer');
-
-    const intervalTimer = null;
-
+    // monitorChart logic
+    let monitorContainer: HTMLElement;
+    let monitorChart: echarts.ECharts;
     onMounted(() => {
-      fetchData();
-      dataChart.value.setOption(get2ColBarChartDataSet());
-      monitorChart.value.setOption(getSmoothLineDataSet());
-
+      monitorContainer = document.getElementById('monitorContainer');
+      monitorChart = echarts.init(monitorContainer);
+      monitorChart.setOption(getSmoothLineDataSet());
       setInterval(() => {
-        monitorChart.value.setOption(getSmoothLineDataSet());
+        monitorChart.setOption(getSmoothLineDataSet());
       }, 3000);
     });
 
+    // dataChart logic
+    let dataContainer: HTMLElement;
+    let dataChart: echarts.ECharts;
+    onMounted(() => {
+      dataContainer = document.getElementById('dataContainer');
+      dataChart = echarts.init(dataContainer);
+      dataChart.setOption(get2ColBarChartDataSet());
+    });
+
+    const intervalTimer = null;
+
+    /// / chartSize update
+    const updateContainer = () => {
+      monitorChart.resize({
+        width: monitorContainer.clientWidth,
+        height: monitorContainer.clientHeight,
+      });
+      dataChart.resize({
+        width: dataContainer.clientWidth,
+        height: dataContainer.clientHeight,
+      });
+    };
+
     onUnmounted(() => {
+      window.removeEventListener('resize', updateContainer);
       clearInterval(intervalTimer);
     });
 
     const onAlertChange = () => {
-      dataChart.value.setOption(get2ColBarChartDataSet());
+      dataChart.setOption(get2ColBarChartDataSet());
     };
 
+    onMounted(() => {
+      fetchData();
+      window.addEventListener('resize', updateContainer, false);
+    });
     const store = useStore();
     watch(
       () => store.state.setting.brandTheme,
       () => {
-        changeChartsTheme([monitorChart.value, dataChart.value]);
+        changeChartsTheme([monitorChart, dataChart]);
       },
     );
-
     return {
       PREFIX,
       BASE_INFO_DATA,

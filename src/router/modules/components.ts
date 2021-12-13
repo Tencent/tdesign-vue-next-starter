@@ -82,7 +82,7 @@ export default [
       },
       {
         path: 'secondary',
-        name: 'detailDeploy',
+        name: 'detailSecondary',
         component: () => import('@/pages/detail/secondary/index.vue'),
         meta: { title: '二级详情页' },
       },
@@ -107,15 +107,6 @@ export default [
         component: () => import('@/pages/result/fail/index.vue'),
         meta: { title: '失败页' },
       },
-    ],
-  },
-  {
-    path: '/warning',
-    name: 'warning',
-    component: Layout,
-    redirect: '/warning/success',
-    meta: { title: '异常页', icon: 'error-circle' },
-    children: [
       {
         path: 'network-error',
         name: 'warningNetworkError',

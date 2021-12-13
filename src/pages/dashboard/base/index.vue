@@ -147,7 +147,7 @@
                 mode="date"
                 range
                 :default-value="LAST_7_DAYS"
-                @change="onWharehouseChange"
+                @change="onStokeDataChange"
               />
             </template>
             <div
@@ -203,7 +203,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, watch, ref } from 'vue';
+import { defineComponent, onMounted, watch, ref, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -211,7 +211,6 @@ import { TooltipComponent, LegendComponent, GridComponent } from 'echarts/compon
 import { PieChart, LineChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { LAST_7_DAYS } from '@/utils/date';
-import { useChart } from '@/utils/hooks';
 
 // 导入样式
 import Trend from '@/components/trend/index.vue';
@@ -221,7 +220,7 @@ import {
   constructInitDataset,
   getPieChartDataSet,
   getLineChartDataSet,
-  constructInitDashbordDataset,
+  constructInitDashboardDataset,
 } from './index';
 
 import { PANE_LIST, SALE_TEND_LIST, BUY_TEND_LIST, SALE_COLUMNS, BUY_COLUMNS } from './constants';
@@ -247,36 +246,90 @@ export default defineComponent({
     Trend,
   },
   setup() {
-    const refundCharts = useChart('refundContainer');
-    const moneyCharts = useChart('moneyContainer');
-    const stokeCharts = useChart('stokeContainer');
-    const monitorChart = useChart('monitorContainer');
-    const countChart = useChart('countContainer');
-    const initCharts = () => {
-      refundCharts.value.setOption(constructInitDashbordDataset('bar'));
-      moneyCharts.value.setOption(constructInitDashbordDataset('line'));
-      stokeCharts.value.setOption(constructInitDataset(LAST_7_DAYS));
-      monitorChart.value.setOption(getLineChartDataSet());
-      countChart.value.setOption(getPieChartDataSet());
+    // refundCharts
+    let refundContainer: HTMLElement;
+    let refundChart: echarts.ECharts;
+    onMounted(() => {
+      refundContainer = document.getElementById('refundContainer');
+      refundChart = echarts.init(refundContainer);
+      refundChart.setOption(constructInitDashboardDataset('bar'));
+    });
+
+    // moneyCharts
+    let moneyContainer: HTMLElement;
+    let moneyChart: echarts.ECharts;
+    onMounted(() => {
+      moneyContainer = document.getElementById('moneyContainer');
+      moneyChart = echarts.init(moneyContainer);
+      moneyChart.setOption(constructInitDashboardDataset('line'));
+    });
+
+    // stokeCharts
+    let stokeContainer: HTMLElement;
+    let stokeChart: echarts.ECharts;
+    onMounted(() => {
+      stokeContainer = document.getElementById('stokeContainer');
+      stokeChart = echarts.init(stokeContainer);
+      stokeChart.setOption(constructInitDataset(LAST_7_DAYS));
+    });
+
+    // monitorChart
+    let monitorContainer: HTMLElement;
+    let monitorChart: echarts.ECharts;
+    onMounted(() => {
+      monitorContainer = document.getElementById('monitorContainer');
+      monitorChart = echarts.init(monitorContainer);
+      monitorChart.setOption(getLineChartDataSet());
+    });
+
+    // monitorChart
+    let countContainer: HTMLElement;
+    let countChart: echarts.ECharts;
+    onMounted(() => {
+      countContainer = document.getElementById('countContainer');
+      countChart = echarts.init(countContainer);
+      countChart.setOption(getPieChartDataSet());
+    });
+
+    // chartSize update
+    const updateContainer = () => {
+      refundChart.resize({
+        width: refundContainer.clientWidth,
+        height: refundContainer.clientHeight,
+      });
+      moneyChart.resize({
+        width: moneyContainer.clientWidth,
+        height: moneyContainer.clientHeight,
+      });
+      stokeChart.resize({
+        width: stokeContainer.clientWidth,
+        height: stokeContainer.clientHeight,
+      });
+      monitorChart.resize({
+        width: monitorContainer.clientWidth,
+        height: monitorContainer.clientHeight,
+      });
+      countChart.resize({
+        width: countContainer.clientWidth,
+        height: countContainer.clientHeight,
+      });
     };
 
-    const currentMonth = ref(getThisMonth());
-
     onMounted(() => {
-      initCharts();
+      window.addEventListener('resize', updateContainer, false);
     });
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', updateContainer);
+    });
+
+    const currentMonth = ref(getThisMonth());
 
     const store = useStore();
     watch(
       () => store.state.setting.brandTheme,
       () => {
-        changeChartsTheme([
-          refundCharts.value,
-          moneyCharts.value,
-          stokeCharts.value,
-          monitorChart.value,
-          countChart.value,
-        ]);
+        changeChartsTheme([refundChart, moneyChart, stokeChart, monitorChart, countChart]);
       },
     );
 
@@ -290,10 +343,10 @@ export default defineComponent({
       BUY_COLUMNS,
       onCurrencyChange(checkedValues: string[]) {
         currentMonth.value = getThisMonth(checkedValues);
-        monitorChart.value.setOption(getLineChartDataSet(checkedValues));
+        monitorChart.setOption(getLineChartDataSet(checkedValues));
       },
-      onWharehouseChange(checkedValues: string[]) {
-        stokeCharts.value.setOption(constructInitDataset(checkedValues));
+      onStokeDataChange(checkedValues: string[]) {
+        stokeChart.setOption(constructInitDataset(checkedValues));
       },
       rehandleClickOp(val: MouseEvent) {
         console.log(val);

@@ -56,46 +56,19 @@ npm run build
 // 项目预览
 npm run preview
 
-// 项目lint
+// 项目 eslint
 npm run lint
 
-// 修复lint
+// 修复 eslint
 npm run lint:fix
 
-```
+// 项目 stylelint
+npm run stylelint
 
-<br/>
-
-## 路由和菜单
-
-菜单（侧边栏和面包屑）由路由配置自动生成，根据路由变化可自动匹配，开发者无需手动处理这些逻辑。
-可在<a href="./src/config/routes.js">src/config/routes.js</a>文件中修改。
-
-菜单和路由的映射如下：
+// 修复 stylelint
+npm run stylelint:fix
 
 ```
-    {
-        path: '/dashboard',
-        icon: 'chart-pie',
-        title: '仪表板',
-        component: '../layouts/default.vue',
-        children: [
-            {
-                title: '概览仪表盘',
-                path: 'base',
-                component: '../pages/demo.vue',
-                children: [            {
-                    title: '概览仪表盘',
-                    path: 'base',
-                    component: '../pages/demo.vue',
-                }]
-            }
-        ]
-    }
-
-```
-
-路由使用 `vue-router`
 
 <br/>
 

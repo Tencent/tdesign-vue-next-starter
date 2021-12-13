@@ -4,7 +4,7 @@ import { useStore } from 'vuex';
 import { PREFIX } from '@/config/global';
 import pgk from '../../../package.json';
 import SubMenu from './SubMenu';
-import tLogoUrl from '@/assets/assets-t-logo.svg?url';
+import tLogo from '@/assets/assets-t-logo.svg?component';
 import tLogoFull from '@/assets/assets-logo-full.svg?component';
 
 const MIN_POINT = 992 - 1;
@@ -54,6 +54,7 @@ export default defineComponent({
   components: {
     SubMenu,
     tLogoFull,
+    tLogo,
   },
   props: {
     menu: {
@@ -151,7 +152,7 @@ export default defineComponent({
               this.showLogo && (
                 <span class={`${PREFIX}-side-nav-logo-wrapper`} onClick={this.goHome}>
                   {this.collapsed ? (
-                    <img class={`${PREFIX}-side-nav-logo-t-logo`} src={tLogoUrl as string} />
+                    <tLogo class={`${PREFIX}-side-nav-logo-t-logo`} />
                   ) : (
                     <t-logo-full class={`${PREFIX}-side-nav-logo-tdesign-logo`} />
                   )}

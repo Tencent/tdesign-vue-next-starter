@@ -28,15 +28,15 @@
       </card>
 
       <card class="content-container">
-        <t-tabs default-value="second">
+        <t-tabs value="second">
           <t-tab-panel value="first" label="内容列表">
             <p>内容列表</p>
           </t-tab-panel>
           <t-tab-panel value="second" label="内容列表">
             <card class="card-padding-no" title="主页访问数据" describe="（次）">
-              <template #options>
+              <template #option>
                 <t-date-picker
-                  class="time-picker"
+                  class="card-date-picker-container"
                   :default-value="LAST_7_DAYS"
                   theme="primary"
                   mode="date"
@@ -90,8 +90,7 @@
   </t-row>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, watch } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent, nextTick, onMounted, onUnmounted } from 'vue';
 
 import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
@@ -99,9 +98,8 @@ import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 
 import { LAST_7_DAYS } from '@/utils/date';
-// import { useChart } from '@/utils/hooks';
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
-// import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
+import { getFolderLineDataSet } from '@/pages/dashboard/base/index';
 import Card from '@/components/card/index.vue';
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
@@ -111,31 +109,44 @@ export default defineComponent({
     Card,
   },
   setup() {
-    // const lineChart = useChart('lineContainer');
+    let lineContainer: HTMLElement;
+    let lineChart: echarts.ECharts;
 
-    const onLineChange = () => {
-      // lineChart.value.setOption(getFolderLineDataSet(value));
+    const onLineChange = (value) => {
+      lineChart.setOption(getFolderLineDataSet(value));
+    };
+
+    const initChart = () => {
+      lineContainer = document.getElementById('lineContainer');
+      lineChart = echarts.init(lineContainer);
+      lineChart.setOption({
+        grid: {
+          x: 30, // 默认是80px
+          y: 30, // 默认是60px
+          x2: 10, // 默认80px
+          y2: 30, // 默认60px
+        },
+        ...getFolderLineDataSet(),
+      });
+    };
+
+    const updateContainer = () => {
+      lineChart.resize({
+        width: lineContainer.clientWidth,
+        height: lineContainer.clientHeight,
+      });
     };
 
     onMounted(() => {
-      // lineChart.value.setOption({
-      //   grid: {
-      //     x: 30, // 默认是80px
-      //     y: 30, // 默认是60px
-      //     x2: 10, // 默认80px
-      //     y2: 30, // 默认60px
-      //   },
-      //   ...getFolderLineDataSet(),
-      // });
+      nextTick(() => {
+        initChart();
+      });
+      window.addEventListener('resize', updateContainer, false);
     });
 
-    const store = useStore();
-    watch(
-      () => store.state.setting.brandTheme,
-      () => {
-        // changeChartsTheme([lineChart.value]);
-      },
-    );
+    onUnmounted(() => {
+      window.removeEventListener('resize', updateContainer);
+    });
 
     return {
       LAST_7_DAYS,

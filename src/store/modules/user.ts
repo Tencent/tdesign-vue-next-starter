@@ -6,7 +6,7 @@ const InitUserInfo = {
 
 // 定义的state初始值
 const state = {
-  token: localStorage.getItem(TOKEN_NAME),
+  token: localStorage.getItem(TOKEN_NAME) || 'main_token', // 默认token不走权限
   userInfo: InitUserInfo,
 };
 
@@ -36,6 +36,7 @@ const getters = {
 const actions = {
   async login({ commit }, userInfo) {
     const mockLogin = async (userInfo) => {
+      // 登录请求流程
       console.log(userInfo);
       // const { account, password } = userInfo;
       // if (account !== 'td') {

@@ -58,7 +58,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, watch } from 'vue';
+import { defineComponent, onMounted, onUnmounted, watch } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -69,7 +69,6 @@ import ProductCard from '@/pages/list/card/components/Card.vue';
 
 import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../base/index';
 import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
-import { useChart } from '@/utils/hooks';
 import { LAST_7_DAYS } from '@/utils/date';
 
 import Trend from '@/components/trend/index.vue';
@@ -85,30 +84,60 @@ export default defineComponent({
     ProductCard,
   },
   setup() {
-    const lineChart = useChart('lineContainer');
-    const scatterChart = useChart('scatterContainer');
+    // lineChart logic
+    let lineContainer: HTMLElement;
+    let lineChart: echarts.ECharts;
+    onMounted(() => {
+      lineContainer = document.getElementById('lineContainer');
+      lineChart = echarts.init(lineContainer);
+      lineChart.setOption(getFolderLineDataSet());
+    });
+
+    // scatterChart logic
+    let scatterContainer: HTMLElement;
+    let scatterChart: echarts.ECharts;
+    onMounted(() => {
+      scatterContainer = document.getElementById('scatterContainer');
+      scatterChart = echarts.init(scatterContainer);
+      scatterChart.setOption(getScatterDataSet());
+    });
+
+    // chartSize update
+    const updateContainer = () => {
+      lineChart.resize({
+        width: lineContainer.clientWidth,
+        height: lineContainer.clientHeight,
+      });
+      scatterChart.resize({
+        width: scatterContainer.clientWidth,
+        height: scatterContainer.clientHeight,
+      });
+    };
+    onMounted(() => {
+      window.addEventListener('resize', updateContainer, false);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', updateContainer);
+    });
 
     const store = useStore();
     watch(
       () => store.state.setting.brandTheme,
       () => {
-        changeChartsTheme([lineChart.value, scatterChart.value]);
+        changeChartsTheme([lineChart, scatterChart]);
       },
     );
 
-    onMounted(() => {
-      lineChart.value.setOption(getFolderLineDataSet());
-      scatterChart.value.setOption(getScatterDataSet());
-    });
     return {
       LAST_7_DAYS,
       PRODUCT_LIST,
       PANE_LIST_DATA,
       onSatisfyChange() {
-        scatterChart.value.setOption(getScatterDataSet());
+        scatterChart.setOption(getScatterDataSet());
       },
       onMaterialChange(value: string[]) {
-        lineChart.value.setOption(getFolderLineDataSet(value));
+        lineChart.setOption(getFolderLineDataSet(value));
       },
     };
   },

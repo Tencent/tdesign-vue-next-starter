@@ -56,6 +56,11 @@ export default defineComponent({
   backdrop-filter: blur(5px);
   color: @text-color-primary;
 
+  .logo {
+    width: 188px;
+    height: 64px;
+  }
+
   .operations-container {
     display: flex;
     align-items: center;
