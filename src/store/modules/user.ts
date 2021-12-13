@@ -36,27 +36,28 @@ const getters = {
 const actions = {
   async login({ commit }, userInfo) {
     const mockLogin = async (userInfo) => {
-      const { account, password } = userInfo;
-      if (account !== 'td') {
-        return {
-          code: 401,
-          message: '账号不存在',
-        };
-      }
-      if (['main_', 'dev_'].indexOf(password) === -1) {
-        return {
-          code: 401,
-          message: '密码错误',
-        };
-      }
-      const token = {
-        main_: 'main_token',
-        dev_: 'dev_token',
-      }[password];
+      console.log(userInfo);
+      // const { account, password } = userInfo;
+      // if (account !== 'td') {
+      //   return {
+      //     code: 401,
+      //     message: '账号不存在',
+      //   };
+      // }
+      // if (['main_', 'dev_'].indexOf(password) === -1) {
+      //   return {
+      //     code: 401,
+      //     message: '密码错误',
+      //   };
+      // }
+      // const token = {
+      //   main_: 'main_token',
+      //   dev_: 'dev_token',
+      // }[password];
       return {
         code: 200,
         message: '登陆成功',
-        data: token,
+        data: 'main_token',
       };
     };
 

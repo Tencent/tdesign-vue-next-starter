@@ -9,7 +9,7 @@
   >
     <template v-if="type == 'password'">
       <t-form-item name="account">
-        <t-input v-model="formData.account" size="large" placeholder="请输入您的账号:td">
+        <t-input v-model="formData.account" size="large" placeholder="请输入您的账号">
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -22,7 +22,7 @@
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
-          placeholder="请输入登录密码:main_/dev_"
+          placeholder="请输入登录密码"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
@@ -43,7 +43,7 @@
     <template v-else-if="type == 'qrcode'">
       <div class="tip-container">
         <span class="tip">请使用微信扫一扫登录</span>
-        <span class="refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
+        <span class="refresh">刷新 <t-icon name="refresh" /> </span>
       </div>
       <qrcode-vue value="" :size="192" level="H" />
     </template>

@@ -10,7 +10,8 @@
     "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0",
     "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
     "stylelint": "stylelint src/**/*.{html,vue,sass,less}",
-    "stylelint:fix": "stylelint --cache --fix src/**/*.{html,vue,vss,sass,less}"
+    "stylelint:fix": "stylelint --fix src/**/*.{html,vue,vss,sass,less}",
+    "prepare": "husky install"
   },
   "dependencies": {
     "dayjs": "^1.10.6",
@@ -25,7 +26,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
-    "@commitlint/config-conventional": "^13.1.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "@types/echarts": "^4.9.10",
     "@types/ws": "^8.2.2",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
@@ -42,20 +43,19 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.2.0",
-    "http-proxy-agent": "^4.0.1",
+    "http-proxy-agent": "^5.0.0",
     "husky": "^7.0.4",
     "less": "^4.1.1",
+    "lint-staged": "^12.1.2",
     "mockjs": "^1.1.0",
-    "postcss-less": "^5.0.0",
     "prettier": "^2.4.1",
-    "stylelint": "^14.1.0",
-    "stylelint-config-standard": "^24.0.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-less": "^1.0.1",
     "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^4.0.0",
     "typescript": "^4.4.3",
     "vite": "^2.7.1",
     "vite-plugin-mock": "^2.9.6",
-    "vite-plugin-svg-sprite-component": "^1.0.10",
     "vite-svg-loader": "^3.1.0",
     "vue-clipboard3": "^1.0.1",
     "vue-tsc": "^0.29.8"
@@ -65,22 +65,15 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
       "prettier --write",
       "npm run lint:fix",
-      "git add"
+      "git add ."
     ],
     "*.{html,vue,vss,sass,less}": [
       "npm run stylelint:fix",
-      "git add"
+      "git add ."
     ]
   }
 }
