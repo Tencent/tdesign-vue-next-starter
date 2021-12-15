@@ -35,7 +35,7 @@
             </t-list-item>
           </t-list>
           <div v-else class="secondary-msg-list__empty-list">
-            <img src="https://tdesign.gtimg.com/pro-template/personal/nothing.png" alt="空" />
+            <empty-icon></empty-icon>
             <p>暂无通知</p>
           </div>
         </t-tab-panel>
@@ -54,6 +54,7 @@ import { defineComponent, ref, computed, ComputedRef } from 'vue';
 import { useStore } from 'vuex';
 import { NOTIFICATION_TYPES } from '@/constants';
 import { NotificationItem } from '@/interface';
+import EmptyIcon from '@/assets/assets-empty.svg?component';
 
 const TAB_LIST = [
   {
@@ -72,6 +73,9 @@ const TAB_LIST = [
 
 export default defineComponent({
   name: 'DetailSecondary',
+  components: {
+    EmptyIcon,
+  },
   setup() {
     const tabValue = ref('msgData');
 

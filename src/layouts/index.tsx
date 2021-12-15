@@ -143,7 +143,6 @@ export default defineComponent({
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
-    const footer = this.renderFooter();
 
     return (
       <div class={`${PREFIX}-wrapper`}>
@@ -156,7 +155,6 @@ export default defineComponent({
           <t-layout key="no-side">
             {header}
             <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
-            {this.showFooter && footer}
           </t-layout>
         )}
         <tdesign-setting />

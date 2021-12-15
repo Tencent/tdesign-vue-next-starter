@@ -1,8 +1,9 @@
 
-<p align="center">
-  <a href="http://tdesgin.tencent.com/starter/vue/#/dashboard/base"><img src="https://tdesign.gtimg.com/starter/brand-logo.svg" /></a>
-</p>
+<p style="display:flex; justify-content: center">
 
+[![](https://tdesign.gtimg.com/starter/brand-logo.svg)](http://tdesgin.tencent.com/starter/vue/#/dashboard/base)
+
+</p>
 <p align="center">
   <a href="https://npmjs.com/package/vite"><img src="https://img.shields.io/npm/v/vite.svg" alt="npm package"></a>
   <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatility"></a>

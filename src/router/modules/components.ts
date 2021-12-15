@@ -1,4 +1,7 @@
 import Layout from '@/layouts';
+import ListIcon from '@/assets/assets-slide-list.svg';
+import FormIcon from '@/assets/assets-slide-form.svg';
+import DetailIcon from '@/assets/assets-slide-detail.svg';
 
 export default [
   {
@@ -6,7 +9,7 @@ export default [
     name: 'list',
     component: Layout,
     redirect: '/list/base',
-    meta: { title: '列表页', icon: 'view-module' },
+    meta: { title: '列表页', icon: ListIcon },
     children: [
       {
         path: 'base',
@@ -39,7 +42,7 @@ export default [
     name: 'form',
     component: Layout,
     redirect: '/form/base',
-    meta: { title: '表单页', icon: 'queue' },
+    meta: { title: '表单页', icon: FormIcon },
     children: [
       {
         path: 'base',
@@ -60,7 +63,7 @@ export default [
     name: 'detail',
     component: Layout,
     redirect: '/detail/base',
-    meta: { title: '详情页', icon: 'layers' },
+    meta: { title: '详情页', icon: DetailIcon },
     children: [
       {
         path: 'base',

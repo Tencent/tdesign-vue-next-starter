@@ -1,11 +1,9 @@
 import { createApp } from 'vue';
 import TDesign from 'tdesign-vue-next';
 import VueClipboard from 'vue3-clipboard';
-
 import App from './App.vue';
 import { store } from './store';
 import router from './router';
-
 import '@/style/index.less';
 import './permission';
 

@@ -1,4 +1,4 @@
-import { defineComponent, PropType, computed } from 'vue';
+import { defineComponent, PropType, computed, h } from 'vue';
 import { PREFIX as prefix } from '@/config/global';
 import { MenuRoute } from '@/interface';
 
@@ -19,6 +19,19 @@ const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
   });
 };
 
+const renderIcon = (item) => {
+  if (typeof item.icon === 'string') {
+    return () => item.icon && <t-icon name={item.icon}></t-icon>;
+  }
+  if (item.icon && typeof item.icon.render === 'function') {
+    return () =>
+      h(item.icon.render(), {
+        class: 't-icon',
+      });
+  }
+  return () => '';
+};
+
 const useRenderNav = (list: Array<MenuRoute>) => {
   return list.map((item) => {
     if (!item.children || !item.children.length || item.meta?.single) {
@@ -27,19 +40,14 @@ const useRenderNav = (list: Array<MenuRoute>) => {
           name={item.path}
           value={item.meta?.single ? item.redirect : item.path}
           to={item.path}
-          icon={() => item.icon && <t-icon name={item.icon} />}
+          icon={renderIcon(item)}
         >
           {item.title}
         </t-menu-item>
       );
     }
     return (
-      <t-submenu
-        name={item.path}
-        value={item.path}
-        title={item.title}
-        icon={() => item.icon && <t-icon name={item.icon} />}
-      >
+      <t-submenu name={item.path} value={item.path} title={item.title} icon={renderIcon(item)}>
         {item.children && useRenderNav(item.children)}
       </t-submenu>
     );

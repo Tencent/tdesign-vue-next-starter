@@ -1,5 +1,5 @@
 <template>
-  <result page-header="500" tip="抱歉，服务器出错啦" bg-url="https://tdesign.gtimg.com/starter/result-page/500.png">
+  <result title="500 Internal Server Error" type="500" tip="抱歉，服务器出错啦">
     <t-button @click="() => $router.push('/')">返回首页</t-button>
   </result>
 </template>
