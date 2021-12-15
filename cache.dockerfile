@@ -1,5 +1,5 @@
 # 选择一个 Base 镜像
-FROM node:14
+FROM node:16
 
 # 设置工作目录
 WORKDIR /space
