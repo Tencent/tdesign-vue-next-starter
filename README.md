@@ -25,9 +25,8 @@ TDesign Vue Next Starter 是一个基于 TDesign。使用 `Vue3`、`Vite2`、`Ty
   <a href="https://tdesign.tencent.com/starter/">使用文档</a>
 
 </p>
-<p>
-  <img src="https://tdesign.gtimg.com/starter/starter.png" style="border-radius:6px;border:1px solid var(--component-border)"/>
-</p>
+
+<img src="docs/starter.png">
 
 ### 特性
 
