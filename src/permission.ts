@@ -16,8 +16,10 @@ router.beforeEach(async (to, from, next) => {
 
   if (token) {
     if (to.path === '/login') {
-      store.dispatch('user/logout');
-      store.dispatch('permission/restore');
+      setTimeout(() => {
+        store.dispatch('user/logout');
+        store.dispatch('permission/restore');
+      });
       next();
       return;
     }

@@ -12,7 +12,7 @@
     </t-input>
   </div>
 
-  <div v-else>
+  <div v-else class="header-menu-search-left">
     <t-button
       :class="{ 'search-icon-hide': isSearchFocus }"
       theme="default"
@@ -72,6 +72,9 @@ export default defineComponent({
     .t-input__inner {
       background: @bg-color-secondarycontainer;
     }
+    .t-icon {
+      color: @brand-color !important;
+    }
   }
 
   .t-icon {
@@ -109,5 +112,9 @@ export default defineComponent({
 }
 .search-icon-hide {
   opacity: 0;
+}
+.header-menu-search-left {
+  display: flex;
+  align-items: center;
 }
 </style>

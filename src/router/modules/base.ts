@@ -1,4 +1,5 @@
 import Layout from '@/layouts';
+import DashboardIcon from '@/assets/assets-slide-dashboard.svg';
 
 export default [
   {
@@ -6,7 +7,7 @@ export default [
     component: Layout,
     redirect: '/dashboard/base',
     name: 'dashboard',
-    meta: { title: '仪表盘', icon: 'dashboard' },
+    meta: { title: '仪表盘', icon: DashboardIcon },
     children: [
       {
         path: 'base',

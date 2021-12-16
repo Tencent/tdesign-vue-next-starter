@@ -1,4 +1,5 @@
 import Layout from '@/layouts';
+import LogoutIcon from '@/assets/assets-slide-logout.svg';
 
 export default [
   {
@@ -19,7 +20,7 @@ export default [
   {
     path: '/loginRedirect',
     name: 'loginRedirect',
-    meta: { title: '登录页', icon: 'chevron-right-rectangle' },
+    meta: { title: '登录页', icon: LogoutIcon },
     component: () => import('@/layouts/blank.vue'),
     children: [
       {

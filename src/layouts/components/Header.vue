@@ -7,8 +7,7 @@
         </span>
         <div v-else class="header-operate-left">
           <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
-            <t-icon v-show="isSidebarCompact" class="collapsed-icon" name="menu-fold" />
-            <t-icon v-show="!isSidebarCompact" class="collapsed-icon" name="menu-unfold" />
+            <t-icon class="collapsed-icon" name="view-list" />
           </t-button>
           <search :layout="layout" />
         </div>
@@ -174,7 +173,7 @@ export default defineComponent({
     };
 
     const navToGitHub = () => {
-      window.open('https://github.com/Tencent/tdesign-vue-next-starter');
+      window.open('https://github.com/TDesignOteam/tdesign-vue-next-starter');
     };
 
     const navToHelper = () => {
@@ -231,13 +230,6 @@ export default defineComponent({
     display: inline-flex;
     height: 64px;
   }
-
-  .t-logo {
-    width: 32px;
-    &:hover {
-      cursor: pointer;
-    }
-  }
 }
 
 .header-menu {
@@ -282,8 +274,17 @@ export default defineComponent({
 }
 
 .header-logo-container {
+  width: 166px;
   display: flex;
-  margin-left: 16px;
+  margin-left: 24px;
+
+  .t-logo {
+    width: 100%;
+    height: 100%;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   &:hover {
     cursor: pointer;
@@ -300,12 +301,19 @@ export default defineComponent({
   }
 }
 
+.t-head-menu__inner {
+  border-bottom: 1px solid @border-level-1-color;
+}
+
 .t-menu--light {
   .header-user-account {
     color: @text-color-primary;
   }
 }
 .t-menu--dark {
+  .t-head-menu__inner {
+    border-bottom: 1px solid var(--td-gray-color-10);
+  }
   .header-user-account {
     color: rgba(255, 255, 255, 0.55);
   }

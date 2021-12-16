@@ -1,6 +1,7 @@
 <template>
   <result
-    page-header="浏览器不兼容"
+    title="浏览器不兼容"
+    type="ie"
     tip="抱歉，您正在使用的浏览器版本过低，无法打开当前网页"
     bg-url="https://tdesign.gtimg.com/starter/result-page/browser-incompatible.png"
   >
