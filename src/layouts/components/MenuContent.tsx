@@ -55,7 +55,6 @@ const useRenderNav = (list: Array<MenuRoute>) => {
 };
 
 export default defineComponent({
-  name: 'SubMenu',
   props: {
     navData: {
       type: Array as PropType<MenuRoute[]>,

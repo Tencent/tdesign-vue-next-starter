@@ -78,8 +78,6 @@ import QrcodeVue from 'qrcode.vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { useCounter } from '@/utils/hooks';
 
-import { passwordValidator } from '../helper';
-
 const INITIAL_DATA = {
   phone: '',
   account: '',
@@ -94,7 +92,7 @@ const FORM_RULES = {
     { required: true, message: '手机号必填', type: 'error' },
     { telnumber: true, message: '请输入正确的手机号', type: 'warning' },
   ],
-  password: [{ required: true, message: '密码必填', type: 'error' }, { validator: passwordValidator }],
+  password: [{ required: true, message: '密码必填', type: 'error' }],
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
 

@@ -18,7 +18,6 @@ import ResultWifiIcon from '@/assets/assets-result-wifi.svg?component';
 
 export default defineComponent({
   name: 'Result',
-  components: { Result403Icon, Result500Icon, Result404Icon },
   props: {
     bgUrl: {
       type: String as PropType<string>,
