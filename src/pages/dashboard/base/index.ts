@@ -14,7 +14,8 @@ const { state } = store;
  * @returns {}
  */
 export function getColorFromTheme(theme: string) {
-  const themeColor = getBrandColor(theme);
+  const { setting } = state as any;
+  const themeColor = getBrandColor(theme, setting.colorList);
   const themeColorList: Array<string> = [];
 
   // eslint-disable-next-line no-restricted-syntax

@@ -21,8 +21,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent, ref } from 'vue';
 
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
@@ -40,19 +39,13 @@ export default defineComponent({
   },
   setup() {
     const type = ref('login');
-    const store = useStore();
     const switchType = (val: string) => {
       type.value = val;
     };
 
-    const mode = computed(() => {
-      return store.state.setting.mode;
-    });
-
     return {
       type,
       switchType,
-      mode,
     };
   },
 });

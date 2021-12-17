@@ -29,11 +29,11 @@ export default defineComponent({
     };
 
     const navToGitHub = () => {
-      window.open('https://github.com/TDesignOteam/tdesign-vue-next-starter');
+      window.open('https://github.com/tencent/tdesign-vue-next-starter');
     };
 
     const navToHelper = () => {
-      window.open('http://tdesign.tencent.com/starter/get-started.html');
+      window.open('http://tdesign.tencent.com/starter/docs/get-started');
     };
 
     return {

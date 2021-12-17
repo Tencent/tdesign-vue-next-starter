@@ -2,7 +2,7 @@
   <div :class="layoutCls">
     <t-head-menu :class="menuCls" :theme="theme" expand-type="popup" :value="active">
       <template #logo>
-        <span v-if="showLogo" class="header-logo-container" @click="goHome">
+        <span v-if="showLogo" class="header-logo-container" @click="handleNav('/dashboard/base')">
           <tLogoFull class="t-logo" />
         </span>
         <div v-else class="header-operate-left">
@@ -12,7 +12,7 @@
           <search :layout="layout" />
         </div>
       </template>
-      <sub-menu v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
+      <menu-content v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
       <template #operations>
         <div class="operations-container">
           <!-- 搜索框 -->
@@ -75,14 +75,14 @@ import { MenuRoute } from '@/interface';
 
 import Notice from './Notice.vue';
 import Search from './Search.vue';
-import SubMenu from './SubMenu';
+import MenuContent from './MenuContent';
 
 export default defineComponent({
   components: {
     tLogoFull,
     Notice,
     Search,
-    SubMenu,
+    MenuContent,
   },
   props: {
     theme: {
@@ -120,10 +120,6 @@ export default defineComponent({
 
     const toggleSettingPanel = () => {
       store.commit('setting/toggleSettingPanel', true);
-    };
-
-    const goHome = () => {
-      router.push('/dashboard/base');
     };
 
     const active = computed(() => {
@@ -173,16 +169,15 @@ export default defineComponent({
     };
 
     const navToGitHub = () => {
-      window.open('https://github.com/TDesignOteam/tdesign-vue-next-starter');
+      window.open('https://github.com/tencent/tdesign-vue-next-starter');
     };
 
     const navToHelper = () => {
-      window.open('http://tdesign.tencent.com/starter/get-started.html');
+      window.open('http://tdesign.tencent.com/starter/docs/get-started');
     };
 
     return {
       isSidebarCompact,
-      goHome,
       toggleSettingPanel,
       active,
       showMenu,

@@ -74,7 +74,6 @@
 import { defineComponent, ref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { useCounter } from '@/utils/hooks';
-import { passwordValidator } from '../helper';
 
 const INITIAL_DATA = {
   phone: '',
@@ -90,7 +89,7 @@ const FORM_RULES = {
     { required: true, message: '邮箱必填', type: 'error' },
     { email: true, message: '请输入正确的邮箱', type: 'warning' },
   ],
-  password: [{ required: true, message: '密码必填', type: 'error' }, { validator: passwordValidator }],
+  password: [{ required: true, message: '密码必填', type: 'error' }],
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
 

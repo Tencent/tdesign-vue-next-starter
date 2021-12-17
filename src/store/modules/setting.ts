@@ -1,18 +1,26 @@
 import STYLE_CONFIG from '@/config/style';
+import { COLOR_TOKEN, ColorSeries } from '@/config/color';
 
 // 定义的state初始值
 const state = {
   ...STYLE_CONFIG,
   showSettingPanel: false,
+  colorList: COLOR_TOKEN,
 };
 
+type IInitStateType = typeof state;
+
+interface IStateType extends IInitStateType {
+  isAsideFooter: boolean;
+  showSettingPanel: boolean;
+}
+
 const mutations = {
-  update(state, payload) {
+  update(state: IStateType, payload: IStateType) {
     state.showBreadcrumb = payload.showBreadcrumb;
     state.mode = payload.mode;
     state.layout = payload.layout;
     state.isSidebarCompact = payload.isSidebarCompact;
-    state.logoPosition = payload.logoPosition;
     state.splitMenu = payload.splitMenu;
     state.isFooterAside = payload.isFooterAside;
     state.isSidebarFixed = payload.isSidebarFixed;
@@ -21,14 +29,18 @@ const mutations = {
     state.backgroundTheme = payload.backgroundTheme;
     state.brandTheme = payload.brandTheme;
   },
-  toggleSidebarCompact(state) {
+  toggleSidebarCompact(state: IStateType) {
     state.isSidebarCompact = !state.isSidebarCompact;
   },
-  showSidebarCompact(state, payload) {
+  showSidebarCompact(state: IStateType, payload: boolean) {
     state.isSidebarCompact = payload;
   },
-  toggleSettingPanel(state, payload) {
+
+  toggleSettingPanel(state: IStateType, payload: boolean) {
     state.showSettingPanel = payload;
+  },
+  addColor(state: IStateType, payload: ColorSeries) {
+    state.colorList = { ...state.colorList, ...payload };
   },
 };
 

@@ -3,7 +3,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { PREFIX } from '@/config/global';
 import pgk from '../../../package.json';
-import SubMenu from './SubMenu';
+import MenuContent from './MenuContent';
 import tLogo from '@/assets/assets-t-logo.svg?component';
 import tLogoFull from '@/assets/assets-logo-full.svg?component';
 
@@ -52,7 +52,7 @@ const useComputed = (props) => {
 export default defineComponent({
   name: 'SideNav',
   components: {
-    SubMenu,
+    MenuContent,
     tLogoFull,
     tLogo,
   },
@@ -165,7 +165,7 @@ export default defineComponent({
             ),
           }}
         >
-          <sub-menu navData={this.menu} />
+          <menu-content navData={this.menu} />
         </t-menu>
         <div class={`${PREFIX}-side-nav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
       </div>
