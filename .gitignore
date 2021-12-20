@@ -18,3 +18,5 @@ yarn-error.log
 *.zip
 .history
 .stylelintcache
+yarn.lock
+package-lock.lock
