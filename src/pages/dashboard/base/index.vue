@@ -365,24 +365,27 @@ export default defineComponent({
 @import '@/style/variables.less';
 
 .card-container.main-color {
-  background: @brand-color !important;
-  color: @text-color-primary !important;
+  background: @brand-color;
+  color: @text-color-primary;
 
+  .card-subtitle {
+    color: @text-color-anti;
+  }
   .card-describe {
-    color: @text-color-anti !important;
+    color: @text-color-anti;
   }
 
   .dashboard-item-top span {
-    color: @text-color-anti !important;
+    color: @text-color-anti;
   }
 
   .dashboard-item-block {
-    color: @text-color-anti !important;
+    color: @text-color-anti;
     opacity: 0.6;
   }
 
   .dashboard-item-bottom {
-    color: @text-color-anti !important;
+    color: @text-color-anti;
   }
 }
 </style>

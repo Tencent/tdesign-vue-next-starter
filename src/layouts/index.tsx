@@ -8,7 +8,7 @@ import TdesignContent from './components/Content.vue';
 
 import { PREFIX } from '@/config/global';
 import TdesignSetting from './setting.vue';
-import { ModeType, SettingType, ClassName } from '@/interface';
+import { SettingType, ClassName } from '@/interface';
 import '@/style/layout.less';
 
 const name = `${PREFIX}-base-layout`;
@@ -59,34 +59,19 @@ export default defineComponent({
     },
     sideMenu() {
       const { layout, splitMenu } = this.$store.state.setting;
-      const { menuRouters } = this;
+      let { menuRouters } = this;
       if (layout === 'mix' && splitMenu) {
-        let index;
-        for (index = 0; index < menuRouters.length; index++) {
-          const item = menuRouters[index];
-          if (item.children && item.children.length > 0) {
-            return item.children.map((menuRouter) => ({ ...menuRouter, path: `${item.path}/${menuRouter.path}` }));
+        menuRouters.forEach((menu) => {
+          if (this.$route.path.indexOf(menu.path) === 0) {
+            menuRouters = menu.children.map((subMenu) => ({ ...subMenu, path: `${menu.path}/${subMenu.path}` }));
           }
-        }
+        });
       }
       return menuRouters;
     },
   },
   methods: {
-    getNavTheme(mode: ModeType, layout: string, type: string): string {
-      if (mode === 'dark') {
-        return 'dark';
-      }
-      if (type.includes(layout)) {
-        return 'dark';
-      }
-      return this.mode;
-    },
     renderSidebar() {
-      // const theme =
-      //   this.setting.mode === 'dark' ? 'dark' : this.setting.layout === 'mix' ? 'light' : this.setting.theme;
-      // menu 组件最多支持 3级菜单
-      const theme = this.getNavTheme(this.setting.mode, this.setting.layout, ['side']);
       return (
         this.showSidebar && (
           <tdesign-side-nav
@@ -94,19 +79,18 @@ export default defineComponent({
             layout={this.setting.layout}
             isFixed={this.setting.isSidebarFixed}
             menu={this.sideMenu}
-            theme={theme}
+            theme={this.mode}
             isCompact={this.setting.isSidebarCompact}
           />
         )
       );
     },
     renderHeader() {
-      const theme = this.getNavTheme(this.setting.mode, this.setting.layout, ['mix', 'top']);
       return (
         this.showHeader && (
           <tdesign-header
             showLogo={this.showHeaderLogo}
-            theme={theme}
+            theme={this.mode}
             layout={this.setting.layout}
             isFixed={this.setting.isHeaderFixed}
             menu={this.headerMenu}
@@ -119,7 +103,7 @@ export default defineComponent({
       const { showBreadcrumb } = this.setting;
       const { showFooter } = this;
       return (
-        <t-layout class={[`${PREFIX}-layout`, 'narrow-scrollbar']}>
+        <t-layout class={[`${PREFIX}-layout`]}>
           <t-content class={`${PREFIX}-content-layout`}>
             {showBreadcrumb && <tdesign-breadcrumb />}
             <TdesignContent />
