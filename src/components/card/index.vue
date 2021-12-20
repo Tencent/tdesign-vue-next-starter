@@ -82,7 +82,7 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import '@/style/variables';
 
 .card {

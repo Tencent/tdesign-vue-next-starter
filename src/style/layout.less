@@ -20,6 +20,23 @@
   }
 }
 
+.t-menu--dark .t-menu__operations .t-icon {
+  color: rgba(255, 255, 255, .55);
+  &:hover {
+    cursor: pointer;
+  }
+}
+.t-default-menu.t-menu--dark {
+  background: var(--td-gray-color-13);
+}
+.t-default-menu:not(.t-menu--dark) .t-menu__item.t-is-active:not(.t-is-opened) {
+  background-color: @brand-color-1;
+  color: @brand-color;
+  .t-icon {
+    color: @brand-color;
+  }
+}
+
 .@{prefix} {
 
   // 布局元素调整
@@ -112,7 +129,7 @@
       padding: 0 24px;
       height: 32px;
       width: 100%;
-      color: @text-color-anti;
+      color: @text-color-primary;
     }
 
     &-logo-normal {
@@ -135,15 +152,6 @@
   }
 }
 
-.t-menu--dark .t-menu__operations .t-icon {
-  color: rgba(255, 255, 255, .55);
-  &:hover {
-    cursor: pointer;
-  }
-}
-.t-default-menu.t-menu--dark {
-  background: var(--td-gray-color-13);
-}
 
 .logo-container {
   cursor: pointer;
@@ -152,14 +160,8 @@
   margin-left: 24px;
 }
 
-
 .version-container {
-  color: @text-color-anti;
+  color: @text-color-primary;
   opacity: 0.4;
 }
-.t-default-menu__inner .t-menu-group-title {
-  color: @text-color-anti;
-  opacity: 0.3;
-};
-
 

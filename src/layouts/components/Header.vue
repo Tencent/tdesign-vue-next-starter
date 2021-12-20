@@ -272,6 +272,7 @@ export default defineComponent({
   width: 166px;
   display: flex;
   margin-left: 24px;
+  color: @text-color-primary;
 
   .t-logo {
     width: 100%;
