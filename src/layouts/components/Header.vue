@@ -18,6 +18,19 @@
           <!-- 搜索框 -->
           <search v-if="layout !== 'side'" :layout="layout" />
 
+          <!-- 全局通知 -->
+          <notice />
+
+          <t-tooltip placement="bottom" content="代码仓库">
+            <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
+              <t-icon name="logo-github" />
+            </t-button>
+          </t-tooltip>
+          <t-tooltip placement="bottom" content="帮助文档">
+            <t-button theme="default" shape="square" variant="text" @click="navToHelper">
+              <t-icon name="help-circle" />
+            </t-button>
+          </t-tooltip>
           <t-dropdown :min-column-width="135" trigger="click">
             <template #dropdown>
               <t-dropdown-menu>
@@ -39,20 +52,6 @@
               </div>
             </t-button>
           </t-dropdown>
-
-          <!-- 全局通知 -->
-          <notice />
-
-          <t-tooltip placement="bottom" content="代码仓库">
-            <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
-              <t-icon name="logo-github" />
-            </t-button>
-          </t-tooltip>
-          <t-tooltip placement="bottom" content="帮助文档">
-            <t-button theme="default" shape="square" variant="text" @click="navToHelper">
-              <t-icon name="help-circle" />
-            </t-button>
-          </t-tooltip>
           <t-tooltip placement="bottom" content="系统设置">
             <t-button theme="default" shape="square" variant="text">
               <t-icon name="setting" @click="toggleSettingPanel" />
@@ -69,7 +68,7 @@ import { defineComponent, PropType, computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
 
-import { PREFIX } from '@/config/global';
+import { prefix } from '@/config/global';
 import tLogoFull from '@/assets/assets-logo-full.svg?component';
 import { MenuRoute } from '@/interface';
 
@@ -136,16 +135,16 @@ export default defineComponent({
 
     const showMenu = computed(() => !(props.layout === 'mix' && props.showLogo));
 
-    const layoutCls = computed(() => [`${PREFIX}-header-layout`]);
+    const layoutCls = computed(() => [`${prefix}-header-layout`]);
 
     const menuCls = computed(() => {
       const { isFixed, layout, isCompact } = props;
       return [
         {
-          [`${PREFIX}-header-menu`]: !isFixed,
-          [`${PREFIX}-header-menu-fixed`]: isFixed,
-          [`${PREFIX}-header-menu-fixed-side`]: layout === 'side' && isFixed,
-          [`${PREFIX}-header-menu-fixed-side-compact`]: layout === 'side' && isFixed && isCompact,
+          [`${prefix}-header-menu`]: !isFixed,
+          [`${prefix}-header-menu-fixed`]: isFixed,
+          [`${prefix}-header-menu-fixed-side`]: layout === 'side' && isFixed,
+          [`${prefix}-header-menu-fixed-side-compact`]: layout === 'side' && isFixed && isCompact,
         },
       ];
     });

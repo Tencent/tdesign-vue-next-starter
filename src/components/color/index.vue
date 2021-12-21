@@ -24,7 +24,7 @@ export default defineComponent({
       const { value } = props;
       const { colorList } = store.state.setting;
       return {
-        backgroundColor: value !== 'dynamic' ? getBrandColor(value, colorList)['@brand-color'] : panelColor,
+        background: value !== 'dynamic' ? getBrandColor(value, colorList)['@brand-color'] : panelColor,
       };
     });
 
@@ -36,8 +36,8 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .color-container {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: inline-block;
 }

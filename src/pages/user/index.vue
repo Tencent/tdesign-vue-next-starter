@@ -1,5 +1,5 @@
 <template>
-  <t-row :gutter="16">
+  <t-row :gutter="[16, 16]">
     <t-col :flex="3">
       <div class="user-left-greeting">
         <div>
@@ -81,8 +81,8 @@
           </t-button>
         </template>
         <t-row class="content" :getters="16">
-          <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :span="4">
-            <img :src="item.logo" class="logo" />
+          <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :span="3">
+            <component :is="getIcon(item)"></component>
           </t-col>
         </t-row>
       </card>
@@ -91,7 +91,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, nextTick, onMounted, onUnmounted } from 'vue';
-
+import { useStore } from 'vuex';
 import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
@@ -100,6 +100,11 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { LAST_7_DAYS } from '@/utils/date';
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
 import { getFolderLineDataSet } from '@/pages/dashboard/base/index';
+import ProductAIcon from '@/assets/assets-product-1.svg';
+import ProductBIcon from '@/assets/assets-product-2.svg';
+import ProductCIcon from '@/assets/assets-product-3.svg';
+import ProductDIcon from '@/assets/assets-product-4.svg';
+
 import Card from '@/components/card/index.vue';
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
@@ -111,6 +116,8 @@ export default defineComponent({
   setup() {
     let lineContainer: HTMLElement;
     let lineChart: echarts.ECharts;
+    const store = useStore();
+    const { chartColors } = store.state.setting;
 
     const onLineChange = (value) => {
       lineChart.setOption(getFolderLineDataSet(value));
@@ -126,12 +133,12 @@ export default defineComponent({
           x2: 10, // 默认80px
           y2: 30, // 默认60px
         },
-        ...getFolderLineDataSet(),
+        ...getFolderLineDataSet({ ...chartColors }),
       });
     };
 
     const updateContainer = () => {
-      lineChart.resize({
+      lineChart?.resize({
         width: lineContainer.clientWidth,
         height: lineContainer.clientHeight,
       });
@@ -148,12 +155,28 @@ export default defineComponent({
       window.removeEventListener('resize', updateContainer);
     });
 
+    const getIcon = (type) => {
+      switch (type) {
+        case 'a':
+          return ProductAIcon;
+        case 'b':
+          return ProductBIcon;
+        case 'c':
+          return ProductCIcon;
+        case 'd':
+          return ProductDIcon;
+        default:
+          return ProductAIcon;
+      }
+    };
+
     return {
       LAST_7_DAYS,
       USER_INFO_LIST,
       TEAM_MEMBERS,
       PRODUCT_LIST,
       onLineChange,
+      getIcon,
     };
   },
 });

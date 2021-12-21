@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
-import { PREFIX } from '@/config/global';
+import { prefix } from '@/config/global';
 
 import { TREE_DATA } from './constants';
 import CommonTable from '../components/CommonTable.vue';
@@ -33,7 +33,7 @@ export default defineComponent({
     const filterByText = ref();
     const filterText = ref();
     return {
-      PREFIX,
+      prefix,
       TREE_DATA,
       expanded: ['0', '0-0', '0-1', '0-2', '0-3', '0-4'],
       filterText,

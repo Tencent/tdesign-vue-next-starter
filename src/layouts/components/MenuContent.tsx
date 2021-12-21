@@ -1,5 +1,5 @@
 import { defineComponent, PropType, computed, h } from 'vue';
-import { PREFIX as prefix } from '@/config/global';
+import { prefix } from '@/config/global';
 import { MenuRoute } from '@/interface';
 
 const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {

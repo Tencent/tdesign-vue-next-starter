@@ -27,7 +27,7 @@ export default [
         path: 'index',
         redirect: '/login',
         component: () => import('@/layouts/blank.vue'),
-        meta: { title: '登陆页' },
+        meta: { title: '登录中心' },
       },
     ],
   },

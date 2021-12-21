@@ -160,5 +160,35 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
-@import url('./index.less');
+@import '@/style/variables.less';
+
+.list-card {
+  height: 100%;
+
+  &-operation {
+    display: flex;
+    justify-content: space-between;
+
+    .search-input {
+      width: 360px;
+    }
+  }
+
+  &-items {
+    margin-top: 14px;
+    margin-bottom: 24px;
+  }
+
+  &-pagination {
+    padding: 16px;
+  }
+
+  &-loading {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 </style>

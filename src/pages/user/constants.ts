@@ -61,14 +61,4 @@ export const TEAM_MEMBERS = [
   },
 ];
 
-export const PRODUCT_LIST = [
-  {
-    logo: 'https://tdesign.gtimg.com/pro-template/tdesign-icon1.png',
-  },
-  {
-    logo: 'https://tdesign.gtimg.com/pro-template/tdesign-icon2.png',
-  },
-  {
-    logo: 'https://tdesign.gtimg.com/pro-template/tdesign-icon3.png',
-  },
-];
+export const PRODUCT_LIST = ['a', 'b', 'c', 'd'];

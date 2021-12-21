@@ -5,21 +5,21 @@
         <card :subtitle="item.title" :style="{ height: '168px' }" :class="{ 'main-color': index == 0 }" size="small">
           <div class="dashboard-item">
             <div class="dashboard-item-top">
-              <span>{{ item.number }}</span>
+              <span :style="{ fontSize: `${resizeTime * 36}px` }">{{ item.number }}</span>
             </div>
             <div class="dashboard-item-left">
               <div v-if="index === 0">
                 <div
                   id="moneyContainer"
                   class="dashboard-chart-container"
-                  style="width: 96px; height: 40px; margin-top: 36px"
+                  :style="{ width: `${resizeTime * 120}px`, height: `${resizeTime * 66}px`, marginTop: '22px' }"
                 />
               </div>
               <div v-else-if="index === 1">
                 <div
                   id="refundContainer"
                   class="dashboard-chart-container"
-                  style="width: 120px; height: 42px; margin-top: 24px"
+                  :style="{ width: `${resizeTime * 120}px`, height: `${resizeTime * 42}px`, marginTop: '24px' }"
                 />
               </div>
 
@@ -67,7 +67,7 @@
             id="monitorContainer"
             ref="monitorContainer"
             class="dashboard-chart-container"
-            style="width: 100%; height: 326px"
+            :style="{ width: '100%', height: `${resizeTime * 326}px` }"
           />
         </card>
       </t-col>
@@ -76,7 +76,7 @@
           <div
             id="countContainer"
             ref="countContainer"
-            style="width: 100%; height: 326px"
+            :style="{ width: `${resizeTime * 326}px`, height: `${resizeTime * 326}px`, margin: '0 auto' }"
             class="dashboard-chart-container"
           />
         </card>
@@ -89,8 +89,8 @@
         <card title="销售订单排名">
           <template #option>
             <t-radio-group default-value="dateVal">
-              <t-radio-button value="dateVal"> 月份 </t-radio-button>
-              <t-radio-button value="monthVal"> 季度 </t-radio-button>
+              <t-radio-button value="dateVal">本周</t-radio-button>
+              <t-radio-button value="monthVal">近三个月</t-radio-button>
             </t-radio-group>
           </template>
           <t-table :data="SALE_TEND_LIST" :columns="SALE_COLUMNS" row-key="productName">
@@ -105,7 +105,7 @@
               </span>
             </template>
             <template #operation="slotProps">
-              <a class="t-button-link" @click="rehandleClickOp(slotProps)">操作</a>
+              <a class="t-button-link" @click="rehandleClickOp(slotProps)">详情</a>
             </template>
           </t-table>
         </card>
@@ -114,8 +114,8 @@
         <card title="采购订单排名">
           <template #option>
             <t-radio-group default-value="dateVal">
-              <t-radio-button value="dateVal"> 月份 </t-radio-button>
-              <t-radio-button value="monthVal"> 季度 </t-radio-button>
+              <t-radio-button value="dateVal">本周</t-radio-button>
+              <t-radio-button value="monthVal">近三个月</t-radio-button>
             </t-radio-group>
           </template>
           <t-table :data="BUY_TEND_LIST" :columns="BUY_COLUMNS" row-key="productName">
@@ -128,7 +128,7 @@
               <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
             </template>
             <template #operation="slotProps">
-              <a class="t-button-link" @click="rehandleClickOp(slotProps)">操作</a>
+              <a class="t-button-link" @click="rehandleClickOp(slotProps)">详情</a>
             </template>
           </t-table>
         </card>
@@ -246,6 +246,10 @@ export default defineComponent({
     Trend,
   },
   setup() {
+    const store = useStore();
+    const resizeTime = ref(1);
+
+    const { chartColors } = store.state.setting;
     // refundCharts
     let refundContainer: HTMLElement;
     let refundChart: echarts.ECharts;
@@ -270,7 +274,7 @@ export default defineComponent({
     onMounted(() => {
       stokeContainer = document.getElementById('stokeContainer');
       stokeChart = echarts.init(stokeContainer);
-      stokeChart.setOption(constructInitDataset(LAST_7_DAYS));
+      stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors }));
     });
 
     // monitorChart
@@ -279,7 +283,7 @@ export default defineComponent({
     onMounted(() => {
       monitorContainer = document.getElementById('monitorContainer');
       monitorChart = echarts.init(monitorContainer);
-      monitorChart.setOption(getLineChartDataSet());
+      monitorChart.setOption(getLineChartDataSet({ ...chartColors }));
     });
 
     // monitorChart
@@ -288,18 +292,25 @@ export default defineComponent({
     onMounted(() => {
       countContainer = document.getElementById('countContainer');
       countChart = echarts.init(countContainer);
-      countChart.setOption(getPieChartDataSet());
+      countChart.setOption(getPieChartDataSet(chartColors));
     });
 
     // chartSize update
     const updateContainer = () => {
+      if (document.documentElement.clientWidth >= 1400 && document.documentElement.clientWidth < 1920) {
+        resizeTime.value = Number((document.documentElement.clientWidth / 2080).toFixed(2));
+      } else if (document.documentElement.clientWidth < 1080) {
+        resizeTime.value = Number((document.documentElement.clientWidth / 1080).toFixed(2));
+      } else {
+        resizeTime.value = 1;
+      }
       refundChart.resize({
-        width: refundContainer.clientWidth,
-        height: refundContainer.clientHeight,
+        width: resizeTime.value * 120,
+        height: resizeTime.value * 66,
       });
       moneyChart.resize({
-        width: moneyContainer.clientWidth,
-        height: moneyContainer.clientHeight,
+        width: resizeTime.value * 120,
+        height: resizeTime.value * 66,
       });
       stokeChart.resize({
         width: stokeContainer.clientWidth,
@@ -307,11 +318,11 @@ export default defineComponent({
       });
       monitorChart.resize({
         width: monitorContainer.clientWidth,
-        height: monitorContainer.clientHeight,
+        height: resizeTime.value * 326,
       });
       countChart.resize({
-        width: countContainer.clientWidth,
-        height: countContainer.clientHeight,
+        width: resizeTime.value * 326,
+        height: resizeTime.value * 326,
       });
     };
 
@@ -325,7 +336,6 @@ export default defineComponent({
 
     const currentMonth = ref(getThisMonth());
 
-    const store = useStore();
     watch(
       () => store.state.setting.brandTheme,
       () => {
@@ -334,6 +344,7 @@ export default defineComponent({
     );
 
     return {
+      resizeTime,
       currentMonth,
       LAST_7_DAYS,
       PANE_LIST,
@@ -343,10 +354,10 @@ export default defineComponent({
       BUY_COLUMNS,
       onCurrencyChange(checkedValues: string[]) {
         currentMonth.value = getThisMonth(checkedValues);
-        monitorChart.setOption(getLineChartDataSet(checkedValues));
+        monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors }));
       },
       onStokeDataChange(checkedValues: string[]) {
-        stokeChart.setOption(constructInitDataset(checkedValues));
+        stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors }));
       },
       rehandleClickOp(val: MouseEvent) {
         console.log(val);

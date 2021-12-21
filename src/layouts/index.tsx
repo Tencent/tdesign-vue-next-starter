@@ -6,12 +6,12 @@ import TdesignFooter from './components/Footer.vue';
 import TdesignSideNav from './components/SideNav';
 import TdesignContent from './components/Content.vue';
 
-import { PREFIX } from '@/config/global';
+import { prefix } from '@/config/global';
 import TdesignSetting from './setting.vue';
 import { SettingType, ClassName } from '@/interface';
 import '@/style/layout.less';
 
-const name = `${PREFIX}-base-layout`;
+const name = `${prefix}-base-layout`;
 
 export default defineComponent({
   name,
@@ -103,8 +103,8 @@ export default defineComponent({
       const { showBreadcrumb } = this.setting;
       const { showFooter } = this;
       return (
-        <t-layout class={[`${PREFIX}-layout`]}>
-          <t-content class={`${PREFIX}-content-layout`}>
+        <t-layout class={[`${prefix}-layout`]}>
+          <t-content class={`${prefix}-content-layout`}>
             {showBreadcrumb && <tdesign-breadcrumb />}
             <TdesignContent />
           </t-content>
@@ -115,7 +115,7 @@ export default defineComponent({
 
     renderFooter() {
       return (
-        <t-footer class={`${PREFIX}-footer-layout`}>
+        <t-footer class={`${prefix}-footer-layout`}>
           <tdesign-footer />
         </t-footer>
       );
@@ -129,7 +129,7 @@ export default defineComponent({
     const content = this.renderContent();
 
     return (
-      <div class={`${PREFIX}-wrapper`}>
+      <div class={`${prefix}-wrapper`}>
         {layout === 'side' ? (
           <t-layout class={this.mainLayoutCls} key="side">
             <t-aside>{sidebar}</t-aside>

@@ -102,7 +102,7 @@ export default defineComponent({
       const changeMsg = msgData;
       changeMsg.forEach((e: NotificationItem) => {
         if (e.id === item.id) {
-          e.status = !e.status;
+          if (e.status) e.status = false;
         }
       });
       store.commit('notification/setMsgData', changeMsg);

@@ -84,36 +84,45 @@ export default defineComponent({
     ProductCard,
   },
   setup() {
+    const store = useStore();
+    const { chartColors } = store.state.setting;
     // lineChart logic
     let lineContainer: HTMLElement;
     let lineChart: echarts.ECharts;
-    onMounted(() => {
+    const renderLineChart = () => {
       lineContainer = document.getElementById('lineContainer');
       lineChart = echarts.init(lineContainer);
-      lineChart.setOption(getFolderLineDataSet());
-    });
+      lineChart.setOption(getFolderLineDataSet({ ...chartColors }));
+    };
 
     // scatterChart logic
     let scatterContainer: HTMLElement;
     let scatterChart: echarts.ECharts;
-    onMounted(() => {
+    const renderScatterChart = () => {
       scatterContainer = document.getElementById('scatterContainer');
       scatterChart = echarts.init(scatterContainer);
-      scatterChart.setOption(getScatterDataSet());
-    });
+      scatterChart.setOption(getScatterDataSet({ ...chartColors }));
+    };
 
     // chartSize update
     const updateContainer = () => {
-      lineChart.resize({
+      lineChart?.resize({
         width: lineContainer.clientWidth,
         height: lineContainer.clientHeight,
       });
-      scatterChart.resize({
+      scatterChart?.resize({
         width: scatterContainer.clientWidth,
         height: scatterContainer.clientHeight,
       });
     };
+
+    const renderCharts = () => {
+      renderScatterChart();
+      renderLineChart();
+    };
+
     onMounted(() => {
+      renderCharts();
       window.addEventListener('resize', updateContainer, false);
     });
 
@@ -121,7 +130,13 @@ export default defineComponent({
       window.removeEventListener('resize', updateContainer);
     });
 
-    const store = useStore();
+    watch(
+      () => store.state.setting.mode,
+      () => {
+        renderCharts();
+      },
+    );
+
     watch(
       () => store.state.setting.brandTheme,
       () => {
@@ -137,7 +152,8 @@ export default defineComponent({
         scatterChart.setOption(getScatterDataSet());
       },
       onMaterialChange(value: string[]) {
-        lineChart.setOption(getFolderLineDataSet(value));
+        const { chartColors } = store.state.setting;
+        lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors }));
       },
     };
   },

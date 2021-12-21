@@ -159,18 +159,19 @@ export default defineComponent({
       color: @brand-color;
 
       &__disabled {
-        color: @text-color-disabled;
+        color: @brand-color-3;
       }
     }
 
     &--name {
       margin: 24px 0 8px 0;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 400;
+      color: @text-color-primary;
     }
 
     &--desc {
-      font-size: 14px;
+      font-size: 12px;
       line-height: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -194,24 +195,23 @@ export default defineComponent({
         }
       }
 
-      &__disabled {
-        > div:first-child {
-          > button:first-child {
-            background-color: @gray-color-6;
-            color: @text-color-anti;
-          }
-
-          > button:last-child {
-            background-color: @gray-color-2;
-            color: @text-color-disabled;
-          }
-        }
+      .t-icon-more {
+        font-size: 24px;
+        color: @text-color-primary;
       }
     }
   }
 
   &__disabled {
     color: @text-color-disabled;
+
+    .list-card-item_detail--name {
+      color: @text-color-disabled;
+    }
+
+    .t-icon-more {
+      color: @text-color-disabled;
+    }
   }
 }
 </style>
