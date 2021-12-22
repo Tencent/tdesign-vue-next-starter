@@ -120,23 +120,39 @@ export default defineComponent({
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
+    let renderLayout;
+    if (layout === 'side') {
+      renderLayout = (
+        <t-layout key="side">
+          <t-aside>{sidebar}</t-aside>
+          <t-layout>
+            <t-header>{header}</t-header>
+            <t-content>{content}</t-content>
+          </t-layout>
+        </t-layout>
+      );
+    } else if (layout === 'top') {
+      renderLayout = (
+        <t-layout key="top">
+          <t-header> {header}</t-header>
+          <t-content>{content}</t-content>
+        </t-layout>
+      );
+    } else {
+      renderLayout = (
+        <t-layout key="mix">
+          <t-header>{header}</t-header>
+          <t-layout>
+            <t-aside>{sidebar}</t-aside>
+            <t-content>{content}</t-content>
+          </t-layout>
+        </t-layout>
+      );
+    }
 
     return (
       <div>
-        {layout === 'side' ? (
-          <t-layout key="side">
-            <t-aside>{sidebar}</t-aside>
-            <t-layout>
-              <t-header>{header}</t-header>
-              <t-content>{content}</t-content>
-            </t-layout>
-          </t-layout>
-        ) : (
-          <t-layout key="no-side">
-            <t-header> {header}</t-header>
-            <t-content>{content}</t-content>
-          </t-layout>
-        )}
+        {renderLayout}
         <tdesign-setting />
       </div>
     );

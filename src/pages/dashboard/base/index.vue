@@ -203,7 +203,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, watch, ref, onUnmounted } from 'vue';
+import { defineComponent, onMounted, watch, ref, onUnmounted, nextTick } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -349,7 +349,9 @@ export default defineComponent({
 
     onMounted(() => {
       renderCharts();
-      updateContainer();
+      nextTick(() => {
+        updateContainer();
+      });
       window.addEventListener('resize', updateContainer, false);
     });
 
