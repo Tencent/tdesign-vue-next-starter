@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import * as echarts from 'echarts/core';
 import { Color } from 'tvision-color';
-import { getBrandColor, generateColorMap } from '@/config/color';
+import { getBrandColor, defaultLightColor, defaultDarkColor } from '@/config/color';
 import store from '@/store';
 
 const { state } = store;
@@ -16,31 +16,25 @@ const { state } = store;
 export function getColorFromTheme(theme: string) {
   const { setting } = state as any;
   const { colorList, mode } = setting;
-  let themeColor = getBrandColor(theme, colorList);
+  const isDarkMode = mode === 'dark';
+  let themeColorList = [];
+  const themeColor = getBrandColor(theme, colorList);
 
-  if (theme === 'dynamic' || (!/^#[A-F\d]{6}$/i.test(theme) && mode === 'dark')) {
-    theme = themeColor?.['@brand-color-1'] || '#0052D9';
+  if (!/^#[A-F\d]{6}$/i.test(theme)) {
+    theme = themeColor?.['@brand-color'] || '#0052D9';
+    const themIdx = defaultLightColor.indexOf(theme.toLocaleLowerCase());
+    const defaultGradients = !isDarkMode ? defaultLightColor : defaultDarkColor;
 
-    const newPalette = Color.getPaletteByGradation({
-      colors: [theme],
-      step: 10,
-    })[0];
-
-    themeColor = generateColorMap(theme, newPalette, mode);
+    const spliceThemeList = defaultGradients.slice(0, themIdx);
+    themeColorList = defaultGradients.slice(themIdx, defaultGradients.length).concat(spliceThemeList);
+  } else {
+    theme = themeColor?.['@brand-color'];
+    themeColorList = Color.getRandomPalette({
+      color: theme,
+      colorGamut: 'bright',
+      number: 8,
+    });
   }
-  // theme = themeColor?.['@brand-color'];
-  const themeColorList: Array<string> = [];
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in themeColor) {
-    if (Object.prototype.hasOwnProperty.call(themeColor, key)) {
-      const elementColor: string = themeColor[key];
-
-      themeColorList.push(elementColor);
-    }
-  }
-  // console.log(themeColorList, 'themeColorList');
-  // console.log(theme, 'theme');
 
   return themeColorList;
 }
