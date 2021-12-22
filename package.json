@@ -14,6 +14,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@tencent/ivring-peng-vue-next": "^0.6.0-alpha.2",
     "dayjs": "^1.10.6",
     "echarts": "~5.1.2",
     "hex-to-hsl": "^1.0.2",
@@ -57,7 +58,7 @@
     "stylelint-less": "^1.0.1",
     "stylelint-order": "^4.1.0",
     "typescript": "^4.4.3",
-    "vite": "^2.7.1",
+    "vite": "^2.6.4",
     "vite-plugin-mock": "^2.9.6",
     "vite-svg-loader": "^3.1.0",
     "vue-clipboard3": "^1.0.1",

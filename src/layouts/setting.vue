@@ -3,7 +3,6 @@
     v-model:visible="showSettingPanel"
     size="408px"
     :footer="false"
-    value="medium"
     header="页面配置"
     :close-btn="true"
     class="setting-drawer-container"
@@ -331,7 +330,7 @@ export default defineComponent({
   .setting-container {
     padding-bottom: 100px;
   }
-  .t-radio-group.t-radio-group-medium {
+  .t-radio-group.t-size-m {
     min-height: 32px;
     width: 100%;
     height: auto;

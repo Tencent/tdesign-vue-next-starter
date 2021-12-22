@@ -1,11 +1,14 @@
 import { createApp } from 'vue';
-import TDesign from 'tdesign-vue-next';
+
+import TDesign from '@tencent/ivring-peng-vue-next';
+import 'tdesign-vue-next/es/style/index.css';
 import VueClipboard from 'vue3-clipboard';
-import App from './App.vue';
 import { store } from './store';
 import router from './router';
 import '@/style/index.less';
 import './permission';
+
+import App from './App.vue';
 
 const app = createApp(App);
 

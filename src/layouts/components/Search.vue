@@ -84,8 +84,8 @@ export default defineComponent({
   .t-input__inner {
     border: none;
     outline: none;
-    box-shadow: none;
-    transform: background @anim-duration-base linear;
+    box-shadow: none !important;
+    transition: background @anim-duration-base linear;
     &:hover {
       background: @bg-color-secondarycontainer;
     }

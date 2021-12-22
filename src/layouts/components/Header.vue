@@ -201,23 +201,23 @@ export default defineComponent({
     height: 64px;
   }
 
-  &-menu-fixed {
-    position: fixed;
-    top: 0;
-    z-index: 10;
+  // &-menu-fixed {
+  //   position: fixed;
+  //   top: 0;
+  //   z-index: 10;
 
-    &-side {
-      left: 232px;
-      right: 0;
-      z-index: 10;
-      width: auto;
-      transition: all 0.3s;
+  //   &-side {
+  //     left: 232px;
+  //     right: 0;
+  //     z-index: 10;
+  //     width: auto;
+  //     transition: all 0.3s;
 
-      &-compact {
-        left: 64px;
-      }
-    }
-  }
+  //     &-compact {
+  //       left: 64px;
+  //     }
+  //   }
+  // }
 
   &-logo-container {
     cursor: pointer;
@@ -236,7 +236,7 @@ export default defineComponent({
   align-items: center;
   margin-right: 12px;
 
-  .t-popup-reference {
+  .t-popup__reference {
     display: flex;
     align-items: center;
     justify-content: center;

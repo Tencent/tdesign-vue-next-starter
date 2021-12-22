@@ -8,7 +8,7 @@ import TdesignContent from './components/Content.vue';
 
 import { prefix } from '@/config/global';
 import TdesignSetting from './setting.vue';
-import { SettingType, ClassName } from '@/interface';
+import { SettingType } from '@/interface';
 import '@/style/layout.less';
 
 const name = `${prefix}-base-layout`;
@@ -35,13 +35,6 @@ export default defineComponent({
     }),
     setting(): SettingType {
       return this.$store.state.setting;
-    },
-    mainLayoutCls(): ClassName {
-      return [
-        {
-          't-layout-has-sider': this.showSidebar,
-        },
-      ];
     },
     headerMenu() {
       const { layout, splitMenu } = this.$store.state.setting;
@@ -129,19 +122,24 @@ export default defineComponent({
     const content = this.renderContent();
 
     return (
-      <div class={`${prefix}-wrapper`}>
+      <div>
         {layout === 'side' ? (
-          <t-layout class={this.mainLayoutCls} key="side">
+          <t-layout key="side">
             <t-aside>{sidebar}</t-aside>
-            <t-layout>{[header, content]}</t-layout>
+            <t-layout>
+              <t-header>
+                {header}
+                <tdesign-setting />
+              </t-header>
+              <t-content>{content}</t-content>
+            </t-layout>
           </t-layout>
         ) : (
           <t-layout key="no-side">
             {header}
-            <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
+            <t-layout>{[sidebar, content]}</t-layout>
           </t-layout>
         )}
-        <tdesign-setting />
       </div>
     );
   },
