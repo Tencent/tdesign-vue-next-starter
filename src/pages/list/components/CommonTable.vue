@@ -48,7 +48,7 @@
           </t-row>
         </t-col>
 
-        <t-col :span="4" class="operation-container">
+        <t-col :span="2" class="operation-container">
           <t-button theme="primary" type="submit" :style="{ marginLeft: '8px' }"> 查询 </t-button>
           <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
         </t-col>
