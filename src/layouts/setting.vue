@@ -1,29 +1,58 @@
 <template>
   <t-drawer
     v-model:visible="showSettingPanel"
-    size="458px"
+    size="408px"
     :footer="false"
     value="medium"
     header="页面配置"
     :close-btn="true"
     class="setting-drawer-container"
+    @close-btn-click="handleCloseDrawer"
   >
     <div class="setting-container">
       <t-form ref="form" :data="formData" label-align="left">
         <div class="setting-group-title">主题模式</div>
-        <t-radio-group v-model="formData.mode" default-vaule="dark">
+        <t-radio-group v-model="formData.mode">
           <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
-            <t-radio-button :key="index" :value="item">
-              <thumbnail :src="getThumbnailUrl(item)" />
-            </t-radio-button>
+            <div>
+              <t-radio-button :key="index" :value="item.type"
+                ><component :is="getModeIcon(item.type)"
+              /></t-radio-button>
+              <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
+            </div>
           </div>
         </t-radio-group>
         <div class="setting-group-title">主题色</div>
         <t-radio-group v-model="formData.brandTheme" default-vaule="default">
-          <div v-for="(item, index) in COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
+          <div
+            v-for="(item, index) in COLOR_OPTIONS.slice(0, COLOR_OPTIONS.length - 1)"
+            :key="index"
+            class="setting-layout-drawer"
+          >
             <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
               <color-container :value="item" />
             </t-radio-button>
+          </div>
+          <div class="setting-layout-drawer">
+            <t-popup
+              destroy-on-close
+              expand-animation
+              placement="bottom-right"
+              trigger="click"
+              :visible="isColoPickerDisplay"
+              :overlay-style="{ padding: 0 }"
+              @visible-change="onPopupVisibleChange"
+            >
+              <template #content>
+                <color-picker :theme="mode" @changeColor="changeColor" />
+              </template>
+              <t-radio-button
+                :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
+                class="setting-layout-color-group dynamic-color-btn"
+              >
+                <color-container :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
+              </t-radio-button>
+            </t-popup>
           </div>
         </t-radio-group>
 
@@ -69,24 +98,39 @@
   </t-drawer>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, watch, onMounted } from 'vue';
 import { useStore } from 'vuex';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { ColorPicker } from 'vue-color-kit';
+import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { Color } from 'tvision-color';
+import 'vue-color-kit/dist/vue-color-kit.css';
+
 import STYLE_CONFIG from '@/config/style';
+import { insertThemeStylesheet, generateColorMap } from '@/config/color';
 
 import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
 
+import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
+import SettingLightIcon from '@/assets/assets-setting-light.svg';
+import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
+
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
-const COLOR_OPTIONS = ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink'];
-const MODE_OPTIONS = ['light', 'dark', 'auto'];
+const COLOR_OPTIONS = ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'dynamic'];
+const MODE_OPTIONS = [
+  { type: 'light', text: '明亮' },
+  { type: 'dark', text: '暗黑' },
+  { type: 'auto', text: '跟随系统' },
+];
 
 export default defineComponent({
   name: 'DefaultLayoutSetting',
-  components: { Thumbnail, ColorContainer },
+  components: { Thumbnail, ColorContainer, ColorPicker },
   setup() {
     const formData = ref({ ...STYLE_CONFIG });
     const store = useStore();
+    const colors = ref();
+    const isColoPickerDisplay = ref(false);
 
     const showSettingPanel = computed({
       get() {
@@ -97,17 +141,92 @@ export default defineComponent({
       },
     });
 
+    const mode = computed(() => {
+      return store.getters['setting/mode'];
+    });
+
+    watch(
+      () => colors.value,
+      (newColor) => {
+        const { hex } = newColor;
+        const { setting } = store.state;
+
+        // hex 主题色
+        const newPalette = Color.getPaletteByGradation({
+          colors: [hex],
+          step: 10,
+        })[0];
+        const { mode } = store.state.setting;
+        const colorMap = generateColorMap(hex, newPalette, mode);
+
+        store.commit('setting/addColor', { [hex]: colorMap });
+
+        insertThemeStylesheet(hex, colorMap, mode);
+
+        store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
+      },
+    );
+    const changeColor = (val) => {
+      const { hex } = val;
+      const { setting } = store.state;
+
+      // hex 主题色
+      const newPalette = Color.getPaletteByGradation({
+        colors: [hex],
+        step: 10,
+      })[0];
+      const { mode } = store.state.setting;
+      const colorMap = generateColorMap(hex, newPalette, mode);
+
+      store.commit('setting/addColor', { [hex]: colorMap });
+
+      insertThemeStylesheet(hex, colorMap, mode);
+
+      store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
+    };
+
+    onMounted(() => {
+      document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+        isColoPickerDisplay.value = true;
+      });
+    });
+
+    const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeContext) => {
+      if (!visible && context.trigger === 'document') {
+        isColoPickerDisplay.value = visible;
+      }
+    };
+
     const handleCopy = () => {
       MessagePlugin.closeAll();
       MessagePlugin.success('复制成功');
     };
+    const getModeIcon = (mode: string) => {
+      if (mode === 'light') {
+        return SettingLightIcon;
+      }
+      if (mode === 'dark') {
+        return SettingDarkIcon;
+      }
+      return SettingAutoIcon;
+    };
+
+    const handleCloseDrawer = () => {
+      store.commit('setting/toggleSettingPanel', false);
+    };
     return {
+      mode,
+      changeColor,
+      isColoPickerDisplay,
+      onPopupVisibleChange,
       MODE_OPTIONS,
       LAYOUT_OPTION,
       COLOR_OPTIONS,
       formData,
       showSettingPanel,
       handleCopy,
+      getModeIcon,
+      handleCloseDrawer,
       getThumbnailUrl(name: string): string {
         return `https://tdesign.gtimg.com/tdesign-pro/setting/${name}.png`;
       },
@@ -125,7 +244,9 @@ export default defineComponent({
 </script>
 <style lang="less">
 @import '@/style/variables';
-
+.hu-color-picker {
+  width: 220px !important;
+}
 .tdesign-setting {
   z-index: 100;
   position: fixed;
@@ -157,14 +278,15 @@ export default defineComponent({
 
 .setting-layout-color-group {
   display: inline-flex;
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   justify-content: center;
   align-items: center;
   border-radius: 50% !important;
+  padding: 6px !important;
   border: 2px solid transparent !important;
 
-  .t-radio-button__label {
+  > .t-radio-button__label {
     display: inline-flex;
   }
 }
@@ -226,7 +348,7 @@ export default defineComponent({
     .t-radio-button {
       display: inline-flex;
       max-height: 78px;
-      padding: 6px !important;
+      padding: 8px;
       border-radius: @border-radius;
       border: 2px solid #e3e6eb;
       > .t-radio-button__label {

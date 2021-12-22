@@ -1,3 +1,5 @@
+import hexToHsl from 'hex-to-hsl';
+/* eslint-disable indent */
 export type ColorToken = Record<string, string>;
 export type ColorSeries = Record<string, ColorToken>;
 
@@ -162,6 +164,18 @@ export const COLOR_TOKEN: ColorSeries = {
   },
 };
 
+export const LIGHT_CHART_COLORS: ColorToken = {
+  textColor: 'rgba(0, 0, 0, 0.9)',
+  placeholderColor: 'rgba(0, 0, 0, 0.35)',
+  borderColor: '#dcdcdc',
+};
+
+export const DARK_CHART_COLORS: ColorToken = {
+  textColor: 'rgba(255, 255, 255, 0.9)',
+  placeholderColor: 'rgba(255, 255, 255, 0.35)',
+  borderColor: '#5e5e5e',
+};
+
 function toUnderline(name: string): string {
   return name.replace(/([A-Z])/g, '_$1').toUpperCase();
 }
@@ -182,12 +196,56 @@ export function getColorList(colorArray: Array<ColorToken>): Array<string> {
 
   return pureColorList;
 }
+// inspired by https://stackoverflow.com/questions/36721830/convert-hsl-to-rgb-and-hex
+export function hslToHex(h: number, s: number, l: number) {
+  l /= 100;
+  const a = (s * Math.min(l, 1 - l)) / 100;
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
 
-export function insertThemeStylesheet(theme: string, colorMap: ColorToken) {
+export function generateColorMap(theme: string, colorPalette: Array<string>, mode: 'light' | 'dark') {
+  const isDarkMode = mode === 'dark';
+  let brandColorIdx = colorPalette.indexOf(theme);
+
+  if (isDarkMode) {
+    // eslint-disable-next-line no-use-before-define
+    colorPalette.reverse().map((color) => {
+      const [h, s, l] = hexToHsl(color);
+      return hslToHex(h, s - 4, l);
+    });
+    brandColorIdx = 5;
+    colorPalette[0] = `${colorPalette[brandColorIdx]}20`;
+  }
+
+  const colorMap = {
+    '@brand-color': colorPalette[brandColorIdx], // 主题色
+    '@brand-color-1': colorPalette[0], // light
+    '@brand-color-2': colorPalette[1], // focus
+    '@brand-color-3': colorPalette[2], // disabled
+    '@brand-color-4': colorPalette[3],
+    '@brand-color-5': colorPalette[4],
+    '@brand-color-6': colorPalette[5],
+    '@brand-color-7': brandColorIdx > 0 ? colorPalette[brandColorIdx - 1] : theme, // hover
+    '@brand-color-8': colorPalette[brandColorIdx], // 主题色
+    '@brand-color-9': brandColorIdx > 8 ? theme : colorPalette[brandColorIdx + 1], // click
+    '@brand-color-10': colorPalette[9],
+  };
+  return colorMap;
+}
+export function insertThemeStylesheet(theme: string, colorMap: ColorToken, mode: 'light' | 'dark') {
+  const isDarkMode = mode === 'dark';
+  const root = !isDarkMode ? `:root[theme-color='${theme}']` : `:root[theme-color='${theme}'][theme-mode='dark']`;
+
   const styleSheet = document.createElement('style');
   styleSheet.type = 'text/css';
-  styleSheet.innerText = `:root[theme-color='${theme}'],
-  :root[theme-color='${theme}'][theme-mode='dark']{
+  styleSheet.innerText = `${root}{
     --td-brand-color: ${colorMap['@brand-color']};
     --td-brand-color-1: ${colorMap['@brand-color-1']};
     --td-brand-color-2: ${colorMap['@brand-color-2']};

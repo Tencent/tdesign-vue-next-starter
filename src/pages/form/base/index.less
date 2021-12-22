@@ -5,7 +5,16 @@
   align-items: center;
   justify-content: center;
   background-color: @bg-color-container;
-  padding-bottom: 134px;
+  padding: 0 32px 134px;
+
+
+  @media (max-width: @screen-sm-max) {
+    padding: 0 32px 67px;
+
+    .form-basic-container-title {
+      margin: 32px 0 32px;
+    }
+  }
 
   .form-basic-item {
     width: 676px;

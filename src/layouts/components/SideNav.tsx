@@ -1,7 +1,7 @@
 import { defineComponent, PropType, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { PREFIX } from '@/config/global';
+import { prefix } from '@/config/global';
 import pgk from '../../../package.json';
 import MenuContent from './MenuContent';
 import tLogo from '@/assets/assets-t-logo.svg?component';
@@ -17,9 +17,9 @@ const useComputed = (props) => {
   const sideNavCls = computed(() => {
     const { isCompact } = props;
     return [
-      `${PREFIX}-sidebar-layout`,
+      `${prefix}-sidebar-layout`,
       {
-        [`${PREFIX}-sidebar-compact`]: isCompact,
+        [`${prefix}-sidebar-compact`]: isCompact,
       },
     ];
   });
@@ -27,18 +27,18 @@ const useComputed = (props) => {
   const menuCls = computed(() => {
     const { showLogo, isFixed, layout } = props;
     return [
-      `${PREFIX}-side-nav`,
+      `${prefix}-side-nav`,
       {
-        [`${PREFIX}-side-nav-no-logo`]: !showLogo,
-        [`${PREFIX}-side-nav-no-fixed`]: !isFixed,
-        [`${PREFIX}-side-nav-mix-fixed`]: layout === 'mix' && isFixed,
+        [`${prefix}-side-nav-no-logo`]: !showLogo,
+        [`${prefix}-side-nav-no-fixed`]: !isFixed,
+        [`${prefix}-side-nav-mix-fixed`]: layout === 'mix' && isFixed,
       },
     ];
   });
 
   const layoutCls = computed(() => {
     const { layout } = props;
-    return [`${PREFIX}-side-nav-${layout}`, `${PREFIX}-sidebar-layout`];
+    return [`${prefix}-side-nav-${layout}`, `${prefix}-sidebar-layout`];
   });
 
   return {
@@ -129,7 +129,7 @@ export default defineComponent({
     };
 
     return {
-      PREFIX,
+      prefix,
       ...useComputed(props),
       autoCollapsed,
       changeCollapsed,
@@ -150,11 +150,11 @@ export default defineComponent({
           v-slots={{
             logo: () =>
               this.showLogo && (
-                <span class={`${PREFIX}-side-nav-logo-wrapper`} onClick={this.goHome}>
+                <span class={`${prefix}-side-nav-logo-wrapper`} onClick={this.goHome}>
                   {this.collapsed ? (
-                    <tLogo class={`${PREFIX}-side-nav-logo-t-logo`} />
+                    <tLogo class={`${prefix}-side-nav-logo-t-logo`} />
                   ) : (
-                    <t-logo-full class={`${PREFIX}-side-nav-logo-tdesign-logo`} />
+                    <t-logo-full class={`${prefix}-side-nav-logo-tdesign-logo`} />
                   )}
                 </span>
               ),
@@ -167,7 +167,7 @@ export default defineComponent({
         >
           <menu-content navData={this.menu} />
         </t-menu>
-        <div class={`${PREFIX}-side-nav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
+        <div class={`${prefix}-side-nav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
       </div>
     );
   },

@@ -73,7 +73,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { useCounter } from '@/utils/hooks';
+import { useCounter } from '@/hooks';
 
 const INITIAL_DATA = {
   phone: '',

@@ -39,8 +39,8 @@
           </span>
         </template>
         <template #op="slotProps">
-          <a :class="PREFIX + '-link'" @click="listClick()">管理</a>
-          <a :class="PREFIX + '-link'" @click="deleteClickOp(slotProps)">删除</a>
+          <a :class="prefix + '-link'" @click="listClick()">管理</a>
+          <a :class="prefix + '-link'" @click="deleteClickOp(slotProps)">删除</a>
         </template>
         <template #op-column>
           <t-icon name="descending-order" />
@@ -80,7 +80,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { changeChartsTheme, getSmoothLineDataSet, get2ColBarChartDataSet } from '../../dashboard/base/index';
 import { BASE_INFO_DATA, TABLE_COLUMNS } from './constants';
 
-import { PREFIX } from '@/config/global';
+import { prefix } from '@/config/global';
 import Card from '@/components/card/index.vue';
 import { ResDataType } from '@/interface';
 import request from '@/utils/request';
@@ -100,6 +100,9 @@ export default defineComponent({
   name: 'DetailDeploy',
   components: { Card },
   setup() {
+    const store = useStore();
+
+    const { chartColors } = store.state.setting;
     const data = ref([]);
     const pagination = ref({
       defaultPageSize: 10,
@@ -130,9 +133,9 @@ export default defineComponent({
     onMounted(() => {
       monitorContainer = document.getElementById('monitorContainer');
       monitorChart = echarts.init(monitorContainer);
-      monitorChart.setOption(getSmoothLineDataSet());
+      monitorChart.setOption(getSmoothLineDataSet({ ...chartColors }));
       setInterval(() => {
-        monitorChart.setOption(getSmoothLineDataSet());
+        monitorChart.setOption(getSmoothLineDataSet({ ...chartColors }));
       }, 3000);
     });
 
@@ -142,7 +145,7 @@ export default defineComponent({
     onMounted(() => {
       dataContainer = document.getElementById('dataContainer');
       dataChart = echarts.init(dataContainer);
-      dataChart.setOption(get2ColBarChartDataSet());
+      dataChart.setOption(get2ColBarChartDataSet({ ...chartColors }));
     });
 
     const intervalTimer = null;
@@ -165,14 +168,14 @@ export default defineComponent({
     });
 
     const onAlertChange = () => {
-      dataChart.setOption(get2ColBarChartDataSet());
+      dataChart.setOption(get2ColBarChartDataSet({ ...chartColors }));
     };
 
     onMounted(() => {
       fetchData();
       window.addEventListener('resize', updateContainer, false);
     });
-    const store = useStore();
+
     watch(
       () => store.state.setting.brandTheme,
       () => {
@@ -180,7 +183,7 @@ export default defineComponent({
       },
     );
     return {
-      PREFIX,
+      prefix,
       BASE_INFO_DATA,
       columns: TABLE_COLUMNS,
       data,

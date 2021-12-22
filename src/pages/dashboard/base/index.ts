@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import * as echarts from 'echarts/core';
-import { getBrandColor } from '@/config/color';
+import { Color } from 'tvision-color';
+import { getBrandColor, generateColorMap } from '@/config/color';
 import store from '@/store';
-import { CommonObjType } from '@/interface';
 
 const { state } = store;
 
@@ -15,27 +15,42 @@ const { state } = store;
  */
 export function getColorFromTheme(theme: string) {
   const { setting } = state as any;
-  const themeColor = getBrandColor(theme, setting.colorList);
+  const { colorList, mode } = setting;
+  let themeColor = getBrandColor(theme, colorList);
+
+  if (theme === 'dynamic' || (!/^#[A-F\d]{6}$/i.test(theme) && mode === 'dark')) {
+    theme = themeColor?.['@brand-color-1'] || '#0052D9';
+
+    const newPalette = Color.getPaletteByGradation({
+      colors: [theme],
+      step: 10,
+    })[0];
+
+    themeColor = generateColorMap(theme, newPalette, mode);
+  }
+  // theme = themeColor?.['@brand-color'];
   const themeColorList: Array<string> = [];
 
   // eslint-disable-next-line no-restricted-syntax
   for (const key in themeColor) {
     if (Object.prototype.hasOwnProperty.call(themeColor, key)) {
-      const elementColor = themeColor[key];
+      const elementColor: string = themeColor[key];
 
       themeColorList.push(elementColor);
     }
   }
+  // console.log(themeColorList, 'themeColorList');
+  // console.log(theme, 'theme');
 
   return themeColorList;
 }
 
 /** 图表颜色 */
 function chartListColor(): Array<string> {
-  const colorList: Array<string> = ['#0052D9', '#BCC4D0', '#7D46BD', '#0594FA', '#ED7B2F'];
   const { setting } = state as any;
+  const res = getColorFromTheme(setting.brandTheme);
 
-  return getColorFromTheme(setting.brandTheme) || colorList;
+  return res;
 }
 
 /**
@@ -165,7 +180,11 @@ export function constructInitDashboardDataset(type: string) {
 }
 
 /** 柱状图数据源 */
-export function constructInitDataset(dateTime: Array<string> = []) {
+export function constructInitDataset({
+  dateTime = [],
+  placeholderColor,
+  borderColor,
+}: { dateTime: Array<string> } & Record<string, string>) {
   // const dataset: Array<Array<string>> = [['时间'], ['入库'], ['出库']];
   const divideNum = 10;
   const timeArray = [];
@@ -201,7 +220,7 @@ export function constructInitDataset(dateTime: Array<string> = []) {
       type: 'category',
       data: timeArray,
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
       },
       axisLine: {
         lineStyle: {
@@ -213,7 +232,12 @@ export function constructInitDataset(dateTime: Array<string> = []) {
     yAxis: {
       type: 'value',
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
+      },
+      splitLine: {
+        lineStyle: {
+          color: borderColor,
+        },
       },
     },
     grid: {
@@ -229,7 +253,7 @@ export function constructInitDataset(dateTime: Array<string> = []) {
       itemGap: 48,
       textStyle: {
         fontSize: 12,
-        color: 'rgba(0, 0, 0, 0.6)',
+        color: placeholderColor,
       },
       left: 'center',
       bottom: '0',
@@ -246,11 +270,6 @@ export function constructInitDataset(dateTime: Array<string> = []) {
         name: '上月',
         data: inArray,
         type: 'bar',
-        itemStyle: {
-          normal: {
-            color: chartListColor()[1],
-          },
-        },
       },
     ],
   };
@@ -259,11 +278,15 @@ export function constructInitDataset(dateTime: Array<string> = []) {
 }
 
 /** 平滑图数据 */
-export function getSmoothLineDataSet(dateTime = []) {
+export function getSmoothLineDataSet({
+  dateTime = [],
+  placeholderColor,
+  borderColor,
+}: { dateTime?: Array<string> } & Record<string, string>) {
   let dateArray: Array<string> = ['00:00', '02:00', '04:00', '06:00'];
   if (dateTime.length > 0) {
-    const devideNum = 7;
-    dateArray = getDateArray(dateTime, devideNum);
+    const divideNum = 7;
+    dateArray = getDateArray(dateTime, divideNum);
   }
 
   return {
@@ -283,11 +306,11 @@ export function getSmoothLineDataSet(dateTime = []) {
       data: dateArray,
       boundaryGap: false,
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
       },
       axisLine: {
         lineStyle: {
-          color: '#E3E6EB',
+          color: borderColor,
           width: 1,
         },
       },
@@ -295,7 +318,12 @@ export function getSmoothLineDataSet(dateTime = []) {
     yAxis: {
       type: 'value',
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
+      },
+      splitLine: {
+        lineStyle: {
+          color: borderColor,
+        },
       },
     },
     legend: {
@@ -305,6 +333,10 @@ export function getSmoothLineDataSet(dateTime = []) {
       itemGap: 48,
       itemHeight: 8,
       itemWidth: 8,
+      textStyle: {
+        fontSize: 12,
+        color: placeholderColor,
+      },
     },
     series: [
       {
@@ -326,7 +358,7 @@ export function getSmoothLineDataSet(dateTime = []) {
         symbolSize: 8,
         areaStyle: {
           normal: {
-            color: '#0053D92F',
+            opacity: 0.1,
           },
         },
       },
@@ -353,18 +385,21 @@ export function getSmoothLineDataSet(dateTime = []) {
 }
 
 /** 折线图数据 */
-export function getFolderLineDataSet(dateTime?: string[]) {
+export function getFolderLineDataSet({
+  dateTime = [],
+  placeholderColor,
+  borderColor,
+}: { dateTime?: Array<string> } & Record<string, string>) {
   let dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-  if (dateTime && dateTime.length > 0) {
+  if (dateTime.length > 0) {
     const divideNum = 7;
     dateArray = getDateArray(dateTime, divideNum);
   }
-
   return {
     color: chartListColor(),
     grid: {
       top: '5%',
-      right: '1px',
+      right: '10px',
       left: '30px',
       bottom: '60px',
     },
@@ -373,17 +408,21 @@ export function getFolderLineDataSet(dateTime?: string[]) {
       bottom: '0',
       orient: 'horizontal', // legend 横向布局。
       data: ['杯子', '茶叶', '蜂蜜', '面粉'],
+      textStyle: {
+        fontSize: 12,
+        color: placeholderColor,
+      },
     },
     xAxis: {
       type: 'category',
       data: dateArray,
       boundaryGap: false,
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
       },
       axisLine: {
         lineStyle: {
-          color: '#E3E6EB',
+          color: borderColor,
           width: 1,
         },
       },
@@ -391,7 +430,12 @@ export function getFolderLineDataSet(dateTime?: string[]) {
     yAxis: {
       type: 'value',
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
+      },
+      splitLine: {
+        lineStyle: {
+          color: borderColor,
+        },
       },
     },
     tooltip: {
@@ -416,7 +460,7 @@ export function getFolderLineDataSet(dateTime?: string[]) {
         type: 'line',
         itemStyle: {
           normal: {
-            borderColor: '#ffffff',
+            borderColor,
             borderWidth: 1,
           },
         },
@@ -439,7 +483,7 @@ export function getFolderLineDataSet(dateTime?: string[]) {
         type: 'line',
         itemStyle: {
           normal: {
-            borderColor: '#ffffff',
+            borderColor,
             borderWidth: 1,
           },
         },
@@ -462,7 +506,7 @@ export function getFolderLineDataSet(dateTime?: string[]) {
         type: 'line',
         itemStyle: {
           normal: {
-            borderColor: '#ffffff',
+            borderColor,
             borderWidth: 1,
           },
         },
@@ -485,7 +529,7 @@ export function getFolderLineDataSet(dateTime?: string[]) {
         type: 'line',
         itemStyle: {
           normal: {
-            borderColor: '#ffffff',
+            borderColor,
             borderWidth: 1,
           },
         },
@@ -501,13 +545,16 @@ export function getFolderLineDataSet(dateTime?: string[]) {
  * @param {Array<string>} [dateTime=[]]
  * @returns {*}
  */
-export function getLineChartDataSet(dateTime: Array<string> = []) {
+export function getLineChartDataSet({
+  dateTime = [],
+  placeholderColor,
+  borderColor,
+}: { dateTime?: Array<string> } & Record<string, string>) {
   const divideNum = 10;
   const timeArray = [];
   const inArray = [];
   const outArray = [];
   for (let i = 0; i < divideNum; i++) {
-    // const [timeArray, inArray, outArray] = dataset;
     if (dateTime.length > 0) {
       const dateAbsTime: number = (new Date(dateTime[1]).getTime() - new Date(dateTime[0]).getTime()) / divideNum;
       const enhandTime: number = new Date(dateTime[0]).getTime() + dateAbsTime * i;
@@ -524,6 +571,7 @@ export function getLineChartDataSet(dateTime: Array<string> = []) {
     inArray.push(getRandomArray().toString());
     outArray.push(getRandomArray().toString());
   }
+
   const dataSet = {
     color: chartListColor(),
     tooltip: {
@@ -543,7 +591,7 @@ export function getLineChartDataSet(dateTime: Array<string> = []) {
       data: ['本月', '上月'],
       textStyle: {
         fontSize: 12,
-        color: 'rgba(0, 0, 0, 0.6)',
+        color: placeholderColor,
       },
     },
     xAxis: {
@@ -551,11 +599,10 @@ export function getLineChartDataSet(dateTime: Array<string> = []) {
       data: timeArray,
       boundaryGap: false,
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
       },
       axisLine: {
         lineStyle: {
-          color: '#E3E6EB',
           width: 1,
         },
       },
@@ -563,7 +610,12 @@ export function getLineChartDataSet(dateTime: Array<string> = []) {
     yAxis: {
       type: 'value',
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
+      },
+      splitLine: {
+        lineStyle: {
+          color: borderColor,
+        },
       },
     },
     series: [
@@ -577,17 +629,13 @@ export function getLineChartDataSet(dateTime: Array<string> = []) {
         symbolSize: 8,
         itemStyle: {
           normal: {
-            borderColor: '#ffffff',
+            borderColor,
             borderWidth: 1,
           },
-          // hover color
-          // emphasis: {
-          //   color: '#000000'
-          // }
         },
         areaStyle: {
           normal: {
-            color: '#0053D92F',
+            opacity: 0.1,
           },
         },
       },
@@ -601,17 +649,9 @@ export function getLineChartDataSet(dateTime: Array<string> = []) {
         symbolSize: 8,
         itemStyle: {
           normal: {
-            borderColor: '#ffffff',
-            color: '#BCC4D0',
-            lineStyle: {
-              color: '#BCC4D0',
-            },
+            borderColor,
             borderWidth: 1,
           },
-          // hover color
-          // emphasis: {
-          //   color: '#000000'
-          // }
         },
       },
     ],
@@ -641,8 +681,12 @@ export function getSelftItemList(productName: string, devideNum: number): string
  * @export
  * @returns {}
  */
-export function getScatterDataSet(dateTime: Array<string> = []) {
-  const divideNum = 10;
+export function getScatterDataSet({
+  dateTime = [],
+  placeholderColor,
+  borderColor,
+}: { dateTime?: Array<string> } & Record<string, string>): any {
+  const divideNum = 40;
   const timeArray = [];
   const inArray = [];
   const outArray = [];
@@ -651,7 +695,6 @@ export function getScatterDataSet(dateTime: Array<string> = []) {
     if (dateTime.length > 0) {
       const dateAbsTime: number = (new Date(dateTime[1]).getTime() - new Date(dateTime[0]).getTime()) / divideNum;
       const enhandTime: number = new Date(dateTime[0]).getTime() + dateAbsTime * i;
-      // console.log('dateAbsTime..', dateAbsTime, enhandTime);
       timeArray.push(dayjs(enhandTime).format('MM-DD'));
     } else {
       timeArray.push(
@@ -670,12 +713,12 @@ export function getScatterDataSet(dateTime: Array<string> = []) {
     xAxis: {
       data: timeArray,
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
       },
       splitLine: { show: false },
       axisLine: {
         lineStyle: {
-          color: '#E3E6EB',
+          color: borderColor,
           width: 1,
         },
       },
@@ -684,7 +727,7 @@ export function getScatterDataSet(dateTime: Array<string> = []) {
       type: 'value',
       // splitLine: { show: false},
       axisLabel: {
-        color: 'rgba(0, 0, 0, 0.4)',
+        color: placeholderColor,
       },
       nameTextStyle: {
         padding: [0, 0, 0, 60],
@@ -697,6 +740,11 @@ export function getScatterDataSet(dateTime: Array<string> = []) {
       },
       axisLine: {
         show: false,
+      },
+      splitLine: {
+        lineStyle: {
+          color: borderColor,
+        },
       },
     },
     tooltip: {
@@ -715,6 +763,10 @@ export function getScatterDataSet(dateTime: Array<string> = []) {
       data: ['按摩仪', '咖啡机'],
       itemHeight: 8,
       itemWidth: 8,
+      textStyle: {
+        fontSize: 12,
+        color: placeholderColor,
+      },
     },
     series: [
       {
@@ -732,14 +784,13 @@ export function getScatterDataSet(dateTime: Array<string> = []) {
     ],
   };
 }
-
 /**
  * 获域图数据结构
  *
  * @export
  * @returns {}
  */
-export function getAreaChartDataSet() {
+export function getAreaChartDataSet(): any {
   const xAxisData = [];
   const data1 = [];
   const data2 = [];
@@ -926,7 +977,11 @@ export const lastYearList: Array<any> = [100, 120, 140, 160, 180, 200, 210];
  * @param {boolean} [isMonth=false]
  * @returns {*}
  */
-export function get2ColBarChartDataSet(isMonth = false) {
+export function get2ColBarChartDataSet({
+  isMonth = false,
+  placeholderColor,
+  borderColor,
+}: { isMonth?: boolean } & Record<string, string>) {
   let lastYearListCopy = lastYearList.concat([]);
   let thisYearListCopy = lastYearList.concat([]);
 
@@ -955,11 +1010,11 @@ export function get2ColBarChartDataSet(isMonth = false) {
           alignWithLabel: true,
         },
         axisLabel: {
-          color: 'rgba(0, 0, 0, 0.4)',
+          color: placeholderColor,
         },
         axisLine: {
           lineStyle: {
-            color: '#E3E6EB',
+            color: borderColor,
             width: 1,
           },
         },
@@ -969,7 +1024,12 @@ export function get2ColBarChartDataSet(isMonth = false) {
       {
         type: 'value',
         axisLabel: {
-          color: 'rgba(0, 0, 0, 0.4)',
+          color: placeholderColor,
+        },
+        splitLine: {
+          lineStyle: {
+            color: borderColor,
+          },
         },
       },
     ],
@@ -980,7 +1040,10 @@ export function get2ColBarChartDataSet(isMonth = false) {
       itemGap: 48,
       itemHeight: 4,
       itemWidth: 12,
-      itemStyle: {},
+      textStyle: {
+        fontSize: 12,
+        color: placeholderColor,
+      },
     },
     series: [
       {
@@ -998,18 +1061,17 @@ export function get2ColBarChartDataSet(isMonth = false) {
         barWidth: '30%',
         data: thisYearListCopy,
         itemStyle: {
-          color: (params: CommonObjType) => {
+          color: (params: { value: number }) => {
             if (params.value >= 200) {
-              return '#E34D59';
+              return chartListColor()[1];
             }
-            return '#0052D9';
+            return chartListColor()[0];
           },
         },
       },
     ],
   };
 }
-
 /**
  * 获取饼图数据
  *
@@ -1017,7 +1079,11 @@ export function get2ColBarChartDataSet(isMonth = false) {
  * @param {number} [radius=1]
  * @returns {*}
  */
-export function getPieChartDataSet(radius = 42) {
+export function getPieChartDataSet({
+  radius = 42,
+  textColor,
+  placeholderColor,
+}: { radius: number } & Record<string, string>) {
   return {
     color: chartListColor(),
     tooltip: {
@@ -1035,7 +1101,7 @@ export function getPieChartDataSet(radius = 42) {
       itemHeight: 4,
       textStyle: {
         fontSize: 12,
-        color: 'rgba(0, 0, 0, 0.6)',
+        color: placeholderColor,
       },
       left: 'center',
       bottom: '0',
@@ -1056,7 +1122,7 @@ export function getPieChartDataSet(radius = 42) {
           formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
           rich: {
             value: {
-              color: '#303133',
+              color: textColor,
               fontSize: 28,
               fontWeight: 'normal',
               lineHeight: 46,
@@ -1074,7 +1140,7 @@ export function getPieChartDataSet(radius = 42) {
             formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
             rich: {
               value: {
-                color: '#303133',
+                color: textColor,
                 fontSize: 28,
                 fontWeight: 'normal',
                 lineHeight: 46,
@@ -1091,7 +1157,10 @@ export function getPieChartDataSet(radius = 42) {
           show: false,
         },
         data: [
-          { value: 1048, name: '线上' },
+          {
+            value: 1048,
+            name: '线上',
+          },
           { value: radius * 7, name: '门店' },
         ],
       },

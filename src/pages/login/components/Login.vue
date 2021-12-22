@@ -9,7 +9,7 @@
   >
     <template v-if="type == 'password'">
       <t-form-item name="account">
-        <t-input v-model="formData.account" size="large" placeholder="请输入您的账号">
+        <t-input v-model="formData.account" size="large" placeholder="请输入账号：admin">
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -22,7 +22,7 @@
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
-          placeholder="请输入登录密码"
+          placeholder="请输入登录密码：admin"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
@@ -76,22 +76,19 @@ import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import QrcodeVue from 'qrcode.vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { useCounter } from '@/utils/hooks';
+import { useCounter } from '@/hooks';
 
 const INITIAL_DATA = {
   phone: '',
-  account: '',
-  password: '',
+  account: 'admin',
+  password: 'admin',
   verifyCode: '',
   checked: false,
 };
 
 const FORM_RULES = {
+  phone: [{ required: true, message: '手机号必填', type: 'error' }],
   account: [{ required: true, message: '账号必填', type: 'error' }],
-  phone: [
-    { required: true, message: '手机号必填', type: 'error' },
-    { telnumber: true, message: '请输入正确的手机号', type: 'warning' },
-  ],
   password: [{ required: true, message: '密码必填', type: 'error' }],
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };

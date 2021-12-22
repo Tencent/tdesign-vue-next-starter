@@ -1,4 +1,4 @@
-@import '@/style/variables.less';
+@import '@/style/variables';
 
 .card-padding-no {
   padding-left: 0;
@@ -47,7 +47,7 @@
       line-height: 24px;
       margin: 20px 0 6px;
       font-size: 14px;
-      color: rgb(0 0 0 / 40%);
+      color: @text-color-placeholder;
     }
 
     &-detail {
@@ -56,7 +56,7 @@
       overflow: hidden;
       line-height: 40px;
       font-size: 14px;
-      color: rgb(0 0 0 / 90%);
+      color: @text-color-secondary;
     }
   }
 
@@ -112,7 +112,7 @@
   border-radius: @border-radius;
 
   .content {
-    width: 70%;
+    width: 100%;
     margin: 24px 0 12px;
   }
 
@@ -124,7 +124,7 @@
 .content-container {
   margin-top: 16px;
   padding: 28px 32px;
-  background: #fff;
+  background: @bg-color-container;
   border-radius: @border-radius;
 }
 

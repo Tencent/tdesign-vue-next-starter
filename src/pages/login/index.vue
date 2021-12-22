@@ -18,6 +18,8 @@
       <register v-else @register-success="switchType('login')" />
       <tdesign-setting />
     </div>
+
+    <footer class="copyright">Copyright @ 2021-2022 Tencent. All Rights Reserved</footer>
   </div>
 </template>
 <script lang="ts">
@@ -28,7 +30,6 @@ import Register from './components/Register.vue';
 import LoginHeader from './components/Header.vue';
 import TdesignSetting from '@/layouts/setting.vue';
 
-/** 高级详情 */
 export default defineComponent({
   name: 'LoginIndex',
   components: {

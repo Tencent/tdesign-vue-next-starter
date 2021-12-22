@@ -12,27 +12,27 @@
     display: flex;
     color: @text-color-primary;
 
-    @media (max-width: @screen-sm-max) {
-      h1 {
-        width: 80px;
-      }
-    }
-
-    @media (min-width: @screen-md-min) {
-      h1 {
-        width: 200px;
-      }
-    }
-
     h1 {
+      width: 200px;
       font-weight: normal;
       font-size: @font-size-base;
       color: @text-color-secondary;
       text-align: left;
       line-height: 22px;
+
+      @media (max-width: @screen-sm-max) {
+        width: 100px;
+      }
+
+      @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+        width: 120px;
+      }
     }
 
     span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       margin-left: 24px;
     }
 
@@ -59,6 +59,7 @@
 }
 
 .dialog-info-block {
+
   .info-item {
     padding: 12px 0;
     display: flex;

@@ -37,8 +37,8 @@
           <t-radio-button value="monthVal"> 月份 </t-radio-button>
         </t-radio-group>
       </template>
-      <t-row class="product-block-container">
-        <t-col :flex="1">
+      <t-row :gutter="16" class="product-block-container">
+        <t-col :xl="4">
           <div class="product-add">
             <div class="product-sub">
               <t-icon name="add" class="product-sub-icon" />
@@ -46,7 +46,7 @@
             </div>
           </div>
         </t-col>
-        <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :flex="1">
+        <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :xl="4">
           <product :data="item" />
         </t-col>
       </t-row>
@@ -79,8 +79,8 @@
         </template>
 
         <template #op="slotProps">
-          <a :class="PREFIX + '-link'" @click="listClick()">管理</a>
-          <a :class="PREFIX + '-link'" @click="deleteClickOp(slotProps)">删除</a>
+          <a :class="prefix + '-link'" @click="listClick()">管理</a>
+          <a :class="prefix + '-link'" @click="deleteClickOp(slotProps)">删除</a>
         </template>
 
         <template #op-column>
@@ -111,7 +111,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
-import { PREFIX } from '@/config/global';
+import { prefix } from '@/config/global';
 import { BASE_INFO_DATA, TABLE_COLUMNS_DATA, PRODUCT_LIST } from './constants';
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';
@@ -169,7 +169,7 @@ export default defineComponent({
 
     return {
       BASE_INFO_DATA,
-      PREFIX,
+      prefix,
       PRODUCT_LIST,
       columns: TABLE_COLUMNS_DATA,
       data,

@@ -3,9 +3,9 @@ export const COLUMNS = [
   {
     title: '合同名称',
     align: 'left',
-    ellipsis: true,
     width: 300,
     colKey: 'name',
+    fixed: 'left',
   },
   { title: '合同状态', colKey: 'status', width: 200, cell: { col: 'status' } },
   {

@@ -62,7 +62,7 @@ export default defineComponent({
 .operater-block {
   position: relative;
   background-color: @bg-color-container;
-  border: 1px solid #e3e6eb;
+  border: 1px solid @component-border;
   border-radius: 3px;
 
   .operater-content {
@@ -70,7 +70,7 @@ export default defineComponent({
     height: 256px;
 
     .operater-title-icon {
-      background: #ecf2fe;
+      background: @brand-color-1;
       color: @brand-color;
       font-size: 56px;
       padding: 14px;
