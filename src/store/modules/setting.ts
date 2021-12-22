@@ -87,6 +87,7 @@ const actions = {
     if (theme !== state.mode) {
       document.documentElement.setAttribute('theme-mode', isDarkMode ? 'dark' : '');
     }
+
     commit('changeChartColor', isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS);
   },
   changeBrandTheme({ state }: { state: IStateType }, payload: IStateType) {

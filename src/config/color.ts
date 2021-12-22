@@ -189,12 +189,14 @@ export const LIGHT_CHART_COLORS: ColorToken = {
   textColor: 'rgba(0, 0, 0, 0.9)',
   placeholderColor: 'rgba(0, 0, 0, 0.35)',
   borderColor: '#dcdcdc',
+  containerColor: '#fff',
 };
 
 export const DARK_CHART_COLORS: ColorToken = {
   textColor: 'rgba(255, 255, 255, 0.9)',
   placeholderColor: 'rgba(255, 255, 255, 0.35)',
   borderColor: '#5e5e5e',
+  containerColor: '#242424',
 };
 
 function toUnderline(name: string): string {
