@@ -2,14 +2,20 @@
   <div class="list-common-table">
     <t-form ref="form" :data="formData" :label-width="80" colon @reset="onReset" @submit="onSubmit">
       <t-row>
-        <t-col :span="8">
+        <t-col :span="10">
           <t-row :gutter="[16, 16]">
-            <t-col :span="4">
+            <t-col :flex="1">
               <t-form-item label="合同名称" name="name">
-                <t-input v-model="formData.name" class="form-item-content" type="search" placeholder="请输入合同名称" />
+                <t-input
+                  v-model="formData.name"
+                  class="form-item-content"
+                  type="search"
+                  placeholder="请输入合同名称"
+                  :style="{ minWidth: '134px' }"
+                />
               </t-form-item>
             </t-col>
-            <t-col :span="4">
+            <t-col :flex="1">
               <t-form-item label="合同状态" name="status">
                 <t-select
                   v-model="formData.status"
@@ -19,34 +25,32 @@
                 />
               </t-form-item>
             </t-col>
-            <t-col :span="4">
+            <t-col :flex="1">
               <t-form-item label="合同编号" name="no">
-                <t-input v-model="formData.no" class="form-item-content" placeholder="请输入合同编号" />
+                <t-input
+                  v-model="formData.no"
+                  class="form-item-content"
+                  placeholder="请输入合同编号"
+                  :style="{ minWidth: '134px' }"
+                />
               </t-form-item>
             </t-col>
-
-            <template v-if="isExpand">
-              <t-col :span="4">
-                <t-form-item label="合同类型" name="type">
-                  <t-select
-                    v-model="formData.type"
-                    class="form-item-content`"
-                    :options="CONTRACT_TYPE_OPTIONS"
-                    placeholder="请选择合同类型"
-                  />
-                </t-form-item>
-              </t-col>
-            </template>
+            <t-col :flex="1">
+              <t-form-item label="合同类型" name="type">
+                <t-select
+                  v-model="formData.type"
+                  class="form-item-content`"
+                  :options="CONTRACT_TYPE_OPTIONS"
+                  placeholder="请选择合同类型"
+                />
+              </t-form-item>
+            </t-col>
           </t-row>
         </t-col>
 
         <t-col :span="4" class="operation-container">
-          <t-button theme="primary" type="submit"> 查询 </t-button>
+          <t-button theme="primary" type="submit" :style="{ marginLeft: '8px' }"> 查询 </t-button>
           <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
-          <t-button theme="primary" variant="text" class="expand" @click="toggleExpand">
-            {{ isExpand ? '收起' : '展开' }}
-            <chevron-down-icon size="20" :style="{ transform: `rotate(${isExpand ? '180deg' : '0'}` }" />
-          </t-button>
         </t-col>
       </t-row>
     </t-form>
@@ -101,7 +105,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';
 import { MessagePlugin } from '@tencent/ivring-peng-vue-next';
-import { ChevronDownIcon } from 'tdesign-icons-vue-next';
 import Trend from '@/components/trend/index.vue';
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';
@@ -168,7 +171,6 @@ export default defineComponent({
   name: 'ListTable',
   components: {
     Trend,
-    ChevronDownIcon,
   },
   setup() {
     const formData = ref({ ...searchForm });
@@ -183,10 +185,6 @@ export default defineComponent({
       defaultCurrent: 1,
     });
     const confirmVisible = ref(false);
-    const isExpand = ref(false);
-    const toggleExpand = () => {
-      isExpand.value = !isExpand.value;
-    };
 
     const data = ref([]);
 
@@ -275,8 +273,6 @@ export default defineComponent({
       rehandleClickOp({ text, row }) {
         console.log(text, row);
       },
-      isExpand,
-      toggleExpand,
     };
   },
 });

@@ -51,7 +51,7 @@
 
     <t-dialog
       v-model:visible="confirmVisible"
-      header="是否确认删除产品"
+      header="确认删除所选产品？"
       :body="confirmBody"
       :on-cancel="onCancel"
       @confirm="onConfirmDelete"
@@ -109,7 +109,7 @@ export default defineComponent({
     };
 
     const confirmBody = computed(() =>
-      deleteProduct.value ? `产品名称:${deleteProduct.value.name}, 产品描述: ${deleteProduct.value?.description}` : '',
+      deleteProduct.value ? `确认删除后${deleteProduct.value.name}的所有产品信息将被清空, 且无法恢复` : '',
     );
 
     onMounted(() => {

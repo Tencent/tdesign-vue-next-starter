@@ -90,7 +90,7 @@
   </t-row>
 </template>
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, onUnmounted } from 'vue';
+import { defineComponent, nextTick, onMounted, onUnmounted, watch } from 'vue';
 import { useStore } from 'vuex';
 import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
@@ -99,7 +99,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 
 import { LAST_7_DAYS } from '@/utils/date';
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
-import { getFolderLineDataSet } from '@/pages/dashboard/base/index';
+import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
 import ProductAIcon from '@/assets/assets-product-1.svg';
 import ProductBIcon from '@/assets/assets-product-2.svg';
 import ProductCIcon from '@/assets/assets-product-3.svg';
@@ -169,6 +169,13 @@ export default defineComponent({
           return ProductAIcon;
       }
     };
+
+    watch(
+      () => store.state.setting.brandTheme,
+      () => {
+        changeChartsTheme([lineChart]);
+      },
+    );
 
     return {
       LAST_7_DAYS,

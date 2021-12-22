@@ -21,6 +21,7 @@ export const INITIAL_DATA = {
   payment: '1',
   amount: 0,
   comment: '',
+  files: [],
 };
 
 export const TYPE_OPTIONS = [

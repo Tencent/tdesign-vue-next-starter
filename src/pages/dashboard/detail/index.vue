@@ -16,7 +16,7 @@
         </t-col>
       </t-row>
     </card>
-    <t-row :gutter="16" class="card-container-margin">
+    <t-row :gutter="[16, 16]" class="card-container-margin">
       <t-col :xs="12" :xl="9">
         <card title="采购商品申请趋势" describe="(件)">
           <template #option>
