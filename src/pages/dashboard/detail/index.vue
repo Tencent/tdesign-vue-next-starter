@@ -149,7 +149,7 @@ export default defineComponent({
       PRODUCT_LIST,
       PANE_LIST_DATA,
       onSatisfyChange() {
-        scatterChart.setOption(getScatterDataSet());
+        scatterChart.setOption(getScatterDataSet({ ...chartColors }));
       },
       onMaterialChange(value: string[]) {
         const { chartColors } = store.state.setting;
