@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "dayjs": "^1.10.6",
-    "echarts": "~5.1.2",
+    "echarts": "~5.2.2",
     "hex-to-hsl": "^1.0.2",
     "nprogress": "^0.2.0",
     "qrcode.vue": "^3.2.2",
