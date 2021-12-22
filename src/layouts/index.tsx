@@ -127,19 +127,17 @@ export default defineComponent({
           <t-layout key="side">
             <t-aside>{sidebar}</t-aside>
             <t-layout>
-              <t-header>
-                {header}
-                <tdesign-setting />
-              </t-header>
+              <t-header>{header}</t-header>
               <t-content>{content}</t-content>
             </t-layout>
           </t-layout>
         ) : (
           <t-layout key="no-side">
-            {header}
-            <t-layout>{[sidebar, content]}</t-layout>
+            <t-header> {header}</t-header>
+            <t-content>{content}</t-content>
           </t-layout>
         )}
+        <tdesign-setting />
       </div>
     );
   },

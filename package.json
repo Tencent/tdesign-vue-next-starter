@@ -14,7 +14,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@tencent/ivring-peng-vue-next": "^0.6.0-alpha.2",
+    "@tencent/ivring-peng-vue-next": "^0.6.0-alpha.3",
     "dayjs": "^1.10.6",
     "echarts": "~5.1.2",
     "hex-to-hsl": "^1.0.2",

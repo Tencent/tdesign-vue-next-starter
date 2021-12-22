@@ -175,7 +175,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin } from '@tencent/ivring-peng-vue-next';
 import { FORM_RULES, INITIAL_DATA, TYPE_OPTIONS, PARTY_A_OPTIONS, PARTY_B_OPTIONS } from './constants';
 
 export default defineComponent({

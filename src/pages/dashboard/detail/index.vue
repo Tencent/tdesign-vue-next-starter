@@ -58,7 +58,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, watch } from 'vue';
+import { defineComponent, nextTick, onMounted, onUnmounted, watch } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -124,6 +124,9 @@ export default defineComponent({
     onMounted(() => {
       renderCharts();
       window.addEventListener('resize', updateContainer, false);
+      nextTick(() => {
+        updateContainer();
+      });
     });
 
     onUnmounted(() => {

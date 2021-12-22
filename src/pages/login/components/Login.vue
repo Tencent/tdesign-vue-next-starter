@@ -75,7 +75,7 @@ import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import QrcodeVue from 'qrcode.vue';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin } from '@tencent/ivring-peng-vue-next';
 import { useCounter } from '@/hooks';
 
 const INITIAL_DATA = {

@@ -100,7 +100,7 @@
 import { defineComponent, ref, computed, watch, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { ColorPicker } from 'vue-color-kit';
-import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { MessagePlugin, PopupVisibleChangeContext } from '@tencent/ivring-peng-vue-next';
 import { Color } from 'tvision-color';
 import 'vue-color-kit/dist/vue-color-kit.css';
 
@@ -359,12 +359,12 @@ export default defineComponent({
       border: 2px solid @brand-color !important;
     }
 
-    .t-form__controls--content {
+    .t-form__controls-content {
       justify-content: end;
     }
   }
 
-  .t-form__controls--content {
+  .t-form__controls-content {
     justify-content: end;
   }
 }

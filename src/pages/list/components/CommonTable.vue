@@ -100,7 +100,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin } from '@tencent/ivring-peng-vue-next';
 import { ChevronDownIcon } from 'tdesign-icons-vue-next';
 import Trend from '@/components/trend/index.vue';
 import request from '@/utils/request';
