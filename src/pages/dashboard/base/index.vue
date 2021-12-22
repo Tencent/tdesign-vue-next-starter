@@ -250,50 +250,69 @@ export default defineComponent({
     const resizeTime = ref(1);
 
     const { chartColors } = store.state.setting;
-    // refundCharts
-    let refundContainer: HTMLElement;
-    let refundChart: echarts.ECharts;
-    onMounted(() => {
-      refundContainer = document.getElementById('refundContainer');
-      refundChart = echarts.init(refundContainer);
-      refundChart.setOption(constructInitDashboardDataset('bar'));
-    });
 
     // moneyCharts
     let moneyContainer: HTMLElement;
     let moneyChart: echarts.ECharts;
-    onMounted(() => {
-      moneyContainer = document.getElementById('moneyContainer');
+    const renderMoneyChart = () => {
+      if (!moneyContainer) {
+        moneyContainer = document.getElementById('moneyContainer');
+      }
       moneyChart = echarts.init(moneyContainer);
       moneyChart.setOption(constructInitDashboardDataset('line'));
-    });
+    };
+
+    // refundCharts
+    let refundContainer: HTMLElement;
+    let refundChart: echarts.ECharts;
+    const renderRefundChart = () => {
+      if (!refundContainer) {
+        refundContainer = document.getElementById('refundContainer');
+      }
+      refundChart = echarts.init(refundContainer);
+      refundChart.setOption(constructInitDashboardDataset('bar'));
+    };
 
     // stokeCharts
     let stokeContainer: HTMLElement;
     let stokeChart: echarts.ECharts;
-    onMounted(() => {
-      stokeContainer = document.getElementById('stokeContainer');
+    const renderStokeChart = () => {
+      if (!stokeContainer) {
+        stokeContainer = document.getElementById('stokeContainer');
+      }
       stokeChart = echarts.init(stokeContainer);
       stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors }));
-    });
+    };
 
     // monitorChart
     let monitorContainer: HTMLElement;
     let monitorChart: echarts.ECharts;
-    onMounted(() => {
-      monitorContainer = document.getElementById('monitorContainer');
+    const renderMonitorChart = () => {
+      if (!monitorContainer) {
+        monitorContainer = document.getElementById('monitorContainer');
+      }
       monitorChart = echarts.init(monitorContainer);
       monitorChart.setOption(getLineChartDataSet({ ...chartColors }));
-    });
+    };
 
     // monitorChart
     let countContainer: HTMLElement;
     let countChart: echarts.ECharts;
-    onMounted(() => {
-      countContainer = document.getElementById('countContainer');
+    const renderCountChart = () => {
+      if (!countContainer) {
+        countContainer = document.getElementById('countContainer');
+      }
       countChart = echarts.init(countContainer);
       countChart.setOption(getPieChartDataSet(chartColors));
-    });
+    };
+
+    const renderCharts = () => {
+      renderMoneyChart();
+      renderRefundChart();
+      renderStokeChart();
+      renderMonitorChart();
+      renderCountChart();
+    };
 
     // chartSize update
     const updateContainer = () => {
@@ -304,11 +323,11 @@ export default defineComponent({
       } else {
         resizeTime.value = 1;
       }
-      refundChart.resize({
+      moneyChart.resize({
         width: resizeTime.value * 120,
         height: resizeTime.value * 66,
       });
-      moneyChart.resize({
+      refundChart.resize({
         width: resizeTime.value * 120,
         height: resizeTime.value * 66,
       });
@@ -327,6 +346,8 @@ export default defineComponent({
     };
 
     onMounted(() => {
+      renderCharts();
+      updateContainer();
       window.addEventListener('resize', updateContainer, false);
     });
 
@@ -339,7 +360,18 @@ export default defineComponent({
     watch(
       () => store.state.setting.brandTheme,
       () => {
-        changeChartsTheme([refundChart, moneyChart, stokeChart, monitorChart, countChart]);
+        changeChartsTheme([refundChart, stokeChart, monitorChart, countChart]);
+      },
+    );
+
+    watch(
+      () => store.state.setting.mode,
+      () => {
+        [moneyChart, refundChart, stokeChart, monitorChart, countChart].forEach((item) => {
+          item.dispose();
+        });
+
+        renderCharts();
       },
     );
 
