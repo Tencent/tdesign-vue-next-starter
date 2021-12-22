@@ -122,6 +122,21 @@
                 />
               </t-form-item>
             </t-col>
+            <t-col :span="6">
+              <t-form-item label="" name="files">
+                <t-upload
+                  v-model="formData.files"
+                  action="https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
+                  tips="请上传pdf文件，大小在60M以内"
+                  :size-limit="{ size: 60, unit: 'MB' }"
+                  :format-response="formatResponse"
+                  :before-upload="beforeUpload"
+                  @fail="handleFail"
+                >
+                  <t-button class="form-submit-upload-btn" variant="outline"> 上传合同文件 </t-button>
+                </t-upload>
+              </t-form-item>
+            </t-col>
           </t-row>
         </t-form>
 
@@ -153,21 +168,8 @@
     <div class="form-submit-container">
       <div class="form-submit-sub">
         <div class="form-submit-left">
-          <t-upload
-            v-model="files"
-            action=""
-            placeholder="支持批量上传文件，文 件格式不限，最多只能上传 10 份文件"
-            :format-response="formatResponse"
-            :before-upload="beforeUpload"
-            @fail="handleFail"
-          >
-            <t-button class="form-submit-upload-btn" variant="outline"> 上传合同文件 </t-button>
-          </t-upload>
-          <span class="form-submit-upload-span">请上传pdf文件，大小在60M以内</span>
-        </div>
-        <div class="form-submit-right">
-          <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
           <t-button theme="primary" class="form-submit-confirm" type="submit"> 提交 </t-button>
+          <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
         </div>
       </div>
     </div>
@@ -182,7 +184,6 @@ export default defineComponent({
   name: 'FormBase',
   setup() {
     const formData = ref({ ...INITIAL_DATA });
-    const files = ref([]);
 
     return {
       TYPE_OPTIONS,
@@ -190,7 +191,6 @@ export default defineComponent({
       PARTY_B_OPTIONS,
       FORM_RULES,
       formData,
-      files,
       onReset() {
         MessagePlugin.warning('取消新建');
       },

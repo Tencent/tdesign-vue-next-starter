@@ -57,7 +57,7 @@
 
     <t-dialog
       v-model:visible="confirmVisible"
-      header="是否确认删除"
+      header="确认删除当前所选合同？"
       :body="confirmBody"
       :on-cancel="onCancel"
       @confirm="onConfirmDelete"
@@ -118,8 +118,8 @@ export default defineComponent({
     const deleteIdx = ref(-1);
     const confirmBody = computed(() => {
       if (deleteIdx.value > -1) {
-        const { no, name } = data.value[deleteIdx.value];
-        return `产品编号:${no}, 产品名称: ${name}`;
+        const { name } = data.value[deleteIdx.value];
+        return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
       }
       return '';
     });
