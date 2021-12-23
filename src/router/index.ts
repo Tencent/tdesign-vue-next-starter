@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
 import baseRouters from './modules/base';
 import componentsRouters from './modules/components';
@@ -28,7 +28,7 @@ export const page404 = {
 };
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: defaultRouterList,
   scrollBehavior() {
     return {
