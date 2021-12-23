@@ -142,7 +142,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { ValidateResultContext } from '@tencent/ivring-peng-vue-next';
+import { ValidateResultContext } from 'tdesign-vue-next';
 import Card from '@/components/card/index.vue';
 
 import {

@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
-import { MessagePlugin } from '@tencent/ivring-peng-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 
 const INITIAL_DATA = {
   name: '',

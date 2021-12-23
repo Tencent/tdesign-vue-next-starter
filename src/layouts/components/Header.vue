@@ -168,7 +168,7 @@ export default defineComponent({
     };
 
     const navToGitHub = () => {
-      window.open('https://github.com/tencent/@tencent/ivring-peng-vue-next-starter');
+      window.open('https://github.com/tencent/tdesign-vue-next-starter');
     };
 
     const navToHelper = () => {
@@ -195,7 +195,35 @@ export default defineComponent({
 </script>
 <style lang="less">
 @import '@/style/variables.less';
+.@{prefix}-header {
+  &-layout {
+    height: 64px;
+  }
 
+  &-menu-fixed {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+
+    &-side {
+      left: 232px;
+      right: 0;
+      z-index: 10;
+      width: auto;
+      transition: all 0.3s;
+
+      &-compact {
+        left: 64px;
+      }
+    }
+  }
+
+  &-logo-container {
+    cursor: pointer;
+    display: inline-flex;
+    height: 64px;
+  }
+}
 .header-menu {
   flex: 1 1 1;
   display: inline-flex;

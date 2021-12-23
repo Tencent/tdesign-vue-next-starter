@@ -1,4 +1,4 @@
-import { MessagePlugin } from '@tencent/ivring-peng-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 

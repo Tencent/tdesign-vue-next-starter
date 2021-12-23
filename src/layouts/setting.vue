@@ -68,10 +68,7 @@
           <t-switch v-model="formData.splitMenu" />
         </t-form-item>
 
-        <t-form-item v-show="formData.layout !== 'side'" label="固定 Header" name="isHeaderFixed">
-          <t-switch v-model="formData.isHeaderFixed" />
-        </t-form-item>
-        <t-form-item v-show="formData.layout !== 'top'" label="固定 Sidebar" name="isSidebarFixed">
+        <t-form-item v-show="formData.layout === 'mix'" label="固定 Sidebar" name="isSidebarFixed">
           <t-switch v-model="formData.isSidebarFixed" />
         </t-form-item>
 
@@ -85,9 +82,6 @@
         <t-form-item label="显示 Footer" name="showFooter">
           <t-switch v-model="formData.showFooter" />
         </t-form-item>
-        <t-form-item v-show="formData.showFooter && !formData.isSidebarFixed" label="footer 内收" name="footerPosition">
-          <t-switch v-model="formData.isFooterAside" />
-        </t-form-item>
       </t-form>
       <div class="setting-info">
         <p>请复制后手动修改配置文件: /src/config/style.js</p>
@@ -100,7 +94,7 @@
 import { defineComponent, ref, computed, watch, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { ColorPicker } from 'vue-color-kit';
-import { MessagePlugin, PopupVisibleChangeContext } from '@tencent/ivring-peng-vue-next';
+import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
 import 'vue-color-kit/dist/vue-color-kit.css';
 

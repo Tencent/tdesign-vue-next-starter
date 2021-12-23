@@ -1,4 +1,4 @@
-import { TdBaseTableProps } from '@tencent/ivring-peng-vue-next';
+import { TdBaseTableProps } from 'tdesign-vue-next';
 
 interface DashboardPanel {
   title: string;

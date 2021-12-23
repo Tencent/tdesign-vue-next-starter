@@ -1,10 +1,10 @@
 import { defineComponent } from 'vue';
 import { mapGetters } from 'vuex';
-import TdesignHeader from './components/Header.vue';
-import TdesignBreadcrumb from './components/Breadcrumb.vue';
-import TdesignFooter from './components/Footer.vue';
-import TdesignSideNav from './components/SideNav';
-import TdesignContent from './components/Content.vue';
+import TDesignHeader from './components/Header.vue';
+import TDesignBreadcrumb from './components/Breadcrumb.vue';
+import TDesignFooter from './components/Footer.vue';
+import TDesignSideNav from './components/SideNav';
+import TDesignContent from './components/Content.vue';
 
 import { prefix } from '@/config/global';
 import TdesignSetting from './setting.vue';
@@ -15,14 +15,6 @@ const name = `${prefix}-base-layout`;
 
 export default defineComponent({
   name,
-  components: {
-    TdesignHeader,
-    TdesignFooter,
-    TdesignSideNav,
-    TdesignSetting,
-    TdesignBreadcrumb,
-    TdesignContent,
-  },
   computed: {
     ...mapGetters({
       showSidebar: 'setting/showSidebar',
@@ -35,6 +27,13 @@ export default defineComponent({
     }),
     setting(): SettingType {
       return this.$store.state.setting;
+    },
+    mainLayoutCls() {
+      return [
+        {
+          't-layout--with-sider': this.showSidebar,
+        },
+      ];
     },
     headerMenu() {
       const { layout, splitMenu } = this.$store.state.setting;
@@ -67,7 +66,7 @@ export default defineComponent({
     renderSidebar() {
       return (
         this.showSidebar && (
-          <tdesign-side-nav
+          <TDesignSideNav
             showLogo={this.showSidebarLogo}
             layout={this.setting.layout}
             isFixed={this.setting.isSidebarFixed}
@@ -81,7 +80,7 @@ export default defineComponent({
     renderHeader() {
       return (
         this.showHeader && (
-          <tdesign-header
+          <TDesignHeader
             showLogo={this.showHeaderLogo}
             theme={this.mode}
             layout={this.setting.layout}
@@ -98,8 +97,8 @@ export default defineComponent({
       return (
         <t-layout class={[`${prefix}-layout`]}>
           <t-content class={`${prefix}-content-layout`}>
-            {showBreadcrumb && <tdesign-breadcrumb />}
-            <TdesignContent />
+            {showBreadcrumb && <TDesignBreadcrumb />}
+            <TDesignContent />
           </t-content>
           {showFooter && this.renderFooter()}
         </t-layout>
@@ -109,7 +108,7 @@ export default defineComponent({
     renderFooter() {
       return (
         <t-footer class={`${prefix}-footer-layout`}>
-          <tdesign-footer />
+          <TDesignFooter />
         </t-footer>
       );
     },
@@ -120,40 +119,20 @@ export default defineComponent({
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
-    let renderLayout;
-    if (layout === 'side') {
-      renderLayout = (
-        <t-layout key="side">
-          <t-aside>{sidebar}</t-aside>
-          <t-layout>
-            <t-header>{header}</t-header>
-            <t-content>{content}</t-content>
-          </t-layout>
-        </t-layout>
-      );
-    } else if (layout === 'top') {
-      renderLayout = (
-        <t-layout key="top">
-          <t-header> {header}</t-header>
-          <t-content>{content}</t-content>
-        </t-layout>
-      );
-    } else {
-      renderLayout = (
-        <t-layout key="mix">
-          <t-header>{header}</t-header>
-          <t-layout>
-            <t-aside>{sidebar}</t-aside>
-            <t-content>{content}</t-content>
-          </t-layout>
-        </t-layout>
-      );
-    }
-
     return (
       <div>
-        {renderLayout}
-        <tdesign-setting />
+        {layout === 'side' ? (
+          <t-layout class={this.mainLayoutCls} key="side">
+            <t-aside>{sidebar}</t-aside>
+            <t-layout>{[header, content]}</t-layout>
+          </t-layout>
+        ) : (
+          <t-layout key="no-side">
+            {header}
+            <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
+          </t-layout>
+        )}
+        <TdesignSetting />
       </div>
     );
   },

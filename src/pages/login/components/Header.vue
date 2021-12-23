@@ -29,7 +29,7 @@ export default defineComponent({
     };
 
     const navToGitHub = () => {
-      window.open('https://github.com/tencent/@tencent/ivring-peng-vue-next-starter');
+      window.open('https://github.com/tencent/tdesign-vue-next-starter');
     };
 
     const navToHelper = () => {

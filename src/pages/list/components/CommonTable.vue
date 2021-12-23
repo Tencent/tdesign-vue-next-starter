@@ -104,7 +104,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import { MessagePlugin } from '@tencent/ivring-peng-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import Trend from '@/components/trend/index.vue';
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';
