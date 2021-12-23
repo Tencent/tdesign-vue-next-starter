@@ -8,7 +8,7 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/starter/vue-next/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
