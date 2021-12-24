@@ -202,7 +202,7 @@ export default defineComponent({
         visible.value = false;
       },
       deleteClickOp(e) {
-        data.value.splice(e.index, 1);
+        data.value.splice(e.rowIndex, 1);
       },
       onAlertChange,
     };

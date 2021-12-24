@@ -186,7 +186,7 @@ export default defineComponent({
         visible.value = true;
       },
       deleteClickOp(columns) {
-        data.value.splice(columns.index, 1);
+        data.value.splice(columns.rowIndex, 1);
       },
       onConfirm() {
         visible.value = false;

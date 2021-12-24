@@ -3,7 +3,6 @@
     v-model:visible="showSettingPanel"
     size="408px"
     :footer="false"
-    value="medium"
     header="页面配置"
     :close-btn="true"
     class="setting-drawer-container"
@@ -69,10 +68,7 @@
           <t-switch v-model="formData.splitMenu" />
         </t-form-item>
 
-        <t-form-item v-show="formData.layout !== 'side'" label="固定 Header" name="isHeaderFixed">
-          <t-switch v-model="formData.isHeaderFixed" />
-        </t-form-item>
-        <t-form-item v-show="formData.layout !== 'top'" label="固定 Sidebar" name="isSidebarFixed">
+        <t-form-item v-show="formData.layout === 'mix'" label="固定 Sidebar" name="isSidebarFixed">
           <t-switch v-model="formData.isSidebarFixed" />
         </t-form-item>
 
@@ -85,9 +81,6 @@
         </t-form-item>
         <t-form-item label="显示 Footer" name="showFooter">
           <t-switch v-model="formData.showFooter" />
-        </t-form-item>
-        <t-form-item v-show="formData.showFooter && !formData.isSidebarFixed" label="footer 内收" name="footerPosition">
-          <t-switch v-model="formData.isFooterAside" />
         </t-form-item>
       </t-form>
       <div class="setting-info">
@@ -331,7 +324,7 @@ export default defineComponent({
   .setting-container {
     padding-bottom: 100px;
   }
-  .t-radio-group.t-radio-group-medium {
+  .t-radio-group.t-size-m {
     min-height: 32px;
     width: 100%;
     height: auto;
@@ -360,12 +353,12 @@ export default defineComponent({
       border: 2px solid @brand-color !important;
     }
 
-    .t-form__controls--content {
+    .t-form__controls-content {
       justify-content: end;
     }
   }
 
-  .t-form__controls--content {
+  .t-form__controls-content {
     justify-content: end;
   }
 }

@@ -1,28 +1,20 @@
 import { defineComponent } from 'vue';
 import { mapGetters } from 'vuex';
-import TdesignHeader from './components/Header.vue';
-import TdesignBreadcrumb from './components/Breadcrumb.vue';
-import TdesignFooter from './components/Footer.vue';
-import TdesignSideNav from './components/SideNav';
-import TdesignContent from './components/Content.vue';
+import TDesignHeader from './components/Header.vue';
+import TDesignBreadcrumb from './components/Breadcrumb.vue';
+import TDesignFooter from './components/Footer.vue';
+import TDesignSideNav from './components/SideNav';
+import TDesignContent from './components/Content.vue';
 
 import { prefix } from '@/config/global';
 import TdesignSetting from './setting.vue';
-import { SettingType, ClassName } from '@/interface';
+import { SettingType } from '@/interface';
 import '@/style/layout.less';
 
 const name = `${prefix}-base-layout`;
 
 export default defineComponent({
   name,
-  components: {
-    TdesignHeader,
-    TdesignFooter,
-    TdesignSideNav,
-    TdesignSetting,
-    TdesignBreadcrumb,
-    TdesignContent,
-  },
   computed: {
     ...mapGetters({
       showSidebar: 'setting/showSidebar',
@@ -36,10 +28,10 @@ export default defineComponent({
     setting(): SettingType {
       return this.$store.state.setting;
     },
-    mainLayoutCls(): ClassName {
+    mainLayoutCls() {
       return [
         {
-          't-layout-has-sider': this.showSidebar,
+          't-layout--with-sider': this.showSidebar,
         },
       ];
     },
@@ -74,7 +66,7 @@ export default defineComponent({
     renderSidebar() {
       return (
         this.showSidebar && (
-          <tdesign-side-nav
+          <TDesignSideNav
             showLogo={this.showSidebarLogo}
             layout={this.setting.layout}
             isFixed={this.setting.isSidebarFixed}
@@ -88,7 +80,7 @@ export default defineComponent({
     renderHeader() {
       return (
         this.showHeader && (
-          <tdesign-header
+          <TDesignHeader
             showLogo={this.showHeaderLogo}
             theme={this.mode}
             layout={this.setting.layout}
@@ -105,8 +97,8 @@ export default defineComponent({
       return (
         <t-layout class={[`${prefix}-layout`]}>
           <t-content class={`${prefix}-content-layout`}>
-            {showBreadcrumb && <tdesign-breadcrumb />}
-            <TdesignContent />
+            {showBreadcrumb && <TDesignBreadcrumb />}
+            <TDesignContent />
           </t-content>
           {showFooter && this.renderFooter()}
         </t-layout>
@@ -116,7 +108,7 @@ export default defineComponent({
     renderFooter() {
       return (
         <t-footer class={`${prefix}-footer-layout`}>
-          <tdesign-footer />
+          <TDesignFooter />
         </t-footer>
       );
     },
@@ -127,9 +119,8 @@ export default defineComponent({
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
-
     return (
-      <div class={`${prefix}-wrapper`}>
+      <div>
         {layout === 'side' ? (
           <t-layout class={this.mainLayoutCls} key="side">
             <t-aside>{sidebar}</t-aside>
@@ -141,7 +132,7 @@ export default defineComponent({
             <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
           </t-layout>
         )}
-        <tdesign-setting />
+        <TdesignSetting />
       </div>
     );
   },

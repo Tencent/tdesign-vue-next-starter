@@ -140,7 +140,7 @@ export default defineComponent({
 
     const onConfirmDelete = () => {
       // 真实业务请发起请求
-      data.value.splice(deleteIdx.value - 1, 1);
+      data.value.splice(deleteIdx.value, 1);
       pagination.value.total = data.value.length;
       const selectedIdx = selectedRowKeys.value.indexOf(deleteIdx.value);
       if (selectedIdx > -1) {
@@ -185,8 +185,8 @@ export default defineComponent({
       handleSetupContract() {
         router.push('/form/base');
       },
-      handleClickDelete({ row }) {
-        deleteIdx.value = row.index;
+      handleClickDelete(row: { rowIndex: any }) {
+        deleteIdx.value = row.rowIndex;
         confirmVisible.value = true;
       },
     };

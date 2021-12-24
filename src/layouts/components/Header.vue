@@ -195,7 +195,6 @@ export default defineComponent({
 </script>
 <style lang="less">
 @import '@/style/variables.less';
-
 .@{prefix}-header {
   &-layout {
     height: 64px;
@@ -225,7 +224,6 @@ export default defineComponent({
     height: 64px;
   }
 }
-
 .header-menu {
   flex: 1 1 1;
   display: inline-flex;
@@ -236,7 +234,7 @@ export default defineComponent({
   align-items: center;
   margin-right: 12px;
 
-  .t-popup-reference {
+  .t-popup__reference {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,7 +258,8 @@ export default defineComponent({
 .header-operate-left {
   display: flex;
   margin-left: 20px;
-  align-items: center;
+  align-items: normal;
+  line-height: 0;
 
   .collapsed-icon {
     font-size: 20px;

@@ -85,7 +85,7 @@ export default defineComponent({
     border: none;
     outline: none;
     box-shadow: none;
-    transform: background @anim-duration-base linear;
+    transition: background @anim-duration-base linear;
     &:hover {
       background: @bg-color-secondarycontainer;
     }
