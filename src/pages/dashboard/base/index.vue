@@ -203,7 +203,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, watch, ref, onUnmounted, nextTick } from 'vue';
+import { defineComponent, onMounted, watch, ref, onUnmounted, nextTick, computed } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -228,7 +228,7 @@ import { PANE_LIST, SALE_TEND_LIST, BUY_TEND_LIST, SALE_COLUMNS, BUY_COLUMNS } f
 echarts.use([TooltipComponent, LegendComponent, PieChart, GridComponent, LineChart, BarChart, CanvasRenderer]);
 
 const getThisMonth = (checkedValues?: string[]) => {
-  let date;
+  let date: Date;
   if (!checkedValues || checkedValues.length === 0) {
     date = new Date();
     return `${date.getFullYear()}-${date.getMonth() + 1}`;
@@ -251,7 +251,7 @@ export default defineComponent({
     const store = useStore();
     const resizeTime = ref(1);
 
-    const { chartColors } = store.state.setting;
+    const chartColors = computed(() => store.state.setting.chartColors);
 
     // moneyCharts
     let moneyContainer: HTMLElement;
@@ -283,7 +283,7 @@ export default defineComponent({
         stokeContainer = document.getElementById('stokeContainer');
       }
       stokeChart = echarts.init(stokeContainer);
-      stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors }));
+      stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors.value }));
     };
 
     // monitorChart
@@ -294,7 +294,7 @@ export default defineComponent({
         monitorContainer = document.getElementById('monitorContainer');
       }
       monitorChart = echarts.init(monitorContainer);
-      monitorChart.setOption(getLineChartDataSet({ ...chartColors }));
+      monitorChart.setOption(getLineChartDataSet({ ...chartColors.value }));
     };
 
     // monitorChart
@@ -305,7 +305,7 @@ export default defineComponent({
         countContainer = document.getElementById('countContainer');
       }
       countChart = echarts.init(countContainer);
-      countChart.setOption(getPieChartDataSet(chartColors));
+      countChart.setOption(getPieChartDataSet(chartColors.value));
     };
 
     const renderCharts = () => {
@@ -331,7 +331,7 @@ export default defineComponent({
       });
       refundChart.resize({
         width: resizeTime.value * 120,
-        height: resizeTime.value * 66,
+        height: resizeTime.value * 42,
       });
       stokeChart.resize({
         width: stokeContainer.clientWidth,

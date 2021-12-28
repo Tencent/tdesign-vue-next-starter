@@ -58,7 +58,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, onUnmounted, watch } from 'vue';
+import { defineComponent, nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -85,14 +85,14 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const { chartColors } = store.state.setting;
+    const chartColors = computed(() => store.state.setting.chartColors);
     // lineChart logic
     let lineContainer: HTMLElement;
     let lineChart: echarts.ECharts;
     const renderLineChart = () => {
       lineContainer = document.getElementById('lineContainer');
       lineChart = echarts.init(lineContainer);
-      lineChart.setOption(getFolderLineDataSet({ ...chartColors }));
+      lineChart.setOption(getFolderLineDataSet({ ...chartColors.value }));
     };
 
     // scatterChart logic
@@ -101,7 +101,7 @@ export default defineComponent({
     const renderScatterChart = () => {
       scatterContainer = document.getElementById('scatterContainer');
       scatterChart = echarts.init(scatterContainer);
-      scatterChart.setOption(getScatterDataSet({ ...chartColors }));
+      scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
     };
 
     // chartSize update
@@ -152,11 +152,11 @@ export default defineComponent({
       PRODUCT_LIST,
       PANE_LIST_DATA,
       onSatisfyChange() {
-        scatterChart.setOption(getScatterDataSet({ ...chartColors }));
+        scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
       },
       onMaterialChange(value: string[]) {
-        const { chartColors } = store.state.setting;
-        lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors }));
+        const chartColors = computed(() => store.state.setting.chartColors);
+        lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors.value }));
       },
     };
   },

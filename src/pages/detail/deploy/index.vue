@@ -69,7 +69,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref, watch, computed } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -102,7 +102,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
-    const { chartColors } = store.state.setting;
+    const chartColors = computed(() => store.state.setting.chartColors);
     const data = ref([]);
     const pagination = ref({
       defaultPageSize: 10,
@@ -133,9 +133,9 @@ export default defineComponent({
     onMounted(() => {
       monitorContainer = document.getElementById('monitorContainer');
       monitorChart = echarts.init(monitorContainer);
-      monitorChart.setOption(getSmoothLineDataSet({ ...chartColors }));
+      monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
       setInterval(() => {
-        monitorChart.setOption(getSmoothLineDataSet({ ...chartColors }));
+        monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
       }, 3000);
     });
 
@@ -145,7 +145,7 @@ export default defineComponent({
     onMounted(() => {
       dataContainer = document.getElementById('dataContainer');
       dataChart = echarts.init(dataContainer);
-      dataChart.setOption(get2ColBarChartDataSet({ ...chartColors }));
+      dataChart.setOption(get2ColBarChartDataSet({ ...chartColors.value }));
     });
 
     const intervalTimer = null;
