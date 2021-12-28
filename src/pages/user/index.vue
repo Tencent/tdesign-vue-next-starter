@@ -90,7 +90,7 @@
   </t-row>
 </template>
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, onUnmounted, watch } from 'vue';
+import { defineComponent, nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useStore } from 'vuex';
 import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
@@ -117,7 +117,7 @@ export default defineComponent({
     let lineContainer: HTMLElement;
     let lineChart: echarts.ECharts;
     const store = useStore();
-    const { chartColors } = store.state.setting;
+    const chartColors = computed(() => store.state.setting.chartColors);
 
     const onLineChange = (value) => {
       lineChart.setOption(getFolderLineDataSet(value));
@@ -133,7 +133,7 @@ export default defineComponent({
           x2: 10, // 默认80px
           y2: 30, // 默认60px
         },
-        ...getFolderLineDataSet({ ...chartColors }),
+        ...getFolderLineDataSet({ ...chartColors.value }),
       });
     };
 

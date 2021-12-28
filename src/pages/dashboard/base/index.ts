@@ -149,19 +149,19 @@ export function constructInitDashboardDataset(type: string) {
           {
             value: 135,
             itemStyle: {
-              color: chartListColor()[1],
+              opacity: 0.2,
             },
           },
           {
             value: 118,
             itemStyle: {
-              color: chartListColor()[1],
+              opacity: 0.2,
             },
           },
           {
             value: 60,
             itemStyle: {
-              color: chartListColor()[1],
+              opacity: 0.2,
             },
           },
         ],
@@ -1077,6 +1077,7 @@ export function getPieChartDataSet({
   radius = 42,
   textColor,
   placeholderColor,
+  containerColor,
 }: { radius: number } & Record<string, string>) {
   return {
     color: chartListColor(),
@@ -1110,6 +1111,10 @@ export function getPieChartDataSet({
         selectedMode: true,
         hoverAnimation: true,
         silent: true,
+        itemStyle: {
+          borderColor: containerColor,
+          borderWidth: 1,
+        },
         label: {
           show: true,
           position: 'center',
