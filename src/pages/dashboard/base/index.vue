@@ -390,10 +390,10 @@ export default defineComponent({
       BUY_COLUMNS,
       onCurrencyChange(checkedValues: string[]) {
         currentMonth.value = getThisMonth(checkedValues);
-        monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors }));
+        monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors.value }));
       },
       onStokeDataChange(checkedValues: string[]) {
-        stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors }));
+        stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors.value }));
       },
       rehandleClickOp(val: MouseEvent) {
         console.log(val);

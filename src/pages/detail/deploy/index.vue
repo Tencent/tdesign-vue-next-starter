@@ -168,7 +168,7 @@ export default defineComponent({
     });
 
     const onAlertChange = () => {
-      dataChart.setOption(get2ColBarChartDataSet({ ...chartColors }));
+      dataChart.setOption(get2ColBarChartDataSet({ ...chartColors.value }));
     };
 
     onMounted(() => {
