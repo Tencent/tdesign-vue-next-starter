@@ -2,8 +2,9 @@
   <router-view :class="[mode]" />
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
+import config from '@/config/style';
 
 export default defineComponent({
   setup() {
@@ -13,6 +14,9 @@ export default defineComponent({
       return store.getters['setting/mode'];
     });
 
+    onMounted(() => {
+      store.dispatch('setting/changeTheme', { ...config });
+    });
     return {
       mode,
     };
