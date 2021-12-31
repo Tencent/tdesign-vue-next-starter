@@ -84,7 +84,7 @@
         </t-form-item>
       </t-form>
       <div class="setting-info">
-        <p>请复制后手动修改配置文件: /src/config/style.js</p>
+        <p>请复制后手动修改配置文件: /src/config/style.ts</p>
         <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
       </div>
     </div>
@@ -96,6 +96,8 @@ import { useStore } from 'vuex';
 import { ColorPicker } from 'vue-color-kit';
 import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
+import useClipboard from 'vue-clipboard3';
+
 import 'vue-color-kit/dist/vue-color-kit.css';
 
 import STYLE_CONFIG from '@/config/style';
@@ -191,8 +193,17 @@ export default defineComponent({
     };
 
     const handleCopy = () => {
-      MessagePlugin.closeAll();
-      MessagePlugin.success('复制成功');
+      const text = JSON.stringify(formData.value, null, 4);
+      const { toClipboard } = useClipboard();
+      toClipboard(text)
+        .then(() => {
+          MessagePlugin.closeAll();
+          MessagePlugin.success('复制成功');
+        })
+        .catch(() => {
+          MessagePlugin.closeAll();
+          MessagePlugin.error('复制失败');
+        });
     };
     const getModeIcon = (mode: string) => {
       if (mode === 'light') {
