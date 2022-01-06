@@ -81,13 +81,22 @@ export default defineComponent({
     font-size: 20px !important;
     color: @text-color-primary !important;
   }
-  .t-input__inner {
+  .t-input {
     border: none;
     outline: none;
     box-shadow: none;
     transition: background @anim-duration-base linear;
+    .t-input__inner {
+      transition: background @anim-duration-base linear;
+    }
+    .t-input__inner {
+      background: none;
+    }
     &:hover {
       background: @bg-color-secondarycontainer;
+      .t-input__inner {
+        background: @bg-color-secondarycontainer;
+      }
     }
   }
 }
@@ -95,7 +104,7 @@ export default defineComponent({
 .header-search {
   width: 200px;
   transition: width @anim-duration-base @anim-time-fn-easing;
-  .t-input__inner {
+  .t-input {
     border: 0;
     padding-left: 40px;
     &:focus {
