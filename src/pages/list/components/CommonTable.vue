@@ -19,7 +19,7 @@
               <t-form-item label="合同状态" name="status">
                 <t-select
                   v-model="formData.status"
-                  class="form-item-content`"
+                  class="form-item-content"
                   :options="CONTRACT_STATUS_OPTIONS"
                   placeholder="请选择合同状态"
                 />
@@ -39,7 +39,7 @@
               <t-form-item label="合同类型" name="type">
                 <t-select
                   v-model="formData.type"
-                  class="form-item-content`"
+                  class="form-item-content"
                   :options="CONTRACT_TYPE_OPTIONS"
                   placeholder="请选择合同类型"
                 />
