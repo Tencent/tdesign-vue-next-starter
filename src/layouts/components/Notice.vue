@@ -53,6 +53,7 @@ import { NotificationItem } from '@/interface';
 
 export default defineComponent({
   setup() {
+    const router = useRouter();
     const store = useStore();
     const { msgData } = store.state.notification;
 
@@ -75,7 +76,6 @@ export default defineComponent({
     };
 
     const goDetail = () => {
-      const router = useRouter();
       router.push('/detail/secondary');
     };
 
