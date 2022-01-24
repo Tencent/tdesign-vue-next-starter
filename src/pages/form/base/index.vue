@@ -1,19 +1,20 @@
 <template>
   <div>
-    <div class="form-basic-container">
-      <div class="form-basic-item">
-        <div class="form-basic-container-title">合同信息</div>
-        <!-- 表单内容 -->
-        <t-form
-          ref="form"
-          class="base-form"
-          :data="formData"
-          :rules="FORM_RULES"
-          label-align="top"
-          :label-width="100"
-          @reset="onReset"
-          @submit="onSubmit"
-        >
+    <t-form
+      ref="form"
+      class="base-form"
+      :data="formData"
+      :rules="FORM_RULES"
+      label-align="top"
+      :label-width="100"
+      @reset="onReset"
+      @submit="onSubmit"
+    >
+      <div class="form-basic-container">
+        <div class="form-basic-item">
+          <div class="form-basic-container-title">合同信息</div>
+          <!-- 表单内容 -->
+
           <!-- 合同名称,合同类型 -->
           <t-row class="row-gap" :gutter="[16, 24]">
             <t-col :span="6">
@@ -138,19 +139,9 @@
               </t-form-item>
             </t-col>
           </t-row>
-        </t-form>
 
-        <div class="form-basic-container-title form-title-gap">其它信息</div>
-        <t-form
-          ref="form"
-          class="base-form"
-          :data="formData"
-          :rules="FORM_RULES"
-          label-align="top"
-          :label-width="100"
-          @reset="onReset"
-          @submit="onSubmit"
-        >
+          <div class="form-basic-container-title form-title-gap">其它信息</div>
+
           <t-form-item label="备注" name="comment">
             <t-textarea v-model="formData.comment" :height="124" placeholder="请输入备注" />
           </t-form-item>
@@ -161,18 +152,18 @@
               <t-avatar>+</t-avatar>
             </t-avatar-group>
           </t-form-item>
-        </t-form>
-      </div>
-    </div>
-
-    <div class="form-submit-container">
-      <div class="form-submit-sub">
-        <div class="form-submit-left">
-          <t-button theme="primary" class="form-submit-confirm" type="submit"> 提交 </t-button>
-          <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
         </div>
       </div>
-    </div>
+
+      <div class="form-submit-container">
+        <div class="form-submit-sub">
+          <div class="form-submit-left">
+            <t-button theme="primary" class="form-submit-confirm" type="submit"> 提交 </t-button>
+            <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
+          </div>
+        </div>
+      </div>
+    </t-form>
   </div>
 </template>
 <script lang="ts">
@@ -184,7 +175,6 @@ export default defineComponent({
   name: 'FormBase',
   setup() {
     const formData = ref({ ...INITIAL_DATA });
-
     return {
       TYPE_OPTIONS,
       PARTY_A_OPTIONS,
@@ -195,6 +185,7 @@ export default defineComponent({
         MessagePlugin.warning('取消新建');
       },
       onSubmit({ validateResult }) {
+        console.log(validateResult);
         if (validateResult === true) {
           MessagePlugin.success('新建成功');
         }
