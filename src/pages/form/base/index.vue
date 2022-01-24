@@ -1,170 +1,158 @@
 <template>
-  <div>
-    <t-form
-      ref="form"
-      class="base-form"
-      :data="formData"
-      :rules="FORM_RULES"
-      label-align="top"
-      :label-width="100"
-      @reset="onReset"
-      @submit="onSubmit"
-    >
-      <div class="form-basic-container">
-        <div class="form-basic-item">
-          <div class="form-basic-container-title">合同信息</div>
-          <!-- 表单内容 -->
+  <t-form
+    ref="form"
+    class="base-form"
+    :data="formData"
+    :rules="FORM_RULES"
+    label-align="top"
+    :label-width="100"
+    @reset="onReset"
+    @submit="onSubmit"
+  >
+    <div class="form-basic-container">
+      <div class="form-basic-item">
+        <div class="form-basic-container-title">合同信息</div>
+        <!-- 表单内容 -->
 
-          <!-- 合同名称,合同类型 -->
-          <t-row class="row-gap" :gutter="[16, 24]">
-            <t-col :span="6">
-              <t-form-item label="合同名称" name="name">
-                <t-input v-model="formData.name" :style="{ width: '322px' }" placeholder="请输入内容" />
-              </t-form-item>
-            </t-col>
-            <t-col :span="6">
-              <t-form-item label="合同类型" name="type">
-                <t-select
-                  v-model="formData.type"
-                  :style="{ width: '322px' }"
-                  placeholder="请选择类型"
-                  class="demo-select-base"
-                  clearable
-                >
-                  <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
-                    {{ item.label }}
-                  </t-option>
-                </t-select>
-              </t-form-item>
-            </t-col>
+        <!-- 合同名称,合同类型 -->
+        <t-row class="row-gap" :gutter="[16, 24]">
+          <t-col :span="6">
+            <t-form-item label="合同名称" name="name">
+              <t-input v-model="formData.name" :style="{ width: '322px' }" placeholder="请输入内容" />
+            </t-form-item>
+          </t-col>
+          <t-col :span="6">
+            <t-form-item label="合同类型" name="type">
+              <t-select
+                v-model="formData.type"
+                :style="{ width: '322px' }"
+                placeholder="请选择类型"
+                class="demo-select-base"
+                clearable
+              >
+                <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                  {{ item.label }}
+                </t-option>
+              </t-select>
+            </t-form-item>
+          </t-col>
 
-            <!-- 合同收付类型 -->
-            <t-col :span="8">
-              <t-form-item label="合同收付类型" name="payment">
-                <t-radio-group v-model="formData.payment">
-                  <t-radio value="1"> 收款 </t-radio>
-                  <t-radio value="2"> 付款 </t-radio>
-                </t-radio-group>
-                <span class="space-item" />
-                <t-input placeholder="请输入金额" :style="{ width: '160px' }" />
-              </t-form-item>
-            </t-col>
+          <!-- 合同收付类型 -->
+          <t-col :span="8">
+            <t-form-item label="合同收付类型" name="payment">
+              <t-radio-group v-model="formData.payment">
+                <t-radio value="1"> 收款 </t-radio>
+                <t-radio value="2"> 付款 </t-radio>
+              </t-radio-group>
+              <span class="space-item" />
+              <t-input placeholder="请输入金额" :style="{ width: '160px' }" />
+            </t-form-item>
+          </t-col>
 
-            <t-col :span="6">
-              <t-form-item label="甲方" name="partyA">
-                <t-select
-                  v-model="formData.partyA"
-                  :style="{ width: '322px' }"
-                  class="demo-select-base"
-                  placeholder="请选择类型"
-                  clearable
-                >
-                  <t-option
-                    v-for="(item, index) in PARTY_A_OPTIONS"
-                    :key="index"
-                    :value="item.value"
-                    :label="item.label"
-                  >
-                    {{ item.label }}
-                  </t-option>
-                </t-select>
-              </t-form-item>
-            </t-col>
-            <t-col :span="6">
-              <t-form-item label="乙方" name="partyB">
-                <t-select
-                  v-model="formData.partyB"
-                  :style="{ width: '322px' }"
-                  placeholder="请选择类型"
-                  class="demo-select-base"
-                  clearable
-                >
-                  <t-option
-                    v-for="(item, index) in PARTY_B_OPTIONS"
-                    :key="index"
-                    :value="item.value"
-                    :label="item.label"
-                  >
-                    {{ item.label }}
-                  </t-option>
-                </t-select>
-              </t-form-item>
-            </t-col>
-            <t-col :span="6">
-              <t-form-item label="合同签订日期" name="signDate">
-                <t-date-picker
-                  v-model="formData.signDate"
-                  :style="{ width: '322px' }"
-                  theme="primary"
-                  mode="date"
-                  separator="/"
-                />
-              </t-form-item>
-            </t-col>
-            <t-col :span="6">
-              <t-form-item label="合同生效日期" name="startDate">
-                <t-date-picker
-                  v-model="formData.startDate"
-                  :style="{ width: '322px' }"
-                  theme="primary"
-                  mode="date"
-                  separator="/"
-                />
-              </t-form-item>
-            </t-col>
-            <t-col :span="6">
-              <t-form-item label="合同结束日期" name="endDate">
-                <t-date-picker
-                  v-model="formData.endDate"
-                  :style="{ width: '322px' }"
-                  theme="primary"
-                  mode="date"
-                  separator="/"
-                />
-              </t-form-item>
-            </t-col>
-            <t-col :span="6">
-              <t-form-item label="" name="files">
-                <t-upload
-                  v-model="formData.files"
-                  action="https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
-                  tips="请上传pdf文件，大小在60M以内"
-                  :size-limit="{ size: 60, unit: 'MB' }"
-                  :format-response="formatResponse"
-                  :before-upload="beforeUpload"
-                  @fail="handleFail"
-                >
-                  <t-button class="form-submit-upload-btn" variant="outline"> 上传合同文件 </t-button>
-                </t-upload>
-              </t-form-item>
-            </t-col>
-          </t-row>
+          <t-col :span="6">
+            <t-form-item label="甲方" name="partyA">
+              <t-select
+                v-model="formData.partyA"
+                :style="{ width: '322px' }"
+                class="demo-select-base"
+                placeholder="请选择类型"
+                clearable
+              >
+                <t-option v-for="(item, index) in PARTY_A_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                  {{ item.label }}
+                </t-option>
+              </t-select>
+            </t-form-item>
+          </t-col>
+          <t-col :span="6">
+            <t-form-item label="乙方" name="partyB">
+              <t-select
+                v-model="formData.partyB"
+                :style="{ width: '322px' }"
+                placeholder="请选择类型"
+                class="demo-select-base"
+                clearable
+              >
+                <t-option v-for="(item, index) in PARTY_B_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                  {{ item.label }}
+                </t-option>
+              </t-select>
+            </t-form-item>
+          </t-col>
+          <t-col :span="6">
+            <t-form-item label="合同签订日期" name="signDate">
+              <t-date-picker
+                v-model="formData.signDate"
+                :style="{ width: '322px' }"
+                theme="primary"
+                mode="date"
+                separator="/"
+              />
+            </t-form-item>
+          </t-col>
+          <t-col :span="6">
+            <t-form-item label="合同生效日期" name="startDate">
+              <t-date-picker
+                v-model="formData.startDate"
+                :style="{ width: '322px' }"
+                theme="primary"
+                mode="date"
+                separator="/"
+              />
+            </t-form-item>
+          </t-col>
+          <t-col :span="6">
+            <t-form-item label="合同结束日期" name="endDate">
+              <t-date-picker
+                v-model="formData.endDate"
+                :style="{ width: '322px' }"
+                theme="primary"
+                mode="date"
+                separator="/"
+              />
+            </t-form-item>
+          </t-col>
+          <t-col :span="6">
+            <t-form-item label="" name="files">
+              <t-upload
+                v-model="formData.files"
+                action="https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
+                tips="请上传pdf文件，大小在60M以内"
+                :size-limit="{ size: 60, unit: 'MB' }"
+                :format-response="formatResponse"
+                :before-upload="beforeUpload"
+                @fail="handleFail"
+              >
+                <t-button class="form-submit-upload-btn" variant="outline"> 上传合同文件 </t-button>
+              </t-upload>
+            </t-form-item>
+          </t-col>
+        </t-row>
 
-          <div class="form-basic-container-title form-title-gap">其它信息</div>
+        <div class="form-basic-container-title form-title-gap">其它信息</div>
 
-          <t-form-item label="备注" name="comment">
-            <t-textarea v-model="formData.comment" :height="124" placeholder="请输入备注" />
-          </t-form-item>
-          <t-form-item label="公证人">
-            <t-avatar-group>
-              <t-avatar>D</t-avatar>
-              <t-avatar>S</t-avatar>
-              <t-avatar>+</t-avatar>
-            </t-avatar-group>
-          </t-form-item>
+        <t-form-item label="备注" name="comment">
+          <t-textarea v-model="formData.comment" :height="124" placeholder="请输入备注" />
+        </t-form-item>
+        <t-form-item label="公证人">
+          <t-avatar-group>
+            <t-avatar>D</t-avatar>
+            <t-avatar>S</t-avatar>
+            <t-avatar>+</t-avatar>
+          </t-avatar-group>
+        </t-form-item>
+      </div>
+    </div>
+
+    <div class="form-submit-container">
+      <div class="form-submit-sub">
+        <div class="form-submit-left">
+          <t-button theme="primary" class="form-submit-confirm" type="submit"> 提交 </t-button>
+          <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
         </div>
       </div>
-
-      <div class="form-submit-container">
-        <div class="form-submit-sub">
-          <div class="form-submit-left">
-            <t-button theme="primary" class="form-submit-confirm" type="submit"> 提交 </t-button>
-            <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
-          </div>
-        </div>
-      </div>
-    </t-form>
-  </div>
+    </div>
+  </t-form>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
