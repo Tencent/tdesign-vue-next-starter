@@ -21,7 +21,7 @@
     "nprogress": "^0.2.0",
     "qrcode.vue": "^3.2.2",
     "tdesign-icons-vue-next": "^0.0.6",
-    "tdesign-vue-next": "0.6.4",
+    "tdesign-vue-next": "0.7.0-alpha.0",
     "tvision-color": "^1.3.1",
     "vue": "^3.1.5",
     "vue-color-kit": "^1.0.5",

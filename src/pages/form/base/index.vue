@@ -173,7 +173,6 @@ export default defineComponent({
         MessagePlugin.warning('取消新建');
       },
       onSubmit({ validateResult }) {
-        console.log(validateResult);
         if (validateResult === true) {
           MessagePlugin.success('新建成功');
         }
