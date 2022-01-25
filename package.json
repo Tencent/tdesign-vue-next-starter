@@ -63,7 +63,7 @@
     "vite-plugin-mock": "^2.9.6",
     "vite-svg-loader": "^3.1.0",
     "vue-clipboard3": "^1.0.1",
-    "vue-tsc": "^0.29.8"
+    "vue-tsc": "^0.31.1"
   },
   "config": {
     "commitizen": {
