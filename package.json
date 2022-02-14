@@ -11,7 +11,9 @@
     "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
     "stylelint": "stylelint src/**/*.{html,vue,sass,less}",
     "stylelint:fix": "stylelint --fix src/**/*.{html,vue,vss,sass,less}",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "site:preview": "npm run build && cp -r dist _site",
+    "test": "echo \"no test specified,work in process\""
   },
   "dependencies": {
     "cz-conventional-changelog": "^3.3.0",
