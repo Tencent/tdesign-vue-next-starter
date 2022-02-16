@@ -62,7 +62,7 @@
 import { defineComponent, ref, computed, onMounted } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import Card from './components/Card.vue';
+import Card from '@/components/card/Card.vue';
 import DialogForm from './components/DialogForm.vue';
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';
