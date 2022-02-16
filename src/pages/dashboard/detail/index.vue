@@ -65,7 +65,7 @@ import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart, ScatterChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import ProductCard from '@/pages/list/card/components/Card.vue';
+import ProductCard from '@/components/card/Card.vue';
 
 import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../base/index';
 import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
