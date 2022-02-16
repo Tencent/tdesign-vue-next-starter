@@ -9,21 +9,15 @@
           <user-avatar-icon v-if="product.type === 4" />
           <laptop-icon v-if="product.type === 5" />
         </div>
-        <t-tag :theme="product.isSetup ? 'success' : 'default'" :disabled="!product.isSetup">{{
-          product.isSetup ? '已启用' : '已停用'
-        }}</t-tag>
+        <t-tag :theme="product.isSetup ? 'success' : 'default'" :disabled="!product.isSetup">
+          {{ product.isSetup ? '已启用' : '已停用' }}
+        </t-tag>
       </t-row>
-      <p class="list-card-item_detail--name">
-        {{ product.name }}
-      </p>
-      <p class="list-card-item_detail--desc">
-        {{ product.description }}
-      </p>
+      <p class="list-card-item_detail--name">{{ product.name }}</p>
+      <p class="list-card-item_detail--desc">{{ product.description }}</p>
       <t-row justify="space-between" align="middle" :class="cardControlClass">
         <div>
-          <t-button shape="circle" :disabled="!product.isSetup">
-            {{ typeMap[product.type - 1] }}
-          </t-button>
+          <t-button shape="circle" :disabled="!product.isSetup">{{ typeMap[product.type - 1] }}</t-button>
           <t-button shape="circle" :disabled="!product.isSetup">
             <add-icon />
           </t-button>
@@ -53,7 +47,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, defineProps, PropType, defineEmits } from 'vue';
+import { computed, PropType } from 'vue';
 import {
   ShopIcon,
   CalendarIcon,

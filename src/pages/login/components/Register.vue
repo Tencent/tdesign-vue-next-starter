@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, ref } from 'vue';
+import { ref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { useCounter } from '@/hooks';
 
