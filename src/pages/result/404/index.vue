@@ -4,12 +4,6 @@
   </result>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import Result from '@/components/result/index.vue';
-
-export default defineComponent({
-  name: 'Result404',
-  components: { Result },
-});
 </script>

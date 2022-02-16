@@ -52,8 +52,8 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue';
+<script setup lang="ts">
+import { computed, defineProps, PropType, defineEmits } from 'vue';
 import {
   ShopIcon,
   CalendarIcon,
@@ -71,63 +71,35 @@ export interface CardProductType {
   name: string;
 }
 
-export default defineComponent({
-  name: 'ListCardComponent',
-  components: {
-    ShopIcon,
-    CalendarIcon,
-    ServiceIcon,
-    UserAvatarIcon,
-    LaptopIcon,
-    MoreIcon,
-    AddIcon,
-  },
-  props: {
-    product: {
-      type: Object as PropType<CardProductType>,
-      default: () => {
-        return {};
-      },
-    },
-  },
-  emits: ['manage-product', 'delete-item'],
-  setup(props, ctx) {
-    const { emit } = ctx;
-    const cardClass = computed(() => [
-      'list-card-item',
-      {
-        'list-card-item__disabled': !props.product.isSetup,
-      },
-    ]);
-
-    const cardLogoClass = computed(() => [
-      'list-card-item_detail--logo',
-      {
-        'list-card-item_detail--logo__disabled': !props.product.isSetup,
-      },
-    ]);
-
-    const cardControlClass = computed(() => [
-      'list-card-item_detail--control',
-      {
-        'list-card-item_detail--control__disabled': !props.product.isSetup,
-      },
-    ]);
-
-    return {
-      cardClass,
-      cardLogoClass,
-      cardControlClass,
-      typeMap: ['A', 'B', 'C', 'D', 'E'],
-      handleClickManage(product) {
-        emit('manage-product', product);
-      },
-      handleClickDelete(product) {
-        emit('delete-item', product);
-      },
-    };
+const props = defineProps({
+  product: {
+    type: Object as PropType<CardProductType>,
   },
 });
+
+const emit = defineEmits(['manage-product', 'delete-item']);
+
+const cardClass = computed(() => ['list-card-item', { 'list-card-item__disabled': !props.product.isSetup }]);
+
+const cardLogoClass = computed(() => [
+  'list-card-item_detail--logo',
+  { 'list-card-item_detail--logo__disabled': !props.product.isSetup },
+]);
+
+const cardControlClass = computed(() => [
+  'list-card-item_detail--control',
+  { 'list-card-item_detail--control__disabled': !props.product.isSetup },
+]);
+
+const typeMap = ['A', 'B', 'C', 'D', 'E'];
+
+const handleClickManage = (product: CardProductType) => {
+  emit('manage-product', product);
+};
+
+const handleClickDelete = (product: CardProductType) => {
+  emit('delete-item', product);
+};
 </script>
 
 <style lang="less" scoped>

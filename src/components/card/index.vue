@@ -16,70 +16,51 @@
     <div v-if="size !== 'small'" class="card-spacer-bottom" />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
+<script setup lang="ts">
+import { defineProps, computed } from 'vue';
 
-export default defineComponent({
-  name: 'Card',
-  props: {
-    title: {
-      type: String as PropType<string>,
-      default: '',
-    },
-    subtitle: {
-      type: String as PropType<string>,
-      default: '',
-    },
-    compact: {
-      type: Boolean as PropType<boolean>,
-      default: false,
-    },
-    describe: {
-      type: String as PropType<string>,
-      default: '',
-    },
-    size: {
-      type: String as PropType<string>,
-      default: 'default',
-    },
-    border: {
-      type: Boolean,
-      default: false,
-    },
+const props = defineProps({
+  title: String,
+  subtitle: String,
+  describe: String,
+  compact: {
+    type: Boolean,
+    default: false,
   },
-  setup(props) {
-    const containerCls = computed(() => {
-      const { compact, border } = props;
-      return ['card-container', { 'card-container-compact': compact, 'card-container--border': border }];
-    });
-
-    const titleCls = computed(() => {
-      const { size } = props;
-      return [
-        'card-title',
-        {
-          'card-title--small': size === 'small',
-          'card-title--default': size !== 'small',
-        },
-      ];
-    });
-
-    const titleTextCls = computed(() => {
-      const { size } = props;
-      return [
-        {
-          'card-title__text--small': size === 'small',
-          'card-title__text--default': size !== 'small',
-        },
-      ];
-    });
-
-    return {
-      containerCls,
-      titleCls,
-      titleTextCls,
-    };
+  size: {
+    type: String,
+    default: 'default',
   },
+  border: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const containerCls = computed(() => {
+  const { compact, border } = props;
+  return ['card-container', { 'card-container-compact': compact, 'card-container--border': border }];
+});
+
+const titleCls = computed(() => {
+  const { size } = props;
+  return [
+    'card-title',
+    {
+      'card-title--small': size === 'small',
+      'card-title--default': size !== 'small',
+    },
+  ];
+});
+
+const titleTextCls = computed(() => {
+  const { size } = props;
+  return [
+    {
+      'card-title__text--small': size === 'small',
+      'card-title__text--default': size !== 'small',
+    },
+  ];
 });
 </script>
 <style lang="less">

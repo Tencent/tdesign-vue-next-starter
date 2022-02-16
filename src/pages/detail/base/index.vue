@@ -26,8 +26,7 @@
     </card>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import Card from '@/components/card/index.vue';
 
 const BASE_INFO_DATA = [
@@ -108,16 +107,6 @@ const BASE_INFO_DATA = [
     type: null,
   },
 ];
-
-export default defineComponent({
-  name: 'ListBase',
-  components: { Card },
-  data() {
-    return {
-      BASE_INFO_DATA,
-    };
-  },
-});
 </script>
 <style lang="less" scoped>
 @import url('./index.less');

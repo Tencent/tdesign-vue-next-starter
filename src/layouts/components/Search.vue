@@ -36,31 +36,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, PropType } from 'vue';
+<script setup lang="ts">
+import { ref, defineProps } from 'vue';
 
-export default defineComponent({
-  props: {
-    layout: {
-      type: String as PropType<string>,
-    },
-  },
-  setup() {
-    const isSearchFocus = ref(false);
-    const searchData = ref('');
-    const changeSearchFocus = (value: boolean) => {
-      if (!value) {
-        searchData.value = '';
-      }
-      isSearchFocus.value = value;
-    };
-    return {
-      isSearchFocus,
-      searchData,
-      changeSearchFocus,
-    };
-  },
+const layout = defineProps({
+  type: String,
 });
+
+const isSearchFocus = ref(false);
+const searchData = ref('');
+const changeSearchFocus = (value: boolean) => {
+  if (!value) {
+    searchData.value = '';
+  }
+  isSearchFocus.value = value;
+};
 </script>
 <style lang="less">
 @import '@/style/variables.less';

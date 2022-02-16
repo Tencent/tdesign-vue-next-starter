@@ -139,8 +139,8 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+<script setup lang="ts">
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { ValidateResultContext } from 'tdesign-vue-next';
 import Card from '@/components/card/index.vue';
@@ -155,53 +155,36 @@ import {
   INITIAL_DATA3,
 } from './constants';
 
-export default defineComponent({
-  name: 'FormStep',
-  components: { Card },
-  setup() {
-    const formData1 = ref({ ...INITIAL_DATA1 });
-    const formData2 = ref({ ...INITIAL_DATA2 });
-    const formData3 = ref({ ...INITIAL_DATA3 });
-    const activeForm = ref(0);
+const formData1 = ref({ ...INITIAL_DATA1 });
+const formData2 = ref({ ...INITIAL_DATA2 });
+const formData3 = ref({ ...INITIAL_DATA3 });
+const activeForm = ref(0);
 
-    const amount = computed(() => {
-      if (formData1.value.name === '1') {
-        return '565421';
-      }
-      if (formData1.value.name === '2') {
-        return '278821';
-      }
-      if (formData1.value.name === '3') {
-        return '109824';
-      }
-      return '--';
-    });
-
-    return {
-      NAME_OPTIONS,
-      TYPE_OPTIONS,
-      ADDRESS_OPTIONS,
-      FORM_RULES,
-      formData1,
-      formData2,
-      formData3,
-      activeForm,
-      amount,
-      onSubmit(result: ValidateResultContext<FormData>, val: number) {
-        if (result.validateResult === true) {
-          activeForm.value = val;
-        }
-      },
-      onReset(val: number) {
-        activeForm.value = val;
-      },
-      complete() {
-        const router = useRouter();
-        router.replace({ path: '/detail/advanced' });
-      },
-    };
-  },
+const amount = computed(() => {
+  if (formData1.value.name === '1') {
+    return '565421';
+  }
+  if (formData1.value.name === '2') {
+    return '278821';
+  }
+  if (formData1.value.name === '3') {
+    return '109824';
+  }
+  return '--';
 });
+
+const onSubmit = (result: ValidateResultContext<FormData>, val: number) => {
+  if (result.validateResult === true) {
+    activeForm.value = val;
+  }
+};
+const onReset = (val: number) => {
+  activeForm.value = val;
+};
+const complete = () => {
+  const router = useRouter();
+  router.replace({ path: '/detail/advanced' });
+};
 </script>
 <style lang="less" scoped>
 @import url('./index.less');
