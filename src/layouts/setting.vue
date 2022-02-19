@@ -91,7 +91,7 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import { ColorPicker } from 'vue-color-kit';
 import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
@@ -219,12 +219,9 @@ const getThumbnailUrl = (name: string): string => {
   return `https://tdesign.gtimg.com/tdesign-pro/setting/${name}.png`;
 };
 
-watch(
-  () => formData.value,
-  (newVal) => {
-    store.dispatch('setting/changeTheme', newVal);
-  },
-);
+watchEffect(() => {
+  store.dispatch('setting/changeTheme', formData.value);
+});
 </script>
 <style lang="less">
 @import '@/style/variables';
