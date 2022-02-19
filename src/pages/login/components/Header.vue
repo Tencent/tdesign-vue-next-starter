@@ -15,34 +15,22 @@
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { useStore } from 'vuex';
 import LogoFullIcon from '@/assets/assets-logo-full.svg?component';
 
-export default defineComponent({
-  components: { LogoFullIcon },
-  setup() {
-    const store = useStore();
-    const toggleSettingPanel = () => {
-      store.commit('setting/toggleSettingPanel', true);
-    };
+const store = useStore();
+const toggleSettingPanel = () => {
+  store.commit('setting/toggleSettingPanel', true);
+};
 
-    const navToGitHub = () => {
-      window.open('https://github.com/tencent/tdesign-vue-next-starter');
-    };
+const navToGitHub = () => {
+  window.open('https://github.com/tencent/tdesign-vue-next-starter');
+};
 
-    const navToHelper = () => {
-      window.open('http://tdesign.tencent.com/starter/docs/get-started');
-    };
-
-    return {
-      toggleSettingPanel,
-      navToGitHub,
-      navToHelper,
-    };
-  },
-});
+const navToHelper = () => {
+  window.open('http://tdesign.tencent.com/starter/docs/get-started');
+};
 </script>
 
 <style lang="less" scoped>

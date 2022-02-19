@@ -8,8 +8,8 @@
         </t-form-item>
         <t-form-item label="产品状态" name="status">
           <t-radio-group v-model="formData.status">
-            <t-radio value="0"> 已停用 </t-radio>
-            <t-radio value="1"> 已启用 </t-radio>
+            <t-radio value="0">已停用</t-radio>
+            <t-radio value="1">已启用</t-radio>
           </t-radio-group>
         </t-form-item>
         <t-form-item label="产品描述" name="description">
@@ -26,16 +26,16 @@
           <t-textarea v-model="textareaValue" :style="{ width: '480px' }" placeholder="请输入内容" name="description" />
         </t-form-item>
         <t-form-item style="float: right">
-          <t-button variant="outline" @click="onClickCloseBtn"> 取消 </t-button>
-          <t-button theme="primary" type="submit"> 确定 </t-button>
+          <t-button variant="outline" @click="onClickCloseBtn">取消</t-button>
+          <t-button theme="primary" type="submit">确定</t-button>
         </t-form-item>
       </t-form>
     </template>
   </t-dialog>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+<script setup lang="ts">
+import { ref, watch } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 
 const INITIAL_DATA = {
@@ -53,72 +53,61 @@ const SELECT_OPTIONS = [
   { label: 'CVM', value: '3' },
 ];
 
-export default defineComponent({
-  props: {
-    visible: {
-      type: Boolean,
-      default: false,
-    },
-    data: {
-      type: Object,
-      default: () => {
-        return {};
-      },
-    },
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: false,
   },
-  setup(props, ctx) {
-    const formVisible = ref(false);
-    const formData = ref(props.data);
-    const textareaValue = ref('');
-
-    const onSubmit = ({ result, firstError }) => {
-      if (!firstError) {
-        MessagePlugin.success('提交成功');
-        formVisible.value = false;
-      } else {
-        console.log('Errors: ', result);
-        MessagePlugin.warning(firstError);
-      }
-    };
-
-    const onClickCloseBtn = () => {
-      formVisible.value = false;
-      formData.value = { ...INITIAL_DATA };
-    };
-
-    watch(
-      () => formVisible.value,
-      (val) => {
-        const { emit } = ctx;
-        emit('update:visible', val);
-      },
-    );
-
-    watch(
-      () => props.visible,
-      (val) => {
-        formVisible.value = val;
-      },
-    );
-
-    watch(
-      () => props.data,
-      (val) => {
-        formData.value = val;
-      },
-    );
-
-    return {
-      SELECT_OPTIONS,
-      formVisible,
-      formData,
-      textareaValue,
-      onSubmit,
-      onClickCloseBtn,
-      rules: {
-        name: [{ required: true, message: '请输入产品名称', type: 'error' }],
-      },
-    };
+  data: {
+    type: Object,
+    default: () => {
+      return {};
+    },
   },
 });
+
+const formVisible = ref(false);
+const formData = ref(props.data);
+const textareaValue = ref('');
+
+const onSubmit = ({ result, firstError }) => {
+  if (!firstError) {
+    MessagePlugin.success('提交成功');
+    formVisible.value = false;
+  } else {
+    console.log('Errors: ', result);
+    MessagePlugin.warning(firstError);
+  }
+};
+
+const onClickCloseBtn = () => {
+  formVisible.value = false;
+  formData.value = { ...INITIAL_DATA };
+};
+
+const emit = defineEmits(['update:visible']);
+watch(
+  () => formVisible.value,
+  (val) => {
+    emit('update:visible', val);
+  },
+);
+
+watch(
+  () => props.visible,
+  (val) => {
+    formVisible.value = val;
+  },
+);
+
+watch(
+  () => props.data,
+  (val) => {
+    formData.value = val;
+  },
+);
+
+const rules = {
+  name: [{ required: true, message: '请输入产品名称', type: 'error' }],
+};
 </script>

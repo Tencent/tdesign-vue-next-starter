@@ -57,8 +57,8 @@
     </card>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
+<script setup lang="ts">
+import { nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -76,91 +76,77 @@ import Card from '@/components/card/index.vue';
 
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 
-export default defineComponent({
-  name: 'DashboardDetail',
-  components: {
-    Card,
-    Trend,
-    ProductCard,
-  },
-  setup() {
-    const store = useStore();
-    const chartColors = computed(() => store.state.setting.chartColors);
-    // lineChart logic
-    let lineContainer: HTMLElement;
-    let lineChart: echarts.ECharts;
-    const renderLineChart = () => {
-      lineContainer = document.getElementById('lineContainer');
-      lineChart = echarts.init(lineContainer);
-      lineChart.setOption(getFolderLineDataSet({ ...chartColors.value }));
-    };
+const store = useStore();
+const chartColors = computed(() => store.state.setting.chartColors);
+// lineChart logic
+let lineContainer: HTMLElement;
+let lineChart: echarts.ECharts;
+const renderLineChart = () => {
+  lineContainer = document.getElementById('lineContainer');
+  lineChart = echarts.init(lineContainer);
+  lineChart.setOption(getFolderLineDataSet({ ...chartColors.value }));
+};
 
-    // scatterChart logic
-    let scatterContainer: HTMLElement;
-    let scatterChart: echarts.ECharts;
-    const renderScatterChart = () => {
-      scatterContainer = document.getElementById('scatterContainer');
-      scatterChart = echarts.init(scatterContainer);
-      scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
-    };
+// scatterChart logic
+let scatterContainer: HTMLElement;
+let scatterChart: echarts.ECharts;
+const renderScatterChart = () => {
+  scatterContainer = document.getElementById('scatterContainer');
+  scatterChart = echarts.init(scatterContainer);
+  scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
+};
 
-    // chartSize update
-    const updateContainer = () => {
-      lineChart?.resize({
-        width: lineContainer.clientWidth,
-        height: lineContainer.clientHeight,
-      });
-      scatterChart?.resize({
-        width: scatterContainer.clientWidth,
-        height: scatterContainer.clientHeight,
-      });
-    };
+// chartSize update
+const updateContainer = () => {
+  lineChart?.resize({
+    width: lineContainer.clientWidth,
+    height: lineContainer.clientHeight,
+  });
+  scatterChart?.resize({
+    width: scatterContainer.clientWidth,
+    height: scatterContainer.clientHeight,
+  });
+};
 
-    const renderCharts = () => {
-      renderScatterChart();
-      renderLineChart();
-    };
+const renderCharts = () => {
+  renderScatterChart();
+  renderLineChart();
+};
 
-    onMounted(() => {
-      renderCharts();
-      window.addEventListener('resize', updateContainer, false);
-      nextTick(() => {
-        updateContainer();
-      });
-    });
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', updateContainer);
-    });
-
-    watch(
-      () => store.state.setting.mode,
-      () => {
-        renderCharts();
-      },
-    );
-
-    watch(
-      () => store.state.setting.brandTheme,
-      () => {
-        changeChartsTheme([lineChart, scatterChart]);
-      },
-    );
-
-    return {
-      LAST_7_DAYS,
-      PRODUCT_LIST,
-      PANE_LIST_DATA,
-      onSatisfyChange() {
-        scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
-      },
-      onMaterialChange(value: string[]) {
-        const chartColors = computed(() => store.state.setting.chartColors);
-        lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors.value }));
-      },
-    };
-  },
+onMounted(() => {
+  renderCharts();
+  window.addEventListener('resize', updateContainer, false);
+  nextTick(() => {
+    updateContainer();
+  });
 });
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateContainer);
+});
+
+watch(
+  () => store.state.setting.mode,
+  () => {
+    renderCharts();
+  },
+);
+
+watch(
+  () => store.state.setting.brandTheme,
+  () => {
+    changeChartsTheme([lineChart, scatterChart]);
+  },
+);
+
+const onSatisfyChange = () => {
+  scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
+};
+
+const onMaterialChange = (value: string[]) => {
+  const chartColors = computed(() => store.state.setting.chartColors);
+  lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors.value }));
+};
 </script>
 <style lang="less" scoped>
 @import url('./index.less');

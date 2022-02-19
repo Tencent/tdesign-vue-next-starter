@@ -6,37 +6,25 @@
   </t-breadcrumb>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-export default defineComponent({
-  name: 'TdesignStarterBreadcrumb',
-  props: {
-    isVisible: Boolean,
-  },
-  setup() {
-    const crumbs = computed(() => {
-      const route = useRoute();
+const crumbs = computed(() => {
+  const route = useRoute();
 
-      const pathArray = route.path.split('/');
-      pathArray.shift();
+  const pathArray = route.path.split('/');
+  pathArray.shift();
 
-      const breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
-        breadcrumbArray.push({
-          path,
-          to: breadcrumbArray[idx - 1] ? `/${breadcrumbArray[idx - 1].path}/${path}` : `/${path}`,
-          title: route.matched[idx].meta.title || path,
-        });
-        return breadcrumbArray;
-      }, []);
-      return breadcrumbs;
+  const breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
+    breadcrumbArray.push({
+      path,
+      to: breadcrumbArray[idx - 1] ? `/${breadcrumbArray[idx - 1].path}/${path}` : `/${path}`,
+      title: route.matched[idx].meta.title || path,
     });
-
-    return {
-      crumbs,
-    };
-  },
+    return breadcrumbArray;
+  }, []);
+  return breadcrumbs;
 });
 </script>
 <style scoped>

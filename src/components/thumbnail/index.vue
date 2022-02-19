@@ -1,34 +1,26 @@
 <template>
   <img :class="className" :src="url" />
 </template>
-<script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 
-export default defineComponent({
-  name: 'Thumbnail',
-  props: {
-    url: {
-      type: String as PropType<string>,
-      default: '',
-    },
-    type: {
-      type: String as PropType<string>,
-      default: 'layout',
-    },
+const props = defineProps({
+  url: String,
+  type: {
+    type: String,
+    default: 'layout',
   },
-  setup(props) {
-    const className = computed(() => {
-      const { type } = props;
-      return [
-        'thumbnail-container',
-        {
-          'thumbnail-circle': type === 'circle',
-          'thumbnail-layout': type === 'layout',
-        },
-      ];
-    });
-    return { className };
-  },
+});
+
+const className = computed(() => {
+  const { type } = props;
+  return [
+    'thumbnail-container',
+    {
+      'thumbnail-circle': type === 'circle',
+      'thumbnail-layout': type === 'layout',
+    },
+  ];
 });
 </script>
 <style lang="less" scoped>

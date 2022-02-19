@@ -2,7 +2,7 @@
   <div>
     <t-row :gutter="[16, 16]">
       <t-col v-for="(item, index) in PANE_LIST" :key="item.title" :xs="6" :xl="3">
-        <card :subtitle="item.title" :style="{ height: '168px' }" :class="{ 'main-color': index == 0 }" size="small">
+        <card :subtitle="item.title" :style="{ height: '168px' }" :class="{ 'main-color': index == 0 }">
           <div class="dashboard-item">
             <div class="dashboard-item-top">
               <span :style="{ fontSize: `${resizeTime * 36}px` }">{{ item.number }}</span>
@@ -202,8 +202,8 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, onMounted, watch, ref, onUnmounted, nextTick, computed } from 'vue';
+<script setup lang="ts">
+import { onMounted, watch, ref, onUnmounted, nextTick, computed } from 'vue';
 import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
@@ -241,169 +241,150 @@ const getThisMonth = (checkedValues?: string[]) => {
   return `${date.getFullYear()}-${startMonth}  至  ${date2.getFullYear()}-${endMonth}`;
 };
 
-export default defineComponent({
-  name: 'DashboardBase',
-  components: {
-    Card,
-    Trend,
-  },
-  setup() {
-    const store = useStore();
-    const resizeTime = ref(1);
+const store = useStore();
+const resizeTime = ref(1);
 
-    const chartColors = computed(() => store.state.setting.chartColors);
+const chartColors = computed(() => store.state.setting.chartColors);
 
-    // moneyCharts
-    let moneyContainer: HTMLElement;
-    let moneyChart: echarts.ECharts;
-    const renderMoneyChart = () => {
-      if (!moneyContainer) {
-        moneyContainer = document.getElementById('moneyContainer');
-      }
-      moneyChart = echarts.init(moneyContainer);
-      moneyChart.setOption(constructInitDashboardDataset('line'));
-    };
+// moneyCharts
+let moneyContainer: HTMLElement;
+let moneyChart: echarts.ECharts;
+const renderMoneyChart = () => {
+  if (!moneyContainer) {
+    moneyContainer = document.getElementById('moneyContainer');
+  }
+  moneyChart = echarts.init(moneyContainer);
+  moneyChart.setOption(constructInitDashboardDataset('line'));
+};
 
-    // refundCharts
-    let refundContainer: HTMLElement;
-    let refundChart: echarts.ECharts;
-    const renderRefundChart = () => {
-      if (!refundContainer) {
-        refundContainer = document.getElementById('refundContainer');
-      }
-      refundChart = echarts.init(refundContainer);
-      refundChart.setOption(constructInitDashboardDataset('bar'));
-    };
+// refundCharts
+let refundContainer: HTMLElement;
+let refundChart: echarts.ECharts;
+const renderRefundChart = () => {
+  if (!refundContainer) {
+    refundContainer = document.getElementById('refundContainer');
+  }
+  refundChart = echarts.init(refundContainer);
+  refundChart.setOption(constructInitDashboardDataset('bar'));
+};
 
-    // stokeCharts
-    let stokeContainer: HTMLElement;
-    let stokeChart: echarts.ECharts;
-    const renderStokeChart = () => {
-      if (!stokeContainer) {
-        stokeContainer = document.getElementById('stokeContainer');
-      }
-      stokeChart = echarts.init(stokeContainer);
-      stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors.value }));
-    };
+// stokeCharts
+let stokeContainer: HTMLElement;
+let stokeChart: echarts.ECharts;
+const renderStokeChart = () => {
+  if (!stokeContainer) {
+    stokeContainer = document.getElementById('stokeContainer');
+  }
+  stokeChart = echarts.init(stokeContainer);
+  stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors.value }));
+};
 
-    // monitorChart
-    let monitorContainer: HTMLElement;
-    let monitorChart: echarts.ECharts;
-    const renderMonitorChart = () => {
-      if (!monitorContainer) {
-        monitorContainer = document.getElementById('monitorContainer');
-      }
-      monitorChart = echarts.init(monitorContainer);
-      monitorChart.setOption(getLineChartDataSet({ ...chartColors.value }));
-    };
+// monitorChart
+let monitorContainer: HTMLElement;
+let monitorChart: echarts.ECharts;
+const renderMonitorChart = () => {
+  if (!monitorContainer) {
+    monitorContainer = document.getElementById('monitorContainer');
+  }
+  monitorChart = echarts.init(monitorContainer);
+  monitorChart.setOption(getLineChartDataSet({ ...chartColors.value }));
+};
 
-    // monitorChart
-    let countContainer: HTMLElement;
-    let countChart: echarts.ECharts;
-    const renderCountChart = () => {
-      if (!countContainer) {
-        countContainer = document.getElementById('countContainer');
-      }
-      countChart = echarts.init(countContainer);
-      countChart.setOption(getPieChartDataSet(chartColors.value));
-    };
+// monitorChart
+let countContainer: HTMLElement;
+let countChart: echarts.ECharts;
+const renderCountChart = () => {
+  if (!countContainer) {
+    countContainer = document.getElementById('countContainer');
+  }
+  countChart = echarts.init(countContainer);
+  countChart.setOption(getPieChartDataSet(chartColors.value));
+};
 
-    const renderCharts = () => {
-      renderMoneyChart();
-      renderRefundChart();
-      renderStokeChart();
-      renderMonitorChart();
-      renderCountChart();
-    };
+const renderCharts = () => {
+  renderMoneyChart();
+  renderRefundChart();
+  renderStokeChart();
+  renderMonitorChart();
+  renderCountChart();
+};
 
-    // chartSize update
-    const updateContainer = () => {
-      if (document.documentElement.clientWidth >= 1400 && document.documentElement.clientWidth < 1920) {
-        resizeTime.value = Number((document.documentElement.clientWidth / 2080).toFixed(2));
-      } else if (document.documentElement.clientWidth < 1080) {
-        resizeTime.value = Number((document.documentElement.clientWidth / 1080).toFixed(2));
-      } else {
-        resizeTime.value = 1;
-      }
-      moneyChart.resize({
-        width: resizeTime.value * 120,
-        height: resizeTime.value * 66,
-      });
-      refundChart.resize({
-        width: resizeTime.value * 120,
-        height: resizeTime.value * 42,
-      });
-      stokeChart.resize({
-        width: stokeContainer.clientWidth,
-        height: stokeContainer.clientHeight,
-      });
-      monitorChart.resize({
-        width: monitorContainer.clientWidth,
-        height: resizeTime.value * 326,
-      });
-      countChart.resize({
-        width: resizeTime.value * 326,
-        height: resizeTime.value * 326,
-      });
-    };
+// chartSize update
+const updateContainer = () => {
+  if (document.documentElement.clientWidth >= 1400 && document.documentElement.clientWidth < 1920) {
+    resizeTime.value = Number((document.documentElement.clientWidth / 2080).toFixed(2));
+  } else if (document.documentElement.clientWidth < 1080) {
+    resizeTime.value = Number((document.documentElement.clientWidth / 1080).toFixed(2));
+  } else {
+    resizeTime.value = 1;
+  }
+  moneyChart.resize({
+    width: resizeTime.value * 120,
+    height: resizeTime.value * 66,
+  });
+  refundChart.resize({
+    width: resizeTime.value * 120,
+    height: resizeTime.value * 42,
+  });
+  stokeChart.resize({
+    width: stokeContainer.clientWidth,
+    height: stokeContainer.clientHeight,
+  });
+  monitorChart.resize({
+    width: monitorContainer.clientWidth,
+    height: resizeTime.value * 326,
+  });
+  countChart.resize({
+    width: resizeTime.value * 326,
+    height: resizeTime.value * 326,
+  });
+};
 
-    onMounted(() => {
-      renderCharts();
-      nextTick(() => {
-        updateContainer();
-      });
-      window.addEventListener('resize', updateContainer, false);
-    });
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', updateContainer);
-    });
-
-    const currentMonth = ref(getThisMonth());
-
-    watch(
-      () => store.state.setting.brandTheme,
-      () => {
-        changeChartsTheme([refundChart, stokeChart, monitorChart, countChart]);
-      },
-    );
-
-    watch(
-      () => store.state.setting.mode,
-      () => {
-        [moneyChart, refundChart, stokeChart, monitorChart, countChart].forEach((item) => {
-          item.dispose();
-        });
-
-        renderCharts();
-      },
-    );
-
-    return {
-      resizeTime,
-      currentMonth,
-      LAST_7_DAYS,
-      PANE_LIST,
-      BUY_TEND_LIST,
-      SALE_TEND_LIST,
-      SALE_COLUMNS,
-      BUY_COLUMNS,
-      onCurrencyChange(checkedValues: string[]) {
-        currentMonth.value = getThisMonth(checkedValues);
-        monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors.value }));
-      },
-      onStokeDataChange(checkedValues: string[]) {
-        stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors.value }));
-      },
-      rehandleClickOp(val: MouseEvent) {
-        console.log(val);
-      },
-      getRankClass(index: number) {
-        return ['dashboard-rank', { 'dashboard-rank__top': index < 3 }];
-      },
-    };
-  },
+onMounted(() => {
+  renderCharts();
+  nextTick(() => {
+    updateContainer();
+  });
+  window.addEventListener('resize', updateContainer, false);
 });
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateContainer);
+});
+
+const currentMonth = ref(getThisMonth());
+
+watch(
+  () => store.state.setting.brandTheme,
+  () => {
+    changeChartsTheme([refundChart, stokeChart, monitorChart, countChart]);
+  },
+);
+
+watch(
+  () => store.state.setting.mode,
+  () => {
+    [moneyChart, refundChart, stokeChart, monitorChart, countChart].forEach((item) => {
+      item.dispose();
+    });
+
+    renderCharts();
+  },
+);
+
+const onCurrencyChange = (checkedValues: string[]) => {
+  currentMonth.value = getThisMonth(checkedValues);
+  monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors.value }));
+};
+const onStokeDataChange = (checkedValues: string[]) => {
+  stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors.value }));
+};
+const rehandleClickOp = (val: MouseEvent) => {
+  console.log(val);
+};
+const getRankClass = (index: number) => {
+  return ['dashboard-rank', { 'dashboard-rank__top': index < 3 }];
+};
 </script>
 <style lang="less" scoped>
 @import './index.less';

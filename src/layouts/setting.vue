@@ -90,8 +90,8 @@
     </div>
   </t-drawer>
 </template>
-<script lang="ts">
-import { defineComponent, ref, computed, watch, onMounted } from 'vue';
+<script setup lang="ts">
+import { ref, computed, watch, onMounted, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import { ColorPicker } from 'vue-color-kit';
 import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
@@ -118,132 +118,109 @@ const MODE_OPTIONS = [
   { type: 'auto', text: '跟随系统' },
 ];
 
-export default defineComponent({
-  name: 'DefaultLayoutSetting',
-  components: { Thumbnail, ColorContainer, ColorPicker },
-  setup() {
-    const formData = ref({ ...STYLE_CONFIG });
-    const store = useStore();
-    const colors = ref();
-    const isColoPickerDisplay = ref(false);
+const formData = ref({ ...STYLE_CONFIG });
+const store = useStore();
+const colors = ref();
+const isColoPickerDisplay = ref(false);
 
-    const showSettingPanel = computed({
-      get() {
-        return store.state.setting.showSettingPanel;
-      },
-      set(newVal) {
-        store.commit('setting/toggleSettingPanel', newVal);
-      },
-    });
-
-    const mode = computed(() => {
-      return store.getters['setting/mode'];
-    });
-
-    watch(
-      () => colors.value,
-      (newColor) => {
-        const { hex } = newColor;
-        const { setting } = store.state;
-
-        // hex 主题色
-        const newPalette = Color.getPaletteByGradation({
-          colors: [hex],
-          step: 10,
-        })[0];
-        const { mode } = store.state.setting;
-        const colorMap = generateColorMap(hex, newPalette, mode);
-
-        store.commit('setting/addColor', { [hex]: colorMap });
-
-        insertThemeStylesheet(hex, colorMap, mode);
-
-        store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
-      },
-    );
-    const changeColor = (val) => {
-      const { hex } = val;
-      const { setting } = store.state;
-
-      // hex 主题色
-      const newPalette = Color.getPaletteByGradation({
-        colors: [hex],
-        step: 10,
-      })[0];
-      const { mode } = store.state.setting;
-      const colorMap = generateColorMap(hex, newPalette, mode);
-
-      store.commit('setting/addColor', { [hex]: colorMap });
-
-      insertThemeStylesheet(hex, colorMap, mode);
-
-      store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
-    };
-
-    onMounted(() => {
-      document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
-        isColoPickerDisplay.value = true;
-      });
-    });
-
-    const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeContext) => {
-      if (!visible && context.trigger === 'document') {
-        isColoPickerDisplay.value = visible;
-      }
-    };
-
-    const handleCopy = () => {
-      const text = JSON.stringify(formData.value, null, 4);
-      const { toClipboard } = useClipboard();
-      toClipboard(text)
-        .then(() => {
-          MessagePlugin.closeAll();
-          MessagePlugin.success('复制成功');
-        })
-        .catch(() => {
-          MessagePlugin.closeAll();
-          MessagePlugin.error('复制失败');
-        });
-    };
-    const getModeIcon = (mode: string) => {
-      if (mode === 'light') {
-        return SettingLightIcon;
-      }
-      if (mode === 'dark') {
-        return SettingDarkIcon;
-      }
-      return SettingAutoIcon;
-    };
-
-    const handleCloseDrawer = () => {
-      store.commit('setting/toggleSettingPanel', false);
-    };
-    return {
-      mode,
-      changeColor,
-      isColoPickerDisplay,
-      onPopupVisibleChange,
-      MODE_OPTIONS,
-      LAYOUT_OPTION,
-      COLOR_OPTIONS,
-      formData,
-      showSettingPanel,
-      handleCopy,
-      getModeIcon,
-      handleCloseDrawer,
-      getThumbnailUrl(name: string): string {
-        return `https://tdesign.gtimg.com/tdesign-pro/setting/${name}.png`;
-      },
-    };
+const showSettingPanel = computed({
+  get() {
+    return store.state.setting.showSettingPanel;
   },
-  watch: {
-    formData: {
-      handler(newVal) {
-        this.$store.dispatch('setting/changeTheme', newVal);
-      },
-      deep: true,
-    },
+  set(newVal) {
+    store.commit('setting/toggleSettingPanel', newVal);
   },
+});
+
+const mode = computed(() => {
+  return store.getters['setting/mode'];
+});
+
+watch(
+  () => colors.value,
+  (newColor) => {
+    const { hex } = newColor;
+    const { setting } = store.state;
+
+    // hex 主题色
+    const newPalette = Color.getPaletteByGradation({
+      colors: [hex],
+      step: 10,
+    })[0];
+    const { mode } = store.state.setting;
+    const colorMap = generateColorMap(hex, newPalette, mode);
+
+    store.commit('setting/addColor', { [hex]: colorMap });
+
+    insertThemeStylesheet(hex, colorMap, mode);
+
+    store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
+  },
+);
+
+const changeColor = (val) => {
+  const { hex } = val;
+  const { setting } = store.state;
+  // hex 主题色
+  const newPalette = Color.getPaletteByGradation({
+    colors: [hex],
+    step: 10,
+  })[0];
+  const { mode } = store.state.setting;
+  const colorMap = generateColorMap(hex, newPalette, mode);
+
+  store.commit('setting/addColor', { [hex]: colorMap });
+
+  insertThemeStylesheet(hex, colorMap, mode);
+
+  store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
+};
+
+onMounted(() => {
+  document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+    isColoPickerDisplay.value = true;
+  });
+});
+
+const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeContext) => {
+  if (!visible && context.trigger === 'document') {
+    isColoPickerDisplay.value = visible;
+  }
+};
+
+const handleCopy = () => {
+  const text = JSON.stringify(formData.value, null, 4);
+  const { toClipboard } = useClipboard();
+  toClipboard(text)
+    .then(() => {
+      MessagePlugin.closeAll();
+      MessagePlugin.success('复制成功');
+    })
+    .catch(() => {
+      MessagePlugin.closeAll();
+      MessagePlugin.error('复制失败');
+    });
+};
+const getModeIcon = (mode: string) => {
+  if (mode === 'light') {
+    return SettingLightIcon;
+  }
+  if (mode === 'dark') {
+    return SettingDarkIcon;
+  }
+  return SettingAutoIcon;
+};
+
+const handleCloseDrawer = () => {
+  store.commit('setting/toggleSettingPanel', false);
+};
+
+const getThumbnailUrl = (name: string): string => {
+  return `https://tdesign.gtimg.com/tdesign-pro/setting/${name}.png`;
+};
+
+watchEffect(() => {
+  store.dispatch('setting/changeTheme', formData.value);
 });
 </script>
 <style lang="less">

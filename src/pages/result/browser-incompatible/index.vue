@@ -19,15 +19,9 @@
   </result>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import Result from '@/components/result/index.vue';
 import Thumbnail from '@/components/thumbnail/index.vue';
-
-export default defineComponent({
-  name: 'ResultBrowserIncompatible',
-  components: { Result, Thumbnail },
-});
 </script>
 <style lang="less" scoped>
 @import '@/style/variables.less';

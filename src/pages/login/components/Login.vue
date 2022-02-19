@@ -70,8 +70,8 @@
   </t-form>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import QrcodeVue from 'qrcode.vue';
@@ -93,48 +93,32 @@ const FORM_RULES = {
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
 
-export default defineComponent({
-  components: { QrcodeVue },
-  setup() {
-    const type = ref('password');
+const type = ref('password');
 
-    const formData = ref({ ...INITIAL_DATA });
-    const showPsw = ref(false);
+const formData = ref({ ...INITIAL_DATA });
+const showPsw = ref(false);
 
-    const [countDown, handleCounter] = useCounter();
+const [countDown, handleCounter] = useCounter();
 
-    const switchType = (val: string) => {
-      type.value = val;
-    };
+const switchType = (val: string) => {
+  type.value = val;
+};
 
-    const router = useRouter();
-    const store = useStore();
+const router = useRouter();
+const store = useStore();
 
-    const onSubmit = async ({ validateResult }) => {
-      if (validateResult === true) {
-        try {
-          await store.dispatch('user/login', formData.value);
-          MessagePlugin.success('登陆成功');
-          router.push({
-            path: '/dashboard/base',
-          });
-        } catch (e) {
-          console.log(e);
-          MessagePlugin.error(e.message);
-        }
-      }
-    };
-
-    return {
-      FORM_RULES,
-      formData,
-      showPsw,
-      type,
-      switchType,
-      countDown,
-      handleCounter,
-      onSubmit,
-    };
-  },
-});
+const onSubmit = async ({ validateResult }) => {
+  if (validateResult === true) {
+    try {
+      await store.dispatch('user/login', formData.value);
+      MessagePlugin.success('登陆成功');
+      router.push({
+        path: '/dashboard/base',
+      });
+    } catch (e) {
+      console.log(e);
+      MessagePlugin.error(e.message);
+    }
+  }
+};
 </script>
