@@ -16,12 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from 'vuex';
 import LogoFullIcon from '@/assets/assets-logo-full.svg?component';
+import { useSettingStore } from '@/store';
 
-const store = useStore();
+const settingStore = useSettingStore();
 const toggleSettingPanel = () => {
-  store.commit('setting/toggleSettingPanel', true);
+  settingStore.updateConfig({
+    showSettingPanel: true,
+  });
 };
 
 const navToGitHub = () => {

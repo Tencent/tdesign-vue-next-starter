@@ -39,8 +39,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const layout = defineProps({
-  type: String,
+defineProps({
+  layout: String,
 });
 
 const isSearchFocus = ref(false);

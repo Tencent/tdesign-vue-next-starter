@@ -1,4 +1,6 @@
+import { defineStore } from 'pinia';
 import router, { asyncRouterList, page404 } from '@/router';
+import { store } from '@/store';
 
 function filterPermissionsRouters(routes, roles) {
   const res = [];
@@ -18,57 +20,38 @@ function filterPermissionsRouters(routes, roles) {
   return res;
 }
 
-const state = {
-  whiteListRouters: ['/login'],
-  routers: [],
-};
+export const usePermissionStore = defineStore('permission', {
+  state: () => ({
+    whiteListRouters: ['/login'],
+    routers: [],
+  }),
+  actions: {
+    async initRoutes(roles) {
+      let accessedRouters;
 
-const mutations = {
-  setRouters: (state, routers) => {
-    state.routers = routers;
+      // special token
+      if (roles.includes('ALL_ROUTERS')) {
+        accessedRouters = asyncRouterList;
+      } else {
+        accessedRouters = filterPermissionsRouters(asyncRouterList, roles);
+      }
+
+      this.routers = accessedRouters;
+
+      // register routers
+      accessedRouters.concat(page404).forEach((item) => {
+        router.addRoute(item);
+      });
+    },
+    async restore() {
+      this.routers.concat(page404).forEach((item) => {
+        if (router.hasRoute(item.name)) router.removeRoute(item.name);
+      });
+      this.routers = [];
+    },
   },
-};
+});
 
-const getters = {
-  routers: (state) => {
-    return state.routers;
-  },
-  whiteListRouters: (state) => {
-    return state.whiteListRouters;
-  },
-};
-
-const actions = {
-  async initRoutes({ commit }, roles) {
-    let accessedRouters;
-
-    // special token
-    if (roles.includes('ALL_ROUTERS')) {
-      accessedRouters = asyncRouterList;
-    } else {
-      accessedRouters = filterPermissionsRouters(asyncRouterList, roles);
-    }
-
-    commit('setRouters', accessedRouters);
-
-    // register routers
-    state.routers.concat(page404).forEach((item) => {
-      router.addRoute(item);
-    });
-  },
-  async restore({ commit, state }) {
-    // remove routers
-    state.routers.concat(page404).forEach((item) => {
-      router.removeRoute(item.name);
-    });
-    commit('setRouters', []);
-  },
-};
-
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-  getters,
-};
+export function getPermissionStore() {
+  return usePermissionStore(store);
+}

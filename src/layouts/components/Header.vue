@@ -12,7 +12,7 @@
           <search :layout="layout" />
         </div>
       </template>
-      <menu-content v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
+      <MenuContent v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
       <template #operations>
         <div class="operations-container">
           <!-- 搜索框 -->
@@ -65,9 +65,8 @@
 
 <script setup lang="ts">
 import { PropType, computed } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router';
-
+import { useSettingStore } from '@/store';
 import { prefix } from '@/config/global';
 import tLogoFull from '@/assets/assets-logo-full.svg?component';
 import { MenuRoute } from '@/interface';
@@ -107,11 +106,13 @@ const props = defineProps({
   },
 });
 
-const store = useStore();
 const router = useRouter();
+const settingStore = useSettingStore();
 
 const toggleSettingPanel = () => {
-  store.commit('setting/toggleSettingPanel', true);
+  settingStore.updateConfig({
+    showSettingPanel: true,
+  });
 };
 
 const active = computed(() => {
@@ -141,7 +142,9 @@ const menuCls = computed(() => {
 });
 
 const changeCollapsed = () => {
-  store.commit('setting/toggleSidebarCompact');
+  settingStore.updateConfig({
+    isSidebarCompact: !settingStore.isSidebarCompact,
+  });
 };
 
 const handleNav = (url) => {
