@@ -50,11 +50,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed, ComputedRef } from 'vue';
-import { useStore } from 'vuex';
+import { ref, computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import { NOTIFICATION_TYPES } from '@/constants';
 import { NotificationItem } from '@/interface';
 import EmptyIcon from '@/assets/assets-empty.svg?component';
+import { useNotificationStore } from '@/store';
 
 const TAB_LIST = [
   {
@@ -76,14 +77,13 @@ const tabValue = ref('msgData');
 const visible = ref(false);
 const selectedItem = ref<NotificationItem>();
 
-const store = useStore();
+const store = useNotificationStore();
+const { msgData, unreadMsg, readMsg } = storeToRefs(store);
 
-const { msgData } = store.state.notification;
-
-const msgDataList: ComputedRef<NotificationItem[]> = computed(() => {
-  if (tabValue.value === 'msgData') return msgData;
-  if (tabValue.value === 'unreadMsg') return store.getters['notification/unreadMsg'];
-  if (tabValue.value === 'readMsg') return store.getters['notification/readMsg'];
+const msgDataList = computed(() => {
+  if (tabValue.value === 'msgData') return msgData.value;
+  if (tabValue.value === 'unreadMsg') return unreadMsg.value;
+  if (tabValue.value === 'readMsg') return readMsg.value;
   return [];
 });
 
@@ -93,25 +93,25 @@ const handleClickDeleteBtn = (item: NotificationItem) => {
 };
 
 const setReadStatus = (item: NotificationItem) => {
-  const changeMsg = msgData;
+  const changeMsg = msgData.value;
   changeMsg.forEach((e: NotificationItem) => {
     if (e.id === item.id) {
       if (e.status) e.status = false;
     }
   });
-  store.commit('notification/setMsgData', changeMsg);
+  store.setMsgData(changeMsg);
 };
 
 const deleteMsg = () => {
   const item = selectedItem.value;
-  const changeMsg = msgData;
+  const changeMsg = msgData.value;
   changeMsg.forEach((e: NotificationItem, index: number) => {
     if (e.id === item?.id) {
       changeMsg.splice(index, 1);
     }
   });
   visible.value = false;
-  store.commit('notification/setMsgData', changeMsg);
+  store.setMsgData(changeMsg);
 };
 </script>
 <style lang="less" scoped>

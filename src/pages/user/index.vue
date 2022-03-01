@@ -91,11 +91,11 @@
 </template>
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
-import { useStore } from 'vuex';
 import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { useSettingStore } from '@/store';
 
 import { LAST_7_DAYS } from '@/utils/date';
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
@@ -111,8 +111,8 @@ echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendC
 
 let lineContainer: HTMLElement;
 let lineChart: echarts.ECharts;
-const store = useStore();
-const chartColors = computed(() => store.state.setting.chartColors);
+const store = useSettingStore();
+const chartColors = computed(() => store.chartColors);
 
 const onLineChange = (value) => {
   lineChart.setOption(getFolderLineDataSet(value));
@@ -166,7 +166,7 @@ const getIcon = (type) => {
 };
 
 watch(
-  () => store.state.setting.brandTheme,
+  () => store.brandTheme,
   () => {
     changeChartsTheme([lineChart]);
   },

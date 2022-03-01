@@ -1,5 +1,8 @@
-import { defineComponent } from 'vue';
-import { mapGetters } from 'vuex';
+import { defineComponent, computed } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useRoute } from 'vue-router';
+import { usePermissionStore, useSettingStore } from '@/store';
+
 import TDesignHeader from './components/Header.vue';
 import TDesignBreadcrumb from './components/Breadcrumb.vue';
 import TDesignFooter from './components/Footer.vue';
@@ -8,112 +11,111 @@ import TDesignContent from './components/Content.vue';
 
 import { prefix } from '@/config/global';
 import TdesignSetting from './setting.vue';
-import { SettingType } from '@/interface';
 import '@/style/layout.less';
 
 const name = `${prefix}-base-layout`;
 
 export default defineComponent({
   name,
-  computed: {
-    ...mapGetters({
-      showSidebar: 'setting/showSidebar',
-      showHeader: 'setting/showHeader',
-      showHeaderLogo: 'setting/showHeaderLogo',
-      showSidebarLogo: 'setting/showSidebarLogo',
-      showFooter: 'setting/showFooter',
-      mode: 'setting/mode',
-      menuRouters: 'permission/routers',
-    }),
-    setting(): SettingType {
-      return this.$store.state.setting;
-    },
-    mainLayoutCls() {
-      return [
-        {
-          't-layout--with-sider': this.showSidebar,
-        },
-      ];
-    },
-    headerMenu() {
-      const { layout, splitMenu } = this.$store.state.setting;
-      const { menuRouters } = this;
-      if (layout === 'mix') {
-        if (splitMenu) {
-          return menuRouters.map((menu) => ({
+  setup() {
+    const route = useRoute();
+    const permissionStore = usePermissionStore();
+    const settingStore = useSettingStore();
+    const { routers: menuRouters } = storeToRefs(permissionStore);
+    const setting = storeToRefs(settingStore);
+
+    const mainLayoutCls = computed(() => [
+      {
+        't-layout--with-sider': settingStore.showSidebar,
+      },
+    ]);
+
+    const headerMenu = computed(() => {
+      if (settingStore.layout === 'mix') {
+        if (settingStore.splitMenu) {
+          console.log(menuRouters);
+          return menuRouters.value.map((menu) => ({
             ...menu,
             children: [],
           }));
         }
         return [];
       }
-      return menuRouters;
-    },
-    sideMenu() {
-      const { layout, splitMenu } = this.$store.state.setting;
-      let { menuRouters } = this;
+      return menuRouters.value;
+    });
+
+    const sideMenu = computed(() => {
+      const { layout, splitMenu } = settingStore;
+      let newMenuRouters = menuRouters.value;
       if (layout === 'mix' && splitMenu) {
-        menuRouters.forEach((menu) => {
-          if (this.$route.path.indexOf(menu.path) === 0) {
-            menuRouters = menu.children.map((subMenu) => ({ ...subMenu, path: `${menu.path}/${subMenu.path}` }));
+        newMenuRouters.forEach((menu) => {
+          if (route.path.indexOf(menu.path) === 0) {
+            newMenuRouters = menu.children.map((subMenu) => ({ ...subMenu, path: `${menu.path}/${subMenu.path}` }));
           }
         });
       }
-      return menuRouters;
-    },
-  },
-  methods: {
-    renderSidebar() {
+      return newMenuRouters;
+    });
+
+    const renderSidebar = () => {
       return (
-        this.showSidebar && (
+        settingStore.showSidebar && (
           <TDesignSideNav
-            showLogo={this.showSidebarLogo}
-            layout={this.setting.layout}
-            isFixed={this.setting.isSidebarFixed}
-            menu={this.sideMenu}
-            theme={this.mode}
-            isCompact={this.setting.isSidebarCompact}
+            showLogo={settingStore.showSidebarLogo}
+            layout={settingStore.layout}
+            isFixed={settingStore.isSidebarFixed}
+            menu={sideMenu.value}
+            theme={settingStore.displayMode}
+            isCompact={settingStore.isSidebarCompact}
           />
         )
       );
-    },
-    renderHeader() {
+    };
+
+    const renderHeader = () => {
       return (
-        this.showHeader && (
+        settingStore.showHeader && (
           <TDesignHeader
-            showLogo={this.showHeaderLogo}
-            theme={this.mode}
-            layout={this.setting.layout}
-            isFixed={this.setting.isHeaderFixed}
-            menu={this.headerMenu}
-            isCompact={this.setting.isSidebarCompact}
+            showLogo={settingStore.showHeaderLogo}
+            theme={settingStore.displayMode}
+            layout={settingStore.layout}
+            isFixed={settingStore.isHeaderFixed}
+            menu={headerMenu.value}
+            isCompact={settingStore.isSidebarCompact}
           />
         )
       );
-    },
-    renderContent() {
-      const { showBreadcrumb } = this.setting;
-      const { showFooter } = this;
+    };
+
+    const renderFooter = () => {
+      return (
+        <t-footer class={`${prefix}-footer-layout`}>
+          <TDesignFooter />
+        </t-footer>
+      );
+    };
+
+    const renderContent = () => {
+      const { showBreadcrumb, showFooter } = settingStore;
       return (
         <t-layout class={[`${prefix}-layout`]}>
           <t-content class={`${prefix}-content-layout`}>
             {showBreadcrumb && <TDesignBreadcrumb />}
             <TDesignContent />
           </t-content>
-          {showFooter && this.renderFooter()}
+          {showFooter && renderFooter()}
         </t-layout>
       );
-    },
+    };
 
-    renderFooter() {
-      return (
-        <t-footer class={`${prefix}-footer-layout`}>
-          <TDesignFooter />
-        </t-footer>
-      );
-    },
+    return {
+      setting,
+      mainLayoutCls,
+      renderSidebar,
+      renderHeader,
+      renderContent,
+    };
   },
-
   render() {
     const { layout } = this.setting;
     const header = this.renderHeader();

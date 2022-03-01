@@ -70,12 +70,12 @@
 </template>
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch, computed } from 'vue';
-import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
 import { TitleComponent, ToolboxComponent, TooltipComponent, GridComponent, LegendComponent } from 'echarts/components';
 import { BarChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { useSettingStore } from '@/store';
 
 import { changeChartsTheme, getSmoothLineDataSet, get2ColBarChartDataSet } from '../../dashboard/base/index';
 import { BASE_INFO_DATA, TABLE_COLUMNS as columns } from './constants';
@@ -96,9 +96,9 @@ echarts.use([
   CanvasRenderer,
 ]);
 
-const store = useStore();
+const store = useSettingStore();
 
-const chartColors = computed(() => store.state.setting.chartColors);
+const chartColors = computed(() => store.chartColors);
 const data = ref([]);
 const pagination = ref({
   defaultPageSize: 10,
@@ -173,7 +173,7 @@ onMounted(() => {
 });
 
 watch(
-  () => store.state.setting.brandTheme,
+  () => store.brandTheme,
   () => {
     changeChartsTheme([monitorChart, dataChart]);
   },

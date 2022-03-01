@@ -3,17 +3,17 @@
 </template>
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
 import config from '@/config/style';
+import { useSettingStore } from '@/store';
 
-const store = useStore();
+const store = useSettingStore();
 
 const mode = computed(() => {
-  return store.getters['setting/mode'];
+  return store.displayMode;
 });
 
 onMounted(() => {
-  store.dispatch('setting/changeTheme', { ...config });
+  store.updateConfig({ ...config });
 });
 </script>
 <style lang="less">

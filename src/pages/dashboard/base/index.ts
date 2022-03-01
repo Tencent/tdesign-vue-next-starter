@@ -1,10 +1,8 @@
 import dayjs from 'dayjs';
 import * as echarts from 'echarts/core';
 import { Color } from 'tvision-color';
-import { getBrandColor, defaultLightColor, defaultDarkColor } from '@/config/color';
-import store from '@/store';
-
-const { state } = store;
+import { getBrandColor, defaultLightColor, defaultDarkColor, TChartColor } from '@/config/color';
+import { getSettingStore } from '@/store';
 
 /**
  * 依据主题类型获取颜色
@@ -14,8 +12,8 @@ const { state } = store;
  * @returns {}
  */
 export function getColorFromTheme(theme: string) {
-  const { setting } = state as any;
-  const { colorList, mode } = setting;
+  const settingStore = getSettingStore();
+  const { colorList, mode } = settingStore;
   const isDarkMode = mode === 'dark';
   let themeColorList = [];
   const themeColor = getBrandColor(theme, colorList);
@@ -41,8 +39,9 @@ export function getColorFromTheme(theme: string) {
 
 /** 图表颜色 */
 function chartListColor(): Array<string> {
-  const { setting } = state as any;
-  const res = getColorFromTheme(setting.brandTheme);
+  const settingStore = getSettingStore();
+  const { brandTheme } = settingStore;
+  const res = getColorFromTheme(brandTheme);
 
   return res;
 }
@@ -178,7 +177,7 @@ export function constructInitDataset({
   dateTime = [],
   placeholderColor,
   borderColor,
-}: { dateTime: Array<string> } & Record<string, string>) {
+}: { dateTime: Array<string> } & TChartColor) {
   // const dataset: Array<Array<string>> = [['时间'], ['入库'], ['出库']];
   const divideNum = 10;
   const timeArray = [];
@@ -276,7 +275,7 @@ export function getSmoothLineDataSet({
   dateTime = [],
   placeholderColor,
   borderColor,
-}: { dateTime?: Array<string> } & Record<string, string>) {
+}: { dateTime?: Array<string> } & TChartColor) {
   let dateArray: Array<string> = ['00:00', '02:00', '04:00', '06:00'];
   if (dateTime.length > 0) {
     const divideNum = 7;
@@ -383,7 +382,7 @@ export function getFolderLineDataSet({
   dateTime = [],
   placeholderColor,
   borderColor,
-}: { dateTime?: Array<string> } & Record<string, string>) {
+}: { dateTime?: Array<string> } & TChartColor) {
   let dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
   if (dateTime.length > 0) {
     const divideNum = 7;
@@ -543,7 +542,7 @@ export function getLineChartDataSet({
   dateTime = [],
   placeholderColor,
   borderColor,
-}: { dateTime?: Array<string> } & Record<string, string>) {
+}: { dateTime?: Array<string> } & TChartColor) {
   const divideNum = 10;
   const timeArray = [];
   const inArray = [];
@@ -679,7 +678,7 @@ export function getScatterDataSet({
   dateTime = [],
   placeholderColor,
   borderColor,
-}: { dateTime?: Array<string> } & Record<string, string>): any {
+}: { dateTime?: Array<string> } & TChartColor): any {
   const divideNum = 40;
   const timeArray = [];
   const inArray = [];
@@ -975,7 +974,7 @@ export function get2ColBarChartDataSet({
   isMonth = false,
   placeholderColor,
   borderColor,
-}: { isMonth?: boolean } & Record<string, string>) {
+}: { isMonth?: boolean } & TChartColor) {
   let lastYearListCopy = lastYearList.concat([]);
   let thisYearListCopy = lastYearList.concat([]);
 
@@ -1078,7 +1077,7 @@ export function getPieChartDataSet({
   textColor,
   placeholderColor,
   containerColor,
-}: { radius: number } & Record<string, string>) {
+}: { radius?: number } & Record<string, string>) {
   return {
     color: chartListColor(),
     tooltip: {

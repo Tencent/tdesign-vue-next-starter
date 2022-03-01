@@ -2,7 +2,7 @@
   <div>
     <t-row :gutter="[16, 16]">
       <t-col v-for="(item, index) in PANE_LIST" :key="item.title" :xs="6" :xl="3">
-        <card :subtitle="item.title" :style="{ height: '168px' }" :class="{ 'main-color': index == 0 }">
+        <card :subtitle="item.title" size="small" :style="{ height: '168px' }" :class="{ 'main-color': index == 0 }">
           <div class="dashboard-item">
             <div class="dashboard-item-top">
               <span :style="{ fontSize: `${resizeTime * 36}px` }">{{ item.number }}</span>
@@ -204,12 +204,12 @@
 </template>
 <script setup lang="ts">
 import { onMounted, watch, ref, onUnmounted, nextTick, computed } from 'vue';
-import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
 import { TooltipComponent, LegendComponent, GridComponent } from 'echarts/components';
 import { PieChart, LineChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { useSettingStore } from '@/store';
 import { LAST_7_DAYS } from '@/utils/date';
 
 // 导入样式
@@ -241,10 +241,10 @@ const getThisMonth = (checkedValues?: string[]) => {
   return `${date.getFullYear()}-${startMonth}  至  ${date2.getFullYear()}-${endMonth}`;
 };
 
-const store = useStore();
+const store = useSettingStore();
 const resizeTime = ref(1);
 
-const chartColors = computed(() => store.state.setting.chartColors);
+const chartColors = computed(() => store.chartColors);
 
 // moneyCharts
 let moneyContainer: HTMLElement;
@@ -355,14 +355,14 @@ onUnmounted(() => {
 const currentMonth = ref(getThisMonth());
 
 watch(
-  () => store.state.setting.brandTheme,
+  () => store.brandTheme,
   () => {
     changeChartsTheme([refundChart, stokeChart, monitorChart, countChart]);
   },
 );
 
 watch(
-  () => store.state.setting.mode,
+  () => store.mode,
   () => {
     [moneyChart, refundChart, stokeChart, monitorChart, countChart].forEach((item) => {
       item.dispose();

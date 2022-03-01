@@ -92,23 +92,22 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, watchEffect } from 'vue';
-import { useStore } from 'vuex';
 import { ColorPicker } from 'vue-color-kit';
 import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
 import useClipboard from 'vue-clipboard3';
+import { useSettingStore } from '@/store';
 
 import 'vue-color-kit/dist/vue-color-kit.css';
 
 import STYLE_CONFIG from '@/config/style';
 import { insertThemeStylesheet, generateColorMap } from '@/config/color';
 
-import Thumbnail from '@/components/thumbnail/index.vue';
-import ColorContainer from '@/components/color/index.vue';
-
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
+
+const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
 const COLOR_OPTIONS = ['default', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'dynamic'];
@@ -119,61 +118,63 @@ const MODE_OPTIONS = [
 ];
 
 const formData = ref({ ...STYLE_CONFIG });
-const store = useStore();
 const colors = ref();
 const isColoPickerDisplay = ref(false);
 
 const showSettingPanel = computed({
   get() {
-    return store.state.setting.showSettingPanel;
+    return settingStore.showSettingPanel;
   },
-  set(newVal) {
-    store.commit('setting/toggleSettingPanel', newVal);
+  set(newVal: boolean) {
+    settingStore.updateConfig({
+      showSettingPanel: newVal,
+    });
   },
 });
 
 const mode = computed(() => {
-  return store.getters['setting/mode'];
+  return settingStore.displayMode;
 });
 
 watch(
   () => colors.value,
   (newColor) => {
     const { hex } = newColor;
-    const { setting } = store.state;
 
     // hex 主题色
     const newPalette = Color.getPaletteByGradation({
       colors: [hex],
       step: 10,
     })[0];
-    const { mode } = store.state.setting;
-    const colorMap = generateColorMap(hex, newPalette, mode);
+    const { mode } = settingStore;
+    const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
 
-    store.commit('setting/addColor', { [hex]: colorMap });
+    insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
 
-    insertThemeStylesheet(hex, colorMap, mode);
-
-    store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
+    settingStore.updateConfig({
+      [hex]: colorMap,
+    });
+    settingStore.changeBrandTheme(hex);
   },
 );
 
 const changeColor = (val) => {
   const { hex } = val;
-  const { setting } = store.state;
   // hex 主题色
   const newPalette = Color.getPaletteByGradation({
     colors: [hex],
     step: 10,
   })[0];
-  const { mode } = store.state.setting;
-  const colorMap = generateColorMap(hex, newPalette, mode);
+  const { mode } = settingStore;
+  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
 
-  store.commit('setting/addColor', { [hex]: colorMap });
+  settingStore.updateConfig({
+    [hex]: colorMap,
+  });
 
-  insertThemeStylesheet(hex, colorMap, mode);
+  insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
 
-  store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
+  settingStore.changeBrandTheme(hex);
 };
 
 onMounted(() => {
@@ -212,7 +213,9 @@ const getModeIcon = (mode: string) => {
 };
 
 const handleCloseDrawer = () => {
-  store.commit('setting/toggleSettingPanel', false);
+  settingStore.updateConfig({
+    showSettingPanel: false,
+  });
 };
 
 const getThumbnailUrl = (name: string): string => {
@@ -220,7 +223,7 @@ const getThumbnailUrl = (name: string): string => {
 };
 
 watchEffect(() => {
-  store.dispatch('setting/changeTheme', formData.value);
+  settingStore.updateConfig(formData.value);
 });
 </script>
 <style lang="less">

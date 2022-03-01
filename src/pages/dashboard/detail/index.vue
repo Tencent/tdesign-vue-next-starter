@@ -59,7 +59,6 @@
 </template>
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
-import { useStore } from 'vuex';
 
 import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
@@ -70,14 +69,16 @@ import ProductCard from '@/components/card/Card.vue';
 import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../base/index';
 import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
 import { LAST_7_DAYS } from '@/utils/date';
+import { useSettingStore } from '@/store';
 
 import Trend from '@/components/trend/index.vue';
 import Card from '@/components/card/index.vue';
 
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 
-const store = useStore();
-const chartColors = computed(() => store.state.setting.chartColors);
+const store = useSettingStore();
+const chartColors = computed(() => store.chartColors);
+
 // lineChart logic
 let lineContainer: HTMLElement;
 let lineChart: echarts.ECharts;
@@ -126,14 +127,14 @@ onUnmounted(() => {
 });
 
 watch(
-  () => store.state.setting.mode,
+  () => store.mode,
   () => {
     renderCharts();
   },
 );
 
 watch(
-  () => store.state.setting.brandTheme,
+  () => store.brandTheme,
   () => {
     changeChartsTheme([lineChart, scatterChart]);
   },
@@ -144,7 +145,7 @@ const onSatisfyChange = () => {
 };
 
 const onMaterialChange = (value: string[]) => {
-  const chartColors = computed(() => store.state.setting.chartColors);
+  const chartColors = computed(() => store.chartColors);
   lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors.value }));
 };
 </script>
