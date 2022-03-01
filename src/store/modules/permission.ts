@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
+import { RouteRecordRaw } from 'vue-router';
 import router, { asyncRouterList, page404 } from '@/router';
 import { store } from '@/store';
 
-function filterPermissionsRouters(routes, roles) {
+function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<unknown>) {
   const res = [];
   routes.forEach((route) => {
     const children = [];
@@ -26,7 +27,7 @@ export const usePermissionStore = defineStore('permission', {
     routers: [],
   }),
   actions: {
-    async initRoutes(roles) {
+    async initRoutes(roles: Array<unknown>) {
       let accessedRouters;
 
       // special token
@@ -39,12 +40,12 @@ export const usePermissionStore = defineStore('permission', {
       this.routers = accessedRouters;
 
       // register routers
-      accessedRouters.concat(page404).forEach((item) => {
+      accessedRouters.concat(page404).forEach((item: RouteRecordRaw) => {
         router.addRoute(item);
       });
     },
     async restore() {
-      this.routers.concat(page404).forEach((item) => {
+      this.routers.concat(page404).forEach((item: RouteRecordRaw) => {
         if (router.hasRoute(item.name)) router.removeRoute(item.name);
       });
       this.routers = [];

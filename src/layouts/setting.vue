@@ -103,9 +103,6 @@ import 'vue-color-kit/dist/vue-color-kit.css';
 import STYLE_CONFIG from '@/config/style';
 import { insertThemeStylesheet, generateColorMap } from '@/config/color';
 
-import Thumbnail from '@/components/thumbnail/index.vue';
-import ColorContainer from '@/components/color/index.vue';
-
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
@@ -128,7 +125,7 @@ const showSettingPanel = computed({
   get() {
     return settingStore.showSettingPanel;
   },
-  set(newVal) {
+  set(newVal: boolean) {
     settingStore.updateConfig({
       showSettingPanel: newVal,
     });

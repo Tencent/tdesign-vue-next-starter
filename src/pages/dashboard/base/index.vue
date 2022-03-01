@@ -276,7 +276,7 @@ const renderStokeChart = () => {
     stokeContainer = document.getElementById('stokeContainer');
   }
   stokeChart = echarts.init(stokeContainer);
-  stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...(chartColors.value as any) }));
+  stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors.value }));
 };
 
 // monitorChart
@@ -374,10 +374,10 @@ watch(
 
 const onCurrencyChange = (checkedValues: string[]) => {
   currentMonth.value = getThisMonth(checkedValues);
-  monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...(chartColors.value as any) }));
+  monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors.value }));
 };
 const onStokeDataChange = (checkedValues: string[]) => {
-  stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...(chartColors.value as any) }));
+  stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors.value }));
 };
 const rehandleClickOp = (val: MouseEvent) => {
   console.log(val);

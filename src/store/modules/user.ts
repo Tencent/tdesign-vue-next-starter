@@ -17,8 +17,8 @@ export const useUserStore = defineStore('user', {
     },
   },
   actions: {
-    async login(userInfo) {
-      const mockLogin = async (userInfo) => {
+    async login(userInfo: Record<string, unknown>) {
+      const mockLogin = async (userInfo: Record<string, unknown>) => {
         // 登录请求流程
         console.log(userInfo);
         // const { account, password } = userInfo;
@@ -53,7 +53,7 @@ export const useUserStore = defineStore('user', {
       }
     },
     async getUserInfo() {
-      const mockRemoteUserInfo = async (token) => {
+      const mockRemoteUserInfo = async (token: string) => {
         if (token === 'main_token') {
           return {
             name: 'td_main',

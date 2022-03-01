@@ -146,7 +146,7 @@ const onSatisfyChange = () => {
 
 const onMaterialChange = (value: string[]) => {
   const chartColors = computed(() => store.chartColors);
-  lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...(chartColors.value as any) }));
+  lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors.value }));
 };
 </script>
 <style lang="less" scoped>

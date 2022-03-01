@@ -10,6 +10,8 @@ const state = {
   chartColors: LIGHT_CHART_COLORS,
 };
 
+export type TState = typeof state;
+
 export const useSettingStore = defineStore('setting', {
   state: () => state,
   getters: {
@@ -48,7 +50,7 @@ export const useSettingStore = defineStore('setting', {
     changeBrandTheme(brandTheme: string) {
       document.documentElement.setAttribute('theme-color', brandTheme);
     },
-    updateConfig(payload) {
+    updateConfig(payload: Partial<TState>) {
       for (const key in payload) {
         if (payload[key] !== undefined) {
           this[key] = payload[key];
