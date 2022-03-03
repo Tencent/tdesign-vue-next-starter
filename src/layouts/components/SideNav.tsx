@@ -50,7 +50,6 @@ const useComputed = (props) => {
 export default defineComponent({
   name: 'SideNav',
   components: {
-    MenuContent,
     tLogoFull,
     tLogo,
   },
@@ -120,12 +119,6 @@ export default defineComponent({
         .join('');
     };
 
-    const routerChange = (path: string) => {
-      router.push({
-        path,
-      });
-    };
-
     const goHome = () => {
       router.push('/dashboard/base');
     };
@@ -136,7 +129,6 @@ export default defineComponent({
       autoCollapsed,
       changeCollapsed,
       getActiveName,
-      routerChange,
       goHome,
     };
   },
@@ -167,7 +159,7 @@ export default defineComponent({
             ),
           }}
         >
-          <menu-content navData={this.menu} />
+          <MenuContent navData={this.menu} />
         </t-menu>
         <div class={`${prefix}-side-nav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
       </div>
