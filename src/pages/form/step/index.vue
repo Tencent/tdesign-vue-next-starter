@@ -142,6 +142,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { ValidateResultContext } from 'tdesign-vue-next';
 import Card from '@/components/card/index.vue';
 
 import {
@@ -172,7 +173,7 @@ const amount = computed(() => {
   return '--';
 });
 
-const onSubmit = (result, val: number) => {
+const onSubmit = (result: ValidateResultContext<FormData>, val: number) => {
   if (result.validateResult === true) {
     activeForm.value = val;
   }

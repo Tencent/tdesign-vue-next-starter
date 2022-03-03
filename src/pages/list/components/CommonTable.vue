@@ -123,7 +123,6 @@ const COLUMNS = [
     fixed: 'left',
     minWidth: '300',
     align: 'left',
-    ellipsis: true,
     colKey: 'name',
   },
   { title: '合同状态', colKey: 'status', width: 200, cell: { col: 'status' } },
