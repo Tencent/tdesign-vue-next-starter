@@ -49,7 +49,7 @@
                 :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
                 class="setting-layout-color-group dynamic-color-btn"
               >
-                <color-container :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
+                <ColorContainer :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
               </t-radio-button>
             </t-popup>
           </div>
@@ -59,7 +59,7 @@
         <t-radio-group v-model="formData.layout" default-vaule="top">
           <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item">
-              <thumbnail :src="getThumbnailUrl(item)" />
+              <Thumbnail :src="getThumbnailUrl(item)" />
             </t-radio-button>
           </div>
         </t-radio-group>
@@ -97,6 +97,8 @@ import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
 import useClipboard from 'vue-clipboard3';
 import { useSettingStore } from '@/store';
+import Thumbnail from '@/components/thumbnail/index.vue';
+import ColorContainer from '@/components/color/index.vue';
 
 import 'vue-color-kit/dist/vue-color-kit.css';
 
