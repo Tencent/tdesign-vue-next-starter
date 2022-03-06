@@ -16,12 +16,13 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start();
 
   const { token } = userStore;
-
   if (token) {
     if (to.path === '/login') {
       setTimeout(() => {
-        userStore.logout();
-        permissionStore.restore();
+        if (userStore.token) {
+          userStore.logout();
+          permissionStore.restore();
+        }
       });
       next();
       return;
@@ -39,10 +40,13 @@ router.beforeEach(async (to, from, next) => {
 
         await permissionStore.initRoutes(roles);
 
-        next({ ...to });
+        if (router.hasRoute(to.name)) {
+          next();
+        } else {
+          next(`/`);
+        }
       } catch (error) {
         MessagePlugin.error(error);
-        await userStore.removeToken();
         next(`/login?redirect=${to.path}`);
         NProgress.done();
       }

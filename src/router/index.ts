@@ -21,17 +21,18 @@ const defaultRouterList: Array<RouteRecordRaw> = [
     redirect: '/dashboard/base',
     component: () => import('@/layouts/blank.vue'),
   },
+  {
+    path: '/:w+',
+    name: '404Page',
+    redirect: '/result/404',
+  },
 ];
 
-export const page404 = {
-  path: '/:w+',
-  name: '404Page',
-  redirect: '/result/404',
-};
+export const allRoutes = [...defaultRouterList, ...asyncRouterList];
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: defaultRouterList,
+  routes: allRoutes,
   scrollBehavior() {
     return {
       el: '#app',
