@@ -61,7 +61,6 @@ export const usePermissionStore = defineStore('permission', {
     async initRoutes(roles: Array<unknown>) {
       let accessedRouters = [];
 
-      // 路由做减法，优化登陆后的跳转时间
       let removeRoutes = [];
       // special token
       if (roles.includes('all')) {
@@ -82,7 +81,6 @@ export const usePermissionStore = defineStore('permission', {
       });
     },
     async restore() {
-      // 复原route,保证在登陆状态时路由全量
       this.removeRoutes.forEach((item: RouteRecordRaw) => {
         router.addRoute(item);
       });
