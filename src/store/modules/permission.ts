@@ -30,33 +30,6 @@ export const usePermissionStore = defineStore('permission', {
     routers: [],
     removeRoutes: [],
   }),
-  getters: {
-    rolesMap: (state) => {
-      const roleMap = [];
-      state.routers.forEach((element, index) => {
-        if (element.meta) {
-          roleMap.push({
-            resourceType: element.meta.title,
-            subResourceList: [],
-          });
-        } else {
-          roleMap.push({
-            subResourceList: [],
-          });
-        }
-        element.children.forEach((item) => {
-          roleMap[index].subResourceList.push({
-            resourceName: item.meta.title,
-            resourceCode: item.name,
-          });
-          if (!roleMap[index].resourceType) {
-            roleMap[index].resourceType = item.meta.title;
-          }
-        });
-      });
-      return roleMap;
-    },
-  },
   actions: {
     async initRoutes(roles: Array<unknown>) {
       let accessedRouters = [];
