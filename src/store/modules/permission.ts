@@ -1,16 +1,19 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
-import router, { asyncRouterList, page404 } from '@/router';
+import router, { asyncRouterList } from '@/router';
 import { store } from '@/store';
 
 function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<unknown>) {
   const res = [];
+  const removeRoutes = [];
   routes.forEach((route) => {
     const children = [];
     route.children?.forEach((childRouter) => {
       const roleCode = childRouter.meta?.roleCode || childRouter.name;
       if (roles.indexOf(roleCode) !== -1) {
         children.push(childRouter);
+      } else {
+        removeRoutes.push(childRouter);
       }
     });
     if (children.length > 0) {
@@ -18,37 +21,42 @@ function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<un
       res.push(route);
     }
   });
-  return res;
+  return { accessedRouters: res, removeRoutes };
 }
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
     whiteListRouters: ['/login'],
     routers: [],
+    removeRoutes: [],
   }),
   actions: {
     async initRoutes(roles: Array<unknown>) {
-      let accessedRouters;
+      let accessedRouters = [];
 
+      let removeRoutes = [];
       // special token
-      if (roles.includes('ALL_ROUTERS')) {
+      if (roles.includes('all')) {
         accessedRouters = asyncRouterList;
       } else {
-        accessedRouters = filterPermissionsRouters(asyncRouterList, roles);
+        const res = filterPermissionsRouters(asyncRouterList, roles);
+        accessedRouters = res.accessedRouters;
+        removeRoutes = res.removeRoutes;
       }
 
       this.routers = accessedRouters;
+      this.removeRoutes = removeRoutes;
 
-      // register routers
-      accessedRouters.concat(page404).forEach((item: RouteRecordRaw) => {
-        router.addRoute(item);
+      removeRoutes.forEach((item: RouteRecordRaw) => {
+        if (router.hasRoute(item.name)) {
+          router.removeRoute(item.name);
+        }
       });
     },
     async restore() {
-      this.routers.concat(page404).forEach((item: RouteRecordRaw) => {
-        if (router.hasRoute(item.name)) router.removeRoute(item.name);
+      this.removeRoutes.forEach((item: RouteRecordRaw) => {
+        router.addRoute(item);
       });
-      this.routers = [];
     },
   },
 });

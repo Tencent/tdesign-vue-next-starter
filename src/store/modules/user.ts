@@ -57,7 +57,7 @@ export const useUserStore = defineStore('user', {
         if (token === 'main_token') {
           return {
             name: 'td_main',
-            roles: ['ALL_ROUTERS'],
+            roles: ['all'],
           };
         }
         return {
