@@ -26,10 +26,15 @@ export default defineConfig({
   ],
 
   server: {
-    port: 3002,
     host: '0.0.0.0',
+    port: 3003,
     proxy: {
-      '/api': 'http://127.0.0.1:3000/',
+      '/api': {
+          // 用于开发环境下的转发请求
+          // 更多请参考：https://vitejs.dev/config/#server-proxy
+          target: 'http://127.0.0.1:3000/',
+          changeOrigin: true,
+        },
     },
   },
 });
