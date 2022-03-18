@@ -7,11 +7,13 @@
           <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length"> 导出合同 </t-button>
           <p v-if="!!selectedRowKeys.length" class="selected-count">已选{{ selectedRowKeys.length }}项</p>
         </div>
-        <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
-          <template #suffix-icon>
-            <search-icon size="20px" />
-          </template>
-        </t-input>
+        <div class="search-input">
+          <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
+            <template #suffix-icon>
+              <search-icon size="20px" />
+            </template>
+          </t-input>
+        </div>
       </t-row>
 
       <t-table
