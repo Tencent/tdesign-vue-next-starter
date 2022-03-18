@@ -2,11 +2,13 @@
   <div>
     <div class="list-card-operation">
       <t-button @click="formDialogVisible = true"> 新建产品 </t-button>
-      <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
-        <template #suffix-icon>
-          <search-icon v-if="searchValue === ''" size="20px" />
-        </template>
-      </t-input>
+      <div class="search-input">
+        <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
+          <template #suffix-icon>
+            <search-icon v-if="searchValue === ''" size="20px" />
+          </template>
+        </t-input>
+      </div>
     </div>
 
     <dialog-form v-model:visible="formDialogVisible" :data="formData" />

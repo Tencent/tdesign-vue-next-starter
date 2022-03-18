@@ -45,7 +45,9 @@
                 <t-radio value="2"> 付款 </t-radio>
               </t-radio-group>
               <span class="space-item" />
-              <t-input placeholder="请输入金额" :style="{ width: '160px' }" />
+              <div>
+                <t-input placeholder="请输入金额" :style="{ width: '160px' }" />
+              </div>
             </t-form-item>
           </t-col>
 
