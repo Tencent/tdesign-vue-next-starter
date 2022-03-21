@@ -49,12 +49,13 @@
     />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, computed, ComputedRef } from 'vue';
-import { useStore } from 'vuex';
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import { NOTIFICATION_TYPES } from '@/constants';
 import { NotificationItem } from '@/interface';
 import EmptyIcon from '@/assets/assets-empty.svg?component';
+import { useNotificationStore } from '@/store';
 
 const TAB_LIST = [
   {
@@ -71,68 +72,47 @@ const TAB_LIST = [
   },
 ];
 
-export default defineComponent({
-  name: 'DetailSecondary',
-  components: {
-    EmptyIcon,
-  },
-  setup() {
-    const tabValue = ref('msgData');
+const tabValue = ref('msgData');
 
-    const visible = ref(false);
-    const selectedItem = ref<NotificationItem>();
+const visible = ref(false);
+const selectedItem = ref<NotificationItem>();
 
-    const store = useStore();
+const store = useNotificationStore();
+const { msgData, unreadMsg, readMsg } = storeToRefs(store);
 
-    const { msgData } = store.state.notification;
-
-    const msgDataList: ComputedRef<NotificationItem[]> = computed(() => {
-      if (tabValue.value === 'msgData') return msgData;
-      if (tabValue.value === 'unreadMsg') return store.getters['notification/unreadMsg'];
-      if (tabValue.value === 'readMsg') return store.getters['notification/readMsg'];
-      return [];
-    });
-
-    const handleClickDeleteBtn = (item: NotificationItem) => {
-      visible.value = true;
-      selectedItem.value = item;
-    };
-
-    const setReadStatus = (item: NotificationItem) => {
-      const changeMsg = msgData;
-      changeMsg.forEach((e: NotificationItem) => {
-        if (e.id === item.id) {
-          if (e.status) e.status = false;
-        }
-      });
-      store.commit('notification/setMsgData', changeMsg);
-    };
-
-    const deleteMsg = () => {
-      const item = selectedItem.value;
-      const changeMsg = msgData;
-      changeMsg.forEach((e: NotificationItem, index: number) => {
-        if (e.id === item?.id) {
-          changeMsg.splice(index, 1);
-        }
-      });
-      visible.value = false;
-      store.commit('notification/setMsgData', changeMsg);
-    };
-
-    return {
-      TAB_LIST,
-      NOTIFICATION_TYPES,
-      visible,
-      selectedItem,
-      tabValue,
-      msgDataList,
-      handleClickDeleteBtn,
-      setReadStatus,
-      deleteMsg,
-    };
-  },
+const msgDataList = computed(() => {
+  if (tabValue.value === 'msgData') return msgData.value;
+  if (tabValue.value === 'unreadMsg') return unreadMsg.value;
+  if (tabValue.value === 'readMsg') return readMsg.value;
+  return [];
 });
+
+const handleClickDeleteBtn = (item: NotificationItem) => {
+  visible.value = true;
+  selectedItem.value = item;
+};
+
+const setReadStatus = (item: NotificationItem) => {
+  const changeMsg = msgData.value;
+  changeMsg.forEach((e: NotificationItem) => {
+    if (e.id === item.id) {
+      if (e.status) e.status = false;
+    }
+  });
+  store.setMsgData(changeMsg);
+};
+
+const deleteMsg = () => {
+  const item = selectedItem.value;
+  const changeMsg = msgData.value;
+  changeMsg.forEach((e: NotificationItem, index: number) => {
+    if (e.id === item?.id) {
+      changeMsg.splice(index, 1);
+    }
+  });
+  visible.value = false;
+  store.setMsgData(changeMsg);
+};
 </script>
 <style lang="less" scoped>
 @import url('./index.less');

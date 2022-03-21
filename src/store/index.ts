@@ -1,16 +1,12 @@
-import { createStore } from 'vuex';
-import user from './modules/user';
-import notification from './modules/notification';
-import setting from './modules/setting';
-import permission from './modules/permission';
+import { createPinia } from 'pinia';
 
-export const store = createStore({
-  modules: {
-    user,
-    setting,
-    notification,
-    permission,
-  },
-});
+const store = createPinia();
+
+export { store };
+
+export * from './modules/notification';
+export * from './modules/permission';
+export * from './modules/user';
+export * from './modules/setting';
 
 export default store;

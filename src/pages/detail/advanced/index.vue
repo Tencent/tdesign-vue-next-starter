@@ -109,91 +109,71 @@
     </t-dialog>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { prefix } from '@/config/global';
-import { BASE_INFO_DATA, TABLE_COLUMNS_DATA, PRODUCT_LIST } from './constants';
+import { BASE_INFO_DATA, TABLE_COLUMNS_DATA as columns, PRODUCT_LIST } from './constants';
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';
 
 import Card from '@/components/card/index.vue';
 import Product from './components/Product.vue';
 
-export default defineComponent({
-  name: 'DetailAdvanced',
-  components: {
-    Card,
-    Product,
-  },
-  setup() {
-    const data = ref([]);
-    const pagination = ref({
-      defaultPageSize: 10,
-      total: 100,
-      defaultCurrent: 1,
-    });
-
-    const updateCurrent = ref(0);
-
-    const stepUpdate = () => {
-      setInterval(() => {
-        if (updateCurrent.value > 5) {
-          updateCurrent.value = -1;
-        }
-        updateCurrent.value += 1;
-      }, 2000);
-    };
-
-    const fetchData = async () => {
-      try {
-        const res: ResDataType = await request.get('/api/get-purchase-list');
-        if (res.code === 0) {
-          const { list = [] } = res.data;
-          data.value = list;
-          pagination.value = {
-            ...pagination.value,
-            total: list.length,
-          };
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    onMounted(() => {
-      stepUpdate();
-      fetchData();
-    });
-
-    const visible = ref(false);
-
-    return {
-      BASE_INFO_DATA,
-      prefix,
-      PRODUCT_LIST,
-      columns: TABLE_COLUMNS_DATA,
-      data,
-      pagination,
-      visible,
-      updateCurrent,
-      sortChange(val) {
-        console.log(val);
-      },
-      rehandleChange(changeParams, triggerAndData) {
-        console.log('统一Change', changeParams, triggerAndData);
-      },
-      listClick() {
-        visible.value = true;
-      },
-      deleteClickOp(columns) {
-        data.value.splice(columns.index, 1);
-      },
-      onConfirm() {
-        visible.value = false;
-      },
-    };
-  },
+const data = ref([]);
+const pagination = ref({
+  defaultPageSize: 10,
+  total: 100,
+  defaultCurrent: 1,
 });
+
+const updateCurrent = ref(0);
+
+const stepUpdate = () => {
+  setInterval(() => {
+    if (updateCurrent.value > 5) {
+      updateCurrent.value = -1;
+    }
+    updateCurrent.value += 1;
+  }, 2000);
+};
+
+const fetchData = async () => {
+  try {
+    const res: ResDataType = await request.get('/api/get-purchase-list');
+    if (res.code === 0) {
+      const { list = [] } = res.data;
+      data.value = list;
+      pagination.value = {
+        ...pagination.value,
+        total: list.length,
+      };
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+onMounted(() => {
+  stepUpdate();
+  fetchData();
+});
+
+const visible = ref(false);
+const sortChange = (val) => {
+  console.log(val);
+};
+const rehandleChange = (changeParams, triggerAndData) => {
+  console.log('统一Change', changeParams, triggerAndData);
+};
+const listClick = () => {
+  visible.value = true;
+};
+const deleteClickOp = (columns) => {
+  data.value.splice(columns.rowIndex, 1);
+};
+const onConfirm = () => {
+  visible.value = false;
+};
 </script>
 <style lang="less" scoped>
 @import url('./index.less');

@@ -1,18 +1,16 @@
 import { defineComponent, PropType, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
 import { prefix } from '@/config/global';
 import pgk from '../../../package.json';
 import MenuContent from './MenuContent';
 import tLogo from '@/assets/assets-t-logo.svg?component';
 import tLogoFull from '@/assets/assets-logo-full.svg?component';
+import { useSettingStore } from '@/store';
 
 const MIN_POINT = 992 - 1;
 
 const useComputed = (props) => {
-  const store = useStore();
-
-  const collapsed = computed(() => store.state.setting.isSidebarCompact);
+  const collapsed = computed(() => useSettingStore().isSidebarCompact);
 
   const sideNavCls = computed(() => {
     const { isCompact } = props;
@@ -52,7 +50,6 @@ const useComputed = (props) => {
 export default defineComponent({
   name: 'SideNav',
   components: {
-    MenuContent,
     tLogoFull,
     tLogo,
   },
@@ -87,16 +84,20 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const store = useStore();
     const router = useRouter();
+    const settingStore = useSettingStore();
 
     const changeCollapsed = () => {
-      store.commit('setting/toggleSidebarCompact');
+      settingStore.updateConfig({
+        isSidebarCompact: !settingStore.isSidebarCompact,
+      });
     };
 
     const autoCollapsed = () => {
       const isCompact = window.innerWidth <= MIN_POINT;
-      store.commit('setting/showSidebarCompact', isCompact);
+      settingStore.updateConfig({
+        isSidebarCompact: isCompact,
+      });
     };
 
     onMounted(() => {
@@ -118,12 +119,6 @@ export default defineComponent({
         .join('');
     };
 
-    const routerChange = (path: string) => {
-      router.push({
-        path,
-      });
-    };
-
     const goHome = () => {
       router.push('/dashboard/base');
     };
@@ -134,7 +129,6 @@ export default defineComponent({
       autoCollapsed,
       changeCollapsed,
       getActiveName,
-      routerChange,
       goHome,
     };
   },
@@ -165,7 +159,7 @@ export default defineComponent({
             ),
           }}
         >
-          <menu-content navData={this.menu} />
+          <MenuContent navData={this.menu} />
         </t-menu>
         <div class={`${prefix}-side-nav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
       </div>

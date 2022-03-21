@@ -2,11 +2,13 @@
   <div>
     <div class="list-card-operation">
       <t-button @click="formDialogVisible = true"> 新建产品 </t-button>
-      <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
-        <template #suffix-icon>
-          <search-icon v-if="searchValue === ''" size="20px" />
-        </template>
-      </t-input>
+      <div class="search-input">
+        <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
+          <template #suffix-icon>
+            <search-icon v-if="searchValue === ''" size="20px" />
+          </template>
+        </t-input>
+      </div>
     </div>
 
     <dialog-form v-model:visible="formDialogVisible" :data="formData" />
@@ -58,11 +60,11 @@
     />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue';
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import Card from './components/Card.vue';
+import Card from '@/components/card/Card.vue';
 import DialogForm from './components/DialogForm.vue';
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';
@@ -76,88 +78,68 @@ const INITIAL_DATA = {
   amount: 0,
 };
 
-export default defineComponent({
-  name: 'ListBase',
-  components: {
-    SearchIcon,
-    Card,
-    DialogForm,
-  },
-  setup() {
-    const pagination = ref({ current: 1, pageSize: 12, total: 0 });
-    const deleteProduct = ref(undefined);
+const pagination = ref({ current: 1, pageSize: 12, total: 0 });
+const deleteProduct = ref(undefined);
 
-    const productList = ref([]);
-    const dataLoading = ref(true);
+const productList = ref([]);
+const dataLoading = ref(true);
 
-    const fetchData = async () => {
-      try {
-        const res: ResDataType = await request.get('/api/get-card-list');
-        if (res.code === 0) {
-          const { list = [] } = res.data;
-          productList.value = list;
-          pagination.value = {
-            ...pagination.value,
-            total: list.length,
-          };
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        dataLoading.value = false;
-      }
-    };
+const fetchData = async () => {
+  try {
+    const res: ResDataType = await request.get('/api/get-card-list');
+    if (res.code === 0) {
+      const { list = [] } = res.data;
+      productList.value = list;
+      pagination.value = {
+        ...pagination.value,
+        total: list.length,
+      };
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    dataLoading.value = false;
+  }
+};
 
-    const confirmBody = computed(() =>
-      deleteProduct.value ? `确认删除后${deleteProduct.value.name}的所有产品信息将被清空, 且无法恢复` : '',
-    );
+const confirmBody = computed(() =>
+  deleteProduct.value ? `确认删除后${deleteProduct.value.name}的所有产品信息将被清空, 且无法恢复` : '',
+);
 
-    onMounted(() => {
-      fetchData();
-    });
-
-    const formDialogVisible = ref(false);
-    const searchValue = ref('');
-    const confirmVisible = ref(false);
-    const formData = ref({ ...INITIAL_DATA });
-
-    return {
-      pagination,
-      productList,
-      dataLoading,
-      formDialogVisible,
-      confirmBody,
-      searchValue,
-      confirmVisible,
-      formData,
-      onPageSizeChange(size: number) {
-        pagination.value.pageSize = size;
-        pagination.value.current = 1;
-      },
-      onCurrentChange(current: number) {
-        pagination.value.current = current;
-      },
-      handleDeleteItem(product) {
-        confirmVisible.value = true;
-        deleteProduct.value = product;
-      },
-      onConfirmDelete() {
-        const { index } = deleteProduct.value;
-        productList.value.splice(index - 1, 1);
-        confirmVisible.value = false;
-        MessagePlugin.success('删除成功');
-      },
-      onCancel() {
-        deleteProduct.value = undefined;
-        formData.value = { ...INITIAL_DATA };
-      },
-      handleManageProduct(product) {
-        formDialogVisible.value = true;
-        formData.value = { ...product, status: product?.isSetup ? '1' : '0' };
-      },
-    };
-  },
+onMounted(() => {
+  fetchData();
 });
+
+const formDialogVisible = ref(false);
+const searchValue = ref('');
+const confirmVisible = ref(false);
+const formData = ref({ ...INITIAL_DATA });
+
+const onPageSizeChange = (size: number) => {
+  pagination.value.pageSize = size;
+  pagination.value.current = 1;
+};
+const onCurrentChange = (current: number) => {
+  pagination.value.current = current;
+};
+const handleDeleteItem = (product) => {
+  confirmVisible.value = true;
+  deleteProduct.value = product;
+};
+const onConfirmDelete = () => {
+  const { index } = deleteProduct.value;
+  productList.value.splice(index - 1, 1);
+  confirmVisible.value = false;
+  MessagePlugin.success('删除成功');
+};
+const onCancel = () => {
+  deleteProduct.value = undefined;
+  formData.value = { ...INITIAL_DATA };
+};
+const handleManageProduct = (product) => {
+  formDialogVisible.value = true;
+  formData.value = { ...product, status: product?.isSetup ? '1' : '0' };
+};
 </script>
 <style lang="less" scoped>
 @import '@/style/variables.less';

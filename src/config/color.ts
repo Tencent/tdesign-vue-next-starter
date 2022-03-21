@@ -1,7 +1,7 @@
 import hexToHsl from 'hex-to-hsl';
 /* eslint-disable indent */
-export type ColorToken = Record<string, string>;
-export type ColorSeries = Record<string, ColorToken>;
+export type TColorToken = Record<string, string>;
+export type TColorSeries = Record<string, TColorToken>;
 
 export const defaultLightColor = [
   '#0052d9',
@@ -24,7 +24,7 @@ export const defaultDarkColor = [
   '#ab87d5',
 ];
 
-export const BACKGROUND_TOKEN: ColorSeries = {
+export const BACKGROUND_TOKEN: TColorSeries = {
   BLUE_GREY: {
     '@gray-color-1': '#F1F2F5',
     '@gray-color-2': '#EBEDF1',
@@ -60,7 +60,7 @@ export const BACKGROUND_TOKEN: ColorSeries = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const NEUTRAL_GREY_TOKEN: ColorToken = {
+export const NEUTRAL_GREY_TOKEN: TColorToken = {
   '@gray-color-1': '#F3F3F3',
   '@gray-color-2': '#EEEEEE',
   '@gray-color-3': '#E7E7E7',
@@ -77,7 +77,7 @@ export const NEUTRAL_GREY_TOKEN: ColorToken = {
   '@gray-color-14': '#181818',
 };
 
-export const COLOR_TOKEN: ColorSeries = {
+export const COLOR_TOKEN: TColorSeries = {
   DEFAULT: {
     '@brand-color': '#0052D9',
     '@brand-color-1': '#e0ebff',
@@ -185,35 +185,37 @@ export const COLOR_TOKEN: ColorSeries = {
   },
 };
 
-export const LIGHT_CHART_COLORS: ColorToken = {
+export const LIGHT_CHART_COLORS = {
   textColor: 'rgba(0, 0, 0, 0.9)',
   placeholderColor: 'rgba(0, 0, 0, 0.35)',
   borderColor: '#dcdcdc',
   containerColor: '#fff',
 };
 
-export const DARK_CHART_COLORS: ColorToken = {
+export const DARK_CHART_COLORS = {
   textColor: 'rgba(255, 255, 255, 0.9)',
   placeholderColor: 'rgba(255, 255, 255, 0.35)',
   borderColor: '#5e5e5e',
   containerColor: '#242424',
 };
 
+export type TChartColor = typeof LIGHT_CHART_COLORS;
+
 function toUnderline(name: string): string {
   return name.replace(/([A-Z])/g, '_$1').toUpperCase();
 }
 
-export function getGreyColor(type: string): ColorToken {
+export function getGreyColor(type: string): TColorToken {
   const name = toUnderline(type);
   return BACKGROUND_TOKEN[name] || {};
 }
 
-export function getBrandColor(type: string, colorList: ColorSeries): ColorToken {
+export function getBrandColor(type: string, colorList: TColorSeries): TColorToken {
   const name = /^#[A-F\d]{6}$/i.test(type) ? type : toUnderline(type);
   return colorList[name || 'DEFAULT'];
 }
 
-export function getColorList(colorArray: Array<ColorToken>): Array<string> {
+export function getColorList(colorArray: Array<TColorToken>): Array<string> {
   const pureColorList = [];
   colorArray.map((colorToken) => Object.keys(colorToken).map((key) => pureColorList.push(colorToken[key])));
 
@@ -262,7 +264,7 @@ export function generateColorMap(theme: string, colorPalette: Array<string>, mod
   };
   return colorMap;
 }
-export function insertThemeStylesheet(theme: string, colorMap: ColorToken, mode: 'light' | 'dark') {
+export function insertThemeStylesheet(theme: string, colorMap: TColorToken, mode: 'light' | 'dark') {
   const isDarkMode = mode === 'dark';
   const root = !isDarkMode ? `:root[theme-color='${theme}']` : `:root[theme-color='${theme}'][theme-mode='dark']`;
 

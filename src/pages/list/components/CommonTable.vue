@@ -19,7 +19,7 @@
               <t-form-item label="合同状态" name="status">
                 <t-select
                   v-model="formData.status"
-                  class="form-item-content`"
+                  class="form-item-content"
                   :options="CONTRACT_STATUS_OPTIONS"
                   placeholder="请选择合同状态"
                 />
@@ -39,7 +39,7 @@
               <t-form-item label="合同类型" name="type">
                 <t-select
                   v-model="formData.type"
-                  class="form-item-content`"
+                  class="form-item-content"
                   :options="CONTRACT_TYPE_OPTIONS"
                   placeholder="请选择合同类型"
                 />
@@ -94,7 +94,7 @@
       </t-table>
       <t-dialog
         v-model:visible="confirmVisible"
-        header="是否确认删除该产品"
+        header="确认删除当前所选合同？"
         :body="confirmBody"
         :on-cancel="onCancel"
         @confirm="onConfirmDelete"
@@ -102,8 +102,8 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue';
+<script setup lang="ts">
+import { ref, computed, onMounted } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import Trend from '@/components/trend/index.vue';
 import request from '@/utils/request';
@@ -123,7 +123,6 @@ const COLUMNS = [
     fixed: 'left',
     minWidth: '300',
     align: 'left',
-    ellipsis: true,
     colKey: 'name',
   },
   { title: '合同状态', colKey: 'status', width: 200, cell: { col: 'status' } },
@@ -167,115 +166,89 @@ const searchForm = {
   type: '',
 };
 
-export default defineComponent({
-  name: 'ListTable',
-  components: {
-    Trend,
-  },
-  setup() {
-    const formData = ref({ ...searchForm });
-    const tableConfig = {
-      rowKey: 'index',
-      verticalAlign: 'top',
-      hover: true,
-    };
-    const pagination = ref({
-      defaultPageSize: 20,
-      total: 100,
-      defaultCurrent: 1,
-    });
-    const confirmVisible = ref(false);
+const formData = ref({ ...searchForm });
+const rowKey = 'index';
+const verticalAlign = 'top';
+const hover = true;
 
-    const data = ref([]);
-
-    const dataLoading = ref(false);
-    const fetchData = async () => {
-      dataLoading.value = true;
-      try {
-        const res: ResDataType = await request.get('/api/get-list');
-        if (res.code === 0) {
-          const { list = [] } = res.data;
-          data.value = list;
-          pagination.value = {
-            ...pagination.value,
-            total: list.length,
-          };
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        dataLoading.value = false;
-      }
-    };
-
-    const deleteIdx = ref(-1);
-    const confirmBody = computed(() => {
-      if (deleteIdx.value > -1) {
-        const { no, name } = data.value[deleteIdx.value];
-        return `产品编号:${no}, 产品名称: ${name}`;
-      }
-      return '';
-    });
-
-    const resetIdx = () => {
-      deleteIdx.value = -1;
-    };
-
-    const onConfirmDelete = () => {
-      // 真实业务请发起请求
-      data.value.splice(deleteIdx.value - 1, 1);
-      pagination.value.total = data.value.length;
-      confirmVisible.value = false;
-      MessagePlugin.success('删除成功');
-      resetIdx();
-    };
-
-    const onCancel = () => {
-      resetIdx();
-    };
-
-    onMounted(() => {
-      fetchData();
-    });
-
-    return {
-      data,
-      COLUMNS,
-      CONTRACT_STATUS,
-      CONTRACT_STATUS_OPTIONS,
-      CONTRACT_TYPES,
-      CONTRACT_TYPE_OPTIONS,
-      CONTRACT_PAYMENT_TYPES,
-      formData,
-      pagination,
-      confirmVisible,
-      confirmBody,
-      ...tableConfig,
-      onConfirmDelete,
-      onCancel,
-      dataLoading,
-      handleClickDelete({ row }) {
-        deleteIdx.value = row.index;
-        confirmVisible.value = true;
-      },
-      onReset(val) {
-        console.log(val);
-      },
-      onSubmit(val) {
-        console.log(val);
-      },
-      rehandlePageChange(curr, pageInfo) {
-        console.log('分页变化', curr, pageInfo);
-      },
-      rehandleChange(changeParams, triggerAndData) {
-        console.log('统一Change', changeParams, triggerAndData);
-      },
-      rehandleClickOp({ text, row }) {
-        console.log(text, row);
-      },
-    };
-  },
+const pagination = ref({
+  defaultPageSize: 20,
+  total: 100,
+  defaultCurrent: 1,
 });
+const confirmVisible = ref(false);
+
+const data = ref([]);
+
+const dataLoading = ref(false);
+const fetchData = async () => {
+  dataLoading.value = true;
+  try {
+    const res: ResDataType = await request.get('/api/get-list');
+    if (res.code === 0) {
+      const { list = [] } = res.data;
+      data.value = list;
+      pagination.value = {
+        ...pagination.value,
+        total: list.length,
+      };
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    dataLoading.value = false;
+  }
+};
+
+const deleteIdx = ref(-1);
+const confirmBody = computed(() => {
+  if (deleteIdx.value > -1) {
+    const { name } = data.value[deleteIdx.value];
+    return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
+  }
+  return '';
+});
+
+const resetIdx = () => {
+  deleteIdx.value = -1;
+};
+
+const onConfirmDelete = () => {
+  // 真实业务请发起请求
+  data.value.splice(deleteIdx.value, 1);
+  pagination.value.total = data.value.length;
+  confirmVisible.value = false;
+  MessagePlugin.success('删除成功');
+  resetIdx();
+};
+
+const onCancel = () => {
+  resetIdx();
+};
+
+onMounted(() => {
+  fetchData();
+});
+
+const handleClickDelete = ({ row }) => {
+  deleteIdx.value = row.rowIndex;
+  confirmVisible.value = true;
+};
+const onReset = (val) => {
+  console.log(val);
+};
+const onSubmit = (val) => {
+  console.log(val);
+};
+const rehandlePageChange = (curr, pageInfo) => {
+  console.log('分页变化', curr, pageInfo);
+};
+const rehandleChange = (changeParams, triggerAndData) => {
+  console.log('统一Change', changeParams, triggerAndData);
+};
+const rehandleClickOp = ({ text, row }) => {
+  console.log(text, row);
+};
 </script>
 
 <style lang="less">

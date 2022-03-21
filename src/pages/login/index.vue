@@ -22,34 +22,18 @@
     <footer class="copyright">Copyright @ 2021-2022 Tencent. All Rights Reserved</footer>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 import LoginHeader from './components/Header.vue';
 import TdesignSetting from '@/layouts/setting.vue';
 
-export default defineComponent({
-  name: 'LoginIndex',
-  components: {
-    Login,
-    Register,
-    LoginHeader,
-    TdesignSetting,
-  },
-  setup() {
-    const type = ref('login');
-    const switchType = (val: string) => {
-      type.value = val;
-    };
-
-    return {
-      type,
-      switchType,
-    };
-  },
-});
+const type = ref('login');
+const switchType = (val: string) => {
+  type.value = val;
+};
 </script>
 <style lang="less">
 @import url('./index.less');

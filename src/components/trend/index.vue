@@ -20,46 +20,31 @@
     <span>{{ describe }}</span>
   </span>
 </template>
-<script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 
-export default defineComponent({
-  name: 'Trend',
-  props: {
-    type: {
-      type: String as PropType<string>,
-      default: '',
-    },
-    describe: {
-      type: [String, Number] as PropType<string | number>,
-      default: '',
-    },
-    isReverseColor: {
-      type: Boolean as PropType<boolean>,
-      default: false,
-    },
-  },
-  setup(props) {
-    const containerCls = computed(() => {
-      const { isReverseColor, type } = props;
-      return [
-        'trend-container',
-        {
-          'trend-container__reverse': isReverseColor,
-          'trend-container__up': !isReverseColor && type === 'up',
-          'trend-container__down': !isReverseColor && type === 'down',
-        },
-      ];
-    });
-
-    const iconCls = computed(() => ['trend-icon-container']);
-
-    return {
-      containerCls,
-      iconCls,
-    };
+const props = defineProps({
+  type: String,
+  describe: [String, Number],
+  isReverseColor: {
+    type: Boolean,
+    default: false,
   },
 });
+
+const containerCls = computed(() => {
+  const { isReverseColor, type } = props;
+  return [
+    'trend-container',
+    {
+      'trend-container__reverse': isReverseColor,
+      'trend-container__up': !isReverseColor && type === 'up',
+      'trend-container__down': !isReverseColor && type === 'down',
+    },
+  ];
+});
+
+const iconCls = computed(() => ['trend-icon-container']);
 </script>
 
 <style lang="less" scoped>

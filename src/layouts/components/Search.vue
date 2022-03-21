@@ -36,31 +36,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, PropType } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 
-export default defineComponent({
-  props: {
-    layout: {
-      type: String as PropType<string>,
-    },
-  },
-  setup() {
-    const isSearchFocus = ref(false);
-    const searchData = ref('');
-    const changeSearchFocus = (value: boolean) => {
-      if (!value) {
-        searchData.value = '';
-      }
-      isSearchFocus.value = value;
-    };
-    return {
-      isSearchFocus,
-      searchData,
-      changeSearchFocus,
-    };
-  },
+defineProps({
+  layout: String,
 });
+
+const isSearchFocus = ref(false);
+const searchData = ref('');
+const changeSearchFocus = (value: boolean) => {
+  if (!value) {
+    searchData.value = '';
+  }
+  isSearchFocus.value = value;
+};
 </script>
 <style lang="less">
 @import '@/style/variables.less';
@@ -81,13 +71,22 @@ export default defineComponent({
     font-size: 20px !important;
     color: @text-color-primary !important;
   }
-  .t-input__inner {
+  .t-input {
     border: none;
     outline: none;
     box-shadow: none;
-    transform: background @anim-duration-base linear;
+    transition: background @anim-duration-base linear;
+    .t-input__inner {
+      transition: background @anim-duration-base linear;
+    }
+    .t-input__inner {
+      background: none;
+    }
     &:hover {
       background: @bg-color-secondarycontainer;
+      .t-input__inner {
+        background: @bg-color-secondarycontainer;
+      }
     }
   }
 }
@@ -95,7 +94,7 @@ export default defineComponent({
 .header-search {
   width: 200px;
   transition: width @anim-duration-base @anim-time-fn-easing;
-  .t-input__inner {
+  .t-input {
     border: 0;
     padding-left: 40px;
     &:focus {

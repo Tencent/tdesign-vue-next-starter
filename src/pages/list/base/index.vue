@@ -7,11 +7,13 @@
           <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length"> 导出合同 </t-button>
           <p v-if="!!selectedRowKeys.length" class="selected-count">已选{{ selectedRowKeys.length }}项</p>
         </div>
-        <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
-          <template #suffix-icon>
-            <search-icon size="20px" />
-          </template>
-        </t-input>
+        <div class="search-input">
+          <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
+            <template #suffix-icon>
+              <search-icon size="20px" />
+            </template>
+          </t-input>
+        </div>
       </t-row>
 
       <t-table
@@ -64,8 +66,8 @@
     />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, onMounted, computed } from 'vue';
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -78,121 +80,96 @@ import request from '@/utils/request';
 
 import { COLUMNS } from './constants';
 
-export default defineComponent({
-  name: 'ListBaseCard',
-  components: {
-    Card,
-    SearchIcon,
-    Trend,
-  },
-  setup() {
-    const data = ref([]);
-    const pagination = ref({
-      defaultPageSize: 20,
-      total: 100,
-      defaultCurrent: 1,
-    });
-
-    const searchValue = ref('');
-
-    const dataLoading = ref(false);
-    const fetchData = async () => {
-      dataLoading.value = true;
-      try {
-        const res: ResDataType = await request.get('/api/get-list');
-        if (res.code === 0) {
-          const { list = [] } = res.data;
-          data.value = list;
-          pagination.value = {
-            ...pagination.value,
-            total: list.length,
-          };
-        }
-      } catch (e) {
-        console.log(e);
-      } finally {
-        dataLoading.value = false;
-      }
-    };
-
-    const deleteIdx = ref(-1);
-    const confirmBody = computed(() => {
-      if (deleteIdx.value > -1) {
-        const { name } = data.value[deleteIdx.value];
-        return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
-      }
-      return '';
-    });
-
-    onMounted(() => {
-      fetchData();
-    });
-
-    const confirmVisible = ref(false);
-
-    const selectedRowKeys = ref([1, 2]);
-
-    const router = useRouter();
-
-    const resetIdx = () => {
-      deleteIdx.value = -1;
-    };
-
-    const onConfirmDelete = () => {
-      // 真实业务请发起请求
-      data.value.splice(deleteIdx.value - 1, 1);
-      pagination.value.total = data.value.length;
-      const selectedIdx = selectedRowKeys.value.indexOf(deleteIdx.value);
-      if (selectedIdx > -1) {
-        selectedRowKeys.value.splice(selectedIdx, 1);
-      }
-      confirmVisible.value = false;
-      MessagePlugin.success('删除成功');
-      resetIdx();
-    };
-
-    const onCancel = () => {
-      resetIdx();
-    };
-
-    return {
-      CONTRACT_STATUS,
-      CONTRACT_TYPES,
-      CONTRACT_PAYMENT_TYPES,
-      COLUMNS,
-      data,
-      searchValue,
-      dataLoading,
-      pagination,
-      confirmBody,
-      confirmVisible,
-      rowKey: 'index',
-      onConfirmDelete,
-      onCancel,
-      selectedRowKeys,
-      rehandleSelectChange(val: number[]) {
-        selectedRowKeys.value = val;
-      },
-      rehandlePageChange(curr, pageInfo) {
-        console.log('分页变化', curr, pageInfo);
-      },
-      rehandleChange(changeParams, triggerAndData) {
-        console.log('统一Change', changeParams, triggerAndData);
-      },
-      handleClickDetail() {
-        router.push('/detail/base');
-      },
-      handleSetupContract() {
-        router.push('/form/base');
-      },
-      handleClickDelete({ row }) {
-        deleteIdx.value = row.index;
-        confirmVisible.value = true;
-      },
-    };
-  },
-  methods: {},
+const data = ref([]);
+const pagination = ref({
+  defaultPageSize: 20,
+  total: 100,
+  defaultCurrent: 1,
 });
+
+const searchValue = ref('');
+
+const dataLoading = ref(false);
+const fetchData = async () => {
+  dataLoading.value = true;
+  try {
+    const res: ResDataType = await request.get('/api/get-list');
+    if (res.code === 0) {
+      const { list = [] } = res.data;
+      data.value = list;
+      pagination.value = {
+        ...pagination.value,
+        total: list.length,
+      };
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    dataLoading.value = false;
+  }
+};
+
+const deleteIdx = ref(-1);
+const confirmBody = computed(() => {
+  if (deleteIdx.value > -1) {
+    const { name } = data.value[deleteIdx.value];
+    return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
+  }
+  return '';
+});
+
+onMounted(() => {
+  fetchData();
+});
+
+const confirmVisible = ref(false);
+
+const selectedRowKeys = ref([1, 2]);
+
+const router = useRouter();
+
+const resetIdx = () => {
+  deleteIdx.value = -1;
+};
+
+const onConfirmDelete = () => {
+  // 真实业务请发起请求
+  data.value.splice(deleteIdx.value, 1);
+  pagination.value.total = data.value.length;
+  const selectedIdx = selectedRowKeys.value.indexOf(deleteIdx.value);
+  if (selectedIdx > -1) {
+    selectedRowKeys.value.splice(selectedIdx, 1);
+  }
+  confirmVisible.value = false;
+  MessagePlugin.success('删除成功');
+  resetIdx();
+};
+
+const onCancel = () => {
+  resetIdx();
+};
+
+const rowKey = 'index';
+
+const rehandleSelectChange = (val: number[]) => {
+  selectedRowKeys.value = val;
+};
+const rehandlePageChange = (curr, pageInfo) => {
+  console.log('分页变化', curr, pageInfo);
+};
+const rehandleChange = (changeParams, triggerAndData) => {
+  console.log('统一Change', changeParams, triggerAndData);
+};
+const handleClickDetail = () => {
+  router.push('/detail/base');
+};
+const handleSetupContract = () => {
+  router.push('/form/base');
+};
+const handleClickDelete = (row: { rowIndex: any }) => {
+  deleteIdx.value = row.rowIndex;
+  confirmVisible.value = true;
+};
 </script>
 <style lang="less" scoped>
 @import '@/style/variables';

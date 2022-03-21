@@ -4,7 +4,7 @@
 
 // layout rewrite
 
-.t-layout--sider {
+.t-layout__sider {
   width: fit-content;
 }
 
@@ -12,8 +12,7 @@
   margin-left: @spacer;
 }
 
-.t-layout.t-layout-has-sider {
-
+.t-layout.t-layout--with-sider {
   > .t-layout {
     flex: 1;
     min-width: 760px;
@@ -88,7 +87,7 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    z-index: 10;
+    z-index: 200;
     transition: all 0.3s;
     min-height: 100%;
 

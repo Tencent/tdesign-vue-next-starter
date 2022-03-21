@@ -70,8 +70,8 @@
   </t-form>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { useCounter } from '@/hooks';
 
@@ -93,47 +93,30 @@ const FORM_RULES = {
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
 
-export default defineComponent({
-  setup(props, ctx) {
-    const type = ref('phone');
-    const emailOptions = ref([]);
+const type = ref('phone');
 
-    const form = ref();
-    const formData = ref({ ...INITIAL_DATA });
+const form = ref();
+const formData = ref({ ...INITIAL_DATA });
 
-    const showPsw = ref(false);
+const showPsw = ref(false);
 
-    const [countDown, handleCounter] = useCounter();
+const [countDown, handleCounter] = useCounter();
 
-    const onSubmit = ({ validateResult }) => {
-      if (validateResult === true) {
-        if (!formData.value.checked) {
-          MessagePlugin.error('请同意TDesign服务协议和TDesign 隐私声明');
-          return;
-        }
-        MessagePlugin.success('注册成功');
-        const { emit } = ctx;
-        emit('registerSuccess');
-      }
-    };
+const emit = defineEmits(['registerSuccess']);
 
-    const switchType = (val) => {
-      form.value.reset();
-      type.value = val;
-    };
+const onSubmit = ({ validateResult }) => {
+  if (validateResult === true) {
+    if (!formData.value.checked) {
+      MessagePlugin.error('请同意TDesign服务协议和TDesign 隐私声明');
+      return;
+    }
+    MessagePlugin.success('注册成功');
+    emit('registerSuccess');
+  }
+};
 
-    return {
-      FORM_RULES,
-      formData,
-      showPsw,
-      form,
-      type,
-      emailOptions,
-      countDown,
-      handleCounter,
-      onSubmit,
-      switchType,
-    };
-  },
-});
+const switchType = (val) => {
+  form.value.reset();
+  type.value = val;
+};
 </script>

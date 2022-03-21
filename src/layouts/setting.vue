@@ -3,7 +3,6 @@
     v-model:visible="showSettingPanel"
     size="408px"
     :footer="false"
-    value="medium"
     header="页面配置"
     :close-btn="true"
     class="setting-drawer-container"
@@ -50,7 +49,7 @@
                 :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
                 class="setting-layout-color-group dynamic-color-btn"
               >
-                <color-container :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
+                <ColorContainer :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
               </t-radio-button>
             </t-popup>
           </div>
@@ -60,7 +59,7 @@
         <t-radio-group v-model="formData.layout" default-vaule="top">
           <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item">
-              <thumbnail :src="getThumbnailUrl(item)" />
+              <Thumbnail :src="getThumbnailUrl(item)" />
             </t-radio-button>
           </div>
         </t-radio-group>
@@ -69,10 +68,7 @@
           <t-switch v-model="formData.splitMenu" />
         </t-form-item>
 
-        <t-form-item v-show="formData.layout !== 'side'" label="固定 Header" name="isHeaderFixed">
-          <t-switch v-model="formData.isHeaderFixed" />
-        </t-form-item>
-        <t-form-item v-show="formData.layout !== 'top'" label="固定 Sidebar" name="isSidebarFixed">
+        <t-form-item v-show="formData.layout === 'mix'" label="固定 Sidebar" name="isSidebarFixed">
           <t-switch v-model="formData.isSidebarFixed" />
         </t-form-item>
 
@@ -86,34 +82,34 @@
         <t-form-item label="显示 Footer" name="showFooter">
           <t-switch v-model="formData.showFooter" />
         </t-form-item>
-        <t-form-item v-show="formData.showFooter && !formData.isSidebarFixed" label="footer 内收" name="footerPosition">
-          <t-switch v-model="formData.isFooterAside" />
-        </t-form-item>
       </t-form>
       <div class="setting-info">
-        <p>请复制后手动修改配置文件: /src/config/style.js</p>
+        <p>请复制后手动修改配置文件: /src/config/style.ts</p>
         <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
       </div>
     </div>
   </t-drawer>
 </template>
-<script lang="ts">
-import { defineComponent, ref, computed, watch, onMounted } from 'vue';
-import { useStore } from 'vuex';
+<script setup lang="ts">
+import { ref, computed, watch, onMounted, watchEffect } from 'vue';
 import { ColorPicker } from 'vue-color-kit';
 import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
+import useClipboard from 'vue-clipboard3';
+import { useSettingStore } from '@/store';
+import Thumbnail from '@/components/thumbnail/index.vue';
+import ColorContainer from '@/components/color/index.vue';
+
 import 'vue-color-kit/dist/vue-color-kit.css';
 
 import STYLE_CONFIG from '@/config/style';
 import { insertThemeStylesheet, generateColorMap } from '@/config/color';
 
-import Thumbnail from '@/components/thumbnail/index.vue';
-import ColorContainer from '@/components/color/index.vue';
-
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
+
+const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
 const COLOR_OPTIONS = ['default', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'dynamic'];
@@ -123,123 +119,113 @@ const MODE_OPTIONS = [
   { type: 'auto', text: '跟随系统' },
 ];
 
-export default defineComponent({
-  name: 'DefaultLayoutSetting',
-  components: { Thumbnail, ColorContainer, ColorPicker },
-  setup() {
-    const formData = ref({ ...STYLE_CONFIG });
-    const store = useStore();
-    const colors = ref();
-    const isColoPickerDisplay = ref(false);
+const formData = ref({ ...STYLE_CONFIG });
+const colors = ref();
+const isColoPickerDisplay = ref(false);
 
-    const showSettingPanel = computed({
-      get() {
-        return store.state.setting.showSettingPanel;
-      },
-      set(newVal) {
-        store.commit('setting/toggleSettingPanel', newVal);
-      },
+const showSettingPanel = computed({
+  get() {
+    return settingStore.showSettingPanel;
+  },
+  set(newVal: boolean) {
+    settingStore.updateConfig({
+      showSettingPanel: newVal,
     });
+  },
+});
 
-    const mode = computed(() => {
-      return store.getters['setting/mode'];
+const mode = computed(() => {
+  return settingStore.displayMode;
+});
+
+watch(
+  () => colors.value,
+  (newColor) => {
+    const { hex } = newColor;
+
+    // hex 主题色
+    const newPalette = Color.getPaletteByGradation({
+      colors: [hex],
+      step: 10,
+    })[0];
+    const { mode } = settingStore;
+    const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
+
+    insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
+
+    settingStore.updateConfig({
+      [hex]: colorMap,
     });
+    settingStore.changeBrandTheme(hex);
+  },
+);
 
-    watch(
-      () => colors.value,
-      (newColor) => {
-        const { hex } = newColor;
-        const { setting } = store.state;
+const changeColor = (val) => {
+  const { hex } = val;
+  // hex 主题色
+  const newPalette = Color.getPaletteByGradation({
+    colors: [hex],
+    step: 10,
+  })[0];
+  const { mode } = settingStore;
+  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
 
-        // hex 主题色
-        const newPalette = Color.getPaletteByGradation({
-          colors: [hex],
-          step: 10,
-        })[0];
-        const { mode } = store.state.setting;
-        const colorMap = generateColorMap(hex, newPalette, mode);
+  settingStore.updateConfig({
+    [hex]: colorMap,
+  });
 
-        store.commit('setting/addColor', { [hex]: colorMap });
+  insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
 
-        insertThemeStylesheet(hex, colorMap, mode);
+  settingStore.changeBrandTheme(hex);
+};
 
-        store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
-      },
-    );
-    const changeColor = (val) => {
-      const { hex } = val;
-      const { setting } = store.state;
+onMounted(() => {
+  document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+    isColoPickerDisplay.value = true;
+  });
+});
 
-      // hex 主题色
-      const newPalette = Color.getPaletteByGradation({
-        colors: [hex],
-        step: 10,
-      })[0];
-      const { mode } = store.state.setting;
-      const colorMap = generateColorMap(hex, newPalette, mode);
+const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeContext) => {
+  if (!visible && context.trigger === 'document') {
+    isColoPickerDisplay.value = visible;
+  }
+};
 
-      store.commit('setting/addColor', { [hex]: colorMap });
-
-      insertThemeStylesheet(hex, colorMap, mode);
-
-      store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
-    };
-
-    onMounted(() => {
-      document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
-        isColoPickerDisplay.value = true;
-      });
-    });
-
-    const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeContext) => {
-      if (!visible && context.trigger === 'document') {
-        isColoPickerDisplay.value = visible;
-      }
-    };
-
-    const handleCopy = () => {
+const handleCopy = () => {
+  const text = JSON.stringify(formData.value, null, 4);
+  const { toClipboard } = useClipboard();
+  toClipboard(text)
+    .then(() => {
       MessagePlugin.closeAll();
       MessagePlugin.success('复制成功');
-    };
-    const getModeIcon = (mode: string) => {
-      if (mode === 'light') {
-        return SettingLightIcon;
-      }
-      if (mode === 'dark') {
-        return SettingDarkIcon;
-      }
-      return SettingAutoIcon;
-    };
+    })
+    .catch(() => {
+      MessagePlugin.closeAll();
+      MessagePlugin.error('复制失败');
+    });
+};
+const getModeIcon = (mode: string) => {
+  if (mode === 'light') {
+    return SettingLightIcon;
+  }
+  if (mode === 'dark') {
+    return SettingDarkIcon;
+  }
+  return SettingAutoIcon;
+};
 
-    const handleCloseDrawer = () => {
-      store.commit('setting/toggleSettingPanel', false);
-    };
-    return {
-      mode,
-      changeColor,
-      isColoPickerDisplay,
-      onPopupVisibleChange,
-      MODE_OPTIONS,
-      LAYOUT_OPTION,
-      COLOR_OPTIONS,
-      formData,
-      showSettingPanel,
-      handleCopy,
-      getModeIcon,
-      handleCloseDrawer,
-      getThumbnailUrl(name: string): string {
-        return `https://tdesign.gtimg.com/tdesign-pro/setting/${name}.png`;
-      },
-    };
-  },
-  watch: {
-    formData: {
-      handler(newVal) {
-        this.$store.dispatch('setting/changeTheme', newVal);
-      },
-      deep: true,
-    },
-  },
+const handleCloseDrawer = () => {
+  settingStore.updateConfig({
+    showSettingPanel: false,
+  });
+};
+
+const getThumbnailUrl = (name: string): string => {
+  return `https://tdesign.gtimg.com/tdesign-pro/setting/${name}.png`;
+};
+
+watchEffect(() => {
+  settingStore.updateConfig(formData.value);
 });
 </script>
 <style lang="less">
@@ -331,7 +317,7 @@ export default defineComponent({
   .setting-container {
     padding-bottom: 100px;
   }
-  .t-radio-group.t-radio-group-medium {
+  .t-radio-group.t-size-m {
     min-height: 32px;
     width: 100%;
     height: auto;
@@ -360,12 +346,12 @@ export default defineComponent({
       border: 2px solid @brand-color !important;
     }
 
-    .t-form__controls--content {
+    .t-form__controls-content {
       justify-content: end;
     }
   }
 
-  .t-form__controls--content {
+  .t-form__controls-content {
     justify-content: end;
   }
 }

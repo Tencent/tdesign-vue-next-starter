@@ -45,47 +45,35 @@
   </t-popup>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
+<script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
+import { storeToRefs } from 'pinia';
+import { useNotificationStore } from '@/store';
 import { NotificationItem } from '@/interface';
 
-export default defineComponent({
-  setup() {
-    const store = useStore();
-    const { msgData } = store.state.notification;
+const router = useRouter();
+const store = useNotificationStore();
+const { msgData, unreadMsg } = storeToRefs(store);
 
-    const unreadMsg = computed(() => store.getters['notification/unreadMsg']);
-
-    const setRead = (type: string, item?: NotificationItem) => {
-      const changeMsg = msgData;
-      if (type === 'all') {
-        changeMsg.forEach((e: NotificationItem) => {
-          e.status = false;
-        });
-      } else {
-        changeMsg.forEach((e: NotificationItem) => {
-          if (e.id === item?.id) {
-            e.status = false;
-          }
-        });
+const setRead = (type: string, item?: NotificationItem) => {
+  const changeMsg = msgData.value;
+  if (type === 'all') {
+    changeMsg.forEach((e) => {
+      e.status = false;
+    });
+  } else {
+    changeMsg.forEach((e) => {
+      if (e.id === item?.id) {
+        e.status = false;
       }
-      store.commit('notification/setMsgData', changeMsg);
-    };
+    });
+  }
+  store.setMsgData(changeMsg);
+};
 
-    const goDetail = () => {
-      const router = useRouter();
-      router.push('/detail/secondary');
-    };
-
-    return {
-      goDetail,
-      unreadMsg,
-      setRead,
-    };
-  },
-});
+const goDetail = () => {
+  router.push('/detail/secondary');
+};
 </script>
 
 <style lang="less" scoped>

@@ -89,13 +89,13 @@
     </t-col>
   </t-row>
 </template>
-<script lang="ts">
-import { defineComponent, nextTick, onMounted, onUnmounted, watch } from 'vue';
-import { useStore } from 'vuex';
+<script setup lang="ts">
+import { nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
 import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { useSettingStore } from '@/store';
 
 import { LAST_7_DAYS } from '@/utils/date';
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
@@ -109,84 +109,68 @@ import Card from '@/components/card/index.vue';
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
 
-export default defineComponent({
-  components: {
-    Card,
-  },
-  setup() {
-    let lineContainer: HTMLElement;
-    let lineChart: echarts.ECharts;
-    const store = useStore();
-    const { chartColors } = store.state.setting;
+let lineContainer: HTMLElement;
+let lineChart: echarts.ECharts;
+const store = useSettingStore();
+const chartColors = computed(() => store.chartColors);
 
-    const onLineChange = (value) => {
-      lineChart.setOption(getFolderLineDataSet(value));
-    };
+const onLineChange = (value) => {
+  lineChart.setOption(getFolderLineDataSet(value));
+};
 
-    const initChart = () => {
-      lineContainer = document.getElementById('lineContainer');
-      lineChart = echarts.init(lineContainer);
-      lineChart.setOption({
-        grid: {
-          x: 30, // 默认是80px
-          y: 30, // 默认是60px
-          x2: 10, // 默认80px
-          y2: 30, // 默认60px
-        },
-        ...getFolderLineDataSet({ ...chartColors }),
-      });
-    };
+const initChart = () => {
+  lineContainer = document.getElementById('lineContainer');
+  lineChart = echarts.init(lineContainer);
+  lineChart.setOption({
+    grid: {
+      x: 30, // 默认是80px
+      y: 30, // 默认是60px
+      x2: 10, // 默认80px
+      y2: 30, // 默认60px
+    },
+    ...getFolderLineDataSet({ ...chartColors.value }),
+  });
+};
 
-    const updateContainer = () => {
-      lineChart?.resize({
-        width: lineContainer.clientWidth,
-        height: lineContainer.clientHeight,
-      });
-    };
+const updateContainer = () => {
+  lineChart?.resize({
+    width: lineContainer.clientWidth,
+    height: lineContainer.clientHeight,
+  });
+};
 
-    onMounted(() => {
-      nextTick(() => {
-        initChart();
-      });
-      window.addEventListener('resize', updateContainer, false);
-    });
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', updateContainer);
-    });
-
-    const getIcon = (type) => {
-      switch (type) {
-        case 'a':
-          return ProductAIcon;
-        case 'b':
-          return ProductBIcon;
-        case 'c':
-          return ProductCIcon;
-        case 'd':
-          return ProductDIcon;
-        default:
-          return ProductAIcon;
-      }
-    };
-
-    watch(
-      () => store.state.setting.brandTheme,
-      () => {
-        changeChartsTheme([lineChart]);
-      },
-    );
-
-    return {
-      LAST_7_DAYS,
-      USER_INFO_LIST,
-      TEAM_MEMBERS,
-      PRODUCT_LIST,
-      onLineChange,
-      getIcon,
-    };
-  },
+onMounted(() => {
+  nextTick(() => {
+    initChart();
+  });
+  window.addEventListener('resize', updateContainer, false);
 });
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateContainer);
+});
+
+const getIcon = (type) => {
+  switch (type) {
+    case 'a':
+      return ProductAIcon;
+    case 'b':
+      return ProductBIcon;
+    case 'c':
+      return ProductCIcon;
+    case 'd':
+      return ProductDIcon;
+    default:
+      return ProductAIcon;
+  }
+};
+
+watch(
+  () => store.brandTheme,
+  () => {
+    changeChartsTheme([lineChart]);
+  },
+);
 </script>
 <style lang="less" scoped>
 @import url('./index.less');

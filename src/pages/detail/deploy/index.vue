@@ -68,17 +68,17 @@
     </t-dialog>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue';
-import { useStore } from 'vuex';
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref, watch, computed } from 'vue';
 
 import * as echarts from 'echarts/core';
 import { TitleComponent, ToolboxComponent, TooltipComponent, GridComponent, LegendComponent } from 'echarts/components';
 import { BarChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { useSettingStore } from '@/store';
 
 import { changeChartsTheme, getSmoothLineDataSet, get2ColBarChartDataSet } from '../../dashboard/base/index';
-import { BASE_INFO_DATA, TABLE_COLUMNS } from './constants';
+import { BASE_INFO_DATA, TABLE_COLUMNS as columns } from './constants';
 
 import { prefix } from '@/config/global';
 import Card from '@/components/card/index.vue';
@@ -96,118 +96,104 @@ echarts.use([
   CanvasRenderer,
 ]);
 
-export default defineComponent({
-  name: 'DetailDeploy',
-  components: { Card },
-  setup() {
-    const store = useStore();
+const store = useSettingStore();
 
-    const { chartColors } = store.state.setting;
-    const data = ref([]);
-    const pagination = ref({
-      defaultPageSize: 10,
-      total: 100,
-      defaultCurrent: 1,
-    });
-
-    const fetchData = async () => {
-      try {
-        const res: ResDataType = await request.get('/api/get-project-list');
-        if (res.code === 0) {
-          const { list = [] } = res.data;
-          data.value = list;
-          pagination.value = {
-            ...pagination.value,
-            total: list.length,
-          };
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    const visible = ref(false);
-
-    // monitorChart logic
-    let monitorContainer: HTMLElement;
-    let monitorChart: echarts.ECharts;
-    onMounted(() => {
-      monitorContainer = document.getElementById('monitorContainer');
-      monitorChart = echarts.init(monitorContainer);
-      monitorChart.setOption(getSmoothLineDataSet({ ...chartColors }));
-      setInterval(() => {
-        monitorChart.setOption(getSmoothLineDataSet({ ...chartColors }));
-      }, 3000);
-    });
-
-    // dataChart logic
-    let dataContainer: HTMLElement;
-    let dataChart: echarts.ECharts;
-    onMounted(() => {
-      dataContainer = document.getElementById('dataContainer');
-      dataChart = echarts.init(dataContainer);
-      dataChart.setOption(get2ColBarChartDataSet({ ...chartColors }));
-    });
-
-    const intervalTimer = null;
-
-    /// / chartSize update
-    const updateContainer = () => {
-      monitorChart.resize({
-        width: monitorContainer.clientWidth,
-        height: monitorContainer.clientHeight,
-      });
-      dataChart.resize({
-        width: dataContainer.clientWidth,
-        height: dataContainer.clientHeight,
-      });
-    };
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', updateContainer);
-      clearInterval(intervalTimer);
-    });
-
-    const onAlertChange = () => {
-      dataChart.setOption(get2ColBarChartDataSet({ ...chartColors }));
-    };
-
-    onMounted(() => {
-      fetchData();
-      window.addEventListener('resize', updateContainer, false);
-    });
-
-    watch(
-      () => store.state.setting.brandTheme,
-      () => {
-        changeChartsTheme([monitorChart, dataChart]);
-      },
-    );
-    return {
-      prefix,
-      BASE_INFO_DATA,
-      columns: TABLE_COLUMNS,
-      data,
-      pagination,
-      visible,
-      sortChange(val) {
-        console.log(val);
-      },
-      rehandleChange(changeParams, triggerAndData) {
-        console.log('统一Change', changeParams, triggerAndData);
-      },
-      listClick() {
-        visible.value = true;
-      },
-      onConfirm() {
-        visible.value = false;
-      },
-      deleteClickOp(e) {
-        data.value.splice(e.index, 1);
-      },
-      onAlertChange,
-    };
-  },
+const chartColors = computed(() => store.chartColors);
+const data = ref([]);
+const pagination = ref({
+  defaultPageSize: 10,
+  total: 100,
+  defaultCurrent: 1,
 });
+
+const fetchData = async () => {
+  try {
+    const res: ResDataType = await request.get('/api/get-project-list');
+    if (res.code === 0) {
+      const { list = [] } = res.data;
+      data.value = list;
+      pagination.value = {
+        ...pagination.value,
+        total: list.length,
+      };
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+const visible = ref(false);
+
+// monitorChart logic
+let monitorContainer: HTMLElement;
+let monitorChart: echarts.ECharts;
+onMounted(() => {
+  monitorContainer = document.getElementById('monitorContainer');
+  monitorChart = echarts.init(monitorContainer);
+  monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
+  setInterval(() => {
+    monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
+  }, 3000);
+});
+
+// dataChart logic
+let dataContainer: HTMLElement;
+let dataChart: echarts.ECharts;
+onMounted(() => {
+  dataContainer = document.getElementById('dataContainer');
+  dataChart = echarts.init(dataContainer);
+  dataChart.setOption(get2ColBarChartDataSet({ ...chartColors.value }));
+});
+
+const intervalTimer = null;
+
+/// / chartSize update
+const updateContainer = () => {
+  monitorChart.resize({
+    width: monitorContainer.clientWidth,
+    height: monitorContainer.clientHeight,
+  });
+  dataChart.resize({
+    width: dataContainer.clientWidth,
+    height: dataContainer.clientHeight,
+  });
+};
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateContainer);
+  clearInterval(intervalTimer);
+});
+
+const onAlertChange = () => {
+  dataChart.setOption(get2ColBarChartDataSet({ ...chartColors.value }));
+};
+
+onMounted(() => {
+  fetchData();
+  window.addEventListener('resize', updateContainer, false);
+});
+
+watch(
+  () => store.brandTheme,
+  () => {
+    changeChartsTheme([monitorChart, dataChart]);
+  },
+);
+
+const sortChange = (val) => {
+  console.log(val);
+};
+const rehandleChange = (changeParams, triggerAndData) => {
+  console.log('统一Change', changeParams, triggerAndData);
+};
+const listClick = () => {
+  visible.value = true;
+};
+const onConfirm = () => {
+  visible.value = false;
+};
+const deleteClickOp = (e) => {
+  data.value.splice(e.rowIndex, 1);
+};
 </script>
 <style lang="less" scoped>
 @import url('../base/index.less');

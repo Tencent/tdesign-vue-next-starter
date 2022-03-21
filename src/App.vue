@@ -1,22 +1,19 @@
 <template>
   <router-view :class="[mode]" />
 </template>
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
-import { useStore } from 'vuex';
+<script setup lang="ts">
+import { computed, onMounted } from 'vue';
+import config from '@/config/style';
+import { useSettingStore } from '@/store';
 
-export default defineComponent({
-  setup() {
-    const store = useStore();
+const store = useSettingStore();
 
-    const mode = computed(() => {
-      return store.getters['setting/mode'];
-    });
+const mode = computed(() => {
+  return store.displayMode;
+});
 
-    return {
-      mode,
-    };
-  },
+onMounted(() => {
+  store.updateConfig({ ...config });
 });
 </script>
 <style lang="less">

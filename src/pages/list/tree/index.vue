@@ -15,38 +15,24 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
-import { prefix } from '@/config/global';
 
 import { TREE_DATA } from './constants';
 import CommonTable from '../components/CommonTable.vue';
 
-export default defineComponent({
-  name: 'ListTree',
-  components: {
-    SearchIcon,
-    CommonTable,
-  },
-  setup() {
-    const filterByText = ref();
-    const filterText = ref();
-    return {
-      prefix,
-      TREE_DATA,
-      expanded: ['0', '0-0', '0-1', '0-2', '0-3', '0-4'],
-      filterText,
-      filterByText,
-      onInput() {
-        filterByText.value = (node) => {
-          const rs = node.label.indexOf(filterText.value) >= 0;
-          return rs;
-        };
-      },
-    };
-  },
-});
+const filterByText = ref();
+const filterText = ref();
+
+const expanded = ['0', '0-0', '0-1', '0-2', '0-3', '0-4'];
+
+const onInput = () => {
+  filterByText.value = (node) => {
+    const rs = node.label.indexOf(filterText.value) >= 0;
+    return rs;
+  };
+};
 </script>
 <style lang="less" scoped>
 @import '@/style/variables.less';

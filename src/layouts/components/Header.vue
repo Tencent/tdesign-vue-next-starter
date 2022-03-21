@@ -12,7 +12,7 @@
           <search :layout="layout" />
         </div>
       </template>
-      <menu-content v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
+      <MenuContent v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
       <template #operations>
         <div class="operations-container">
           <!-- 搜索框 -->
@@ -63,11 +63,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, computed, ref } from 'vue';
-import { useStore } from 'vuex';
+<script setup lang="ts">
+import { PropType, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-
+import { useSettingStore } from '@/store';
 import { prefix } from '@/config/global';
 import tLogoFull from '@/assets/assets-logo-full.svg?component';
 import { MenuRoute } from '@/interface';
@@ -76,126 +75,96 @@ import Notice from './Notice.vue';
 import Search from './Search.vue';
 import MenuContent from './MenuContent';
 
-export default defineComponent({
-  components: {
-    tLogoFull,
-    Notice,
-    Search,
-    MenuContent,
+const props = defineProps({
+  theme: {
+    type: String,
+    default: '',
   },
-  props: {
-    theme: {
-      type: String as PropType<string>,
-      default: '',
-    },
-    layout: {
-      type: String as PropType<string>,
-      default: 'top',
-    },
-    showLogo: {
-      type: Boolean as PropType<boolean>,
-      default: true,
-    },
-    menu: {
-      type: Array as PropType<MenuRoute[]>,
-      default: () => [],
-    },
-    isFixed: {
-      type: Boolean as PropType<boolean>,
-      default: false,
-    },
-    isCompact: {
-      type: Boolean as PropType<boolean>,
-      default: false,
-    },
-    maxLevel: {
-      type: Number as PropType<number>,
-      default: 3,
-    },
+  layout: {
+    type: String,
+    default: 'top',
   },
-  setup(props) {
-    const store = useStore();
-    const router = useRouter();
-
-    const toggleSettingPanel = () => {
-      store.commit('setting/toggleSettingPanel', true);
-    };
-
-    const active = computed(() => {
-      const route = useRoute();
-      if (!route.path) {
-        return '';
-      }
-      return route.path
-        .split('/')
-        .filter((item, index) => index <= props.maxLevel && index > 0)
-        .map((item) => `/${item}`)
-        .join('');
-    });
-
-    const showMenu = computed(() => !(props.layout === 'mix' && props.showLogo));
-
-    const layoutCls = computed(() => [`${prefix}-header-layout`]);
-
-    const menuCls = computed(() => {
-      const { isFixed, layout, isCompact } = props;
-      return [
-        {
-          [`${prefix}-header-menu`]: !isFixed,
-          [`${prefix}-header-menu-fixed`]: isFixed,
-          [`${prefix}-header-menu-fixed-side`]: layout === 'side' && isFixed,
-          [`${prefix}-header-menu-fixed-side-compact`]: layout === 'side' && isFixed && isCompact,
-        },
-      ];
-    });
-
-    const userVisible = ref(false);
-    const userVisibleChange = (value: boolean) => {
-      userVisible.value = value;
-    };
-
-    const changeCollapsed = () => {
-      store.commit('setting/toggleSidebarCompact');
-    };
-    const isSidebarCompact = computed(() => store.state.setting.isSidebarCompact);
-
-    const handleNav = (url) => {
-      router.push(url);
-    };
-
-    const handleLogout = () => {
-      router.push(`/login?redirect=${router.currentRoute.value.fullPath}`);
-    };
-
-    const navToGitHub = () => {
-      window.open('https://github.com/tencent/tdesign-vue-next-starter');
-    };
-
-    const navToHelper = () => {
-      window.open('http://tdesign.tencent.com/starter/docs/get-started');
-    };
-
-    return {
-      isSidebarCompact,
-      toggleSettingPanel,
-      active,
-      showMenu,
-      layoutCls,
-      userVisible,
-      userVisibleChange,
-      menuCls,
-      changeCollapsed,
-      handleNav,
-      handleLogout,
-      navToGitHub,
-      navToHelper,
-    };
+  showLogo: {
+    type: Boolean,
+    default: true,
+  },
+  menu: {
+    type: Array as PropType<MenuRoute[]>,
+    default: () => [],
+  },
+  isFixed: {
+    type: Boolean,
+    default: false,
+  },
+  isCompact: {
+    type: Boolean,
+    default: false,
+  },
+  maxLevel: {
+    type: Number,
+    default: 3,
   },
 });
+
+const router = useRouter();
+const settingStore = useSettingStore();
+
+const toggleSettingPanel = () => {
+  settingStore.updateConfig({
+    showSettingPanel: true,
+  });
+};
+
+const active = computed(() => {
+  const route = useRoute();
+  if (!route.path) {
+    return '';
+  }
+  return route.path
+    .split('/')
+    .filter((item, index) => index <= props.maxLevel && index > 0)
+    .map((item) => `/${item}`)
+    .join('');
+});
+
+const layoutCls = computed(() => [`${prefix}-header-layout`]);
+
+const menuCls = computed(() => {
+  const { isFixed, layout, isCompact } = props;
+  return [
+    {
+      [`${prefix}-header-menu`]: !isFixed,
+      [`${prefix}-header-menu-fixed`]: isFixed,
+      [`${prefix}-header-menu-fixed-side`]: layout === 'side' && isFixed,
+      [`${prefix}-header-menu-fixed-side-compact`]: layout === 'side' && isFixed && isCompact,
+    },
+  ];
+});
+
+const changeCollapsed = () => {
+  settingStore.updateConfig({
+    isSidebarCompact: !settingStore.isSidebarCompact,
+  });
+};
+
+const handleNav = (url) => {
+  router.push(url);
+};
+
+const handleLogout = () => {
+  router.push(`/login?redirect=${router.currentRoute.value.fullPath}`);
+};
+
+const navToGitHub = () => {
+  window.open('https://github.com/tencent/tdesign-vue-next-starter');
+};
+
+const navToHelper = () => {
+  window.open('http://tdesign.tencent.com/starter/docs/get-started');
+};
 </script>
 <style lang="less">
 @import '@/style/variables.less';
-
 .@{prefix}-header {
   &-layout {
     height: 64px;
@@ -225,7 +194,6 @@ export default defineComponent({
     height: 64px;
   }
 }
-
 .header-menu {
   flex: 1 1 1;
   display: inline-flex;
@@ -236,7 +204,7 @@ export default defineComponent({
   align-items: center;
   margin-right: 12px;
 
-  .t-popup-reference {
+  .t-popup__reference {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,7 +228,8 @@ export default defineComponent({
 .header-operate-left {
   display: flex;
   margin-left: 20px;
-  align-items: center;
+  align-items: normal;
+  line-height: 0;
 
   .collapsed-icon {
     font-size: 20px;

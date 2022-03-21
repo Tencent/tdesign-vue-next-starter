@@ -35,5 +35,5 @@ export interface NotificationItem {
   status: boolean;
   collected: boolean;
   date: string;
-  quality: 'high' | 'low' | 'middle';
+  quality: string;
 }
