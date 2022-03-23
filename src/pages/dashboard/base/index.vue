@@ -202,6 +202,13 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DashboardBase',
+};
+</script>
+
 <script setup lang="ts">
 import { onMounted, watch, ref, onUnmounted, nextTick, computed } from 'vue';
 
@@ -386,9 +393,11 @@ const getRankClass = (index: number) => {
   return ['dashboard-rank', { 'dashboard-rank__top': index < 3 }];
 };
 </script>
+
 <style lang="less" scoped>
 @import './index.less';
 </style>
+
 <style lang="less">
 @import '@/style/variables.less';
 

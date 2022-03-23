@@ -11,7 +11,7 @@ export default [
     children: [
       {
         path: 'index',
-        name: 'userIndex',
+        name: 'UserIndex',
         component: () => import('@/pages/user/index.vue'),
         meta: { title: '个人中心' },
       },

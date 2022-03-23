@@ -1,10 +1,30 @@
 <template>
-  <router-view v-slot="{ Component }">
+  <router-view v-if="!isRefreshing" v-slot="{ Component }">
     <transition name="fade" mode="out-in">
-      <component :is="Component" />
+      <keep-alive :include="aliveViews">
+        <component :is="Component" />
+      </keep-alive>
     </transition>
   </router-view>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useTabsRouterStore } from '@/store';
+
+const aliveViews = computed(() => {
+  const tabsRouterStore = useTabsRouterStore();
+  const { tabRouters } = tabsRouterStore;
+
+  return tabRouters.filter((route) => route.isAlive).map((route) => route.name);
+});
+
+const isRefreshing = computed(() => {
+  const tabsRouterStore = useTabsRouterStore();
+  const { refreshing } = tabsRouterStore;
+  return refreshing;
+});
+</script>
 <style lang="less" scoped>
 @import '@/style/variables';
 

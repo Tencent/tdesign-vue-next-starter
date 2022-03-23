@@ -156,6 +156,13 @@
     </div>
   </t-form>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'FormBase',
+};
+</script>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -190,6 +197,7 @@ const formatResponse = (res) => {
   return { ...res, error: '上传失败，请重试', url: res.url };
 };
 </script>
+
 <style lang="less" scoped>
 @import url('./index.less');
 </style>

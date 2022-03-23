@@ -22,6 +22,11 @@
     <footer class="copyright">Copyright @ 2021-2022 Tencent. All Rights Reserved</footer>
   </div>
 </template>
+<script lang="ts">
+export default {
+  name: 'LoginIndex',
+};
+</script>
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -35,6 +40,7 @@ const switchType = (val: string) => {
   type.value = val;
 };
 </script>
+
 <style lang="less">
 @import url('./index.less');
 </style>

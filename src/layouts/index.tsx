@@ -1,16 +1,17 @@
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, nextTick, onMounted, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useRoute } from 'vue-router';
-import { usePermissionStore, useSettingStore } from '@/store';
+import { useRoute, useRouter } from 'vue-router';
+import { usePermissionStore, useSettingStore, useTabsRouterStore } from '@/store';
 
-import TDesignHeader from './components/Header.vue';
-import TDesignBreadcrumb from './components/Breadcrumb.vue';
-import TDesignFooter from './components/Footer.vue';
-import TDesignSideNav from './components/SideNav';
-import TDesignContent from './components/Content.vue';
+import LayoutHeader from './components/Header.vue';
+import LayoutBreadcrumb from './components/Breadcrumb.vue';
+import LayoutFooter from './components/Footer.vue';
+import LayoutSideNav from './components/SideNav';
+import LayoutContent from './components/Content.vue';
+import Setting from './setting.vue';
 
 import { prefix } from '@/config/global';
-import TdesignSetting from './setting.vue';
+
 import '@/style/layout.less';
 
 const name = `${prefix}-base-layout`;
@@ -19,8 +20,10 @@ export default defineComponent({
   name,
   setup() {
     const route = useRoute();
+    const router = useRouter();
     const permissionStore = usePermissionStore();
     const settingStore = useSettingStore();
+    const tabsRouterStore = useTabsRouterStore();
     const { routers: menuRouters } = storeToRefs(permissionStore);
     const setting = storeToRefs(settingStore);
 
@@ -57,10 +60,59 @@ export default defineComponent({
       return newMenuRouters;
     });
 
+    const appendNewRoute = () => {
+      const {
+        path,
+        meta: { title },
+        name,
+      } = route;
+      tabsRouterStore.appendTabRouterList({ path, title: title as string, name, isAlive: true });
+    };
+
+    onMounted(() => {
+      appendNewRoute();
+    });
+
+    watch(
+      () => route.path,
+      () => {
+        appendNewRoute();
+      },
+    );
+
+    const handleRemove = ({ value: path, index }) => {
+      const { tabRouters } = tabsRouterStore;
+      const nextRouter = tabRouters[index + 1] || tabRouters[index - 1];
+
+      tabsRouterStore.subtractCurrentTabRouter({ path, routeIdx: index });
+      if (path === route.path) {
+        router.push(nextRouter.path);
+      }
+    };
+    const handleChangeCurrentTab = (path: string) => {
+      router.push(path);
+    };
+    const handleRefresh = (currentPath: string, routeIdx: number) => {
+      tabsRouterStore.toggleTabRouterAlive(routeIdx);
+      nextTick(() => {
+        tabsRouterStore.toggleTabRouterAlive(routeIdx);
+        router.replace({ path: currentPath });
+      });
+    };
+    const handleCloseAhead = (path: string, routeIdx: number) => {
+      tabsRouterStore.subtractTabRouterAhead({ path, routeIdx });
+    };
+    const handleCloseBehind = (path: string, routeIdx: number) => {
+      tabsRouterStore.subtractTabRouterBehind({ path, routeIdx });
+    };
+    const handleCloseOther = (path: string, routeIdx: number) => {
+      tabsRouterStore.subtractTabRouterOther({ path, routeIdx });
+    };
+
     const renderSidebar = () => {
       return (
         settingStore.showSidebar && (
-          <TDesignSideNav
+          <LayoutSideNav
             showLogo={settingStore.showSidebarLogo}
             layout={settingStore.layout}
             isFixed={settingStore.isSidebarFixed}
@@ -75,7 +127,7 @@ export default defineComponent({
     const renderHeader = () => {
       return (
         settingStore.showHeader && (
-          <TDesignHeader
+          <LayoutHeader
             showLogo={settingStore.showHeaderLogo}
             theme={settingStore.displayMode}
             layout={settingStore.layout}
@@ -90,18 +142,72 @@ export default defineComponent({
     const renderFooter = () => {
       return (
         <t-footer class={`${prefix}-footer-layout`}>
-          <TDesignFooter />
+          <LayoutFooter />
         </t-footer>
       );
     };
 
     const renderContent = () => {
-      const { showBreadcrumb, showFooter } = settingStore;
+      const { showBreadcrumb, showFooter, isUseTabsRouter } = settingStore;
+      const { tabRouters } = tabsRouterStore;
       return (
         <t-layout class={[`${prefix}-layout`]}>
+          {isUseTabsRouter && (
+            <t-tabs
+              theme="card"
+              class={`${prefix}-layout-tabs-nav`}
+              value={route.path}
+              onChange={handleChangeCurrentTab}
+              style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
+              onRemove={handleRemove}
+            >
+              {tabRouters.map((router: any, idx: number) => (
+                <t-tab-panel
+                  value={router.path}
+                  key={`${router.path}_${idx}`}
+                  label={
+                    <t-dropdown
+                      trigger="context-menu"
+                      minColumnWidth={128}
+                      popupProps={{ overlayClassName: 'router-tabs-dropdown' }}
+                      v-slots={{
+                        dropdown: () => (
+                          <t-dropdown-menu>
+                            <t-dropdown-item onClick={() => handleRefresh(router.path, idx)}>
+                              <t-icon name="refresh" />
+                              刷新
+                            </t-dropdown-item>
+                            {idx > 0 && (
+                              <t-dropdown-item onClick={() => handleCloseAhead(router.path, idx)}>
+                                <t-icon name="arrow-left" />
+                                关闭左侧
+                              </t-dropdown-item>
+                            )}
+                            {idx < tabRouters.length - 1 && (
+                              <t-dropdown-item onClick={() => handleCloseBehind(router.path, idx)}>
+                                <t-icon name="arrow-right" />
+                                关闭右侧
+                              </t-dropdown-item>
+                            )}
+                            <t-dropdown-item onClick={() => handleCloseOther(router.path, idx)}>
+                              <t-icon name="close-circle" />
+                              关闭其它
+                            </t-dropdown-item>
+                          </t-dropdown-menu>
+                        ),
+                      }}
+                    >
+                      {!router.isHome ? router.title : <t-icon name="home" />}
+                    </t-dropdown>
+                  }
+                  removable={!router.isHome}
+                />
+              ))}
+            </t-tabs>
+          )}
           <t-content class={`${prefix}-content-layout`}>
-            {showBreadcrumb && <TDesignBreadcrumb />}
-            <TDesignContent />
+            {showBreadcrumb && <LayoutBreadcrumb />}
+            <LayoutContent />
           </t-content>
           {showFooter && renderFooter()}
         </t-layout>
@@ -134,7 +240,7 @@ export default defineComponent({
             <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
           </t-layout>
         )}
-        <TdesignSetting />
+        <Setting />
       </div>
     );
   },

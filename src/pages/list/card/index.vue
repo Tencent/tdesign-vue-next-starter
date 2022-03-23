@@ -60,6 +60,13 @@
     />
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'ListCard',
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
@@ -141,6 +148,7 @@ const handleManageProduct = (product) => {
   formData.value = { ...product, status: product?.isSetup ? '1' : '0' };
 };
 </script>
+
 <style lang="less" scoped>
 @import '@/style/variables.less';
 

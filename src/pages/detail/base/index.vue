@@ -26,6 +26,13 @@
     </card>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DetailBase',
+};
+</script>
+
 <script setup lang="ts">
 import Card from '@/components/card/index.vue';
 
@@ -108,6 +115,7 @@ const BASE_INFO_DATA = [
   },
 ];
 </script>
+
 <style lang="less" scoped>
 @import url('./index.less');
 </style>

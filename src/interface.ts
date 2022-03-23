@@ -1,3 +1,4 @@
+import { RouteRecordName } from 'vue-router';
 import STYLE_CONFIG from '@/config/style';
 
 export interface ResDataType {
@@ -36,4 +37,18 @@ export interface NotificationItem {
   collected: boolean;
   date: string;
   quality: string;
+}
+
+export interface TRouterInfo {
+  path: string;
+  routeIdx?: number;
+  title?: string;
+  name?: RouteRecordName;
+  isAlive?: boolean;
+  isHome?: boolean;
+}
+
+export interface TTabRouterType {
+  isRefreshing: boolean;
+  tabRouterList: Array<TRouterInfo>;
 }

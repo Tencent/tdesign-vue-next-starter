@@ -56,13 +56,22 @@
     }
   }
 
+  &-content-layout {
+    padding: @spacer-3;
+  }
+
   &-layout{
     height: calc(100vh - 64px);
     overflow-y: scroll;
-  }
-
-  &-content-layout {
-    padding: @spacer-3;
+    &-tabs-nav {
+      max-width: 100%;
+      position: fixed;
+      overflow: visible;
+      z-index: 999;
+    }
+    &-tabs-nav + .@{prefix}-content-layout {
+      padding-top: 48px + @spacer-3;
+    }
   }
 
   &-footer-layout {
@@ -148,6 +157,12 @@
       min-width: 72px;
       transition: all 0.3s;
     }
+  }
+}
+
+.route-tabs-dropdown {
+  .t-icon {
+    margin-right: 8px;
   }
 }
 

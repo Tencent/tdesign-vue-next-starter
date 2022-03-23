@@ -82,6 +82,9 @@
         <t-form-item label="显示 Footer" name="showFooter">
           <t-switch v-model="formData.showFooter" />
         </t-form-item>
+        <t-form-item label="使用 多标签Tab页" name="isUseTabsRouter">
+          <t-switch v-model="formData.isUseTabsRouter"></t-switch>
+        </t-form-item>
       </t-form>
       <div class="setting-info">
         <p>请复制后手动修改配置文件: /src/config/style.ts</p>

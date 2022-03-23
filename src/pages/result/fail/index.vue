@@ -9,7 +9,11 @@
     </div>
   </div>
 </template>
-
+<script lang="ts">
+export default {
+  name: 'ResultFail',
+};
+</script>
 <style lang="less" scoped>
 @import '@/style/variables.less';
 
