@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ComputedRef } from 'vue';
 import { useTabsRouterStore } from '@/store';
 
 const aliveViews = computed(() => {
@@ -17,7 +17,7 @@ const aliveViews = computed(() => {
   const { tabRouters } = tabsRouterStore;
 
   return tabRouters.filter((route) => route.isAlive).map((route) => route.name);
-});
+}) as ComputedRef<string[]>;
 
 const isRefreshing = computed(() => {
   const tabsRouterStore = useTabsRouterStore();
