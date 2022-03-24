@@ -4,6 +4,12 @@
   </result>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'Result404',
+};
+</script>
+
 <script setup lang="ts">
 import Result from '@/components/result/index.vue';
 </script>

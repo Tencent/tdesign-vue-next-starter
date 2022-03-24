@@ -15,10 +15,7 @@
     "defineProps": "readonly",
     "defineEmits": "readonly"
   },
-  "plugins": [
-    "vue",
-    "@typescript-eslint"
-  ],
+  "plugins": ["vue", "@typescript-eslint"],
   "parserOptions": {
     "parser": "@typescript-eslint/parser",
     "sourceType": "module",
@@ -28,27 +25,22 @@
     }
   },
   "settings": {
-    "import/extensions": [
-      ".js",
-      ".jsx",
-      ".ts",
-      ".tsx"
-    ]
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"]
   },
   "rules": {
     "no-console": "off",
     "no-continue": "off",
     "no-restricted-syntax": "off",
     "no-plusplus": "off",
-    "no-param-reassign":  "off",
-    "no-shadow":  "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off",
     "guard-for-in": "off",
 
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
-
+    "import/first": "off", // https://github.com/vuejs/vue-eslint-parser/issues/58
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "vue/first-attribute-linebreak": 0
@@ -61,8 +53,7 @@
         "vue/require-default-prop": 0,
         "vue/multi-word-component-names": 0,
         "vue/no-reserved-props": 0,
-        "vue/no-v-html": 0,
-        
+        "vue/no-v-html": 0
       }
     }
   ]

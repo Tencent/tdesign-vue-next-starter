@@ -109,6 +109,13 @@
     </t-dialog>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DetailAdvanced',
+};
+</script>
+
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { prefix } from '@/config/global';
@@ -175,6 +182,7 @@ const onConfirm = () => {
   visible.value = false;
 };
 </script>
+
 <style lang="less" scoped>
 @import url('./index.less');
 </style>

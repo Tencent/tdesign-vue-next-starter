@@ -89,6 +89,11 @@
     </t-col>
   </t-row>
 </template>
+<script lang="ts">
+export default {
+  name: 'UserIndex',
+};
+</script>
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
 import * as echarts from 'echarts/core';
@@ -172,6 +177,7 @@ watch(
   },
 );
 </script>
+
 <style lang="less" scoped>
 @import url('./index.less');
 </style>

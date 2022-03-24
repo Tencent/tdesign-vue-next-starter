@@ -68,6 +68,13 @@
     </t-dialog>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'DetailDeploy',
+};
+</script>
+
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch, computed } from 'vue';
 
@@ -195,6 +202,7 @@ const deleteClickOp = (e) => {
   data.value.splice(e.rowIndex, 1);
 };
 </script>
+
 <style lang="less" scoped>
 @import url('../base/index.less');
 </style>

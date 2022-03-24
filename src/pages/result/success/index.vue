@@ -9,7 +9,11 @@
     </div>
   </div>
 </template>
-
+<script lang="ts">
+export default {
+  name: 'ResultSuccess',
+};
+</script>
 <style lang="less" scoped>
 @import '@/style/variables.less';
 

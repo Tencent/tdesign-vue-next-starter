@@ -15,6 +15,13 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'ListTree',
+};
+</script>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
@@ -34,6 +41,7 @@ const onInput = () => {
   };
 };
 </script>
+
 <style lang="less" scoped>
 @import '@/style/variables.less';
 .table-tree-container {

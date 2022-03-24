@@ -139,6 +139,13 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'FormStep',
+};
+</script>
+
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
@@ -186,6 +193,7 @@ const complete = () => {
   router.replace({ path: '/detail/advanced' });
 };
 </script>
+
 <style lang="less" scoped>
 @import url('./index.less');
 </style>

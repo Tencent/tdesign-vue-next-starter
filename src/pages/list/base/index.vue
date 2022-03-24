@@ -66,6 +66,13 @@
     />
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'ListBase',
+};
+</script>
+
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
@@ -171,6 +178,7 @@ const handleClickDelete = (row: { rowIndex: any }) => {
   confirmVisible.value = true;
 };
 </script>
+
 <style lang="less" scoped>
 @import '@/style/variables';
 
