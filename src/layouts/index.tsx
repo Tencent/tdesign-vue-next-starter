@@ -11,6 +11,7 @@ import LayoutContent from './components/Content.vue';
 import Setting from './setting.vue';
 
 import { prefix } from '@/config/global';
+import { TRouterInfo } from '@/interface';
 
 import '@/style/layout.less';
 
@@ -161,7 +162,7 @@ export default defineComponent({
               style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
               onRemove={handleRemove}
             >
-              {tabRouters.map((router: any, idx: number) => (
+              {tabRouters.map((router: TRouterInfo, idx: number) => (
                 <t-tab-panel
                   value={router.path}
                   key={`${router.path}_${idx}`}
@@ -171,30 +172,31 @@ export default defineComponent({
                       minColumnWidth={128}
                       popupProps={{ overlayClassName: 'router-tabs-dropdown' }}
                       v-slots={{
-                        dropdown: () => (
-                          <t-dropdown-menu>
-                            <t-dropdown-item onClick={() => handleRefresh(router.path, idx)}>
-                              <t-icon name="refresh" />
-                              刷新
-                            </t-dropdown-item>
-                            {idx > 0 && (
-                              <t-dropdown-item onClick={() => handleCloseAhead(router.path, idx)}>
-                                <t-icon name="arrow-left" />
-                                关闭左侧
+                        dropdown: () =>
+                          router.path === route.path ? (
+                            <t-dropdown-menu>
+                              <t-dropdown-item onClick={() => handleRefresh(router.path, idx)}>
+                                <t-icon name="refresh" />
+                                刷新
                               </t-dropdown-item>
-                            )}
-                            {idx < tabRouters.length - 1 && (
-                              <t-dropdown-item onClick={() => handleCloseBehind(router.path, idx)}>
-                                <t-icon name="arrow-right" />
-                                关闭右侧
+                              {idx > 0 && (
+                                <t-dropdown-item onClick={() => handleCloseAhead(router.path, idx)}>
+                                  <t-icon name="arrow-left" />
+                                  关闭左侧
+                                </t-dropdown-item>
+                              )}
+                              {idx < tabRouters.length - 1 && (
+                                <t-dropdown-item onClick={() => handleCloseBehind(router.path, idx)}>
+                                  <t-icon name="arrow-right" />
+                                  关闭右侧
+                                </t-dropdown-item>
+                              )}
+                              <t-dropdown-item onClick={() => handleCloseOther(router.path, idx)}>
+                                <t-icon name="close-circle" />
+                                关闭其它
                               </t-dropdown-item>
-                            )}
-                            <t-dropdown-item onClick={() => handleCloseOther(router.path, idx)}>
-                              <t-icon name="close-circle" />
-                              关闭其它
-                            </t-dropdown-item>
-                          </t-dropdown-menu>
-                        ),
+                            </t-dropdown-menu>
+                          ) : null,
                       }}
                     >
                       {!router.isHome ? router.title : <t-icon name="home" />}
