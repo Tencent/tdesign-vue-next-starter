@@ -62,7 +62,7 @@ export const useUserStore = defineStore('user', {
         }
         return {
           name: 'td_dev',
-          roles: ['userIndex', 'dashboardBase', 'login'],
+          roles: ['UserIndex', 'DashboardBase', 'login'],
         };
       };
 
