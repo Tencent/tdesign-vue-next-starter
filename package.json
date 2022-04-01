@@ -33,7 +33,7 @@
     "vue3-clipboard": "^1.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^15.0.0",
+    "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^15.0.0",
     "@types/echarts": "^4.9.10",
     "@types/ws": "^8.2.2",
