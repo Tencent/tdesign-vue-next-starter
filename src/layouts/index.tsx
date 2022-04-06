@@ -1,4 +1,4 @@
-import { defineComponent, computed, nextTick, onMounted, watch } from 'vue';
+import { defineComponent, computed, nextTick, onMounted, watch, onBeforeUnmount } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRoute, useRouter } from 'vue-router';
 import { usePermissionStore, useSettingStore, useTabsRouterStore } from '@/store';
@@ -37,7 +37,6 @@ export default defineComponent({
     const headerMenu = computed(() => {
       if (settingStore.layout === 'mix') {
         if (settingStore.splitMenu) {
-          console.log(menuRouters);
           return menuRouters.value.map((menu) => ({
             ...menu,
             children: [],
@@ -70,8 +69,26 @@ export default defineComponent({
       tabsRouterStore.appendTabRouterList({ path, title: title as string, name, isAlive: true });
     };
 
+    const getTabRouterListCache = () => {
+      tabsRouterStore.initTabRouterList(JSON.parse(localStorage.getItem('tabRouterList')));
+    };
+    const setTabRouterListCache = () => {
+      const { tabRouters } = tabsRouterStore;
+      localStorage.setItem('tabRouterList', JSON.stringify(tabRouters));
+    };
+
     onMounted(() => {
       appendNewRoute();
+    });
+
+    // 如果不需要持久化标签页可以注释掉以下的 onMounted 和 onBeforeUnmount 的内容
+    onMounted(() => {
+      if (localStorage.getItem('tabRouterList')) getTabRouterListCache();
+      window.addEventListener('beforeunload', setTabRouterListCache);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('beforeunload', setTabRouterListCache);
     });
 
     watch(
@@ -159,7 +176,7 @@ export default defineComponent({
               class={`${prefix}-layout-tabs-nav`}
               value={route.path}
               onChange={handleChangeCurrentTab}
-              style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
+              style={{ width: '100%', position: 'sticky', top: 0 }}
               onRemove={handleRemove}
             >
               {tabRouters.map((router: TRouterInfo, idx: number) => (

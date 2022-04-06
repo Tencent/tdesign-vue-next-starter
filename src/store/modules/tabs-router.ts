@@ -43,6 +43,9 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
     removeTabRouterList() {
       this.tabRouterList = [];
     },
+    initTabRouterList(newRoutes: TRouterInfo[]) {
+      this.tabRouterList = newRoutes;
+    },
   },
 });
 
