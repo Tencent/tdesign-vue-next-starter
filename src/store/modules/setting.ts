@@ -45,7 +45,7 @@ export const useSettingStore = defineStore('setting', {
 
       document.documentElement.setAttribute('theme-mode', isDarkMode ? 'dark' : '');
 
-      this.chartColor = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
+      this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
     },
     changeBrandTheme(brandTheme: string) {
       document.documentElement.setAttribute('theme-color', brandTheme);
