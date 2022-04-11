@@ -1,33 +1,33 @@
 <template>
-  <div class="operater-block operater-gap">
-    <div class="operater-content">
-      <div class="operater-title">
-        <t-icon name="cart" class="operater-title-icon" />
+  <div class="operator-block operator-gap">
+    <div class="operator-content">
+      <div class="operator-title">
+        <t-icon name="cart" class="operator-title-icon" />
         <h1>{{ data.name }}</h1>
-        <div class="operater-title-subtitle">
+        <div class="operator-title-subtitle">
           {{ data.subtitle }}
         </div>
-        <div class="operater-title-tags">
-          <t-tag class="operater-title-tag" theme="success" size="small">
+        <div class="operator-title-tags">
+          <t-tag class="operator-title-tag" theme="success" size="small">
             {{ data.size }}
           </t-tag>
-          <t-tag class="operater-title-tag" size="small">
+          <t-tag class="operator-title-tag" size="small">
             {{ data.cpu }}
           </t-tag>
-          <t-tag class="operater-title-tag" size="small">
+          <t-tag class="operator-title-tag" size="small">
             {{ data.memory }}
           </t-tag>
         </div>
       </div>
-      <div class="operater-item">
-        <span class="operater-item-info">{{ data.info }}</span>
-        <t-icon class="operater-item-icon" name="chevron-right" size="small" style="color: rgba(0, 0, 0, 0.26)" />
+      <div class="operator-item">
+        <span class="operator-item-info">{{ data.info }}</span>
+        <t-icon class="operator-item-icon" name="chevron-right" size="small" style="color: rgba(0, 0, 0, 0.26)" />
       </div>
     </div>
-    <div class="operater-footer">
-      <span class="operater-footer-percentage">{{ data.use }} / {{ data.stock }}（台）</span>
+    <div class="operator-footer">
+      <span class="operator-footer-percentage">{{ data.use }} / {{ data.stock }}（台）</span>
       <t-progress
-        class="operater-progress"
+        class="operator-progress"
         theme="line"
         :percentage="(data.use / data.stock) * 100"
         :label="false"
@@ -55,21 +55,21 @@ export default defineComponent({
 
 <style lang="less" scoped>
 @import '@/style/variables.less';
-.operater-gap {
+.operator-gap {
   margin-left: 20px;
 }
 
-.operater-block {
+.operator-block {
   position: relative;
   background-color: @bg-color-container;
   border: 1px solid @component-border;
   border-radius: 3px;
 
-  .operater-content {
+  .operator-content {
     padding: 20px 32px 24px 32px;
     height: 256px;
 
-    .operater-title-icon {
+    .operator-title-icon {
       background: @brand-color-1;
       color: @brand-color;
       font-size: 56px;
@@ -77,7 +77,7 @@ export default defineComponent({
       border-radius: 100%;
     }
 
-    .operater-title {
+    .operator-title {
       margin-bottom: 25px;
       position: relative;
 
@@ -120,7 +120,7 @@ export default defineComponent({
       }
     }
 
-    .operater-item {
+    .operator-item {
       position: relative;
       padding-top: 8px;
       padding-bottom: 8px;
@@ -141,7 +141,7 @@ export default defineComponent({
     }
   }
 
-  .operater-footer {
+  .operator-footer {
     position: absolute;
     width: 100%;
     bottom: 0px;

@@ -110,7 +110,7 @@ export const COLOR_TOKEN: TColorSeries = {
     '@brand-color-1': '#eee6f7',
     '@brand-color-2': '#ddceee',
     '@brand-color-3': '#ccb6e6',
-    '@brand-color-4': '#bb9ede',
+    '@brand-color-4': '#bb9edc',
     '@brand-color-5': '#ab87d5',
     '@brand-color-6': '#9a6fce',
     '@brand-color-7': '#9a6fce',

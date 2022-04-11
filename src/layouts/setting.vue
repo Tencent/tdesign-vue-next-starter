@@ -61,7 +61,7 @@
         </t-radio-group>
 
         <div class="setting-group-title">导航布局</div>
-        <t-radio-group v-model="formData.layout" default-vaule="top">
+        <t-radio-group v-model="formData.layout">
           <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item">
               <Thumbnail :src="getThumbnailUrl(item)" />

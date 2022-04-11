@@ -657,11 +657,11 @@ export function getLineChartDataSet({
  *
  * @export
  * @param {string} productName
- * @param {number} devideNum
+ * @param {number} divideNum
  */
-export function getSelftItemList(productName: string, devideNum: number): string[] {
+export function getSelftItemList(productName: string, divideNum: number): string[] {
   const productArray: string[] = [productName];
-  for (let i = 0; i < devideNum; i++) {
+  for (let i = 0; i < divideNum; i++) {
     productArray.push(getRandomArray(100 * i).toString());
   }
 
