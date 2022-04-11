@@ -14,7 +14,8 @@
     "stylelint:fix": "stylelint --fix src/**/*.{html,vue,vss,sass,less}",
     "prepare": "husky install",
     "site:preview": "npm run build && cp -r dist _site",
-    "test": "echo \"no test specified,work in process\""
+    "test": "echo \"no test specified,work in process\"",
+    "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
     "axios": "^0.26.0",
