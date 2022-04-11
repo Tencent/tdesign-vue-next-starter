@@ -22,7 +22,7 @@
           </div>
         </t-radio-group>
         <div class="setting-group-title">主题色</div>
-        <t-radio-group v-model="formData.brandTheme" default-vaule="default">
+        <t-radio-group v-model="formData.brandTheme">
           <div
             v-for="(item, index) in COLOR_OPTIONS.slice(0, COLOR_OPTIONS.length - 1)"
             :key="index"
@@ -43,7 +43,12 @@
               @visible-change="onPopupVisibleChange"
             >
               <template #content>
-                <color-picker :theme="mode" @changeColor="changeColor" />
+                <t-color-picker-panel
+                  :on-change="changeColor"
+                  :color-modes="['monochrome']"
+                  format="HEX"
+                  :swatch-colors="[]"
+                />
               </template>
               <t-radio-button
                 :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
@@ -56,7 +61,7 @@
         </t-radio-group>
 
         <div class="setting-group-title">导航布局</div>
-        <t-radio-group v-model="formData.layout" default-vaule="top">
+        <t-radio-group v-model="formData.layout">
           <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item">
               <Thumbnail :src="getThumbnailUrl(item)" />
@@ -94,16 +99,14 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, watchEffect } from 'vue';
-import { ColorPicker } from 'vue-color-kit';
+import { ref, computed, onMounted, watchEffect } from 'vue';
 import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
 import useClipboard from 'vue-clipboard3';
+
 import { useSettingStore } from '@/store';
 import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
-
-import 'vue-color-kit/dist/vue-color-kit.css';
 
 import STYLE_CONFIG from '@/config/style';
 import { insertThemeStylesheet, generateColorMap } from '@/config/color';
@@ -123,7 +126,6 @@ const MODE_OPTIONS = [
 ];
 
 const formData = ref({ ...STYLE_CONFIG });
-const colors = ref();
 const isColoPickerDisplay = ref(false);
 
 const showSettingPanel = computed({
@@ -137,35 +139,7 @@ const showSettingPanel = computed({
   },
 });
 
-const mode = computed(() => {
-  return settingStore.displayMode;
-});
-
-watch(
-  () => colors.value,
-  (newColor) => {
-    const { hex } = newColor;
-
-    // hex 主题色
-    const newPalette = Color.getPaletteByGradation({
-      colors: [hex],
-      step: 10,
-    })[0];
-    const { mode } = settingStore;
-    const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
-
-    insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
-
-    settingStore.updateConfig({
-      [hex]: colorMap,
-    });
-    settingStore.changeBrandTheme(hex);
-  },
-);
-
-const changeColor = (val) => {
-  const { hex } = val;
-  // hex 主题色
+const changeColor = (hex: string) => {
   const newPalette = Color.getPaletteByGradation({
     colors: [hex],
     step: 10,
@@ -173,13 +147,9 @@ const changeColor = (val) => {
   const { mode } = settingStore;
   const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
 
-  settingStore.updateConfig({
-    [hex]: colorMap,
-  });
-
+  settingStore.addColor({ [hex]: colorMap });
+  settingStore.updateConfig({ ...formData.value, brandTheme: hex });
   insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
-
-  settingStore.changeBrandTheme(hex);
 };
 
 onMounted(() => {
@@ -233,9 +203,7 @@ watchEffect(() => {
 </script>
 <style lang="less">
 @import '@/style/variables';
-.hu-color-picker {
-  width: 220px !important;
-}
+
 .tdesign-setting {
   z-index: 100;
   position: fixed;

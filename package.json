@@ -21,7 +21,6 @@
     "axios": "^0.26.0",
     "dayjs": "^1.10.6",
     "echarts": "~5.1.2",
-    "hex-to-hsl": "^1.0.2",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.11",
     "qrcode.vue": "^3.2.2",
@@ -29,7 +28,6 @@
     "tdesign-vue-next": "~0.11.2",
     "tvision-color": "^1.3.1",
     "vue": "^3.2.31",
-    "vue-color-kit": "^1.0.5",
     "vue-router": "^4.0.11",
     "vue-clipboard3": "^1.0.0"
   },
