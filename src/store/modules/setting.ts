@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { COLOR_TOKEN, LIGHT_CHART_COLORS, DARK_CHART_COLORS } from '@/config/color';
+import { COLOR_TOKEN, LIGHT_CHART_COLORS, DARK_CHART_COLORS, TColorSeries } from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
 
@@ -49,6 +49,9 @@ export const useSettingStore = defineStore('setting', {
     },
     changeBrandTheme(brandTheme: string) {
       document.documentElement.setAttribute('theme-color', brandTheme);
+    },
+    addColor(payload: TColorSeries) {
+      this.colorList = { ...this.colorList, ...payload };
     },
     updateConfig(payload: Partial<TState>) {
       for (const key in payload) {

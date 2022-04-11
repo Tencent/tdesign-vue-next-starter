@@ -1,5 +1,6 @@
-import hexToHsl from 'hex-to-hsl';
 /* eslint-disable indent */
+import { Color } from 'tvision-color';
+
 export type TColorToken = Record<string, string>;
 export type TColorSeries = Record<string, TColorToken>;
 
@@ -23,59 +24,6 @@ export const defaultDarkColor = [
   '#f172c5',
   '#ab87d5',
 ];
-
-export const BACKGROUND_TOKEN: TColorSeries = {
-  BLUE_GREY: {
-    '@gray-color-1': '#F1F2F5',
-    '@gray-color-2': '#EBEDF1',
-    '@gray-color-3': '#E3E6EB',
-    '@gray-color-4': '#D6DBE3',
-    '@gray-color-5': '#BCC4D0',
-    '@gray-color-6': '#97A3B7',
-    '@gray-color-7': '#7787A2',
-    '@gray-color-8': '#5F7292',
-    '@gray-color-9': '#4B5B76',
-    '@gray-color-10': '#3C485C',
-    '@gray-color-11': '#2C3645',
-    '@gray-color-12': '#232A35',
-    '@gray-color-13': '#1C222B',
-    '@gray-color-14': '#13161B',
-  },
-  NEUTRAL_GREY: {
-    '@gray-color-1': '#F3F3F3',
-    '@gray-color-2': '#EEEEEE',
-    '@gray-color-3': '#E7E7E7',
-    '@gray-color-4': '#DCDCDC',
-    '@gray-color-5': '#C5C5C5',
-    '@gray-color-6': '#A6A6A6',
-    '@gray-color-7': '#8B8B8B',
-    '@gray-color-8': '#777777',
-    '@gray-color-9': '#5E5E5E',
-    '@gray-color-10': '#4B4B4B',
-    '@gray-color-11': '#383838',
-    '@gray-color-12': '#2C2C2C',
-    '@gray-color-13': '#242424',
-    '@gray-color-14': '#181818',
-  },
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const NEUTRAL_GREY_TOKEN: TColorToken = {
-  '@gray-color-1': '#F3F3F3',
-  '@gray-color-2': '#EEEEEE',
-  '@gray-color-3': '#E7E7E7',
-  '@gray-color-4': '#DCDCDC',
-  '@gray-color-5': '#C5C5C5',
-  '@gray-color-6': '#A6A6A6',
-  '@gray-color-7': '#8B8B8B',
-  '@gray-color-8': '#777777',
-  '@gray-color-9': '#5E5E5E',
-  '@gray-color-10': '#4B4B4B',
-  '@gray-color-11': '#383838',
-  '@gray-color-12': '#2C2C2C',
-  '@gray-color-13': '#242424',
-  '@gray-color-14': '#181818',
-};
 
 export const COLOR_TOKEN: TColorSeries = {
   DEFAULT: {
@@ -205,11 +153,6 @@ function toUnderline(name: string): string {
   return name.replace(/([A-Z])/g, '_$1').toUpperCase();
 }
 
-export function getGreyColor(type: string): TColorToken {
-  const name = toUnderline(type);
-  return BACKGROUND_TOKEN[name] || {};
-}
-
 export function getBrandColor(type: string, colorList: TColorSeries): TColorToken {
   const name = /^#[A-F\d]{6}$/i.test(type) ? type : toUnderline(type);
   return colorList[name || 'DEFAULT'];
@@ -221,19 +164,6 @@ export function getColorList(colorArray: Array<TColorToken>): Array<string> {
 
   return pureColorList;
 }
-// inspired by https://stackoverflow.com/questions/36721830/convert-hsl-to-rgb-and-hex
-export function hslToHex(h: number, s: number, l: number) {
-  l /= 100;
-  const a = (s * Math.min(l, 1 - l)) / 100;
-  const f = (n: number) => {
-    const k = (n + h / 30) % 12;
-    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-    return Math.round(255 * color)
-      .toString(16)
-      .padStart(2, '0');
-  };
-  return `#${f(0)}${f(8)}${f(4)}`;
-}
 
 export function generateColorMap(theme: string, colorPalette: Array<string>, mode: 'light' | 'dark') {
   const isDarkMode = mode === 'dark';
@@ -242,8 +172,8 @@ export function generateColorMap(theme: string, colorPalette: Array<string>, mod
   if (isDarkMode) {
     // eslint-disable-next-line no-use-before-define
     colorPalette.reverse().map((color) => {
-      const [h, s, l] = hexToHsl(color);
-      return hslToHex(h, s - 4, l);
+      const [h, s, l] = Color.colorTransform(color, 'hex', 'hsl');
+      return Color.colorTransform([h, Number(s) - 4, l], 'hsl', 'hex');
     });
     brandColorIdx = 5;
     colorPalette[0] = `${colorPalette[brandColorIdx]}20`;
