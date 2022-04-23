@@ -197,6 +197,11 @@ const navToHelper = () => {
 .header-menu {
   flex: 1 1 1;
   display: inline-flex;
+
+  .t-menu__item {
+    min-width: unset !important;
+    padding: 0px 16px !important;
+  }
 }
 
 .operations-container {
