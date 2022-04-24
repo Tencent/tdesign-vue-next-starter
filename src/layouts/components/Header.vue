@@ -122,7 +122,7 @@ const active = computed(() => {
   }
   return route.path
     .split('/')
-    .filter((item, index) => index <= props.maxLevel && index > 0)
+    .filter((item, index) => (index < props.maxLevel - 1) && index > 0)
     .map((item) => `/${item}`)
     .join('');
 });
