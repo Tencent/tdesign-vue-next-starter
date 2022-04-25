@@ -116,13 +116,14 @@ const toggleSettingPanel = () => {
 };
 
 const active = computed(() => {
+  const { layout } = props;
   const route = useRoute();
   if (!route.path) {
     return '';
   }
   return route.path
     .split('/')
-    .filter((item, index) => index < props.maxLevel - 1 && index > 0)
+    .filter((item, index) => index < props.maxLevel - (layout === 'mix' ? 1 : -1) && index > 0)
     .map((item) => `/${item}`)
     .join('');
 });
