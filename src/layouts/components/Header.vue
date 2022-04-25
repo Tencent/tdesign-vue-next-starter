@@ -199,8 +199,8 @@ const navToHelper = () => {
   display: inline-flex;
 
   .t-menu__item {
-    min-width: unset !important;
-    padding: 0px 16px !important;
+    min-width: unset;
+    padding: 0px 16px;
   }
 }
 
