@@ -96,7 +96,6 @@ const changeSearchFocus = (value: boolean) => {
   transition: width @anim-duration-base @anim-time-fn-easing;
   .t-input {
     border: 0;
-    padding-left: 40px;
     &:focus {
       box-shadow: none;
     }
