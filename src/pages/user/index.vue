@@ -104,11 +104,12 @@ import { useSettingStore } from '@/store';
 
 import { LAST_7_DAYS } from '@/utils/date';
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
-import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
+import { getFolderLineDataSet } from './index';
 import ProductAIcon from '@/assets/assets-product-1.svg';
 import ProductBIcon from '@/assets/assets-product-2.svg';
 import ProductCIcon from '@/assets/assets-product-3.svg';
 import ProductDIcon from '@/assets/assets-product-4.svg';
+import { changeChartsTheme } from '@/utils/color';
 
 import Card from '@/components/card/index.vue';
 
