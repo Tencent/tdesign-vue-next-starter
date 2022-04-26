@@ -84,8 +84,9 @@ import { BarChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useSettingStore } from '@/store';
 
-import { changeChartsTheme, getSmoothLineDataSet, get2ColBarChartDataSet } from '../../dashboard/base/index';
+import { getSmoothLineDataSet, get2ColBarChartDataSet } from './index';
 import { BASE_INFO_DATA, TABLE_COLUMNS as columns } from './constants';
+import { changeChartsTheme } from '@/utils/color';
 
 import { prefix } from '@/config/global';
 import Card from '@/components/card/index.vue';

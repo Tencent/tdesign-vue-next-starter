@@ -73,10 +73,11 @@ import { LineChart, ScatterChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import ProductCard from '@/components/card/Card.vue';
 
-import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../base/index';
+import { getFolderLineDataSet, getScatterDataSet } from './index';
 import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
 import { LAST_7_DAYS } from '@/utils/date';
 import { useSettingStore } from '@/store';
+import { changeChartsTheme } from '@/utils/color';
 
 import Trend from '@/components/trend/index.vue';
 import Card from '@/components/card/index.vue';

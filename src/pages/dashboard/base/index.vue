@@ -218,17 +218,12 @@ import { PieChart, LineChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useSettingStore } from '@/store';
 import { LAST_7_DAYS } from '@/utils/date';
+import { changeChartsTheme } from '@/utils/color';
 
 // 导入样式
 import Trend from '@/components/trend/index.vue';
 import Card from '@/components/card/index.vue';
-import {
-  changeChartsTheme,
-  constructInitDataset,
-  getPieChartDataSet,
-  getLineChartDataSet,
-  constructInitDashboardDataset,
-} from './index';
+import { constructInitDataset, getPieChartDataSet, getLineChartDataSet, constructInitDashboardDataset } from './index';
 
 import { PANE_LIST, SALE_TEND_LIST, BUY_TEND_LIST, SALE_COLUMNS, BUY_COLUMNS } from './constants';
 
