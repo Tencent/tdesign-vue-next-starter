@@ -3,7 +3,7 @@
     "plugin:@typescript-eslint/recommended",
     "eslint-config-airbnb-base",
     "plugin:vue/vue3-recommended",
-    "plugin:vue-scoped-css/vue3-recommended",
+    "plugin:vue-scoped-css/base",
     "plugin:prettier/recommended"
   ],
   "env": {
