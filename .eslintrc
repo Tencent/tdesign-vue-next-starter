@@ -3,6 +3,7 @@
     "plugin:@typescript-eslint/recommended",
     "eslint-config-airbnb-base",
     "plugin:vue/vue3-recommended",
+    "plugin:vue-scoped-css/base",
     "plugin:prettier/recommended"
   ],
   "env": {
@@ -53,7 +54,8 @@
         "vue/require-default-prop": 0,
         "vue/multi-word-component-names": 0,
         "vue/no-reserved-props": 0,
-        "vue/no-v-html": 0
+        "vue/no-v-html": 0,
+        "vue-scoped-css/enforce-style-type": ["error", { "allows": ["scoped"] }]
       }
     }
   ]

@@ -201,7 +201,7 @@ watchEffect(() => {
   settingStore.updateConfig(formData.value);
 });
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables';
 
 .tdesign-setting {
@@ -288,7 +288,7 @@ watchEffect(() => {
   .setting-container {
     padding-bottom: 100px;
   }
-  .t-radio-group.t-size-m {
+  :deep(.t-radio-group.t-size-m) {
     min-height: 32px;
     width: 100%;
     height: auto;
@@ -302,7 +302,7 @@ watchEffect(() => {
     align-items: center;
     margin-bottom: 16px;
 
-    .t-radio-button {
+    :deep(.t-radio-button) {
       display: inline-flex;
       max-height: 78px;
       padding: 8px;
@@ -313,22 +313,22 @@ watchEffect(() => {
       }
     }
 
-    .t-is-checked {
+    :deep(.t-is-checked) {
       border: 2px solid @brand-color !important;
     }
 
-    .t-form__controls-content {
+    :deep(.t-form__controls-content) {
       justify-content: end;
     }
   }
 
-  .t-form__controls-content {
+  :deep(.t-form__controls-content) {
     justify-content: end;
   }
 }
 
 .setting-route-theme {
-  .t-form__label {
+  :deep(.t-form__label) {
     min-width: 310px !important;
     color: @text-color-secondary;
   }
@@ -336,7 +336,7 @@ watchEffect(() => {
 
 .setting-color-theme {
   .setting-layout-drawer {
-    .t-radio-button {
+    :deep(.t-radio-button) {
       height: 32px;
     }
 

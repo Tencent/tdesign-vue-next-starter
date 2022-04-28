@@ -1,7 +1,7 @@
 <template>
   <div v-if="layout === 'side'" class="header-menu-search">
     <t-input
-      :class="{ 'hover-active': isSearchFocus }"
+      :class="['header-search', { 'hover-active': isSearchFocus }]"
       placeholder="请输入搜索内容"
       @blur="changeSearchFocus(false)"
       @focus="changeSearchFocus(true)"
@@ -52,7 +52,7 @@ const changeSearchFocus = (value: boolean) => {
   isSearchFocus.value = value;
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables.less';
 
 .header-menu-search {
@@ -71,42 +71,38 @@ const changeSearchFocus = (value: boolean) => {
     font-size: 20px !important;
     color: @text-color-primary !important;
   }
-  .t-input {
-    border: none;
-    outline: none;
-    box-shadow: none;
-    transition: background @anim-duration-base linear;
-    .t-input__inner {
+  .header-search {
+    :deep(.t-input) {
+      border: none;
+      outline: none;
+      box-shadow: none;
       transition: background @anim-duration-base linear;
-    }
-    .t-input__inner {
-      background: none;
-    }
-    &:hover {
-      background: @bg-color-secondarycontainer;
       .t-input__inner {
+        transition: background @anim-duration-base linear;
+      }
+      .t-input__inner {
+        background: none;
+      }
+      &:hover {
         background: @bg-color-secondarycontainer;
+        .t-input__inner {
+          background: @bg-color-secondarycontainer;
+        }
       }
     }
   }
 }
 
-.header-search {
-  width: 200px;
-  transition: width @anim-duration-base @anim-time-fn-easing;
-  .t-input {
-    border: 0;
-    &:focus {
-      box-shadow: none;
+.t-button {
+  margin: 0 8px;
+  transition: opacity @anim-duration-base @anim-time-fn-easing;
+
+  .t-icon {
+    font-size: 20px;
+    &.general {
+      margin-right: 16px;
     }
   }
-  &.width-zero {
-    width: 0;
-    opacity: 0;
-  }
-}
-.t-button {
-  transition: opacity @anim-duration-base @anim-time-fn-easing;
 }
 .search-icon-hide {
   opacity: 0;
@@ -114,5 +110,20 @@ const changeSearchFocus = (value: boolean) => {
 .header-menu-search-left {
   display: flex;
   align-items: center;
+
+  .header-search {
+    width: 200px;
+    transition: width @anim-duration-base @anim-time-fn-easing;
+    :deep(.t-input) {
+      border: 0;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    &.width-zero {
+      width: 0;
+      opacity: 0;
+    }
+  }
 }
 </style>

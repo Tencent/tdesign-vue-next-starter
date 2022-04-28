@@ -16,7 +16,7 @@ onMounted(() => {
   store.updateConfig({ ...config });
 });
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables.less';
 
 #nprogress .bar {
