@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { useRoute, createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
 import baseRouters from './modules/base';
 import componentsRouters from './modules/components';
@@ -29,6 +29,18 @@ const defaultRouterList: Array<RouteRecordRaw> = [
 ];
 
 export const allRoutes = [...defaultRouterList, ...asyncRouterList];
+
+export const getActive = (maxLevel = 2): string => {
+  const route = useRoute();
+  if (!route.path) {
+    return '';
+  }
+  return route.path
+    .split('/')
+    .filter((_item: string, index: number) => index <= maxLevel && index > 0)
+    .map((item: string) => `/${item}`)
+    .join('');
+};
 
 const router = createRouter({
   history: createWebHashHistory(),

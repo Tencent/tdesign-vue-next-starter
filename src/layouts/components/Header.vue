@@ -65,8 +65,9 @@
 
 <script setup lang="ts">
 import { PropType, computed } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useSettingStore } from '@/store';
+import { getActive } from '@/router';
 import { prefix } from '@/config/global';
 import tLogoFull from '@/assets/assets-logo-full.svg?component';
 import { MenuRoute } from '@/interface';
@@ -115,18 +116,7 @@ const toggleSettingPanel = () => {
   });
 };
 
-const active = computed(() => {
-  const { layout } = props;
-  const route = useRoute();
-  if (!route.path) {
-    return '';
-  }
-  return route.path
-    .split('/')
-    .filter((item, index) => index < props.maxLevel - (layout === 'mix' ? 1 : -1) && index > 0)
-    .map((item) => `/${item}`)
-    .join('');
-});
+const active = computed(() => getActive());
 
 const layoutCls = computed(() => [`${prefix}-header-layout`]);
 

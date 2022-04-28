@@ -1,16 +1,19 @@
 import { defineComponent, PropType, computed, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { prefix } from '@/config/global';
 import pgk from '../../../package.json';
 import MenuContent from './MenuContent';
 import tLogo from '@/assets/assets-t-logo.svg?component';
 import tLogoFull from '@/assets/assets-logo-full.svg?component';
 import { useSettingStore } from '@/store';
+import { getActive } from '@/router';
 
 const MIN_POINT = 992 - 1;
 
 const useComputed = (props) => {
   const collapsed = computed(() => useSettingStore().isSidebarCompact);
+
+  const active = computed(() => getActive());
 
   const sideNavCls = computed(() => {
     const { isCompact } = props;
@@ -40,6 +43,7 @@ const useComputed = (props) => {
   });
 
   return {
+    active,
     collapsed,
     sideNavCls,
     menuCls,
@@ -107,18 +111,6 @@ export default defineComponent({
       };
     });
 
-    const getActiveName = (maxLevel = 2) => {
-      const route = useRoute();
-      if (!route.path) {
-        return '';
-      }
-      return route.path
-        .split('/')
-        .filter((_item: string, index: number) => index <= maxLevel && index > 0)
-        .map((item: string) => `/${item}`)
-        .join('');
-    };
-
     const goHome = () => {
       router.push('/dashboard/base');
     };
@@ -128,18 +120,16 @@ export default defineComponent({
       ...useComputed(props),
       autoCollapsed,
       changeCollapsed,
-      getActiveName,
       goHome,
     };
   },
   render() {
-    const active = this.getActiveName();
     return (
       <div class={this.sideNavCls}>
         <t-menu
           class={this.menuCls}
           theme={this.theme}
-          value={active}
+          value={this.active}
           collapsed={this.collapsed}
           v-slots={{
             logo: () =>
