@@ -15,7 +15,7 @@
         <!-- 表单内容 -->
 
         <!-- 合同名称,合同类型 -->
-        <t-row class="row-gap" :gutter="[16, 24]">
+        <t-row class="row-gap" :gutter="[16, 0]">
           <t-col :span="6">
             <t-form-item label="合同名称" name="name">
               <t-input v-model="formData.name" :style="{ width: '322px' }" placeholder="请输入内容" />
