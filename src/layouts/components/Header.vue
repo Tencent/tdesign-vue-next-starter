@@ -164,7 +164,7 @@ const navToHelper = () => {
   window.open('http://tdesign.tencent.com/starter/docs/get-started');
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables.less';
 .@{prefix}-header {
   &-layout {

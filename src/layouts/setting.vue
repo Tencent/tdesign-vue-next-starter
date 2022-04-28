@@ -201,7 +201,7 @@ watchEffect(() => {
   settingStore.updateConfig(formData.value);
 });
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables';
 
 .tdesign-setting {

@@ -63,7 +63,7 @@ const titleTextCls = computed(() => {
   ];
 });
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables';
 
 .t-col-lg-6 + .t-col-lg-6 {

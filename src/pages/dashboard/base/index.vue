@@ -398,7 +398,7 @@ const getRankClass = (index: number) => {
 @import './index.less';
 </style>
 
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables.less';
 
 .card-container.main-color {

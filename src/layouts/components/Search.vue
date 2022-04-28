@@ -52,7 +52,7 @@ const changeSearchFocus = (value: boolean) => {
   isSearchFocus.value = value;
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables.less';
 
 .header-menu-search {
