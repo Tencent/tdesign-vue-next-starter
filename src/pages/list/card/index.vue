@@ -26,7 +26,7 @@
             :xs="6"
             :xl="3"
           >
-            <card
+            <product-card
               class="list-card-item"
               :product="product"
               @delete-item="handleDeleteItem"
@@ -71,7 +71,7 @@ export default {
 import { ref, computed, onMounted } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import Card from '@/components/card/Card.vue';
+import ProductCard from '@/components/product-card/index.vue';
 import DialogForm from './components/DialogForm.vue';
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';

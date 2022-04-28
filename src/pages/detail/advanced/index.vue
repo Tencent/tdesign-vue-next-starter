@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <card title="基本信息">
+  <div class="detail-advanced">
+    <t-card title="基本信息">
       <div class="info-block">
         <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
           <h1>{{ item.name }}</h1>
@@ -15,10 +15,10 @@
           </span>
         </div>
       </div>
-    </card>
+    </t-card>
 
     <!-- 发票进度 -->
-    <card title="发票进度" class="container-base-margin-top">
+    <t-card title="发票进度" class="container-base-margin-top">
       <t-row justify="space-between">
         <t-steps :current="updateCurrent">
           <t-step-item title="申请提交" content="已于12月21日提交" />
@@ -27,10 +27,10 @@
           <t-step-item title="完成" content />
         </t-steps>
       </t-row>
-    </card>
+    </t-card>
 
     <!-- 产品目录 -->
-    <card title="产品目录" class="container-base-margin-top">
+    <t-card title="产品目录" class="container-base-margin-top">
       <template #option>
         <t-radio-group default-value="dateVal">
           <t-radio-button value="dateVal"> 季度 </t-radio-button>
@@ -50,10 +50,10 @@
           <product :data="item" />
         </t-col>
       </t-row>
-    </card>
+    </t-card>
 
     <!-- 产品采购明细 -->
-    <card title="产品采购明细" class="container-base-margin-top">
+    <t-card title="产品采购明细" class="container-base-margin-top">
       <t-table
         :columns="columns"
         :data="data"
@@ -87,7 +87,7 @@
           <t-icon name="descending-order" />
         </template>
       </t-table>
-    </card>
+    </t-card>
 
     <t-dialog v-model:visible="visible" header="基本信息" @confirm="onConfirm">
       <template #body>
@@ -123,7 +123,6 @@ import { BASE_INFO_DATA, TABLE_COLUMNS_DATA as columns, PRODUCT_LIST } from './c
 import request from '@/utils/request';
 import { ResDataType } from '@/interface';
 
-import Card from '@/components/card/index.vue';
 import Product from './components/Product.vue';
 
 const data = ref([]);

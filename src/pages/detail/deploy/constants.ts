@@ -83,7 +83,7 @@ export const BASE_INFO_DATA = [
 
 export const TABLE_COLUMNS = [
   {
-    minWidth: '448',
+    width: '448',
     ellipsis: true,
     colKey: 'name',
     title: '项目名称',

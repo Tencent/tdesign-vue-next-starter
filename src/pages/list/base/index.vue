@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card class="list-card-container">
+    <t-card class="list-card-container">
       <t-row justify="space-between">
         <div class="left-operation-container">
           <t-button @click="handleSetupContract"> 新建合同 </t-button>
@@ -15,7 +15,7 @@
           </t-input>
         </div>
       </t-row>
-
+      <!-- 如果开启多标签tab页 请修改offsetTop的配置 -->
       <t-table
         :data="data"
         :columns="COLUMNS"
@@ -25,6 +25,8 @@
         :pagination="pagination"
         :selected-row-keys="selectedRowKeys"
         :loading="dataLoading"
+        :header-affixed-top="true"
+        :header-affix-props="{ offsetTop: 0, container: getContainer }"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
         @select-change="rehandleSelectChange"
@@ -55,7 +57,7 @@
           <a class="t-button-link" @click="handleClickDelete(slotProps)">删除</a>
         </template>
       </t-table>
-    </card>
+    </t-card>
 
     <t-dialog
       v-model:visible="confirmVisible"
@@ -81,7 +83,6 @@ import { MessagePlugin } from 'tdesign-vue-next';
 
 import { CONTRACT_STATUS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
 import Trend from '@/components/trend/index.vue';
-import Card from '@/components/card/index.vue';
 import { ResDataType } from '@/interface';
 import request from '@/utils/request';
 
@@ -176,6 +177,10 @@ const handleSetupContract = () => {
 const handleClickDelete = (row: { rowIndex: any }) => {
   deleteIdx.value = row.rowIndex;
   confirmVisible.value = true;
+};
+
+const getContainer = () => {
+  return document.querySelector('.tdesign-starter-layout');
 };
 </script>
 

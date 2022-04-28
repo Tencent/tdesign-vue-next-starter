@@ -1,7 +1,6 @@
 @import './variables.less';
 @import './font-family.less';
 
-
 // layout rewrite
 
 .t-layout__sider {
@@ -20,7 +19,7 @@
 }
 
 .t-menu--dark .t-menu__operations .t-icon {
-  color: rgba(255, 255, 255, .55);
+  color: rgba(255, 255, 255, 0.55);
   &:hover {
     cursor: pointer;
   }
@@ -37,15 +36,14 @@
 }
 
 .@{prefix} {
-
   // 布局元素调整
   &-wrapper {
     height: 100vh;
     display: flex;
     flex-direction: column;
   }
-  
-  &-main-wrapper{
+
+  &-main-wrapper {
     height: 500px;
     overflow: scroll;
   }
@@ -60,7 +58,7 @@
     padding: @spacer-3;
   }
 
-  &-layout{
+  &-layout {
     height: calc(100vh - 64px);
     overflow-y: scroll;
     &-tabs-nav {
@@ -70,7 +68,7 @@
       z-index: 100;
     }
     &-tabs-nav + .@{prefix}-content-layout {
-      padding-top:  @spacer-3;
+      padding-top: @spacer-3;
     }
   }
 
@@ -176,4 +174,8 @@
 .version-container {
   color: @text-color-primary;
   opacity: 0.4;
+}
+
+.t-menu__popup {
+  z-index: 1000;
 }
