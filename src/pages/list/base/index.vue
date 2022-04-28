@@ -26,7 +26,7 @@
         :selected-row-keys="selectedRowKeys"
         :loading="dataLoading"
         :header-affixed-top="true"
-        :header-affix-props="{ offsetTop: 0, container: getContainer }"
+        :header-affix-props="{ offsetTop, container: getContainer }"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
         @select-change="rehandleSelectChange"
@@ -85,8 +85,11 @@ import { CONTRACT_STATUS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/const
 import Trend from '@/components/trend/index.vue';
 import { ResDataType } from '@/interface';
 import request from '@/utils/request';
+import { useSettingStore } from '@/store';
 
 import { COLUMNS } from './constants';
+
+const store = useSettingStore();
 
 const data = ref([]);
 const pagination = ref({
@@ -178,6 +181,10 @@ const handleClickDelete = (row: { rowIndex: any }) => {
   deleteIdx.value = row.rowIndex;
   confirmVisible.value = true;
 };
+
+const offsetTop = computed(() => {
+  return store.isUseTabsRouter ? 48 : 0;
+});
 
 const getContainer = () => {
   return document.querySelector('.tdesign-starter-layout');

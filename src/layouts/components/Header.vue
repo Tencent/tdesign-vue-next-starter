@@ -171,6 +171,23 @@ const navToHelper = () => {
     height: 64px;
   }
 
+  &-menu-fixed {
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+
+    &-side {
+      left: 232px;
+      right: 0;
+      z-index: 10;
+      width: auto;
+      transition: all 0.3s;
+      &-compact {
+        left: 64px;
+      }
+    }
+  }
+
   &-logo-container {
     cursor: pointer;
     display: inline-flex;
