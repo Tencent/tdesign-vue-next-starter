@@ -121,7 +121,8 @@ const COLUMNS = [
   {
     title: '合同名称',
     fixed: 'left',
-    minWidth: '300',
+    width: 200,
+    ellipsis: true,
     align: 'left',
     colKey: 'name',
   },

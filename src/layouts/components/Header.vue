@@ -3,7 +3,7 @@
     <t-head-menu :class="menuCls" :theme="theme" expand-type="popup" :value="active">
       <template #logo>
         <span v-if="showLogo" class="header-logo-container" @click="handleNav('/dashboard/base')">
-          <tLogoFull class="t-logo" />
+          <LogoFull class="t-logo" />
         </span>
         <div v-else class="header-operate-left">
           <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
@@ -69,7 +69,7 @@ import { useRouter } from 'vue-router';
 import { useSettingStore } from '@/store';
 import { getActive } from '@/router';
 import { prefix } from '@/config/global';
-import tLogoFull from '@/assets/assets-logo-full.svg?component';
+import LogoFull from '@/assets/assets-logo-full.svg?component';
 import { MenuRoute } from '@/interface';
 
 import Notice from './Notice.vue';
@@ -159,24 +159,6 @@ const navToHelper = () => {
 .@{prefix}-header {
   &-layout {
     height: 64px;
-  }
-
-  &-menu-fixed {
-    position: fixed;
-    top: 0;
-    z-index: 10;
-
-    &-side {
-      left: 232px;
-      right: 0;
-      z-index: 10;
-      width: auto;
-      transition: all 0.3s;
-
-      &-compact {
-        left: 64px;
-      }
-    }
   }
 
   &-logo-container {

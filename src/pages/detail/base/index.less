@@ -1,7 +1,18 @@
 @import '@/style/variables.less';
 
-.detail-base-info-steps {
-  padding-top: 12px;
+.detail-base {
+  :deep(.t-card) {
+    padding: 8px;
+  }
+
+  :deep(.t-card__title) {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &-info-steps {
+    padding-top: 12px;
+  }
 }
 
 .info-block {
@@ -59,7 +70,6 @@
 }
 
 .dialog-info-block {
-
   .info-item {
     padding: 12px 0;
     display: flex;

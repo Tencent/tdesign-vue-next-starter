@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="detail-deploy">
     <t-row :gutter="16">
-      <t-col :span="6">
-        <card title="部署趋势">
+      <t-col :lg="6" :xs="12">
+        <t-card title="部署趋势">
           <div class="deploy-panel-left">
             <div id="monitorContainer" style="width: 100%; height: 265px" />
           </div>
-        </card>
+        </t-card>
       </t-col>
-      <t-col :span="6">
-        <card title="告警情况">
+      <t-col :lg="6" :xs="12">
+        <t-card title="告警情况">
           <template #option>
             <t-radio-group default-value="dateVal" @change="onAlertChange">
               <t-radio-button value="dateVal"> 本周 </t-radio-button>
@@ -17,12 +17,12 @@
             </t-radio-group>
           </template>
           <div id="dataContainer" style="width: 100%; height: 265px" />
-        </card>
+        </t-card>
       </t-col>
     </t-row>
 
     <!-- 项目列表 -->
-    <card title="项目列表" class="container-base-margin-top">
+    <t-card title="项目列表" class="container-base-margin-top">
       <t-table
         :columns="columns"
         :data="data"
@@ -46,7 +46,7 @@
           <t-icon name="descending-order" />
         </template>
       </t-table>
-    </card>
+    </t-card>
 
     <t-dialog v-model:visible="visible" header="基本信息" @confirm="onConfirm">
       <template #body>
@@ -89,7 +89,6 @@ import { BASE_INFO_DATA, TABLE_COLUMNS as columns } from './constants';
 import { changeChartsTheme } from '@/utils/color';
 
 import { prefix } from '@/config/global';
-import Card from '@/components/card/index.vue';
 import { ResDataType } from '@/interface';
 import request from '@/utils/request';
 
@@ -205,5 +204,14 @@ const deleteClickOp = (e) => {
 </script>
 
 <style lang="less" scoped>
-@import url('../base/index.less');
+.detail-deploy {
+  :deep(.t-card) {
+    padding: 8px;
+  }
+
+  :deep(.t-card__title) {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
 </style>

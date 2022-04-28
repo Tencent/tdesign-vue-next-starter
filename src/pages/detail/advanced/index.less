@@ -1,5 +1,23 @@
 @import '../base/index.less';
 
+.detail-advanced {
+  :deep(.t-card) {
+    padding: 8px;
+  }
+  :deep(.t-card__title) {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .advanced-card {
+    margin-top: 0 !important;
+
+    .card-title-default {
+      margin-bottom: 12px;
+    }
+  }
+}
+
 .product-block-container {
   .t-col-xl-4 + .t-col-xl-4 {
     @media (max-width: @screen-lg-max) {
