@@ -192,4 +192,15 @@ const goDetail = () => {
     }
   }
 }
+
+.t-button {
+  margin: 0 8px;
+
+  .t-icon {
+    font-size: 20px;
+    &.general {
+      margin-right: 16px;
+    }
+  }
+}
 </style>

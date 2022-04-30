@@ -120,3 +120,7 @@ const switchType = (val) => {
   type.value = val;
 };
 </script>
+
+<style lang="less" scoped>
+@import url('../index.less');
+</style>

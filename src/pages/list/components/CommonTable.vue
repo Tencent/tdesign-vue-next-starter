@@ -265,7 +265,7 @@ const getContainer = () => {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables.less';
 .list-common-table {
   background-color: @bg-color-container;
