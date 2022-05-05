@@ -15,6 +15,7 @@ import Result404Icon from '@/assets/assets-result-404.svg?component';
 import Result500Icon from '@/assets/assets-result-500.svg?component';
 import ResultIeIcon from '@/assets/assets-result-ie.svg?component';
 import ResultWifiIcon from '@/assets/assets-result-wifi.svg?component';
+import ResultMaintenanceIcon from '@/assets/assets-result-maintenance.svg?component';
 
 const props = defineProps({
   bgUrl: String,
@@ -35,6 +36,8 @@ const dynamicComponent = computed(() => {
       return ResultIeIcon;
     case 'wifi':
       return ResultWifiIcon;
+    case 'maintenance':
+      return ResultMaintenanceIcon;
     default:
       return Result403Icon;
   }
