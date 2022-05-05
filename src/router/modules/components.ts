@@ -140,6 +140,12 @@ export default [
         component: () => import('@/pages/result/browser-incompatible/index.vue'),
         meta: { title: '浏览器不兼容页' },
       },
+      {
+        path: 'maintenance',
+        name: 'ResultMaintenance',
+        component: () => import('@/pages/result/maintenance/index.vue'),
+        meta: { title: '系统维护页' },
+      },
     ],
   },
 ];
