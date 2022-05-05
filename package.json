@@ -18,7 +18,7 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
-    "axios": "^0.26.0",
+    "axios": "^0.27.2",
     "dayjs": "^1.10.6",
     "echarts": "~5.1.2",
     "nprogress": "^0.2.0",
@@ -55,7 +55,7 @@
     "lint-staged": "^12.1.2",
     "mockjs": "^1.1.0",
     "prettier": "^2.4.1",
-    "stylelint": "^13.13.1",
+    "stylelint": "^14.8.2",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-less": "^1.0.1",
     "stylelint-order": "^4.1.0",
