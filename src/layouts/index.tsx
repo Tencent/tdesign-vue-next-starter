@@ -196,7 +196,7 @@ export default defineComponent({
                                 <t-icon name="refresh" />
                                 刷新
                               </t-dropdown-item>
-                              {idx > 0 && (
+                              {idx > 1 && (
                                 <t-dropdown-item onClick={() => handleCloseAhead(router.path, idx)}>
                                   <t-icon name="arrow-left" />
                                   关闭左侧

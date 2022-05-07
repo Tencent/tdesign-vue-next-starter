@@ -50,5 +50,6 @@ export interface TRouterInfo {
 
 export interface TTabRouterType {
   isRefreshing: boolean;
+  homeRouter: TRouterInfo;
   tabRouterList: Array<TRouterInfo>;
 }
