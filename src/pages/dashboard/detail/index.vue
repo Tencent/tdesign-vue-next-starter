@@ -201,14 +201,14 @@ const onMaterialChange = (value: string[]) => {
 
   &.dark {
     &:hover {
-      background: var(--td-gray-color-14);
+      background: var(--tdvns-gray-color-14);
       cursor: pointer;
     }
   }
 
   &.light {
     &:hover {
-      background: var(--td-gray-color-14);
+      background: var(--tdvns-gray-color-14);
       cursor: pointer;
     }
   }
@@ -216,7 +216,7 @@ const onMaterialChange = (value: string[]) => {
   &__number {
     font-size: 36px;
     line-height: 44px;
-    color: var(--td-text-color-primary);
+    color: var(--tdvns-text-color-primary);
   }
 
   &__text {
@@ -225,7 +225,7 @@ const onMaterialChange = (value: string[]) => {
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    color: var(--td-text-color-placeholder);
+    color: var(--tdvns-text-color-placeholder);
     text-align: left;
     line-height: 18px;
 

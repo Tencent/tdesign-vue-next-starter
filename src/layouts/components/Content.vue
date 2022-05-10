@@ -30,7 +30,7 @@ const isRefreshing = computed(() => {
 
 .fade-leave-active,
 .fade-enter-active {
-  transition: opacity var(--td-anim-duration-slow) var(--td-anim-time-fn-easing);
+  transition: opacity var(--tdvns-anim-duration-slow) var(--tdvns-anim-time-fn-easing);
 }
 .fade-enter,
 .fade-leave-to {

@@ -48,20 +48,20 @@ const dynamicComponent = computed(() => {
 
 .result {
   &-link {
-    color: var(--td-brand-color);
+    color: var(--tdvns-brand-color);
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      color: var(--td-brand-color);
+      color: var(--tdvns-brand-color);
     }
 
     &:active {
-      color: var(--td-brand-color);
+      color: var(--tdvns-brand-color);
     }
 
     &--active {
-      color: var(--td-brand-color);
+      color: var(--tdvns-brand-color);
     }
 
     &:focus {
@@ -81,23 +81,23 @@ const dynamicComponent = computed(() => {
 
   &-bg-img {
     width: 200px;
-    color: var(--td-brand-color);
+    color: var(--tdvns-brand-color);
   }
 
   &-title {
     font-style: normal;
     font-weight: 500;
     margin-top: 8px;
-    color: var(--td-text-color-primary);
-    font-size: var(--td-font-size-xl);
-    line-height: var(--td-text-line-height-xl);
+    color: var(--tdvns-text-color-primary);
+    font-size: var(--tdvns-font-size-xl);
+    line-height: var(--tdvns-text-line-height-xl);
   }
 
   &-tip {
     margin: 8px 0 32px;
-    font-size: var(--td-font-size-base);
-    color: var(--td-text-color-secondary);
-    line-height: var(--td-text-line-height-base);
+    font-size: var(--tdvns-font-size-base);
+    color: var(--tdvns-text-color-secondary);
+    line-height: var(--tdvns-text-line-height-base);
   }
 }
 </style>

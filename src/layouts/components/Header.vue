@@ -236,7 +236,7 @@ const navToHelper = () => {
   height: 26px;
   display: flex;
   margin-left: 24px;
-  color: var(--td-text-color-primary);
+  color: var(--tdvns-text-color-primary);
 
   .t-logo {
     width: 100%;
@@ -254,7 +254,7 @@ const navToHelper = () => {
 .header-user-account {
   display: inline-flex;
   align-items: center;
-  color: var(--td-text-color-primary);
+  color: var(--tdvns-text-color-primary);
   .t-icon {
     margin-left: 4px;
     font-size: 16px;
@@ -262,25 +262,25 @@ const navToHelper = () => {
 }
 
 :deep(.t-head-menu__inner) {
-  border-bottom: 1px solid var(--td-border-level-1-color);
+  border-bottom: 1px solid var(--tdvns-border-level-1-color);
 }
 
 .t-menu--light {
   .header-user-account {
-    color: var(--td-text-color-primary);
+    color: var(--tdvns-text-color-primary);
   }
 }
 .t-menu--dark {
   .t-head-menu__inner {
-    border-bottom: 1px solid var(--td-gray-color-10);
+    border-bottom: 1px solid var(--tdvns-gray-color-10);
   }
   .header-user-account {
     color: rgba(255, 255, 255, 0.55);
   }
   .t-button {
-    --ripple-color: var(--td-gray-color-10) !important;
+    --ripple-color: var(--tdvns-gray-color-10) !important;
     &:hover {
-      background: var(--td-gray-color-12) !important;
+      background: var(--tdvns-gray-color-12) !important;
     }
   }
 }

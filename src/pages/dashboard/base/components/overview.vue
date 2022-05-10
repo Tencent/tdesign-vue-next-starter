@@ -194,7 +194,7 @@ const onStokeDataChange = (checkedValues: string[]) => {
       display: flex;
       align-items: center;
       line-height: 22px;
-      color: var(--td-text-color-placeholder);
+      color: var(--tdvns-text-color-placeholder);
 
       .trend-tag {
         margin-left: 4px;

@@ -268,9 +268,9 @@ const getContainer = () => {
 <style lang="less" scoped>
 @import '@/style/variables.less';
 .list-common-table {
-  background-color: var(--td-bg-color-container);
+  background-color: var(--tdvns-bg-color-container);
   padding: 30px 32px;
-  border-radius: var(--td-border-radius);
+  border-radius: var(--tdvns-border-radius);
 
   .table-container {
     margin-top: 30px;

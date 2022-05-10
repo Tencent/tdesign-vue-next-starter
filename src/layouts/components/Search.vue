@@ -60,33 +60,33 @@ const changeSearchFocus = (value: boolean) => {
   margin-left: 16px;
   .hover-active {
     .t-input__inner {
-      background: var(--td-bg-color-secondarycontainer);
+      background: var(--tdvns-bg-color-secondarycontainer);
     }
     .t-icon {
-      color: var(--td-brand-color) !important;
+      color: var(--tdvns-brand-color) !important;
     }
   }
 
   .t-icon {
     font-size: 20px !important;
-    color: var(--td-text-color-primary) !important;
+    color: var(--tdvns-text-color-primary) !important;
   }
   .header-search {
     :deep(.t-input) {
       border: none;
       outline: none;
       box-shadow: none;
-      transition: background var(--td-anim-duration-base) linear;
+      transition: background var(--tdvns-anim-duration-base) linear;
       .t-input__inner {
-        transition: background var(--td-anim-duration-base) linear;
+        transition: background var(--tdvns-anim-duration-base) linear;
       }
       .t-input__inner {
         background: none;
       }
       &:hover {
-        background: var(--td-bg-color-secondarycontainer);
+        background: var(--tdvns-bg-color-secondarycontainer);
         .t-input__inner {
-          background: var(--td-bg-color-secondarycontainer);
+          background: var(--tdvns-bg-color-secondarycontainer);
         }
       }
     }
@@ -95,7 +95,7 @@ const changeSearchFocus = (value: boolean) => {
 
 .t-button {
   margin: 0 8px;
-  transition: opacity var(--td-anim-duration-base) var(--td-anim-time-fn-easing);
+  transition: opacity var(--tdvns-anim-duration-base) var(--tdvns-anim-time-fn-easing);
 
   .t-icon {
     font-size: 20px;
@@ -113,7 +113,7 @@ const changeSearchFocus = (value: boolean) => {
 
   .header-search {
     width: 200px;
-    transition: width var(--td-anim-duration-base) var(--td-anim-time-fn-easing);
+    transition: width var(--tdvns-anim-duration-base) var(--tdvns-anim-time-fn-easing);
     :deep(.t-input) {
       border: 0;
       &:focus {

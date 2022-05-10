@@ -211,7 +211,7 @@ const getContainer = () => {
   .selected-count {
     display: inline-block;
     margin-left: 8px;
-    color: var(--td-text-color-secondary);
+    color: var(--tdvns-text-color-secondary);
   }
 }
 
