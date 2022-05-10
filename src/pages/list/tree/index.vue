@@ -46,7 +46,7 @@ const onInput = () => {
 @import '@/style/variables.less';
 .table-tree-container {
   background-color: var(--td-bg-color-container);
-  border-radius: @border-radius;
+  border-radius: var(--td-border-radius);
 
   .t-tree {
     margin-top: 24px;

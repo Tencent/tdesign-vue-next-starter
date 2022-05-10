@@ -8,7 +8,7 @@
 }
 
 .t-button + .t-button {
-  margin-left: @spacer;
+  margin-left: var(--td-spacer);
 }
 
 .t-layout.t-layout--with-sider {
@@ -55,7 +55,7 @@
   }
 
   &-content-layout {
-    padding: @spacer-3;
+    padding: var(--td-spacer-3);
   }
 
   &-layout {
@@ -68,13 +68,13 @@
       z-index: 100;
     }
     &-tabs-nav + .@{prefix}-content-layout {
-      padding-top: @spacer-3;
+      padding-top: var(--td-spacer-3);
     }
   }
 
   &-footer-layout {
     padding: 0;
-    margin-bottom: @spacer-2;
+    margin-bottom: var(--td-spacer-2);
   }
 
   // slideBar
@@ -140,7 +140,7 @@
 
     &-logo-normal {
       color: var(--td-brand-color);
-      font-size: @font-size-l;
+      font-size: var(--td-font-size-l);
       transition: all 0.3s;
     }
   }

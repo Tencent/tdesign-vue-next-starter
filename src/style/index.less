@@ -4,15 +4,15 @@
 
 body {
   color: var(--td-text-color-secondary);
-  font-family: -apple-system, BlinkMacSystemFont, @font-family;
-  font-size: @font-size-base;
+  font-family: -apple-system, BlinkMacSystemFont, var(--td-font-family);
+  font-size: var(--td-font-size-base);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   padding: 0;
 }
 
 pre {
-  font-family: @font-family;
+  font-family: var(--td-font-family);
 }
 
 ul,
@@ -43,9 +43,9 @@ p {
 .t-button-link {
   color: var(--td-brand-color);
   text-decoration: none;
-  margin-right: @spacer-3;
+  margin-right: var(--td-spacer-3);
   cursor: pointer;
-  transition: color @anim-duration-base @anim-time-fn-easing;
+  transition: color var(--td-anim-duration-base) var(--td-anim-time-fn-easing);
 
   &:hover {
     color: var(--td-brand-color-hover);
@@ -69,7 +69,7 @@ p {
 }
 
 .t-button + .t-button {
-  margin-left: @spacer;
+  margin-left: var(--td-spacer);
 }
 
 .container-base-margin-top {

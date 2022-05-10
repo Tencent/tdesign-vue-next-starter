@@ -26,16 +26,16 @@
     h1 {
       width: 200px;
       font-weight: normal;
-      font-size: @font-size-base;
+      font-size: var(--td-font-size-base);
       color: var(--td-text-color-secondary);
       text-align: left;
       line-height: 22px;
 
-      @media (max-width: @screen-sm-max) {
+      @media (max-width: var(--td-screen-sm-max)) {
         width: 100px;
       }
 
-      @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      @media (min-width: var(--td-screen-md-min)) and (max-width: var(--td-screen-md-max)) {
         width: 120px;
       }
     }
@@ -51,7 +51,7 @@
       display: inline-block;
       width: 8px;
       height: 8px;
-      border-radius: @border-radius-50;
+      border-radius: var(--td-border-radius-50);
       background: var(--td-success-color-5);
     }
 
@@ -91,7 +91,7 @@
       display: inline-block;
       width: 8px;
       height: 8px;
-      border-radius: @border-radius-50;
+      border-radius: var(--td-border-radius-50);
       background: var(--td-success-color-5);
     }
 

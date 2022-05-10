@@ -76,9 +76,9 @@ const changeSearchFocus = (value: boolean) => {
       border: none;
       outline: none;
       box-shadow: none;
-      transition: background @anim-duration-base linear;
+      transition: background var(--td-anim-duration-base) linear;
       .t-input__inner {
-        transition: background @anim-duration-base linear;
+        transition: background var(--td-anim-duration-base) linear;
       }
       .t-input__inner {
         background: none;
@@ -95,7 +95,7 @@ const changeSearchFocus = (value: boolean) => {
 
 .t-button {
   margin: 0 8px;
-  transition: opacity @anim-duration-base @anim-time-fn-easing;
+  transition: opacity var(--td-anim-duration-base) var(--td-anim-time-fn-easing);
 
   .t-icon {
     font-size: 20px;
@@ -113,7 +113,7 @@ const changeSearchFocus = (value: boolean) => {
 
   .header-search {
     width: 200px;
-    transition: width @anim-duration-base @anim-time-fn-easing;
+    transition: width var(--td-anim-duration-base) var(--td-anim-time-fn-easing);
     :deep(.t-input) {
       border: 0;
       &:focus {

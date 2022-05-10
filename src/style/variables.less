@@ -1,82 +1,84 @@
 /** 公共前缀 */
 @prefix: tdesign-starter;
 
+:root {
+
 // Spacer
-@spacer: 8px;
-@spacer-s: @spacer * .5; // 间距-4
-@spacer-l: @spacer * 1.5; // 间距-12
-@spacer-1: @spacer; // 间距-8
-@spacer-2: @spacer * 2; // 间距-16
-@spacer-3: @spacer * 3; // 间距-24
-@spacer-4: @spacer * 4; // 间距-32
-@spacer-5: @spacer * 5; // 间距-大-40
-@spacer-6: @spacer * 6; // 间距-大-48
-@spacer-7: @spacer * 7; // 间距-大-48
-@spacer-8: @spacer * 8; // 间距-大-48
-@spacer-9: @spacer * 9; // 间距-大-48
-@spacer-10: @spacer * 10; // 间距-大-80
+--td-spacer: 8px;
+--td-spacer-s: calc(var(--td-spacer) * .5); // 间距-4
+--td-spacer-l: calc(var(--td-spacer) * 1.5); // 间距-12
+--td-spacer-1: var(--td-spacer); // 间距-8
+--td-spacer-2: calc(var(--td-spacer) * 2); // 间距-16
+--td-spacer-3: calc(var(--td-spacer) * 3); // 间距-24
+--td-spacer-4: calc(var(--td-spacer) * 4); // 间距-32
+--td-spacer-5: calc(var(--td-spacer) * 5); // 间距-大-40
+--td-spacer-6: calc(var(--td-spacer) * 6); // 间距-大-48
+--td-spacer-7: calc(var(--td-spacer) * 7); // 间距-大-48
+--td-spacer-8: calc(var(--td-spacer) * 8); // 间距-大-48
+--td-spacer-9: calc(var(--td-spacer) * 9); // 间距-大-48
+--td-spacer-10: calc(var(--td-spacer) * 10); // 间距-大-80
 
 // Font
-@font-size: 10px;
-@font-size-s: @font-size * 1.2; // 字号-五级字号
-@font-size-base: @font-size * 1.4; // 字号-四级字号
-@font-size-l: @font-size * 1.6; // 字号-三级字号
-@font-size-xl: @font-size * 2; // 字号-二级字号
-@font-size-xxl: @font-size * 3.6; // 字号-一级字号
+--td-font-size: 10px;
+--td-font-size-s: calc(var(--td-font-size) * 1.2); // 字号-五级字号
+--td-font-size-base: calc(var(--td-font-size) * 1.4); // 字号-四级字号
+--td-font-size-l: calc(var(--td-font-size) * 1.6); // 字号-三级字号
+--td-font-size-xl: calc(var(--td-font-size) * 2); // 字号-二级字号
+--td-font-size-xxl: calc(var(--td-font-size) * 3.6); // 字号-一级字号
 
 // Line Height
-@text-line-height: 1.5; // 行高-常规
-@text-line-height-s: 20px; // 行高-对应五级文字
-@text-line-height-base: 22px;  // 行高-对应四级文字
-@text-line-height-l: 24px; // 行高-对应三级文字
-@text-line-height-xl: 28px; // 行高-对应二级文字
-@text-line-height-xxl: 44px; //行高-对应一级文字
+--td-text-line-height: 1.5; // 行高-常规
+--td-text-line-height-s: 20px; // 行高-对应五级文字
+--td-text-line-height-base: 22px;  // 行高-对应四级文字
+--td-text-line-height-l: 24px; // 行高-对应三级文字
+--td-text-line-height-xl: 28px; // 行高-对应二级文字
+--td-text-line-height-xxl: 44px; //行高-对应一级文字
 
-@font-family: PingFang SC, Microsoft YaHei, Arial Regular; // 字体-磅数-常规
-@font-family-medium: PingFang SC, Microsoft YaHei, Arial Medium; // 字体-磅数-粗体
+--td-font-family: PingFang SC, Microsoft YaHei, Arial Regular; // 字体-磅数-常规
+--td-font-family-medium: PingFang SC, Microsoft YaHei, Arial Medium; // 字体-磅数-粗体
 
 // Border Radius
-@border-radius: 3px; // 圆角-全局
-@border-radius-50: 50%; // 圆角-全圆角
+--td-border-radius: 3px; // 圆角-全局
+--td-border-radius-50: 50%; // 圆角-全圆角
 
 // 表单相关
-@form-height: 30px;
+--td-form-height: 30px;
 
 // 图标尺寸
-@icon-default: 16px;
-@icon-l: 24px;
+--td-icon-default: 16px;
+--td-icon-l: 24px;
 
 // 响应式断点
-@screen-sm: 768px;
-@screen-md: 992px;
-@screen-lg: 1200px;
-@screen-xl: 1400px;
+--td-screen-sm: 768px;
+--td-screen-md: 992px;
+--td-screen-lg: 1200px;
+--td-screen-xl: 1400px;
 
-@screen-sm-min: @screen-sm;
-@screen-md-min: @screen-md;
-@screen-lg-min: @screen-lg;
-@screen-xl-min: @screen-xl;
+--td-screen-sm-min: var(--td-screen-sm);
+--td-screen-md-min: var(--td-screen-md);
+--td-screen-lg-min: var(--td-screen-lg);
+--td-screen-xl-min: var(--td-screen-xl);
 
-@screen-sm-max: (@screen-md-min - 1px);
-@screen-md-max: (@screen-lg-min - 1px);
-@screen-lg-max: (@screen-xl-min - 1px);
+--td-screen-sm-max: calc(var(--td-screen-md-min) - 1px);
+--td-screen-md-max: calc(var(--td-screen-lg-min) - 1px);
+--td-screen-lg-max: calc(var(--td-screen-xl-min) - 1px);
 
 
 // 动画
-@anim-time-fn-easing: cubic-bezier(.38, 0, .24, 1);
-@anim-time-fn-ease-out: cubic-bezier(0, 0, .15, 1);
-@anim-time-fn-ease-in: cubic-bezier(.82, 0, 1, .9);
-@anim-duration-base: .2s;
-@anim-duration-moderate: .24s;
-@anim-duration-slow: .28s;
+--td-anim-time-fn-easing: cubic-bezier(.38, 0, .24, 1);
+--td-anim-time-fn-ease-out: cubic-bezier(0, 0, .15, 1);
+--td-anim-time-fn-ease-in: cubic-bezier(.82, 0, 1, .9);
+--td-anim-duration-base: .2s;
+--td-anim-duration-moderate: .24s;
+--td-anim-duration-slow: .28s;
 
 // 统一管理各组件层级关系
-@z-index-affix: 500;
-@z-index-drawer: 1500;
-@z-index-dialog: 2500;
-@z-index-loading: 3500;
-@z-index-message: 5000;
-@z-index-Popup: 5500;
-@z-index-Notification: 6000;
+--td-z-index-affix: 500;
+--td-z-index-drawer: 1500;
+--td-z-index-dialog: 2500;
+--td-z-index-loading: 3500;
+--td-z-index-message: 5000;
+--td-z-index-Popup: 5500;
+--td-z-index-Notification: 6000;
 
-
+}

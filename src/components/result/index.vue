@@ -89,15 +89,15 @@ const dynamicComponent = computed(() => {
     font-weight: 500;
     margin-top: 8px;
     color: var(--td-text-color-primary);
-    font-size: @font-size-xl;
-    line-height: @text-line-height-xl;
+    font-size: var(--td-font-size-xl);
+    line-height: var(--td-text-line-height-xl);
   }
 
   &-tip {
     margin: 8px 0 32px;
-    font-size: @font-size-base;
+    font-size: var(--td-font-size-base);
     color: var(--td-text-color-secondary);
-    line-height: @text-line-height-base;
+    line-height: var(--td-text-line-height-base);
   }
 }
 </style>

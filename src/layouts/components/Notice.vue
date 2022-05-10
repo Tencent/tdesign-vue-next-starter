@@ -138,7 +138,7 @@ const goDetail = () => {
     overflow: hidden;
     width: 100%;
     padding: 16px 24px;
-    border-radius: @border-radius;
+    border-radius: var(--td-border-radius);
     font-size: 14px;
     color: var(--td-text-color-primary);
     line-height: 22px;
