@@ -18,14 +18,14 @@ export function getColorFromTheme(theme: string) {
   const themeColor = getBrandColor(theme, colorList);
 
   if (!/^#[A-F\d]{6}$/i.test(theme)) {
-    theme = themeColor?.['@brand-color'] || '#0052D9';
+    theme = themeColor?.['--td-brand-color'] || '#0052D9';
     const themIdx = defaultLightColor.indexOf(theme.toLocaleLowerCase());
     const defaultGradients = !isDarkMode ? defaultLightColor : defaultDarkColor;
 
     const spliceThemeList = defaultGradients.slice(0, themIdx);
     themeColorList = defaultGradients.slice(themIdx, defaultGradients.length).concat(spliceThemeList);
   } else {
-    theme = themeColor?.['@brand-color'];
+    theme = themeColor?.['--td-brand-color'];
     themeColorList = Color.getRandomPalette({
       color: theme,
       colorGamut: 'bright',

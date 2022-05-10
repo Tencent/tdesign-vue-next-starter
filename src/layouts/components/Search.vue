@@ -60,16 +60,16 @@ const changeSearchFocus = (value: boolean) => {
   margin-left: 16px;
   .hover-active {
     .t-input__inner {
-      background: @bg-color-secondarycontainer;
+      background: var(--td-bg-color-secondarycontainer);
     }
     .t-icon {
-      color: @brand-color !important;
+      color: var(--td-brand-color) !important;
     }
   }
 
   .t-icon {
     font-size: 20px !important;
-    color: @text-color-primary !important;
+    color: var(--td-text-color-primary) !important;
   }
   .header-search {
     :deep(.t-input) {
@@ -84,9 +84,9 @@ const changeSearchFocus = (value: boolean) => {
         background: none;
       }
       &:hover {
-        background: @bg-color-secondarycontainer;
+        background: var(--td-bg-color-secondarycontainer);
         .t-input__inner {
-          background: @bg-color-secondarycontainer;
+          background: var(--td-bg-color-secondarycontainer);
         }
       }
     }

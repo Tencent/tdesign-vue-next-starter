@@ -1,7 +1,7 @@
 @import '@/style/variables.less';
 
 .secondary-notification {
-  background-color: @bg-color-container;
+  background-color: var(--td-bg-color-container);
   border-radius: @border-radius;
   padding: @spacer-3 @spacer-4;
 
@@ -18,7 +18,7 @@
     padding: 13px 24px 13px 0;
 
     &:hover {
-      background-color: @bg-color-container-hover;
+      background-color: var(--td-bg-color-container-hover);
 
       .msg-date {
         display: none;
@@ -44,7 +44,7 @@
   .content {
     font-family: PingFangSC-Medium;
     font-size: 14px;
-    color: @text-color-placeholder;
+    color: var(--td-text-color-placeholder);
     text-align: left;
     line-height: 22px;
     overflow: hidden;
@@ -53,7 +53,7 @@
   }
 
   .unread {
-    color: @brand-color-8;
+    color: var(--td-brand-color-8);
   }
 
   .msg-action {
@@ -68,6 +68,6 @@
     min-height: 443px;
     padding-top: 170px;
     text-align: center;
-    color: @text-color-primary;
+    color: var(--td-text-color-primary);
   }
 }

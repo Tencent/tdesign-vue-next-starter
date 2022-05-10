@@ -262,12 +262,12 @@ watchEffect(() => {
   font-family: PingFang SC;
   font-style: normal;
   font-weight: 500;
-  color: @text-color-primary;
+  color: var(--td-text-color-primary);
 }
 
 .setting-link {
   cursor: pointer;
-  color: @brand-color;
+  color: var(--td-brand-color);
   margin-bottom: 8px;
 }
 
@@ -279,9 +279,9 @@ watchEffect(() => {
   line-height: 20px;
   font-size: 12px;
   text-align: center;
-  color: @text-color-placeholder;
+  color: var(--td-text-color-placeholder);
   width: 100%;
-  background: @bg-color-container;
+  background: var(--td-bg-color-container);
 }
 
 .setting-drawer-container {
@@ -314,7 +314,7 @@ watchEffect(() => {
     }
 
     :deep(.t-is-checked) {
-      border: 2px solid @brand-color !important;
+      border: 2px solid var(--td-brand-color) !important;
     }
 
     :deep(.t-form__controls-content) {
@@ -330,7 +330,7 @@ watchEffect(() => {
 .setting-route-theme {
   :deep(.t-form__label) {
     min-width: 310px !important;
-    color: @text-color-secondary;
+    color: var(--td-text-color-secondary);
   }
 }
 

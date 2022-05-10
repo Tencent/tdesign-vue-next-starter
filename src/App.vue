@@ -20,6 +20,6 @@ onMounted(() => {
 @import '@/style/variables.less';
 
 #nprogress .bar {
-  background: @brand-color !important;
+  background: var(--td-brand-color) !important;
 }
 </style>

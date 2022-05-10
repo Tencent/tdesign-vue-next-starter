@@ -236,7 +236,7 @@ const navToHelper = () => {
   height: 26px;
   display: flex;
   margin-left: 24px;
-  color: @text-color-primary;
+  color: var(--td-text-color-primary);
 
   .t-logo {
     width: 100%;
@@ -254,7 +254,7 @@ const navToHelper = () => {
 .header-user-account {
   display: inline-flex;
   align-items: center;
-  color: @text-color-primary;
+  color: var(--td-text-color-primary);
   .t-icon {
     margin-left: 4px;
     font-size: 16px;
@@ -262,12 +262,12 @@ const navToHelper = () => {
 }
 
 :deep(.t-head-menu__inner) {
-  border-bottom: 1px solid @border-level-1-color;
+  border-bottom: 1px solid var(--td-border-level-1-color);
 }
 
 .t-menu--light {
   .header-user-account {
-    color: @text-color-primary;
+    color: var(--td-text-color-primary);
   }
 }
 .t-menu--dark {

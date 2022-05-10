@@ -3,7 +3,7 @@
 @import './theme/index.less';
 
 body {
-  color: @text-color-secondary;
+  color: var(--td-text-color-secondary);
   font-family: -apple-system, BlinkMacSystemFont, @font-family;
   font-size: @font-size-base;
   line-height: 1.5;
@@ -41,22 +41,22 @@ p {
 }
 
 .t-button-link {
-  color: @brand-color;
+  color: var(--td-brand-color);
   text-decoration: none;
   margin-right: @spacer-3;
   cursor: pointer;
   transition: color @anim-duration-base @anim-time-fn-easing;
 
   &:hover {
-    color: @brand-color-hover;
+    color: var(--td-brand-color-hover);
   }
 
   &:active {
-    color: @brand-color-active;
+    color: var(--td-brand-color-active);
   }
 
   &--active {
-    color: @brand-color-active;
+    color: var(--td-brand-color-active);
   }
 
   &:focus {

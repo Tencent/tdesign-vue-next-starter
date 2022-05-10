@@ -88,7 +88,7 @@ const goDetail = () => {
     text-align: center;
     padding-top: 135px;
     font-size: 14px;
-    color: @text-color-secondary;
+    color: var(--td-text-color-secondary);
 
     img {
       width: 63px;
@@ -103,10 +103,10 @@ const goDetail = () => {
     position: relative;
     height: 56px;
     font-size: 16px;
-    color: @text-color-primary;
+    color: var(--td-text-color-primary);
     text-align: center;
     line-height: 56px;
-    border-bottom: 1px solid @component-border;
+    border-bottom: 1px solid var(--td-component-border);
 
     .clear-btn {
       position: absolute;
@@ -124,7 +124,7 @@ const goDetail = () => {
     &-link {
       text-decoration: none;
       font-size: 14px;
-      color: @brand-color;
+      color: var(--td-brand-color);
       line-height: 48px;
       cursor: pointer;
     }
@@ -140,16 +140,16 @@ const goDetail = () => {
     padding: 16px 24px;
     border-radius: @border-radius;
     font-size: 14px;
-    color: @text-color-primary;
+    color: var(--td-text-color-primary);
     line-height: 22px;
     cursor: pointer;
 
     &:hover {
       transition: background 0.2s ease;
-      background: @bg-color-container-hover;
+      background: var(--td-bg-color-container-hover);
 
       .msg-content {
-        color: @brand-color-8;
+        color: var(--td-brand-color-8);
       }
 
       .t-list-item__action {
@@ -170,7 +170,7 @@ const goDetail = () => {
     }
 
     .msg-type {
-      color: @text-color-secondary;
+      color: var(--td-text-color-secondary);
     }
 
     .t-list-item__action {
@@ -188,7 +188,7 @@ const goDetail = () => {
       position: absolute;
       right: 24px;
       bottom: 16px;
-      color: @text-color-secondary;
+      color: var(--td-text-color-secondary);
     }
   }
 }

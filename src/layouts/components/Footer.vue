@@ -10,7 +10,7 @@ import { prefix } from '@/config/global';
 @import '@/style/variables';
 
 .@{prefix}-footer {
-  color: @text-color-placeholder;
+  color: var(--td-text-color-placeholder);
   line-height: 20px;
   text-align: center;
 }
