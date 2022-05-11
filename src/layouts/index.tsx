@@ -169,7 +169,7 @@ export default defineComponent({
       const { showBreadcrumb, showFooter, isUseTabsRouter } = settingStore;
       const { tabRouters } = tabsRouterStore;
       return (
-        <t-layout class={[`${prefix}-layout`]}>
+        <t-layout class={[`${prefix}-layout`]} key={route.name}>
           {isUseTabsRouter && (
             <t-tabs
               theme="card"
