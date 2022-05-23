@@ -8,6 +8,10 @@ const state = {
   isRefreshing: false,
 };
 
+// 不需要做多标签tabs页缓存的列表 值为每个页面对应的name 如 DashboardDetail
+// const ignoreCacheRoutes = ['DashboardDetail'];
+const ignoreCacheRoutes = [];
+
 export const useTabsRouterStore = defineStore('tabsRouter', {
   state: () => state,
   getters: {
@@ -20,9 +24,10 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
       this.tabRouters[routeIdx].isAlive = !this.tabRouters[routeIdx].isAlive;
     },
     appendTabRouterList(newRoute: TRouterInfo) {
+      const needAlive = !ignoreCacheRoutes.includes(newRoute.name);
       if (!this.tabRouters.find((route: TRouterInfo) => route.path === newRoute.path)) {
         // eslint-disable-next-line no-param-reassign
-        this.tabRouterList = this.tabRouterList.concat(newRoute);
+        this.tabRouterList = this.tabRouterList.concat({ ...newRoute, isAlive: needAlive });
       }
     },
     subtractCurrentTabRouter(newRoute: TRouterInfo) {
