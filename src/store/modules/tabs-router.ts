@@ -2,9 +2,18 @@ import { defineStore } from 'pinia';
 import { TRouterInfo, TTabRouterType } from '@/interface';
 import { store } from '@/store';
 
+const homeRoute: Array<TRouterInfo> = [
+  {
+    path: '/dashboard/base',
+    routeIdx: 0,
+    title: '仪表盘',
+    name: 'DashboardBase',
+    isHome: true,
+  },
+];
+
 const state = {
-  homeRouter: { path: '/dashboard/base', routeIdx: 0, title: '仪表盘', name: 'DashboardBase', isHome: true },
-  tabRouterList: [],
+  tabRouterList: homeRoute,
   isRefreshing: false,
 };
 
@@ -15,14 +24,16 @@ const ignoreCacheRoutes = [];
 export const useTabsRouterStore = defineStore('tabsRouter', {
   state: () => state,
   getters: {
-    tabRouters: (state: TTabRouterType) => [state.homeRouter].concat(state.tabRouterList),
+    tabRouters: (state: TTabRouterType) => state.tabRouterList,
     refreshing: (state: TTabRouterType) => state.isRefreshing,
   },
   actions: {
+    // 处理刷新
     toggleTabRouterAlive(routeIdx: number) {
       this.isRefreshing = !this.isRefreshing;
       this.tabRouters[routeIdx].isAlive = !this.tabRouters[routeIdx].isAlive;
     },
+    // 处理新增
     appendTabRouterList(newRoute: TRouterInfo) {
       const needAlive = !ignoreCacheRoutes.includes(newRoute.name);
       if (!this.tabRouters.find((route: TRouterInfo) => route.path === newRoute.path)) {
@@ -30,21 +41,25 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
         this.tabRouterList = this.tabRouterList.concat({ ...newRoute, isAlive: needAlive });
       }
     },
+    // 处理关闭当前
     subtractCurrentTabRouter(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      this.tabRouterList = this.tabRouterList.slice(0, routeIdx - 1).concat(this.tabRouterList.slice(routeIdx));
+      this.tabRouterList = this.tabRouterList.slice(0, routeIdx).concat(this.tabRouterList.slice(routeIdx + 1));
     },
+    // 处理关闭右侧
     subtractTabRouterBehind(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      this.tabRouterList = this.tabRouterList.slice(0, routeIdx);
+      this.tabRouterList = this.tabRouterList.slice(0, routeIdx + 1);
     },
+    // 处理关闭左侧
     subtractTabRouterAhead(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      this.tabRouterList = this.tabRouterList.slice(routeIdx - 1);
+      this.tabRouterList = homeRoute.concat(this.tabRouterList.slice(routeIdx));
     },
+    // 处理关闭其他
     subtractTabRouterOther(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      this.tabRouterList = [this.tabRouterList?.[routeIdx]];
+      this.tabRouterList = homeRoute.concat([this.tabRouterList?.[routeIdx]]);
     },
     removeTabRouterList() {
       this.tabRouterList = [];
