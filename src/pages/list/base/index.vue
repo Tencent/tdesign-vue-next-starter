@@ -15,7 +15,6 @@
           </t-input>
         </div>
       </t-row>
-      <!-- 如果开启多标签tab页 请修改offsetTop的配置 -->
       <t-table
         :data="data"
         :columns="COLUMNS"
