@@ -95,6 +95,7 @@ export default defineComponent({
       () => route.path,
       () => {
         appendNewRoute();
+        document.querySelector(`.${prefix}-layout`).scrollTo({ top: 0, behavior: 'smooth' });
       },
     );
 
