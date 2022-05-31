@@ -21,21 +21,21 @@
   .info-item {
     padding: 12px 0;
     display: flex;
-    color: @text-color-primary;
+    color: var(--tdvns-text-color-primary);
 
     h1 {
       width: 200px;
       font-weight: normal;
-      font-size: @font-size-base;
-      color: @text-color-secondary;
+      font-size: var(--tdvns-font-size-base);
+      color: var(--tdvns-text-color-secondary);
       text-align: left;
       line-height: 22px;
 
-      @media (max-width: @screen-sm-max) {
+      @media (max-width: var(--tdvns-screen-sm-max)) {
         width: 100px;
       }
 
-      @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      @media (min-width: var(--tdvns-screen-md-min)) and (max-width: var(--tdvns-screen-md-max)) {
         width: 120px;
       }
     }
@@ -51,16 +51,16 @@
       display: inline-block;
       width: 8px;
       height: 8px;
-      border-radius: @border-radius-50;
-      background: @success-color-5;
+      border-radius: var(--tdvns-border-radius-50);
+      background: var(--tdvns-success-color-5);
     }
 
     .inProgress {
-      color: @success-color-5;
+      color: var(--tdvns-success-color-5);
     }
 
     .pdf {
-      color: @brand-color;
+      color: var(--tdvns-brand-color);
 
       &:hover {
         cursor: pointer;
@@ -78,7 +78,7 @@
       width: 84px;
       font-family: PingFangSC-Regular;
       font-size: 14px;
-      color: @text-color-secondary;
+      color: var(--tdvns-text-color-secondary);
       text-align: left;
       line-height: 22px;
     }
@@ -91,16 +91,16 @@
       display: inline-block;
       width: 8px;
       height: 8px;
-      border-radius: @border-radius-50;
-      background: @success-color-5;
+      border-radius: var(--tdvns-border-radius-50);
+      background: var(--tdvns-success-color-5);
     }
 
     .green {
-      color: @success-color-5;
+      color: var(--tdvns-success-color-5);
     }
 
     .blue {
-      color: @brand-color-8;
+      color: var(--tdvns-brand-color-8);
     }
   }
 }

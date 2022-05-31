@@ -21,7 +21,7 @@ const style = computed(() => {
   const { value } = props;
   const { colorList } = store;
   return {
-    background: value !== 'dynamic' ? getBrandColor(value, colorList)['@brand-color'] : panelColor,
+    background: value !== 'dynamic' ? getBrandColor(value, colorList)['--td-brand-color'] : panelColor,
   };
 });
 </script>

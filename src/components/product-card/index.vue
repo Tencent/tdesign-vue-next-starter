@@ -108,11 +108,11 @@ const handleClickDelete = (product: CardProductType) => {
       margin-bottom: 8px;
       font-size: 16px;
       font-weight: 400;
-      color: @text-color-primary;
+      color: var(--tdvns-text-color-primary);
     }
 
     &--desc {
-      color: @text-color-secondary;
+      color: var(--tdvns-text-color-secondary);
       font-size: 12px;
       line-height: 20px;
       overflow: hidden;

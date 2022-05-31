@@ -3,16 +3,16 @@
 @import './theme/index.less';
 
 body {
-  color: @text-color-secondary;
-  font-family: -apple-system, BlinkMacSystemFont, @font-family;
-  font-size: @font-size-base;
+  color: var(--tdvns-text-color-secondary);
+  font-family: -apple-system, BlinkMacSystemFont, var(--tdvns-font-family);
+  font-size: var(--tdvns-font-size-base);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   padding: 0;
 }
 
 pre {
-  font-family: @font-family;
+  font-family: var(--tdvns-font-family);
 }
 
 ul,
@@ -41,22 +41,22 @@ p {
 }
 
 .t-button-link {
-  color: @brand-color;
+  color: var(--tdvns-brand-color);
   text-decoration: none;
-  margin-right: @spacer-3;
+  margin-right: var(--tdvns-spacer-3);
   cursor: pointer;
-  transition: color @anim-duration-base @anim-time-fn-easing;
+  transition: color var(--tdvns-anim-duration-base) var(--tdvns-anim-time-fn-easing);
 
   &:hover {
-    color: @brand-color-hover;
+    color: var(--tdvns-brand-color-hover);
   }
 
   &:active {
-    color: @brand-color-active;
+    color: var(--tdvns-brand-color-active);
   }
 
   &--active {
-    color: @brand-color-active;
+    color: var(--tdvns-brand-color-active);
   }
 
   &:focus {
@@ -69,7 +69,7 @@ p {
 }
 
 .t-button + .t-button {
-  margin-left: @spacer;
+  margin-left: var(--tdvns-spacer);
 }
 
 .container-base-margin-top {

@@ -20,6 +20,6 @@ onMounted(() => {
 @import '@/style/variables.less';
 
 #nprogress .bar {
-  background: @brand-color !important;
+  background: var(--tdvns-brand-color) !important;
 }
 </style>
