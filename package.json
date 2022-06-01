@@ -50,7 +50,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^7.16.0",
     "eslint-plugin-vue-scoped-css": "^2.2.0",
-    "husky": "^7.0.4",
+    "husky": "^8.0.1",
     "less": "^4.1.1",
     "lint-staged": "^12.1.2",
     "mockjs": "^1.1.0",
