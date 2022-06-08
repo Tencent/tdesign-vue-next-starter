@@ -30,7 +30,7 @@ const defaultRouterList: Array<RouteRecordRaw> = [
 
 export const allRoutes = [...defaultRouterList, ...asyncRouterList];
 
-export const getActive = (maxLevel = 2): string => {
+export const getActive = (maxLevel = 3): string => {
   const route = useRoute();
   if (!route.path) {
     return '';
