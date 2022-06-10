@@ -21,10 +21,10 @@ export const USER_INFO_LIST = [
   },
   {
     title: '直属上级',
-    content: 'Account@qq.com',
+    content: 'Michael Wang',
   },
   {
-    title: '直属上级',
+    title: '职位',
     content: '高级 UI 设计师',
   },
   {
