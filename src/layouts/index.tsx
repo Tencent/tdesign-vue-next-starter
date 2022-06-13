@@ -168,7 +168,7 @@ export default defineComponent({
 
     const renderContent = () => {
       const { showBreadcrumb, showFooter, isUseTabsRouter } = settingStore;
-      const { tabRouters } = tabsRouterStore;
+      const tabRouters = tabsRouterStore.tabRouters.filter((route) => route.isAlive || route.isHome);
       return (
         // <t-layout class={[`${prefix}-layout`]} key={route.name}> 如果存在多个滚动列表之间切换时，页面不刷新导致的样式问题 请设置key 但会导致多标签tab页的缓存失效
         <t-layout class={[`${prefix}-layout`]}>
