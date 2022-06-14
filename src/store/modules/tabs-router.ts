@@ -19,7 +19,7 @@ const state = {
 
 // 不需要做多标签tabs页缓存的列表 值为每个页面对应的name 如 DashboardDetail
 // const ignoreCacheRoutes = ['DashboardDetail'];
-const ignoreCacheRoutes = [];
+const ignoreCacheRoutes = ['login'];
 
 export const useTabsRouterStore = defineStore('tabsRouter', {
   state: () => state,
@@ -35,7 +35,7 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
     },
     // 处理新增
     appendTabRouterList(newRoute: TRouterInfo) {
-      const needAlive = !ignoreCacheRoutes.includes(newRoute.name);
+      const needAlive = !ignoreCacheRoutes.includes(newRoute.name as string);
       if (!this.tabRouters.find((route: TRouterInfo) => route.path === newRoute.path)) {
         // eslint-disable-next-line no-param-reassign
         this.tabRouterList = this.tabRouterList.concat({ ...newRoute, isAlive: needAlive });
