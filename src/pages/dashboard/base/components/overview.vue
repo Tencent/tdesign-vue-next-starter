@@ -9,11 +9,10 @@
           :class="{ 'dashboard-overview-card': true, 'overview-panel': true }"
         >
           <template #actions>
-            <t-date-picker
+            <t-date-range-picker
               class="card-date-picker-container"
               theme="primary"
               mode="date"
-              range
               :default-value="LAST_7_DAYS"
               @change="onStokeDataChange"
             />

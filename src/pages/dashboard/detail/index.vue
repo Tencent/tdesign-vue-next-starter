@@ -20,12 +20,11 @@
       <t-col :xs="12" :xl="9">
         <t-card class="dashboard-detail-card" title="采购商品申请趋势" subtitle="(件)">
           <template #actions>
-            <t-date-picker
+            <t-date-range-picker
               class="card-date-picker-container"
               :default-value="LAST_7_DAYS"
               theme="primary"
               mode="date"
-              range
               style="width: 240px"
               @change="onMaterialChange"
             />
@@ -44,12 +43,11 @@
     </t-row>
     <t-card :class="['dashboard-detail-card', 'row-margin']" title="采购商品满意度分布">
       <template #actions>
-        <t-date-picker
+        <t-date-range-picker
           class="card-date-picker-container"
           :default-value="LAST_7_DAYS"
           theme="primary"
           mode="date"
-          range
           style="display: inline-block; margin-right: 8px; width: 240px"
           @change="onSatisfyChange"
         />

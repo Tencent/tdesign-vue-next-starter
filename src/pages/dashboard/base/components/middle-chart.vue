@@ -4,11 +4,10 @@
       <t-card title="统计数据" :subtitle="`(万元)${currentMonth}`" class="dashboard-chart-card">
         <template #option>
           <div class="dashboard-chart-title-container">
-            <t-date-picker
+            <t-date-range-picker
               class="card-date-picker-container"
               theme="primary"
               mode="date"
-              range
               :default-value="LAST_7_DAYS"
               @change="onCurrencyChange"
             />
