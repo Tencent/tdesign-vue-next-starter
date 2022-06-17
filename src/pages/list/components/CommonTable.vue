@@ -47,6 +47,7 @@
               <t-form-item label="合同类型" name="type">
                 <t-select
                   v-model="formData.type"
+                  style="display: inline-block"
                   class="form-item-content"
                   :options="CONTRACT_TYPE_OPTIONS"
                   placeholder="请选择合同类型"
