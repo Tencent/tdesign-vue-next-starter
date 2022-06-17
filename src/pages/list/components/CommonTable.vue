@@ -12,7 +12,7 @@
       <t-row>
         <t-col :span="10">
           <t-row :gutter="[16, 24]">
-            <t-col :flex="1">
+            <t-col :span="4">
               <t-form-item label="合同名称" name="name">
                 <t-input
                   v-model="formData.name"
@@ -23,7 +23,7 @@
                 />
               </t-form-item>
             </t-col>
-            <t-col :flex="1">
+            <t-col :span="4">
               <t-form-item label="合同状态" name="status">
                 <t-select
                   v-model="formData.status"
@@ -33,7 +33,7 @@
                 />
               </t-form-item>
             </t-col>
-            <t-col :flex="1">
+            <t-col :span="4">
               <t-form-item label="合同编号" name="no">
                 <t-input
                   v-model="formData.no"
@@ -43,7 +43,7 @@
                 />
               </t-form-item>
             </t-col>
-            <t-col :flex="1">
+            <t-col :span="4">
               <t-form-item label="合同类型" name="type">
                 <t-select
                   v-model="formData.type"

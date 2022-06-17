@@ -204,6 +204,8 @@ const deleteClickOp = (e) => {
 </script>
 
 <style lang="less" scoped>
+@import url('../base/index.less');
+
 .detail-deploy {
   :deep(.t-card) {
     padding: 8px;
