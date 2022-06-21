@@ -52,7 +52,7 @@
     "eslint-plugin-vue-scoped-css": "^2.2.0",
     "husky": "^7.0.4",
     "less": "^4.1.1",
-    "lint-staged": "^12.1.2",
+    "lint-staged": "^13.0.2",
     "mockjs": "^1.1.0",
     "prettier": "^2.4.1",
     "stylelint": "~13.13.1",
