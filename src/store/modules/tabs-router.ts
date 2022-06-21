@@ -59,7 +59,7 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
     // 处理关闭其他
     subtractTabRouterOther(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      this.tabRouterList = homeRoute.concat([this.tabRouterList?.[routeIdx]]);
+      this.tabRouterList = routeIdx === 0 ? homeRoute : homeRoute.concat([this.tabRouterList?.[routeIdx]]);
     },
     removeTabRouterList() {
       this.tabRouterList = [];
