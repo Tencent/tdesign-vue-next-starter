@@ -93,7 +93,7 @@ const dataLoading = ref(true);
 
 const fetchData = async () => {
   try {
-    const res: ResDataType = await request.get('/api/get-card-list');
+    const res: ResDataType = await request.get({ url: '/api/get-card-list' });
     if (res.code === 0) {
       const { list = [] } = res.data;
       productList.value = list;

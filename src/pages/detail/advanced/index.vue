@@ -145,7 +145,7 @@ const stepUpdate = () => {
 
 const fetchData = async () => {
   try {
-    const res: ResDataType = await request.get('/api/get-purchase-list');
+    const res: ResDataType = await request.get({ url: '/api/get-purchase-list' });
     if (res.code === 0) {
       const { list = [] } = res.data;
       data.value = list;

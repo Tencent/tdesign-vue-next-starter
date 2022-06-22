@@ -115,7 +115,7 @@ const pagination = ref({
 
 const fetchData = async () => {
   try {
-    const res: ResDataType = await request.get('/api/get-project-list');
+    const res: ResDataType = await request.get({ url: '/api/get-project-list' });
     if (res.code === 0) {
       const { list = [] } = res.data;
       data.value = list;
