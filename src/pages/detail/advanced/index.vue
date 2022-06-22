@@ -121,7 +121,7 @@ import { ref, onMounted } from 'vue';
 import { prefix } from '@/config/global';
 import { BASE_INFO_DATA, TABLE_COLUMNS_DATA as columns, PRODUCT_LIST } from './constants';
 import request from '@/utils/request';
-import { ResDataType } from '@/interface';
+import { ResDataType } from '#/interface';
 
 import Product from './components/Product.vue';
 

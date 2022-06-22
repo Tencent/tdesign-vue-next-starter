@@ -29,7 +29,7 @@ export function getDateArray(dateTime: string[] = [], divideNum = 10): string[] 
  *
  * @memberOf DashboardBase
  */
-export function getRandomArray(num = 100) {
+export function getRandomArray(num = 100): number {
   let resultNum = Number((Math.random() * num).toFixed(0));
 
   if (resultNum <= 1) {

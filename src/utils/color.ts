@@ -10,11 +10,11 @@ import { getSettingStore } from '@/store';
  * @param {string} theme
  * @returns {}
  */
-export function getColorFromTheme(theme: string) {
+export function getColorFromTheme(theme: string): Array<string> {
   const settingStore = getSettingStore();
   const { colorList, mode } = settingStore;
   const isDarkMode = mode === 'dark';
-  let themeColorList = [];
+  let themeColorList;
   const themeColor = getBrandColor(theme, colorList);
 
   if (!/^#[A-F\d]{6}$/i.test(theme)) {
@@ -52,7 +52,7 @@ export function getChartListColor(): Array<string> {
  * @param {Array<string>} chartsList
  * @param {string} theme
  */
-export function changeChartsTheme(chartsList: echarts.EChartsType[]) {
+export function changeChartsTheme(chartsList: echarts.EChartsType[]): void {
   if (chartsList && chartsList.length) {
     const chartChangeColor = getChartListColor();
 

@@ -49,7 +49,7 @@
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useNotificationStore } from '@/store';
-import { NotificationItem } from '@/interface';
+import { NotificationItem } from '#/interface';
 
 const router = useRouter();
 const store = useNotificationStore();

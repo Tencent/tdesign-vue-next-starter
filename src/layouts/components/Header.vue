@@ -70,7 +70,7 @@ import { useSettingStore } from '@/store';
 import { getActive } from '@/router';
 import { prefix } from '@/config/global';
 import LogoFull from '@/assets/assets-logo-full.svg?component';
-import { MenuRoute } from '@/interface';
+import { MenuRoute } from '#/interface';
 
 import Notice from './Notice.vue';
 import Search from './Search.vue';
