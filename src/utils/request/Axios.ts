@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } f
 import { stringify } from 'qs';
 import { cloneDeep, isFunction } from 'lodash-es';
 import { CreateAxiosOptions } from './AxiosTransform';
+import { AxiosCanceler } from './AxiosCancel';
 import { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
 
 // Axios模块
@@ -58,9 +59,16 @@ export class VAxios {
     }
     const { requestInterceptors, requestInterceptorsCatch, responseInterceptors, responseInterceptorsCatch } =
       transform;
+    const axiosCanceler = new AxiosCanceler();
 
     // 请求配置处理
     this.instance.interceptors.request.use((config: AxiosRequestConfig) => {
+      const {
+        headers: { ignoreRepeatRequest },
+      } = config;
+      const ignoreRepeat = ignoreRepeatRequest ?? this.options.requestOptions?.ignoreRepeatRequest;
+      if (!ignoreRepeat) axiosCanceler.addPending(config);
+
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config, this.options);
       }
@@ -74,6 +82,7 @@ export class VAxios {
 
     // 响应结果处理
     this.instance.interceptors.response.use((res: AxiosResponse) => {
+      if (res) axiosCanceler.removePending(res.config);
       if (responseInterceptors && isFunction(responseInterceptors)) {
         res = responseInterceptors(res);
       }

@@ -6,6 +6,7 @@ export interface RequestOptions {
   isTransformResponse?: boolean;
   isReturnNativeResponse?: boolean;
   apiUrl?: string;
+  ignoreRepeatRequest?: boolean;
   joinTime?: boolean;
   withToken?: boolean;
   retry?: {

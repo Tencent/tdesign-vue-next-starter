@@ -138,7 +138,7 @@ const transform: AxiosTransform = {
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
   return new VAxios(
     merge(
-      {
+      <CreateAxiosOptions>{
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
         // 例如: authenticationScheme: 'Bearer'
         authenticationScheme: '',
@@ -165,7 +165,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求
-          ignoreCancelToken: true,
+          ignoreRepeatRequest: true,
           // 是否携带token
           withToken: true,
           // 重试
