@@ -89,7 +89,7 @@ import { BASE_INFO_DATA, TABLE_COLUMNS as columns } from './constants';
 import { changeChartsTheme } from '@/utils/color';
 
 import { prefix } from '@/config/global';
-import { ResDataType } from '@/interface';
+import { ResDataType } from '@/types/interface';
 import request from '@/utils/request';
 
 echarts.use([

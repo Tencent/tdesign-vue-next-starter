@@ -11,7 +11,7 @@ import LayoutContent from './components/Content.vue';
 import Setting from './setting.vue';
 
 import { prefix } from '@/config/global';
-import { TRouterInfo } from '@/interface';
+import { TRouterInfo } from '@/types/interface';
 
 import '@/style/layout.less';
 

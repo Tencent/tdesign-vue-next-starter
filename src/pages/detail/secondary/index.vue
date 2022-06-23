@@ -60,7 +60,7 @@ export default {
 import { ref, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { NOTIFICATION_TYPES } from '@/constants';
-import { NotificationItem } from '@/interface';
+import { NotificationItem } from '@/types/interface';
 import EmptyIcon from '@/assets/assets-empty.svg?component';
 import { useNotificationStore } from '@/store';
 
