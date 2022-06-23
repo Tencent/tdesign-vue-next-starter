@@ -43,7 +43,7 @@ export class AxiosCanceler {
     }
   }
 
-  reset(): void {
+  reset() {
     pendingMap = new Map<string, Canceler>();
   }
 }

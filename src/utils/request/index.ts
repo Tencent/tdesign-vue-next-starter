@@ -8,7 +8,8 @@ import { TOKEN_NAME } from '@/config/global';
 
 const env = import.meta.env.MODE || 'development';
 
-const host = env === 'mock' ? '/' : proxy[env].host; // 如果是mock模式 就不配置host 会走本地Mock拦截
+// 如果是mock模式 或 没启用直连代理 就不配置host 会走本地Mock拦截 或 Vite 代理
+const host = env === 'mock' || !proxy.isRequestProxy ? '' : proxy[env].host;
 
 // 数据处理，方便区分多种处理方式
 const transform: AxiosTransform = {
@@ -52,7 +53,12 @@ const transform: AxiosTransform = {
 
   // 请求前处理配置
   beforeRequestHook: (config, options) => {
-    const { apiUrl, joinParamsToUrl, formatDate, joinTime = true } = options;
+    const { apiUrl, isJoinPrefix, urlPrefix, joinParamsToUrl, formatDate, joinTime = true } = options;
+
+    // 添加接口前缀
+    if (isJoinPrefix) {
+      config.url = `${urlPrefix}${config.url}`;
+    }
 
     // 将baseUrl拼接
     if (apiUrl && isString(apiUrl)) {
@@ -152,6 +158,14 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         transform,
         // 配置项，下面的选项都可以在独立的接口请求中覆盖
         requestOptions: {
+          // 接口地址
+          apiUrl: host,
+          // 是否自动添加接口前缀
+          isJoinPrefix: false,
+          // 接口前缀
+          // 例如: https://www.baidu.com/api
+          // urlPrefix: '/api'
+          urlPrefix: '/api',
           // 是否返回原生响应头 比如：需要获取响应头时使用该属性
           isReturnNativeResponse: false,
           // 需要对返回数据进行处理
@@ -160,9 +174,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           joinParamsToUrl: false,
           // 格式化提交参数时间
           formatDate: true,
-          // 接口地址
-          apiUrl: host,
-          //  是否加入时间戳
+          // 是否加入时间戳
           joinTime: true,
           // 忽略重复请求
           ignoreRepeatRequest: true,
