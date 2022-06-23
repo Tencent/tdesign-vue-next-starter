@@ -90,7 +90,7 @@ import { changeChartsTheme } from '@/utils/color';
 
 import { prefix } from '@/config/global';
 import { ResDataType } from '@/types/interface';
-import request from '@/utils/request';
+import { request } from '@/utils/request';
 
 echarts.use([
   TitleComponent,

@@ -117,7 +117,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import Trend from '@/components/trend/index.vue';
-import request from '@/utils/request';
+import { request } from '@/utils/request';
 import { ResDataType } from '@/types/interface';
 import { useSettingStore } from '@/store';
 

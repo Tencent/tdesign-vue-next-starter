@@ -1,6 +1,6 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AxiosError } from 'axios';
-import type { RequestOptions, Result } from '#/axios';
+import type { RequestOptions, Result } from '@/types/axios';
 
 // 创建Axios选项
 export interface CreateAxiosOptions extends AxiosRequestConfig {

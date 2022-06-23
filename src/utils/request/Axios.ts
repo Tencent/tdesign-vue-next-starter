@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } f
 import qs from 'qs';
 import { CreateAxiosOptions } from './AxiosTransform';
 import { isFunction } from '@/utils/is';
-import { AxiosRequestConfigRetry, RequestOptions, Result } from '#/axios';
+import { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
 
 // Axios模块
 export class VAxios {
