@@ -1,6 +1,6 @@
 import { defineComponent, PropType, computed, h } from 'vue';
 import { prefix } from '@/config/global';
-import { MenuRoute } from '#/interface';
+import { MenuRoute } from '@/types/interface';
 import { getActive } from '@/router';
 
 const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
