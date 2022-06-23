@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import qs from 'qs';
+import { stringify } from 'qs';
+import { cloneDeep, isFunction } from 'lodash-es';
 import { CreateAxiosOptions } from './AxiosTransform';
-import { isFunction } from '@/utils/is';
 import { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
 
 // Axios模块
@@ -101,7 +101,7 @@ export class VAxios {
 
     return {
       ...config,
-      data: qs.stringify(config.data, { arrayFormat: 'brackets' }),
+      data: stringify(config.data, { arrayFormat: 'brackets' }),
     };
   }
 
@@ -127,8 +127,7 @@ export class VAxios {
 
   // 请求
   async request<T = any>(config: AxiosRequestConfigRetry, options?: RequestOptions): Promise<T> {
-    // 深拷贝，但是可以使用lodash的cloneDeep，非必须
-    let conf: CreateAxiosOptions = JSON.parse(JSON.stringify(config));
+    let conf: CreateAxiosOptions = cloneDeep(config);
     const transform = this.getTransform();
 
     const { requestOptions } = this.options;

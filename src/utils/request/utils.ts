@@ -1,4 +1,4 @@
-import { isObject, isString } from '@/utils/is';
+import { isObject, isString } from 'lodash-es';
 
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
@@ -43,20 +43,11 @@ export function formatRequestDate(params: Recordable) {
 }
 
 // 将对象转为Url参数
-export function setObjToUrlParams(baseUrl: string, obj: any): string {
+export function setObjToUrlParams(baseUrl: string, obj: object): string {
   let parameters = '';
   for (const key in obj) {
     parameters += `${key}=${encodeURIComponent(obj[key])}&`;
   }
   parameters = parameters.replace(/&$/, '');
   return /\?$/.test(baseUrl) ? baseUrl + parameters : baseUrl.replace(/\/?$/, '?') + parameters;
-}
-
-// 深合并
-export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
-  let key: string;
-  for (key in target) {
-    src[key] = isObject(src[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key]);
-  }
-  return src;
 }

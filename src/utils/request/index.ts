@@ -1,9 +1,9 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
+import { merge, isString } from 'lodash-es';
 import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
 import { VAxios } from './Axios';
-import { isString } from '@/utils/is';
 import proxy from '@/config/proxy';
-import { joinTimestamp, formatRequestDate, setObjToUrlParams, deepMerge } from './utils';
+import { joinTimestamp, formatRequestDate, setObjToUrlParams } from './utils';
 import { TOKEN_NAME } from '@/config/global';
 
 const env = import.meta.env.MODE || 'development';
@@ -137,7 +137,7 @@ const transform: AxiosTransform = {
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
   return new VAxios(
-    deepMerge(
+    merge(
       {
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
         // 例如: authenticationScheme: 'Bearer'
