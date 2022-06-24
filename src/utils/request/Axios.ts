@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { stringify } from 'qs';
-import { cloneDeep, isFunction } from 'lodash-es';
+import isFunction from 'lodash/isFunction';
+import cloneDeep from 'lodash/cloneDeep';
 import { CreateAxiosOptions } from './AxiosTransform';
 import { AxiosCanceler } from './AxiosCancel';
 import { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';

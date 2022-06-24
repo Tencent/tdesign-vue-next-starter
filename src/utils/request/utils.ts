@@ -1,4 +1,5 @@
-import { isObject, isString } from 'lodash-es';
+import isString from 'lodash/isString';
+import isObject from 'lodash/isObject';
 
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
