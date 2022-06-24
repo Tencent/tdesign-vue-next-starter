@@ -90,7 +90,7 @@ import { changeChartsTheme } from '@/utils/color';
 
 import { prefix } from '@/config/global';
 import { ResDataType } from '@/types/interface';
-import request from '@/utils/request';
+import { request } from '@/utils/request';
 
 echarts.use([
   TitleComponent,
@@ -115,7 +115,7 @@ const pagination = ref({
 
 const fetchData = async () => {
   try {
-    const res: ResDataType = await request.get('/api/get-project-list');
+    const res: ResDataType = await request.get({ url: '/api/get-project-list' });
     if (res.code === 0) {
       const { list = [] } = res.data;
       data.value = list;

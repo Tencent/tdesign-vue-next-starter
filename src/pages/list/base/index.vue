@@ -83,7 +83,7 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import { CONTRACT_STATUS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
 import Trend from '@/components/trend/index.vue';
 import { ResDataType } from '@/types/interface';
-import request from '@/utils/request';
+import { request } from '@/utils/request';
 import { useSettingStore } from '@/store';
 
 import { COLUMNS } from './constants';
@@ -103,7 +103,7 @@ const dataLoading = ref(false);
 const fetchData = async () => {
   dataLoading.value = true;
   try {
-    const res: ResDataType = await request.get('/api/get-list');
+    const res: ResDataType = await request.get({ url: '/api/get-list' });
     if (res.code === 0) {
       const { list = [] } = res.data;
       data.value = list;

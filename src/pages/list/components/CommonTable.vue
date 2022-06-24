@@ -117,7 +117,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import Trend from '@/components/trend/index.vue';
-import request from '@/utils/request';
+import { request } from '@/utils/request';
 import { ResDataType } from '@/types/interface';
 import { useSettingStore } from '@/store';
 
@@ -199,7 +199,7 @@ const dataLoading = ref(false);
 const fetchData = async () => {
   dataLoading.value = true;
   try {
-    const res: ResDataType = await request.get('/api/get-list');
+    const res: ResDataType = await request.get({ url: '/api/get-list' });
     if (res.code === 0) {
       const { list = [] } = res.data;
       data.value = list;
