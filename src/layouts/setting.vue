@@ -291,9 +291,12 @@ watchEffect(() => {
   :deep(.t-radio-group.t-size-m) {
     min-height: 32px;
     width: 100%;
-    height: auto;
     justify-content: space-between;
     align-items: center;
+  }
+
+  :deep(.t-radio-group.t-size-m .t-radio-button) {
+    height: auto;
   }
 
   .setting-layout-drawer {
