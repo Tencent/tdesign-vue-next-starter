@@ -1,5 +1,7 @@
 <template>
-  <router-view :class="[mode]" />
+  <t-config-provider :global-config="{ classPrefix: 'tt' }">
+    <router-view :class="[mode]" />
+  </t-config-provider>
 </template>
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';

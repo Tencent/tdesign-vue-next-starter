@@ -19,6 +19,16 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       },
     },
 
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: {
+            '@prefix': 'tt',
+          },
+        },
+      },
+    },
+
     plugins: [
       createVuePlugin(),
       vueJsx(),
