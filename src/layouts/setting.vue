@@ -235,8 +235,6 @@ watchEffect(() => {
 
 .setting-layout-color-group {
   display: inline-flex;
-  width: 36px;
-  height: 36px;
   justify-content: center;
   align-items: center;
   border-radius: 50% !important;
