@@ -1,257 +1,66 @@
 /** 公共前缀 */
-@prefix: tdesign-starter;
+@starter-prefix: tdesign-starter;
 
-:root {
-
-/* 颜色色板 */
-
---tdvns-brand-color-1: var(--td-brand-color-1);
---tdvns-brand-color-2: var(--td-brand-color-2);
---tdvns-brand-color-3: var(--td-brand-color-3);
---tdvns-brand-color-4: var(--td-brand-color-4);
---tdvns-brand-color-5: var(--td-brand-color-5);
---tdvns-brand-color-6: var(--td-brand-color-6);
---tdvns-brand-color-7: var(--td-brand-color-7);
---tdvns-brand-color-8: var(--td-brand-color-8);
---tdvns-brand-color-9: var(--td-brand-color-9);
---tdvns-brand-color-10: var(--td-brand-color-10);
-
---tdvns-warning-color-1: var(--td-warning-color-1);
---tdvns-warning-color-2: var(--td-warning-color-2);
---tdvns-warning-color-3: var(--td-warning-color-3);
---tdvns-warning-color-4: var(--td-warning-color-4);
---tdvns-warning-color-5: var(--td-warning-color-5);
---tdvns-warning-color-6: var(--td-warning-color-6);
---tdvns-warning-color-7: var(--td-warning-color-7);
---tdvns-warning-color-8: var(--td-warning-color-8);
---tdvns-warning-color-9: var(--td-warning-color-9);
---tdvns-warning-color-10: var(--td-warning-color-10);
-
---tdvns-error-color-1: var(--td-error-color-1);
---tdvns-error-color-2: var(--td-error-color-2);
---tdvns-error-color-3: var(--td-error-color-3);
---tdvns-error-color-4: var(--td-error-color-4);
---tdvns-error-color-5: var(--td-error-color-5);
---tdvns-error-color-6: var(--td-error-color-6);
---tdvns-error-color-7: var(--td-error-color-7);
---tdvns-error-color-8: var(--td-error-color-8);
---tdvns-error-color-9: var(--td-error-color-9);
---tdvns-error-color-10: var(--td-error-color-10);
-
---tdvns-success-color-1: var(--td-success-color-1);
---tdvns-success-color-2: var(--td-success-color-2);
---tdvns-success-color-3: var(--td-success-color-3);
---tdvns-success-color-4: var(--td-success-color-4);
---tdvns-success-color-5: var(--td-success-color-5);
---tdvns-success-color-6: var(--td-success-color-6);
---tdvns-success-color-7: var(--td-success-color-7);
---tdvns-success-color-8: var(--td-success-color-8);
---tdvns-success-color-9: var(--td-success-color-9);
---tdvns-success-color-10: var(--td-success-color-10);
-
---tdvns-gray-color-1: var(--td-gray-color-1);
---tdvns-gray-color-2: var(--td-gray-color-2);
---tdvns-gray-color-3: var(--td-gray-color-3);
---tdvns-gray-color-4: var(--td-gray-color-4);
---tdvns-gray-color-5: var(--td-gray-color-5);
---tdvns-gray-color-6: var(--td-gray-color-6);
---tdvns-gray-color-7: var(--td-gray-color-7);
---tdvns-gray-color-8: var(--td-gray-color-8);
---tdvns-gray-color-9: var(--td-gray-color-9);
---tdvns-gray-color-10: var(--td-gray-color-10);
---tdvns-gray-color-11: var(--td-gray-color-11);
---tdvns-gray-color-12: var(--td-gray-color-12);
---tdvns-gray-color-13: var(--td-gray-color-13);
---tdvns-gray-color-14: var(--td-gray-color-14);
-
-/* 文字 & 图标 颜色 */
---tdvns-font-white-1: var(--td-font-white-1);
---tdvns-font-white-2: var(--td-font-white-2);
---tdvns-font-white-3: var(--td-font-white-3);
---tdvns-font-white-4: var(--td-font-white-4);
-
---tdvns-font-gray-1: var(--td-font-gray-1);
---tdvns-font-gray-2: var(--td-font-gray-2);
---tdvns-font-gray-3: var(--td-font-gray-3);
---tdvns-font-gray-4: var(--td-font-gray-4);
-
-/* 基础颜色 */ 
---tdvns-brand-color: var(--td-brand-color); // 色彩-品牌-可操作
---tdvns-warning-color: var(--td-warning-color); // 色彩-功能-警告
---tdvns-error-color: var(--td-error-color); // 色彩-功能-失败
---tdvns-success-color: var(--td-success-color); // 色彩-功能-成功
-
-
-// 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态
---tdvns-brand-color-hover: var(--td-brand-color-hover);     // hover态
---tdvns-brand-color-focus: var(--td-brand-color-focus);     // focus态，包括鼠标和键盘
---tdvns-brand-color-active: var(--td-brand-color-active);    // 点击态
---tdvns-brand-color-disabled: var(--td-brand-color-disabled);  // 禁用态
---tdvns-brand-color-light: var(--td-brand-color-light);     // 浅色的选中态
-
-// 警告色扩展
---tdvns-warning-color-hover: var(--td-warning-color-hover);
---tdvns-warning-color-focus: var(--td-warning-color-focus);
---tdvns-warning-color-active: var(--td-warning-color-active);
---tdvns-warning-color-disabled: var(--td-warning-color-disabled);
---tdvns-warning-color-light: var(--td-warning-color-light);
-
-// 失败/错误色扩展
---tdvns-error-color-hover: var(--td-error-color-hover);
---tdvns-error-color-focus: var(--td-error-color-focus);
---tdvns-error-color-active: var(--td-error-color-active);
---tdvns-error-color-disabled: var(--td-error-color-disabled);
---tdvns-error-color-light: var(--td-error-color-light);
-
-// 成功色扩展
---tdvns-success-color-hover: var(--td-success-color-hover);
---tdvns-success-color-focus: var(--td-success-color-focus);
---tdvns-success-color-active: var(--td-success-color-active);
---tdvns-success-color-disabled: var(--td-success-color-disabled);
---tdvns-success-color-light: var(--td-success-color-light);
-
-// 遮罩
---tdvns-mask-active: var(--td-mask-active); // 遮罩-弹出
---tdvns-mask-disabled: var(--td-mask-disabled); // 遮罩-禁用
-
-// 背景色
---tdvns-bg-color-page: var(--td-bg-color-page);                                            // 色彩 - page
---tdvns-bg-color-container: var(--td-bg-color-container);                                  // 色彩 - 容器             
---tdvns-bg-color-container-hover: var(--td-bg-color-container-hover);                      // 色彩 - 容器 - hover
---tdvns-bg-color-container-active: var(--td-bg-color-container-active);                    // 色彩 - 容器 - active
---tdvns-bg-color-container-select: var(--td-bg-color-container-select);                    // 色彩 - 容器 - select
-
---tdvns-bg-color-secondarycontainer: var(--td-bg-color-secondarycontainer);                // 色彩 - 次级容器
---tdvns-bg-color-secondarycontainer-hover: var(--td-bg-color-secondarycontainer-hover);    // 色彩 - 次级容器 - hover
---tdvns-bg-color-secondarycontainer-active: var(--td-bg-color-secondarycontainer-active);  // 色彩 - 次级容器 - active
-
---tdvns-bg-color-component: var(--td-bg-color-component);                   // 色彩  - 组件
---tdvns-bg-color-component-hover: var(--td-bg-color-component-hover);            // 色彩 - 组件 - hover
---tdvns-bg-color-component-active: var(--td-bg-color-component-active);            // 色彩 - 组件 - active
---tdvns-bg-color-component-disabled: var(--td-bg-color-component-disabled);          // 色彩 - 组件 - disabled
-
-// TODO: 考虑是否在组件内部做判断，不增加额外变量
-// 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
---tdvns-bg-color-specialcomponent: var(--td-bg-color-specialcomponent);
-
-// 文本颜色
---tdvns-text-color-primary: var(--td-text-color-primary);      // 色彩-文字-主要
---tdvns-text-color-secondary: var(--td-text-color-secondary);    // 色彩-文字-次要
---tdvns-text-color-placeholder: var(--td-text-color-placeholder);  // 色彩-文字-占位符/说明
---tdvns-text-color-disabled: var(--td-text-color-disabled);    // 色彩-文字-禁用
---tdvns-text-color-anti: var(--td-text-color-anti);                      // 色彩-文字-反色
---tdvns-text-color-brand: var(--td-text-color-brand);           // 色彩-文字-品牌
---tdvns-text-color-link: var(--td-text-color-link);            // 色彩-文字-链接
-
-// 分割线
---tdvns-border-level-1-color: var(--td-border-level-1-color);
---tdvns-component-stroke: var(--td-component-stroke);
-// 边框
---tdvns-border-level-2-color: var(--td-border-level-2-color);
---tdvns-component-border: var(--td-component-border);
-
-// shadow
-
-// 基础/下层 投影 hover 使用的组件包括：表格 /
---tdvns-shadow-1: var(--td-shadow-1);
-// 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
---tdvns-shadow-2:  var(--td-shadow-2);
-// 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
---tdvns-shadow-3: var(--td-shadow-3);
-
-// 内投影 用于弹窗类组件（气泡确认框 / 全局提示 / 消息通知）的内描边
---tdvns-shadow-inset-top: var(--td-shadow-inset-top);
---tdvns-shadow-inset-right: var(--td-shadow-inset-right);
---tdvns-shadow-inset-bottom: var(--td-shadow-inset-bottom);
---tdvns-shadow-inset-left: var(--td-shadow-inset-left);
---tdvns-shadow-inset: var(--td-shadow-inset-top), var(--td-shadow-inset-right), var(--td-shadow-inset-bottom), var(--td-shadow-inset-left);
-
-// 融合阴影
---tdvns-shadow-2-inset: var(--td-shadow-2), var(--td-shadow-inset);
---tdvns-shadow-3-inset: var(--td-shadow-3), var(--td-shadow-inset);
+// 组件库本身只有色彩相关的css token 扩展其他css token使用 待组件库扩充其他token后再做替换 这里使用less vars 避免两种css token让使用者混淆
+// tdesign 只保持一套token即可
 
 // Spacer
---tdvns-spacer: 8px;
---tdvns-spacer-s: calc(var(--tdvns-spacer) * .5); // 间距-4
---tdvns-spacer-l: calc(var(--tdvns-spacer) * 1.5); // 间距-12
---tdvns-spacer-1: var(--tdvns-spacer); // 间距-8
---tdvns-spacer-2: calc(var(--tdvns-spacer) * 2); // 间距-16
---tdvns-spacer-3: calc(var(--tdvns-spacer) * 3); // 间距-24
---tdvns-spacer-4: calc(var(--tdvns-spacer) * 4); // 间距-32
---tdvns-spacer-5: calc(var(--tdvns-spacer) * 5); // 间距-大-40
---tdvns-spacer-6: calc(var(--tdvns-spacer) * 6); // 间距-大-48
---tdvns-spacer-7: calc(var(--tdvns-spacer) * 7); // 间距-大-48
---tdvns-spacer-8: calc(var(--tdvns-spacer) * 8); // 间距-大-48
---tdvns-spacer-9: calc(var(--tdvns-spacer) * 9); // 间距-大-48
---tdvns-spacer-10: calc(var(--tdvns-spacer) * 10); // 间距-大-80
+@spacer: 8px;
+@spacer-s: calc(@spacer * 0.5); // 间距-4
+@spacer-l: calc(@spacer * 1.5); // 间距-12
+@spacer-1: @spacer; // 间距-8
+@spacer-2: calc(@spacer * 2); // 间距-16
+@spacer-3: calc(@spacer * 3); // 间距-24
+@spacer-4: calc(@spacer * 4); // 间距-32
+@spacer-5: calc(@spacer * 5); // 间距-大-40
+@spacer-6: calc(@spacer * 6); // 间距-大-48
+@spacer-7: calc(@spacer * 7); // 间距-大-48
+@spacer-8: calc(@spacer * 8); // 间距-大-48
+@spacer-9: calc(@spacer * 9); // 间距-大-48
+@spacer-10: calc(@spacer * 10); // 间距-大-80
 
 // Font
---tdvns-font-size: 10px;
---tdvns-font-size-s: calc(var(--tdvns-font-size) * 1.2); // 字号-五级字号
---tdvns-font-size-base: calc(var(--tdvns-font-size) * 1.4); // 字号-四级字号
---tdvns-font-size-l: calc(var(--tdvns-font-size) * 1.6); // 字号-三级字号
---tdvns-font-size-xl: calc(var(--tdvns-font-size) * 2); // 字号-二级字号
---tdvns-font-size-xxl: calc(var(--tdvns-font-size) * 3.6); // 字号-一级字号
+@font-size: 10px;
+@font-size-s: calc(@font-size * 1.2); // 字号-五级字号
+@font-size-base: calc(@font-size * 1.4); // 字号-四级字号
+@font-size-l: calc(@font-size * 1.6); // 字号-三级字号
+@font-size-xl: calc(@font-size * 2); // 字号-二级字号
+@font-size-xxl: calc(@font-size * 3.6); // 字号-一级字号
 
 // Line Height
---tdvns-text-line-height: 1.5; // 行高-常规
---tdvns-text-line-height-s: 20px; // 行高-对应五级文字
---tdvns-text-line-height-base: 22px;  // 行高-对应四级文字
---tdvns-text-line-height-l: 24px; // 行高-对应三级文字
---tdvns-text-line-height-xl: 28px; // 行高-对应二级文字
---tdvns-text-line-height-xxl: 44px; //行高-对应一级文字
+@line-height: 1.5; // 行高-常规
+@line-height-s: 20px; // 行高-对应五级文字
+@line-height-base: 22px; // 行高-对应四级文字
+@line-height-l: 24px; // 行高-对应三级文字
+@line-height-xl: 28px; // 行高-对应二级文字
+@line-height-xxl: 44px; //行高-对应一级文字
 
---tdvns-font-family: PingFang SC, Microsoft YaHei, Arial Regular; // 字体-磅数-常规
---tdvns-font-family-medium: PingFang SC, Microsoft YaHei, Arial Medium; // 字体-磅数-粗体
+@font-family: PingFang SC, Microsoft YaHei, Arial Regular; // 字体-磅数-常规
+@font-family-medium: PingFang SC, Microsoft YaHei, Arial Medium; // 字体-磅数-粗体
 
 // Border Radius
---tdvns-border-radius: 3px; // 圆角-全局
---tdvns-border-radius-50: 50%; // 圆角-全圆角
-
-// 表单相关
---tdvns-form-height: 30px;
---tdvns-form-text-color: var(--td-text-color-primary);
---tdvns-form-bg-color: var(--td-bg-color-container);
---tdvns-form-border-color: var(--td-border-level-2-color);
-
-// 图标尺寸
---tdvns-icon-default: 16px;
---tdvns-icon-l: 24px;
-
-// 滚动条颜色
---tdvns-scrollbar-color: var(--td-scrollbar-color);
+@border-radius: 3px; // 圆角-全局
+@border-radius-50: 50%; // 圆角-全圆角
 
 // 响应式断点
---tdvns-screen-sm: 768px;
---tdvns-screen-md: 992px;
---tdvns-screen-lg: 1200px;
---tdvns-screen-xl: 1400px;
+@screen-sm: 768px;
+@screen-md: 992px;
+@screen-lg: 1200px;
+@screen-xl: 1400px;
 
---tdvns-screen-sm-min: var(--tdvns-screen-sm);
---tdvns-screen-md-min: var(--tdvns-screen-md);
---tdvns-screen-lg-min: var(--tdvns-screen-lg);
---tdvns-screen-xl-min: var(--tdvns-screen-xl);
+@screen-sm-min: @screen-sm;
+@screen-md-min: @screen-md;
+@screen-lg-min: @screen-lg;
+@screen-xl-min: @screen-xl;
 
---tdvns-screen-sm-max: calc(var(--tdvns-screen-md-min) - 1px);
---tdvns-screen-md-max: calc(var(--tdvns-screen-lg-min) - 1px);
---tdvns-screen-lg-max: calc(var(--tdvns-screen-xl-min) - 1px);
-
+@screen-sm-max: calc(@screen-md-min - 1px);
+@screen-md-max: calc(@screen-lg-min - 1px);
+@screen-lg-max: calc(@screen-xl-min - 1px);
 
 // 动画
---tdvns-anim-time-fn-easing: cubic-bezier(.38, 0, .24, 1);
---tdvns-anim-time-fn-ease-out: cubic-bezier(0, 0, .15, 1);
---tdvns-anim-time-fn-ease-in: cubic-bezier(.82, 0, 1, .9);
---tdvns-anim-duration-base: .2s;
---tdvns-anim-duration-moderate: .24s;
---tdvns-anim-duration-slow: .28s;
-
-// 统一管理各组件层级关系
---tdvns-z-index-affix: 500;
---tdvns-z-index-drawer: 1500;
---tdvns-z-index-dialog: 2500;
---tdvns-z-index-loading: 3500;
---tdvns-z-index-message: 5000;
---tdvns-z-index-Popup: 5500;
---tdvns-z-index-Notification: 6000;
-
-}
+@anim-time-fn-easing: cubic-bezier(0.38, 0, 0.24, 1);
+@anim-time-fn-ease-out: cubic-bezier(0, 0, 0.15, 1);
+@anim-time-fn-ease-in: cubic-bezier(0.82, 0, 1, 0.9);
+@anim-duration-base: 0.2s;
+@anim-duration-moderate: 0.24s;
+@anim-duration-slow: 0.28s;

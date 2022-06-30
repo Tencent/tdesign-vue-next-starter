@@ -52,25 +52,25 @@ const iconCls = computed(() => ['trend-icon-container']);
 .trend {
   &-container {
     &__up {
-      color: var(--tdvns-error-color);
+      color: var(--td-error-color);
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
-        background: var(--tdvns-error-color-2);
+        background: var(--td-error-color-2);
         margin-right: 8px;
       }
     }
 
     &__down {
-      color: var(--tdvns-success-color);
+      color: var(--td-success-color);
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
-        background: var(--tdvns-success-color-2);
+        background: var(--td-success-color-2);
         margin-right: 8px;
       }
     }
@@ -82,7 +82,7 @@ const iconCls = computed(() => ['trend-icon-container']);
       justify-content: center;
 
       .trend-icon-container {
-        background: var(--tdvns-brand-color-5);
+        background: var(--td-brand-color-5);
         margin-right: 8px;
       }
     }

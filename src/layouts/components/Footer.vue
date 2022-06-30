@@ -9,8 +9,8 @@ import { prefix } from '@/config/global';
 <style lang="less" scoped>
 @import '@/style/variables';
 
-.@{prefix}-footer {
-  color: var(--tdvns-text-color-placeholder);
+.@{starter-prefix}-footer {
+  color: var(--td-text-color-placeholder);
   line-height: 20px;
   text-align: center;
 }

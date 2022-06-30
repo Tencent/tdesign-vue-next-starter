@@ -48,20 +48,20 @@ const dynamicComponent = computed(() => {
 
 .result {
   &-link {
-    color: var(--tdvns-brand-color);
+    color: var(--td-brand-color);
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      color: var(--tdvns-brand-color);
+      color: var(--td-brand-color);
     }
 
     &:active {
-      color: var(--tdvns-brand-color);
+      color: var(--td-brand-color);
     }
 
     &--active {
-      color: var(--tdvns-brand-color);
+      color: var(--td-brand-color);
     }
 
     &:focus {
@@ -81,23 +81,23 @@ const dynamicComponent = computed(() => {
 
   &-bg-img {
     width: 200px;
-    color: var(--tdvns-brand-color);
+    color: var(--td-brand-color);
   }
 
   &-title {
     font-style: normal;
     font-weight: 500;
     margin-top: 8px;
-    color: var(--tdvns-text-color-primary);
-    font-size: var(--tdvns-font-size-xl);
-    line-height: var(--tdvns-text-line-height-xl);
+    color: var(--td-text-color-primary);
+    font-size: @font-size-xl;
+    line-height: @line-height-xl;
   }
 
   &-tip {
     margin: 8px 0 32px;
-    font-size: var(--tdvns-font-size-base);
-    color: var(--tdvns-text-color-secondary);
-    line-height: var(--tdvns-text-line-height-base);
+    font-size: @font-size-base;
+    color: var(--td-text-color-secondary);
+    line-height: @line-height-base;
   }
 }
 </style>

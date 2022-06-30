@@ -45,8 +45,8 @@ const onInput = () => {
 <style lang="less" scoped>
 @import '@/style/variables.less';
 .table-tree-container {
-  background-color: var(--tdvns-bg-color-container);
-  border-radius: var(--tdvns-border-radius);
+  background-color: var(--td-bg-color-container);
+  border-radius: @border-radius;
 
   .t-tree {
     margin-top: 24px;
@@ -64,7 +64,7 @@ const onInput = () => {
 }
 
 .list-tree-content {
-  border-left: 1px solid var(--tdvns-border-level-1-color);
+  border-left: 1px solid var(--td-border-level-1-color);
   overflow: auto;
 }
 </style>
