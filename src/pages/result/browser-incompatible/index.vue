@@ -37,7 +37,7 @@ import Thumbnail from '@/components/thumbnail/index.vue';
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: var(--tdvns-text-color-secondary);
+  color: var(--td-text-color-secondary);
 }
 
 .recommend-container {
@@ -48,8 +48,8 @@ import Thumbnail from '@/components/thumbnail/index.vue';
   top: 175px;
   padding: 24px 48px;
   width: 640px;
-  background: var(--tdvns-bg-color-container);
-  box-shadow: 0px 1px 2px var(--tdvns-shadow-1);
+  background: var(--td-bg-color-container);
+  box-shadow: 0px 1px 2px var(--td-shadow-1);
   border-radius: 3px;
 }
 

@@ -61,8 +61,8 @@ export default defineComponent({
 
 .operator-block {
   position: relative;
-  background-color: var(--tdvns-bg-color-container);
-  border: 1px solid var(--tdvns-component-border);
+  background-color: var(--td-bg-color-container);
+  border: 1px solid var(--td-component-border);
   border-radius: 3px;
 
   .operator-content {
@@ -70,8 +70,8 @@ export default defineComponent({
     height: 256px;
 
     .operator-title-icon {
-      background: var(--tdvns-brand-color-1);
-      color: var(--tdvns-brand-color);
+      background: var(--td-brand-color-1);
+      color: var(--td-brand-color);
       font-size: 56px;
       padding: 14px;
       border-radius: 100%;
@@ -85,7 +85,7 @@ export default defineComponent({
         display: inline-block;
         font-weight: 500;
         font-size: 24px;
-        color: var(--tdvns-text-color-primary);
+        color: var(--td-text-color-primary);
       }
 
       &-subtitle {
@@ -93,7 +93,7 @@ export default defineComponent({
         font-weight: 400;
         font-size: 14px;
         width: 60%;
-        color: var(--tdvns-text-color-placeholder);
+        color: var(--td-text-color-placeholder);
       }
 
       &-tag {
@@ -111,11 +111,11 @@ export default defineComponent({
 
       svg {
         circle {
-          fill: var(--tdvns-brand-color-2);
+          fill: var(--td-brand-color-2);
         }
 
         path {
-          fill: var(--tdvns-brand-color);
+          fill: var(--td-brand-color);
         }
       }
     }
@@ -130,7 +130,7 @@ export default defineComponent({
         width: 60%;
         text-align: left;
         font-size: 14px;
-        color: var(--tdvns-text-color-placeholder);
+        color: var(--td-text-color-placeholder);
       }
 
       &-icon {
@@ -155,7 +155,7 @@ export default defineComponent({
       position: absolute;
       bottom: 15px;
       right: 32px;
-      color: var(--tdvns-text-color-placeholder);
+      color: var(--td-text-color-placeholder);
     }
   }
 }

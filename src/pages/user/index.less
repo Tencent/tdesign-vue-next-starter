@@ -9,10 +9,10 @@
   padding: 28px 32px;
   line-height: 28px;
   font-size: 20px;
-  background: var(--tdvns-bg-color-container);
-  color: var(--tdvns-text-color-primary);
+  background: var(--td-bg-color-container);
+  color: var(--td-text-color-primary);
   text-align: left;
-  border-radius: var(--tdvns-border-radius);
+  border-radius: @border-radius;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,7 +37,7 @@
   .contract {
     width: 340px;
     height: 88px;
-    border-radius: var(--tdvns-border-radius);
+    border-radius: @border-radius;
     margin: 8px 0;
 
     &-title {
@@ -47,7 +47,7 @@
       line-height: 24px;
       margin: 20px 0 6px;
       font-size: 14px;
-      color: var(--tdvns-text-color-placeholder);
+      color: var(--td-text-color-placeholder);
     }
 
     &-detail {
@@ -56,7 +56,7 @@
       overflow: hidden;
       line-height: 40px;
       font-size: 14px;
-      color: var(--tdvns-text-color-secondary);
+      color: var(--td-text-color-secondary);
     }
   }
 
@@ -67,9 +67,9 @@
 
 .user-intro {
   padding: 32px 24px;
-  background: var(--tdvns-brand-color);
-  border-radius: var(--tdvns-border-radius);
-  color: var(--tdvns-text-color-primary);
+  background: var(--td-brand-color);
+  border-radius: @border-radius;
+  color: var(--td-text-color-primary);
 
   .name {
     line-height: 37px;
@@ -88,7 +88,7 @@
   .user-info {
     line-height: 24px;
     font-size: 14px;
-    color: var(--tdvns-text-color-primary);
+    color: var(--td-text-color-primary);
 
     .hiredate,
     .del,
@@ -109,7 +109,7 @@
 
 .product-container {
   margin-top: 16px;
-  border-radius: var(--tdvns-border-radius);
+  border-radius: @border-radius;
 
   .content {
     width: 100%;
@@ -123,8 +123,8 @@
 
 .content-container {
   margin-top: 16px;
-  background: var(--tdvns-bg-color-container);
-  border-radius: var(--tdvns-border-radius);
+  background: var(--td-bg-color-container);
+  border-radius: @border-radius;
 }
 
 .user-team {
