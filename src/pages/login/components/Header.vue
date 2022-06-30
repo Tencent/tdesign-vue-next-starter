@@ -44,7 +44,7 @@ const navToHelper = () => {
   justify-content: space-between;
   align-items: center;
   backdrop-filter: blur(5px);
-  color: var(--tdvns-text-color-primary);
+  color: var(--td-text-color-primary);
 
   .logo {
     width: 188px;

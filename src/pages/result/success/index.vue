@@ -26,13 +26,13 @@ export default {
 
   &-icon {
     font-size: 64px;
-    color: var(--tdvns-success-color);
+    color: var(--td-success-color);
   }
 
   &-title {
     margin-top: 16px;
     font-size: 20px;
-    color: var(--tdvns-text-color-primary);
+    color: var(--td-text-color-primary);
     text-align: center;
     line-height: 22px;
     font-weight: 500;
@@ -41,7 +41,7 @@ export default {
   &-describe {
     margin: 8px 0 32px;
     font-size: 14px;
-    color: var(--tdvns-text-color-primary);
+    color: var(--td-text-color-primary);
     line-height: 22px;
   }
 }

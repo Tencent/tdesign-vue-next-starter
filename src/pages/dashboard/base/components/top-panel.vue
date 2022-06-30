@@ -186,7 +186,7 @@ watch(
 
     > span {
       display: inline-block;
-      color: var(--tdvns-text-color-primary);
+      color: var(--td-text-color-primary);
       font-size: 36px;
       line-height: 44px;
     }
@@ -208,7 +208,7 @@ watch(
     align-items: center;
     justify-content: center;
     line-height: 22px;
-    color: var(--tdvns-text-color-placeholder);
+    color: var(--td-text-color-placeholder);
   }
 
   &-trend {
@@ -226,34 +226,34 @@ watch(
       justify-content: center;
       width: 56px;
       height: 56px;
-      background: var(--tdvns-brand-color-1);
+      background: var(--td-brand-color-1);
       border-radius: 50%;
 
       .t-icon {
         font-size: 24px;
-        color: var(--tdvns-brand-color);
+        color: var(--td-brand-color);
       }
     }
   }
 
   // 针对第一个卡片需要反色处理
   &--main-color {
-    background: var(--tdvns-brand-color);
-    color: var(--tdvns-text-color-primary);
+    background: var(--td-brand-color);
+    color: var(--td-text-color-primary);
 
     :deep(.t-card__title),
     .dashboard-item-top span,
     .dashboard-item-bottom {
-      color: var(--tdvns-text-color-anti);
+      color: var(--td-text-color-anti);
     }
 
     .dashboard-item-block {
-      color: var(--tdvns-text-color-anti);
+      color: var(--td-text-color-anti);
       opacity: 0.6;
     }
 
     .dashboard-item-bottom {
-      color: var(--tdvns-text-color-anti);
+      color: var(--td-text-color-anti);
     }
   }
 }
