@@ -20,7 +20,7 @@ const crumbs = computed(() => {
     breadcrumbArray.push({
       path,
       to: breadcrumbArray[idx - 1] ? `/${breadcrumbArray[idx - 1].path}/${path}` : `/${path}`,
-      title: route.matched[idx].meta.title || path,
+      title: route.matched[idx]?.meta?.title ?? path,
     });
     return breadcrumbArray;
   }, []);

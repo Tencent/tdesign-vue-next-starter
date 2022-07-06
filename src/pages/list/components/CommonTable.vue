@@ -73,8 +73,7 @@
         :hover="hover"
         :pagination="pagination"
         :loading="dataLoading"
-        :header-affixed-top="true"
-        :header-affix-props="{ offsetTop, container: getContainer }"
+        :header-affixed-top="{ offsetTop, container: getContainer }"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
       >
