@@ -82,9 +82,7 @@ export function getSmoothLineDataSet({
         symbol: 'circle',
         symbolSize: 8,
         areaStyle: {
-          normal: {
-            opacity: 0.1,
-          },
+          opacity: 0.1,
         },
       },
       {
