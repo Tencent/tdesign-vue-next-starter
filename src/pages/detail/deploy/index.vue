@@ -89,8 +89,7 @@ import { BASE_INFO_DATA, TABLE_COLUMNS as columns } from './constants';
 import { changeChartsTheme } from '@/utils/color';
 
 import { prefix } from '@/config/global';
-import { ResDataType } from '@/types/interface';
-import { request } from '@/utils/request';
+import { getProjectList } from '@/api/detail';
 
 echarts.use([
   TitleComponent,
@@ -115,15 +114,12 @@ const pagination = ref({
 
 const fetchData = async () => {
   try {
-    const res: ResDataType = await request.get({ url: '/api/get-project-list' });
-    if (res.code === 0) {
-      const { list = [] } = res.data;
-      data.value = list;
-      pagination.value = {
-        ...pagination.value,
-        total: list.length,
-      };
-    }
+    const { list } = await getProjectList();
+    data.value = list;
+    pagination.value = {
+      ...pagination.value,
+      total: list.length,
+    };
   } catch (e) {
     console.log(e);
   }

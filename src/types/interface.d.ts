@@ -1,11 +1,6 @@
 import { RouteRecordName } from 'vue-router';
 import STYLE_CONFIG from '@/config/style';
 
-export interface ResDataType {
-  code: number;
-  data: any;
-}
-
 export interface MenuRoute {
   path: string;
   title?: string;
