@@ -1,5 +1,5 @@
 import { request } from '@/utils/request';
-import { ProjectListResult, PurchaseListResult } from '@/api/model/detailModel';
+import type { ProjectListResult, PurchaseListResult } from '@/api/model/detailModel';
 
 const Api = {
   PurchaseList: '/get-purchase-list',
