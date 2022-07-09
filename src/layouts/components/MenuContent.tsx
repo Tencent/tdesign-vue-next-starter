@@ -7,6 +7,10 @@ const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
   if (!list) {
     return [];
   }
+  // 如果meta中有orderNo则按照从小到大排序
+  list.sort((a, b) => {
+    return (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0);
+  });
   return list
     .map((item) => {
       const path = basePath ? `${basePath}/${item.path}` : item.path;
