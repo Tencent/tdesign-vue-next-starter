@@ -17,6 +17,11 @@ const crumbs = computed(() => {
   pathArray.shift();
 
   const breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
+    // 如果路由下有hiddenBreadcrumb或当前遍历到参数则隐藏
+    if (route.matched[idx]?.meta?.hiddenBreadcrumb || Object.values(route.params).includes(path)) {
+      return breadcrumbArray;
+    }
+
     breadcrumbArray.push({
       path,
       to: breadcrumbArray[idx - 1] ? `/${breadcrumbArray[idx - 1].path}/${path}` : `/${path}`,
