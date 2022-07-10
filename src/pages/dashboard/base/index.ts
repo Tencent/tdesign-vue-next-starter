@@ -41,12 +41,8 @@ export function constructInitDashboardDataset(type: string) {
               { type: 'min', name: '最小值' },
             ],
           },
-          itemStyle: {
-            normal: {
-              lineStyle: {
-                width: 2,
-              },
-            },
+          lineStyle: {
+            width: 2,
           },
         },
       ],
@@ -278,15 +274,11 @@ export function getLineChartDataSet({
         symbol: 'circle',
         symbolSize: 8,
         itemStyle: {
-          normal: {
-            borderColor,
-            borderWidth: 1,
-          },
+          borderColor,
+          borderWidth: 1,
         },
         areaStyle: {
-          normal: {
-            opacity: 0.1,
-          },
+          opacity: 0.1,
         },
       },
       {
@@ -298,10 +290,8 @@ export function getLineChartDataSet({
         symbol: 'circle',
         symbolSize: 8,
         itemStyle: {
-          normal: {
-            borderColor,
-            borderWidth: 1,
-          },
+          borderColor,
+          borderWidth: 1,
         },
       },
     ],
@@ -352,7 +342,6 @@ export function getPieChartDataSet({
         radius: ['48%', '60%'],
         avoidLabelOverlap: true,
         selectedMode: true,
-        hoverAnimation: true,
         silent: true,
         itemStyle: {
           borderColor: containerColor,
@@ -377,6 +366,7 @@ export function getPieChartDataSet({
           },
         },
         emphasis: {
+          scale: true,
           label: {
             show: true,
             formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
