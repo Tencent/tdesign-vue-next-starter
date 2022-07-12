@@ -188,10 +188,8 @@ export function getFolderLineDataSet({
         ],
         type: 'line',
         itemStyle: {
-          normal: {
-            borderColor,
-            borderWidth: 1,
-          },
+          borderColor,
+          borderWidth: 1,
         },
       },
       {
@@ -211,10 +209,8 @@ export function getFolderLineDataSet({
         ],
         type: 'line',
         itemStyle: {
-          normal: {
-            borderColor,
-            borderWidth: 1,
-          },
+          borderColor,
+          borderWidth: 1,
         },
       },
       {
@@ -234,10 +230,8 @@ export function getFolderLineDataSet({
         ],
         type: 'line',
         itemStyle: {
-          normal: {
-            borderColor,
-            borderWidth: 1,
-          },
+          borderColor,
+          borderWidth: 1,
         },
       },
       {
@@ -257,10 +251,8 @@ export function getFolderLineDataSet({
         ],
         type: 'line',
         itemStyle: {
-          normal: {
-            borderColor,
-            borderWidth: 1,
-          },
+          borderColor,
+          borderWidth: 1,
         },
       },
     ],

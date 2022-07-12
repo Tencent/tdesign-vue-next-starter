@@ -1,6 +1,6 @@
 {
   "name": "tdesign-vue-next-starter",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
@@ -27,7 +27,7 @@
     "qrcode.vue": "^3.2.2",
     "qs": "^6.10.5",
     "tdesign-icons-vue-next": "^0.1.1",
-    "tdesign-vue-next": "0.17.3",
+    "tdesign-vue-next": "0.17.4",
     "tvision-color": "^1.3.1",
     "vue": "^3.2.31",
     "vue-clipboard3": "^2.0.0",
