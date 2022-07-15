@@ -83,6 +83,7 @@ import { CONTRACT_STATUS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/const
 import Trend from '@/components/trend/index.vue';
 import { getList } from '@/api/list';
 import { useSettingStore } from '@/store';
+import { prefix } from '@/config/global';
 
 import { COLUMNS } from './constants';
 
@@ -181,7 +182,7 @@ const offsetTop = computed(() => {
 });
 
 const getContainer = () => {
-  return document.querySelector('.tdesign-starter-layout');
+  return document.querySelector(`.${prefix}-layout`);
 };
 </script>
 

@@ -118,6 +118,7 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import Trend from '@/components/trend/index.vue';
 import { getList } from '@/api/list';
 import { useSettingStore } from '@/store';
+import { prefix } from '@/config/global';
 
 import {
   CONTRACT_STATUS,
@@ -265,7 +266,7 @@ const offsetTop = computed(() => {
 });
 
 const getContainer = () => {
-  return document.querySelector('.tdesign-starter-layout');
+  return document.querySelector(`.${prefix}-layout`);
 };
 </script>
 
