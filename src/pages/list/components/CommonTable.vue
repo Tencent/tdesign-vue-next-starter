@@ -93,7 +93,7 @@
           <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
             付款<trend class="dashboard-item-trend" type="up" />
           </p>
-          <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
+          <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECEIPT" class="payment-col">
             收款<trend class="dashboard-item-trend" type="down" />
           </p>
         </template>
@@ -118,6 +118,7 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import Trend from '@/components/trend/index.vue';
 import { getList } from '@/api/list';
 import { useSettingStore } from '@/store';
+import { prefix } from '@/config/global';
 
 import {
   CONTRACT_STATUS,
@@ -265,7 +266,7 @@ const offsetTop = computed(() => {
 });
 
 const getContainer = () => {
-  return document.querySelector('.tdesign-starter-layout');
+  return document.querySelector(`.${prefix}-layout`);
 };
 </script>
 
