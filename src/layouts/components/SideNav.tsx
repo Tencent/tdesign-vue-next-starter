@@ -3,8 +3,8 @@ import { useRouter } from 'vue-router';
 import { prefix } from '@/config/global';
 import pgk from '../../../package.json';
 import MenuContent from './MenuContent';
-import tLogo from '@/assets/assets-t-logo.svg?component';
-import tLogoFull from '@/assets/assets-logo-full.svg?component';
+import AssetLogo from '@/assets/assets-t-logo.svg?component';
+import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
 import { useSettingStore } from '@/store';
 import { getActive } from '@/router';
 
@@ -61,8 +61,9 @@ const useComputed = (props) => {
 export default defineComponent({
   name: 'SideNav',
   components: {
-    tLogoFull,
-    tLogo,
+    AssetLogoFull,
+    AssetLogo,
+    MenuContent,
   },
   props: {
     menu: {
@@ -144,9 +145,9 @@ export default defineComponent({
               this.showLogo && (
                 <span class={`${prefix}-side-nav-logo-wrapper`} onClick={this.goHome}>
                   {this.collapsed ? (
-                    <tLogo class={`${prefix}-side-nav-logo-t-logo`} />
+                    <asset-logo class={`${prefix}-side-nav-logo-t-logo`} />
                   ) : (
-                    <t-logo-full class={`${prefix}-side-nav-logo-tdesign-logo`} />
+                    <asset-logo-full class={`${prefix}-side-nav-logo-tdesign-logo`} />
                   )}
                 </span>
               ),
@@ -157,7 +158,7 @@ export default defineComponent({
             ),
           }}
         >
-          <MenuContent navData={this.menu} />
+          <menu-content navData={this.menu} />
         </t-menu>
         <div class={`${prefix}-side-nav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
       </div>

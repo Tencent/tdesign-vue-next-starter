@@ -3,7 +3,7 @@
     <t-head-menu :class="menuCls" :theme="theme" expand-type="popup" :value="active">
       <template #logo>
         <span v-if="showLogo" class="header-logo-container" @click="handleNav('/dashboard/base')">
-          <LogoFull class="t-logo" />
+          <logo-full class="t-logo" />
         </span>
         <div v-else class="header-operate-left">
           <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
@@ -12,7 +12,7 @@
           <search :layout="layout" />
         </div>
       </template>
-      <MenuContent v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
+      <menu-content v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
       <template #operations>
         <div class="operations-container">
           <!-- 搜索框 -->
