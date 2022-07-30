@@ -1,12 +1,13 @@
 import { defineComponent, PropType, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import union from 'lodash/union';
 import { prefix } from '@/config/global';
 import pgk from '../../../package.json';
 import MenuContent from './MenuContent';
 import AssetLogo from '@/assets/assets-t-logo.svg?component';
 import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
 import { useSettingStore } from '@/store';
-import { getActive } from '@/router';
+import { getActive, getRoutesExpanded } from '@/router';
 
 const MIN_POINT = 992 - 1;
 
@@ -18,7 +19,8 @@ const useComputed = (props) => {
   const defaultExpanded = computed(() => {
     const path = getActive();
     const parentPath = path.substring(0, path.lastIndexOf('/'));
-    return parentPath === '' ? [] : [parentPath];
+    const expanded = getRoutesExpanded();
+    return union(expanded, parentPath === '' ? [] : [parentPath]);
   });
 
   const sideNavCls = computed(() => {
