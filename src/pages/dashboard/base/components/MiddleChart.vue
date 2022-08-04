@@ -137,6 +137,21 @@ watch(
 );
 
 watch(
+  () => store.isSidebarCompact,
+  () => {
+    if (store.isSidebarCompact) {
+      nextTick(() => {
+        updateContainer();
+      });
+    } else {
+      setTimeout(() => {
+        updateContainer();
+      }, 180);
+    }
+  },
+);
+
+watch(
   () => store.mode,
   () => {
     [monitorChart, countChart].forEach((item) => {
