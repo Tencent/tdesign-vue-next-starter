@@ -122,7 +122,6 @@ const router = useRouter();
  */
 const sendCode = () => {
   form.value.validate({ fields: ['phone'] }).then((e) => {
-
     if (e === true) {
       handleCounter();
     }
