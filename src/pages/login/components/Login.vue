@@ -50,9 +50,17 @@
 
     <!-- 手机号登陆 -->
     <template v-else>
+      <t-form-item name="phone">
+        <t-input v-model="formData.phone" size="large" placeholder="请输入手机号码">
+          <template #prefix-icon>
+            <t-icon name="mobile" />
+          </template>
+        </t-input>
+      </t-form-item>
+
       <t-form-item class="verification-code" name="verifyCode">
         <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
-        <t-button variant="outline" :disabled="countDown > 0" @click="handleCounter">
+        <t-button variant="outline" :disabled="countDown > 0" @click="sendCode">
           {{ countDown == 0 ? '发送验证码' : `${countDown}秒后可重发` }}
         </t-button>
       </t-form-item>
@@ -74,7 +82,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import QrcodeVue from 'qrcode.vue';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { FormInstanceFunctions, MessagePlugin } from 'tdesign-vue-next';
 import { useCounter } from '@/hooks';
 import { useUserStore } from '@/store';
 
@@ -97,6 +105,7 @@ const FORM_RULES = {
 
 const type = ref('password');
 
+const form = ref<FormInstanceFunctions>();
 const formData = ref({ ...INITIAL_DATA });
 const showPsw = ref(false);
 
@@ -107,6 +116,17 @@ const switchType = (val: string) => {
 };
 
 const router = useRouter();
+
+/**
+ * 发送验证码
+ */
+const sendCode = () => {
+  form.value.validate({ fields: ['phone'] }).then((e) => {
+    if (e === true) {
+      handleCounter();
+    }
+  });
+};
 
 const onSubmit = async ({ validateResult }) => {
   if (validateResult === true) {
