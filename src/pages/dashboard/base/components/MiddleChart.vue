@@ -130,6 +130,7 @@ onUnmounted(() => {
 onDeactivated(() => {
   storeModeWatch();
   storeBrandThemeWatch();
+  storeSidebarCompactWatch();
 });
 
 const currentMonth = ref(getThisMonth());
@@ -138,6 +139,21 @@ const storeBrandThemeWatch = watch(
   () => store.brandTheme,
   () => {
     changeChartsTheme([monitorChart, countChart]);
+  },
+);
+
+const storeSidebarCompactWatch = watch(
+  () => store.isSidebarCompact,
+  () => {
+    if (store.isSidebarCompact) {
+      nextTick(() => {
+        updateContainer();
+      });
+    } else {
+      setTimeout(() => {
+        updateContainer();
+      }, 180);
+    }
   },
 );
 
