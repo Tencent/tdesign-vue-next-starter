@@ -1,6 +1,6 @@
 {
   "name": "tdesign-vue-next-starter",
-  "version": "0.3.7",
+  "version": "0.4.0",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
