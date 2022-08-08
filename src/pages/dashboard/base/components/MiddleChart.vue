@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch, ref, onUnmounted, nextTick, computed } from 'vue';
+import { onMounted, watch, ref, onUnmounted, nextTick, computed, onDeactivated } from 'vue';
 
 import * as echarts from 'echarts/core';
 import { TooltipComponent, LegendComponent, GridComponent } from 'echarts/components';
@@ -127,16 +127,37 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateContainer);
 });
 
+onDeactivated(() => {
+  storeModeWatch();
+  storeBrandThemeWatch();
+  storeSidebarCompactWatch();
+});
+
 const currentMonth = ref(getThisMonth());
 
-watch(
+const storeBrandThemeWatch = watch(
   () => store.brandTheme,
   () => {
     changeChartsTheme([monitorChart, countChart]);
   },
 );
 
-watch(
+const storeSidebarCompactWatch = watch(
+  () => store.isSidebarCompact,
+  () => {
+    if (store.isSidebarCompact) {
+      nextTick(() => {
+        updateContainer();
+      });
+    } else {
+      setTimeout(() => {
+        updateContainer();
+      }, 180);
+    }
+  },
+);
+
+const storeModeWatch = watch(
   () => store.mode,
   () => {
     [monitorChart, countChart].forEach((item) => {

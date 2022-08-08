@@ -65,7 +65,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
+import { nextTick, onMounted, onUnmounted, watch, computed, onDeactivated } from 'vue';
 
 import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
@@ -133,14 +133,19 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateContainer);
 });
 
-watch(
+onDeactivated(() => {
+  storeModeWatch();
+  storeBrandThemeWatch();
+});
+
+const storeModeWatch = watch(
   () => store.mode,
   () => {
     renderCharts();
   },
 );
 
-watch(
+const storeBrandThemeWatch = watch(
   () => store.brandTheme,
   () => {
     changeChartsTheme([lineChart, scatterChart]);
