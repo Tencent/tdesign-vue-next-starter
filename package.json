@@ -1,6 +1,6 @@
 {
   "name": "tdesign-vue-next-starter",
-  "version": "0.3.7",
+  "version": "0.4.0",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
@@ -31,7 +31,7 @@
     "tvision-color": "^1.3.1",
     "vue": "^3.2.31",
     "vue-clipboard3": "^2.0.0",
-    "vue-router": "~4.0.11"
+    "vue-router": "~4.1.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
