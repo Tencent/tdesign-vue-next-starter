@@ -12,3 +12,4 @@ _site
 temp*
 static/
 !.prettierrc.js
+public/tinymce

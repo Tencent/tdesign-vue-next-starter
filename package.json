@@ -9,7 +9,7 @@
     "build": "vue-tsc --noEmit && vite build --mode release",
     "preview": "vite preview",
     "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0",
-    "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
+    "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --fix",
     "stylelint": "stylelint src/**/*.{html,vue,sass,less}",
     "stylelint:fix": "stylelint --fix src/**/*.{html,vue,vss,sass,less}",
     "prepare": "husky install",
@@ -18,6 +18,7 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
+    "@tinymce/tinymce-vue": "^5.0.0",
     "axios": "^0.27.2",
     "dayjs": "^1.10.6",
     "echarts": "~5.1.2",

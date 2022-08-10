@@ -136,6 +136,11 @@
         <t-form-item label="备注" name="comment">
           <t-textarea v-model="formData.comment" :height="124" placeholder="请输入备注" />
         </t-form-item>
+
+        <t-form-item label="备注（富文本）" name="comment">
+          <tinymce-editor v-model="formData.comment"></tinymce-editor>
+        </t-form-item>
+
         <t-form-item label="公证人">
           <t-avatar-group>
             <t-avatar>D</t-avatar>
@@ -167,6 +172,7 @@ export default {
 import { ref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { FORM_RULES, INITIAL_DATA, TYPE_OPTIONS, PARTY_A_OPTIONS, PARTY_B_OPTIONS } from './constants';
+import TinymceEditor from '@/components/tinymce-editor/index.vue';
 
 const formData = ref({ ...INITIAL_DATA });
 
