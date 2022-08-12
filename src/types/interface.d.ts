@@ -36,7 +36,7 @@ export interface NotificationItem {
 
 export interface TRouterInfo {
   path: string;
-  query: LocationQueryRaw;
+  query?: LocationQueryRaw;
   routeIdx?: number;
   title?: string;
   name?: RouteRecordName;

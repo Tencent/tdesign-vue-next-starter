@@ -104,7 +104,7 @@ export default defineComponent({
       const { tabRouters } = tabsRouterStore;
       const nextRouter = tabRouters[index + 1] || tabRouters[index - 1];
 
-      tabsRouterStore.subtractCurrentTabRouter({ path, query: null, routeIdx: index });
+      tabsRouterStore.subtractCurrentTabRouter({ path, routeIdx: index });
       if (path === route.path) {
         router.push({ path: nextRouter.path, query: nextRouter.query });
       }
@@ -122,13 +122,13 @@ export default defineComponent({
       });
     };
     const handleCloseAhead = (path: string, routeIdx: number) => {
-      tabsRouterStore.subtractTabRouterAhead({ path, query: null, routeIdx });
+      tabsRouterStore.subtractTabRouterAhead({ path, routeIdx });
     };
     const handleCloseBehind = (path: string, routeIdx: number) => {
-      tabsRouterStore.subtractTabRouterBehind({ path, query: null, routeIdx });
+      tabsRouterStore.subtractTabRouterBehind({ path, routeIdx });
     };
     const handleCloseOther = (path: string, routeIdx: number) => {
-      tabsRouterStore.subtractTabRouterOther({ path, query: null, routeIdx });
+      tabsRouterStore.subtractTabRouterOther({ path, routeIdx });
     };
 
     const renderSidebar = () => {
