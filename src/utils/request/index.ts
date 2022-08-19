@@ -84,7 +84,11 @@ const transform: AxiosTransform = {
       if (formatDate) {
         formatRequestDate(params);
       }
-      if (Reflect.has(config, 'data') && config.data && Object.keys(config.data).length > 0) {
+      if (
+        Reflect.has(config, 'data') &&
+        config.data &&
+        (Object.keys(config.data).length > 0 || data instanceof FormData)
+      ) {
         config.data = data;
         config.params = params;
       } else {
