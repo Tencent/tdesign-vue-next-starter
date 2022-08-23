@@ -18,8 +18,6 @@ router.beforeEach(async (to, from, next) => {
   const { token } = userStore;
   if (token) {
     if (to.path === '/login') {
-      userStore.logout();
-      permissionStore.restore();
       next();
       return;
     }
