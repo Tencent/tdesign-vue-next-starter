@@ -63,10 +63,11 @@ export default defineComponent({
     const appendNewRoute = () => {
       const {
         path,
+        query,
         meta: { title },
         name,
       } = route;
-      tabsRouterStore.appendTabRouterList({ path, title: title as string, name, isAlive: true });
+      tabsRouterStore.appendTabRouterList({ path, query, title: title as string, name, isAlive: true });
     };
 
     const getTabRouterListCache = () => {
@@ -105,17 +106,19 @@ export default defineComponent({
 
       tabsRouterStore.subtractCurrentTabRouter({ path, routeIdx: index });
       if (path === route.path) {
-        router.push(nextRouter.path);
+        router.push({ path: nextRouter.path, query: nextRouter.query });
       }
     };
     const handleChangeCurrentTab = (path: string) => {
-      router.push(path);
+      const { tabRouters } = tabsRouterStore;
+      const route = tabRouters.find((i) => i.path === path);
+      router.push({ path, query: route.query });
     };
-    const handleRefresh = (currentPath: string, routeIdx: number) => {
-      tabsRouterStore.toggleTabRouterAlive(routeIdx);
+    const handleRefresh = (route: TRouterInfo) => {
+      tabsRouterStore.toggleTabRouterAlive(route.routeIdx);
       nextTick(() => {
-        tabsRouterStore.toggleTabRouterAlive(routeIdx);
-        router.replace({ path: currentPath });
+        tabsRouterStore.toggleTabRouterAlive(route.routeIdx);
+        router.replace({ path: route.path, query: route.query });
       });
     };
     const handleCloseAhead = (path: string, routeIdx: number) => {
@@ -195,7 +198,7 @@ export default defineComponent({
                           dropdown: () =>
                             router.path === route.path ? (
                               <t-dropdown-menu>
-                                <t-dropdown-item onClick={() => handleRefresh(router.path, idx)}>
+                                <t-dropdown-item onClick={() => handleRefresh(router)}>
                                   <t-icon name="refresh" />
                                   刷新
                                 </t-dropdown-item>

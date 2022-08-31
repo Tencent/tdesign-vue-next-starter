@@ -1,4 +1,4 @@
-import { RouteRecordName } from 'vue-router';
+import { RouteRecordName, LocationQueryRaw } from 'vue-router';
 import STYLE_CONFIG from '@/config/style';
 
 export interface MenuRoute {
@@ -36,6 +36,7 @@ export interface NotificationItem {
 
 export interface TRouterInfo {
   path: string;
+  query?: LocationQueryRaw;
   routeIdx?: number;
   title?: string;
   name?: RouteRecordName;
