@@ -34,8 +34,6 @@ import isObject from 'lodash/isObject';
 import { MenuRoute } from '@/types/interface';
 import { getActive } from '@/router';
 
-// import RenderFnIcon from './RenderFnIcon.vue';
-
 const props = withDefaults(defineProps<{ navData: MenuRoute[] }>(), { navData: () => [] });
 
 const active = computed(() => getActive());
