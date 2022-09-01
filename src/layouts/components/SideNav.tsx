@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router';
 import union from 'lodash/union';
 import { prefix } from '@/config/global';
 import pgk from '../../../package.json';
-import MenuContent from './MenuContent';
+import MenuContent from './MenuContent.vue';
 import AssetLogo from '@/assets/assets-t-logo.svg?component';
 import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
 import { useSettingStore } from '@/store';
