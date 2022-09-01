@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, watch, onBeforeUnmount } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
 import { useSettingStore, useTabsRouterStore } from '@/store';
@@ -59,26 +59,8 @@ const appendNewRoute = () => {
   tabsRouterStore.appendTabRouterList({ path, query, title: title as string, name, isAlive: true });
 };
 
-const getTabRouterListCache = () => {
-  tabsRouterStore.initTabRouterList(JSON.parse(localStorage.getItem('tabRouterList')));
-};
-const setTabRouterListCache = () => {
-  const { tabRouters } = tabsRouterStore;
-  localStorage.setItem('tabRouterList', JSON.stringify(tabRouters));
-};
-
 onMounted(() => {
   appendNewRoute();
-});
-
-// 如果不需要持久化标签页可以注释掉以下的 onMounted 和 onBeforeUnmount 的内容
-onMounted(() => {
-  if (localStorage.getItem('tabRouterList')) getTabRouterListCache();
-  window.addEventListener('beforeunload', setTabRouterListCache);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener('beforeunload', setTabRouterListCache);
 });
 
 watch(
