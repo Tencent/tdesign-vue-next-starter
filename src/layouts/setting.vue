@@ -131,7 +131,7 @@ const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
     if (Object.prototype.hasOwnProperty.call(styleConfig, key)) {
-      styleConfig[key] = settingStore.$state[key];
+      styleConfig[key] = settingStore[key];
     }
   }
 
