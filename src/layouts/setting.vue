@@ -124,8 +124,21 @@ const MODE_OPTIONS = [
   { type: 'dark', text: '暗黑' },
   { type: 'auto', text: '跟随系统' },
 ];
+/**
+ * 初始表单数据
+ */
+const initStyleConfig = () => {
+  const styleConfig = STYLE_CONFIG;
+  for (const key in styleConfig) {
+    if (Object.prototype.hasOwnProperty.call(styleConfig, key)) {
+      styleConfig[key] = settingStore.$state[key];
+    }
+  }
 
-const formData = ref({ ...STYLE_CONFIG });
+  return styleConfig;
+};
+
+const formData = ref({ ...initStyleConfig() });
 const isColoPickerDisplay = ref(false);
 
 const showSettingPanel = computed({
