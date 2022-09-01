@@ -5,14 +5,14 @@
         <t-menu-item v-if="getHref(item)" :href="getHref(item)?.[0]" :name="item.path" :value="getPath(item)">
           <template #icon>
             <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
-            <render-fn-icon v-else-if="isObject(item.icon)" :icon="item.icon" />
+            <component :is="beRender(item).render" v-else-if="beRender(item).can" class="t-icon" />
           </template>
           {{ item.title }}
         </t-menu-item>
         <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
           <template #icon>
             <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
-            <render-fn-icon v-else-if="isObject(item.icon)" :icon="item.icon" />
+            <component :is="beRender(item).render" v-else-if="beRender(item).can" class="t-icon" />
           </template>
           {{ item.title }}
         </t-menu-item>
@@ -20,7 +20,7 @@
       <t-submenu v-else :name="item.path" :value="item.path" :title="item.title">
         <template #icon>
           <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
-          <render-fn-icon v-else-if="isObject(item.icon)" :icon="item.icon" />
+          <component :is="beRender(item).render" v-else-if="beRender(item).can" class="t-icon" />
         </template>
         <menu-content v-if="item.children" :nav-data="item.children" />
       </t-submenu>
@@ -34,7 +34,7 @@ import isObject from 'lodash/isObject';
 import { MenuRoute } from '@/types/interface';
 import { getActive } from '@/router';
 
-import RenderFnIcon from './RenderFnIcon.vue';
+// import RenderFnIcon from './RenderFnIcon.vue';
 
 const props = withDefaults(defineProps<{ navData: MenuRoute[] }>(), { navData: () => [] });
 
@@ -76,6 +76,19 @@ const getPath = (item) => {
     return active.value;
   }
   return item.meta?.single ? item.redirect : item.path;
+};
+
+const beRender = (item: MenuRoute) => {
+  if (isObject(item.icon) && typeof item.icon.render === 'function') {
+    return {
+      can: true,
+      render: item.icon.render,
+    };
+  }
+  return {
+    can: false,
+    render: null,
+  };
 };
 </script>
 

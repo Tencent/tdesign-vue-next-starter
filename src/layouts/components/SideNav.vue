@@ -3,7 +3,7 @@
     <t-menu :class="menuCls" :theme="theme" :value="active" :collapsed="collapsed" :default-expanded="defaultExpanded">
       <template #logo>
         <span v-if="showLogo" :class="`${prefix}-side-nav-logo-wrapper`" @click="goHome">
-          <component :is="getLogo" :class="`${prefix}-side-nav-logo-${collapsed ? 't' : 'tdesign'}-logo`" />
+          <component :is="getLogo()" :class="`${prefix}-side-nav-logo-${collapsed ? 't' : 'tdesign'}-logo`" />
         </span>
       </template>
       <menu-content :nav-data="menu" />
@@ -33,13 +33,13 @@ import MenuContent from './MenuContent.vue';
 const MIN_POINT = 992 - 1;
 const props = withDefaults(
   defineProps<{
-    menu: MenuRoute[];
-    showLogo: boolean;
-    isFixed: boolean;
-    layout: string;
-    headerHeight: string;
-    theme: string;
-    isCompact: boolean;
+    menu?: MenuRoute[];
+    showLogo?: boolean;
+    isFixed?: boolean;
+    layout?: string;
+    headerHeight?: string;
+    theme?: string;
+    isCompact?: boolean;
   }>(),
   { menu: () => [], showLogo: true, isFixed: true, layout: '', headerHeight: '64px', theme: 'light', isCompact: false },
 );

@@ -19,7 +19,7 @@ export default defineComponent({
           class: 't-icon',
         });
       }
-      return undefined;
+      return '';
     };
   },
 });
