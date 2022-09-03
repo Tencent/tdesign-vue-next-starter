@@ -114,10 +114,10 @@ export default defineComponent({
       const route = tabRouters.find((i) => i.path === path);
       router.push({ path, query: route.query });
     };
-    const handleRefresh = (route: TRouterInfo) => {
-      tabsRouterStore.toggleTabRouterAlive(route.routeIdx);
+    const handleRefresh = (route: TRouterInfo, routeIdx: number) => {
+      tabsRouterStore.toggleTabRouterAlive(routeIdx);
       nextTick(() => {
-        tabsRouterStore.toggleTabRouterAlive(route.routeIdx);
+        tabsRouterStore.toggleTabRouterAlive(routeIdx);
         router.replace({ path: route.path, query: route.query });
       });
     };
@@ -198,7 +198,7 @@ export default defineComponent({
                           dropdown: () =>
                             router.path === route.path ? (
                               <t-dropdown-menu>
-                                <t-dropdown-item onClick={() => handleRefresh(router)}>
+                                <t-dropdown-item onClick={() => handleRefresh(router, idx)}>
                                   <t-icon name="refresh" />
                                   刷新
                                 </t-dropdown-item>
