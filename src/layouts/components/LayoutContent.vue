@@ -1,5 +1,5 @@
 <template>
-  <t-layout :class="[`${prefix}-layout`]">
+  <t-layout :class="`${prefix}-layout`">
     <t-tabs
       v-if="settingStore.isUseTabsRouter"
       theme="card"
@@ -9,11 +9,11 @@
       @change="handleChangeCurrentTab"
     >
       <t-tab-panel
-        v-for="(_route, idx) in tabRouters"
-        :key="`${_route.path}_${idx}`"
-        :value="_route.path"
-        :removable="!_route.isHome"
-        @remove="() => handleRemove(_route.path, idx)"
+        v-for="(routeItem, index) in tabRouters"
+        :key="`${routeItem.path}_${index}`"
+        :value="routeItem.path"
+        :removable="!routeItem.isHome"
+        @remove="() => handleRemove(routeItem.path, index)"
       >
         <template #label>
           <t-dropdown
@@ -21,25 +21,28 @@
             :min-column-width="128"
             :popup-props="{ overlayClassName: 'route-tabs-dropdown' }"
           >
-            <template v-if="!_route.isHome">
-              {{ _route.title }}
+            <template v-if="!routeItem.isHome">
+              {{ routeItem.title }}
             </template>
             <t-icon v-else name="home" />
             <template #dropdown>
-              <t-dropdown-menu v-if="$route.path === _route.path">
-                <t-dropdown-item @click="() => handleRefresh(_route)">
+              <t-dropdown-menu v-if="$route.path === routeItem.path">
+                <t-dropdown-item @click="() => handleRefresh(routeItem)">
                   <t-icon name="refresh" />
                   刷新
                 </t-dropdown-item>
-                <t-dropdown-item v-if="idx > 0" @lick="() => handleCloseAhead(_route.path, idx)">
+                <t-dropdown-item v-if="index > 0" @lick="() => handleCloseAhead(routeItem.path, index)">
                   <t-icon name="arrow-left" />
                   关闭左侧
                 </t-dropdown-item>
-                <t-dropdown-item v-if="idx < tabRouters.length - 1" @click="() => handleCloseBehind(_route.path, idx)">
+                <t-dropdown-item
+                  v-if="index < tabRouters.length - 1"
+                  @click="() => handleCloseBehind(routeItem.path, index)"
+                >
                   <t-icon name="arrow-right" />
                   关闭右侧
                 </t-dropdown-item>
-                <t-dropdown-item @click="() => handleCloseOther(_route.path, idx)">
+                <t-dropdown-item @click="() => handleCloseOther(routeItem.path, index)">
                   <t-icon name="close-circle" />
                   关闭其它
                 </t-dropdown-item>
@@ -60,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick } from 'vue';
+import { nextTick, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useSettingStore, useTabsRouterStore } from '@/store';
 import { prefix } from '@/config/global';
@@ -75,7 +78,7 @@ const router = useRouter();
 
 const settingStore = useSettingStore();
 const tabsRouterStore = useTabsRouterStore();
-const tabRouters = tabsRouterStore.tabRouters.filter((route) => route.isAlive || route.isHome);
+const tabRouters = computed(() => tabsRouterStore.tabRouters.filter((route) => route.isAlive || route.isHome));
 
 const handleChangeCurrentTab = (path: string) => {
   const { tabRouters } = tabsRouterStore;

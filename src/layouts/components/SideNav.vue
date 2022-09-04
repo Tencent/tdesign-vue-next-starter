@@ -99,9 +99,7 @@ const goHome = () => {
 };
 
 const getLogo = () => {
-  if (collapsed.value) {
-    return AssetLogo;
-  }
+  if (collapsed.value) return AssetLogo;
   return AssetLogoFull;
 };
 </script>

@@ -4,14 +4,14 @@
       <template v-if="!item.children || !item.children.length || item.meta?.single">
         <t-menu-item v-if="getHref(item)" :href="getHref(item)?.[0]" :name="item.path" :value="getPath(item)">
           <template #icon>
-            <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
+            <t-icon v-if="beIcon(item)" :name="item.icon" />
             <component :is="beRender(item).render" v-else-if="beRender(item).can" class="t-icon" />
           </template>
           {{ item.title }}
         </t-menu-item>
         <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
           <template #icon>
-            <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
+            <t-icon v-if="beIcon(item)" :name="item.icon" />
             <component :is="beRender(item).render" v-else-if="beRender(item).can" class="t-icon" />
           </template>
           {{ item.title }}
@@ -19,7 +19,7 @@
       </template>
       <t-submenu v-else :name="item.path" :value="item.path" :title="item.title">
         <template #icon>
-          <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
+          <t-icon v-if="beIcon(item)" :name="item.icon" />
           <component :is="beRender(item).render" v-else-if="beRender(item).can" class="t-icon" />
         </template>
         <menu-content v-if="item.children" :nav-data="item.children" />
@@ -74,6 +74,10 @@ const getPath = (item) => {
     return active.value;
   }
   return item.meta?.single ? item.redirect : item.path;
+};
+
+const beIcon = (item: MenuRoute) => {
+  return item.icon && typeof item.icon === 'string';
 };
 
 const beRender = (item: MenuRoute) => {
