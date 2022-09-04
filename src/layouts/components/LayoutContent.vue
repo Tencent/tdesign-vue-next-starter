@@ -27,7 +27,7 @@
             <t-icon v-else name="home" />
             <template #dropdown>
               <t-dropdown-menu v-if="$route.path === routeItem.path">
-                <t-dropdown-item @click="() => handleRefresh(routeItem)">
+                <t-dropdown-item @click="() => handleRefresh(routeItem, index)">
                   <t-icon name="refresh" />
                   刷新
                 </t-dropdown-item>
@@ -96,10 +96,10 @@ const handleRemove = (path, index) => {
   }
 };
 
-const handleRefresh = (route: TRouterInfo) => {
-  tabsRouterStore.toggleTabRouterAlive(route.routeIdx);
+const handleRefresh = (route: TRouterInfo, routeIdx: number) => {
+  tabsRouterStore.toggleTabRouterAlive(routeIdx);
   nextTick(() => {
-    tabsRouterStore.toggleTabRouterAlive(route.routeIdx);
+    tabsRouterStore.toggleTabRouterAlive(routeIdx);
     router.replace({ path: route.path, query: route.query });
   });
 };
