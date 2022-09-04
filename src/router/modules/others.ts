@@ -1,4 +1,4 @@
-import Layout from '@/layouts';
+import Layout from '@/layouts/index.vue';
 import LogoutIcon from '@/assets/assets-slide-logout.svg';
 
 export default [
