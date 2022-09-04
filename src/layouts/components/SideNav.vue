@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, PropType } from 'vue';
 import { useRouter } from 'vue-router';
 import union from 'lodash/union';
 
@@ -31,18 +31,37 @@ import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
 import MenuContent from './MenuContent.vue';
 
 const MIN_POINT = 992 - 1;
-const props = withDefaults(
-  defineProps<{
-    menu?: MenuRoute[];
-    showLogo?: boolean;
-    isFixed?: boolean;
-    layout?: string;
-    headerHeight?: string;
-    theme?: string;
-    isCompact?: boolean;
-  }>(),
-  { menu: () => [], showLogo: true, isFixed: true, layout: '', headerHeight: '64px', theme: 'light', isCompact: false },
-);
+
+const props = defineProps({
+  menu: {
+    type: Array as PropType<MenuRoute[]>,
+    default: () => [],
+  },
+  showLogo: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
+  isFixed: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
+  layout: {
+    type: String as PropType<string>,
+    default: '',
+  },
+  headerHeight: {
+    type: String as PropType<string>,
+    default: '64px',
+  },
+  theme: {
+    type: String as PropType<string>,
+    default: 'light',
+  },
+  isCompact: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+});
 
 const collapsed = computed(() => useSettingStore().isSidebarCompact);
 

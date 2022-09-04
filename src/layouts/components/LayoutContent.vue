@@ -7,13 +7,13 @@
       :value="$route.path"
       :style="{ position: 'sticky', top: 0, width: '100%' }"
       @change="handleChangeCurrentTab"
+      @remove="handleRemove"
     >
       <t-tab-panel
         v-for="(routeItem, index) in tabRouters"
         :key="`${routeItem.path}_${index}`"
         :value="routeItem.path"
         :removable="!routeItem.isHome"
-        @remove="() => handleRemove(routeItem.path, index)"
       >
         <template #label>
           <t-dropdown
@@ -86,14 +86,12 @@ const handleChangeCurrentTab = (path: string) => {
   router.push({ path, query: route.query });
 };
 
-const handleRemove = (path, index) => {
+const handleRemove = ({ value: path, index }) => {
   const { tabRouters } = tabsRouterStore;
   const nextRouter = tabRouters[index + 1] || tabRouters[index - 1];
 
   tabsRouterStore.subtractCurrentTabRouter({ path, routeIdx: index });
-  if (path === route.path) {
-    router.push({ path: nextRouter.path, query: nextRouter.query });
-  }
+  if (path === route.path) router.push({ path: nextRouter.path, query: nextRouter.query });
 };
 
 const handleRefresh = (route: TRouterInfo, routeIdx: number) => {

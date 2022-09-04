@@ -29,12 +29,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, PropType } from 'vue';
 import isObject from 'lodash/isObject';
 import { MenuRoute } from '@/types/interface';
 import { getActive } from '@/router';
 
-const props = withDefaults(defineProps<{ navData: MenuRoute[] }>(), { navData: () => [] });
+const props = defineProps({
+  navData: {
+    type: Array as PropType<MenuRoute[]>,
+    default: () => [],
+  },
+});
 
 const active = computed(() => getActive());
 const list = computed(() => {
