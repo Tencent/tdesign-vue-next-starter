@@ -1,4 +1,4 @@
-import Layout from '@/layouts';
+import Layout from '@/layouts/index.vue';
 import DashboardIcon from '@/assets/assets-slide-dashboard.svg';
 
 export default [

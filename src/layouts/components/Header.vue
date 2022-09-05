@@ -74,7 +74,7 @@ import { MenuRoute } from '@/types/interface';
 
 import Notice from './Notice.vue';
 import Search from './Search.vue';
-import MenuContent from './MenuContent';
+import MenuContent from './MenuContent.vue';
 
 const props = defineProps({
   theme: {
