@@ -5,15 +5,14 @@ import 'nprogress/nprogress.css'; // progress bar style
 import { getPermissionStore, getUserStore } from '@/store';
 import router from '@/router';
 
-const permissionStore = getPermissionStore();
-const userStore = getUserStore();
-
 NProgress.configure({ showSpinner: false });
-
-const { whiteListRouters } = permissionStore;
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
+
+  const userStore = getUserStore();
+  const permissionStore = getPermissionStore();
+  const { whiteListRouters } = permissionStore;
 
   const { token } = userStore;
   if (token) {
@@ -58,6 +57,9 @@ router.beforeEach(async (to, from, next) => {
 
 router.afterEach((to) => {
   if (to.path === '/login') {
+    const userStore = getUserStore();
+    const permissionStore = getPermissionStore();
+
     userStore.logout();
     permissionStore.restore();
   }
