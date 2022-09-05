@@ -12,7 +12,7 @@
 
     <template v-else>
       <t-layout key="no-side">
-        <t-header />
+        <t-header><layout-header /> </t-header>
         <t-layout :class="mainLayoutCls">
           <layout-side-nav />
           <layout-content />
