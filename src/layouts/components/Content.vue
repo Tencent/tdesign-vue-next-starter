@@ -13,7 +13,9 @@ import { computed, ComputedRef } from 'vue';
 import { useTabsRouterStore } from '@/store';
 
 // 如果存在需解决/page/1=> /page/2 刷新数据问题 请修改代码 使用activeRouteFullPath 作为key
-// <component :is="Component" :key="activeRouteFullPath" />
+// <suspense>
+//  <component :is="Component" :key="activeRouteFullPath" />
+// </suspense>
 
 // import { useRouter } from 'vue-router';
 // const activeRouteFullPath = computed(() => {
