@@ -21,8 +21,8 @@
             :min-column-width="128"
             :popup-props="{
               overlayClassName: 'route-tabs-dropdown',
-              onVisibleChange: () => (activeTapPath = routeItem.path),
-              visible: activeTapPath === routeItem.path,
+              onVisibleChange: () => (activeTabPath = routeItem.path),
+              visible: activeTabPath === routeItem.path,
             }"
           >
             <template v-if="!routeItem.isHome">
@@ -83,7 +83,7 @@ const router = useRouter();
 const settingStore = useSettingStore();
 const tabsRouterStore = useTabsRouterStore();
 const tabRouters = computed(() => tabsRouterStore.tabRouters.filter((route) => route.isAlive || route.isHome));
-const activeTapPath = ref('');
+const activeTabPath = ref('');
 
 const handleChangeCurrentTab = (path: string) => {
   const { tabRouters } = tabsRouterStore;
