@@ -19,19 +19,23 @@
           <t-dropdown
             trigger="context-menu"
             :min-column-width="128"
-            :popup-props="{ overlayClassName: 'route-tabs-dropdown' }"
+            :popup-props="{
+              overlayClassName: 'route-tabs-dropdown',
+              onVisibleChange: () => (activeTapPath = routeItem.path),
+              visible: activeTapPath === routeItem.path,
+            }"
           >
             <template v-if="!routeItem.isHome">
               {{ routeItem.title }}
             </template>
             <t-icon v-else name="home" />
             <template #dropdown>
-              <t-dropdown-menu v-if="$route.path === routeItem.path">
+              <t-dropdown-menu>
                 <t-dropdown-item @click="() => handleRefresh(routeItem, index)">
                   <t-icon name="refresh" />
                   刷新
                 </t-dropdown-item>
-                <t-dropdown-item v-if="index > 0" @click="() => handleCloseAhead(routeItem.path, index)">
+                <t-dropdown-item v-if="index > 1" @click="() => handleCloseAhead(routeItem.path, index)">
                   <t-icon name="arrow-left" />
                   关闭左侧
                 </t-dropdown-item>
@@ -42,7 +46,7 @@
                   <t-icon name="arrow-right" />
                   关闭右侧
                 </t-dropdown-item>
-                <t-dropdown-item @click="() => handleCloseOther(routeItem.path, index)">
+                <t-dropdown-item v-if="tabRouters.length > 2" @click="() => handleCloseOther(routeItem.path, index)">
                   <t-icon name="close-circle" />
                   关闭其它
                 </t-dropdown-item>
@@ -63,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, computed } from 'vue';
+import { nextTick, ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useSettingStore, useTabsRouterStore } from '@/store';
 import { prefix } from '@/config/global';
@@ -79,6 +83,7 @@ const router = useRouter();
 const settingStore = useSettingStore();
 const tabsRouterStore = useTabsRouterStore();
 const tabRouters = computed(() => tabsRouterStore.tabRouters.filter((route) => route.isAlive || route.isHome));
+const activeTapPath = ref('');
 
 const handleChangeCurrentTab = (path: string) => {
   const { tabRouters } = tabsRouterStore;
