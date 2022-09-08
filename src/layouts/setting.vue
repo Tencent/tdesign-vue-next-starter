@@ -124,9 +124,6 @@ const MODE_OPTIONS = [
   { type: 'dark', text: '暗黑' },
   { type: 'auto', text: '跟随系统' },
 ];
-/**
- * 初始表单数据
- */
 const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
