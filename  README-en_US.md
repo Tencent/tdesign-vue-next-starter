@@ -14,16 +14,14 @@
   </a>
 </p>
 
-English | [简体中文](./README-zh_CN.md) 
 ### Introduction
 
-TDesign Vue Next Starter is a TDesign-based, developed with `Vue3`, `Vite2`, `Pinia`, `TypeScript`, which can be customized theme configuration, and aims to provide project out-of-the-box, configuration-style middle and background projects .
+TDesign Vue Next Starter is a TDesign-based developed with `Vue3`, `Vite2`, `Pinia`, `TypeScript`. It can be customized theme configuration, and aims to provide project out-of-the-box, configuration-style middle and background projects.
 
 <p>
-  <a href="http://tdesign.tencent.com/starter/vue-next/">preview</a>
+  <a href="http://tdesign.tencent.com/starter/vue-next/">Live Preview</a>
   ·
-  <a href="https://tdesign.tencent.com/starter/">documentation</a>
-
+  <a href="https://tdesign.tencent.com/starter/">Documentation</a>
 </p>
 
 <img src="docs/starter.png">
@@ -31,22 +29,22 @@ TDesign Vue Next Starter is a TDesign-based, developed with `Vue3`, `Vite2`, `Pi
 ### Features
 
 - Various provided pages for develop
-- Complete Directory Structure for develop
-- Code Specification Configuration
-- Dark Mode
+- Complete directory structure for develop
+- Code specification configuration
+- Support dark mode
 - Custom theme colors
 - Various space layouts
-- Mock Data Scheme
+- Mock data scheme
 
 ### Usage
 
-> init project with our CLI tool `tdesign-starter-cli` 
+> Initialize project with our CLI tool `tdesign-starter-cli` 
 
 ```bash
 ## install tdesign-starter-cli
 npm i tdesign-starter-cli@latest -g
 
-## 2、create project
+## create project
 td-starter init
 ```
 
@@ -71,9 +69,9 @@ npm run build:test
 ```
 
 
-### Contributing
+### Contributing Guide
 
-Contributing is welcome！Create your [Issue](https://github.com/tencent/tdesign-vue-next-starter/issues/new/choose) or Submit your [Pull Request](https://github.com/Tencent/tdesign-vue-next-starter/pulls)。
+We welcome contributions to our project. Create your [Issue](https://github.com/tencent/tdesign-vue-next-starter/issues/new/choose) or Submit your [Pull Request](https://github.com/Tencent/tdesign-vue-next-starter/pulls).
 
 #### Pull Request
 
@@ -94,6 +92,6 @@ Contributing is welcome！Create your [Issue](https://github.com/tencent/tdesign
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Edge >=84                                                                                                                                                                                                        | Firefox >=83                                                                                                                                                                                                      | Chrome >=84                                                                                                                                                                                                   | Safari >=14.1                                                                                                                                                                                                 |
 
-### LICENSE
+### License
 
-[MIT](https://github.com/Tencent/tdesign-vue-next-starter/LICENSE)
+The MIT License. Please see [the license file](LICENSE) for more information.
