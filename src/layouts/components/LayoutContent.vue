@@ -21,7 +21,7 @@
             :min-column-width="128"
             :popup-props="{
               overlayClassName: 'route-tabs-dropdown',
-              onVisibleChange: () => (activeTabPath = routeItem.path),
+              onVisibleChange: (visible: boolean, ctx) => handleTabMenuClick(visible, ctx, routeItem.path),
               visible: activeTabPath === routeItem.path,
             }"
           >
@@ -105,14 +105,46 @@ const handleRefresh = (route: TRouterInfo, routeIdx: number) => {
     tabsRouterStore.toggleTabRouterAlive(routeIdx);
     router.replace({ path: route.path, query: route.query });
   });
+  activeTabPath.value = null;
 };
 const handleCloseAhead = (path: string, routeIdx: number) => {
   tabsRouterStore.subtractTabRouterAhead({ path, routeIdx });
+
+  handleOperationEffect('ahead', routeIdx);
 };
 const handleCloseBehind = (path: string, routeIdx: number) => {
   tabsRouterStore.subtractTabRouterBehind({ path, routeIdx });
+
+  handleOperationEffect('behind', routeIdx);
 };
 const handleCloseOther = (path: string, routeIdx: number) => {
   tabsRouterStore.subtractTabRouterOther({ path, routeIdx });
+
+  handleOperationEffect('other', routeIdx);
+};
+
+// 处理非当前路由操作的副作用
+const handleOperationEffect = (type: 'other' | 'ahead' | 'behind', routeIndex: number) => {
+  const currentPath = router.currentRoute.value.path;
+  const { tabRouters } = tabsRouterStore;
+
+  const currentIdx = tabRouters.findIndex((i) => i.path === currentPath);
+  // 存在三种情况需要刷新当前路由
+  // 点击非当前路由的关闭其他、点击非当前路由的关闭左侧且当前路由小于触发路由、点击非当前路由的关闭右侧且当前路由大于触发路由
+  const needRefreshRouter =
+    (type === 'other' && currentIdx !== routeIndex) ||
+    (type === 'ahead' && currentIdx < routeIndex) ||
+    (type === 'behind' && currentIdx === -1);
+  if (needRefreshRouter) {
+    const nextRouteIdx = type === 'behind' ? tabRouters.length - 1 : 1;
+    const nextRouter = tabRouters[nextRouteIdx];
+    router.push({ path: nextRouter.path, query: nextRouter.query });
+  }
+
+  activeTabPath.value = null;
+};
+const handleTabMenuClick = (visible: boolean, ctx, path: string) => {
+  if (ctx.trigger === 'document') activeTabPath.value = null;
+  if (visible) activeTabPath.value = path;
 };
 </script>
