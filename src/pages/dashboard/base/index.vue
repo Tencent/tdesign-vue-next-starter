@@ -25,7 +25,7 @@ import OutputOverview from './components/OutputOverview.vue';
 </script>
 
 <style scoped>
-.row-container {
+.row-container:not(:last-child) {
   margin-bottom: 16px;
 }
 </style>

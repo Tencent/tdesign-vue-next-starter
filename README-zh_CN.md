@@ -1,3 +1,4 @@
+
 <p style="display:flex; justify-content: center">
 
 </p>
@@ -14,85 +15,106 @@
   </a>
 </p>
 
-English | [简体中文](./README-zh_CN.md) 
-### Introduction
+简体中文 | [English](./README.md) 
 
-TDesign Vue Next Starter is a TDesign-based developed with `Vue3`, `Vite2`, `Pinia`, `TypeScript`. It can be customized theme configuration, and aims to provide project out-of-the-box, configuration-style middle and background projects.
+### 项目简介
+
+TDesign Vue Next Starter 是一个基于 TDesign，使用 `Vue3`、`Vite2`、`Pinia`、`TypeScript` 开发，可进行个性化主题配置，旨在提供项目开箱即用的、配置式的中后台项目。
 
 <p>
-  <a href="http://tdesign.tencent.com/starter/vue-next/">Live Preview</a>
+  <a href="http://tdesign.tencent.com/starter/vue-next/">在线预览</a>
   ·
-  <a href="https://tdesign.tencent.com/starter/">Documentation</a>
+  <a href="https://tdesign.tencent.com/starter/">使用文档</a>
+
 </p>
 
 <img src="docs/starter.png">
 
-### Features
+### 特性
 
-- Various provided pages for develop
-- Complete directory structure for develop
-- Code specification configuration
-- Support dark mode
-- Custom theme colors
-- Various space layouts
-- Mock data scheme
+- 内置多种常用的中后台页面
+- 完善的目录结构
+- 完善的代码规范配置
+- 支持暗黑模式
+- 自定义主题颜色
+- 多种空间布局
+- 内置 Mock 数据方案
 
-### Usage
+### 使用
 
-> Initialize project with our CLI tool `tdesign-starter-cli` 
+> 通过 `tdesign-starter-cli` 初始化项目仓库
 
 ```bash
-## install tdesign-starter-cli
+## 1、安装 tdesign-starter-cli
 npm i tdesign-starter-cli@latest -g
 
-## create project
+## 2、创建项目
 td-starter init
 ```
 
-### Develop
+### 开发
 
-```bash
-## install dependencies
+``` bash
+## 安装依赖
 npm install
 
-## set up
+## 启动项目
 npm run dev
 ```
 
-### Build
+### 构建
 
 ```bash
-## build
+## 构建正式环境
 npm run build
 
-## build for test
+## 构建测试环境
 npm run build:test
 ```
 
+### 其他
 
-### Contributing Guide
+```bash
+## 预览构建产物
+npm run preview
 
-We welcome contributions to our project. Create your [Issue](https://github.com/tencent/tdesign-vue-next-starter/issues/new/choose) or Submit your [Pull Request](https://github.com/Tencent/tdesign-vue-next-starter/pulls).
+## 代码格式检查
+npm run lint
+
+## 代码格式检查与自动修复
+npm run lint:fix
+
+## style格式检查
+npm run stylelint
+
+## style格式检查与自动修复
+npm run stylelint:fix
+```
+
+### 如何贡献
+
+非常欢迎您的贡献！提交您的 [Issue](https://github.com/tencent/tdesign-vue-next-starter/issues/new/choose) 或者提交 [Pull Request](https://github.com/Tencent/tdesign-vue-next-starter/pulls)。
 
 #### Pull Request
 
-1. Fork it!
-2. Create your branch: `git checkout -b feat/xxxx`
-3. Commit: `git commit -a 'feat(project): describe'`
-4. Push: `git push origin feat/xxxx`
-5. New Pull Request `pull request`
+1. Fork 代码!
+2. 创建自己的分支: `git checkout -b feat/xxxx`
+3. 提交你的修改: `git commit -a 'feat(project): describe'`
+4. 推送您的分支: `git push origin feat/xxxx`
+5. 提交 `pull request`
 
-#### Commit Specification
+#### 贡献提交规范
 
 - [Angular Convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular)
 - [Vue Style Guide](https://v3.vuejs.org/style-guide/#rule-categories)
 
-### Compatibility
+### 兼容性
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br> IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Edge >=84                                                                                                                                                                                                        | Firefox >=83                                                                                                                                                                                                      | Chrome >=84                                                                                                                                                                                                   | Safari >=14.1                                                                                                                                                                                                 |
+| Edge >=84                                                                                                                                                                                                        | Firefox >=83                                                                                                                                                                                                      | Chrome >=84                                                                                                                                                                                                   | Safari >=14.1                                                                                                                                                                                                  |
 
-### License
+### 开源协议
 
-The MIT License. Please see [the license file](LICENSE) for more information.
+TDesign 遵循 [MIT 协议](https://github.com/Tencent/tdesign-vue-next-starter/LICENSE)。
+
