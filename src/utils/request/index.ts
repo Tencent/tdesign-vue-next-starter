@@ -57,7 +57,7 @@ const transform: AxiosTransform = {
     const { apiUrl, isJoinPrefix, urlPrefix, joinParamsToUrl, formatDate, joinTime = true } = options;
 
     // 添加接口前缀
-    if (isJoinPrefix) {
+    if (isJoinPrefix && urlPrefix && isString(urlPrefix)) {
       config.url = `${urlPrefix}${config.url}`;
     }
 
