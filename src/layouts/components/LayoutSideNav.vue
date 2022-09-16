@@ -5,7 +5,7 @@
     :layout="settingStore.layout"
     :is-fixed="settingStore.isSidebarFixed"
     :menu="sideMenu"
-    :theme="settingStore.mode"
+    :theme="settingStore.displayMode"
     :is-compact="settingStore.isSidebarCompact"
   />
 </template>
