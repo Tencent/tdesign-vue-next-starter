@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { TOKEN_NAME } from '@/config/global';
-import { store } from '@/store';
+import { store, usePermissionStore } from '@/store';
 
 const InitUserInfo = {
   roles: [],
@@ -77,6 +77,14 @@ export const useUserStore = defineStore('user', {
     },
     async removeToken() {
       this.token = '';
+    },
+  },
+  persist: {
+    afterRestore: (ctx) => {
+      const permissionStore = usePermissionStore();
+      if (ctx.store.roles && ctx.store.roles.length > 0) {
+        permissionStore.initRoutes(ctx.store.roles);
+      }
     },
   },
 });
