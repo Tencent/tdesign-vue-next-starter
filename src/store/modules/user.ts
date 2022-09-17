@@ -81,8 +81,8 @@ export const useUserStore = defineStore('user', {
   },
   persist: {
     afterRestore: (ctx) => {
-      const permissionStore = usePermissionStore();
       if (ctx.store.roles && ctx.store.roles.length > 0) {
+        const permissionStore = usePermissionStore();
         permissionStore.initRoutes(ctx.store.roles);
       }
     },
