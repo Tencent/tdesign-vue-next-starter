@@ -57,7 +57,7 @@ const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
   });
   return list
     .map((item) => {
-      const path = basePath ? `${basePath}/${item.path}` : item.path;
+      const path = basePath && !item.path.includes(basePath) ? `${basePath}/${item.path}` : item.path;
       return {
         path,
         title: item.meta?.title,
