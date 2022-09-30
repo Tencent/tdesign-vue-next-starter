@@ -77,8 +77,6 @@ const goDetail = () => {
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .header-msg {
   width: 400px;
   height: 500px;

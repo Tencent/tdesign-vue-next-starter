@@ -29,8 +29,6 @@ import Thumbnail from '@/components/thumbnail/index.vue';
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .result-slot-container {
   position: relative;
   display: flex;

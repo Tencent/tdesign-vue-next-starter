@@ -12,8 +12,6 @@ const mode = computed(() => {
 });
 </script>
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 #nprogress .bar {
   background: var(--td-brand-color) !important;
 }

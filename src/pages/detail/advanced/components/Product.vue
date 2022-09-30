@@ -54,7 +54,6 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
 .operator-gap {
   margin-left: 20px;
 }
