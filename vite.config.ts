@@ -5,7 +5,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import svgLoader from 'vite-svg-loader';
 
 import path from 'path';
-import themeConfig from './src/config/theme';
 
 const CWD = process.cwd();
 
@@ -25,7 +24,6 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         less: {
           modifyVars: {
             hack: `true; @import (reference) "${path.resolve('src/style/variables.less')}";`,
-            ...themeConfig,
           },
           math: 'strict',
           javascriptEnabled: true,
