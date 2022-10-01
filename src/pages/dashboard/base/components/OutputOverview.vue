@@ -155,8 +155,6 @@ const onStokeDataChange = (checkedValues: string[]) => {
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .dashboard-overview-card {
   :deep(.t-card__header) {
     padding-bottom: 24px;

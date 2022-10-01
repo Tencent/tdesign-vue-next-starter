@@ -43,7 +43,6 @@ const onInput = () => {
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
 .table-tree-container {
   background-color: var(--td-bg-color-container);
   border-radius: @border-radius;

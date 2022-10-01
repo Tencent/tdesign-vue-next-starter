@@ -19,6 +19,18 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       },
     },
 
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: {
+            hack: `true; @import (reference) "${path.resolve('src/style/variables.less')}";`,
+          },
+          math: 'strict',
+          javascriptEnabled: true,
+        },
+      },
+    },
+
     plugins: [
       createVuePlugin(),
       vueJsx(),

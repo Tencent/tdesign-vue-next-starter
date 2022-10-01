@@ -212,8 +212,6 @@ watchEffect(() => {
 });
 </script>
 <style lang="less" scoped>
-@import '@/style/variables';
-
 .tdesign-setting {
   z-index: 100;
   position: fixed;

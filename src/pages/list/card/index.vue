@@ -146,8 +146,6 @@ const handleManageProduct = (product) => {
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .list-card {
   height: 100%;
 

@@ -163,8 +163,6 @@ const onMaterialChange = (value: string[]) => {
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .row-margin {
   margin-top: 16px;
 }

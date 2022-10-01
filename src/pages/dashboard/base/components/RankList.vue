@@ -66,8 +66,6 @@ const getRankClass = (index: number) => {
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .dashboard-rank-card {
   padding: 8px;
 

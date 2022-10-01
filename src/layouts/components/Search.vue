@@ -53,8 +53,6 @@ const changeSearchFocus = (value: boolean) => {
 };
 </script>
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .header-menu-search {
   display: flex;
   margin-left: 16px;

@@ -155,7 +155,6 @@ const navToHelper = () => {
 };
 </script>
 <style lang="less" scoped>
-@import '@/style/variables.less';
 .@{starter-prefix}-header {
   &-layout {
     height: 64px;

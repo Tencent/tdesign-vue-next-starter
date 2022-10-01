@@ -187,8 +187,6 @@ const getContainer = () => {
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables';
-
 .payment-col {
   display: flex;
 
