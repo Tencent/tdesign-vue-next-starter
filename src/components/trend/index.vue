@@ -48,7 +48,6 @@ const iconCls = computed(() => ['trend-icon-container']);
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
 .trend {
   &-container {
     &__up {

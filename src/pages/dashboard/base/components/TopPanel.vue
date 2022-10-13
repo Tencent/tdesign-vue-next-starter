@@ -153,8 +153,6 @@ watch(
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .dashboard-item {
   padding: 8px;
 

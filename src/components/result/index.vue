@@ -44,8 +44,6 @@ const dynamicComponent = computed(() => {
 });
 </script>
 <style lang="less" scoped>
-@import '@/style/variables';
-
 .result {
   &-link {
     color: var(--td-brand-color);

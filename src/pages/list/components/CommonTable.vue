@@ -271,7 +271,6 @@ const getContainer = () => {
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
 .list-common-table {
   background-color: var(--td-bg-color-container);
   padding: 30px 32px;

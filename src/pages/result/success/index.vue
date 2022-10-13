@@ -15,8 +15,6 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .result-success {
   display: flex;
   flex-direction: column;

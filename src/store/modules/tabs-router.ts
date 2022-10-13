@@ -68,6 +68,7 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
       newRoutes?.forEach((route: TRouterInfo) => this.appendTabRouterList(route));
     },
   },
+  persist: true,
 });
 
 export function getTabsRouterStore() {

@@ -29,8 +29,6 @@ import Thumbnail from '@/components/thumbnail/index.vue';
 </script>
 
 <style lang="less" scoped>
-@import '@/style/variables.less';
-
 .result-slot-container {
   position: relative;
   display: flex;
@@ -38,14 +36,14 @@ import Thumbnail from '@/components/thumbnail/index.vue';
   align-items: center;
   justify-content: space-between;
   color: var(--td-text-color-secondary);
+  height: calc(75vh - 254px);
+  min-height: 156px;
 }
 
 .recommend-container {
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  top: 175px;
   padding: 24px 48px;
   width: 640px;
   background: var(--td-bg-color-container);
