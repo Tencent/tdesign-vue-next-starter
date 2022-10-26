@@ -53,8 +53,8 @@
             </t-button>
           </t-dropdown>
           <t-tooltip placement="bottom" content="系统设置">
-            <t-button theme="default" shape="square" variant="text">
-              <t-icon name="setting" @click="toggleSettingPanel" />
+            <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
+              <t-icon name="setting" />
             </t-button>
           </t-tooltip>
         </div>
