@@ -18,7 +18,7 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.1.3",
     "dayjs": "^1.10.6",
     "echarts": "~5.1.2",
     "lodash": "^4.17.21",
