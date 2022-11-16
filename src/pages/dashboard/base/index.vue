@@ -28,4 +28,7 @@ import OutputOverview from './components/OutputOverview.vue';
 .row-container:not(:last-child) {
   margin-bottom: 16px;
 }
+:deep() .t-card__body {
+  padding-top: 0;
+}
 </style>

@@ -12,7 +12,9 @@
           <search :layout="layout" />
         </div>
       </template>
-      <menu-content v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
+      <template v-if="layout !== 'side'" #default>
+        <menu-content class="header-menu" :nav-data="menu" />
+      </template>
       <template #operations>
         <div class="operations-container">
           <!-- 搜索框 -->
@@ -46,10 +48,8 @@
               <template #icon>
                 <t-icon class="header-user-avatar" name="user-circle" />
               </template>
-              <div class="header-user-account">
-                Tencent
-                <t-icon name="chevron-down" />
-              </div>
+              <div class="header-user-account">Tencent</div>
+              <template #suffix><t-icon name="chevron-down" /></template>
             </t-button>
           </t-dropdown>
           <t-tooltip placement="bottom" content="系统设置">
