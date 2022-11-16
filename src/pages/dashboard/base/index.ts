@@ -116,8 +116,6 @@ export function constructInitDataset({
     outArray.push(getRandomArray().toString());
   }
 
-  // console.log('timeArray..', timeArray);
-
   const dataset = {
     color: getChartListColor(),
     tooltip: {
