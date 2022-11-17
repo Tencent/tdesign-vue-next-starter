@@ -4,7 +4,7 @@
       <t-layout key="side" :class="mainLayoutCls">
         <t-aside><layout-side-nav /></t-aside>
         <t-layout>
-          <t-header><layout-header /></t-header>
+          <t-header height="64px"><layout-header /></t-header>
           <t-content><layout-content /></t-content>
         </t-layout>
       </t-layout>
@@ -12,7 +12,7 @@
 
     <template v-else>
       <t-layout key="no-side">
-        <t-header><layout-header /> </t-header>
+        <t-header height="64px"><layout-header /> </t-header>
         <t-layout :class="mainLayoutCls">
           <layout-side-nav />
           <layout-content />
