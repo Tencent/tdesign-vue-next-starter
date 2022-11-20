@@ -141,7 +141,7 @@ const transform: AxiosTransform = {
         resolve(config);
       }, config.requestOptions.retry.delay || 1);
     });
-
+    config.headers = { ...config.headers, 'Content-Type': 'application/json;charset=UTF-8' };
     return backoff.then((config) => request.request(config));
   },
 };
