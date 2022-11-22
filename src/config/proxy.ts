@@ -1,5 +1,5 @@
 export default {
-  isRequestProxy: true,
+  isRequestProxy: false,
   development: {
     // 开发环境接口请求
     host: 'https://service-exndqyuk-1257786608.gz.apigw.tencentcs.com',

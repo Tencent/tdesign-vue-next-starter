@@ -2,6 +2,9 @@ import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
 import router, { asyncRouterList } from '@/router';
 import { store } from '@/store';
+import { RouteItem } from '@/api/model/permissionModel';
+import { getMenuList } from '@/api/permission';
+import { transformObjectToRoute } from '@/utils/route';
 
 function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<unknown>) {
   const res = [];
@@ -52,6 +55,15 @@ export const usePermissionStore = defineStore('permission', {
           router.removeRoute(item.name);
         }
       });
+    },
+    async buildRoutesAction() {
+      try {
+        const asyncRoutes: Array<RouteItem> = (await getMenuList()).list;
+        const routeList = transformObjectToRoute(asyncRoutes);
+        console.log(routeList);
+      } catch (error) {
+        throw new Error("Can't build routes");
+      }
     },
     async restore() {
       this.removeRoutes.forEach((item: RouteRecordRaw) => {

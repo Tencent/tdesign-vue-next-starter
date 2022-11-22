@@ -144,4 +144,39 @@ export default [
       },
     },
   },
+  {
+    url: '/api/get-menu-list',
+    method: 'get',
+    timeout: 2000,
+    response: {
+      code: 0,
+      data: {
+        ...Mock.mock({
+          list: [
+            {
+              path: '/dashboard',
+              component: 'LAYOUT',
+              redirect: '/dashboard/base',
+              name: 'dashboard',
+              meta: { title: '仪表盘', icon: 'DashboardIcon' },
+              children: [
+                {
+                  path: 'base',
+                  name: 'DashboardBase',
+                  component: '/dashboard/base/index',
+                  meta: { title: '概览仪表盘' },
+                },
+                {
+                  path: 'detail',
+                  name: 'DashboardDetail',
+                  component: '/dashboard/detail/index',
+                  meta: { title: '统计报表' },
+                },
+              ],
+            },
+          ],
+        }),
+      },
+    },
+  },
 ] as MockMethod[];
