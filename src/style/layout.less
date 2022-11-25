@@ -7,7 +7,7 @@
 }
 
 .t-button + .t-button {
-  margin-left: @spacer;
+  margin-left: var(--td-comp-margin-s);
 }
 
 .t-jumper {
@@ -26,7 +26,7 @@
 .left-operation-container,
 .operation-container {
   .t-button + .t-button {
-    margin-left: @spacer;
+    margin-left: var(--td-comp-margin-s);
   }
 }
 
@@ -76,7 +76,7 @@
   }
 
   &-content-layout {
-    padding: @spacer-3;
+    padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
   }
 
   &-layout {
@@ -89,7 +89,7 @@
       z-index: 100;
     }
     &-tabs-nav + .@{starter-prefix}-content-layout {
-      padding-top: @spacer-3;
+      padding-top: var(--td-comp-paddingTB-xxl);
     }
 
     &::-webkit-scrollbar {
@@ -107,7 +107,7 @@
 
   &-footer-layout {
     padding: 0;
-    margin-bottom: @spacer-3;
+    margin-bottom: var(--td-comp-margin-xxl);
   }
 
   // slideBar
