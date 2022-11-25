@@ -84,18 +84,16 @@ const dynamicComponent = computed(() => {
 
   &-title {
     font-style: normal;
-    font-weight: 500;
     margin-top: 8px;
     color: var(--td-text-color-primary);
-    font-size: @font-size-xl;
-    line-height: @line-height-xl;
+    font: var(--td-font-title-large);
+    font-weight: 500;
   }
 
   &-tip {
     margin: 8px 0 32px;
-    font-size: @font-size-base;
+    font: var(--td-font-body-medium);
     color: var(--td-text-color-secondary);
-    line-height: @line-height-base;
   }
 }
 </style>

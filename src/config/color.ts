@@ -27,6 +27,7 @@ export const defaultDarkColor = [
 
 export const COLOR_TOKEN: TColorSeries = {
   DEFAULT: {
+    '--td-brand-color': '#0052d9',
     '--td-brand-color-1': '#f2f3ff',
     '--td-brand-color-2': '#d9e1ff',
     '--td-brand-color-3': '#b5c7ff',
@@ -167,7 +168,7 @@ export function getColorList(colorArray: Array<TColorToken>): Array<string> {
 export function generateColorMap(theme: string, colorPalette: Array<string>, mode: 'light' | 'dark') {
   const isDarkMode = mode === 'dark';
   let brandColorIdx = colorPalette.indexOf(theme);
-  console.log(theme, 'theme');
+
   if (isDarkMode) {
     // eslint-disable-next-line no-use-before-define
     colorPalette.reverse().map((color) => {
