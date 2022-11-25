@@ -27,17 +27,16 @@ export const defaultDarkColor = [
 
 export const COLOR_TOKEN: TColorSeries = {
   DEFAULT: {
-    '--td-brand-color': '#0052D9',
-    '--td-brand-color-1': '#e0ebff',
-    '--td-brand-color-2': '#c0d8ff',
-    '--td-brand-color-3': '#a1c4ff',
-    '--td-brand-color-4': '#81b1ff',
-    '--td-brand-color-5': '#5f9bff',
-    '--td-brand-color-6': '#3d87ff',
-    '--td-brand-color-7': '#176eff',
-    '--td-brand-color-8': '#0052D9',
-    '--td-brand-color-9': '#0048cd',
-    '--td-brand-color-10': '#0035b5',
+    '--td-brand-color-1': '#f2f3ff',
+    '--td-brand-color-2': '#d9e1ff',
+    '--td-brand-color-3': '#b5c7ff',
+    '--td-brand-color-4': '#8eabff',
+    '--td-brand-color-5': '#618dff',
+    '--td-brand-color-6': '#366ef4',
+    '--td-brand-color-7': '#0052d9',
+    '--td-brand-color-8': '#003cab',
+    '--td-brand-color-9': '#002a7c',
+    '--td-brand-color-10': '#001a57',
   },
 
   CYAN: {
@@ -168,7 +167,7 @@ export function getColorList(colorArray: Array<TColorToken>): Array<string> {
 export function generateColorMap(theme: string, colorPalette: Array<string>, mode: 'light' | 'dark') {
   const isDarkMode = mode === 'dark';
   let brandColorIdx = colorPalette.indexOf(theme);
-
+  console.log(theme, 'theme');
   if (isDarkMode) {
     // eslint-disable-next-line no-use-before-define
     colorPalette.reverse().map((color) => {

@@ -156,10 +156,6 @@ const navToHelper = () => {
 </script>
 <style lang="less" scoped>
 .@{starter-prefix}-header {
-  &-layout {
-    height: 64px;
-  }
-
   &-menu-fixed {
     position: fixed;
     top: 0;
@@ -180,7 +176,6 @@ const navToHelper = () => {
   &-logo-container {
     cursor: pointer;
     display: inline-flex;
-    height: 64px;
   }
 }
 .header-menu {

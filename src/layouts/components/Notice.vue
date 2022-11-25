@@ -147,7 +147,7 @@ const goDetail = () => {
       background: var(--td-bg-color-container-hover);
 
       .msg-content {
-        color: var(--td-brand-color-8);
+        color: var(--td-brand-color);
       }
 
       .t-list-item__action {

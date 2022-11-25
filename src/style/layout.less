@@ -6,10 +6,6 @@
   width: fit-content;
 }
 
-.t-layout__header {
-  height: auto;
-}
-
 .t-button + .t-button {
   margin-left: @spacer;
 }
@@ -136,10 +132,10 @@
     min-height: 100%;
 
     &-mix {
-      top: 64px;
+      top: var(--td-comp-size-xxxl);
 
       &-fixed {
-        top: 64px;
+        top: var(--td-comp-size-xxxl);
         z-index: 0;
       }
     }
