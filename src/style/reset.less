@@ -1,16 +1,15 @@
 // 对部分样式进行重置
 body {
   color: var(--td-text-color-secondary);
-  font-family: -apple-system, BlinkMacSystemFont, @font-family;
-  font-size: @font-size-base;
-  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, var(--td-font-family);
+  font: var(--td-font-body-medium);
   -webkit-font-smoothing: antialiased;
   padding: 0;
   margin: 0;
 }
 
 pre {
-  font-family: @font-family;
+  font-family: var(--td-font-family);
 }
 
 ul,
@@ -63,7 +62,7 @@ a {
 }
 
 .t-button-link {
-  margin-right: @spacer-3;
+  margin-right: var(--td-comp-margin-xxl);
 
   &:last-child {
     margin-right: 0;

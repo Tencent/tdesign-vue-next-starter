@@ -32,7 +32,7 @@ const className = computed(() => {
   }
 
   &-circle {
-    border-radius: @border-radius-50;
+    border-radius: var(--td-radius-circle);
   }
 
   &-layout {

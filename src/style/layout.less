@@ -6,12 +6,8 @@
   width: fit-content;
 }
 
-.t-layout__header {
-  height: auto;
-}
-
 .t-button + .t-button {
-  margin-left: @spacer;
+  margin-left: var(--td-comp-margin-s);
 }
 
 .t-jumper {
@@ -30,7 +26,7 @@
 .left-operation-container,
 .operation-container {
   .t-button + .t-button {
-    margin-left: @spacer;
+    margin-left: var(--td-comp-margin-s);
   }
 }
 
@@ -80,7 +76,7 @@
   }
 
   &-content-layout {
-    padding: @spacer-3;
+    padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
   }
 
   &-layout {
@@ -93,7 +89,7 @@
       z-index: 100;
     }
     &-tabs-nav + .@{starter-prefix}-content-layout {
-      padding-top: @spacer-3;
+      padding-top: var(--td-comp-paddingTB-xxl);
     }
 
     &::-webkit-scrollbar {
@@ -111,7 +107,7 @@
 
   &-footer-layout {
     padding: 0;
-    margin-bottom: @spacer-3;
+    margin-bottom: var(--td-comp-margin-xxl);
   }
 
   // slideBar
@@ -136,10 +132,10 @@
     min-height: 100%;
 
     &-mix {
-      top: 64px;
+      top: var(--td-comp-size-xxxl);
 
       &-fixed {
-        top: 64px;
+        top: var(--td-comp-size-xxxl);
         z-index: 0;
       }
     }
@@ -177,7 +173,7 @@
 
     &-logo-normal {
       color: var(--td-brand-color);
-      font-size: @font-size-l;
+      font: var(--td-font-body-large);
       transition: all 0.3s;
     }
   }

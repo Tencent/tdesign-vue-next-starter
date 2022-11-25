@@ -274,7 +274,7 @@ const getContainer = () => {
 .list-common-table {
   background-color: var(--td-bg-color-container);
   padding: 30px 32px;
-  border-radius: @border-radius;
+  border-radius: var(--td-radius-default);
 
   .table-container {
     margin-top: 30px;
