@@ -24,7 +24,7 @@
     "lodash": "^4.17.21",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.11",
-    "pinia-plugin-persistedstate": "^2.1.1",
+    "pinia-plugin-persistedstate": "^3.0.1",
     "qrcode.vue": "^3.2.2",
     "qs": "^6.10.5",
     "tdesign-icons-vue-next": "^0.1.1",
