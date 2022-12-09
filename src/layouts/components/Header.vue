@@ -143,7 +143,10 @@ const handleNav = (url) => {
 };
 
 const handleLogout = () => {
-  router.push(`/login?redirect=${router.currentRoute.value.fullPath}`);
+  router.push({
+    path: '/login',
+    query: { redirect: encodeURIComponent(router.currentRoute.value.fullPath) },
+  });
 };
 
 const navToGitHub = () => {
