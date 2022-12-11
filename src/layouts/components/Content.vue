@@ -9,7 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue';
+import { computed } from 'vue';
+import type { ComputedRef } from 'vue';
 import { useTabsRouterStore } from '@/store';
 
 // <suspense>标签属于实验性功能，请谨慎使用

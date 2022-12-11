@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { TRouterInfo, TTabRouterType } from '@/types/interface';
+import type { TRouterInfo, TTabRouterType } from '@/types/interface';
 import { store } from '@/store';
 
 const homeRoute: Array<TRouterInfo> = [

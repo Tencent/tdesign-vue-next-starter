@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { NotificationItem } from '@/types/interface';
+import type { NotificationItem } from '@/types/interface';
 
 const msgData = [
   {

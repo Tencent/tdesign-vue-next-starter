@@ -100,7 +100,8 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted, watchEffect } from 'vue';
-import { MessagePlugin, PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
+import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
 import useClipboard from 'vue-clipboard3';
 
