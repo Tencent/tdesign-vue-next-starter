@@ -21,7 +21,7 @@
             :min-column-width="128"
             :popup-props="{
               overlayClassName: 'route-tabs-dropdown',
-              onVisibleChange: (visible: boolean, ctx) => handleTabMenuClick(visible, ctx, routeItem.path),
+              onVisibleChange: (visible, ctx) => handleTabMenuClick(visible, ctx, routeItem.path),
               visible: activeTabPath === routeItem.path,
             }"
           >
@@ -71,7 +71,7 @@ import { nextTick, ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useSettingStore, useTabsRouterStore } from '@/store';
 import { prefix } from '@/config/global';
-import { TRouterInfo } from '@/types/interface';
+import type { TRouterInfo } from '@/types/interface';
 
 import LContent from './Content.vue';
 import LBreadcrumb from './Breadcrumb.vue';
