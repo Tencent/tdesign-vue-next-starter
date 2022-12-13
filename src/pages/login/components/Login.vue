@@ -82,7 +82,8 @@
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import QrcodeVue from 'qrcode.vue';
-import { FormInstanceFunctions, MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
+import type { FormInstanceFunctions, FormRule } from 'tdesign-vue-next';
 import { useCounter } from '@/hooks';
 import { useUserStore } from '@/store';
 
@@ -96,7 +97,7 @@ const INITIAL_DATA = {
   checked: false,
 };
 
-const FORM_RULES = {
+const FORM_RULES: Record<string, FormRule[]> = {
   phone: [{ required: true, message: '手机号必填', type: 'error' }],
   account: [{ required: true, message: '账号必填', type: 'error' }],
   password: [{ required: true, message: '密码必填', type: 'error' }],
