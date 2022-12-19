@@ -40,7 +40,10 @@ router.beforeEach(async (to, from, next) => {
         }
       } catch (error) {
         MessagePlugin.error(error);
-        next(`/login?redirect=${to.path}`);
+        next({
+          path: '/login',
+          query: { redirect: encodeURIComponent(to.fullPath) },
+        });
         NProgress.done();
       }
     }
@@ -49,7 +52,10 @@ router.beforeEach(async (to, from, next) => {
     if (whiteListRouters.indexOf(to.path) !== -1) {
       next();
     } else {
-      next(`/login?redirect=${to.path}`);
+      next({
+        path: '/login',
+        query: { redirect: encodeURIComponent(to.fullPath) },
+      });
     }
     NProgress.done();
   }

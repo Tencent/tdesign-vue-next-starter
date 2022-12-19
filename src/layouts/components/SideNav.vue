@@ -16,14 +16,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, PropType } from 'vue';
+import { computed, onMounted } from 'vue';
+import type { PropType } from 'vue';
 import { useRouter } from 'vue-router';
 import union from 'lodash/union';
 
 import { useSettingStore } from '@/store';
 import { prefix } from '@/config/global';
 import pgk from '../../../package.json';
-import { MenuRoute } from '@/types/interface';
+import type { MenuRoute } from '@/types/interface';
 import { getActive, getRoutesExpanded } from '@/router';
 
 import AssetLogo from '@/assets/assets-t-logo.svg?component';
@@ -54,7 +55,7 @@ const props = defineProps({
     default: '64px',
   },
   theme: {
-    type: String as PropType<string>,
+    type: String as PropType<'light' | 'dark'>,
     default: 'light',
   },
   isCompact: {

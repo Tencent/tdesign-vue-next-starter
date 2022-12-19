@@ -2,7 +2,7 @@
   <div>
     <template v-for="item in list" :key="item.path">
       <template v-if="!item.children || !item.children.length || item.meta?.single">
-        <t-menu-item v-if="getHref(item)" :href="getHref(item)?.[0]" :name="item.path" :value="getPath(item)">
+        <t-menu-item v-if="getHref(item)" :name="item.path" :value="getPath(item)" @click="openHref(getHref(item)[0])">
           <template #icon>
             <t-icon v-if="beIcon(item)" :name="item.icon" />
             <component :is="beRender(item).render" v-else-if="beRender(item).can" class="t-icon" />
@@ -29,9 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
+import { computed } from 'vue';
+import type { PropType } from 'vue';
 import isObject from 'lodash/isObject';
-import { MenuRoute } from '@/types/interface';
+import type { MenuRoute } from '@/types/interface';
 import { getActive } from '@/router';
 
 const props = defineProps({
@@ -47,7 +48,9 @@ const list = computed(() => {
   return getMenuList(navData);
 });
 
-const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
+type ListItemType = MenuRoute & { icon?: string };
+
+const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
   if (!list) {
     return [];
   }
@@ -71,7 +74,11 @@ const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
 };
 
 const getHref = (item: MenuRoute) => {
-  return item.path.match(/(http|https):\/\/([\w.]+\/?)\S*/);
+  const { frameSrc, frameBlank } = item.meta;
+  if (frameSrc && frameBlank) {
+    return frameSrc.match(/(http|https):\/\/([\w.]+\/?)\S*/);
+  }
+  return null;
 };
 
 const getPath = (item) => {
@@ -96,6 +103,10 @@ const beRender = (item: MenuRoute) => {
     can: false,
     render: null,
   };
+};
+
+const openHref = (url: string) => {
+  window.open(url);
 };
 </script>
 

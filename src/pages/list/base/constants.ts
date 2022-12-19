@@ -1,4 +1,6 @@
-export const COLUMNS = [
+import { PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+
+export const COLUMNS: PrimaryTableCol<TableRowData>[] = [
   { colKey: 'row-select', type: 'multiple', width: 64, fixed: 'left' },
   {
     title: '合同名称',
@@ -7,7 +9,7 @@ export const COLUMNS = [
     colKey: 'name',
     fixed: 'left',
   },
-  { title: '合同状态', colKey: 'status', width: 200, cell: { col: 'status' } },
+  { title: '合同状态', colKey: 'status', width: 200 },
   {
     title: '合同编号',
     width: 200,

@@ -80,9 +80,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import QrcodeVue from 'qrcode.vue';
-import { FormInstanceFunctions, MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
+import type { FormInstanceFunctions, FormRule } from 'tdesign-vue-next';
 import { useCounter } from '@/hooks';
 import { useUserStore } from '@/store';
 
@@ -96,7 +97,7 @@ const INITIAL_DATA = {
   checked: false,
 };
 
-const FORM_RULES = {
+const FORM_RULES: Record<string, FormRule[]> = {
   phone: [{ required: true, message: '手机号必填', type: 'error' }],
   account: [{ required: true, message: '账号必填', type: 'error' }],
   password: [{ required: true, message: '密码必填', type: 'error' }],
@@ -116,6 +117,7 @@ const switchType = (val: string) => {
 };
 
 const router = useRouter();
+const route = useRoute();
 
 /**
  * 发送验证码
@@ -134,9 +136,9 @@ const onSubmit = async ({ validateResult }) => {
       await userStore.login(formData.value);
 
       MessagePlugin.success('登陆成功');
-      router.push({
-        path: '/dashboard/base',
-      });
+      const redirect = route.query.redirect as string;
+      const redirectUrl = redirect ? decodeURIComponent(redirect) : '/dashboard';
+      router.push(redirectUrl);
     } catch (e) {
       console.log(e);
       MessagePlugin.error(e.message);
