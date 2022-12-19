@@ -24,7 +24,7 @@
         :pagination="pagination"
         :selected-row-keys="selectedRowKeys"
         :loading="dataLoading"
-        :header-affixed-top="{ offsetTop, container: getContainer }"
+        :header-affixed-top="headerAffixedTop"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
         @select-change="rehandleSelectChange"
@@ -177,13 +177,13 @@ const handleClickDelete = (row: { rowIndex: any }) => {
   confirmVisible.value = true;
 };
 
-const offsetTop = computed(() => {
-  return store.isUseTabsRouter ? 48 : 0;
-});
-
-const getContainer = () => {
-  return document.querySelector(`.${prefix}-layout`);
-};
+const headerAffixedTop = computed(
+  () =>
+    ({
+      offsetTop: store.isUseTabsRouter ? 48 : 0,
+      container: `.${prefix}-layout`,
+    } as any),
+);
 </script>
 
 <style lang="less" scoped>

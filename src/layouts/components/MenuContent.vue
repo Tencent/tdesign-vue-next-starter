@@ -48,7 +48,9 @@ const list = computed(() => {
   return getMenuList(navData);
 });
 
-const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
+type ListItemType = MenuRoute & { icon?: string };
+
+const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
   if (!list) {
     return [];
   }

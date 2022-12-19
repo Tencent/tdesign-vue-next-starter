@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin, FormRule, SubmitContext, Data } from 'tdesign-vue-next';
 
 const INITIAL_DATA = {
   name: '',
@@ -70,12 +70,12 @@ const formVisible = ref(false);
 const formData = ref(props.data);
 const textareaValue = ref('');
 
-const onSubmit = ({ result, firstError }) => {
+const onSubmit = ({ validateResult, firstError }: SubmitContext<Data>) => {
   if (!firstError) {
     MessagePlugin.success('提交成功');
     formVisible.value = false;
   } else {
-    console.log('Errors: ', result);
+    console.log('Errors: ', validateResult);
     MessagePlugin.warning(firstError);
   }
 };
@@ -107,7 +107,7 @@ watch(
   },
 );
 
-const rules = {
+const rules: Record<string, FormRule[]> = {
   name: [{ required: true, message: '请输入产品名称', type: 'error' }],
 };
 </script>

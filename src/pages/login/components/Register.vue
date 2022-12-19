@@ -72,7 +72,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin, FormRule } from 'tdesign-vue-next';
 import { useCounter } from '@/hooks';
 
 const INITIAL_DATA = {
@@ -83,7 +83,7 @@ const INITIAL_DATA = {
   checked: false,
 };
 
-const FORM_RULES = {
+const FORM_RULES: Record<string, FormRule[]> = {
   phone: [{ required: true, message: '手机号必填', type: 'error' }],
   email: [
     { required: true, message: '邮箱必填', type: 'error' },

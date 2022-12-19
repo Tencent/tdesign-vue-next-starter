@@ -119,8 +119,8 @@ export const TABLE_COLUMNS_DATA = [
     sorter: (a, b) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
   },
   {
-    align: 'left',
-    fixed: 'right',
+    align: 'left' as const,
+    fixed: 'right' as const,
     width: 200,
     className: 'test2',
     colKey: 'op',

@@ -149,7 +149,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { ValidateResultContext } from 'tdesign-vue-next';
+import { SubmitContext, Data } from 'tdesign-vue-next';
 
 import {
   FORM_RULES,
@@ -179,7 +179,7 @@ const amount = computed(() => {
   return '--';
 });
 
-const onSubmit = (result: ValidateResultContext<FormData>, val: number) => {
+const onSubmit = (result: SubmitContext<Data>, val: number) => {
   if (result.validateResult === true) {
     activeForm.value = val;
   }

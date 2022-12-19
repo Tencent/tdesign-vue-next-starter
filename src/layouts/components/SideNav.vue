@@ -55,7 +55,7 @@ const props = defineProps({
     default: '64px',
   },
   theme: {
-    type: String as PropType<string>,
+    type: String as PropType<'light' | 'dark'>,
     default: 'light',
   },
   isCompact: {

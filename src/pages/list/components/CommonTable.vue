@@ -73,7 +73,7 @@
         :hover="hover"
         :pagination="pagination"
         :loading="dataLoading"
-        :header-affixed-top="{ offsetTop, container: getContainer }"
+        :header-affixed-top="headerAffixedTop"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
       >
@@ -114,7 +114,7 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin, PrimaryTableCol, TableRowData, PageInfo } from 'tdesign-vue-next';
 import Trend from '@/components/trend/index.vue';
 import { getList } from '@/api/list';
 import { useSettingStore } from '@/store';
@@ -130,7 +130,7 @@ import {
 
 const store = useSettingStore();
 
-const COLUMNS = [
+const COLUMNS: PrimaryTableCol<TableRowData>[] = [
   {
     title: '合同名称',
     fixed: 'left',
@@ -139,7 +139,7 @@ const COLUMNS = [
     align: 'left',
     colKey: 'name',
   },
-  { title: '合同状态', colKey: 'status', width: 200, cell: { col: 'status' } },
+  { title: '合同状态', colKey: 'status', width: 200 },
   {
     title: '合同编号',
     width: 200,
@@ -182,7 +182,7 @@ const searchForm = {
 
 const formData = ref({ ...searchForm });
 const rowKey = 'index';
-const verticalAlign = 'top';
+const verticalAlign = 'top' as const;
 const hover = true;
 
 const pagination = ref({
@@ -251,8 +251,8 @@ const onReset = (val) => {
 const onSubmit = (val) => {
   console.log(val);
 };
-const rehandlePageChange = (curr, pageInfo) => {
-  console.log('分页变化', curr, pageInfo);
+const rehandlePageChange = (pageInfo: PageInfo, newDataSource: TableRowData[]) => {
+  console.log('分页变化', pageInfo, newDataSource);
 };
 const rehandleChange = (changeParams, triggerAndData) => {
   console.log('统一Change', changeParams, triggerAndData);
@@ -261,13 +261,13 @@ const rehandleClickOp = ({ text, row }) => {
   console.log(text, row);
 };
 
-const offsetTop = computed(() => {
-  return store.isUseTabsRouter ? 48 : 0;
-});
-
-const getContainer = () => {
-  return document.querySelector(`.${prefix}-layout`);
-};
+const headerAffixedTop = computed(
+  () =>
+    ({
+      offsetTop: store.isUseTabsRouter ? 48 : 0,
+      container: `.${prefix}-layout`,
+    } as any), // TO BE FIXED
+);
 </script>
 
 <style lang="less" scoped>
