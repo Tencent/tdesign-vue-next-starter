@@ -19,7 +19,7 @@ export const useSettingStore = defineStore('setting', {
     showSidebar: (state) => state.layout !== 'top',
     showSidebarLogo: (state) => state.layout === 'side',
     showHeaderLogo: (state) => state.layout !== 'side',
-    displayMode: (state) => {
+    displayMode: (state): 'dark' | 'light' => {
       if (state.mode === 'auto') {
         const media = window.matchMedia('(prefers-color-scheme:dark)');
         if (media.matches) {
@@ -27,7 +27,7 @@ export const useSettingStore = defineStore('setting', {
         }
         return 'light';
       }
-      return state.mode;
+      return state.mode as 'dark' | 'light';
     },
   },
   actions: {
