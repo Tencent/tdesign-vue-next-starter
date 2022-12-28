@@ -53,7 +53,7 @@ export const usePermissionStore = defineStore('permission', {
       this.removeRoutes = removeRoutes;
 
       removeRoutes.forEach((item: RemoveRouteInfo) => {
-        if (router.hasRoute(item.parentRouteName)) {
+        if (router.hasRoute(item.route.name)) {
           router.removeRoute(item.route.name);
         }
       });
