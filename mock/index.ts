@@ -158,7 +158,7 @@ export default [
               component: 'LAYOUT',
               redirect: '/dashboard/base',
               name: 'dashboard',
-              meta: { title: '仪表盘', icon: 'DashboardIcon' },
+              meta: { title: '仪表盘', icon: 'dashboard' },
               children: [
                 {
                   path: 'base',
@@ -171,6 +171,47 @@ export default [
                   name: 'DashboardDetail',
                   component: '/dashboard/detail/index',
                   meta: { title: '统计报表' },
+                },
+              ],
+            },
+            {
+              path: '/frame',
+              name: 'Frame',
+              component: 'Layout',
+              redirect: '/frame/doc',
+              meta: {
+                icon: 'internet',
+                title: '外部页面',
+              },
+
+              children: [
+                {
+                  path: 'doc',
+                  name: 'Doc',
+                  component: 'IFrame',
+                  meta: {
+                    frameSrc: 'https://tdesign.tencent.com/starter/docs/vue-next/get-started',
+                    title: '使用文档（内嵌）',
+                  },
+                },
+                {
+                  path: 'TDesign',
+                  name: 'TDesign',
+                  component: 'IFrame',
+                  meta: {
+                    frameSrc: 'https://tdesign.tencent.com/vue-next/getting-started',
+                    title: 'TDesign 文档（内嵌）',
+                  },
+                },
+                {
+                  path: 'TDesign2',
+                  name: 'TDesign2',
+                  component: 'IFrame',
+                  meta: {
+                    frameSrc: 'https://tdesign.tencent.com/vue-next/getting-started',
+                    frameBlank: true,
+                    title: 'TDesign 文档（外链）',
+                  },
                 },
               ],
             },

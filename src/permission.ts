@@ -10,12 +10,13 @@ NProgress.configure({ showSpinner: false });
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
 
-  const userStore = getUserStore();
   const permissionStore = getPermissionStore();
   const { whiteListRouters } = permissionStore;
+  await permissionStore.buildRoutesAction();
 
+  const userStore = getUserStore();
   const { token } = userStore;
-  permissionStore.buildRoutesAction();
+
   if (token) {
     if (to.path === '/login') {
       next();

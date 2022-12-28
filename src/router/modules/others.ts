@@ -1,5 +1,5 @@
+import { LogoutIcon } from 'tdesign-icons-vue-next';
 import Layout from '@/layouts/index.vue';
-import LogoutIcon from '@/assets/assets-slide-logout.svg';
 
 export default [
   {

@@ -1,19 +1,33 @@
 import cloneDeep from 'lodash/cloneDeep';
+import { shallowRef } from 'vue';
 import { RouteItem, RouteMeta } from '@/api/model/permissionModel';
-import { BLANK_LAYOUT, LAYOUT } from '@/utils/route/constant';
+import { BLANK_LAYOUT, LAYOUT, IFRAME } from '@/utils/route/constant';
+
+// vite 3+ support dynamic import from node_modules
+const iconsPath = import.meta.glob('../../../node_modules/tdesign-icons-vue-next/esm/components/*.js');
 
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>();
 
 LayoutMap.set('LAYOUT', LAYOUT);
 LayoutMap.set('BLANK', BLANK_LAYOUT);
+LayoutMap.set('IFRAME', IFRAME);
 
 let dynamicViewsModules: Record<string, () => Promise<Recordable>>;
 
+// 动态从包内引入单个Icon
+async function getMenuIcon(iconName: string) {
+  const RenderIcon = iconsPath[`../../../node_modules/tdesign-icons-vue-next/esm/components/${iconName}.js`];
+
+  const Icon = await RenderIcon();
+  // @ts-ignore
+  return shallowRef(Icon.default);
+}
+
 // 动态引入路由组件
 function asyncImportRoute(routes: RouteItem[] | undefined) {
-  dynamicViewsModules = dynamicViewsModules || import.meta.glob('../../pages/**/*.{vue,tsx}');
+  dynamicViewsModules = dynamicViewsModules || import.meta.glob('../../pages/**/*.vue');
   if (!routes) return;
-  routes.forEach((item) => {
+  routes.forEach(async (item) => {
     const { component } = item;
     const { children } = item;
     if (component) {
@@ -21,9 +35,11 @@ function asyncImportRoute(routes: RouteItem[] | undefined) {
       if (layoutFound) {
         item.component = layoutFound;
       } else {
-        item.component = dynamicImport(dynamicViewsModules, component as string);
+        item.component = dynamicImport(dynamicViewsModules, component);
       }
     }
+    if (item.meta.icon) item.meta.icon = await getMenuIcon(item.meta.icon);
+
     // eslint-disable-next-line no-unused-expressions
     children && asyncImportRoute(children);
   });
@@ -54,8 +70,10 @@ function dynamicImport(dynamicViewsModules: Record<string, () => Promise<Recorda
 
 // 将背景对象变成路由对象
 export function transformObjectToRoute<T = RouteItem>(routeList: RouteItem[]): T[] {
-  routeList.forEach((route) => {
+  routeList.forEach(async (route) => {
     const component = route.component as string;
+    if (route.meta.icon) route.meta.icon = await getMenuIcon(route.meta.icon);
+
     if (component) {
       if (component.toUpperCase() === 'LAYOUT') {
         route.component = LayoutMap.get(component.toUpperCase());

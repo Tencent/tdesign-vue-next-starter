@@ -1,6 +1,6 @@
 import { ConfigEnv, UserConfig, loadEnv } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
-import createVuePlugin from '@vitejs/plugin-vue';
+import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import svgLoader from 'vite-svg-loader';
 
@@ -32,7 +32,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     },
 
     plugins: [
-      createVuePlugin(),
+      vue(),
       vueJsx(),
       viteMockServe({
         mockPath: 'mock',

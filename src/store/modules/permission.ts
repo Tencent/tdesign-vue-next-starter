@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
-import router, { asyncRouterList } from '@/router';
+import router from '@/router';
 import { store } from '@/store';
 import { RouteItem } from '@/api/model/permissionModel';
 import { getMenuList } from '@/api/permission';
@@ -32,6 +32,7 @@ export const usePermissionStore = defineStore('permission', {
     whiteListRouters: ['/login'],
     routers: [],
     removeRoutes: [],
+    asyncRoutes: [],
   }),
   actions: {
     async initRoutes(roles: Array<unknown>) {
@@ -40,9 +41,12 @@ export const usePermissionStore = defineStore('permission', {
       let removeRoutes = [];
       // special token
       if (roles.includes('all')) {
-        accessedRouters = asyncRouterList;
+        accessedRouters = this.asyncRoutes;
+        accessedRouters.forEach((item: RouteRecordRaw) => {
+          router.addRoute(item);
+        });
       } else {
-        const res = filterPermissionsRouters(asyncRouterList, roles);
+        const res = filterPermissionsRouters(this.asyncRoutes, roles);
         accessedRouters = res.accessedRouters;
         removeRoutes = res.removeRoutes;
       }
@@ -60,7 +64,7 @@ export const usePermissionStore = defineStore('permission', {
       try {
         const asyncRoutes: Array<RouteItem> = (await getMenuList()).list;
         const routeList = transformObjectToRoute(asyncRoutes);
-        console.log(routeList);
+        this.asyncRoutes = routeList;
       } catch (error) {
         throw new Error("Can't build routes");
       }
