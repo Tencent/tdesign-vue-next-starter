@@ -3,9 +3,14 @@ import { RouteRecordRaw } from 'vue-router';
 import router, { asyncRouterList } from '@/router';
 import { store } from '@/store';
 
+interface RemoveRouteInfo {
+  parentRouteName: string
+  route: RouteRecordRaw
+}
+
 function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<unknown>) {
   const res = [];
-  const removeRoutes = [];
+  const removeRoutes: Array<RemoveRouteInfo> = [];
   routes.forEach((route) => {
     const children = [];
     route.children?.forEach((childRouter) => {
@@ -13,7 +18,7 @@ function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<un
       if (roles.indexOf(roleCode) !== -1) {
         children.push(childRouter);
       } else {
-        removeRoutes.push(childRouter);
+        removeRoutes.push({parentRouteName: route.name, route: childRouter});
       }
     });
     if (children.length > 0) {
@@ -47,15 +52,15 @@ export const usePermissionStore = defineStore('permission', {
       this.routers = accessedRouters;
       this.removeRoutes = removeRoutes;
 
-      removeRoutes.forEach((item: RouteRecordRaw) => {
-        if (router.hasRoute(item.name)) {
-          router.removeRoute(item.name);
+      removeRoutes.forEach((item: RemoveRouteInfo) => {
+        if (router.hasRoute(item.parentRouteName)) {
+          router.removeRoute(item.route.name);
         }
       });
     },
     async restore() {
-      this.removeRoutes.forEach((item: RouteRecordRaw) => {
-        router.addRoute(item);
+      this.removeRoutes.forEach((item: RemoveRouteInfo) => {
+        router.addRoute(item.parentRouteName, item.route);
       });
     },
   },
