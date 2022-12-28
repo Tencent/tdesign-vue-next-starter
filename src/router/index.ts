@@ -1,5 +1,7 @@
-import { useRoute, createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { useRoute, createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import uniq from 'lodash/uniq';
+
+const env = import.meta.env.MODE || 'development';
 
 // 自动导入modules文件夹下所有ts文件
 const modules = import.meta.globEager('./modules/**/*.ts');
@@ -8,6 +10,7 @@ const modules = import.meta.globEager('./modules/**/*.ts');
 const routeModuleList: Array<RouteRecordRaw> = [];
 
 Object.keys(modules).forEach((key) => {
+  // @ts-ignore
   const mod = modules[key].default || {};
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   routeModuleList.push(...modList);
@@ -70,7 +73,7 @@ export const getActive = (maxLevel = 3): string => {
 };
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(env === 'site' ? '/starter/vue-next/' : null),
   routes: allRoutes,
   scrollBehavior() {
     return {
