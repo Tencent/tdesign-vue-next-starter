@@ -32,11 +32,6 @@ const defaultRouterList: Array<RouteRecordRaw> = [
     path: '/',
     redirect: '/dashboard/base',
   },
-  {
-    path: '/:w+',
-    name: '404Page',
-    redirect: '/result/404',
-  },
 ];
 
 export const allRoutes = [...defaultRouterList, ...asyncRouterList];

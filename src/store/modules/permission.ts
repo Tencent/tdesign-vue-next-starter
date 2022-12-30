@@ -42,9 +42,6 @@ export const usePermissionStore = defineStore('permission', {
       // special token
       if (roles.includes('all')) {
         accessedRouters = this.asyncRoutes;
-        accessedRouters.forEach((item: RouteRecordRaw) => {
-          router.addRoute(item);
-        });
       } else {
         const res = filterPermissionsRouters(this.asyncRoutes, roles);
         accessedRouters = res.accessedRouters;
@@ -60,11 +57,12 @@ export const usePermissionStore = defineStore('permission', {
         }
       });
     },
-    async buildRoutesAction() {
+    async buildRoutesAction(roles: Array<unknown>) {
       try {
         const asyncRoutes: Array<RouteItem> = (await getMenuList()).list;
-        const routeList = transformObjectToRoute(asyncRoutes);
-        this.asyncRoutes = routeList;
+        this.asyncRoutes = transformObjectToRoute(asyncRoutes);
+        await this.initRoutes(roles);
+        return this.asyncRoutes;
       } catch (error) {
         throw new Error("Can't build routes");
       }

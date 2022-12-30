@@ -2,8 +2,10 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 
+import { RouteRecordRaw } from 'vue-router';
 import { getPermissionStore, getUserStore } from '@/store';
 import router from '@/router';
+import { PAGE_NOT_FOUND_ROUTE } from '@/utils/route/constant';
 
 NProgress.configure({ showSpinner: false });
 
@@ -12,7 +14,6 @@ router.beforeEach(async (to, from, next) => {
 
   const permissionStore = getPermissionStore();
   const { whiteListRouters } = permissionStore;
-  await permissionStore.buildRoutesAction();
 
   const userStore = getUserStore();
   const { token } = userStore;
@@ -24,16 +25,29 @@ router.beforeEach(async (to, from, next) => {
     }
 
     const { roles } = userStore;
+    const { asyncRoutes } = permissionStore;
+
+    if (asyncRoutes && asyncRoutes.length === 0) {
+      const routeList = await permissionStore.buildRoutesAction(roles);
+      routeList.forEach((item: RouteRecordRaw) => {
+        router.addRoute(item);
+      });
+
+      if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
+        // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
+        next({ path: to.fullPath, replace: true, query: to.query });
+      } else {
+        const redirect = decodeURIComponent((from.query.redirect || to.path) as string);
+        next(to.path === redirect ? { ...to, replace: true } : { path: redirect });
+        return;
+      }
+    }
 
     if (roles && roles.length > 0) {
       next();
     } else {
       try {
         await userStore.getUserInfo();
-
-        const { roles } = userStore;
-
-        await permissionStore.initRoutes(roles);
 
         if (router.hasRoute(to.name)) {
           next();
