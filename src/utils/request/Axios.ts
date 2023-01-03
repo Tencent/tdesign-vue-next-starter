@@ -64,10 +64,7 @@ export class VAxios {
 
     // 请求配置处理
     this.instance.interceptors.request.use((config: AxiosRequestConfig) => {
-      const {
-        headers: { ignoreRepeatRequest },
-      } = config;
-      const ignoreRepeat = ignoreRepeatRequest ?? this.options.requestOptions?.ignoreRepeatRequest;
+      const ignoreRepeat = this.options.requestOptions?.ignoreRepeatRequest;
       if (!ignoreRepeat) axiosCanceler.addPending(config);
 
       if (requestInterceptors && isFunction(requestInterceptors)) {
