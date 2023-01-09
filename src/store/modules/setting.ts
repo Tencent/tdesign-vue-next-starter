@@ -1,6 +1,13 @@
 import { defineStore } from 'pinia';
+import { Color } from 'tvision-color';
 import keys from 'lodash/keys';
-import { LIGHT_CHART_COLORS, DARK_CHART_COLORS, TColorSeries } from '@/config/color';
+import {
+  LIGHT_CHART_COLORS,
+  DARK_CHART_COLORS,
+  TColorSeries,
+  insertThemeStylesheet,
+  generateColorMap,
+} from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
 
@@ -49,6 +56,16 @@ export const useSettingStore = defineStore('setting', {
       this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
     },
     changeBrandTheme(brandTheme: string) {
+      const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
+        colors: [brandTheme],
+        step: 10,
+        remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
+      })[0];
+      const { mode } = this;
+      const colorMap = generateColorMap(brandTheme, newPalette, mode as 'light' | 'dark', brandColorIndex);
+
+      insertThemeStylesheet(brandTheme, colorMap, mode as 'light' | 'dark');
+
       document.documentElement.setAttribute('theme-color', brandTheme);
     },
     addColor(payload: TColorSeries) {

@@ -21,15 +21,6 @@ export const DARK_CHART_COLORS = {
 
 export type TChartColor = typeof LIGHT_CHART_COLORS;
 
-function toUnderline(name: string): string {
-  return name.replace(/([A-Z])/g, '_$1').toUpperCase();
-}
-
-export function getBrandColor(type: string, colorList: TColorSeries): TColorToken {
-  const name = /^#[A-F\d]{6}$/i.test(type) ? type : toUnderline(type);
-  return colorList[name || 'DEFAULT'];
-}
-
 export function getColorList(colorArray: Array<TColorToken>): Array<string> {
   const pureColorList = [];
   colorArray.map((colorToken) => Object.keys(colorToken).map((key) => pureColorList.push(colorToken[key])));

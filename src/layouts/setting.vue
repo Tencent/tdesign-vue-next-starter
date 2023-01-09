@@ -223,7 +223,7 @@ const getThumbnailUrl = (name: string): string => {
 };
 
 watchEffect(() => {
-  settingStore.updateConfig(formData.value);
+  if (formData.value.brandTheme !== 'dynamic') settingStore.updateConfig(formData.value);
 });
 </script>
 <style lang="less" scoped>

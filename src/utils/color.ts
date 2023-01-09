@@ -1,6 +1,5 @@
 import { Color } from 'tvision-color';
 import * as echarts from 'echarts/core';
-import { getBrandColor } from '@/config/color';
 import { getSettingStore } from '@/store';
 
 /**
@@ -11,11 +10,6 @@ import { getSettingStore } from '@/store';
  * @returns {}
  */
 export function getColorFromTheme(theme: string): Array<string> {
-  const settingStore = getSettingStore();
-  const { colorList } = settingStore;
-  const themeColor = getBrandColor(theme, colorList);
-
-  theme = themeColor?.['--td-brand-color'];
   const themeColorList = Color.getRandomPalette({
     color: theme,
     colorGamut: 'bright',
@@ -29,6 +23,7 @@ export function getColorFromTheme(theme: string): Array<string> {
 export function getChartListColor(): Array<string> {
   const settingStore = getSettingStore();
   const { brandTheme } = settingStore;
+  console.log(brandTheme, 'brandTheme');
   const res = getColorFromTheme(brandTheme);
 
   return res;
