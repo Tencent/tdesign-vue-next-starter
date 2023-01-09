@@ -4,135 +4,7 @@ import { Color } from 'tvision-color';
 export type TColorToken = Record<string, string>;
 export type TColorSeries = Record<string, TColorToken>;
 
-export const defaultLightColor = [
-  '#0052d9',
-  '#0594fa',
-  '#00a870',
-  '#ebb105',
-  '#ed7b2f',
-  '#e34d59',
-  '#ed49b4',
-  '#834ec2',
-];
-export const defaultDarkColor = [
-  '#4582e6',
-  '#29a4fb',
-  '#03a56f',
-  '#ca8d03',
-  '#ed7b2f',
-  '#ea7b84',
-  '#f172c5',
-  '#ab87d5',
-];
-
-export const COLOR_TOKEN: TColorSeries = {
-  DEFAULT: {
-    '--td-brand-color': '#0052d9',
-    '--td-brand-color-1': '#f2f3ff',
-    '--td-brand-color-2': '#d9e1ff',
-    '--td-brand-color-3': '#b5c7ff',
-    '--td-brand-color-4': '#8eabff',
-    '--td-brand-color-5': '#618dff',
-    '--td-brand-color-6': '#366ef4',
-    '--td-brand-color-7': '#0052d9',
-    '--td-brand-color-8': '#003cab',
-    '--td-brand-color-9': '#002a7c',
-    '--td-brand-color-10': '#001a57',
-  },
-
-  CYAN: {
-    '--td-brand-color': '#0594FA',
-    '--td-brand-color-1': '#d7eefe',
-    '--td-brand-color-2': '#aeddfd',
-    '--td-brand-color-3': '#84cafd',
-    '--td-brand-color-4': '#58b8fc',
-    '--td-brand-color-5': '#29a4fb',
-    '--td-brand-color-6': '#0594FA',
-    '--td-brand-color-7': '#29a4fb',
-    '--td-brand-color-8': '#0594FA',
-    '--td-brand-color-9': '#0378df',
-    '--td-brand-color-10': '#01409b',
-  },
-  GREEN: {
-    '--td-brand-color': '#00A870',
-    '--td-brand-color-1': '#8dffd9',
-    '--td-brand-color-2': '#00f2a2',
-    '--td-brand-color-3': '#00dc92',
-    '--td-brand-color-4': '#00c583',
-    '--td-brand-color-5': '#00A870',
-    '--td-brand-color-6': '#009a5d',
-    '--td-brand-color-7': '#00c583',
-    '--td-brand-color-8': '#00A870',
-    '--td-brand-color-9': '#009a5d',
-    '--td-brand-color-10': '#004a14',
-  },
-  ORANGE: {
-    '--td-brand-color': '#ED7B2F',
-    '--td-brand-color-1': '#fce5d7',
-    '--td-brand-color-2': '#f8cdaf',
-    '--td-brand-color-3': '#f4b285',
-    '--td-brand-color-4': '#f19659',
-    '--td-brand-color-5': '#ED7B2F',
-    '--td-brand-color-6': '#e75510',
-    '--td-brand-color-7': '#f19659',
-    '--td-brand-color-8': '#ED7B2F',
-    '--td-brand-color-9': '#e75510',
-    '--td-brand-color-10': '#7f0a02',
-  },
-  RED: {
-    '--td-brand-color': '#E34D59',
-    '--td-brand-color-1': '#fbe5e7',
-    '--td-brand-color-2': '#f7ccd0',
-    '--td-brand-color-3': '#f3b2b8',
-    '--td-brand-color-4': '#ef989f',
-    '--td-brand-color-5': '#ea7b84',
-    '--td-brand-color-6': '#E34D59',
-    '--td-brand-color-7': '#ea7b84',
-    '--td-brand-color-8': '#E34D59',
-    '--td-brand-color-9': '#e42c3a',
-    '--td-brand-color-10': '#8d0309',
-  },
-  PINK: {
-    '--td-brand-color': '#ED49B4',
-    '--td-brand-color-1': '#fce5f4',
-    '--td-brand-color-2': '#facae9',
-    '--td-brand-color-3': '#f7aede',
-    '--td-brand-color-4': '#f491d2',
-    '--td-brand-color-5': '#f172c5',
-    '--td-brand-color-6': '#ED49B4',
-    '--td-brand-color-7': '#f172c5',
-    '--td-brand-color-8': '#ED49B4',
-    '--td-brand-color-9': '#e80f9d',
-    '--td-brand-color-10': '#8f025e',
-  },
-  PURPLE: {
-    '--td-brand-color': '#834EC2',
-    '--td-brand-color-1': '#eee6f7',
-    '--td-brand-color-2': '#ddceee',
-    '--td-brand-color-3': '#ccb6e6',
-    '--td-brand-color-4': '#bb9edc',
-    '--td-brand-color-5': '#ab87d5',
-    '--td-brand-color-6': '#9a6fce',
-    '--td-brand-color-7': '#9a6fce',
-    '--td-brand-color-8': '#834EC2',
-    '--td-brand-color-9': '#783ac3',
-    '--td-brand-color-10': '#4c1397',
-  },
-  YELLOW: {
-    '--td-brand-color': '#EBB105',
-    '--td-brand-color-1': '#fde9ab',
-    '--td-brand-color-2': '#fbd152',
-    '--td-brand-color-3': '#EBB105',
-    '--td-brand-color-4': '#dda204',
-    '--td-brand-color-5': '#ca8d03',
-    '--td-brand-color-6': '#b67803',
-    '--td-brand-color-7': '#fbd152',
-    '--td-brand-color-8': '#EBB105',
-    '--td-brand-color-9': '#dda204',
-    '--td-brand-color-10': '#603100',
-  },
-};
-
+// TODO: 中性色暂时固定 待tvision-color生成带色彩倾向的中性色
 export const LIGHT_CHART_COLORS = {
   textColor: 'rgba(0, 0, 0, 0.9)',
   placeholderColor: 'rgba(0, 0, 0, 0.35)',
@@ -165,9 +37,13 @@ export function getColorList(colorArray: Array<TColorToken>): Array<string> {
   return pureColorList;
 }
 
-export function generateColorMap(theme: string, colorPalette: Array<string>, mode: 'light' | 'dark') {
+export function generateColorMap(
+  theme: string,
+  colorPalette: Array<string>,
+  mode: 'light' | 'dark',
+  brandColorIdx: number,
+) {
   const isDarkMode = mode === 'dark';
-  let brandColorIdx = colorPalette.indexOf(theme);
 
   if (isDarkMode) {
     // eslint-disable-next-line no-use-before-define

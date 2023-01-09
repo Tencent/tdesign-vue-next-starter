@@ -119,12 +119,25 @@ import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
-const COLOR_OPTIONS = ['default', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'dynamic'];
+
+const COLOR_OPTIONS = [
+  '#0052D9',
+  '#0594FA',
+  '#00A870',
+  '#EBB105',
+  '#ED7B2F',
+  '#E34D59',
+  '#ED49B4',
+  '#834EC2',
+  'dynamic',
+];
+
 const MODE_OPTIONS = [
   { type: 'light', text: '明亮' },
   { type: 'dark', text: '暗黑' },
   { type: 'auto', text: '跟随系统' },
 ];
+
 const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
@@ -151,12 +164,13 @@ const showSettingPanel = computed({
 });
 
 const changeColor = (hex: string) => {
-  const newPalette = Color.getPaletteByGradation({
+  const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
     colors: [hex],
     step: 10,
+    remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
   })[0];
   const { mode } = settingStore;
-  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
+  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark', brandColorIndex);
 
   settingStore.addColor({ [hex]: colorMap });
   settingStore.updateConfig({ ...formData.value, brandTheme: hex });
