@@ -1,13 +1,8 @@
 import { defineStore } from 'pinia';
 import { Color } from 'tvision-color';
 import keys from 'lodash/keys';
-import {
-  LIGHT_CHART_COLORS,
-  DARK_CHART_COLORS,
-  TColorSeries,
-  insertThemeStylesheet,
-  generateColorMap,
-} from '@/config/color';
+import { LIGHT_CHART_COLORS, DARK_CHART_COLORS, TColorSeries } from '@/config/color';
+import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
 
