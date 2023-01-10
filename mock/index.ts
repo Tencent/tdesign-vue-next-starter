@@ -246,7 +246,7 @@ export default [
                 {
                   path: 'step',
                   name: 'FormStep',
-                  component: '/form/base/index',
+                  component: '/form/step/index',
                   meta: {
                     title: '分步表单页',
                   },
