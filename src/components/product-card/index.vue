@@ -1,5 +1,5 @@
 <template>
-  <t-card theme="poster2">
+  <t-card theme="poster2" :bordered="false">
     <template #avatar>
       <t-avatar size="56px">
         <template #icon>
