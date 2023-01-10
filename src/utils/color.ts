@@ -1,7 +1,8 @@
 import { Color } from 'tvision-color';
 import * as echarts from 'echarts/core';
-import { getSettingStore } from '@/store';
+import trim from 'lodash/trim';
 import { TColorToken } from '@/config/color';
+
 /**
  * 依据主题类型获取颜色
  *
@@ -9,7 +10,8 @@ import { TColorToken } from '@/config/color';
  * @param {string} theme
  * @returns {}
  */
-export function getColorFromTheme(theme: string): Array<string> {
+export function getColorFromTheme(): Array<string> {
+  const theme = trim(getComputedStyle(document.documentElement).getPropertyValue('--td-brand-color'));
   const themeColorList = Color.getRandomPalette({
     color: theme,
     colorGamut: 'bright',
@@ -21,9 +23,7 @@ export function getColorFromTheme(theme: string): Array<string> {
 
 /** 图表颜色 */
 export function getChartListColor(): Array<string> {
-  const settingStore = getSettingStore();
-  const { brandTheme } = settingStore;
-  const res = getColorFromTheme(brandTheme);
+  const res = getColorFromTheme();
 
   return res;
 }
