@@ -156,6 +156,7 @@ const changeColor = (hex: string) => {
     remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
   })[0];
   const { mode } = settingStore;
+
   const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark', brandColorIndex);
 
   settingStore.addColor({ [hex]: colorMap });
@@ -210,7 +211,7 @@ const getThumbnailUrl = (name: string): string => {
 };
 
 watchEffect(() => {
-  settingStore.updateConfig(formData.value);
+  if (formData.value.brandTheme) settingStore.updateConfig(formData.value);
 });
 </script>
 <style lang="less" scoped>

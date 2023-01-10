@@ -3,6 +3,7 @@
     <t-col v-for="(item, index) in PANE_LIST" :key="item.title" :xs="6" :xl="3">
       <t-card
         :title="item.title"
+        :bordered="false"
         :style="{ height: '168px' }"
         :class="{ 'dashboard-item': true, 'dashboard-item--main-color': index == 0 }"
       >
