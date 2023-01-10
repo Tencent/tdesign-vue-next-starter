@@ -1,7 +1,7 @@
 <template>
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="9">
-      <t-card title="统计数据" :subtitle="`(万元)${currentMonth}`" class="dashboard-chart-card">
+      <t-card title="统计数据" :subtitle="`(万元)${currentMonth}`" class="dashboard-chart-card" :bordered="false">
         <template #option>
           <div class="dashboard-chart-title-container">
             <t-date-range-picker
@@ -22,7 +22,7 @@
       </t-card>
     </t-col>
     <t-col :xs="12" :xl="3">
-      <t-card title="销售渠道" :subtitle="currentMonth" class="dashboard-chart-card">
+      <t-card title="销售渠道" :subtitle="currentMonth" class="dashboard-chart-card" :bordered="false">
         <div
           id="countContainer"
           ref="countContainer"

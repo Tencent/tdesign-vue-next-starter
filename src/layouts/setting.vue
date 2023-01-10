@@ -23,11 +23,7 @@
         </t-radio-group>
         <div class="setting-group-title">主题色</div>
         <t-radio-group v-model="formData.brandTheme">
-          <div
-            v-for="(item, index) in COLOR_OPTIONS.slice(0, COLOR_OPTIONS.length - 1)"
-            :key="index"
-            class="setting-layout-drawer"
-          >
+          <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
               <color-container :value="item" />
             </t-radio-button>
@@ -50,11 +46,8 @@
                   :swatch-colors="[]"
                 />
               </template>
-              <t-radio-button
-                :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
-                class="setting-layout-color-group dynamic-color-btn"
-              >
-                <color-container :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
+              <t-radio-button :value="dynamicColor" class="setting-layout-color-group dynamic-color-btn">
+                <color-container :value="dynamicColor" />
               </t-radio-button>
             </t-popup>
           </div>
@@ -110,7 +103,8 @@ import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
 
 import STYLE_CONFIG from '@/config/style';
-import { insertThemeStylesheet, generateColorMap } from '@/config/color';
+import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
+import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
 
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
@@ -119,12 +113,13 @@ import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
-const COLOR_OPTIONS = ['default', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'dynamic'];
+
 const MODE_OPTIONS = [
   { type: 'light', text: '明亮' },
   { type: 'dark', text: '暗黑' },
   { type: 'auto', text: '跟随系统' },
 ];
+
 const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
@@ -136,6 +131,10 @@ const initStyleConfig = () => {
   return styleConfig;
 };
 
+const dynamicColor = computed(() => {
+  const isDynamic = DEFAULT_COLOR_OPTIONS.indexOf(formData.value.brandTheme) === -1;
+  return isDynamic ? formData.value.brandTheme : '';
+});
 const formData = ref({ ...initStyleConfig() });
 const isColoPickerDisplay = ref(false);
 
@@ -151,14 +150,17 @@ const showSettingPanel = computed({
 });
 
 const changeColor = (hex: string) => {
-  const newPalette = Color.getPaletteByGradation({
+  const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
     colors: [hex],
     step: 10,
+    remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
   })[0];
   const { mode } = settingStore;
-  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
+
+  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark', brandColorIndex);
 
   settingStore.addColor({ [hex]: colorMap });
+  formData.value.brandTheme = hex;
   settingStore.updateConfig({ ...formData.value, brandTheme: hex });
   insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
 };
@@ -209,7 +211,7 @@ const getThumbnailUrl = (name: string): string => {
 };
 
 watchEffect(() => {
-  settingStore.updateConfig(formData.value);
+  if (formData.value.brandTheme) settingStore.updateConfig(formData.value);
 });
 </script>
 <style lang="less" scoped>
