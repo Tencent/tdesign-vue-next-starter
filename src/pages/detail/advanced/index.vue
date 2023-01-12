@@ -24,7 +24,7 @@
           <t-step-item title="申请提交" content="已于12月21日提交" />
           <t-step-item title="电子发票" content="预计1～3个工作日" />
           <t-step-item title="发票已邮寄" content="电子发票开出后7个工作日联系" />
-          <t-step-item title="完成" content />
+          <t-step-item title="完成" content="" />
         </t-steps>
       </t-row>
     </t-card>
