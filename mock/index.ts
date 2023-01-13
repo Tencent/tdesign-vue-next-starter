@@ -154,34 +154,6 @@ export default [
         ...Mock.mock({
           list: [
             {
-              path: '/dashboard',
-              component: 'LAYOUT',
-              redirect: '/dashboard/base',
-              name: 'dashboard',
-              meta: {
-                title: '仪表盘',
-                icon: 'dashboard',
-              },
-              children: [
-                {
-                  path: 'base',
-                  name: 'DashboardBase',
-                  component: '/dashboard/base/index',
-                  meta: {
-                    title: '概览仪表盘',
-                  },
-                },
-                {
-                  path: 'detail',
-                  name: 'DashboardDetail',
-                  component: '/dashboard/detail/index',
-                  meta: {
-                    title: '统计报表',
-                  },
-                },
-              ],
-            },
-            {
               path: '/list',
               name: 'list',
               component: 'LAYOUT',

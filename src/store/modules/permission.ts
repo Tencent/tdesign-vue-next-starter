@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
-import router from '@/router';
+import router, { asyncRouterList } from '@/router';
 import { store } from '@/store';
 import { RouteItem } from '@/api/model/permissionModel';
 import { getMenuList } from '@/api/permission';
@@ -48,7 +48,7 @@ export const usePermissionStore = defineStore('permission', {
         removeRoutes = res.removeRoutes;
       }
 
-      this.routers = accessedRouters;
+      this.routers = accessedRouters.concat(asyncRouterList);
       this.removeRoutes = removeRoutes;
 
       removeRoutes.forEach((item: RouteRecordRaw) => {

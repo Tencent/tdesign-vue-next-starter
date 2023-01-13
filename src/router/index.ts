@@ -1,4 +1,4 @@
-import { useRoute, createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router';
+import { useRoute, createRouter, RouteRecordRaw, createWebHistory } from 'vue-router';
 import uniq from 'lodash/uniq';
 
 const env = import.meta.env.MODE || 'development';
@@ -68,7 +68,7 @@ export const getActive = (maxLevel = 3): string => {
 };
 
 const router = createRouter({
-  history: createWebHashHistory(env === 'site' ? '/starter/vue-next/' : null),
+  history: createWebHistory(env === 'site' ? '/starter/vue-next/' : null),
   routes: allRoutes,
   scrollBehavior() {
     return {
