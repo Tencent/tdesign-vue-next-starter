@@ -1,3 +1,6 @@
+// 前端 roles 控制菜单权限 通过登录后的角色对菜单就行过滤处理
+// 如果需要前端 roles 控制菜单权限 请使用此文件代码替换 permission.ts 的内容
+
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
 import router, { allRoutes } from '@/router';
