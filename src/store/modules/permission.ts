@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
-import router, { asyncRouterList } from '@/router';
+import router, { fixedRouterList, homepageRouterList } from '@/router';
 import { store } from '@/store';
 import { RouteItem } from '@/api/model/permissionModel';
 import { getMenuList } from '@/api/permission';
@@ -47,8 +47,12 @@ export const usePermissionStore = defineStore('permission', {
         accessedRouters = res.accessedRouters;
         removeRoutes = res.removeRoutes;
       }
-
-      this.routers = accessedRouters.concat(asyncRouterList);
+      // 在菜单展示全部路由
+      this.routers = [...homepageRouterList, ...accessedRouters, ...fixedRouterList];
+      // 在菜单只展示动态路由和首页
+      // this.routers = [...homepageRouterList, ...accessedRouters];
+      // 在菜单只展示动态路由
+      // this.routers = [...accessedRouters];
       this.removeRoutes = removeRoutes;
 
       removeRoutes.forEach((item: RouteRecordRaw) => {
@@ -57,7 +61,7 @@ export const usePermissionStore = defineStore('permission', {
         }
       });
     },
-    async buildRoutesAction(roles: Array<unknown>) {
+    async buildAsyncRoutes(roles: Array<unknown>) {
       try {
         const asyncRoutes: Array<RouteItem> = (await getMenuList()).list;
         this.asyncRoutes = transformObjectToRoute(asyncRoutes);
@@ -67,7 +71,7 @@ export const usePermissionStore = defineStore('permission', {
         throw new Error("Can't build routes");
       }
     },
-    async restore() {
+    async restoreRoutes() {
       this.removeRoutes.forEach((item: RouteRecordRaw) => {
         router.addRoute(item);
       });

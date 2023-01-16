@@ -28,7 +28,7 @@ router.beforeEach(async (to, from, next) => {
     const { asyncRoutes } = permissionStore;
 
     if (asyncRoutes && asyncRoutes.length === 0) {
-      const routeList = await permissionStore.buildRoutesAction(roles);
+      const routeList = await permissionStore.buildAsyncRoutes(roles);
       routeList.forEach((item: RouteRecordRaw) => {
         router.addRoute(item);
       });
@@ -83,7 +83,7 @@ router.afterEach((to) => {
     const permissionStore = getPermissionStore();
 
     userStore.logout();
-    permissionStore.restore();
+    permissionStore.restoreRoutes();
   }
   NProgress.done();
 });
