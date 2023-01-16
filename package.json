@@ -19,6 +19,7 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
+    "@types/nprogress": "^0.2.0",
     "axios": "^1.2.2",
     "dayjs": "^1.11.7",
     "echarts": "5.1.2",

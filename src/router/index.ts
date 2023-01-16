@@ -20,11 +20,6 @@ const defaultRouterList: Array<RouteRecordRaw> = [
     path: '/',
     redirect: '/dashboard/base',
   },
-  {
-    path: '/:w+',
-    name: '404Page',
-    redirect: '/result/404',
-  },
 ];
 // 存放固定路由
 export const homepageRouterList: Array<RouteRecordRaw> = mapModuleRouterList(homepageModules);

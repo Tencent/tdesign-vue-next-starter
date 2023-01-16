@@ -17,18 +17,16 @@ router.beforeEach(async (to, from, next) => {
 
   const userStore = getUserStore();
   const { token } = userStore;
-
   if (token) {
     if (to.path === '/login') {
       next();
       return;
     }
 
-    const { roles } = userStore;
     const { asyncRoutes } = permissionStore;
 
     if (asyncRoutes && asyncRoutes.length === 0) {
-      const routeList = await permissionStore.buildAsyncRoutes(roles);
+      const routeList = await permissionStore.buildAsyncRoutes();
       routeList.forEach((item: RouteRecordRaw) => {
         router.addRoute(item);
       });
@@ -43,25 +41,21 @@ router.beforeEach(async (to, from, next) => {
       }
     }
 
-    if (roles && roles.length > 0) {
-      next();
-    } else {
-      try {
-        await userStore.getUserInfo();
+    try {
+      await userStore.getUserInfo();
 
-        if (router.hasRoute(to.name)) {
-          next();
-        } else {
-          next(`/`);
-        }
-      } catch (error) {
-        MessagePlugin.error(error);
-        next({
-          path: '/login',
-          query: { redirect: encodeURIComponent(to.fullPath) },
-        });
-        NProgress.done();
+      if (router.hasRoute(to.name)) {
+        next();
+      } else {
+        next(`/`);
       }
+    } catch (error) {
+      MessagePlugin.error(error);
+      next({
+        path: '/login',
+        query: { redirect: encodeURIComponent(to.fullPath) },
+      });
+      NProgress.done();
     }
   } else {
     /* white list router */
