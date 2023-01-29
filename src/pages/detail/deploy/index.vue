@@ -2,14 +2,14 @@
   <div class="detail-deploy">
     <t-row :gutter="16">
       <t-col :lg="6" :xs="12">
-        <t-card title="部署趋势">
+        <t-card title="部署趋势" :bordered="false">
           <div class="deploy-panel-left">
             <div id="monitorContainer" style="width: 100%; height: 265px" />
           </div>
         </t-card>
       </t-col>
       <t-col :lg="6" :xs="12">
-        <t-card title="告警情况">
+        <t-card title="告警情况" :bordered="false">
           <template #option>
             <t-radio-group default-value="dateVal" @change="onAlertChange">
               <t-radio-button value="dateVal"> 本周 </t-radio-button>
@@ -22,7 +22,7 @@
     </t-row>
 
     <!-- 项目列表 -->
-    <t-card title="项目列表" class="container-base-margin-top">
+    <t-card title="项目列表" class="container-base-margin-top" :bordered="false">
       <t-table
         :columns="columns"
         :data="data"

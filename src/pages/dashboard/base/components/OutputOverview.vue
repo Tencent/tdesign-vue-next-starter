@@ -1,5 +1,5 @@
 <template>
-  <t-card>
+  <t-card :bordered="false">
     <t-row>
       <t-col :xs="12" :xl="9">
         <t-card

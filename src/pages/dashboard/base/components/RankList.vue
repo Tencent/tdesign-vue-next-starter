@@ -1,7 +1,7 @@
 <template>
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="6">
-      <t-card title="销售订单排名" class="dashboard-rank-card">
+      <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
         <template #actions>
           <t-radio-group default-value="dateVal">
             <t-radio-button value="dateVal">本周</t-radio-button>
@@ -26,7 +26,7 @@
       </t-card>
     </t-col>
     <t-col :xs="12" :xl="6">
-      <t-card title="销售订单排名" class="dashboard-rank-card">
+      <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
         <template #actions>
           <t-radio-group default-value="dateVal">
             <t-radio-button value="dateVal">本周</t-radio-button>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <t-card class="list-card-container">
+    <t-card class="list-card-container" :bordered="false">
       <t-row justify="space-between">
         <div class="left-operation-container">
           <t-button @click="handleSetupContract"> 新建合同 </t-button>

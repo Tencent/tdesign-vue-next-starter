@@ -3,7 +3,7 @@ import { TOKEN_NAME } from '@/config/global';
 import { store, usePermissionStore } from '@/store';
 
 const InitUserInfo = {
-  roles: [],
+  roles: [], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
 };
 
 export const useUserStore = defineStore('user', {
@@ -20,7 +20,7 @@ export const useUserStore = defineStore('user', {
     async login(userInfo: Record<string, unknown>) {
       const mockLogin = async (userInfo: Record<string, unknown>) => {
         // 登录请求流程
-        console.log(userInfo);
+        console.log(`用户信息:`, userInfo);
         // const { account, password } = userInfo;
         // if (account !== 'td') {
         //   return {
@@ -57,15 +57,14 @@ export const useUserStore = defineStore('user', {
         if (token === 'main_token') {
           return {
             name: 'td_main',
-            roles: ['all'],
+            roles: ['all'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
           };
         }
         return {
           name: 'td_dev',
-          roles: ['UserIndex', 'DashboardBase', 'login'],
+          roles: ['UserIndex', 'DashboardBase', 'login'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
         };
       };
-
       const res = await mockRemoteUserInfo(this.token);
 
       this.userInfo = res;
@@ -80,11 +79,9 @@ export const useUserStore = defineStore('user', {
     },
   },
   persist: {
-    afterRestore: (ctx) => {
-      if (ctx.store.roles && ctx.store.roles.length > 0) {
-        const permissionStore = usePermissionStore();
-        permissionStore.initRoutes(ctx.store.roles);
-      }
+    afterRestore: () => {
+      const permissionStore = usePermissionStore();
+      permissionStore.initRoutes();
     },
   },
 });

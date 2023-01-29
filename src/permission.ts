@@ -2,18 +2,20 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 
+import { RouteRecordRaw } from 'vue-router';
 import { getPermissionStore, getUserStore } from '@/store';
 import router from '@/router';
+import { PAGE_NOT_FOUND_ROUTE } from '@/utils/route/constant';
 
 NProgress.configure({ showSpinner: false });
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
 
-  const userStore = getUserStore();
   const permissionStore = getPermissionStore();
   const { whiteListRouters } = permissionStore;
 
+  const userStore = getUserStore();
   const { token } = userStore;
   if (token) {
     if (to.path === '/login') {
@@ -21,31 +23,39 @@ router.beforeEach(async (to, from, next) => {
       return;
     }
 
-    const { roles } = userStore;
+    const { asyncRoutes } = permissionStore;
 
-    if (roles && roles.length > 0) {
-      next();
-    } else {
-      try {
-        await userStore.getUserInfo();
+    if (asyncRoutes && asyncRoutes.length === 0) {
+      const routeList = await permissionStore.buildAsyncRoutes();
+      routeList.forEach((item: RouteRecordRaw) => {
+        router.addRoute(item);
+      });
 
-        const { roles } = userStore;
-
-        await permissionStore.initRoutes(roles);
-
-        if (router.hasRoute(to.name)) {
-          next();
-        } else {
-          next(`/`);
-        }
-      } catch (error) {
-        MessagePlugin.error(error);
-        next({
-          path: '/login',
-          query: { redirect: encodeURIComponent(to.fullPath) },
-        });
-        NProgress.done();
+      if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
+        // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
+        next({ path: to.fullPath, replace: true, query: to.query });
+      } else {
+        const redirect = decodeURIComponent((from.query.redirect || to.path) as string);
+        next(to.path === redirect ? { ...to, replace: true } : { path: redirect });
+        return;
       }
+    }
+
+    try {
+      await userStore.getUserInfo();
+
+      if (router.hasRoute(to.name)) {
+        next();
+      } else {
+        next(`/`);
+      }
+    } catch (error) {
+      MessagePlugin.error(error);
+      next({
+        path: '/login',
+        query: { redirect: encodeURIComponent(to.fullPath) },
+      });
+      NProgress.done();
     }
   } else {
     /* white list router */
@@ -67,7 +77,7 @@ router.afterEach((to) => {
     const permissionStore = getPermissionStore();
 
     userStore.logout();
-    permissionStore.restore();
+    permissionStore.restoreRoutes();
   }
   NProgress.done();
 });

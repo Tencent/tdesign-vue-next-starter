@@ -1,6 +1,6 @@
 <template>
   <div :class="layoutCls">
-    <t-head-menu :class="menuCls" :theme="theme" expand-type="popup" :value="active">
+    <t-head-menu :class="menuCls" :theme="menuTheme" expand-type="popup" :value="active">
       <template #logo>
         <span v-if="showLogo" class="header-logo-container" @click="handleNav('/dashboard/base')">
           <logo-full class="t-logo" />
@@ -80,7 +80,7 @@ import MenuContent from './MenuContent.vue';
 const props = defineProps({
   theme: {
     type: String,
-    default: '',
+    default: 'light',
   },
   layout: {
     type: String,
@@ -132,7 +132,7 @@ const menuCls = computed(() => {
     },
   ];
 });
-
+const menuTheme = computed(() => props.theme as 'light' | 'dark');
 const changeCollapsed = () => {
   settingStore.updateConfig({
     isSidebarCompact: !settingStore.isSidebarCompact,
