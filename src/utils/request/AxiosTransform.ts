@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import { AxiosError } from 'axios';
 import type { RequestOptions, Result } from '@/types/axios';
 
@@ -24,7 +24,7 @@ export abstract class AxiosTransform {
   requestCatchHook?: (e: Error | AxiosError, options: RequestOptions) => Promise<any>;
 
   // 请求前的拦截器
-  requestInterceptors?: (config: AxiosRequestConfig, options: CreateAxiosOptions) => AxiosRequestConfig;
+  requestInterceptors?: (config: AxiosRequestConfig, options: CreateAxiosOptions) => InternalAxiosRequestConfig;
 
   // 请求后的拦截器
   responseInterceptors?: (res: AxiosResponse) => AxiosResponse;

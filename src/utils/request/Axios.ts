@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { stringify } from 'qs';
 import isFunction from 'lodash/isFunction';
 import cloneDeep from 'lodash/cloneDeep';
@@ -63,7 +63,7 @@ export class VAxios {
     const axiosCanceler = new AxiosCanceler();
 
     // 请求配置处理
-    this.instance.interceptors.request.use((config: AxiosRequestConfig) => {
+    this.instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       const ignoreRepeat = this.options.requestOptions?.ignoreRepeatRequest;
       if (!ignoreRepeat) axiosCanceler.addPending(config);
 
