@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@types/nprogress": "^0.2.0",
-    "axios": "^1.2.2",
+    "axios": "^1.2.6",
     "dayjs": "^1.11.7",
     "echarts": "5.1.2",
     "lodash": "^4.17.21",
