@@ -198,7 +198,6 @@ const onMaterialChange = (value: string[]) => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 0;
   }
 
   &.dark {
