@@ -1,17 +1,9 @@
 <template>
   <div class="list-common-table">
-    <t-form
-      ref="form"
-      :data="formData"
-      :label-width="80"
-      colon
-      :style="{ marginBottom: '8px' }"
-      @reset="onReset"
-      @submit="onSubmit"
-    >
+    <t-form ref="form" :data="formData" :label-width="80" colon @reset="onReset" @submit="onSubmit">
       <t-row>
         <t-col :span="10">
-          <t-row :gutter="[16, 24]">
+          <t-row :gutter="[24, 24]">
             <t-col :span="4">
               <t-form-item label="合同名称" name="name">
                 <t-input
@@ -58,7 +50,7 @@
         </t-col>
 
         <t-col :span="2" class="operation-container">
-          <t-button theme="primary" type="submit" :style="{ marginLeft: '8px' }"> 查询 </t-button>
+          <t-button theme="primary" type="submit" :style="{ marginLeft: 'var(--td-comp-margin-s)' }"> 查询 </t-button>
           <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
         </t-col>
       </t-row>
@@ -134,40 +126,40 @@ const COLUMNS: PrimaryTableCol<TableRowData>[] = [
   {
     title: '合同名称',
     fixed: 'left',
-    width: 200,
+    width: 280,
     ellipsis: true,
     align: 'left',
     colKey: 'name',
   },
-  { title: '合同状态', colKey: 'status', width: 200 },
+  { title: '合同状态', colKey: 'status', width: 160 },
   {
     title: '合同编号',
-    width: 200,
+    width: 160,
     ellipsis: true,
     colKey: 'no',
   },
   {
     title: '合同类型',
-    width: 200,
+    width: 160,
     ellipsis: true,
     colKey: 'contractType',
   },
   {
     title: '合同收付类型',
-    width: 200,
+    width: 160,
     ellipsis: true,
     colKey: 'paymentType',
   },
   {
     title: '合同金额 (元)',
-    width: 200,
+    width: 160,
     ellipsis: true,
     colKey: 'amount',
   },
   {
     align: 'left',
     fixed: 'right',
-    width: 200,
+    width: 160,
     colKey: 'op',
     title: '操作',
   },
@@ -273,11 +265,11 @@ const headerAffixedTop = computed(
 <style lang="less" scoped>
 .list-common-table {
   background-color: var(--td-bg-color-container);
-  padding: 30px 32px;
-  border-radius: var(--td-radius-default);
+  padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
+  border-radius: var(--td-radius-medium);
 
   .table-container {
-    margin-top: 30px;
+    margin-top: var(--td-comp-margin-xxl);
   }
 }
 
@@ -294,10 +286,6 @@ const headerAffixedTop = computed(
       display: flex;
       align-items: center;
     }
-    .t-icon {
-      margin-left: 4px;
-      transition: transform 0.3s ease;
-    }
   }
 }
 
@@ -307,7 +295,7 @@ const headerAffixedTop = computed(
   .trend-container {
     display: flex;
     align-items: center;
-    margin-left: 8px;
+    margin-left: var(--td-comp-margin-s);
   }
 }
 </style>

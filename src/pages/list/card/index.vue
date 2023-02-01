@@ -5,7 +5,7 @@
       <div class="search-input">
         <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
           <template #suffix-icon>
-            <search-icon v-if="searchValue === ''" size="20px" />
+            <search-icon v-if="searchValue === ''" size="var(--td-comp-size-xxxs)" />
           </template>
         </t-input>
       </div>
@@ -15,7 +15,7 @@
 
     <template v-if="pagination.total > 0 && !dataLoading">
       <div class="list-card-items">
-        <t-row :gutter="[16, 12]">
+        <t-row :gutter="[16, 16]">
           <t-col
             v-for="product in productList.slice(
               pagination.pageSize * (pagination.current - 1),
@@ -152,19 +152,33 @@ const handleManageProduct = (product) => {
   &-operation {
     display: flex;
     justify-content: space-between;
+    margin-bottom: var(--td-comp-margin-xxl);
 
     .search-input {
       width: 360px;
     }
   }
 
-  &-items {
-    margin-top: 14px;
-    margin-bottom: 24px;
+  &-item {
+    padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingTB-xl);
+
+    :deep(.t-card__header) {
+      padding: 0;
+    }
+
+    :deep(.t-card__body) {
+      padding: 0;
+      margin-top: var(--td-comp-margin-xxl);
+      margin-bottom: var(--td-comp-margin-xxl);
+    }
+
+    :deep(.t-card__footer) {
+      padding: 0;
+    }
   }
 
   &-pagination {
-    padding: 16px;
+    padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingTB-xl);
   }
 
   &-loading {

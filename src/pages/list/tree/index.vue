@@ -4,7 +4,7 @@
       <div class="list-tree-operator">
         <t-input v-model="filterText" placeholder="请输入关键词" @input="onInput">
           <template #suffix-icon>
-            <search-icon size="20px" />
+            <search-icon size="var(--td-comp-size-xxxs)" />
           </template>
         </t-input>
         <t-tree :data="TREE_DATA" hover expand-on-click-node :default-expanded="expanded" :filter="filterByText" />
@@ -48,7 +48,7 @@ const onInput = () => {
   border-radius: var(--td-radius-default);
 
   .t-tree {
-    margin-top: 24px;
+    margin-top: var(--td-comp-margin-xxl);
   }
 }
 
@@ -57,9 +57,9 @@ const onInput = () => {
 }
 
 .list-tree-operator {
-  width: 200px;
+  width: 280px;
   float: left;
-  padding: 30px 32px;
+  padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
 }
 
 .list-tree-content {
