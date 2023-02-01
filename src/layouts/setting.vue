@@ -319,7 +319,7 @@ watchEffect(() => {
       max-height: 78px;
       padding: 8px;
       border-radius: var(--td-radius-default);
-      border: 2px solid #e3e6eb;
+      border: 2px solid var(--td-component-border);
       > .t-radio-button__label {
         display: inline-flex;
       }

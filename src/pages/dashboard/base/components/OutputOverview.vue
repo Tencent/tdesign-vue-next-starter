@@ -155,14 +155,23 @@ const onStokeDataChange = (checkedValues: string[]) => {
 </script>
 
 <style lang="less" scoped>
+:deep(.t-card__body) {
+  padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
+}
+
 .dashboard-overview-card {
   :deep(.t-card__header) {
-    padding-bottom: 24px;
+    padding: 0;
   }
 
   :deep(.t-card__title) {
-    font-size: 20px;
-    font-weight: 500;
+    font: var(--td-font-title-large);
+    font-weight: 400;
+  }
+
+  :deep(.t-card__body) {
+    margin-top: var(--td-comp-margin-xxl);
+    padding: 0;
   }
 
   &.overview-panel {
@@ -171,30 +180,36 @@ const onStokeDataChange = (checkedValues: string[]) => {
 
   &.export-panel {
     border-left: none;
+    margin-left: calc(var(--td-comp-margin-xxxl) + var(--td-comp-margin-xxxl));
   }
 }
 
 .inner-card {
-  padding: 24px 0;
+  margin-top: var(--td-comp-margin-s);
+  margin-bottom: var(--td-comp-margin-xxxxl);
 
   :deep(.t-card__header) {
     padding-bottom: 0;
   }
 
+  :deep(.t-card__body) {
+    margin-top: var(--td-comp-margin-s);
+  }
+
   &__content {
     &-title {
-      font-size: 36px;
-      line-height: 44px;
+      font: var(--td-font-headline-medium);
+      font-weight: 400;
     }
 
     &-footer {
       display: flex;
       align-items: center;
-      line-height: 22px;
       color: var(--td-text-color-placeholder);
+      margin-top: var(--td-comp-margin-xxl);
 
       .trend-tag {
-        margin-left: 4px;
+        margin-left: var(--td-comp-margin-s);
       }
     }
   }

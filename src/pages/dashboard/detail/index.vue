@@ -169,11 +169,20 @@ const onMaterialChange = (value: string[]) => {
 
 // 统一增加8px;
 .dashboard-detail-card {
-  padding: 8px;
+  padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
+
+  :deep(.t-card__header) {
+    padding: 0;
+  }
 
   :deep(.t-card__title) {
-    font-size: 20px;
-    font-weight: 500;
+    font: var(--td-font-title-large);
+    font-weight: 400;
+  }
+
+  :deep(.t-card__body) {
+    padding: 0;
+    margin-top: var(--td-comp-margin-xxl);
   }
 
   :deep(.t-card__actions) {
@@ -186,11 +195,10 @@ const onMaterialChange = (value: string[]) => {
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 170px;
-  padding: 8px;
+  padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingLR-xl);
 
-  :deep(.t-card__header) {
-    padding-bottom: 8px;
+  :deep(.t-card__description) {
+    margin: 0;
   }
 
   :deep(.t-card__body) {
@@ -198,7 +206,7 @@ const onMaterialChange = (value: string[]) => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 0;
+    margin-top: var(--td-comp-margin-s);
   }
 
   &.dark {
@@ -216,9 +224,10 @@ const onMaterialChange = (value: string[]) => {
   }
 
   &__number {
-    font-size: 36px;
-    line-height: 44px;
+    font: var(--td-font-headline-large);
+    font-weight: 400;
     color: var(--td-text-color-primary);
+    margin-bottom: var(--td-comp-margin-xxl);
   }
 
   &__text {
@@ -226,16 +235,18 @@ const onMaterialChange = (value: string[]) => {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    font-size: 14px;
+    font: var(--td-font-body-medium);
     color: var(--td-text-color-placeholder);
     text-align: left;
-    line-height: 18px;
 
+    .t-icon {
+      font-size: var(--td-comp-size-xxxs);
+    }
     &-left {
       display: flex;
 
       .icon {
-        margin: 0 8px;
+        margin: 0 var(--td-comp-margin-s);
       }
     }
   }
