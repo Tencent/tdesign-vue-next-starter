@@ -15,7 +15,7 @@
         <!-- 表单内容 -->
 
         <!-- 合同名称,合同类型 -->
-        <t-row class="row-gap" :gutter="[16, 24]">
+        <t-row class="row-gap" :gutter="[32, 24]">
           <t-col :span="6">
             <t-form-item label="合同名称" name="name">
               <t-input v-model="formData.name" :style="{ width: '322px' }" placeholder="请输入内容" />
@@ -115,7 +115,7 @@
             </t-form-item>
           </t-col>
           <t-col :span="6">
-            <t-form-item label="" name="files">
+            <t-form-item label="上传文件" name="files">
               <t-upload
                 v-model="formData.files"
                 action="https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
@@ -149,7 +149,7 @@
     <div class="form-submit-container">
       <div class="form-submit-sub">
         <div class="form-submit-left">
-          <t-button theme="primary" class="form-submit-confirm" type="submit"> 提交 </t-button>
+          <t-button theme="primary" class="form-submit-confirm" type="submit"> 确认提交 </t-button>
           <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
         </div>
       </div>

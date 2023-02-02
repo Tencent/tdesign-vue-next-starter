@@ -45,7 +45,7 @@ const onInput = () => {
 <style lang="less" scoped>
 .table-tree-container {
   background-color: var(--td-bg-color-container);
-  border-radius: var(--td-radius-default);
+  border-radius: var(--td-radius-medium);
 
   .t-tree {
     margin-top: var(--td-comp-margin-xxl);
