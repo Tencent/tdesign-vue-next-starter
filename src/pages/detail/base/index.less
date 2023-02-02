@@ -1,15 +1,24 @@
 .detail-base {
   :deep(.t-card) {
-    padding: 8px;
+    padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
+  }
+
+  :deep(.t-card__header) {
+    padding: 0;
+    margin-bottom: var(--td-comp-margin-m);
+  }
+
+  :deep(.t-card__body) {
+    padding: 0;
   }
 
   :deep(.t-card__title) {
-    font-size: 20px;
-    font-weight: 500;
+    font: var(--td-font-title-large);
+    font-weight: 400;
   }
 
   &-info-steps {
-    padding-top: 12px;
+    padding-top: var(--td-comp-margin-xl);
   }
 }
 
@@ -17,19 +26,19 @@
   column-count: 2;
 
   .info-item {
-    padding: 12px 0;
+    padding-top: var(--td-comp-margin-xxl);
     display: flex;
     color: var(--td-text-color-primary);
 
     h1 {
-      width: 200px;
+      width: 160px;
       font: var(--td-font-body-medium);
       color: var(--td-text-color-secondary);
       font-weight: normal;
       text-align: left;
 
       @media (max-width: @screen-sm-max) {
-        width: 100px;
+        width: 80px;
       }
 
       @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
@@ -41,7 +50,7 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      margin-left: 24px;
+      margin-left: var(--td-comp-margin-xxl);
     }
 
     i {
@@ -49,11 +58,11 @@
       width: 8px;
       height: 8px;
       border-radius: var(--td-radius-circle);
-      background: var(--td-success-color-5);
+      background: var(--td-success-color);
     }
 
     .inProgress {
-      color: var(--td-success-color-5);
+      color: var(--td-success-color);
     }
 
     .pdf {
@@ -81,7 +90,7 @@
     }
 
     span {
-      margin-left: 24px;
+      margin-left: var(--td-comp-margin-xxl);
     }
 
     i {
@@ -89,11 +98,11 @@
       width: 8px;
       height: 8px;
       border-radius: var(--td-radius-circle);
-      background: var(--td-success-color-5);
+      background: var(--td-success-color);
     }
 
     .green {
-      color: var(--td-success-color-5);
+      color: var(--td-success-color);
     }
 
     .blue {
