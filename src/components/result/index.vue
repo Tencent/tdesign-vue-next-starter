@@ -74,7 +74,6 @@ const dynamicComponent = computed(() => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 24px;
   }
 
   &-bg-img {
@@ -84,14 +83,13 @@ const dynamicComponent = computed(() => {
 
   &-title {
     font-style: normal;
-    margin-top: 8px;
+    margin-top: var(--td-comp-margin-l);
     color: var(--td-text-color-primary);
     font: var(--td-font-title-large);
-    font-weight: 500;
   }
 
   &-tip {
-    margin: 8px 0 32px;
+    margin: var(--td-comp-margin-s) 0 var(--td-comp-margin-xxxl);
     font: var(--td-font-body-medium);
     color: var(--td-text-color-secondary);
   }
