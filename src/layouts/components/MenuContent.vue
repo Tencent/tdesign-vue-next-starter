@@ -4,20 +4,20 @@
       <template v-if="!item.children || !item.children.length || item.meta?.single">
         <t-menu-item v-if="getHref(item)" :name="item.path" :value="getPath(item)" @click="openHref(getHref(item)[0])">
           <template #icon>
-            <component :is="menuIcon(item)"></component>
+            <component :is="menuIcon(item)" class="t-icon"></component>
           </template>
           {{ item.title }}
         </t-menu-item>
         <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
           <template #icon>
-            <component :is="menuIcon(item)"></component>
+            <component :is="menuIcon(item)" class="t-icon"></component>
           </template>
           {{ item.title }}
         </t-menu-item>
       </template>
       <t-submenu v-else :name="item.path" :value="item.path" :title="item.title">
         <template #icon>
-          <component :is="menuIcon(item)"></component>
+          <component :is="menuIcon(item)" class="t-icon"></component>
         </template>
         <menu-content v-if="item.children" :nav-data="item.children" />
       </t-submenu>
