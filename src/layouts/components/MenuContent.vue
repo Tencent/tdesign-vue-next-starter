@@ -53,7 +53,7 @@ const menuIcon = (item: ListItemType) => {
 };
 
 const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
-  if (!list) {
+  if (!list || list.length === 0) {
     return [];
   }
   // 如果meta中有orderNo则按照从小到大排序
