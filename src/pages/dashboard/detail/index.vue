@@ -25,11 +25,11 @@
               :default-value="LAST_7_DAYS"
               theme="primary"
               mode="date"
-              style="width: 240px"
+              style="width: 248px"
               @change="onMaterialChange"
             />
           </template>
-          <div id="lineContainer" style="width: 100%; height: 410px" />
+          <div id="lineContainer" style="width: 100%; height: 412px" />
         </t-card>
       </t-col>
       <t-col :xs="12" :xl="3">
@@ -48,12 +48,12 @@
           :default-value="LAST_7_DAYS"
           theme="primary"
           mode="date"
-          style="display: inline-block; margin-right: 8px; width: 240px"
+          style="display: inline-block; margin-right: var(--td-comp-margin-s); width: 248px"
           @change="onSatisfyChange"
         />
         <t-button class="card-date-button"> 导出数据 </t-button>
       </template>
-      <div id="scatterContainer" style="width: 100%; height: 330px" />
+      <div id="scatterContainer" style="width: 100%; height: 434px" />
     </t-card>
   </div>
 </template>

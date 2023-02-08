@@ -28,6 +28,7 @@
         :data="data"
         :pagination="pagination"
         :hover="true"
+        :stripe="true"
         row-key="index"
         @sort-change="sortChange"
         @change="rehandleChange"
@@ -204,12 +205,25 @@ const deleteClickOp = (e) => {
 
 .detail-deploy {
   :deep(.t-card) {
-    padding: 8px;
+    padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
+  }
+
+  :deep(.t-card__header) {
+    padding: 0;
+  }
+
+  :deep(.t-card__body) {
+    padding: 0;
+    margin-top: var(--td-comp-margin-xxl);
   }
 
   :deep(.t-card__title) {
-    font-size: 20px;
-    font-weight: 500;
+    font: var(--td-font-title-large);
+    font-weight: 400;
+  }
+
+  :deep(.t-text-ellipsis) {
+    width: auto;
   }
 }
 </style>
