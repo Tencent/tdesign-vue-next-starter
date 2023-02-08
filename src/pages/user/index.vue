@@ -12,7 +12,7 @@
       <t-card class="user-info-list" title="个人信息" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
-            <t-icon name="edit" size="18" />
+            <t-icon name="ellipsis" />
           </t-button>
         </template>
         <t-row class="content" justify="space-between">
@@ -43,7 +43,7 @@
                   @change="onLineChange"
                 />
               </template>
-              <div id="lineContainer" style="width: 100%; height: 330px" />
+              <div id="lineContainer" style="width: 100%; height: 328px" />
             </t-card>
           </t-tab-panel>
           <t-tab-panel value="third" label="内容列表">
@@ -55,7 +55,7 @@
 
     <t-col :flex="1">
       <t-card class="user-intro" :bordered="false">
-        <t-avatar size="90px">T</t-avatar>
+        <t-avatar size="80px">T</t-avatar>
         <div class="name">My Account</div>
         <div class="position">XXG 港澳业务拓展组员工 直客销售</div>
       </t-card>
@@ -63,7 +63,7 @@
       <t-card title="团队成员" class="user-team" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
-            <t-icon name="edit" size="18" />
+            <t-icon name="ellipsis" />
           </t-button>
         </template>
         <t-list :split="false">
@@ -76,7 +76,7 @@
       <t-card title="服务产品" class="product-container" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
-            <t-icon name="edit" size="18" />
+            <t-icon name="ellipsis" />
           </t-button>
         </template>
         <t-row class="content" :getters="16">

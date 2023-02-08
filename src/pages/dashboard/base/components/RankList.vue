@@ -3,7 +3,7 @@
     <t-col :xs="12" :xl="6">
       <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
         <template #actions>
-          <t-radio-group default-value="dateVal">
+          <t-radio-group default-value="dateVal" variant="default-filled">
             <t-radio-button value="dateVal">本周</t-radio-button>
             <t-radio-button value="monthVal">近三个月</t-radio-button>
           </t-radio-group>
@@ -28,7 +28,7 @@
     <t-col :xs="12" :xl="6">
       <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
         <template #actions>
-          <t-radio-group default-value="dateVal">
+          <t-radio-group default-value="dateVal" variant="default-filled">
             <t-radio-button value="dateVal">本周</t-radio-button>
             <t-radio-button value="monthVal">近三个月</t-radio-button>
           </t-radio-group>
@@ -67,15 +67,20 @@ const getRankClass = (index: number) => {
 
 <style lang="less" scoped>
 .dashboard-rank-card {
-  padding: 8px;
+  padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
 
   :deep(.t-card__header) {
-    padding-bottom: 24px;
+    padding: 0;
   }
 
   :deep(.t-card__title) {
-    font-size: 20px;
-    font-weight: 500;
+    font: var(--td-font-title-large);
+    font-weight: 400;
+  }
+
+  :deep(.t-card__body) {
+    padding: 0;
+    margin-top: var(--td-comp-margin-xxl);
   }
 }
 

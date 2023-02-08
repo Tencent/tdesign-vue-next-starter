@@ -1,10 +1,11 @@
-import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { stringify } from 'qs';
 import isFunction from 'lodash/isFunction';
 import cloneDeep from 'lodash/cloneDeep';
 import { CreateAxiosOptions } from './AxiosTransform';
 import { AxiosCanceler } from './AxiosCancel';
 import { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
+import { ContentTypeEnum } from '@/constants';
 
 // Axios模块
 export class VAxios {
@@ -63,13 +64,16 @@ export class VAxios {
     const axiosCanceler = new AxiosCanceler();
 
     // 请求配置处理
-    this.instance.interceptors.request.use((config: AxiosRequestConfig) => {
-      const ignoreRepeat = this.options.requestOptions?.ignoreRepeatRequest;
+    this.instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+      // @ts-ignore
+      const { ignoreRepeatRequest } = config.requestOptions;
+      const ignoreRepeat = ignoreRepeatRequest ?? this.options.requestOptions?.ignoreRepeatRequest;
       if (!ignoreRepeat) axiosCanceler.addPending(config);
 
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config, this.options);
       }
+
       return config;
     }, undefined);
 
@@ -99,7 +103,7 @@ export class VAxios {
     const contentType = headers?.['Content-Type'] || headers?.['content-type'];
 
     if (
-      contentType !== 'application/x-www-form-urlencoded;charset=UTF-8' ||
+      contentType !== ContentTypeEnum.FormURLEncoded ||
       !Reflect.has(config, 'data') ||
       config.method?.toUpperCase() === 'GET'
     ) {

@@ -1,11 +1,13 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 import isString from 'lodash/isString';
 import merge from 'lodash/merge';
+import type { InternalAxiosRequestConfig } from 'axios';
 import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
 import { VAxios } from './Axios';
 import proxy from '@/config/proxy';
 import { joinTimestamp, formatRequestDate, setObjToUrlParams } from './utils';
 import { TOKEN_NAME } from '@/config/global';
+import { ContentTypeEnum } from '@/constants';
 
 const env = import.meta.env.MODE || 'development';
 
@@ -117,7 +119,7 @@ const transform: AxiosTransform = {
         ? `${options.authenticationScheme} ${token}`
         : token;
     }
-    return config;
+    return config as InternalAxiosRequestConfig;
   },
 
   // 响应拦截器处理
@@ -141,7 +143,7 @@ const transform: AxiosTransform = {
         resolve(config);
       }, config.requestOptions.retry.delay || 1);
     });
-    config.headers = { ...config.headers, 'Content-Type': 'application/json;charset=UTF-8' };
+    config.headers = { ...config.headers, 'Content-Type': ContentTypeEnum.Json };
     return backoff.then((config) => request.request(config));
   },
 };
@@ -158,7 +160,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // 携带Cookie
         withCredentials: true,
         // 头信息
-        headers: { 'Content-Type': 'application/json;charset=UTF-8' },
+        headers: { 'Content-Type': ContentTypeEnum.Json },
         // 数据处理方式
         transform,
         // 配置项，下面的选项都可以在独立的接口请求中覆盖

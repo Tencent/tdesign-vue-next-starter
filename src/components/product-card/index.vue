@@ -103,22 +103,19 @@ const handleClickDelete = (product: CardProductType) => {
     min-height: 140px;
 
     &--name {
-      margin-bottom: 8px;
-      font-size: 16px;
-      font-weight: 400;
+      margin-bottom: var(--td-comp-margin-s);
+      font: var(--td-font-title-medium);
       color: var(--td-text-color-primary);
     }
 
     &--desc {
       color: var(--td-text-color-secondary);
-      font-size: 12px;
-      line-height: 20px;
+      font: var(--td-font-body-small);
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      height: 40px;
     }
   }
 }

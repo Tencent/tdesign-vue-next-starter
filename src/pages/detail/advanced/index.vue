@@ -59,6 +59,7 @@
         :data="data"
         :pagination="pagination"
         :hover="true"
+        :stripe="true"
         row-key="index"
         size="large"
         @sort-change="sortChange"
@@ -67,14 +68,21 @@
         <template #pdName="{ row }">
           <span>
             {{ row.pdName }}
-            <t-tag v-if="row.pdType" size="small">{{ row.pdType }}</t-tag>
+            <t-tag v-if="row.pdType" size="medium" style="margin-left: var(--td-comp-margin-s)">{{ row.pdType }}</t-tag>
           </span>
         </template>
 
         <template #purchaseNum="{ row }">
           <span>
             {{ row.purchaseNum }}
-            <t-tag v-if="row.purchaseNum > 50" theme="danger" variant="light" size="small">超预算</t-tag>
+            <t-tag
+              v-if="row.purchaseNum > 50"
+              theme="danger"
+              variant="light"
+              size="medium"
+              style="margin-left: var(--td-comp-margin-s)"
+              >超预算</t-tag
+            >
           </span>
         </template>
 
