@@ -3,12 +3,12 @@
     <template #content>
       <div class="header-msg">
         <div class="header-msg-top">
-          <p>通知</p>
+          <p>通知中心</p>
           <t-button v-if="unreadMsg.length > 0" class="clear-btn" variant="text" theme="primary" @click="setRead('all')"
             >清空</t-button
           >
         </div>
-        <t-list v-if="unreadMsg.length > 0" class="narrow-scrollbar" :split="true">
+        <t-list v-if="unreadMsg.length > 0" class="narrow-scrollbar" :split="false">
           <t-list-item v-for="(item, index) in unreadMsg" :key="index">
             <div>
               <p class="msg-content">{{ item.content }}</p>
@@ -30,7 +30,8 @@
             v-if="unreadMsg.length > 0"
             class="header-msg-bottom-link"
             variant="text"
-            theme="primary"
+            theme="default"
+            block
             @click="goDetail"
             >查看全部</t-button
           >
@@ -79,72 +80,71 @@ const goDetail = () => {
 <style lang="less" scoped>
 .header-msg {
   width: 400px;
-  height: 500px;
+  // height: 440px;
+  margin: calc(0px - var(--td-comp-paddingTB-xs)) calc(0px - var(--td-comp-paddingLR-s));
 
   .empty-list {
-    height: calc(100% - 104px);
+    height: calc(100% - 120px);
     text-align: center;
     padding-top: 135px;
-    font-size: 14px;
+    font: var(--td-font-body-medium);
     color: var(--td-text-color-secondary);
 
     img {
-      width: 63px;
+      width: var(--td-comp-size-xxxxl);
     }
 
     p {
-      margin-top: 30px;
+      margin-top: var(--td-comp-margin-xxl);
     }
   }
 
   &-top {
     position: relative;
-    height: 56px;
-    font-size: 16px;
+    font: var(--td-font-title-medium);
     color: var(--td-text-color-primary);
-    text-align: center;
-    line-height: 56px;
-    border-bottom: 1px solid var(--td-component-border);
+    text-align: left;
+    padding: var(--td-comp-paddingTB-l) var(--td-comp-paddingLR-xl) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     .clear-btn {
-      position: absolute;
-      top: 12px;
-      right: 24px;
+      right: calc(var(--td-comp-paddingTB-l) - var(--td-comp-paddingLR-xl));
     }
   }
 
   &-bottom {
-    height: 48px;
     align-items: center;
     display: flex;
     justify-content: center;
+    padding: var(--td-comp-paddingTB-s) var(--td-comp-paddingLR-s);
+    border-top: 1px solid var(--td-component-stroke);
 
     &-link {
       text-decoration: none;
-      font-size: 14px;
-      color: var(--td-brand-color);
-      line-height: 48px;
       cursor: pointer;
+      color: var(--td-text-color-placeholder);
     }
   }
 
   .t-list {
     height: calc(100% - 104px);
+    padding: var(--td-comp-margin-s) var(--td-comp-margin-s);
   }
 
   .t-list-item {
     overflow: hidden;
     width: 100%;
-    padding: 16px 24px;
+    padding: var(--td-comp-paddingTB-l) var(--td-comp-paddingLR-l);
     border-radius: var(--td-radius-default);
-    font-size: 14px;
+    font: var(--td-font-body-medium);
     color: var(--td-text-color-primary);
-    line-height: 22px;
     cursor: pointer;
+    transition: background-color 0.2s linear;
 
     &:hover {
-      transition: background 0.2s ease;
-      background: var(--td-bg-color-container-hover);
+      background-color: var(--td-bg-color-container-hover);
 
       .msg-content {
         color: var(--td-brand-color);
@@ -152,7 +152,7 @@ const goDetail = () => {
 
       .t-list-item__action {
         button {
-          bottom: 16px;
+          bottom: var(--td-comp-margin-l);
           opacity: 1;
         }
       }
@@ -164,7 +164,7 @@ const goDetail = () => {
     }
 
     .msg-content {
-      margin-bottom: 16px;
+      margin-bottom: var(--td-comp-margin-s);
     }
 
     .msg-type {
@@ -175,7 +175,7 @@ const goDetail = () => {
       button {
         opacity: 0;
         position: absolute;
-        right: 24px;
+        right: var(--td-comp-margin-xxl);
         bottom: -6px;
       }
     }
@@ -184,8 +184,8 @@ const goDetail = () => {
       transition: all 0.2s ease;
       opacity: 1;
       position: absolute;
-      right: 24px;
-      bottom: 16px;
+      right: var(--td-comp-margin-xxl);
+      bottom: var(--td-comp-margin-l);
       color: var(--td-text-color-secondary);
     }
   }

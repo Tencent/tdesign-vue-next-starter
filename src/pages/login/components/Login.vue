@@ -45,7 +45,7 @@
         <span class="tip">请使用微信扫一扫登录</span>
         <span class="refresh">刷新 <t-icon name="refresh" /> </span>
       </div>
-      <qrcode-vue value="" :size="192" level="H" />
+      <qrcode-vue value="" :size="160" level="H" />
     </template>
 
     <!-- 手机号登陆 -->
@@ -60,7 +60,7 @@
 
       <t-form-item class="verification-code" name="verifyCode">
         <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
-        <t-button variant="outline" :disabled="countDown > 0" @click="sendCode">
+        <t-button size="large" variant="outline" :disabled="countDown > 0" @click="sendCode">
           {{ countDown == 0 ? '发送验证码' : `${countDown}秒后可重发` }}
         </t-button>
       </t-form-item>
