@@ -40,14 +40,14 @@ function asyncImportRoute(routes: RouteItem[] | undefined) {
     const { children } = item;
 
     if (component) {
-      const layoutFound = LayoutMap.get(component.toUpperCase());
+      const layoutFound = LayoutMap.get((component as string).toUpperCase());
       if (layoutFound) {
         item.component = layoutFound;
       } else {
-        item.component = dynamicImport(dynamicViewsModules, component);
+        item.component = dynamicImport(dynamicViewsModules, component as string);
       }
     } else if (name) {
-      item.component = PARENT_LAYOUT();
+      item.component = PARENT_LAYOUT() as any;
     }
     if (item.meta.icon) item.meta.icon = await getMenuIcon(item.meta.icon);
 
