@@ -214,7 +214,9 @@ watchEffect(() => {
   if (formData.value.brandTheme) settingStore.updateConfig(formData.value);
 });
 </script>
-<style lang="less" scoped>
+<!-- teleport导致drawer 内 scoped样式问题无法生效 先规避下 -->
+<!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
+<style lang="less">
 .tdesign-setting {
   z-index: 100;
   position: fixed;
@@ -297,14 +299,14 @@ watchEffect(() => {
   .setting-container {
     padding-bottom: 100px;
   }
-  :deep(.t-radio-group.t-size-m) {
+  .t-radio-group.t-size-m {
     min-height: 32px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
   }
 
-  :deep(.t-radio-group.t-size-m .t-radio-button) {
+  .t-radio-group.t-size-m .t-radio-button {
     height: auto;
   }
 
@@ -314,7 +316,7 @@ watchEffect(() => {
     align-items: center;
     margin-bottom: 16px;
 
-    :deep(.t-radio-button) {
+    .t-radio-button {
       display: inline-flex;
       max-height: 78px;
       padding: 8px;
@@ -325,22 +327,22 @@ watchEffect(() => {
       }
     }
 
-    :deep(.t-is-checked) {
+    .t-is-checked {
       border: 2px solid var(--td-brand-color) !important;
     }
 
-    :deep(.t-form__controls-content) {
+    .t-form__controls-content {
       justify-content: end;
     }
   }
 
-  :deep(.t-form__controls-content) {
+  .t-form__controls-content {
     justify-content: end;
   }
 }
 
 .setting-route-theme {
-  :deep(.t-form__label) {
+  .t-form__label {
     min-width: 310px !important;
     color: var(--td-text-color-secondary);
   }
@@ -348,7 +350,7 @@ watchEffect(() => {
 
 .setting-color-theme {
   .setting-layout-drawer {
-    :deep(.t-radio-button) {
+    .t-radio-button {
       height: 32px;
     }
 
