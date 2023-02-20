@@ -152,6 +152,10 @@ const handleTabMenuClick = (visible: boolean, ctx, path: string) => {
 
 const handleDragend = ({ currentIndex, targetIndex }) => {
   const { tabRouters } = tabsRouterStore;
+  if (tabRouters[currentIndex].isHome || tabRouters[targetIndex].isHome) {
+    return;
+  }
+
   [tabRouters[currentIndex], tabRouters[targetIndex]] = [tabRouters[targetIndex], tabRouters[currentIndex]];
 };
 </script>
