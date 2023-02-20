@@ -150,12 +150,12 @@ const handleTabMenuClick = (visible: boolean, ctx, path: string) => {
   if (visible) activeTabPath.value = path;
 };
 
-const handleDragend = ({ currentIndex, targetIndex }) => {
+const handleDragend = (options: { currentIndex: number; targetIndex: number }) => {
   const { tabRouters } = tabsRouterStore;
-  if (tabRouters[currentIndex].isHome || tabRouters[targetIndex].isHome) {
-    return;
-  }
 
-  [tabRouters[currentIndex], tabRouters[targetIndex]] = [tabRouters[targetIndex], tabRouters[currentIndex]];
+  [tabRouters[options.currentIndex], tabRouters[options.targetIndex]] = [
+    tabRouters[options.targetIndex],
+    tabRouters[options.currentIndex],
+  ];
 };
 </script>
