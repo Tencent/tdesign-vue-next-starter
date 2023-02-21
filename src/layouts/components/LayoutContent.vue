@@ -2,12 +2,14 @@
   <t-layout :class="`${prefix}-layout`">
     <t-tabs
       v-if="settingStore.isUseTabsRouter"
+      drag-sort
       theme="card"
       :class="`${prefix}-layout-tabs-nav`"
       :value="$route.path"
       :style="{ position: 'sticky', top: 0, width: '100%' }"
       @change="handleChangeCurrentTab"
       @remove="handleRemove"
+      @drag-sort="handleDragend"
     >
       <t-tab-panel
         v-for="(routeItem, index) in tabRouters"
@@ -146,5 +148,14 @@ const handleOperationEffect = (type: 'other' | 'ahead' | 'behind', routeIndex: n
 const handleTabMenuClick = (visible: boolean, ctx, path: string) => {
   if (ctx.trigger === 'document') activeTabPath.value = null;
   if (visible) activeTabPath.value = path;
+};
+
+const handleDragend = (options: { currentIndex: number; targetIndex: number }) => {
+  const { tabRouters } = tabsRouterStore;
+
+  [tabRouters[options.currentIndex], tabRouters[options.targetIndex]] = [
+    tabRouters[options.targetIndex],
+    tabRouters[options.currentIndex],
+  ];
 };
 </script>
