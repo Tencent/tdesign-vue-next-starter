@@ -35,11 +35,11 @@ export const CONTRACT_PAYMENT_TYPES = {
 };
 
 // 通知的优先级对应的TAG类型
-export const NOTIFICATION_TYPES = {
-  low: 'primary',
-  middle: 'warning',
-  high: 'danger',
-};
+export const NOTIFICATION_TYPES = new Map([
+  ['low', 'primary'],
+  ['middle', 'warning'],
+  ['high', 'danger'],
+]);
 
 // 通用请求头
 export enum ContentTypeEnum {

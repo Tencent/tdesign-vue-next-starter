@@ -15,6 +15,7 @@ import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { usePermissionStore, useSettingStore } from '@/store';
 import LHeader from './Header.vue';
+import { MenuRoute } from '@/types/interface';
 
 const permissionStore = usePermissionStore();
 const settingStore = useSettingStore();
@@ -22,13 +23,15 @@ const { routers: menuRouters } = storeToRefs(permissionStore);
 const headerMenu = computed(() => {
   if (settingStore.layout === 'mix') {
     if (settingStore.splitMenu) {
-      return menuRouters.value.map((menu) => ({
-        ...menu,
-        children: [],
-      }));
+      return (menuRouters.value as Array<MenuRoute>).map((menu) => {
+        return {
+          ...menu,
+          children: [],
+        };
+      });
     }
     return [];
   }
-  return menuRouters.value;
+  return menuRouters.value as Array<MenuRoute>;
 });
 </script>

@@ -16,6 +16,7 @@ import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { usePermissionStore, useSettingStore } from '@/store';
 import LSideNav from './SideNav.vue';
+import { MenuRoute } from '@/types/interface';
 
 const route = useRoute();
 const permissionStore = usePermissionStore();
@@ -24,7 +25,7 @@ const { routers: menuRouters } = storeToRefs(permissionStore);
 
 const sideMenu = computed(() => {
   const { layout, splitMenu } = settingStore;
-  let newMenuRouters = menuRouters.value;
+  let newMenuRouters = menuRouters.value as Array<MenuRoute>;
   if (layout === 'mix' && splitMenu) {
     newMenuRouters.forEach((menu) => {
       if (route.path.indexOf(menu.path) === 0) {

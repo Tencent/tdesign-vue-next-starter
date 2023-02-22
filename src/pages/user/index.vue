@@ -112,33 +112,34 @@ import { changeChartsTheme } from '@/utils/color';
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
 
-let lineContainer: HTMLElement;
+let lineContainer: HTMLElement | null;
 let lineChart: echarts.ECharts;
 const store = useSettingStore();
 const chartColors = computed(() => store.chartColors);
 
-const onLineChange = (value) => {
-  lineChart.setOption(getFolderLineDataSet(value));
+const onLineChange = (value: Array<string>) => {
+  lineChart.setOption(
+    getFolderLineDataSet({
+      dateTime: value,
+      ...chartColors.value,
+    }),
+  );
 };
 
 const initChart = () => {
   lineContainer = document.getElementById('lineContainer');
-  lineChart = echarts.init(lineContainer);
-  lineChart.setOption({
-    grid: {
-      x: 30, // 默认是80px
-      y: 30, // 默认是60px
-      x2: 10, // 默认80px
-      y2: 30, // 默认60px
-    },
-    ...getFolderLineDataSet({ ...chartColors.value }),
-  });
+  if (lineContainer) {
+    lineChart = echarts.init(lineContainer);
+    lineChart.setOption({
+      ...getFolderLineDataSet({ ...chartColors.value }),
+    });
+  }
 };
 
 const updateContainer = () => {
   lineChart?.resize({
-    width: lineContainer.clientWidth,
-    height: lineContainer.clientHeight,
+    width: lineContainer?.clientWidth,
+    height: lineContainer?.clientHeight,
   });
 };
 
@@ -153,7 +154,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateContainer);
 });
 
-const getIcon = (type) => {
+const getIcon = (type: string) => {
   switch (type) {
     case 'a':
       return ProductAIcon;

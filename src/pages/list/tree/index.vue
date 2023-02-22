@@ -35,9 +35,8 @@ const filterText = ref();
 const expanded = ['0', '0-0', '0-1', '0-2', '0-3', '0-4'];
 
 const onInput = () => {
-  filterByText.value = (node) => {
-    const rs = node.label.indexOf(filterText.value) >= 0;
-    return rs;
+  filterByText.value = (node: { label: string }) => {
+    return node.label.indexOf(filterText.value) >= 0;
   };
 };
 </script>

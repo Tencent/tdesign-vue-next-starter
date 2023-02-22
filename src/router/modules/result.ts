@@ -1,6 +1,7 @@
+import { RouteRecordRaw } from 'vue-router';
 import Layout from '@/layouts/index.vue';
 
-export default [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/result',
     name: 'result',
@@ -59,3 +60,5 @@ export default [
     ],
   },
 ];
+
+export default routes;

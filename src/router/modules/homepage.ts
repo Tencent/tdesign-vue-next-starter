@@ -1,8 +1,9 @@
 import { DashboardIcon } from 'tdesign-icons-vue-next';
 import { shallowRef } from 'vue';
+import { RouteRecordRaw } from 'vue-router';
 import Layout from '@/layouts/index.vue';
 
-export default [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/dashboard',
     component: Layout,
@@ -33,3 +34,5 @@ export default [
     ],
   },
 ];
+
+export default routes;

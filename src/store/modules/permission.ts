@@ -5,17 +5,18 @@ import { store } from '@/store';
 import { RouteItem } from '@/api/model/permissionModel';
 import { getMenuList } from '@/api/permission';
 import { transformObjectToRoute } from '@/utils/route';
+import { MenuRoute } from '@/types/interface';
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
     whiteListRouters: ['/login'],
-    routers: [],
+    routers: [] as Array<RouteRecordRaw> | Array<MenuRoute>,
     removeRoutes: [],
     asyncRoutes: [],
   }),
   actions: {
     async initRoutes() {
-      const accessedRouters = this.asyncRoutes;
+      const accessedRouters: RouteRecordRaw[] = this.asyncRoutes;
 
       // 在菜单展示全部路由
       this.routers = [...homepageRouterList, ...accessedRouters, ...fixedRouterList];

@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { BreadcrumbItem } from '@/types/router';
 
 const crumbs = computed(() => {
   const route = useRoute();
@@ -16,7 +17,7 @@ const crumbs = computed(() => {
   const pathArray = route.path.split('/');
   pathArray.shift();
 
-  const breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
+  return pathArray.reduce((breadcrumbArray: Array<BreadcrumbItem>, path, idx) => {
     // 如果路由下有hiddenBreadcrumb或当前遍历到参数则隐藏
     if (route.matched[idx]?.meta?.hiddenBreadcrumb || Object.values(route.params).includes(path)) {
       return breadcrumbArray;
@@ -29,7 +30,6 @@ const crumbs = computed(() => {
     });
     return breadcrumbArray;
   }, []);
-  return breadcrumbs;
 });
 </script>
 <style scoped>

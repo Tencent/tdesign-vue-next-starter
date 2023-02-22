@@ -11,6 +11,7 @@ const panelColor =
 const props = defineProps({
   value: {
     type: String,
+    required: true,
   },
 });
 

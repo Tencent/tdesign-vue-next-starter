@@ -40,7 +40,7 @@ export function mapModuleRouterList(modules: Record<string, unknown>): Array<Rou
 }
 
 export const getRoutesExpanded = () => {
-  const expandedRoutes = [];
+  const expandedRoutes: Array<string> = [];
 
   fixedRouterList.forEach((item) => {
     if (item.meta && item.meta.expanded) {

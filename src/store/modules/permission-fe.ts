@@ -2,15 +2,15 @@
 // 如果需要前端 roles 控制菜单权限 请使用此文件代码替换 permission.ts 的内容
 
 import { defineStore } from 'pinia';
-import { RouteRecordRaw } from 'vue-router';
+import { RouteRecordName, RouteRecordRaw } from 'vue-router';
 import router, { allRoutes } from '@/router';
 import { store } from '@/store';
 
 function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<unknown>) {
-  const res = [];
-  const removeRoutes = [];
+  const res: Array<RouteRecordRaw> = [];
+  const removeRoutes: Array<RouteRecordRaw> = [];
   routes.forEach((route) => {
-    const children = [];
+    const children: Array<RouteRecordRaw> = [];
     route.children?.forEach((childRouter) => {
       const roleCode = childRouter.meta?.roleCode || childRouter.name;
       if (roles.indexOf(roleCode) !== -1) {
@@ -30,14 +30,14 @@ function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<un
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
     whiteListRouters: ['/login'],
-    routers: [],
-    removeRoutes: [],
+    routers: [] as Array<RouteRecordRaw>,
+    removeRoutes: [] as Array<RouteRecordRaw>,
   }),
   actions: {
     async initRoutes(roles: Array<unknown>) {
       let accessedRouters = [];
 
-      let removeRoutes = [];
+      let removeRoutes: Array<RouteRecordRaw> = [];
       // special token
       if (roles.includes('all')) {
         accessedRouters = allRoutes;
@@ -51,8 +51,8 @@ export const usePermissionStore = defineStore('permission', {
       this.removeRoutes = removeRoutes;
 
       removeRoutes.forEach((item: RouteRecordRaw) => {
-        if (router.hasRoute(item.name)) {
-          router.removeRoute(item.name);
+        if (router.hasRoute(<RouteRecordName>item.name)) {
+          router.removeRoute(<RouteRecordName>item.name);
         }
       });
     },

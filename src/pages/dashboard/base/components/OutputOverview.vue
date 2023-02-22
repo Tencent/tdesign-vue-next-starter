@@ -89,14 +89,14 @@ const resizeTime = ref(1);
 const chartColors = computed(() => store.chartColors);
 
 // stokeCharts
-let stokeContainer: HTMLElement;
+let stokeContainer: HTMLElement | null;
 let stokeChart: echarts.ECharts;
 const renderStokeChart = () => {
-  if (!stokeContainer) {
-    stokeContainer = document.getElementById('stokeContainer');
+  stokeContainer = document.getElementById('stokeContainer');
+  if (stokeContainer) {
+    stokeChart = echarts.init(stokeContainer);
+    stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors.value }));
   }
-  stokeChart = echarts.init(stokeContainer);
-  stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors.value }));
 };
 
 const renderCharts = () => {
@@ -114,8 +114,8 @@ const updateContainer = () => {
   }
 
   stokeChart.resize({
-    width: stokeContainer.clientWidth,
-    height: stokeContainer.clientHeight,
+    width: stokeContainer?.clientWidth,
+    height: stokeContainer?.clientHeight,
   });
 };
 

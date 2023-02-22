@@ -77,7 +77,7 @@ export default {
 import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { SearchIcon } from 'tdesign-icons-vue-next';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin, PageInfo } from 'tdesign-vue-next';
 
 import { CONTRACT_STATUS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
 import Trend from '@/components/trend/index.vue';
@@ -86,10 +86,11 @@ import { useSettingStore } from '@/store';
 import { prefix } from '@/config/global';
 
 import { COLUMNS } from './constants';
+import { ListModel } from '@/api/model/listModel';
 
 const store = useSettingStore();
 
-const data = ref([]);
+const data = ref<Array<ListModel>>([]);
 const pagination = ref({
   defaultPageSize: 20,
   total: 100,
@@ -160,10 +161,10 @@ const rowKey = 'index';
 const rehandleSelectChange = (val: number[]) => {
   selectedRowKeys.value = val;
 };
-const rehandlePageChange = (curr, pageInfo) => {
-  console.log('分页变化', curr, pageInfo);
+const rehandlePageChange = (pageInfo: PageInfo, newDataSource: unknown) => {
+  console.log('分页变化', pageInfo, newDataSource);
 };
-const rehandleChange = (changeParams, triggerAndData) => {
+const rehandleChange = (changeParams: unknown, triggerAndData: unknown) => {
   console.log('统一Change', changeParams, triggerAndData);
 };
 const handleClickDetail = () => {

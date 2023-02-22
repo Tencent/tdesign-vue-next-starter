@@ -1,5 +1,15 @@
-import { RouteRecordName, LocationQueryRaw } from 'vue-router';
+import type { RouteRecordName, LocationQueryRaw, RouteMeta } from 'vue-router';
 import STYLE_CONFIG from '@/config/style';
+
+export type ModeType = 'dark' | 'light';
+
+export type SettingType = typeof STYLE_CONFIG;
+
+export type ClassName = { [className: string]: any } | ClassName[] | string;
+
+export type CommonObjType = {
+  [key: string]: string | number;
+};
 
 export interface MenuRoute {
   path: string;
@@ -12,18 +22,8 @@ export interface MenuRoute {
       };
   redirect?: string;
   children: MenuRoute[];
-  meta: any;
+  meta: RouteMeta;
 }
-
-export type ModeType = 'dark' | 'light';
-
-export type SettingType = typeof STYLE_CONFIG;
-
-export type ClassName = { [className: string]: any } | ClassName[] | string;
-
-export type CommonObjType = {
-  [key: string]: string | number;
-};
 
 export interface NotificationItem {
   id: string;
@@ -40,13 +40,23 @@ export interface TRouterInfo {
   query?: LocationQueryRaw;
   routeIdx?: number;
   title?: string;
-  name?: RouteRecordName;
+  name?: RouteRecordName | null;
   isAlive?: boolean;
   isHome?: boolean;
-  meta?: any;
+  meta?: RouteMeta;
 }
 
 export interface TTabRouterType {
   isRefreshing: boolean;
   tabRouterList: Array<TRouterInfo>;
+}
+
+export interface Proxy {
+  isRequestProxy: boolean;
+  [key: string]: ProxyItem | boolean;
+}
+
+export interface ProxyItem {
+  host?: string;
+  cdn?: string;
 }

@@ -6,7 +6,7 @@
           <t-list v-if="msgDataList.length > 0" class="secondary-msg-list" :split="true">
             <t-list-item v-for="(item, index) in msgDataList" :key="index">
               <p :class="['content', { unread: item.status }]" @click="setReadStatus(item)">
-                <t-tag size="medium" :theme="NOTIFICATION_TYPES[item.quality]" variant="light">
+                <t-tag size="medium" :theme="NOTIFICATION_TYPES.get(item.quality)" variant="light">
                   {{ item.type }}
                 </t-tag>
                 {{ item.content }}
@@ -87,7 +87,7 @@ const selectedItem = ref<NotificationItem>();
 const store = useNotificationStore();
 const { msgData, unreadMsg, readMsg } = storeToRefs(store);
 
-const msgDataList = computed(() => {
+const msgDataList = computed<Array<NotificationItem>>(() => {
   if (tabValue.value === 'msgData') return msgData.value;
   if (tabValue.value === 'unreadMsg') return unreadMsg.value;
   if (tabValue.value === 'readMsg') return readMsg.value;

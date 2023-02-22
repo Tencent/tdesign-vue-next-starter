@@ -87,32 +87,36 @@ const store = useSettingStore();
 const chartColors = computed(() => store.chartColors);
 
 // lineChart logic
-let lineContainer: HTMLElement;
+let lineContainer: HTMLElement | null;
 let lineChart: echarts.ECharts;
 const renderLineChart = () => {
   lineContainer = document.getElementById('lineContainer');
-  lineChart = echarts.init(lineContainer);
-  lineChart.setOption(getFolderLineDataSet({ ...chartColors.value }));
+  if (lineContainer) {
+    lineChart = echarts.init(lineContainer);
+    lineChart.setOption(getFolderLineDataSet({ ...chartColors.value }));
+  }
 };
 
 // scatterChart logic
-let scatterContainer: HTMLElement;
+let scatterContainer: HTMLElement | null;
 let scatterChart: echarts.ECharts;
 const renderScatterChart = () => {
   scatterContainer = document.getElementById('scatterContainer');
-  scatterChart = echarts.init(scatterContainer);
-  scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
+  if (scatterContainer) {
+    scatterChart = echarts.init(scatterContainer);
+    scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
+  }
 };
 
 // chartSize update
 const updateContainer = () => {
   lineChart?.resize({
-    width: lineContainer.clientWidth,
-    height: lineContainer.clientHeight,
+    width: lineContainer?.clientWidth,
+    height: lineContainer?.clientHeight,
   });
   scatterChart?.resize({
-    width: scatterContainer.clientWidth,
-    height: scatterContainer.clientHeight,
+    width: scatterContainer?.clientWidth,
+    height: scatterContainer?.clientHeight,
   });
 };
 

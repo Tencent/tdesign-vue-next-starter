@@ -2,7 +2,7 @@
   <div>
     <template v-for="item in list" :key="item.path">
       <template v-if="!item.children || !item.children.length || item.meta?.single">
-        <t-menu-item v-if="getHref(item)" :name="item.path" :value="getPath(item)" @click="openHref(getHref(item)[0])">
+        <t-menu-item v-if="getHref(item)" :name="item.path" :value="getPath(item)" @click="openHref(getHref(item))">
           <template #icon>
             <component :is="menuIcon(item)" class="t-icon"></component>
           </template>
@@ -25,8 +25,8 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { computed } from 'vue';
 import type { PropType } from 'vue';
+import { computed } from 'vue';
 import type { MenuRoute } from '@/types/interface';
 import { getActive } from '@/router';
 
@@ -48,8 +48,7 @@ const list = computed(() => {
 
 const menuIcon = (item: ListItemType) => {
   if (typeof item.icon === 'string') return <t-icon name={item.icon} />;
-  const RenderIcon = item.icon;
-  return RenderIcon;
+  return item.icon;
 };
 
 const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
@@ -78,10 +77,9 @@ const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
 
 const getHref = (item: MenuRoute) => {
   const { frameSrc, frameBlank } = item.meta;
-  if (frameSrc && frameBlank) {
-    return frameSrc.match(/(http|https):\/\/([\w.]+\/?)\S*/);
-  }
-  return null;
+
+  if (!(frameSrc && frameBlank)) return '';
+  return frameSrc.match(/(http|https):\/\/([\w.]+\/?)\S*/)?.[0] ?? '';
 };
 
 const getPath = (item: ListItemType) => {

@@ -74,20 +74,31 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import ProductCard from '@/components/product-card/index.vue';
 import DialogForm from './components/DialogForm.vue';
 import { getCardList } from '@/api/list';
+import { CardList } from '@/api/model/listModel';
 
-const INITIAL_DATA = {
+interface FormData {
+  name: string;
+  status: string;
+  description: string;
+  type: number;
+  mark: string;
+  amount: number;
+  [key: string]: unknown;
+}
+
+const INITIAL_DATA: FormData = {
   name: '',
   status: '',
   description: '',
-  type: '',
+  type: 0,
   mark: '',
   amount: 0,
 };
 
 const pagination = ref({ current: 1, pageSize: 12, total: 0 });
-const deleteProduct = ref(undefined);
+const deleteProduct = ref<CardList>();
 
-const productList = ref([]);
+const productList = ref<Array<CardList>>([]);
 const dataLoading = ref(true);
 
 const fetchData = async () => {
@@ -125,23 +136,32 @@ const onPageSizeChange = (size: number) => {
 const onCurrentChange = (current: number) => {
   pagination.value.current = current;
 };
-const handleDeleteItem = (product) => {
+const handleDeleteItem = (product: CardList) => {
   confirmVisible.value = true;
   deleteProduct.value = product;
 };
 const onConfirmDelete = () => {
-  const { index } = deleteProduct.value;
-  productList.value.splice(index - 1, 1);
-  confirmVisible.value = false;
-  MessagePlugin.success('删除成功');
+  if (deleteProduct.value) {
+    const { index } = deleteProduct.value;
+    productList.value.splice(index - 1, 1);
+    confirmVisible.value = false;
+    MessagePlugin.success('删除成功');
+  }
 };
 const onCancel = () => {
   deleteProduct.value = undefined;
   formData.value = { ...INITIAL_DATA };
 };
-const handleManageProduct = (product) => {
+const handleManageProduct = (product: CardList) => {
   formDialogVisible.value = true;
-  formData.value = { ...product, status: product?.isSetup ? '1' : '0' };
+  formData.value = {
+    name: product.name,
+    status: product?.isSetup ? '1' : '0',
+    description: product.description,
+    type: product.type,
+    mark: '',
+    amount: 0,
+  };
 };
 </script>
 

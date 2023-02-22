@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { MessagePlugin, FormRule, SubmitContext, Data } from 'tdesign-vue-next';
+import { MessagePlugin, FormRule, SubmitContext } from 'tdesign-vue-next';
 
 const INITIAL_DATA = {
   name: '',
@@ -70,7 +70,7 @@ const formVisible = ref(false);
 const formData = ref(props.data);
 const textareaValue = ref('');
 
-const onSubmit = ({ validateResult, firstError }: SubmitContext<Data>) => {
+const onSubmit = ({ validateResult, firstError }: SubmitContext) => {
   if (!firstError) {
     MessagePlugin.success('提交成功');
     formVisible.value = false;

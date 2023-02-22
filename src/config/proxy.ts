@@ -1,4 +1,6 @@
-export default {
+import { Proxy } from '@/types/interface';
+
+const proxy: Proxy = {
   isRequestProxy: true,
   development: {
     // 开发环境接口请求
@@ -25,3 +27,5 @@ export default {
     cdn: '',
   },
 };
+
+export default proxy;

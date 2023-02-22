@@ -76,25 +76,29 @@ const store = useSettingStore();
 const resizeTime = ref(1);
 
 // moneyCharts
-let moneyContainer: HTMLElement;
+let moneyContainer: HTMLElement | null;
 let moneyChart: echarts.ECharts;
 const renderMoneyChart = () => {
   if (!moneyContainer) {
     moneyContainer = document.getElementById('moneyContainer');
   }
-  moneyChart = echarts.init(moneyContainer);
-  moneyChart.setOption(constructInitDashboardDataset('line'));
+  if (moneyContainer) {
+    moneyChart = echarts.init(moneyContainer);
+    moneyChart.setOption(constructInitDashboardDataset('line'));
+  }
 };
 
 // refundCharts
-let refundContainer: HTMLElement;
+let refundContainer: HTMLElement | null;
 let refundChart: echarts.ECharts;
 const renderRefundChart = () => {
   if (!refundContainer) {
     refundContainer = document.getElementById('refundContainer');
   }
-  refundChart = echarts.init(refundContainer);
-  refundChart.setOption(constructInitDashboardDataset('bar'));
+  if (refundContainer) {
+    refundChart = echarts.init(refundContainer);
+    refundChart.setOption(constructInitDashboardDataset('bar'));
+  }
 };
 
 const renderCharts = () => {

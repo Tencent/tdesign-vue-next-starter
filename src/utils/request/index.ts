@@ -8,11 +8,13 @@ import proxy from '@/config/proxy';
 import { joinTimestamp, formatRequestDate, setObjToUrlParams } from './utils';
 import { TOKEN_NAME } from '@/config/global';
 import { ContentTypeEnum } from '@/constants';
+import { AxiosRequestConfigRetry } from '@/types/axios';
+import { ProxyItem } from '@/types/interface';
 
 const env = import.meta.env.MODE || 'development';
 
 // 如果是mock模式 或 没启用直连代理 就不配置host 会走本地Mock拦截 或 Vite 代理
-const host = env === 'mock' || !proxy.isRequestProxy ? '' : proxy[env].host;
+const host = env === 'mock' || !proxy.isRequestProxy ? '' : (proxy[env] as ProxyItem).host;
 
 // 数据处理，方便区分多种处理方式
 const transform: AxiosTransform = {
@@ -144,7 +146,7 @@ const transform: AxiosTransform = {
       }, config.requestOptions.retry.delay || 1);
     });
     config.headers = { ...config.headers, 'Content-Type': ContentTypeEnum.Json };
-    return backoff.then((config) => request.request(config));
+    return backoff.then((config) => request.request(config as AxiosRequestConfigRetry));
   },
 };
 

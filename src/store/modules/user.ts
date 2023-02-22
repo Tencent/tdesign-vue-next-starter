@@ -3,7 +3,8 @@ import { TOKEN_NAME } from '@/config/global';
 import { store, usePermissionStore } from '@/store';
 
 const InitUserInfo = {
-  roles: [], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
+  name: '',
+  roles: [] as Array<string>, // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
 };
 
 export const useUserStore = defineStore('user', {

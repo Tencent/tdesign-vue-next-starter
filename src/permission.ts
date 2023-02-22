@@ -2,7 +2,7 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 
-import { RouteRecordRaw } from 'vue-router';
+import { RouteRecordName, RouteRecordRaw } from 'vue-router';
 import { getPermissionStore, getUserStore } from '@/store';
 import router from '@/router';
 import { PAGE_NOT_FOUND_ROUTE } from '@/utils/route/constant';
@@ -44,12 +44,12 @@ router.beforeEach(async (to, from, next) => {
     try {
       await userStore.getUserInfo();
 
-      if (router.hasRoute(to.name)) {
+      if (router.hasRoute(<RouteRecordName>to.name)) {
         next();
       } else {
         next(`/`);
       }
-    } catch (error) {
+    } catch (error: any) {
       MessagePlugin.error(error);
       next({
         path: '/login',

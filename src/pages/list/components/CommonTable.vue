@@ -119,6 +119,7 @@ import {
   CONTRACT_TYPE_OPTIONS,
   CONTRACT_PAYMENT_TYPES,
 } from '@/constants';
+import { ListModel } from '@/api/model/listModel';
 
 const store = useSettingStore();
 
@@ -184,7 +185,7 @@ const pagination = ref({
 });
 const confirmVisible = ref(false);
 
-const data = ref([]);
+const data = ref<Array<ListModel>>([]);
 
 const dataLoading = ref(false);
 const fetchData = async () => {
@@ -233,24 +234,24 @@ onMounted(() => {
   fetchData();
 });
 
-const handleClickDelete = ({ row }) => {
-  deleteIdx.value = row.rowIndex;
+const handleClickDelete = (slot: { row: { rowIndex: number } }) => {
+  deleteIdx.value = slot.row.rowIndex;
   confirmVisible.value = true;
 };
-const onReset = (val) => {
+const onReset = (val: unknown) => {
   console.log(val);
 };
-const onSubmit = (val) => {
+const onSubmit = (val: unknown) => {
   console.log(val);
 };
 const rehandlePageChange = (pageInfo: PageInfo, newDataSource: TableRowData[]) => {
   console.log('分页变化', pageInfo, newDataSource);
 };
-const rehandleChange = (changeParams, triggerAndData) => {
+const rehandleChange = (changeParams: unknown, triggerAndData: unknown) => {
   console.log('统一Change', changeParams, triggerAndData);
 };
-const rehandleClickOp = ({ text, row }) => {
-  console.log(text, row);
+const rehandleClickOp = (context: unknown) => {
+  console.log(context);
 };
 
 const headerAffixedTop = computed(

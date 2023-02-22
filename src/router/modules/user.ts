@@ -1,8 +1,9 @@
 import { LogoutIcon } from 'tdesign-icons-vue-next';
 import { shallowRef } from 'vue';
+import { RouteRecordRaw } from 'vue-router';
 import Layout from '@/layouts/index.vue';
 
-export default [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/user',
     name: 'user',
@@ -28,9 +29,10 @@ export default [
       {
         path: 'index',
         redirect: '/login',
-        component: () => import('@/layouts/blank.vue'),
         meta: { title: '登录中心' },
       },
     ],
   },
 ];
+
+export default routes;

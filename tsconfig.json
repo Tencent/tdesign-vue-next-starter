@@ -12,6 +12,7 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
     "noEmit": true,
+    "strict": true,
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]

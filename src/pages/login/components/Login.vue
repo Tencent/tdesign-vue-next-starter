@@ -83,7 +83,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import QrcodeVue from 'qrcode.vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import type { FormInstanceFunctions, FormRule } from 'tdesign-vue-next';
+import type { FormInstanceFunctions, FormRule, SubmitContext } from 'tdesign-vue-next';
 import { useCounter } from '@/hooks';
 import { useUserStore } from '@/store';
 
@@ -123,14 +123,15 @@ const route = useRoute();
  * 发送验证码
  */
 const sendCode = () => {
-  form.value.validate({ fields: ['phone'] }).then((e) => {
+  form.value?.validate({ fields: ['phone'] }).then((e) => {
     if (e === true) {
       handleCounter();
     }
   });
 };
 
-const onSubmit = async ({ validateResult }) => {
+const onSubmit = async (context: SubmitContext<FormData>) => {
+  const { validateResult } = context;
   if (validateResult === true) {
     try {
       await userStore.login(formData.value);
@@ -139,7 +140,7 @@ const onSubmit = async ({ validateResult }) => {
       const redirect = route.query.redirect as string;
       const redirectUrl = redirect ? decodeURIComponent(redirect) : '/dashboard';
       router.push(redirectUrl);
-    } catch (e) {
+    } catch (e: any) {
       console.log(e);
       MessagePlugin.error(e.message);
     }

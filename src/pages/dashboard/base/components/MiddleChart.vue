@@ -69,25 +69,25 @@ const resizeTime = ref(1);
 const chartColors = computed(() => store.chartColors);
 
 // monitorChart
-let monitorContainer: HTMLElement;
+let monitorContainer: HTMLElement | null;
 let monitorChart: echarts.ECharts;
 const renderMonitorChart = () => {
-  if (!monitorContainer) {
-    monitorContainer = document.getElementById('monitorContainer');
+  monitorContainer = document.getElementById('monitorContainer');
+  if (monitorContainer) {
+    monitorChart = echarts.init(monitorContainer);
+    monitorChart.setOption(getLineChartDataSet({ ...chartColors.value }));
   }
-  monitorChart = echarts.init(monitorContainer);
-  monitorChart.setOption(getLineChartDataSet({ ...chartColors.value }));
 };
 
 // monitorChart
-let countContainer: HTMLElement;
+let countContainer: HTMLElement | null;
 let countChart: echarts.ECharts;
 const renderCountChart = () => {
-  if (!countContainer) {
-    countContainer = document.getElementById('countContainer');
+  countContainer = document.getElementById('countContainer');
+  if (countContainer) {
+    countChart = echarts.init(countContainer);
+    countChart.setOption(getPieChartDataSet(chartColors.value));
   }
-  countChart = echarts.init(countContainer);
-  countChart.setOption(getPieChartDataSet(chartColors.value));
 };
 
 const renderCharts = () => {
@@ -106,7 +106,7 @@ const updateContainer = () => {
   }
 
   monitorChart.resize({
-    width: monitorContainer.clientWidth,
+    width: monitorContainer?.clientWidth,
     height: resizeTime.value * 326,
   });
   countChart.resize({

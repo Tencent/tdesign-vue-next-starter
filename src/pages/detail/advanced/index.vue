@@ -126,13 +126,15 @@ export default {
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { PageInfo } from 'tdesign-vue-next';
 import { prefix } from '@/config/global';
 import { BASE_INFO_DATA, TABLE_COLUMNS_DATA as columns, PRODUCT_LIST } from './constants';
 import { getPurchaseList } from '@/api/detail';
 
 import Product from './components/Product.vue';
+import { PurchaseInfo } from '@/api/model/detailModel';
 
-const data = ref([]);
+const data = ref<Array<PurchaseInfo>>([]);
 const pagination = ref({
   defaultPageSize: 10,
   total: 100,
@@ -169,16 +171,16 @@ onMounted(() => {
 });
 
 const visible = ref(false);
-const sortChange = (val) => {
+const sortChange = (val: unknown) => {
   console.log(val);
 };
-const rehandleChange = (changeParams, triggerAndData) => {
-  console.log('统一Change', changeParams, triggerAndData);
+const rehandleChange = (pageInfo: PageInfo, newDataSource: unknown) => {
+  console.log('统一Change', pageInfo, newDataSource);
 };
 const listClick = () => {
   visible.value = true;
 };
-const deleteClickOp = (columns) => {
+const deleteClickOp = (columns: { rowIndex: number }) => {
   data.value.splice(columns.rowIndex, 1);
 };
 const onConfirm = () => {

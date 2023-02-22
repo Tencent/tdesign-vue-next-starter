@@ -91,6 +91,7 @@ import { changeChartsTheme } from '@/utils/color';
 
 import { prefix } from '@/config/global';
 import { getProjectList } from '@/api/detail';
+import { ProjectInfo } from '@/api/model/detailModel';
 
 echarts.use([
   TitleComponent,
@@ -106,7 +107,7 @@ echarts.use([
 const store = useSettingStore();
 
 const chartColors = computed(() => store.chartColors);
-const data = ref([]);
+const data = ref<Array<ProjectInfo>>([]);
 const pagination = ref({
   defaultPageSize: 10,
   total: 100,
@@ -128,43 +129,44 @@ const fetchData = async () => {
 const visible = ref(false);
 
 // monitorChart logic
-let monitorContainer: HTMLElement;
+let monitorContainer: HTMLElement | null;
 let monitorChart: echarts.ECharts;
 onMounted(() => {
   monitorContainer = document.getElementById('monitorContainer');
-  monitorChart = echarts.init(monitorContainer);
-  monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
-  setInterval(() => {
+  if (monitorContainer) {
+    monitorChart = echarts.init(monitorContainer);
     monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
-  }, 3000);
+    setInterval(() => {
+      monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
+    }, 3000);
+  }
 });
 
 // dataChart logic
-let dataContainer: HTMLElement;
+let dataContainer: HTMLElement | null;
 let dataChart: echarts.ECharts;
 onMounted(() => {
   dataContainer = document.getElementById('dataContainer');
-  dataChart = echarts.init(dataContainer);
-  dataChart.setOption(get2ColBarChartDataSet({ ...chartColors.value }));
+  if (dataContainer) {
+    dataChart = echarts.init(dataContainer);
+    dataChart.setOption(get2ColBarChartDataSet({ ...chartColors.value }));
+  }
 });
-
-const intervalTimer = null;
 
 /// / chartSize update
 const updateContainer = () => {
   monitorChart.resize({
-    width: monitorContainer.clientWidth,
-    height: monitorContainer.clientHeight,
+    width: monitorContainer?.clientWidth,
+    height: monitorContainer?.clientHeight,
   });
   dataChart.resize({
-    width: dataContainer.clientWidth,
-    height: dataContainer.clientHeight,
+    width: dataContainer?.clientWidth,
+    height: dataContainer?.clientHeight,
   });
 };
 
 onUnmounted(() => {
   window.removeEventListener('resize', updateContainer);
-  clearInterval(intervalTimer);
 });
 
 const onAlertChange = () => {
@@ -183,10 +185,10 @@ watch(
   },
 );
 
-const sortChange = (val) => {
+const sortChange = (val: unknown) => {
   console.log(val);
 };
-const rehandleChange = (changeParams, triggerAndData) => {
+const rehandleChange = (changeParams: unknown, triggerAndData: unknown) => {
   console.log('统一Change', changeParams, triggerAndData);
 };
 const listClick = () => {
@@ -195,7 +197,7 @@ const listClick = () => {
 const onConfirm = () => {
   visible.value = false;
 };
-const deleteClickOp = (e) => {
+const deleteClickOp = (e: { rowIndex: number }) => {
   data.value.splice(e.rowIndex, 1);
 };
 </script>

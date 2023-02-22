@@ -96,7 +96,7 @@ import { ref, computed, onMounted, watchEffect } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
 import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
-import useClipboard from 'vue-clipboard3';
+import { useClipboard } from '@vueuse/core';
 
 import { useSettingStore } from '@/store';
 import Thumbnail from '@/components/thumbnail/index.vue';
@@ -124,7 +124,7 @@ const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
     if (Object.prototype.hasOwnProperty.call(styleConfig, key)) {
-      styleConfig[key] = settingStore[key];
+      (styleConfig[key as keyof typeof STYLE_CONFIG] as any) = settingStore[key as keyof typeof STYLE_CONFIG];
     }
   }
 
@@ -166,7 +166,7 @@ const changeColor = (hex: string) => {
 };
 
 onMounted(() => {
-  document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+  document.querySelector('.dynamic-color-btn')?.addEventListener('click', () => {
     isColoPickerDisplay.value = true;
   });
 });
@@ -179,8 +179,8 @@ const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeConte
 
 const handleCopy = () => {
   const text = JSON.stringify(formData.value, null, 4);
-  const { toClipboard } = useClipboard();
-  toClipboard(text)
+  const { copy } = useClipboard();
+  copy(text)
     .then(() => {
       MessagePlugin.closeAll();
       MessagePlugin.success('复制成功');

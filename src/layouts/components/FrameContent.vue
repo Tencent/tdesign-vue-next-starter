@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import { CSSProperties, watch, ref, unref, computed } from 'vue';
 import debounce from 'lodash/debounce';
-import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn';
+import { useWindowSize } from '@vueuse/core';
 import { prefix } from '@/config/global';
 import { useSettingStore } from '@/store';
 
@@ -21,6 +21,7 @@ const heightRef = ref(window.innerHeight);
 const frameRef = ref<HTMLFrameElement>();
 const prefixCls = computed(() => [`${prefix}-iframe-page`]);
 const settingStore = useSettingStore();
+const { width, height } = useWindowSize();
 
 const getWrapStyle = computed((): CSSProperties => {
   return {
@@ -51,12 +52,12 @@ function calcHeight() {
   const { showFooter, isUseTabsRouter, showBreadcrumb } = settingStore;
   const headerHeight = parseFloat(sizeXxxl);
   const navDom = document.querySelector('.t-tabs__nav');
-  const navHeight = isUseTabsRouter ? getOuterHeight(navDom) : 0;
+  const navHeight = isUseTabsRouter && navDom ? getOuterHeight(navDom) : 0;
   const breadcrumbDom = document.querySelector('.t-breadcrumb');
-  const breadcrumbHeight = showBreadcrumb ? getOuterHeight(breadcrumbDom) : 0;
+  const breadcrumbHeight = showBreadcrumb && breadcrumbDom ? getOuterHeight(breadcrumbDom) : 0;
   const contentPadding = parseFloat(paddingTBXxl) * 2;
   const footerDom = document.querySelector('.t-layout__footer');
-  const footerHeight = showFooter ? getOuterHeight(footerDom) : 0;
+  const footerHeight = showFooter && footerDom ? getOuterHeight(footerDom) : 0;
   const top = headerHeight + navHeight + breadcrumbHeight + contentPadding + footerHeight + 2;
   heightRef.value = window.innerHeight - top;
   clientHeight = document.documentElement.clientHeight - top;
@@ -68,7 +69,11 @@ function hideLoading() {
   calcHeight();
 }
 
-useWindowSizeFn(calcHeight, { immediate: true });
+watch(
+  () => [width, height],
+  () => calcHeight(),
+  { immediate: true },
+);
 
 watch(
   [() => settingStore.showFooter, () => settingStore.isUseTabsRouter, () => settingStore.showBreadcrumb],

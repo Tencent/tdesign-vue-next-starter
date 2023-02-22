@@ -44,33 +44,34 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
     // 处理关闭当前
     subtractCurrentTabRouter(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      this.tabRouterList = this.tabRouterList.slice(0, routeIdx).concat(this.tabRouterList.slice(routeIdx + 1));
+      if (routeIdx) {
+        this.tabRouterList = this.tabRouterList.slice(0, routeIdx).concat(this.tabRouterList.slice(routeIdx + 1));
+      } else {
+        throw new Error('route index is undefined');
+      }
     },
     // 处理关闭右侧
     subtractTabRouterBehind(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      const homeIdx: number = this.tabRouters.findIndex((route) => route.isHome);
-      let tabRouterList: Array<TRouterInfo> = this.tabRouterList.slice(0, routeIdx + 1);
-      if (routeIdx < homeIdx) {
-        tabRouterList = tabRouterList.concat(homeRoute);
+      if (routeIdx) {
+        this.tabRouterList = this.tabRouterList.slice(0, routeIdx + 1);
+      } else {
+        throw new Error('route index is undefined');
       }
-      this.tabRouterList = tabRouterList;
     },
     // 处理关闭左侧
     subtractTabRouterAhead(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      const homeIdx: number = this.tabRouters.findIndex((route) => route.isHome);
-      let tabRouterList: Array<TRouterInfo> = this.tabRouterList.slice(routeIdx);
-      if (routeIdx > homeIdx) {
-        tabRouterList = homeRoute.concat(tabRouterList);
-      }
-      this.tabRouterList = tabRouterList;
+      this.tabRouterList = homeRoute.concat(this.tabRouterList.slice(routeIdx));
     },
     // 处理关闭其他
     subtractTabRouterOther(newRoute: TRouterInfo) {
       const { routeIdx } = newRoute;
-      const homeIdx: number = this.tabRouters.findIndex((route) => route.isHome);
-      this.tabRouterList = routeIdx === homeIdx ? homeRoute : homeRoute.concat([this.tabRouterList?.[routeIdx]]);
+      if (routeIdx) {
+        this.tabRouterList = routeIdx === 0 ? homeRoute : homeRoute.concat([this.tabRouterList?.[routeIdx]]);
+      } else {
+        throw new Error('route index is undefined');
+      }
     },
     removeTabRouterList() {
       this.tabRouterList = [];
