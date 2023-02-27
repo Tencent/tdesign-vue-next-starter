@@ -4,7 +4,7 @@ module.exports = {
   plugins: ['stylelint-less'],
   overrides: [
     {
-      files: ['**/*.vue'],
+      files: ['**/*.html', '**/*.vue'],
       customSyntax: 'postcss-html',
     },
     {
