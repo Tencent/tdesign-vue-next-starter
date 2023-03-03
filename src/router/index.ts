@@ -4,10 +4,10 @@ import uniq from 'lodash/uniq';
 const env = import.meta.env.MODE || 'development';
 
 // 导入homepage相关固定路由
-const homepageModules = import.meta.globEager('./modules/**/homepage.ts');
+const homepageModules = import.meta.glob('./modules/**/homepage.ts', { eager: true });
 
 // 导入modules非homepage相关固定路由
-const fixedModules = import.meta.globEager('./modules/**/!(homepage).ts');
+const fixedModules = import.meta.glob('./modules/**/!(homepage).ts', { eager: true });
 
 // 其他固定路由
 const defaultRouterList: Array<RouteRecordRaw> = [
