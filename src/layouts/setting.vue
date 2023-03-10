@@ -21,37 +21,6 @@
             </div>
           </div>
         </t-radio-group>
-        <div class="setting-group-title">主题色</div>
-        <t-radio-group v-model="formData.brandTheme">
-          <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
-            <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
-              <color-container :value="item" />
-            </t-radio-button>
-          </div>
-          <div class="setting-layout-drawer">
-            <t-popup
-              destroy-on-close
-              expand-animation
-              placement="bottom-right"
-              trigger="click"
-              :visible="isColoPickerDisplay"
-              :overlay-style="{ padding: 0 }"
-              @visible-change="onPopupVisibleChange"
-            >
-              <template #content>
-                <t-color-picker-panel
-                  :on-change="changeColor"
-                  :color-modes="['monochrome']"
-                  format="HEX"
-                  :swatch-colors="[]"
-                />
-              </template>
-              <t-radio-button :value="dynamicColor" class="setting-layout-color-group dynamic-color-btn">
-                <color-container :value="dynamicColor" />
-              </t-radio-button>
-            </t-popup>
-          </div>
-        </t-radio-group>
 
         <div class="setting-group-title">导航布局</div>
         <t-radio-group v-model="formData.layout">
@@ -92,17 +61,13 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
-import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { ref, computed, watchEffect } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { computed, onMounted, ref, watchEffect } from 'vue';
 import useClipboard from 'vue-clipboard3';
 
-import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
-import ColorContainer from '@/components/color/index.vue';
 import Thumbnail from '@/components/thumbnail/index.vue';
-import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
 import { useSettingStore } from '@/store';
 
@@ -127,12 +92,7 @@ const initStyleConfig = () => {
   return styleConfig;
 };
 
-const dynamicColor = computed(() => {
-  const isDynamic = DEFAULT_COLOR_OPTIONS.indexOf(formData.value.brandTheme) === -1;
-  return isDynamic ? formData.value.brandTheme : '';
-});
 const formData = ref({ ...initStyleConfig() });
-const isColoPickerDisplay = ref(false);
 
 const showSettingPanel = computed({
   get() {
@@ -144,22 +104,6 @@ const showSettingPanel = computed({
     });
   },
 });
-
-const changeColor = (hex: string) => {
-  formData.value.brandTheme = hex;
-};
-
-onMounted(() => {
-  document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
-    isColoPickerDisplay.value = true;
-  });
-});
-
-const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeContext) => {
-  if (!visible && context.trigger === 'document') {
-    isColoPickerDisplay.value = visible;
-  }
-};
 
 const handleCopy = () => {
   const text = JSON.stringify(formData.value, null, 4);
