@@ -85,7 +85,7 @@ const getHref = (item: MenuRoute) => {
 };
 
 const getPath = (item: ListItemType) => {
-  if (active.value.startsWith(item.path)) {
+  if (active.value === item.path) {
     return active.value;
   }
   return item.meta?.single ? item.redirect : item.path;
