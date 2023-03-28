@@ -19,7 +19,6 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
-    "@types/nprogress": "^0.2.0",
     "axios": "^1.3.4",
     "dayjs": "^1.11.7",
     "echarts": "5.4.2",
@@ -41,8 +40,8 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@types/echarts": "^4.9.16",
     "@types/lodash": "^4.14.191",
+    "@types/nprogress": "^0.2.0",
     "@types/qs": "^6.9.7",
-    "@types/ws": "^8.5.4",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "@vitejs/plugin-vue": "^3.2.0",
