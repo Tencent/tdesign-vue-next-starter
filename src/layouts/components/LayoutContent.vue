@@ -16,6 +16,7 @@
         :key="`${routeItem.path}_${index}`"
         :value="routeItem.path"
         :removable="!routeItem.isHome"
+        :draggable="!routeItem.isHome"
       >
         <template #label>
           <t-dropdown
