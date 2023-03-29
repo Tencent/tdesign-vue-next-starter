@@ -38,7 +38,6 @@ const props = defineProps({
     default: () => [],
   },
 });
-
 const active = computed(() => getActive());
 
 const list = computed(() => {
@@ -85,9 +84,16 @@ const getHref = (item: MenuRoute) => {
 };
 
 const getPath = (item: ListItemType) => {
+  const activeLevel = active.value.split('/').length;
+  const pathLevel = item.path.split('/').length;
+  if (activeLevel > pathLevel && active.value.startsWith(item.path)) {
+    return active.value;
+  }
+
   if (active.value === item.path) {
     return active.value;
   }
+
   return item.meta?.single ? item.redirect : item.path;
 };
 
