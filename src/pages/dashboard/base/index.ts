@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { TChartColor } from '@/config/color';
 import { getChartListColor } from '@/utils/color';
 import { getRandomArray } from '@/utils/charts';
+import { t } from '@/locales';
 
 /** 首页 dashboard 折线图 */
 export function constructInitDashboardDataset(type: string) {
@@ -160,16 +161,16 @@ export function constructInitDataset({
       left: 'center',
       bottom: '0',
       orient: 'horizontal',
-      data: ['本月', '上月'],
+      data: [t('home.basePage.analysis.series1'), t('home.basePage.analysis.series2')],
     },
     series: [
       {
-        name: '本月',
+        name: t('home.basePage.analysis.series1'),
         data: outArray,
         type: 'bar',
       },
       {
-        name: '上月',
+        name: t('home.basePage.analysis.series2'),
         data: inArray,
         type: 'bar',
       },
@@ -229,7 +230,7 @@ export function getLineChartDataSet({
       left: 'center',
       bottom: '0',
       orient: 'horizontal', // legend 横向布局。
-      data: ['本月', '上月'],
+      data: [t('home.basePage.analysis.series1'), t('home.basePage.analysis.series2')],
       textStyle: {
         fontSize: 12,
         color: placeholderColor,
@@ -261,7 +262,7 @@ export function getLineChartDataSet({
     },
     series: [
       {
-        name: '本月',
+        name: t('home.basePage.analysis.series1'),
         data: outArray,
         type: 'line',
         smooth: false,
@@ -277,7 +278,7 @@ export function getLineChartDataSet({
         },
       },
       {
-        name: '上月',
+        name: t('home.basePage.analysis.series2'),
         data: inArray,
         type: 'line',
         smooth: false,
@@ -332,7 +333,7 @@ export function getPieChartDataSet({
     },
     series: [
       {
-        name: '销售渠道',
+        name: t('home.basePage.analysis.channels'),
         type: 'pie',
         radius: ['48%', '60%'],
         avoidLabelOverlap: true,
@@ -345,7 +346,7 @@ export function getPieChartDataSet({
         label: {
           show: true,
           position: 'center',
-          formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
+          formatter: ['{value|{d}%}', `{name|{b}${t('home.basePage.analysis.channelTips')}}`].join('\n'),
           rich: {
             value: {
               color: textColor,
@@ -386,9 +387,9 @@ export function getPieChartDataSet({
         data: [
           {
             value: 1048,
-            name: '线上',
+            name: t('home.basePage.analysis.channel1'),
           },
-          { value: radius * 7, name: '门店' },
+          { value: radius * 7, name: t('home.basePage.analysis.channel2') },
         ],
       },
     ],

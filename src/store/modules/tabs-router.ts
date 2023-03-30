@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
 import type { TRouterInfo, TTabRouterType } from '@/types/interface';
 import { store } from '@/store';
+import { t } from '@/locales';
 
 const homeRoute: Array<TRouterInfo> = [
   {
     path: '/dashboard/base',
     routeIdx: 0,
-    title: '仪表盘',
+    title: t('home.dashboard'),
     name: 'DashboardBase',
     isHome: true,
   },

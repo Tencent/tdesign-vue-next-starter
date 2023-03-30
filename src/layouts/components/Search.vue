@@ -2,7 +2,7 @@
   <div v-if="layout === 'side'" class="header-menu-search">
     <t-input
       :class="['header-search', { 'hover-active': isSearchFocus }]"
-      placeholder="请输入搜索内容"
+      :placeholder="t('layout.searchHolder')"
       @blur="changeSearchFocus(false)"
       @focus="changeSearchFocus(true)"
     >
@@ -38,10 +38,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 defineProps({
   layout: String,
 });
+
+const { t } = useI18n();
 
 const isSearchFocus = ref(false);
 const searchData = ref('');

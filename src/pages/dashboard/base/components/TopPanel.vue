@@ -1,6 +1,6 @@
 <template>
   <t-row :gutter="[16, 16]">
-    <t-col v-for="(item, index) in PANE_LIST" :key="item.title" :xs="6" :xl="3">
+    <t-col v-for="(item, index) in paneList" :key="item.title" :xs="6" :xl="3">
       <t-card
         :title="item.title"
         :bordered="false"
@@ -32,7 +32,7 @@
         <template #footer>
           <div class="dashboard-item-bottom">
             <div class="dashboard-item-block">
-              自从上周以来
+              {{ t('home.basePage.cardTips') }}
               <trend
                 class="dashboard-item-trend"
                 :type="item.upTrend ? 'up' : 'down'"
@@ -61,6 +61,7 @@ import * as echarts from 'echarts/core';
 import { LineChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { UsergroupIcon, FileIcon } from 'tdesign-icons-vue-next';
+import { useI18n } from 'vue-i18n';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
@@ -69,6 +70,10 @@ import Trend from '@/components/trend/index.vue';
 import { constructInitDashboardDataset } from '../index';
 
 import { PANE_LIST } from '../constants';
+
+const { t } = useI18n();
+
+const paneList = ref(PANE_LIST.map((item, index) => ({ ...item, title: t(`home.basePage.card${index + 1}`) })));
 
 echarts.use([LineChart, BarChart, CanvasRenderer]);
 

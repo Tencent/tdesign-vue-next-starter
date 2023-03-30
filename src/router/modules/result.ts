@@ -1,4 +1,5 @@
 import Layout from '@/layouts/index.vue';
+import { t } from '@/locales';
 
 export default [
   {
@@ -6,7 +7,7 @@ export default [
     name: 'result',
     component: Layout,
     redirect: '/result/success',
-    meta: { title: '结果页', icon: 'check-circle' },
+    meta: { title: t('result.home'), icon: 'check-circle' },
     children: [
       {
         path: 'success',

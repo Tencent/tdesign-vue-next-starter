@@ -6,6 +6,7 @@ import { store } from './store';
 import router from './router';
 import '@/style/index.less';
 import './permission';
+import i18n from './locales';
 import App from './App.vue';
 
 const app = createApp(App);
@@ -13,5 +14,6 @@ const app = createApp(App);
 app.use(TDesign);
 app.use(store);
 app.use(router);
+app.use(i18n);
 
 app.mount('#app');

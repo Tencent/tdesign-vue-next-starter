@@ -39,7 +39,7 @@
       </div>
     </template>
 
-    <!-- 扫码登陆 -->
+    <!-- 扫码登录 -->
     <template v-else-if="type == 'qrcode'">
       <div class="tip-container">
         <span class="tip">请使用微信扫一扫登录</span>
@@ -48,7 +48,7 @@
       <qrcode-vue value="" :size="160" level="H" />
     </template>
 
-    <!-- 手机号登陆 -->
+    <!-- 手机号登录 -->
     <template v-else>
       <t-form-item name="phone">
         <t-input v-model="formData.phone" size="large" placeholder="请输入手机号码">
@@ -135,7 +135,7 @@ const onSubmit = async ({ validateResult }) => {
     try {
       await userStore.login(formData.value);
 
-      MessagePlugin.success('登陆成功');
+      MessagePlugin.success('登录成功');
       const redirect = route.query.redirect as string;
       const redirectUrl = redirect ? decodeURIComponent(redirect) : '/dashboard';
       router.push(redirectUrl);

@@ -1,4 +1,5 @@
 import { TdBaseTableProps } from 'tdesign-vue-next';
+import { t } from '@/locales';
 
 interface DashboardPanel {
   title: string;
@@ -17,25 +18,25 @@ interface TendItem {
 
 export const PANE_LIST: Array<DashboardPanel> = [
   {
-    title: '总收入',
+    title: t('home.basePage.card1'),
     number: '¥ 28,425.00',
     upTrend: '20.5%',
     leftType: 'echarts-line',
   },
   {
-    title: '总退款',
+    title: t('home.basePage.card2'),
     number: '¥ 768.00',
     downTrend: '20.5%',
     leftType: 'echarts-bar',
   },
   {
-    title: '活跃用户（个）',
+    title: t('home.basePage.card3'),
     number: '1126',
     upTrend: '20.5%',
     leftType: 'icon-usergroup',
   },
   {
-    title: '产生订单（个）',
+    title: t('home.basePage.card4'),
     number: 527,
     downTrend: '20.5%',
     leftType: 'icon-file-paste',

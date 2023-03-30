@@ -23,24 +23,29 @@
           <!-- 全局通知 -->
           <notice />
 
-          <t-tooltip placement="bottom" content="代码仓库">
+          <t-tooltip placement="bottom" :content="t('layout.code')">
             <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
               <t-icon name="logo-github" />
             </t-button>
           </t-tooltip>
-          <t-tooltip placement="bottom" content="帮助文档">
+          <t-tooltip placement="bottom" :content="t('layout.help')">
             <t-button theme="default" shape="square" variant="text" @click="navToHelper">
               <t-icon name="help-circle" />
             </t-button>
           </t-tooltip>
+          <t-dropdown trigger="click" :options="langList" :on-click="(e) => changeLang(e.value)">
+            <t-button theme="default" shape="square" variant="text">
+              <t-icon name="internet" />
+            </t-button>
+          </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
             <template #dropdown>
               <t-dropdown-menu>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
-                  <t-icon name="user-circle"></t-icon>个人中心
+                  <t-icon name="user-circle"></t-icon>{{ t('layout.user') }}
                 </t-dropdown-item>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
-                  <t-icon name="poweroff"></t-icon>退出登录
+                  <t-icon name="poweroff"></t-icon>{{ t('layout.signOut') }}
                 </t-dropdown-item>
               </t-dropdown-menu>
             </template>
@@ -64,14 +69,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import type { PropType } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { useSettingStore } from '@/store';
 import { getActive } from '@/router';
 import { prefix } from '@/config/global';
 import LogoFull from '@/assets/assets-logo-full.svg?component';
 import type { MenuRoute } from '@/types/interface';
+import { langList } from '@/locales';
+import { useLocale } from '@/locales/useLocale';
 
 import Notice from './Notice.vue';
 import Search from './Search.vue';
@@ -108,6 +116,8 @@ const props = defineProps({
   },
 });
 
+const { t } = useI18n();
+
 const router = useRouter();
 const settingStore = useSettingStore();
 
@@ -115,6 +125,16 @@ const toggleSettingPanel = () => {
   settingStore.updateConfig({
     showSettingPanel: true,
   });
+};
+
+const { changeLocale } = useLocale();
+
+const reload = inject('reload');
+const changeLang = (lang: any) => {
+  changeLocale(lang);
+  if (typeof reload === 'function') {
+    reload();
+  }
 };
 
 const active = computed(() => getActive());
