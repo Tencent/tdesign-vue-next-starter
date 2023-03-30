@@ -4,8 +4,8 @@
       <t-col :xs="12" :xl="9">
         <t-card
           :bordered="false"
-          title="出入库概览"
-          subtitle="(件)"
+          :title="t('dashboard.base.outputOverview.title')"
+          :subtitle="t('dashboard.base.outputOverview.subtitle')"
           :class="{ 'dashboard-overview-card': true, 'overview-panel': true }"
         >
           <template #actions>
@@ -22,32 +22,32 @@
             ref="stokeContainer"
             style="width: 100%; height: 351px"
             class="dashboard-chart-container"
-          ></div>
+          />
         </t-card>
       </t-col>
       <t-col :xs="12" :xl="3">
         <t-card :bordered="false" :class="{ 'dashboard-overview-card': true, 'export-panel': true }">
           <template #actions>
-            <t-button>导出数据</t-button>
+            <t-button>{{ t('dashboard.base.outputOverview.export') }}</t-button>
           </template>
           <t-row>
             <t-col :xs="6" :xl="12">
-              <t-card :bordered="false" subtitle="本月出库总计（件）" class="inner-card">
+              <t-card :bordered="false" :subtitle="t('dashboard.base.outputOverview.month.output')" class="inner-card">
                 <div class="inner-card__content">
                   <div class="inner-card__content-title">1726</div>
                   <div class="inner-card__content-footer">
-                    自从上周以来
+                    {{ t('dashboard.base.outputOverview.since') }}
                     <trend class="trend-tag" type="down" :is-reverse-color="false" describe="20.3%" />
                   </div>
                 </div>
               </t-card>
             </t-col>
             <t-col :xs="6" :xl="12">
-              <t-card :bordered="false" subtitle="本月入库总计（件）" class="inner-card">
+              <t-card :bordered="false" :subtitle="t('dashboard.base.outputOverview.month.input')" class="inner-card">
                 <div class="inner-card__content">
                   <div class="inner-card__content-title">226</div>
                   <div class="inner-card__content-footer">
-                    自从上周以来
+                    {{ t('dashboard.base.outputOverview.since') }}
                     <trend class="trend-tag" type="down" :is-reverse-color="false" describe="20.3%" />
                   </div>
                 </div>
@@ -76,6 +76,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { useSettingStore } from '@/store';
 import { LAST_7_DAYS } from '@/utils/date';
 import { changeChartsTheme } from '@/utils/color';
+import { t } from '@/locales';
 
 // 导入样式
 import Trend from '@/components/trend/index.vue';

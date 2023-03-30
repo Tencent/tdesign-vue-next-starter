@@ -23,12 +23,12 @@
           <!-- 全局通知 -->
           <notice />
 
-          <t-tooltip placement="bottom" :content="t('layout.code')">
+          <t-tooltip placement="bottom" :content="t('layout.header.code')">
             <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
               <t-icon name="logo-github" />
             </t-button>
           </t-tooltip>
-          <t-tooltip placement="bottom" :content="t('layout.help')">
+          <t-tooltip placement="bottom" :content="t('layout.header.help')">
             <t-button theme="default" shape="square" variant="text" @click="navToHelper">
               <t-icon name="help-circle" />
             </t-button>
@@ -42,10 +42,10 @@
             <template #dropdown>
               <t-dropdown-menu>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
-                  <t-icon name="user-circle"></t-icon>{{ t('layout.user') }}
+                  <t-icon name="user-circle"></t-icon>{{ t('layout.header.user') }}
                 </t-dropdown-item>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
-                  <t-icon name="poweroff"></t-icon>{{ t('layout.signOut') }}
+                  <t-icon name="poweroff"></t-icon>{{ t('layout.header.signOut') }}
                 </t-dropdown-item>
               </t-dropdown-menu>
             </template>
@@ -57,7 +57,7 @@
               <template #suffix><t-icon name="chevron-down" /></template>
             </t-button>
           </t-dropdown>
-          <t-tooltip placement="bottom" content="系统设置">
+          <t-tooltip placement="bottom" :content="t('layout.header.setting')">
             <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
               <t-icon name="setting" />
             </t-button>
@@ -72,13 +72,12 @@
 import { computed, inject } from 'vue';
 import type { PropType } from 'vue';
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
 import { useSettingStore } from '@/store';
 import { getActive } from '@/router';
 import { prefix } from '@/config/global';
 import LogoFull from '@/assets/assets-logo-full.svg?component';
 import type { MenuRoute } from '@/types/interface';
-import { langList } from '@/locales';
+import { langList, t } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 
 import Notice from './Notice.vue';
@@ -115,8 +114,6 @@ const props = defineProps({
     default: 3,
   },
 });
-
-const { t } = useI18n();
 
 const router = useRouter();
 const settingStore = useSettingStore();

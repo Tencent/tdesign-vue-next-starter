@@ -2,8 +2,8 @@
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="9">
       <t-card
-        :title="t('home.basePage.analysis.title')"
-        :subtitle="`(${t('home.basePage.analysis.unit')})${currentMonth}`"
+        :title="t('dashboard.base.topPanel.analysis.title')"
+        :subtitle="`(${t('dashboard.base.topPanel.analysis.unit')})${currentMonth}`"
         class="dashboard-chart-card"
         :bordered="false"
       >
@@ -28,7 +28,7 @@
     </t-col>
     <t-col :xs="12" :xl="3">
       <t-card
-        :title="t('home.basePage.analysis.channels')"
+        :title="t('dashboard.base.topPanel.analysis.channels')"
         :subtitle="currentMonth"
         class="dashboard-chart-card"
         :bordered="false"
@@ -51,14 +51,12 @@ import * as echarts from 'echarts/core';
 import { TooltipComponent, LegendComponent, GridComponent } from 'echarts/components';
 import { PieChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import { useI18n } from 'vue-i18n';
 import { useSettingStore } from '@/store';
 import { LAST_7_DAYS } from '@/utils/date';
 import { changeChartsTheme } from '@/utils/color';
+import { t } from '@/locales';
 
 import { getPieChartDataSet, getLineChartDataSet } from '../index';
-
-const { t } = useI18n();
 
 echarts.use([TooltipComponent, LegendComponent, PieChart, GridComponent, LineChart, CanvasRenderer]);
 

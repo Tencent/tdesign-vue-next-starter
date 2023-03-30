@@ -1,11 +1,11 @@
 <template>
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="6">
-      <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
+      <t-card :title="t('dashboard.base.rankList.title')" class="dashboard-rank-card" :bordered="false">
         <template #actions>
           <t-radio-group default-value="dateVal" variant="default-filled">
-            <t-radio-button value="dateVal">本周</t-radio-button>
-            <t-radio-button value="monthVal">近三个月</t-radio-button>
+            <t-radio-button value="dateVal">{{ t('dashboard.base.rankList.week') }}</t-radio-button>
+            <t-radio-button value="monthVal">{{ t('dashboard.base.rankList.month') }}</t-radio-button>
           </t-radio-group>
         </template>
         <t-table :data="SALE_TEND_LIST" :columns="SALE_COLUMNS" row-key="productName">
@@ -20,17 +20,17 @@
             </span>
           </template>
           <template #operation="slotProps">
-            <a class="t-button-link" @click="rehandleClickOp(slotProps)">详情</a>
+            <a class="t-button-link" @click="rehandleClickOp(slotProps)">{{ t('dashboard.base.rankList.info') }}</a>
           </template>
         </t-table>
       </t-card>
     </t-col>
     <t-col :xs="12" :xl="6">
-      <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
+      <t-card :title="t('dashboard.base.rankList.title')" class="dashboard-rank-card" :bordered="false">
         <template #actions>
           <t-radio-group default-value="dateVal" variant="default-filled">
-            <t-radio-button value="dateVal">本周</t-radio-button>
-            <t-radio-button value="monthVal">近三个月</t-radio-button>
+            <t-radio-button value="dateVal">{{ t('dashboard.base.rankList.week') }}</t-radio-button>
+            <t-radio-button value="monthVal">{{ t('dashboard.base.rankList.month') }}</t-radio-button>
           </t-radio-group>
         </template>
         <t-table :data="BUY_TEND_LIST" :columns="BUY_COLUMNS" row-key="productName">
@@ -43,7 +43,7 @@
             <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
           </template>
           <template #operation="slotProps">
-            <a class="t-button-link" @click="rehandleClickOp(slotProps)">详情</a>
+            <a class="t-button-link" @click="rehandleClickOp(slotProps)">{{ t('dashboard.base.rankList.info') }}</a>
           </template>
         </t-table>
       </t-card>
@@ -56,6 +56,7 @@
 import Trend from '@/components/trend/index.vue';
 
 import { SALE_TEND_LIST, BUY_TEND_LIST, SALE_COLUMNS, BUY_COLUMNS } from '../constants';
+import { t } from '@/locales';
 
 const rehandleClickOp = (val: MouseEvent) => {
   console.log(val);

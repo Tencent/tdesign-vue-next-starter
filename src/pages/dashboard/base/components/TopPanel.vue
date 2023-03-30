@@ -4,7 +4,7 @@
       <t-card
         :title="item.title"
         :bordered="false"
-        :class="{ 'dashboard-item': true, 'dashboard-item--main-color': index == 0 }"
+        :class="{ 'dashboard-item': true, 'dashboard-item--main-color': index === 0 }"
       >
         <div class="dashboard-item-top">
           <span :style="{ fontSize: `${resizeTime * 28}px` }">{{ item.number }}</span>
@@ -32,7 +32,7 @@
         <template #footer>
           <div class="dashboard-item-bottom">
             <div class="dashboard-item-block">
-              {{ t('home.basePage.cardTips') }}
+              {{ t('dashboard.base.topPanel.cardTips') }}
               <trend
                 class="dashboard-item-trend"
                 :type="item.upTrend ? 'up' : 'down'"
@@ -61,7 +61,7 @@ import * as echarts from 'echarts/core';
 import { LineChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { UsergroupIcon, FileIcon } from 'tdesign-icons-vue-next';
-import { useI18n } from 'vue-i18n';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
@@ -71,9 +71,9 @@ import { constructInitDashboardDataset } from '../index';
 
 import { PANE_LIST } from '../constants';
 
-const { t } = useI18n();
-
-const paneList = ref(PANE_LIST.map((item, index) => ({ ...item, title: t(`home.basePage.card${index + 1}`) })));
+const paneList = ref(
+  PANE_LIST.map((item, index) => ({ ...item, title: t(`dashboard.base.topPanel.card${index + 1}`) })),
+);
 
 echarts.use([LineChart, BarChart, CanvasRenderer]);
 

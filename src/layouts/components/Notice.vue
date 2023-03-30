@@ -3,10 +3,16 @@
     <template #content>
       <div class="header-msg">
         <div class="header-msg-top">
-          <p>通知中心</p>
-          <t-button v-if="unreadMsg.length > 0" class="clear-btn" variant="text" theme="primary" @click="setRead('all')"
-            >清空</t-button
+          <p>{{ t('layout.notice.title') }}</p>
+          <t-button
+            v-if="unreadMsg.length > 0"
+            class="clear-btn"
+            variant="text"
+            theme="primary"
+            @click="setRead('all')"
           >
+            {{ t('layout.notice.clear') }}
+          </t-button>
         </div>
         <t-list v-if="unreadMsg.length > 0" class="narrow-scrollbar" :split="false">
           <t-list-item v-for="(item, index) in unreadMsg" :key="index">
@@ -16,14 +22,16 @@
             </div>
             <p class="msg-time">{{ item.date }}</p>
             <template #action>
-              <t-button size="small" variant="outline" @click="setRead('radio', item)"> 设为已读 </t-button>
+              <t-button size="small" variant="outline" @click="setRead('radio', item)">
+                {{ t('layout.notice.setRead') }}
+              </t-button>
             </template>
           </t-list-item>
         </t-list>
 
         <div v-else class="empty-list">
-          <img src="https://tdesign.gtimg.com/pro-template/personal/nothing.png" alt="空" />
-          <p>暂无通知</p>
+          <img src="https://tdesign.gtimg.com/pro-template/personal/nothing.png" :alt="t('layout.notice.empty')" />
+          <p>{{ t('layout.notice.emptyNotice') }}</p>
         </div>
         <div class="header-msg-bottom">
           <t-button
@@ -33,8 +41,9 @@
             theme="default"
             block
             @click="goDetail"
-            >查看全部</t-button
           >
+            {{ t('layout.notice.viewAll') }}
+          </t-button>
         </div>
       </div>
     </template>
@@ -51,6 +60,7 @@ import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useNotificationStore } from '@/store';
 import type { NotificationItem } from '@/types/interface';
+import { t } from '@/locales';
 
 const router = useRouter();
 const store = useNotificationStore();

@@ -13,7 +13,7 @@
     </template>
     <template #status>
       <t-tag :theme="product.isSetup ? 'success' : 'default'" :disabled="!product.isSetup">{{
-        product.isSetup ? '已启用' : '已停用'
+        product.isSetup ? t('components.isSetup.on') : t('components.isSetup.off')
       }}</t-tag>
     </template>
     <template #content>
@@ -36,12 +36,12 @@
         trigger="click"
         :options="[
           {
-            content: '管理',
+            content: t('components.manage'),
             value: 'manage',
             onClick: () => handleClickManage(product),
           },
           {
-            content: '删除',
+            content: t('components.delete'),
             value: 'delete',
             onClick: () => handleClickDelete(product),
           },
@@ -65,6 +65,7 @@ import {
   MoreIcon,
   AddIcon,
 } from 'tdesign-icons-vue-next';
+import { t } from '@/locales';
 
 export interface CardProductType {
   type: number;

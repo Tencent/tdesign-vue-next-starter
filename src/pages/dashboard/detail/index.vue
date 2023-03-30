@@ -1,13 +1,13 @@
 <template>
   <div class="dashboard-panel-detail">
-    <t-card title="本月采购申请情况" class="dashboard-detail-card" :bordered="false">
+    <t-card :title="t('dashboard.detail.topPanel.title')" class="dashboard-detail-card" :bordered="false">
       <t-row :gutter="[16, 16]">
         <t-col v-for="(item, index) in PANE_LIST_DATA" :key="index" :xs="6" :xl="3">
           <t-card class="dashboard-list-card" :description="item.title">
             <div class="dashboard-list-card__number">{{ item.number }}</div>
             <div class="dashboard-list-card__text">
               <div class="dashboard-list-card__text-left">
-                环比
+                {{ t('dashboard.detail.topPanel.quarter') }}
                 <trend class="icon" :type="item.upTrend ? 'up' : 'down'" :describe="item.upTrend || item.downTrend" />
               </div>
               <t-icon name="chevron-right" />
@@ -78,6 +78,7 @@ import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
 import { LAST_7_DAYS } from '@/utils/date';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
+import { t } from '@/locales';
 
 import Trend from '@/components/trend/index.vue';
 

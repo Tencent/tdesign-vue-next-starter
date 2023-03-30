@@ -6,7 +6,10 @@ import { t } from '@/locales';
 
 /** 首页 dashboard 折线图 */
 export function constructInitDashboardDataset(type: string) {
-  const dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+  const dateArray: Array<string> = [];
+  for (let i = 1; i < 7; i++) {
+    dateArray.push(t(`dashboard.base.chart.week${i}`));
+  }
   const datasetAxis = {
     xAxis: {
       type: 'category',
@@ -38,8 +41,8 @@ export function constructInitDashboardDataset(type: string) {
           symbolSize: 0,
           markPoint: {
             data: [
-              { type: 'max', name: '最大值' },
-              { type: 'min', name: '最小值' },
+              { type: 'max', name: t('dashboard.base.chart.max') },
+              { type: 'min', name: t('dashboard.base.chart.min') },
             ],
           },
           lineStyle: {
@@ -161,16 +164,16 @@ export function constructInitDataset({
       left: 'center',
       bottom: '0',
       orient: 'horizontal',
-      data: [t('home.basePage.analysis.series1'), t('home.basePage.analysis.series2')],
+      data: [t('dashboard.base.topPanel.analysis.series1'), t('dashboard.base.topPanel.analysis.series2')],
     },
     series: [
       {
-        name: t('home.basePage.analysis.series1'),
+        name: t('dashboard.base.topPanel.analysis.series1'),
         data: outArray,
         type: 'bar',
       },
       {
-        name: t('home.basePage.analysis.series2'),
+        name: t('dashboard.base.topPanel.analysis.series2'),
         data: inArray,
         type: 'bar',
       },
@@ -230,7 +233,7 @@ export function getLineChartDataSet({
       left: 'center',
       bottom: '0',
       orient: 'horizontal', // legend 横向布局。
-      data: [t('home.basePage.analysis.series1'), t('home.basePage.analysis.series2')],
+      data: [t('dashboard.base.topPanel.analysis.series1'), t('dashboard.base.topPanel.analysis.series2')],
       textStyle: {
         fontSize: 12,
         color: placeholderColor,
@@ -262,7 +265,7 @@ export function getLineChartDataSet({
     },
     series: [
       {
-        name: t('home.basePage.analysis.series1'),
+        name: t('dashboard.base.topPanel.analysis.series1'),
         data: outArray,
         type: 'line',
         smooth: false,
@@ -278,7 +281,7 @@ export function getLineChartDataSet({
         },
       },
       {
-        name: t('home.basePage.analysis.series2'),
+        name: t('dashboard.base.topPanel.analysis.series2'),
         data: inArray,
         type: 'line',
         smooth: false,
@@ -333,7 +336,7 @@ export function getPieChartDataSet({
     },
     series: [
       {
-        name: t('home.basePage.analysis.channels'),
+        name: t('dashboard.base.topPanel.analysis.channels'),
         type: 'pie',
         radius: ['48%', '60%'],
         avoidLabelOverlap: true,
@@ -346,7 +349,7 @@ export function getPieChartDataSet({
         label: {
           show: true,
           position: 'center',
-          formatter: ['{value|{d}%}', `{name|{b}${t('home.basePage.analysis.channelTips')}}`].join('\n'),
+          formatter: ['{value|{d}%}', `{name|{b}${t('dashboard.base.topPanel.analysis.channelTips')}}`].join('\n'),
           rich: {
             value: {
               color: textColor,
@@ -365,7 +368,7 @@ export function getPieChartDataSet({
           scale: true,
           label: {
             show: true,
-            formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
+            formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'), // TODO 这个东西不知道怎么翻译
             rich: {
               value: {
                 color: textColor,
@@ -387,9 +390,9 @@ export function getPieChartDataSet({
         data: [
           {
             value: 1048,
-            name: t('home.basePage.analysis.channel1'),
+            name: t('dashboard.base.topPanel.analysis.channel1'),
           },
-          { value: radius * 7, name: t('home.basePage.analysis.channel2') },
+          { value: radius * 7, name: t('dashboard.base.topPanel.analysis.channel2') },
         ],
       },
     ],

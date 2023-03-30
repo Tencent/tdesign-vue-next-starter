@@ -3,25 +3,25 @@
     v-model:visible="showSettingPanel"
     size="408px"
     :footer="false"
-    header="页面配置"
+    :header="t('layout.setting.title')"
     :close-btn="true"
     class="setting-drawer-container"
     @close-btn-click="handleCloseDrawer"
   >
     <div class="setting-container">
       <t-form ref="form" :data="formData" label-align="left">
-        <div class="setting-group-title">主题模式</div>
+        <div class="setting-group-title">{{ t('layout.setting.theme.mode') }}</div>
         <t-radio-group v-model="formData.mode">
           <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
             <div>
-              <t-radio-button :key="index" :value="item.type"
-                ><component :is="getModeIcon(item.type)"
-              /></t-radio-button>
+              <t-radio-button :key="index" :value="item.type">
+                <component :is="getModeIcon(item.type)" />
+              </t-radio-button>
               <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
             </div>
           </div>
         </t-radio-group>
-        <div class="setting-group-title">主题色</div>
+        <div class="setting-group-title">{{ t('layout.setting.theme.color') }}</div>
         <t-radio-group v-model="formData.brandTheme">
           <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
@@ -53,7 +53,7 @@
           </div>
         </t-radio-group>
 
-        <div class="setting-group-title">导航布局</div>
+        <div class="setting-group-title">{{ t('layout.setting.navigationLayout') }}</div>
         <t-radio-group v-model="formData.layout">
           <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item">
@@ -62,31 +62,35 @@
           </div>
         </t-radio-group>
 
-        <t-form-item v-show="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
+        <t-form-item v-show="formData.layout === 'mix'" :label="t('layout.setting.splitMenu')" name="splitMenu">
           <t-switch v-model="formData.splitMenu" />
         </t-form-item>
 
-        <t-form-item v-show="formData.layout === 'mix'" label="固定 Sidebar" name="isSidebarFixed">
+        <t-form-item v-show="formData.layout === 'mix'" :label="t('layout.setting.fixedSidebar')" name="isSidebarFixed">
           <t-switch v-model="formData.isSidebarFixed" />
         </t-form-item>
 
-        <div class="setting-group-title">元素开关</div>
-        <t-form-item v-show="formData.layout === 'side'" label="显示 Header" name="showHeader">
+        <div class="setting-group-title">{{ t('layout.setting.element.title') }}</div>
+        <t-form-item
+          v-show="formData.layout === 'side'"
+          :label="t('layout.setting.element.showHeader')"
+          name="showHeader"
+        >
           <t-switch v-model="formData.showHeader" />
         </t-form-item>
-        <t-form-item label="显示 Breadcrumbs" name="showBreadcrumb">
+        <t-form-item :label="t('layout.setting.element.showBreadcrumb')" name="showBreadcrumb">
           <t-switch v-model="formData.showBreadcrumb" />
         </t-form-item>
-        <t-form-item label="显示 Footer" name="showFooter">
+        <t-form-item :label="t('layout.setting.element.showFooter')" name="showFooter">
           <t-switch v-model="formData.showFooter" />
         </t-form-item>
-        <t-form-item label="使用 多标签Tab页" name="isUseTabsRouter">
+        <t-form-item :label="t('layout.setting.element.useTabs')" name="isUseTabsRouter">
           <t-switch v-model="formData.isUseTabsRouter"></t-switch>
         </t-form-item>
       </t-form>
       <div class="setting-info">
-        <p>请复制后手动修改配置文件: /src/config/style.ts</p>
-        <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
+        <p>{{ t('layout.setting.tips') }}</p>
+        <t-button theme="primary" variant="text" @click="handleCopy"> {{ t('layout.setting.copy.title') }} </t-button>
       </div>
     </div>
   </t-drawer>
@@ -107,15 +111,16 @@ import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
+import { t } from '@/locales';
 
 const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
 
 const MODE_OPTIONS = [
-  { type: 'light', text: '明亮' },
-  { type: 'dark', text: '暗黑' },
-  { type: 'auto', text: '跟随系统' },
+  { type: 'light', text: t('layout.setting.theme.options.light') },
+  { type: 'dark', text: t('layout.setting.theme.options.dark') },
+  { type: 'auto', text: t('layout.setting.theme.options.auto') },
 ];
 
 const initStyleConfig = () => {
@@ -169,11 +174,11 @@ const handleCopy = () => {
   toClipboard(text)
     .then(() => {
       MessagePlugin.closeAll();
-      MessagePlugin.success('复制成功');
+      MessagePlugin.success(t('layout.setting.copy.success'));
     })
     .catch(() => {
       MessagePlugin.closeAll();
-      MessagePlugin.error('复制失败');
+      MessagePlugin.error(t('layout.setting.copy.fail'));
     });
 };
 const getModeIcon = (mode: string) => {
