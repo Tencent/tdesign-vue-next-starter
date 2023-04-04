@@ -1,5 +1,5 @@
-import { useRoute, createRouter, RouteRecordRaw, createWebHistory } from 'vue-router';
 import uniq from 'lodash/uniq';
+import { createRouter, createWebHistory, RouteRecordRaw, useRoute } from 'vue-router';
 
 const env = import.meta.env.MODE || 'development';
 

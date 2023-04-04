@@ -1,5 +1,6 @@
-import type { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { AxiosError } from 'axios';
+
 import type { RequestOptions, Result } from '@/types/axios';
 
 // 创建Axios选项

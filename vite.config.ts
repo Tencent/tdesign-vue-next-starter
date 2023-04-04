@@ -1,10 +1,9 @@
-import { ConfigEnv, UserConfig, loadEnv } from 'vite';
-import { viteMockServe } from 'vite-plugin-mock';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import svgLoader from 'vite-svg-loader';
-
 import path from 'path';
+import { ConfigEnv, loadEnv, UserConfig } from 'vite';
+import { viteMockServe } from 'vite-plugin-mock';
+import svgLoader from 'vite-svg-loader';
 
 const CWD = process.cwd();
 

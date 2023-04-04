@@ -57,12 +57,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { storeToRefs } from 'pinia';
-import { NOTIFICATION_TYPES } from '@/constants';
-import type { NotificationItem } from '@/types/interface';
+import { computed, ref } from 'vue';
+
 import EmptyIcon from '@/assets/assets-empty.svg?component';
+import { NOTIFICATION_TYPES } from '@/constants';
 import { useNotificationStore } from '@/store';
+import type { NotificationItem } from '@/types/interface';
 
 const TAB_LIST = [
   {

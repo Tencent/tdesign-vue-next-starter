@@ -55,7 +55,7 @@
 // 导入样式
 import Trend from '@/components/trend/index.vue';
 
-import { SALE_TEND_LIST, BUY_TEND_LIST, SALE_COLUMNS, BUY_COLUMNS } from '../constants';
+import { BUY_COLUMNS, BUY_TEND_LIST, SALE_COLUMNS, SALE_TEND_LIST } from '../constants';
 
 const rehandleClickOp = (val: MouseEvent) => {
   console.log(val);
