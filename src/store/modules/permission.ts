@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
-import router, { fixedRouterList, homepageRouterList } from '@/router';
-import { store } from '@/store';
+
 import { RouteItem } from '@/api/model/permissionModel';
 import { getMenuList } from '@/api/permission';
+import router, { fixedRouterList, homepageRouterList } from '@/router';
+import { store } from '@/store';
 import { transformObjectToRoute } from '@/utils/route';
 
 export const usePermissionStore = defineStore('permission', {

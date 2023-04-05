@@ -55,6 +55,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-vue": "^9.8.0",
     "eslint-plugin-vue-scoped-css": "^2.2.0",
     "husky": "^8.0.2",

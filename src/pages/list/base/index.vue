@@ -74,16 +74,16 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import { useRouter } from 'vue-router';
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-import { CONTRACT_STATUS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
-import Trend from '@/components/trend/index.vue';
 import { getList } from '@/api/list';
-import { useSettingStore } from '@/store';
+import Trend from '@/components/trend/index.vue';
 import { prefix } from '@/config/global';
+import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
+import { useSettingStore } from '@/store';
 
 import { COLUMNS } from './constants';
 

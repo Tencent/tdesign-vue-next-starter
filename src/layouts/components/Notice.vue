@@ -47,8 +47,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+
 import { useNotificationStore } from '@/store';
 import type { NotificationItem } from '@/types/interface';
 

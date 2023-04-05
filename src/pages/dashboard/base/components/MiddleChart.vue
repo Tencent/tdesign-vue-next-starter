@@ -35,17 +35,17 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch, ref, onUnmounted, nextTick, computed, onDeactivated } from 'vue';
-
+import { LineChart, PieChart } from 'echarts/charts';
+import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import * as echarts from 'echarts/core';
-import { TooltipComponent, LegendComponent, GridComponent } from 'echarts/components';
-import { PieChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import { useSettingStore } from '@/store';
-import { LAST_7_DAYS } from '@/utils/date';
-import { changeChartsTheme } from '@/utils/color';
+import { computed, nextTick, onDeactivated, onMounted, onUnmounted, ref, watch } from 'vue';
 
-import { getPieChartDataSet, getLineChartDataSet } from '../index';
+import { useSettingStore } from '@/store';
+import { changeChartsTheme } from '@/utils/color';
+import { LAST_7_DAYS } from '@/utils/date';
+
+import { getLineChartDataSet, getPieChartDataSet } from '../index';
 
 echarts.use([TooltipComponent, LegendComponent, PieChart, GridComponent, LineChart, CanvasRenderer]);
 
