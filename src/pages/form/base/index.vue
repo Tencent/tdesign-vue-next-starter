@@ -165,7 +165,7 @@ export default {
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { MessagePlugin, SubmitContext, UploadFailContext } from 'tdesign-vue-next';
+import { MessagePlugin, SubmitContext, UploadFailContext, UploadFile } from 'tdesign-vue-next';
 import { FORM_RULES, INITIAL_DATA, TYPE_OPTIONS, PARTY_A_OPTIONS, PARTY_B_OPTIONS } from './constants';
 
 const formData = ref({ ...INITIAL_DATA });
@@ -179,12 +179,12 @@ const onSubmit = (context: SubmitContext) => {
     MessagePlugin.success('新建成功');
   }
 };
-const beforeUpload = (file: File) => {
-  if (!/\.(pdf)$/.test(file.name)) {
+const beforeUpload = (file: UploadFile) => {
+  if (!/\.(pdf)$/.test(file.name || '')) {
     MessagePlugin.warning('请上传pdf文件');
     return false;
   }
-  if (file.size > 60 * 1024 * 1024) {
+  if (file.size || 60 * 1024 * 1024 < 0) {
     MessagePlugin.warning('上传文件不能大于60M');
     return false;
   }

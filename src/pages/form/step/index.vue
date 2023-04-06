@@ -29,7 +29,7 @@
         :data="formData1"
         :rules="FORM_RULES"
         label-align="right"
-        @submit="(result: SubmitContext<FormData>) => onSubmit(result, 1)"
+        @submit="(result: SubmitContext) => onSubmit(result, 1)"
       >
         <t-form-item label="合同名称" name="name">
           <t-select v-model="formData1.name" :style="{ width: '480px' }" class="demo-select-base" clearable>
@@ -59,7 +59,7 @@
         :rules="FORM_RULES"
         label-align="left"
         @reset="onReset(0)"
-        @submit="(result: SubmitContext<FormData>) => onSubmit(result, 2)"
+        @submit="(result: SubmitContext) => onSubmit(result, 2)"
       >
         <t-form-item label="发票抬头" name="title">
           <t-input v-model="formData2.title" :style="{ width: '480px' }" placeholder="请输入发票抬头" />

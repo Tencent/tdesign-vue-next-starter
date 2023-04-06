@@ -131,7 +131,7 @@ onMounted(() => {
 
 const confirmVisible = ref(false);
 
-const selectedRowKeys = ref([1, 2]);
+const selectedRowKeys = ref<Array<string | number>>([1, 2]);
 
 const router = useRouter();
 
@@ -158,7 +158,7 @@ const onCancel = () => {
 
 const rowKey = 'index';
 
-const rehandleSelectChange = (val: number[]) => {
+const rehandleSelectChange = (val: (string | number)[]) => {
   selectedRowKeys.value = val;
 };
 const rehandlePageChange = (pageInfo: PageInfo, newDataSource: unknown) => {

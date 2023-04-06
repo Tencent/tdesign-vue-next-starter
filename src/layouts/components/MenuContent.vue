@@ -8,7 +8,7 @@
           </template>
           {{ item.title }}
         </t-menu-item>
-        <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
+        <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="{ path: item.path }">
           <template #icon>
             <component :is="menuIcon(item)" class="t-icon"></component>
           </template>

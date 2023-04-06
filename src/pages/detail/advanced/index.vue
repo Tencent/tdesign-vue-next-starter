@@ -63,7 +63,7 @@
         row-key="index"
         size="large"
         @sort-change="sortChange"
-        @change="rehandleChange"
+        @page-change="rehandleChange"
       >
         <template #pdName="{ row }">
           <span>
@@ -126,7 +126,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { PageInfo } from 'tdesign-vue-next';
+import { PageInfo, TableRowData } from 'tdesign-vue-next';
 import { prefix } from '@/config/global';
 import { BASE_INFO_DATA, TABLE_COLUMNS_DATA as columns, PRODUCT_LIST } from './constants';
 import { getPurchaseList } from '@/api/detail';
@@ -174,7 +174,7 @@ const visible = ref(false);
 const sortChange = (val: unknown) => {
   console.log(val);
 };
-const rehandleChange = (pageInfo: PageInfo, newDataSource: unknown) => {
+const rehandleChange = (pageInfo: PageInfo, newDataSource: TableRowData[]) => {
   console.log('统一Change', pageInfo, newDataSource);
 };
 const listClick = () => {
