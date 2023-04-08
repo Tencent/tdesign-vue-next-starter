@@ -86,10 +86,10 @@ const tabsRouterStore = useTabsRouterStore();
 const tabRouters = computed(() => tabsRouterStore.tabRouters.filter((route) => route.isAlive || route.isHome));
 const activeTabPath = ref('');
 
-const handleChangeCurrentTab = (path: string) => {
+const handleChangeCurrentTab = (path: TabValue) => {
   const { tabRouters } = tabsRouterStore;
   const route = tabRouters.find((i) => i.path === path);
-  router.push({ path, query: route?.query });
+  router.push({ path: path as string, query: route?.query });
 };
 
 const handleRemove = (options: { value: TabValue; index: number; e: MouseEvent }) => {

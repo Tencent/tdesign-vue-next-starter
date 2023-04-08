@@ -99,6 +99,7 @@ import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { DateRangeValue } from 'tdesign-vue-next';
 import { useSettingStore } from '@/store';
 
 import { LAST_7_DAYS } from '@/utils/date';
@@ -117,10 +118,10 @@ let lineChart: echarts.ECharts;
 const store = useSettingStore();
 const chartColors = computed(() => store.chartColors);
 
-const onLineChange = (value: Array<string>) => {
+const onLineChange = (value: DateRangeValue) => {
   lineChart.setOption(
     getFolderLineDataSet({
-      dateTime: value,
+      dateTime: value as string[],
       ...chartColors.value,
     }),
   );

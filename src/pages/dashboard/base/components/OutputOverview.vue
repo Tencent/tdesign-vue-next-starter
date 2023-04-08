@@ -73,6 +73,7 @@ import * as echarts from 'echarts/core';
 import { TooltipComponent, LegendComponent, GridComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { DateRangeValue } from 'tdesign-vue-next';
 import { useSettingStore } from '@/store';
 import { LAST_7_DAYS } from '@/utils/date';
 import { changeChartsTheme } from '@/utils/color';
@@ -149,8 +150,8 @@ watch(
   },
 );
 
-const onStokeDataChange = (checkedValues: string[]) => {
-  stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors.value }));
+const onStokeDataChange = (checkedValues: DateRangeValue) => {
+  stokeChart.setOption(constructInitDataset({ dateTime: checkedValues as string[], ...chartColors.value }));
 };
 </script>
 

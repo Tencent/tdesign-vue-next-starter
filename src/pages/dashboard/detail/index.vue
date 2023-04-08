@@ -71,6 +71,7 @@ import * as echarts from 'echarts/core';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart, ScatterChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { DateRangeValue } from 'tdesign-vue-next';
 import ProductCard from '@/components/product-card/index.vue';
 
 import { getFolderLineDataSet, getScatterDataSet } from './index';
@@ -160,9 +161,9 @@ const onSatisfyChange = () => {
   scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
 };
 
-const onMaterialChange = (value: string[]) => {
+const onMaterialChange = (value: DateRangeValue) => {
   const chartColors = computed(() => store.chartColors);
-  lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors.value }));
+  lineChart.setOption(getFolderLineDataSet({ dateTime: value as string[], ...chartColors.value }));
 };
 </script>
 

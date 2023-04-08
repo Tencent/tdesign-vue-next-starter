@@ -158,8 +158,8 @@ const onCancel = () => {
 
 const rowKey = 'index';
 
-const rehandleSelectChange = (val: number[]) => {
-  selectedRowKeys.value = val;
+const rehandleSelectChange = (val: (string | number)[]) => {
+  selectedRowKeys.value = val as number[];
 };
 const rehandlePageChange = (pageInfo: PageInfo, newDataSource: unknown) => {
   console.log('分页变化', pageInfo, newDataSource);

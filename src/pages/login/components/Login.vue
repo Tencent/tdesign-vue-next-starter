@@ -130,7 +130,7 @@ const sendCode = () => {
   });
 };
 
-const onSubmit = async (context: SubmitContext<FormData>) => {
+const onSubmit = async (context: SubmitContext) => {
   const { validateResult } = context;
   if (validateResult === true) {
     try {
