@@ -65,22 +65,21 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, watch, computed, onDeactivated } from 'vue';
-
-import * as echarts from 'echarts/core';
-import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart, ScatterChart } from 'echarts/charts';
+import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
+import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { DateRangeValue } from 'tdesign-vue-next';
-import ProductCard from '@/components/product-card/index.vue';
+import { computed, nextTick, onDeactivated, onMounted, onUnmounted, watch } from 'vue';
 
-import { getFolderLineDataSet, getScatterDataSet } from './index';
-import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
-import { LAST_7_DAYS } from '@/utils/date';
+import ProductCard from '@/components/product-card/index.vue';
+import Trend from '@/components/trend/index.vue';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
+import { LAST_7_DAYS } from '@/utils/date';
 
-import Trend from '@/components/trend/index.vue';
+import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
+import { getFolderLineDataSet, getScatterDataSet } from './index';
 
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 

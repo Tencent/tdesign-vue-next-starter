@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+
 import { BreadcrumbItem } from '@/types/router';
 
 const crumbs = computed(() => {

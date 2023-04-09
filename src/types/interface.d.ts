@@ -1,4 +1,5 @@
-import type { RouteRecordName, LocationQueryRaw, RouteMeta } from 'vue-router';
+import type { LocationQueryRaw, RouteMeta, RouteRecordName } from 'vue-router';
+
 import STYLE_CONFIG from '@/config/style';
 
 export type ModeType = 'dark' | 'light';
@@ -49,14 +50,4 @@ export interface TRouterInfo {
 export interface TTabRouterType {
   isRefreshing: boolean;
   tabRouterList: Array<TRouterInfo>;
-}
-
-export interface Proxy {
-  isRequestProxy: boolean;
-  [key: string]: ProxyItem | boolean;
-}
-
-export interface ProxyItem {
-  host?: string;
-  cdn?: string;
 }

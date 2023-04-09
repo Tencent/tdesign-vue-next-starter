@@ -23,11 +23,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
+import { ref } from 'vue';
 
-import { TREE_DATA } from './constants';
 import CommonTable from '../components/CommonTable.vue';
+import { TREE_DATA } from './constants';
 
 const filterByText = ref();
 const filterText = ref();

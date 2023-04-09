@@ -1,20 +1,20 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
+import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import isString from 'lodash/isString';
 import merge from 'lodash/merge';
-import type { InternalAxiosRequestConfig } from 'axios';
-import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
-import { VAxios } from './Axios';
-import proxy from '@/config/proxy';
-import { joinTimestamp, formatRequestDate, setObjToUrlParams } from './utils';
+
 import { TOKEN_NAME } from '@/config/global';
 import { ContentTypeEnum } from '@/constants';
 import { AxiosRequestConfigRetry } from '@/types/axios';
-import { ProxyItem } from '@/types/interface';
+
+import { VAxios } from './Axios';
+import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
+import { formatRequestDate, joinTimestamp, setObjToUrlParams } from './utils';
 
 const env = import.meta.env.MODE || 'development';
 
 // 如果是mock模式 或 没启用直连代理 就不配置host 会走本地Mock拦截 或 Vite 代理
-const host = env === 'mock' || !proxy.isRequestProxy ? '' : (proxy[env] as ProxyItem).host;
+const host = env === 'mock' || import.meta.env.VITE_IS_REQUEST_PROXY !== 'true' ? '' : import.meta.env.VITE_API_URL;
 
 // 数据处理，方便区分多种处理方式
 const transform: AxiosTransform = {
@@ -130,7 +130,7 @@ const transform: AxiosTransform = {
   },
 
   // 响应错误处理
-  responseInterceptorsCatch: (error: any) => {
+  responseInterceptorsCatch: (error: any, instance: AxiosInstance) => {
     const { config } = error;
     if (!config || !config.requestOptions.retry) return Promise.reject(error);
 
@@ -146,7 +146,7 @@ const transform: AxiosTransform = {
       }, config.requestOptions.retry.delay || 1);
     });
     config.headers = { ...config.headers, 'Content-Type': ContentTypeEnum.Json };
-    return backoff.then((config) => request.request(config as AxiosRequestConfigRetry));
+    return backoff.then((config) => instance.request(config as AxiosRequestConfigRetry));
   },
 };
 
@@ -174,7 +174,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 接口前缀
           // 例如: https://www.baidu.com/api
           // urlPrefix: '/api'
-          urlPrefix: '/api',
+          urlPrefix: import.meta.env.VITE_API_URL_PREFIX,
           // 是否返回原生响应头 比如：需要获取响应头时使用该属性
           isReturnNativeResponse: false,
           // 需要对返回数据进行处理

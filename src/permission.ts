@@ -1,10 +1,11 @@
-import { MessagePlugin } from 'tdesign-vue-next';
-import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 
+import NProgress from 'nprogress'; // progress bar
+import { MessagePlugin } from 'tdesign-vue-next';
 import { RouteRecordName, RouteRecordRaw } from 'vue-router';
-import { getPermissionStore, getUserStore } from '@/store';
+
 import router from '@/router';
+import { getPermissionStore, getUserStore } from '@/store';
 import { PAGE_NOT_FOUND_ROUTE } from '@/utils/route/constant';
 
 NProgress.configure({ showSpinner: false });

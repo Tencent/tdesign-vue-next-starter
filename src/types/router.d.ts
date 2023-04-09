@@ -1,4 +1,5 @@
 import 'vue-router';
+
 import { shallowRef } from 'vue';
 
 declare module 'vue-router' {

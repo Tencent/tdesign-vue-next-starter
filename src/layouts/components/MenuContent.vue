@@ -27,8 +27,9 @@
 <script setup lang="tsx">
 import type { PropType } from 'vue';
 import { computed } from 'vue';
-import type { MenuRoute } from '@/types/interface';
+
 import { getActive } from '@/router';
+import type { MenuRoute } from '@/types/interface';
 
 type ListItemType = MenuRoute & { icon?: string };
 
@@ -38,7 +39,6 @@ const props = defineProps({
     default: () => [],
   },
 });
-
 const active = computed(() => getActive());
 
 const list = computed(() => {
@@ -83,9 +83,16 @@ const getHref = (item: MenuRoute) => {
 };
 
 const getPath = (item: ListItemType) => {
-  if (active.value.startsWith(item.path)) {
+  const activeLevel = active.value.split('/').length;
+  const pathLevel = item.path.split('/').length;
+  if (activeLevel > pathLevel && active.value.startsWith(item.path)) {
     return active.value;
   }
+
+  if (active.value === item.path) {
+    return active.value;
+  }
+
   return item.meta?.single ? item.redirect : item.path;
 };
 

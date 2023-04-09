@@ -55,16 +55,16 @@
   </t-card>
 </template>
 <script setup lang="ts">
-import type { PropType } from 'vue';
 import {
-  ShopIcon,
+  AddIcon,
   CalendarIcon,
-  ServiceIcon,
-  UserAvatarIcon,
   LaptopIcon,
   MoreIcon,
-  AddIcon,
+  ServiceIcon,
+  ShopIcon,
+  UserAvatarIcon,
 } from 'tdesign-icons-vue-next';
+import type { PropType } from 'vue';
 
 export interface CardProductType {
   type: number;

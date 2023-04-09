@@ -1,10 +1,11 @@
+import keys from 'lodash/keys';
 import { defineStore } from 'pinia';
 import { Color } from 'tvision-color';
-import keys from 'lodash/keys';
-import { LIGHT_CHART_COLORS, DARK_CHART_COLORS, TColorSeries } from '@/config/color';
-import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
+
+import { DARK_CHART_COLORS, LIGHT_CHART_COLORS } from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
+import { generateColorMap, insertThemeStylesheet } from '@/utils/color';
 
 const state = {
   ...STYLE_CONFIG,
@@ -52,20 +53,23 @@ export const useSettingStore = defineStore('setting', {
       this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
     },
     changeBrandTheme(brandTheme: string) {
-      const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
-        colors: [brandTheme],
-        step: 10,
-        remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
-      })[0];
-      const { mode } = this;
-      const colorMap = generateColorMap(brandTheme, newPalette, mode as 'light' | 'dark', brandColorIndex);
-
+      const mode = this.displayMode;
+      // 以主题色加显示模式作为键
+      const colorKey = `${brandTheme}[${mode}]`;
+      let colorMap = this.colorList[colorKey];
+      // 如果不存在色阶，就需要计算
+      if (colorMap === undefined) {
+        const [{ colors: newPalette, primary: brandColorIndex }] = Color.getColorGradations({
+          colors: [brandTheme],
+          step: 10,
+          remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
+        });
+        colorMap = generateColorMap(brandTheme, newPalette, mode as 'light' | 'dark', brandColorIndex);
+        this.colorList[colorKey] = colorMap;
+      }
+      // TODO 需要解决不停切换时有反复插入 style 的问题
       insertThemeStylesheet(brandTheme, colorMap, mode as 'light' | 'dark');
-
       document.documentElement.setAttribute('theme-color', brandTheme);
-    },
-    addColor(payload: TColorSeries) {
-      this.colorList = { ...this.colorList, ...payload };
     },
     updateConfig(payload: Partial<TState>) {
       for (const key in payload) {

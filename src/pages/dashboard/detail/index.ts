@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
+
 import { TChartColor } from '@/config/color';
+import { getDateArray, getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
-import { getRandomArray, getDateArray } from '@/utils/charts';
 
 /**
  * 散点图数据

@@ -125,14 +125,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import { PageInfo, TableRowData } from 'tdesign-vue-next';
-import { prefix } from '@/config/global';
-import { BASE_INFO_DATA, TABLE_COLUMNS_DATA as columns, PRODUCT_LIST } from './constants';
+import { onMounted, ref } from 'vue';
+
 import { getPurchaseList } from '@/api/detail';
+import { PurchaseInfo } from '@/api/model/detailModel';
+import { prefix } from '@/config/global';
 
 import Product from './components/Product.vue';
-import { PurchaseInfo } from '@/api/model/detailModel';
+import { BASE_INFO_DATA, PRODUCT_LIST, TABLE_COLUMNS_DATA as columns } from './constants';
 
 const data = ref<Array<PurchaseInfo>>([]);
 const pagination = ref({

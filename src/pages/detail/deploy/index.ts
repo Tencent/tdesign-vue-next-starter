@@ -1,6 +1,6 @@
 import { TChartColor } from '@/config/color';
+import { getDateArray, getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
-import { getRandomArray, getDateArray } from '@/utils/charts';
 
 /** 平滑图数据 */
 export function getSmoothLineDataSet({

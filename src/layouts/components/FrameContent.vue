@@ -6,9 +6,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { CSSProperties, watch, ref, unref, computed } from 'vue';
-import debounce from 'lodash/debounce';
 import { useWindowSize } from '@vueuse/core';
+import debounce from 'lodash/debounce';
+import { computed, CSSProperties, ref, unref, watch } from 'vue';
+
 import { prefix } from '@/config/global';
 import { useSettingStore } from '@/store';
 

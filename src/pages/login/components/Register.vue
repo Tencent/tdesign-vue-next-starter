@@ -71,8 +71,9 @@
 </template>
 
 <script setup lang="ts">
+import { FormRule, MessagePlugin, SubmitContext } from 'tdesign-vue-next';
 import { ref } from 'vue';
-import { MessagePlugin, FormRule, SubmitContext } from 'tdesign-vue-next';
+
 import { useCounter } from '@/hooks';
 
 const INITIAL_DATA = {

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+
 import { TOKEN_NAME } from '@/config/global';
 import { store, usePermissionStore } from '@/store';
 

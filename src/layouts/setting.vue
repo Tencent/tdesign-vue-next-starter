@@ -92,23 +92,19 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted, watchEffect } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
-import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
-import { Color } from 'tvision-color';
 import { useClipboard } from '@vueuse/core';
+import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 
-import { useSettingStore } from '@/store';
-import Thumbnail from '@/components/thumbnail/index.vue';
-import ColorContainer from '@/components/color/index.vue';
-
-import STYLE_CONFIG from '@/config/style';
-import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
-import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
-
+import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
-import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
+import ColorContainer from '@/components/color/index.vue';
+import Thumbnail from '@/components/thumbnail/index.vue';
+import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
+import STYLE_CONFIG from '@/config/style';
+import { useSettingStore } from '@/store';
 
 const settingStore = useSettingStore();
 
@@ -150,19 +146,7 @@ const showSettingPanel = computed({
 });
 
 const changeColor = (hex: string) => {
-  const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
-    colors: [hex],
-    step: 10,
-    remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
-  })[0];
-  const { mode } = settingStore;
-
-  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark', brandColorIndex);
-
-  settingStore.addColor({ [hex]: colorMap });
   formData.value.brandTheme = hex;
-  settingStore.updateConfig({ ...formData.value, brandTheme: hex });
-  insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
 };
 
 onMounted(() => {

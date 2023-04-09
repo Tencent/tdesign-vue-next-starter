@@ -64,18 +64,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { PropType } from 'vue';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { useSettingStore } from '@/store';
-import { getActive } from '@/router';
-import { prefix } from '@/config/global';
+
 import LogoFull from '@/assets/assets-logo-full.svg?component';
+import { prefix } from '@/config/global';
+import { getActive } from '@/router';
+import { useSettingStore } from '@/store';
 import type { MenuRoute } from '@/types/interface';
 
+import MenuContent from './MenuContent.vue';
 import Notice from './Notice.vue';
 import Search from './Search.vue';
-import MenuContent from './MenuContent.vue';
 
 const props = defineProps({
   theme: {
