@@ -26,4 +26,7 @@ export interface RouteMeta {
   hidden?: boolean;
   hiddenBreadcrumb?: boolean;
   single?: boolean;
+  keepAlive?: boolean;
+  frameSrc?: string;
+  frameBlank?: boolean;
 }
