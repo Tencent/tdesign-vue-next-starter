@@ -221,6 +221,7 @@ export default [
                   component: '/form/step/index',
                   meta: {
                     title: '分步表单页',
+                    keepAlive: false,
                   },
                 },
               ],
