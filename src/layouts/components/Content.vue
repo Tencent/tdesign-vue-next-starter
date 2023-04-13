@@ -37,7 +37,6 @@ const aliveViews = computed(() => {
     .filter((route) => {
       const keepAliveConfig = route.meta?.keepAlive;
       const isRouteKeepAlive = isUndefined(keepAliveConfig) || (isBoolean(keepAliveConfig) && keepAliveConfig); // 默认开启keepalive
-      console.log(isRouteKeepAlive, 'isRouteKeepAlive');
       return route.isAlive && isRouteKeepAlive;
     })
     .map((route) => route.name);
