@@ -1,11 +1,13 @@
-import axios, { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import { stringify } from 'qs';
-import isFunction from 'lodash/isFunction';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
-import { CreateAxiosOptions } from './AxiosTransform';
-import { AxiosCanceler } from './AxiosCancel';
-import { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
+import isFunction from 'lodash/isFunction';
+import { stringify } from 'qs';
+
 import { ContentTypeEnum } from '@/constants';
+import { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
+
+import { AxiosCanceler } from './AxiosCancel';
+import { CreateAxiosOptions } from './AxiosTransform';
 
 // Axios模块
 export class VAxios {
@@ -93,7 +95,7 @@ export class VAxios {
 
     // 响应错误处理
     if (responseInterceptorsCatch && isFunction(responseInterceptorsCatch)) {
-      this.instance.interceptors.response.use(undefined, responseInterceptorsCatch);
+      this.instance.interceptors.response.use(undefined, (error) => responseInterceptorsCatch(error, this.instance));
     }
   }
 

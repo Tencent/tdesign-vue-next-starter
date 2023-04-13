@@ -1,12 +1,14 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
+import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import isString from 'lodash/isString';
 import merge from 'lodash/merge';
-import type { InternalAxiosRequestConfig } from 'axios';
-import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
-import { VAxios } from './Axios';
-import { joinTimestamp, formatRequestDate, setObjToUrlParams } from './utils';
+
 import { TOKEN_NAME } from '@/config/global';
 import { ContentTypeEnum } from '@/constants';
+
+import { VAxios } from './Axios';
+import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
+import { formatRequestDate, joinTimestamp, setObjToUrlParams } from './utils';
 
 const env = import.meta.env.MODE || 'development';
 
@@ -127,7 +129,7 @@ const transform: AxiosTransform = {
   },
 
   // 响应错误处理
-  responseInterceptorsCatch: (error: any) => {
+  responseInterceptorsCatch: (error: any, instance: AxiosInstance) => {
     const { config } = error;
     if (!config || !config.requestOptions.retry) return Promise.reject(error);
 
@@ -143,7 +145,7 @@ const transform: AxiosTransform = {
       }, config.requestOptions.retry.delay || 1);
     });
     config.headers = { ...config.headers, 'Content-Type': ContentTypeEnum.Json };
-    return backoff.then((config) => request.request(config));
+    return backoff.then((config) => instance.request(config));
   },
 };
 

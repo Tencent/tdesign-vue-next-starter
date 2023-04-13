@@ -1,5 +1,6 @@
-import type { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { AxiosError } from 'axios';
+
 import type { RequestOptions, Result } from '@/types/axios';
 
 // 创建Axios选项
@@ -33,5 +34,5 @@ export abstract class AxiosTransform {
   requestInterceptorsCatch?: (error: AxiosError) => void;
 
   // 请求后的拦截器错误处理
-  responseInterceptorsCatch?: (error: AxiosError) => void;
+  responseInterceptorsCatch?: (error: AxiosError, instance: AxiosInstance) => void;
 }

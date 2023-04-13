@@ -16,6 +16,7 @@
         :key="`${routeItem.path}_${index}`"
         :value="routeItem.path"
         :removable="!routeItem.isHome"
+        :draggable="!routeItem.isHome"
       >
         <template #label>
           <t-dropdown
@@ -69,14 +70,15 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, computed } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useSettingStore, useTabsRouterStore } from '@/store';
+
 import { prefix } from '@/config/global';
+import { useSettingStore, useTabsRouterStore } from '@/store';
 import type { TRouterInfo } from '@/types/interface';
 
-import LContent from './Content.vue';
 import LBreadcrumb from './Breadcrumb.vue';
+import LContent from './Content.vue';
 import LFooter from './Footer.vue';
 
 const route = useRoute();

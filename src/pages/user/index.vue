@@ -94,21 +94,22 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, watch, computed } from 'vue';
-import * as echarts from 'echarts/core';
-import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
+import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
+import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
-import { useSettingStore } from '@/store';
+import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue';
 
-import { LAST_7_DAYS } from '@/utils/date';
-import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from './constants';
-import { getFolderLineDataSet } from './index';
 import ProductAIcon from '@/assets/assets-product-1.svg';
 import ProductBIcon from '@/assets/assets-product-2.svg';
 import ProductCIcon from '@/assets/assets-product-3.svg';
 import ProductDIcon from '@/assets/assets-product-4.svg';
+import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
+import { LAST_7_DAYS } from '@/utils/date';
+
+import { PRODUCT_LIST, TEAM_MEMBERS, USER_INFO_LIST } from './constants';
+import { getFolderLineDataSet } from './index';
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
 

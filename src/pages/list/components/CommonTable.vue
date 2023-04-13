@@ -105,20 +105,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { MessagePlugin, PrimaryTableCol, TableRowData, PageInfo } from 'tdesign-vue-next';
-import Trend from '@/components/trend/index.vue';
-import { getList } from '@/api/list';
-import { useSettingStore } from '@/store';
-import { prefix } from '@/config/global';
+import { MessagePlugin, PageInfo, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+import { computed, onMounted, ref } from 'vue';
 
+import { getList } from '@/api/list';
+import Trend from '@/components/trend/index.vue';
+import { prefix } from '@/config/global';
 import {
+  CONTRACT_PAYMENT_TYPES,
   CONTRACT_STATUS,
   CONTRACT_STATUS_OPTIONS,
-  CONTRACT_TYPES,
   CONTRACT_TYPE_OPTIONS,
-  CONTRACT_PAYMENT_TYPES,
+  CONTRACT_TYPES,
 } from '@/constants';
+import { useSettingStore } from '@/store';
 
 const store = useSettingStore();
 

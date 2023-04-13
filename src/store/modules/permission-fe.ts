@@ -3,6 +3,7 @@
 
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
+
 import router, { allRoutes } from '@/router';
 import { store } from '@/store';
 

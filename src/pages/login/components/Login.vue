@@ -79,11 +79,12 @@
 </template>
 
 <script setup lang="ts">
+import QrcodeVue from 'qrcode.vue';
+import type { FormInstanceFunctions, FormRule } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import QrcodeVue from 'qrcode.vue';
-import { MessagePlugin } from 'tdesign-vue-next';
-import type { FormInstanceFunctions, FormRule } from 'tdesign-vue-next';
+
 import { useCounter } from '@/hooks';
 import { useUserStore } from '@/store';
 

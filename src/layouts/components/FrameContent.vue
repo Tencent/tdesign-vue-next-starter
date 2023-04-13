@@ -6,10 +6,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { CSSProperties, watch, ref, unref, computed } from 'vue';
 import debounce from 'lodash/debounce';
-import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn';
+import { computed, CSSProperties, ref, unref, watch } from 'vue';
+
 import { prefix } from '@/config/global';
+import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn';
 import { useSettingStore } from '@/store';
 
 defineProps({

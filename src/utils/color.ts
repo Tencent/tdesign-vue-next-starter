@@ -1,6 +1,7 @@
-import { Color } from 'tvision-color';
 import * as echarts from 'echarts/core';
 import trim from 'lodash/trim';
+import { Color } from 'tvision-color';
+
 import { TColorToken } from '@/config/color';
 
 /**
