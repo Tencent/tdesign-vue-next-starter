@@ -37,7 +37,7 @@
           v-for="(item, index) in PRODUCT_LIST"
           :key="index"
           :product="item"
-          :class="{ 'row-margin': index !== 0 }"
+          :class="{ 'row-margin': index !== 0, 'product-card': true }"
         />
       </t-col>
     </t-row>
@@ -166,6 +166,23 @@ const onMaterialChange = (value: string[]) => {
   margin-top: 16px;
 }
 
+.product-card {
+  padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingTB-xl);
+
+  :deep(.t-card__header) {
+    padding: 0;
+  }
+
+  :deep(.t-card__body) {
+    padding: 0;
+    margin-top: var(--td-comp-margin-xxl);
+    margin-bottom: var(--td-comp-margin-xxl);
+  }
+
+  :deep(.t-card__footer) {
+    padding: 0;
+  }
+}
 // 统一增加8px;
 .dashboard-detail-card {
   padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
