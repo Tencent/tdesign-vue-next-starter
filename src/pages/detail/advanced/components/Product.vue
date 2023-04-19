@@ -65,7 +65,7 @@ export default defineComponent({
     height: 240px;
 
     .operator-title-icon {
-      background: var(--td-brand-color-focus);
+      background: var(--td-brand-color-light);
       color: var(--td-brand-color);
       font-size: var(--td-comp-size-xxxl);
       padding: calc(var(--td-comp-size-xxxl) - var(--td-comp-size-xl));
