@@ -29,7 +29,7 @@
               @change="onMaterialChange"
             />
           </template>
-          <div id="lineContainer" style="width: 100%; height: 412px" />
+          <div id="lineContainer" style="width: 100%; height: 416px" />
         </t-card>
       </t-col>
       <t-col :xs="12" :xl="3">
@@ -240,8 +240,8 @@ const onMaterialChange = (value: string[]) => {
   }
 
   &__number {
-    font: var(--td-font-headline-large);
-    font-weight: 400;
+    font-size: var(--td-font-size-headline-medium);
+    line-height: var(--td-font-size-headline-medium);
     color: var(--td-text-color-primary);
     margin-bottom: var(--td-comp-margin-xxl);
   }
