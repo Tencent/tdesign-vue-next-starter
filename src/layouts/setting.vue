@@ -61,10 +61,11 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, ref, watchEffect } from 'vue';
 import useClipboard from 'vue-clipboard3';
 
+import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import Thumbnail from '@/components/thumbnail/index.vue';
