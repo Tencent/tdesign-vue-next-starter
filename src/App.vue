@@ -1,10 +1,11 @@
 <template>
   <router-view :class="[mode]" />
-  <td-theme-generator />
+  <setting-component />
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import SettingComponent from '@/layouts/setting/index.vue';
 import { useSettingStore } from '@/store';
 
 const store = useSettingStore();

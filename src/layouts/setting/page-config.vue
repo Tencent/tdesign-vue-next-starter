@@ -55,15 +55,12 @@
       </t-form>
       <div class="setting-info">
         <p>请复制后手动修改配置文件: /src/config/style.ts</p>
-        <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
       </div>
     </div>
   </t-drawer>
 </template>
 <script setup lang="ts">
-import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, ref, watchEffect } from 'vue';
-import useClipboard from 'vue-clipboard3';
 
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
@@ -106,19 +103,6 @@ const showSettingPanel = computed({
   },
 });
 
-const handleCopy = () => {
-  const text = JSON.stringify(formData.value, null, 4);
-  const { toClipboard } = useClipboard();
-  toClipboard(text)
-    .then(() => {
-      MessagePlugin.closeAll();
-      MessagePlugin.success('复制成功');
-    })
-    .catch(() => {
-      MessagePlugin.closeAll();
-      MessagePlugin.error('复制失败');
-    });
-};
 const getModeIcon = (mode: string) => {
   if (mode === 'light') {
     return SettingLightIcon;
@@ -146,35 +130,6 @@ watchEffect(() => {
 <!-- teleport导致drawer 内 scoped样式问题无法生效 先规避下 -->
 <!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
 <style lang="less">
-.tdesign-setting {
-  z-index: 100;
-  position: fixed;
-  bottom: 200px;
-  right: 0;
-  transition: transform 0.3s cubic-bezier(0.7, 0.3, 0.1, 1), visibility 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
-  height: 40px;
-  width: 40px;
-  border-radius: 20px 0 0 20px;
-  transition: all 0.3s;
-
-  .t-icon {
-    margin-left: 8px;
-  }
-
-  .tdesign-setting-text {
-    font-size: 12px;
-    display: none;
-  }
-
-  &:hover {
-    width: 96px;
-
-    .tdesign-setting-text {
-      display: inline-block;
-    }
-  }
-}
-
 .setting-layout-color-group {
   display: inline-flex;
   justify-content: center;
@@ -188,12 +143,6 @@ watchEffect(() => {
   }
 }
 
-.tdesign-setting-close {
-  position: fixed;
-  bottom: 200px;
-  right: 300px;
-}
-
 .setting-group-title {
   font-size: 14px;
   line-height: 22px;
@@ -203,12 +152,6 @@ watchEffect(() => {
   font-style: normal;
   font-weight: 500;
   color: var(--td-text-color-primary);
-}
-
-.setting-link {
-  cursor: pointer;
-  color: var(--td-brand-color);
-  margin-bottom: 8px;
 }
 
 .setting-info {
@@ -225,9 +168,6 @@ watchEffect(() => {
 }
 
 .setting-drawer-container {
-  .setting-container {
-    padding-bottom: 100px;
-  }
   .t-radio-group.t-size-m {
     min-height: 32px;
     width: 100%;
@@ -257,7 +197,7 @@ watchEffect(() => {
     }
 
     .t-is-checked {
-      border: 2px solid var(--td-brand-color) !important;
+      border: 2px solid var(--td-brand-color);
     }
 
     .t-form__controls-content {
@@ -267,13 +207,6 @@ watchEffect(() => {
 
   .t-form__controls-content {
     justify-content: end;
-  }
-}
-
-.setting-route-theme {
-  .t-form__label {
-    min-width: 310px !important;
-    color: var(--td-text-color-secondary);
   }
 }
 

@@ -52,11 +52,6 @@
               <template #suffix><t-icon name="chevron-down" /></template>
             </t-button>
           </t-dropdown>
-          <t-tooltip placement="bottom" content="系统设置">
-            <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
-              <t-icon name="setting" />
-            </t-button>
-          </t-tooltip>
         </div>
       </template>
     </t-head-menu>
@@ -111,12 +106,6 @@ const props = defineProps({
 
 const router = useRouter();
 const settingStore = useSettingStore();
-
-const toggleSettingPanel = () => {
-  settingStore.updateConfig({
-    showSettingPanel: true,
-  });
-};
 
 const active = computed(() => getActive());
 
