@@ -1,19 +1,27 @@
 <template>
-  <t-popup hide-empty-popup :visible="isThemeTabVisible" @visible-change="handleVisibleChange">
+  <t-popup
+    hide-empty-popup
+    :visible="false"
+    :trigger="isThemeTabVisible ? 'hover' : 'click'"
+    @visible-change="handleVisibleChange"
+  >
     <div
-      class="trigger-island"
+      class="dock"
       :style="{
         zIndex: 9999,
         width: operationWidth,
         transition: 'width .3s',
       }"
     >
-      <div class="trigger-island__operation">
+      <div class="dock__theme-tab" :style="{ height: !isThemeTabVisible ? '0px' : '150px' }">
+        <td-theme-themes v-if="isThemeTabContentDisplay" />
+      </div>
+      <div class="dock__operation">
         <div
           ref="btn"
           class="generator-btn"
           :style="{
-            width: generateBtnWidth,
+            width: !isCustomizeDrawerVisible && !isPageSettingShow ? '272px' : '48px',
             marginRight: '4px',
             transition: 'width .3s',
           }"
@@ -22,11 +30,8 @@
         >
           <t-button variant="outline" shape="square" size="large">
             <template #icon>
-              <palette-svg />
+              <component :is="PaletteIcon" />
             </template>
-            <!-- <div v-if="!isCustomizeDrawerVisible" style="margin-left: 8px">
-              {{ currentTheme.name }}
-            </div> -->
           </t-button>
         </div>
         <div
@@ -36,43 +41,39 @@
             margin: '0 4px',
             transition: 'width .3s',
           }"
-          @click="handleClickCustomize"
+          @click="toggleGeneratorPanel"
         >
           <t-button variant="outline" shape="square" size="large">
             <template #icon>
-              <adjust-svg />
+              <component :is="AdjustIcon" />
             </template>
-            <div v-if="isCustomizeDrawerVisible" style="margin-left: 8px">主参数调节</div>
+            <div v-if="isCustomizeDrawerVisible" style="margin-left: 8px">参数调节</div>
           </t-button>
         </div>
         <div class="page-setting-btn" :style="{ width: !isPageSettingShow ? '48px' : '272px', marginLeft: '4px' }">
           <t-button variant="outline" shape="square" size="large" @click="toggleSettingPanel">
             <template #icon>
-              <setting-icon size="24" />
+              <component :is="SettingIcon" />
             </template>
             <div v-if="isPageSettingShow" style="margin-left: 8px">页面设置</div>
           </t-button>
         </div>
         <div
-          v-if="isCustomizeDrawerVisible || isThemeTabVisible"
+          v-if="isOperationDisplay"
           class="download-btn"
           :style="{ width: '48px', margin: '0 4px' }"
           @click="handleDownload"
         >
           <t-button variant="outline" shape="square" size="large">
             <template #icon>
-              <download-icon size="20" />
+              <component :is="CopyIcon" />
             </template>
           </t-button>
         </div>
-        <div
-          v-if="isCustomizeDrawerVisible || isThemeTabVisible"
-          class="recover-btn"
-          :style="{ width: '48px', marginLeft: '4px' }"
-        >
-          <t-button variant="outline" shape="square" size="large" @click="recoverTheme">
+        <div v-if="isOperationDisplay" class="recover-btn" :style="{ width: '48px', marginLeft: '4px' }">
+          <t-button variant="outline" shape="square" size="large" @click="handleClickRevokeIcon">
             <template #icon>
-              <recover-svg />
+              <component :is="RevokeIcon" />
             </template>
           </t-button>
         </div>
@@ -82,36 +83,49 @@
 </template>
 
 <script setup lang="ts">
-import { DownloadIcon, SettingIcon } from 'tdesign-icons-vue-next';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
+import AdjustIcon from '@/assets/assets-adjust-icon.svg';
+import CopyIcon from '@/assets/assets-copy-icon.svg';
+import PaletteIcon from '@/assets/assets-palette-icon.svg';
+import RevokeIcon from '@/assets/assets-revoke-icon.svg';
+import SettingIcon from '@/assets/assets-setting-icon.svg';
 import { useSettingStore } from '@/store';
 
 const settingStore = useSettingStore();
 
-const isThemeTabVisible = ref(false);
-const isCustomizeDrawerVisible = ref(false);
 const isThemeTabContentDisplay = ref(false);
-
-const toggleSettingPanel = () => {
-  settingStore.updateConfig({
-    showSettingPanel: true,
-  });
-};
+const isThemeTabVisible = ref(false);
 
 const isPageSettingShow = computed(() => {
   return settingStore.showSettingPanel;
 });
-const operationWidth = computed(() => {
-  if (isThemeTabVisible.value) return '400px';
-  if (isCustomizeDrawerVisible.value) return '456px';
-  return '312px';
+
+const isCustomizeDrawerVisible = computed(() => {
+  return settingStore.showGeneratorDrawer;
 });
 
-const generateBtnWidth = computed(() => {
-  if (isThemeTabVisible.value) return '216px';
-  if (isCustomizeDrawerVisible.value) return '48px';
-  return '184px';
+const isOperationDisplay = computed(
+  () => isCustomizeDrawerVisible.value || isPageSettingShow.value || isThemeTabContentDisplay.value,
+);
+
+const toggleSettingPanel = () => {
+  settingStore.updateConfig({
+    showSettingPanel: true,
+    showGeneratorDrawer: false,
+  });
+};
+
+const toggleGeneratorPanel = () => {
+  settingStore.updateConfig({
+    showGeneratorDrawer: !settingStore.showGeneratorDrawer,
+    showSettingPanel: settingStore.showGeneratorDrawer,
+  });
+};
+
+const operationWidth = computed(() => {
+  if (isOperationDisplay.value) return '456px';
+  return '400px';
 });
 
 const handleLeaveTheme = () => {
@@ -120,47 +134,41 @@ const handleLeaveTheme = () => {
   //     this.$refs.btn.classList.remove('is-mouseleave');
   //   }, 500);
 };
-const handleClickCustomize = () => {
-  //   this.$emit('trigger-visible');
-  //   this.isCustomizeDrawerVisible = true;
-  //   this.isThemeTabVisible = false;
-};
+
 const handleClickTheme = () => {
   isThemeTabVisible.value = true;
-  isCustomizeDrawerVisible.value = false;
 };
 const handleVisibleChange = (visible: boolean) => {
-  if (!visible) isThemeTabVisible.value = visible;
+  if (!visible) {
+    isThemeTabVisible.value = false;
+    isThemeTabContentDisplay.value = false;
+    settingStore.updateConfig({
+      showSettingPanel: false,
+      showGeneratorDrawer: false,
+    });
+  }
 };
-const handleChangeTabTheme = (theme) => {
-  //   this.currentTheme = theme;
-  //   this.$emit('refresh-content');
-  //   this.$emit('change-theme', theme);
-};
-const handleDownload = () => {};
-const handleClickPageSettingIcon = () => {};
-</script>
-<!-- <script>
-export default {
-  props: {
-    drawerVisible: Boolean,
-  },
 
-  watch: {
-    drawerVisible(v) {
-      if (!v) this.isCustomizeDrawerVisible = false;
-    },
-    isThemeTabVisible(v) {
-      setTimeout(() => {
-        this.isThemeTabContentDisplay = v;
-      }, 300);
-    },
-  },
+const handleDownload = () => {
+  return null;
 };
-</script> -->
+
+const handleClickRevokeIcon = () => {
+  return null;
+};
+
+watch(
+  () => isThemeTabVisible.value,
+  (v) => {
+    setTimeout(() => {
+      isThemeTabContentDisplay.value = v;
+    }, 300);
+  },
+);
+</script>
 
 <style lang="less" scoped>
-.trigger-island {
+.dock {
   position: fixed;
   margin: auto;
   left: 0;

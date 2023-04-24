@@ -10,9 +10,9 @@ import { generateColorMap, insertThemeStylesheet } from '@/utils/color';
 const state = {
   ...STYLE_CONFIG,
   showSettingPanel: false,
-  showGeneratorDrawer: null,
-  colorList: {},
+  showGeneratorDrawer: false,
   chartColors: LIGHT_CHART_COLORS,
+  colorList: {},
 };
 
 export type TState = typeof state;
@@ -53,6 +53,8 @@ export const useSettingStore = defineStore('setting', {
       this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
     },
     changeBrandTheme(brandTheme: string) {
+      if (document.querySelector('td-theme-generator')) return; // 项目中若使用了主题插件 则不让主题色在页面配置中使用
+
       const mode = this.displayMode;
       // 以主题色加显示模式作为键
       const colorKey = `${brandTheme}[${mode}]`;
