@@ -183,7 +183,7 @@ const changeColor = (hex: string) => {
 };
 
 onMounted(() => {
-  document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+  document.querySelector('.dynamic-color-btn')?.addEventListener('click', () => {
     isColoPickerDisplay.value = true;
   });
 });
