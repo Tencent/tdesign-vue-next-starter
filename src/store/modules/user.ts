@@ -58,7 +58,7 @@ export const useUserStore = defineStore('user', {
       const mockRemoteUserInfo = async (token: string) => {
         if (token === 'main_token') {
           return {
-            name: 'td_main',
+            name: 'Tencent',
             roles: ['all'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
           };
         }
