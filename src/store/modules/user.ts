@@ -4,7 +4,7 @@ import { TOKEN_NAME } from '@/config/global';
 import { store, usePermissionStore } from '@/store';
 
 const InitUserInfo = {
-  name: '',  // 用户名，用于展示在页面右上角头像处
+  name: '', // 用户名，用于展示在页面右上角头像处
   roles: [], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
 };
 
