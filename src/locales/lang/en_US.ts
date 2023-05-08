@@ -1,6 +1,6 @@
 // noinspection NonAsciiCharacters
-import tdesignLocale from 'tdesign-vue-next/es/locale/en_US';
 import merge from 'lodash/merge';
+import tdesignLocale from 'tdesign-vue-next/es/locale/en_US';
 
 export default {
   lang: 'English',

@@ -96,22 +96,20 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted, watchEffect } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 import useClipboard from 'vue-clipboard3';
 
-import { useSettingStore } from '@/store';
-import Thumbnail from '@/components/thumbnail/index.vue';
-import ColorContainer from '@/components/color/index.vue';
-
-import STYLE_CONFIG from '@/config/style';
-import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
-
+import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
-import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
+import ColorContainer from '@/components/color/index.vue';
+import Thumbnail from '@/components/thumbnail/index.vue';
+import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
+import STYLE_CONFIG from '@/config/style';
 import { t } from '@/locales';
+import { useSettingStore } from '@/store';
 
 const settingStore = useSettingStore();
 

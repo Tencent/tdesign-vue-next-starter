@@ -147,18 +147,18 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { Data, SubmitContext } from 'tdesign-vue-next';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { SubmitContext, Data } from 'tdesign-vue-next';
 
 import {
-  FORM_RULES,
-  NAME_OPTIONS,
-  TYPE_OPTIONS,
   ADDRESS_OPTIONS,
+  FORM_RULES,
   INITIAL_DATA1,
   INITIAL_DATA2,
   INITIAL_DATA3,
+  NAME_OPTIONS,
+  TYPE_OPTIONS,
 } from './constants';
 
 const formData1 = ref({ ...INITIAL_DATA1 });

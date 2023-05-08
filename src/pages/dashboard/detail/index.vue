@@ -29,7 +29,7 @@
               @change="onMaterialChange"
             />
           </template>
-          <div id="lineContainer" style="width: 100%; height: 412px" />
+          <div id="lineContainer" style="width: 100%; height: 416px" />
         </t-card>
       </t-col>
       <t-col :xs="12" :xl="3">
@@ -37,7 +37,7 @@
           v-for="(item, index) in PRODUCT_LIST"
           :key="index"
           :product="item"
-          :class="{ 'row-margin': index !== 0 }"
+          :class="{ 'row-margin': index !== 0, 'product-card': true }"
         />
       </t-col>
     </t-row>
@@ -65,22 +65,21 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, watch, computed, onDeactivated } from 'vue';
-
-import * as echarts from 'echarts/core';
-import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart, ScatterChart } from 'echarts/charts';
+import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
+import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
-import ProductCard from '@/components/product-card/index.vue';
+import { computed, nextTick, onDeactivated, onMounted, onUnmounted, watch } from 'vue';
 
-import { getFolderLineDataSet, getScatterDataSet } from './index';
-import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
-import { LAST_7_DAYS } from '@/utils/date';
+import ProductCard from '@/components/product-card/index.vue';
+import Trend from '@/components/trend/index.vue';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
-import { t } from '@/locales';
+import { LAST_7_DAYS } from '@/utils/date';
 
-import Trend from '@/components/trend/index.vue';
+import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
+import { getFolderLineDataSet, getScatterDataSet } from './index';
 
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 
@@ -168,6 +167,23 @@ const onMaterialChange = (value: string[]) => {
   margin-top: 16px;
 }
 
+.product-card {
+  padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingTB-xl);
+
+  :deep(.t-card__header) {
+    padding: 0;
+  }
+
+  :deep(.t-card__body) {
+    padding: 0;
+    margin-top: var(--td-comp-margin-xxl);
+    margin-bottom: var(--td-comp-margin-xxl);
+  }
+
+  :deep(.t-card__footer) {
+    padding: 0;
+  }
+}
 // 统一增加8px;
 .dashboard-detail-card {
   padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
@@ -225,8 +241,8 @@ const onMaterialChange = (value: string[]) => {
   }
 
   &__number {
-    font: var(--td-font-headline-large);
-    font-weight: 400;
+    font-size: var(--td-font-size-headline-medium);
+    line-height: var(--td-font-size-headline-medium);
     color: var(--td-text-color-primary);
     margin-bottom: var(--td-comp-margin-xxl);
   }

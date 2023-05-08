@@ -4,9 +4,10 @@
   </t-config-provider>
 </template>
 <script setup lang="ts">
-import { ref, computed, provide, nextTick } from 'vue';
-import { useSettingStore } from '@/store';
+import { computed, nextTick, provide, ref } from 'vue';
+
 import { useLocale } from '@/locales/useLocale';
+import { useSettingStore } from '@/store';
 
 const store = useSettingStore();
 

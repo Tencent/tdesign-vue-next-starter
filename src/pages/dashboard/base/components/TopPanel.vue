@@ -55,21 +55,20 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onMounted, watch, ref, onUnmounted, nextTick } from 'vue';
-
+import { BarChart, LineChart } from 'echarts/charts';
 import * as echarts from 'echarts/core';
-import { LineChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import { UsergroupIcon, FileIcon } from 'tdesign-icons-vue-next';
+import { FileIcon, UsergroupIcon } from 'tdesign-icons-vue-next';
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+
+// 导入样式
+import Trend from '@/components/trend/index.vue';
 import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
-// 导入样式
-import Trend from '@/components/trend/index.vue';
-import { constructInitDashboardDataset } from '../index';
-
 import { PANE_LIST } from '../constants';
+import { constructInitDashboardDataset } from '../index';
 
 const paneList = ref(
   PANE_LIST.map((item, index) => ({ ...item, title: t(`dashboard.base.topPanel.card${index + 1}`) })),
@@ -197,8 +196,8 @@ watch(
     > span {
       display: inline-block;
       color: var(--td-text-color-primary);
-      font: var(--td-font-headline-medium);
-      font-weight: 400;
+      font-size: var(--td-font-size-headline-medium);
+      line-height: var(--td-line-height-headline-medium);
     }
   }
 

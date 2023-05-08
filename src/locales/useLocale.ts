@@ -1,6 +1,7 @@
-import { useI18n } from 'vue-i18n';
 import { computed } from 'vue';
-import { LangCode, i18n } from '@/locales/index';
+import { useI18n } from 'vue-i18n';
+
+import { i18n, LangCode } from '@/locales/index';
 
 export function useLocale() {
   const { locale } = useI18n({ useScope: 'global' });

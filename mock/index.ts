@@ -1,5 +1,5 @@
-import { MockMethod } from 'vite-plugin-mock';
 import Mock from 'mockjs';
+import { MockMethod } from 'vite-plugin-mock';
 
 export default [
   {
@@ -221,6 +221,7 @@ export default [
                   component: '/form/step/index',
                   meta: {
                     title: '分步表单页',
+                    keepAlive: false,
                   },
                 },
               ],

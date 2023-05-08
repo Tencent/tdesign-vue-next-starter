@@ -1,6 +1,6 @@
-import { createI18n } from 'vue-i18n';
 import { DropdownOption } from 'tdesign-vue-next';
 import { computed } from 'vue';
+import { createI18n } from 'vue-i18n';
 
 // 导入语言文件
 const langModules = import.meta.glob('./lang/**/*.ts', { eager: true });

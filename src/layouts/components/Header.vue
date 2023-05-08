@@ -69,20 +69,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue';
 import type { PropType } from 'vue';
+import { computed, inject } from 'vue';
 import { useRouter } from 'vue-router';
-import { useSettingStore } from '@/store';
-import { getActive } from '@/router';
-import { prefix } from '@/config/global';
+
 import LogoFull from '@/assets/assets-logo-full.svg?component';
-import type { MenuRoute } from '@/types/interface';
+import { prefix } from '@/config/global';
 import { langList, t } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
+import { getActive } from '@/router';
+import { useSettingStore } from '@/store';
+import type { MenuRoute } from '@/types/interface';
 
+import MenuContent from './MenuContent.vue';
 import Notice from './Notice.vue';
 import Search from './Search.vue';
-import MenuContent from './MenuContent.vue';
 
 const props = defineProps({
   theme: {

@@ -1,13 +1,14 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { shallowRef } from 'vue';
+
 import { RouteItem, RouteMeta } from '@/api/model/permissionModel';
 import {
   BLANK_LAYOUT,
-  LAYOUT,
-  IFRAME,
   EXCEPTION_COMPONENT,
-  PARENT_LAYOUT,
+  IFRAME,
+  LAYOUT,
   PAGE_NOT_FOUND_ROUTE,
+  PARENT_LAYOUT,
 } from '@/utils/route/constant';
 
 // vite 3+ support dynamic import from node_modules

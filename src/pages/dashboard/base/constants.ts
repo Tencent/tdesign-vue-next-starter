@@ -1,4 +1,5 @@
 import { TdBaseTableProps } from 'tdesign-vue-next';
+
 import { t } from '@/locales';
 
 interface DashboardPanel {

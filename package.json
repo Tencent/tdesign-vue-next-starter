@@ -1,6 +1,6 @@
 {
   "name": "tdesign-vue-next-starter",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
@@ -21,7 +21,7 @@
   "dependencies": {
     "axios": "^1.3.4",
     "dayjs": "^1.11.7",
-    "echarts": "5.4.2",
+    "echarts": "5.1.2",
     "lodash": "^4.17.21",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.33",
@@ -56,6 +56,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-vue": "^9.8.0",
     "eslint-plugin-vue-scoped-css": "^2.2.0",
     "husky": "^8.0.2",

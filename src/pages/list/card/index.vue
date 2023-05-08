@@ -68,12 +68,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import ProductCard from '@/components/product-card/index.vue';
-import DialogForm from './components/DialogForm.vue';
+import { computed, onMounted, ref } from 'vue';
+
 import { getCardList } from '@/api/list';
+import ProductCard from '@/components/product-card/index.vue';
+
+import DialogForm from './components/DialogForm.vue';
 
 const INITIAL_DATA = {
   name: '',

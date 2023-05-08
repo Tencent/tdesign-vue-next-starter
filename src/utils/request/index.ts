@@ -1,12 +1,14 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
+import type { InternalAxiosRequestConfig } from 'axios';
 import isString from 'lodash/isString';
 import merge from 'lodash/merge';
-import type { InternalAxiosRequestConfig } from 'axios';
-import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
-import { VAxios } from './Axios';
-import { joinTimestamp, formatRequestDate, setObjToUrlParams } from './utils';
+
 import { TOKEN_NAME } from '@/config/global';
 import { ContentTypeEnum } from '@/constants';
+
+import { VAxios } from './Axios';
+import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
+import { formatRequestDate, joinTimestamp, setObjToUrlParams } from './utils';
 
 const env = import.meta.env.MODE || 'development';
 
