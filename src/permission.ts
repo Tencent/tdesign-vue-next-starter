@@ -23,6 +23,16 @@ router.beforeEach(async (to, from, next) => {
       next();
       return;
     }
+    try {
+      await userStore.getUserInfo();
+    } catch (error) {
+      MessagePlugin.error(error);
+      next({
+        path: '/login',
+        query: { redirect: encodeURIComponent(to.fullPath) },
+      });
+      NProgress.done();
+    }
 
     const { asyncRoutes } = permissionStore;
 
@@ -42,21 +52,10 @@ router.beforeEach(async (to, from, next) => {
       }
     }
 
-    try {
-      await userStore.getUserInfo();
-
-      if (router.hasRoute(to.name)) {
-        next();
-      } else {
-        next(`/`);
-      }
-    } catch (error) {
-      MessagePlugin.error(error);
-      next({
-        path: '/login',
-        query: { redirect: encodeURIComponent(to.fullPath) },
-      });
-      NProgress.done();
+    if (router.hasRoute(to.name)) {
+      next();
+    } else {
+      next(`/`);
     }
   } else {
     /* white list router */
