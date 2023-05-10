@@ -17,53 +17,24 @@
           <t-radio-group v-model="formData.mode">
             <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
               <div>
-                <t-radio-button :key="index" :value="item.type"
-                  ><component :is="getModeIcon(item.type)"
-                /></t-radio-button>
+                <t-radio-button :key="index" :value="item.type">
+                  <component :is="getModeIcon(item.type)" class="mode-img" />
+                  <picked-icon v-if="formData.mode === item.type" class="picked" />
+                </t-radio-button>
                 <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
               </div>
             </div>
           </t-radio-group>
         </div>
 
-        <!-- 若需要在页面配置中插入轻量主题色配置 可以启用这部分代码 并将 theme-config 的节点移除 -->
-        <!-- <div class="setting-group-title">主题色</div>
-        <t-radio-group v-model="formData.brandTheme">
-          <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
-            <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
-              <color-container :value="item" />
-            </t-radio-button>
-          </div>
-          <div class="setting-layout-drawer">
-            <t-popup
-              destroy-on-close
-              expand-animation
-              placement="bottom-right"
-              trigger="click"
-              :visible="isColoPickerDisplay"
-              :overlay-style="{ padding: 0 }"
-              @visible-change="onPopupVisibleChange"
-            >
-              <template #content>
-                <t-color-picker-panel
-                  :on-change="changeColor"
-                  :color-modes="['monochrome']"
-                  format="HEX"
-                  :swatch-colors="[]"
-                />
-              </template>
-              <t-radio-button :value="dynamicColor" class="setting-layout-color-group dynamic-color-btn">
-                <color-container :value="dynamicColor" />
-              </t-radio-button>
-            </t-popup>
-          </div>
-        </t-radio-group> -->
-
         <div class="setting-container-subgroup">
           <div class="setting-group-title">导航布局</div>
           <t-radio-group v-model="formData.layout">
             <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
-              <t-radio-button :key="index" :value="item"> <component :is="getLayoutIcon(item)" /> </t-radio-button>
+              <t-radio-button :key="index" :value="item">
+                <component :is="getLayoutIcon(item)" class="layout-img" />
+                <picked-icon v-if="formData.layout === item" class="picked" />
+              </t-radio-button>
             </div>
           </t-radio-group>
           <div v-show="formData.layout === 'mix'" :class="['setting-container-subgroup', 'setting-config-list']">
@@ -99,12 +70,12 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
-import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { computed, onMounted, ref, watchEffect } from 'vue';
 
 import LayoutMixIcon from '@/assets/assets-layout-mix.svg';
 import LayoutSideIcon from '@/assets/assets-layout-side.svg';
 import LayoutTopIcon from '@/assets/assets-layout-top.svg';
+import PickedIcon from '@/assets/assets-picked.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
@@ -189,13 +160,6 @@ onMounted(() => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeContext) => {
-  if (!visible && context.trigger === 'document') {
-    isColoPickerDisplay.value = visible;
-  }
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 const dynamicColor = computed(() => {
   const isDynamic = DEFAULT_COLOR_OPTIONS.indexOf(formData.value.brandTheme) === -1;
   return isDynamic ? formData.value.brandTheme : '';
@@ -265,14 +229,24 @@ const dynamicColor = computed(() => {
       max-height: 78px;
       padding: 0;
       border-radius: var(--td-radius-default);
-      border: 2px solid var(--td-component-border);
+      border: none;
       > .t-radio-button__label {
         display: inline-flex;
+        position: relative;
+        .mode-img,
+        .layout-img {
+          border-radius: 9px;
+        }
+        .picked {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+        }
       }
     }
 
     .t-is-checked {
-      border: 2px solid var(--td-brand-color);
+      border: none;
     }
 
     .t-form__controls-content {
