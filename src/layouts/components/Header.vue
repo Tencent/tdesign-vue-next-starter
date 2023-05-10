@@ -48,7 +48,7 @@
               <template #icon>
                 <t-icon class="header-user-avatar" name="user-circle" />
               </template>
-              <div class="header-user-account">Tencent</div>
+              <div class="header-user-account">{{ user.userInfo.name }}</div>
               <template #suffix><t-icon name="chevron-down" /></template>
             </t-button>
           </t-dropdown>
@@ -66,7 +66,7 @@ import { useRouter } from 'vue-router';
 import LogoFull from '@/assets/assets-logo-full.svg?component';
 import { prefix } from '@/config/global';
 import { getActive } from '@/router';
-import { useSettingStore } from '@/store';
+import { useSettingStore, useUserStore } from '@/store';
 import type { MenuRoute } from '@/types/interface';
 
 import MenuContent from './MenuContent.vue';
@@ -106,6 +106,7 @@ const props = defineProps({
 
 const router = useRouter();
 const settingStore = useSettingStore();
+const user = useUserStore();
 
 const active = computed(() => getActive());
 
