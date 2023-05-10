@@ -19,7 +19,6 @@
         </t-layout>
       </t-layout>
     </template>
-    <setting-com />
   </div>
 </template>
 
@@ -36,7 +35,6 @@ import { useSettingStore, useTabsRouterStore } from '@/store';
 import LayoutContent from './components/LayoutContent.vue';
 import LayoutHeader from './components/LayoutHeader.vue';
 import LayoutSideNav from './components/LayoutSideNav.vue';
-import SettingCom from './setting.vue';
 
 const route = useRoute();
 const settingStore = useSettingStore();
