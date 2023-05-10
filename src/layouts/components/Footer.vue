@@ -1,9 +1,12 @@
 <template>
-  <div :class="prefix + '-footer'">Copyright © 2021-{{ new Date().getFullYear() }} Tencent. All Rights Reserved</div>
+  <div :class="prefix + '-footer'">{{ setting.copyRight }}</div>
 </template>
 
 <script setup lang="ts">
 import { prefix } from '@/config/global';
+import { useSettingStore } from '@/store';
+
+const setting = useSettingStore();
 </script>
 
 <style lang="less" scoped>

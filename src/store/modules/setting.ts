@@ -12,6 +12,7 @@ const state = {
   showSettingPanel: false,
   colorList: {},
   chartColors: LIGHT_CHART_COLORS,
+  company: 'Tencent',
 };
 
 export type TState = typeof state;
@@ -19,6 +20,7 @@ export type TState = typeof state;
 export const useSettingStore = defineStore('setting', {
   state: () => state,
   getters: {
+    copyRight: (state) => `Copyright © 2021-${new Date().getFullYear()} ${state.company}. All Rights Reserved`,
     showSidebar: (state) => state.layout !== 'top',
     showSidebarLogo: (state) => state.layout === 'side',
     showHeaderLogo: (state) => state.layout !== 'side',
