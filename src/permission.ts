@@ -37,7 +37,13 @@ router.beforeEach(async (to, from, next) => {
     const { asyncRoutes } = permissionStore;
 
     if (asyncRoutes && asyncRoutes.length === 0) {
-      const routeList = await permissionStore.buildAsyncRoutes();
+      try {
+        routeList = await permissionStore.buildAsyncRoutes();
+      } catch (error) {
+        MessagePlugin.error(error.message);
+        NProgress.done();
+        throw error;
+      }
       routeList.forEach((item: RouteRecordRaw) => {
         router.addRoute(item);
       });
