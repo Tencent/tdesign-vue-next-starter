@@ -37,6 +37,7 @@ router.beforeEach(async (to, from, next) => {
     const { asyncRoutes } = permissionStore;
 
     if (asyncRoutes && asyncRoutes.length === 0) {
+      let routeList;
       try {
         routeList = await permissionStore.buildAsyncRoutes();
       } catch (error) {
