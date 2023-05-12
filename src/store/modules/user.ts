@@ -49,7 +49,7 @@ export const useUserStore = defineStore('user', {
 
       const res = await mockLogin(userInfo);
       if (res.code === 200) {
-        this.token = res.data;
+        this.setToken(res.data);
       } else {
         throw res;
       }
@@ -72,12 +72,16 @@ export const useUserStore = defineStore('user', {
       this.userInfo = res;
     },
     async logout() {
-      localStorage.removeItem(TOKEN_NAME);
-      this.token = '';
+      this.removeToken();
       this.userInfo = { ...InitUserInfo };
     },
     async removeToken() {
-      this.token = '';
+      localStorage.removeItem(TOKEN_NAME);
+      this.setToken('');
+    },
+    async setToken(token: string) {
+      this.token = token;
+      localStorage.setItem(TOKEN_NAME, this.token);
     },
   },
   persist: {
