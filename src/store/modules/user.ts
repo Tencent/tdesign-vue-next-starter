@@ -10,7 +10,7 @@ const InitUserInfo = {
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    token: localStorage.getItem(TOKEN_NAME) || 'main_token', // 默认token不走权限
+    [TOKEN_NAME]: 'main_token', // 默认token不走权限
     userInfo: { ...InitUserInfo },
   }),
   getters: {
@@ -67,7 +67,7 @@ export const useUserStore = defineStore('user', {
           roles: ['UserIndex', 'DashboardBase', 'login'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
         };
       };
-      const res = await mockRemoteUserInfo(this.token);
+      const res = await mockRemoteUserInfo(this[TOKEN_NAME]);
 
       this.userInfo = res;
     },
@@ -76,12 +76,10 @@ export const useUserStore = defineStore('user', {
       this.userInfo = { ...InitUserInfo };
     },
     async removeToken() {
-      localStorage.removeItem(TOKEN_NAME);
       this.setToken('');
     },
     async setToken(token: string) {
-      this.token = token;
-      localStorage.setItem(TOKEN_NAME, this.token);
+      this[TOKEN_NAME] = token;
     },
   },
   persist: {
@@ -89,6 +87,8 @@ export const useUserStore = defineStore('user', {
       const permissionStore = usePermissionStore();
       permissionStore.initRoutes();
     },
+    key: 'user',
+    paths: [TOKEN_NAME],
   },
 });
 
