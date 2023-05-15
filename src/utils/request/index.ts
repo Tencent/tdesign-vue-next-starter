@@ -116,7 +116,6 @@ const transform: AxiosTransform = {
     // 请求之前处理config
     const userStore = getUserStore();
     const token = userStore[TOKEN_NAME];
-    console.log('token', token);
 
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
