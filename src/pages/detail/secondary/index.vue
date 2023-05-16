@@ -104,7 +104,7 @@ const setReadStatus = (item: NotificationItem) => {
   const changeMsg = msgData.value;
   changeMsg.forEach((e: NotificationItem) => {
     if (e.id === item.id) {
-      if (e.status) e.status = false;
+      e.status = !e.status;
     }
   });
   store.setMsgData(changeMsg);
