@@ -5,6 +5,7 @@ import merge from 'lodash/merge';
 
 import { TOKEN_NAME } from '@/config/global';
 import { ContentTypeEnum } from '@/constants';
+import { getUserStore } from '@/store';
 
 import { VAxios } from './Axios';
 import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
@@ -113,7 +114,9 @@ const transform: AxiosTransform = {
   // 请求拦截器处理
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    const token = localStorage.getItem(TOKEN_NAME);
+    const userStore = getUserStore();
+    const token = userStore[TOKEN_NAME];
+
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
       (config as Recordable).headers.Authorization = options.authenticationScheme
