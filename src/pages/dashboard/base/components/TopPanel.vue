@@ -191,8 +191,8 @@ watch(
     > span {
       display: inline-block;
       color: var(--td-text-color-primary);
-      font: var(--td-font-headline-medium);
-      font-weight: 400;
+      font-size: var(--td-font-size-headline-medium);
+      line-height: var(--td-line-height-headline-medium);
     }
   }
 

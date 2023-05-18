@@ -4,12 +4,13 @@ import { TOKEN_NAME } from '@/config/global';
 import { store, usePermissionStore } from '@/store';
 
 const InitUserInfo = {
+  name: '', // 用户名，用于展示在页面右上角头像处
   roles: [], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
 };
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    token: localStorage.getItem(TOKEN_NAME) || 'main_token', // 默认token不走权限
+    [TOKEN_NAME]: 'main_token', // 默认token不走权限
     userInfo: { ...InitUserInfo },
   }),
   getters: {
@@ -48,7 +49,7 @@ export const useUserStore = defineStore('user', {
 
       const res = await mockLogin(userInfo);
       if (res.code === 200) {
-        this.token = res.data;
+        this.setToken(res.data);
       } else {
         throw res;
       }
@@ -57,7 +58,7 @@ export const useUserStore = defineStore('user', {
       const mockRemoteUserInfo = async (token: string) => {
         if (token === 'main_token') {
           return {
-            name: 'td_main',
+            name: 'Tencent',
             roles: ['all'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
           };
         }
@@ -66,17 +67,19 @@ export const useUserStore = defineStore('user', {
           roles: ['UserIndex', 'DashboardBase', 'login'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
         };
       };
-      const res = await mockRemoteUserInfo(this.token);
+      const res = await mockRemoteUserInfo(this[TOKEN_NAME]);
 
       this.userInfo = res;
     },
     async logout() {
-      localStorage.removeItem(TOKEN_NAME);
-      this.token = '';
+      this.removeToken();
       this.userInfo = { ...InitUserInfo };
     },
     async removeToken() {
-      this.token = '';
+      this.setToken('');
+    },
+    async setToken(token: string) {
+      this[TOKEN_NAME] = token;
     },
   },
   persist: {
@@ -84,6 +87,8 @@ export const useUserStore = defineStore('user', {
       const permissionStore = usePermissionStore();
       permissionStore.initRoutes();
     },
+    key: 'user',
+    paths: [TOKEN_NAME],
   },
 });
 
