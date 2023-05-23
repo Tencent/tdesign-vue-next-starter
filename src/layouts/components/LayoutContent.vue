@@ -148,7 +148,7 @@ const handleOperationEffect = (type: 'other' | 'ahead' | 'behind', routeIndex: n
 
   activeTabPath.value = null;
 };
-const handleTabMenuClick = (visible: boolean, ctx, path: string) => {
+const handleTabMenuClick = (visible: boolean, ctx: PopupVisibleChangeContext, path: string) => {
   if (ctx.trigger === 'document') activeTabPath.value = null;
   if (visible) activeTabPath.value = path;
 };
