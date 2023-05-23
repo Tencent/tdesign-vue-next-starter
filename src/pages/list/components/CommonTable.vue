@@ -167,7 +167,7 @@ const COLUMNS: PrimaryTableCol[] = [
 
 const searchForm = {
   name: '',
-  no: 0,
+  no: '',
   status: typeof CONTRACT_STATUS,
   type: '',
 };
