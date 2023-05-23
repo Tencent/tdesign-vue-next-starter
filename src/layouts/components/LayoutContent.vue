@@ -76,7 +76,7 @@ import { useRoute, useRouter } from 'vue-router';
 
 import { prefix } from '@/config/global';
 import { useSettingStore, useTabsRouterStore } from '@/store';
-import type { TRouterInfo } from '@/types/interface';
+import type { TRouterInfo, TTabRemoveOptions } from '@/types/interface';
 
 import LBreadcrumb from './Breadcrumb.vue';
 import LContent from './Content.vue';
@@ -96,12 +96,12 @@ const handleChangeCurrentTab = (path: string) => {
   router.push({ path, query: route.query });
 };
 
-const handleRemove = ({ value: path, index }) => {
+const handleRemove = (options: TTabRemoveOptions) => {
   const { tabRouters } = tabsRouterStore;
-  const nextRouter = tabRouters[index + 1] || tabRouters[index - 1];
+  const nextRouter = tabRouters[options.index + 1] || tabRouters[options.index - 1];
 
-  tabsRouterStore.subtractCurrentTabRouter({ path, routeIdx: index });
-  if (path === route.path) router.push({ path: nextRouter.path, query: nextRouter.query });
+  tabsRouterStore.subtractCurrentTabRouter({ path: options.value as string, routeIdx: options.index });
+  if ((options.value as string) === route.path) router.push({ path: nextRouter.path, query: nextRouter.query });
 };
 
 const handleRefresh = (route: TRouterInfo, routeIdx: number) => {
