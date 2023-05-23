@@ -15,6 +15,7 @@ const state = {
 };
 
 export type TState = typeof state;
+export type TStateKey = keyof typeof state;
 
 export const useSettingStore = defineStore('setting', {
   state: () => state,
@@ -72,8 +73,8 @@ export const useSettingStore = defineStore('setting', {
     },
     updateConfig(payload: Partial<TState>) {
       for (const key in payload) {
-        if (payload[key] !== undefined) {
-          this[key] = payload[key];
+        if (payload[key as TStateKey] !== undefined) {
+          this[key] = payload[key as TStateKey];
         }
         if (key === 'mode') {
           this.changeMode(payload[key]);

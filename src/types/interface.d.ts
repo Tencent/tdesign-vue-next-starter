@@ -27,6 +27,11 @@ export type CommonObjType = {
   [key: string]: string | number;
 };
 
+export interface UserInfo {
+  name: string;
+  roles: string[];
+}
+
 export interface NotificationItem {
   id: string;
   content: string;
