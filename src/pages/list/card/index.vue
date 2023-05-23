@@ -73,15 +73,26 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 
 import { getCardList } from '@/api/list';
+import type { CardProductType } from '@/components/product-card/index.vue';
 import ProductCard from '@/components/product-card/index.vue';
 
 import DialogForm from './components/DialogForm.vue';
 
-const INITIAL_DATA = {
+interface FormData {
+  name: string;
+  status: string;
+  description: string;
+  type: number;
+  mark: string;
+  amount: number;
+  [key: string]: unknown;
+}
+
+const INITIAL_DATA: FormData = {
   name: '',
   status: '',
   description: '',
-  type: '',
+  type: 0,
   mark: '',
   amount: 0,
 };
@@ -127,7 +138,7 @@ const onPageSizeChange = (size: number) => {
 const onCurrentChange = (current: number) => {
   pagination.value.current = current;
 };
-const handleDeleteItem = (product) => {
+const handleDeleteItem = (product: CardProductType) => {
   confirmVisible.value = true;
   deleteProduct.value = product;
 };
@@ -141,9 +152,16 @@ const onCancel = () => {
   deleteProduct.value = undefined;
   formData.value = { ...INITIAL_DATA };
 };
-const handleManageProduct = (product) => {
+const handleManageProduct = (product: CardProductType) => {
   formDialogVisible.value = true;
-  formData.value = { ...product, status: product?.isSetup ? '1' : '0' };
+  formData.value = {
+    name: product.name,
+    status: product?.isSetup ? '1' : '0',
+    description: product.description,
+    type: product.type,
+    mark: '',
+    amount: 0,
+  };
 };
 </script>
 

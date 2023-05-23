@@ -83,14 +83,14 @@ export const TABLE_COLUMNS_DATA = [
     ellipsis: true,
     colKey: 'index',
     title: '申请号',
-    sorter: (a, b) => a.index.substr(3) - b.index.substr(3),
+    sorter: (a: any, b: any) => a.index.substr(3) - b.index.substr(3),
   },
   {
     width: 200,
     ellipsis: true,
     colKey: 'pdName',
     title: '产品名称',
-    sorter: (a, b) => a.pdName.length - b.pdName.length,
+    sorter: (a: any, b: any) => a.pdName.length - b.pdName.length,
   },
   {
     width: 200,
@@ -103,7 +103,7 @@ export const TABLE_COLUMNS_DATA = [
     ellipsis: true,
     colKey: 'purchaseNum',
     title: '采购数量',
-    sorter: (a, b) => a.purchaseNum - b.purchaseNum,
+    sorter: (a: any, b: any) => a.purchaseNum - b.purchaseNum,
   },
   {
     width: 160,
@@ -116,7 +116,7 @@ export const TABLE_COLUMNS_DATA = [
     ellipsis: true,
     colKey: 'updateTime',
     title: '创建时间',
-    sorter: (a, b) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
+    sorter: (a: any, b: any) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
   },
   {
     align: 'left' as const,

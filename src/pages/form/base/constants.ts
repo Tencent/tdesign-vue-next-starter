@@ -1,4 +1,4 @@
-import { FormRule } from 'tdesign-vue-next';
+import type { FormRule, UploadFile } from 'tdesign-vue-next';
 
 export const FORM_RULES: Record<string, FormRule[]> = {
   name: [{ required: true, message: '请输入合同名称', type: 'error' }],
@@ -23,7 +23,7 @@ export const INITIAL_DATA = {
   payment: '1',
   amount: 0,
   comment: '',
-  files: [],
+  files: [] as Array<UploadFile>,
 };
 
 export const TYPE_OPTIONS = [

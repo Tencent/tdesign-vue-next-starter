@@ -160,10 +160,10 @@ const rowKey = 'index';
 const rehandleSelectChange = (val: number[]) => {
   selectedRowKeys.value = val;
 };
-const rehandlePageChange = (curr, pageInfo) => {
+const rehandlePageChange = (curr: unknown, pageInfo: unknown) => {
   console.log('分页变化', curr, pageInfo);
 };
-const rehandleChange = (changeParams, triggerAndData) => {
+const rehandleChange = (changeParams: unknown, triggerAndData: unknown) => {
   console.log('统一Change', changeParams, triggerAndData);
 };
 const handleClickDetail = () => {
