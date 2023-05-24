@@ -8,10 +8,10 @@ import router, { allRoutes } from '@/router';
 import { store } from '@/store';
 
 function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<unknown>) {
-  const res = [];
-  const removeRoutes = [];
+  const res: Array<RouteRecordRaw> = [];
+  const removeRoutes: Array<RouteRecordRaw> = [];
   routes.forEach((route) => {
-    const children = [];
+    const children: Array<RouteRecordRaw> = [];
     route.children?.forEach((childRouter) => {
       const roleCode = childRouter.meta?.roleCode || childRouter.name;
       if (roles.indexOf(roleCode) !== -1) {
@@ -38,7 +38,7 @@ export const usePermissionStore = defineStore('permission', {
     async initRoutes(roles: Array<unknown>) {
       let accessedRouters = [];
 
-      let removeRoutes = [];
+      let removeRoutes: Array<RouteRecordRaw> = [];
       // special token
       if (roles.includes('all')) {
         accessedRouters = allRoutes;

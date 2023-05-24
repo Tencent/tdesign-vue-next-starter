@@ -2,8 +2,9 @@ import { defineStore } from 'pinia';
 
 import { TOKEN_NAME } from '@/config/global';
 import { store, usePermissionStore } from '@/store';
+import type { UserInfo } from '@/types/interface';
 
-const InitUserInfo = {
+const InitUserInfo: UserInfo = {
   name: '', // 用户名，用于展示在页面右上角头像处
   roles: [], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
 };

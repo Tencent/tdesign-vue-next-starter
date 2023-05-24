@@ -164,6 +164,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import type { SubmitContext, UploadFailContext, UploadFile } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { ref } from 'vue';
 
@@ -174,12 +175,12 @@ const formData = ref({ ...INITIAL_DATA });
 const onReset = () => {
   MessagePlugin.warning('取消新建');
 };
-const onSubmit = ({ validateResult }) => {
-  if (validateResult === true) {
+const onSubmit = (ctx: SubmitContext) => {
+  if (ctx.validateResult === true) {
     MessagePlugin.success('新建成功');
   }
 };
-const beforeUpload = (file) => {
+const beforeUpload = (file: UploadFile) => {
   if (!/\.(pdf)$/.test(file.name)) {
     MessagePlugin.warning('请上传pdf文件');
     return false;
@@ -190,11 +191,11 @@ const beforeUpload = (file) => {
   }
   return true;
 };
-const handleFail = ({ file }) => {
-  MessagePlugin.error(`文件 ${file.name} 上传失败`);
+const handleFail = (options: UploadFailContext) => {
+  MessagePlugin.error(`文件 ${options.file.name} 上传失败`);
 };
 // 用于格式化接口响应值，error 会被用于上传失败的提示文字；url 表示文件/图片地址
-const formatResponse = (res) => {
+const formatResponse = (res: any) => {
   return { ...res, error: '上传失败，请重试', url: res.url };
 };
 </script>

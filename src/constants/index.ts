@@ -34,12 +34,14 @@ export const CONTRACT_PAYMENT_TYPES = {
   RECEIPT: 1,
 };
 
-// 通知的优先级对应的TAG类型
-export const NOTIFICATION_TYPES = {
-  low: 'primary',
-  middle: 'warning',
-  high: 'danger',
-};
+// 标签类型
+type TagTheme = 'default' | 'success' | 'primary' | 'warning' | 'danger';
+// 通知的优先级对应的标签类型
+export const NOTIFICATION_TYPES: Map<string, TagTheme> = new Map([
+  ['low', 'primary'],
+  ['middle', 'warning'],
+  ['high', 'danger'],
+]);
 
 // 通用请求头
 export enum ContentTypeEnum {

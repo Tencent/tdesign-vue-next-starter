@@ -16,7 +16,7 @@
           </t-button>
         </template>
         <t-row class="content" justify="space-between">
-          <t-col v-for="(item, index) in USER_INFO_LIST" :key="index" class="contract" :span="item.span || 3">
+          <t-col v-for="(item, index) in USER_INFO_LIST" :key="index" class="contract" :span="item.span ?? 3">
             <div class="contract-title">
               {{ item.title }}
             </div>
@@ -98,6 +98,7 @@ import { LineChart } from 'echarts/charts';
 import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
+import type { DateRangeValue } from 'tdesign-vue-next';
 import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue';
 
 import ProductAIcon from '@/assets/assets-product-1.svg';
@@ -118,8 +119,13 @@ let lineChart: echarts.ECharts;
 const store = useSettingStore();
 const chartColors = computed(() => store.chartColors);
 
-const onLineChange = (value) => {
-  lineChart.setOption(getFolderLineDataSet(value));
+const onLineChange = (value: DateRangeValue) => {
+  lineChart.setOption(
+    getFolderLineDataSet({
+      dateTime: value as string[],
+      ...chartColors.value,
+    }),
+  );
 };
 
 const initChart = () => {
@@ -154,7 +160,7 @@ onUnmounted(() => {
   window.removeEventListener('resize', updateContainer);
 });
 
-const getIcon = (type) => {
+const getIcon = (type: string) => {
   switch (type) {
     case 'a':
       return ProductAIcon;

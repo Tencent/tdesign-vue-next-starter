@@ -141,7 +141,7 @@ const changeCollapsed = () => {
   });
 };
 
-const handleNav = (url) => {
+const handleNav = (url: string) => {
   router.push(url);
 };
 
