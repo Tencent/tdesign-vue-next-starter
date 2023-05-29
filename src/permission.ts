@@ -4,7 +4,6 @@ import NProgress from 'nprogress'; // progress bar
 import { MessagePlugin } from 'tdesign-vue-next';
 import { RouteRecordRaw } from 'vue-router';
 
-import { TOKEN_NAME } from '@/config/global';
 import router from '@/router';
 import { getPermissionStore, getUserStore } from '@/store';
 import { PAGE_NOT_FOUND_ROUTE } from '@/utils/route/constant';
@@ -18,8 +17,8 @@ router.beforeEach(async (to, from, next) => {
   const { whiteListRouters } = permissionStore;
 
   const userStore = getUserStore();
-
-  if (userStore[TOKEN_NAME]) {
+  const { token } = userStore;
+  if (token) {
     if (to.path === '/login') {
       next();
       return;
