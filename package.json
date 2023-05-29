@@ -1,6 +1,6 @@
 {
   "name": "@tencent/tdesign-vue-next-starter",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
