@@ -3,9 +3,8 @@ import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import isString from 'lodash/isString';
 import merge from 'lodash/merge';
 
-import { TOKEN_NAME } from '@/config/global';
 import { ContentTypeEnum } from '@/constants';
-import { getUserStore } from '@/store';
+import { useUserStore } from '@/store';
 
 import { VAxios } from './Axios';
 import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
@@ -114,8 +113,8 @@ const transform: AxiosTransform = {
   // 请求拦截器处理
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    const userStore = getUserStore();
-    const token = userStore[TOKEN_NAME];
+    const userStore = useUserStore();
+    const { token } = userStore;
 
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
