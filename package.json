@@ -1,6 +1,6 @@
 {
-  "name": "tdesign-vue-next-starter",
-  "version": "0.7.5",
+  "name": "@tencent/tdesign-vue-next-starter",
+  "version": "0.7.6",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
@@ -28,9 +28,9 @@
     "pinia-plugin-persistedstate": "^3.1.0",
     "qrcode.vue": "^3.3.4",
     "qs": "^6.11.1",
-    "tdesign-icons-vue-next": "^0.1.8",
-    "tdesign-vue-next": "^1.2.2",
-    "tvision-color": "^1.5.0",
+    "tdesign-icons-vue-next": "^0.1.11",
+    "tdesign-vue-next": "^1.3.4",
+    "tvision-color": "^1.6.0",
     "vue": "^3.2.47",
     "vue-clipboard3": "^2.0.0",
     "vue-router": "~4.1.6"
@@ -83,12 +83,10 @@
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
       "prettier --write",
-      "npm run lint:fix",
-      "git add ."
+      "npm run lint:fix"
     ],
     "*.{html,vue,vss,sass,less}": [
-      "npm run stylelint:fix",
-      "git add ."
+      "npm run stylelint:fix"
     ]
   }
 }

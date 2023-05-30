@@ -122,7 +122,7 @@ import { useSettingStore } from '@/store';
 
 const store = useSettingStore();
 
-const COLUMNS: PrimaryTableCol<TableRowData>[] = [
+const COLUMNS: PrimaryTableCol[] = [
   {
     title: '合同名称',
     fixed: 'left',
@@ -167,8 +167,8 @@ const COLUMNS: PrimaryTableCol<TableRowData>[] = [
 
 const searchForm = {
   name: '',
-  no: undefined,
-  status: undefined,
+  no: '',
+  status: typeof CONTRACT_STATUS,
   type: '',
 };
 
@@ -233,24 +233,24 @@ onMounted(() => {
   fetchData();
 });
 
-const handleClickDelete = ({ row }) => {
-  deleteIdx.value = row.rowIndex;
+const handleClickDelete = (slot: { row: { rowIndex: number } }) => {
+  deleteIdx.value = slot.row.rowIndex;
   confirmVisible.value = true;
 };
-const onReset = (val) => {
+const onReset = (val: unknown) => {
   console.log(val);
 };
-const onSubmit = (val) => {
+const onSubmit = (val: unknown) => {
   console.log(val);
 };
 const rehandlePageChange = (pageInfo: PageInfo, newDataSource: TableRowData[]) => {
   console.log('分页变化', pageInfo, newDataSource);
 };
-const rehandleChange = (changeParams, triggerAndData) => {
+const rehandleChange = (changeParams: unknown, triggerAndData: unknown) => {
   console.log('统一Change', changeParams, triggerAndData);
 };
-const rehandleClickOp = ({ text, row }) => {
-  console.log(text, row);
+const rehandleClickOp = (ctx: unknown) => {
+  console.log(ctx);
 };
 
 const headerAffixedTop = computed(

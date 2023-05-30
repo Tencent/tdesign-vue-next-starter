@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { EChartsOption } from 'echarts';
 
 import { TChartColor } from '@/config/color';
 import { getRandomArray } from '@/utils/charts';
@@ -307,7 +308,7 @@ export function getPieChartDataSet({
   textColor,
   placeholderColor,
   containerColor,
-}: { radius?: number } & Record<string, string>) {
+}: { radius?: number } & Record<string, string>): EChartsOption {
   return {
     color: getChartListColor(),
     tooltip: {
