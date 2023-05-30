@@ -97,6 +97,7 @@ const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
     if (Object.prototype.hasOwnProperty.call(styleConfig, key)) {
+      // @ts-ignore
       styleConfig[key] = settingStore[key];
     }
   }
@@ -123,7 +124,7 @@ const getModeIcon = (mode: string) => {
     dark: SettingDarkIcon,
     auto: SettingAutoIcon,
   };
-  return modeIconMap[mode];
+  return modeIconMap[mode as 'light' | 'dark' | 'auto'];
 };
 
 const getLayoutIcon = (mode: string) => {
@@ -132,7 +133,7 @@ const getLayoutIcon = (mode: string) => {
     top: LayoutTopIcon,
     mix: LayoutMixIcon,
   };
-  return layoutIconMap[mode];
+  return layoutIconMap[mode as 'side' | 'top' | 'mix'];
 };
 
 const handleCloseDrawer = () => {
