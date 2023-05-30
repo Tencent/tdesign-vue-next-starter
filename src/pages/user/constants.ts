@@ -1,4 +1,10 @@
-export const USER_INFO_LIST = [
+export interface UserInfoListType {
+  title: string;
+  content: string;
+  span?: number;
+}
+
+export const USER_INFO_LIST: Array<UserInfoListType> = [
   {
     title: '手机',
     content: '+86 13923734567',

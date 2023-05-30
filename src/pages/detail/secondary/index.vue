@@ -6,7 +6,7 @@
           <t-list v-if="msgDataList.length > 0" class="secondary-msg-list" :split="true">
             <t-list-item v-for="(item, index) in msgDataList" :key="index">
               <p :class="['content', { unread: item.status }]" @click="setReadStatus(item)">
-                <t-tag size="medium" :theme="NOTIFICATION_TYPES[item.quality]" variant="light">
+                <t-tag size="medium" :theme="NOTIFICATION_TYPES.get(item.quality)" variant="light">
                   {{ item.type }}
                 </t-tag>
                 {{ item.content }}
