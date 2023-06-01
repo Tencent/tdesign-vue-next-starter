@@ -15,7 +15,6 @@
         </template>
         <div
           id="monitorContainer"
-          ref="monitorContainer"
           class="dashboard-chart-container"
           :style="{ width: '100%', height: `${resizeTime * 326}px` }"
         />
@@ -25,7 +24,6 @@
       <t-card title="销售渠道" :subtitle="currentMonth" class="dashboard-chart-card" :bordered="false">
         <div
           id="countContainer"
-          ref="countContainer"
           :style="{ width: `${resizeTime * 326}px`, height: `${resizeTime * 326}px`, margin: '0 auto' }"
           class="dashboard-chart-container"
         />
