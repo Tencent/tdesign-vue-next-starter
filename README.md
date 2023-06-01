@@ -17,7 +17,7 @@
 English | [简体中文](./README-zh_CN.md) 
 ### Introduction
 
-TDesign Vue Next Starter is a TDesign-based developed with `Vue 3`, `Vite 3+`, `Pinia`, `TypeScript`. It can be customized theme configuration, and aims to provide project out-of-the-box, configuration-style middle and background projects.
+TDesign Vue Next Starter is a TDesign-based developed with `Vue 3`, `Vite 4`, `Pinia`, `TypeScript`. It can be customized theme configuration, and aims to provide project out-of-the-box, configuration-style middle and background projects.
 
 <p>
   <a href="http://tdesign.tencent.com/starter/vue-next/">Live Preview</a>
