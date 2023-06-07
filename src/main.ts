@@ -11,6 +11,7 @@ import '@/style/index.less';
 import './permission';
 
 import 'tdesign-theme-generator';
+import 'tdesign-site-components';
 
 const app = createApp(App);
 

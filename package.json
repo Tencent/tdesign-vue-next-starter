@@ -29,6 +29,7 @@
     "qrcode.vue": "^3.3.4",
     "qs": "^6.11.1",
     "tdesign-icons-vue-next": "^0.1.11",
+    "tdesign-site-components": "^0.12.9",
     "tdesign-theme-generator": "^1.0.5",
     "tdesign-vue-next": "^1.3.4",
     "tvision-color": "^1.6.0",
