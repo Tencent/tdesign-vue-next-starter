@@ -35,7 +35,7 @@
           </t-tooltip>
           <t-dropdown trigger="click" :options="langList" :on-click="(e) => changeLang(e.value)">
             <t-button theme="default" shape="square" variant="text">
-              <t-icon name="internet" />
+              <t-icon name="translate-1" />
             </t-button>
           </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
