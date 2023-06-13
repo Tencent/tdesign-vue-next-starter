@@ -53,7 +53,7 @@
               <template #icon>
                 <t-icon class="header-user-avatar" name="user-circle" />
               </template>
-              <div class="header-user-account">Tencent</div>
+              <div class="header-user-account">{{ user.userInfo.name }}</div>
               <template #suffix><t-icon name="chevron-down" /></template>
             </t-button>
           </t-dropdown>
@@ -78,7 +78,7 @@ import { prefix } from '@/config/global';
 import { langList, t } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
-import { useSettingStore } from '@/store';
+import { useSettingStore, useUserStore } from '@/store';
 import type { MenuRoute } from '@/types/interface';
 
 import MenuContent from './MenuContent.vue';
@@ -118,6 +118,7 @@ const props = defineProps({
 
 const router = useRouter();
 const settingStore = useSettingStore();
+const user = useUserStore();
 
 const toggleSettingPanel = () => {
   settingStore.updateConfig({
@@ -157,7 +158,7 @@ const changeCollapsed = () => {
   });
 };
 
-const handleNav = (url) => {
+const handleNav = (url: string) => {
   router.push(url);
 };
 

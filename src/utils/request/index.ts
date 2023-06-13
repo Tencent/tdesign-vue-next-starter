@@ -3,8 +3,8 @@ import type { InternalAxiosRequestConfig } from 'axios';
 import isString from 'lodash/isString';
 import merge from 'lodash/merge';
 
-import { TOKEN_NAME } from '@/config/global';
 import { ContentTypeEnum } from '@/constants';
+import { useUserStore } from '@/store';
 
 import { VAxios } from './Axios';
 import type { AxiosTransform, CreateAxiosOptions } from './AxiosTransform';
@@ -23,7 +23,7 @@ const transform: AxiosTransform = {
 
     // 如果204无内容直接返回
     const method = res.config.method?.toLowerCase();
-    if (res.status === 204 || method === 'put' || method === 'patch') {
+    if (res.status === 204 && ['put', 'patch', 'delete'].includes(method)) {
       return res;
     }
 
@@ -113,7 +113,9 @@ const transform: AxiosTransform = {
   // 请求拦截器处理
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    const token = localStorage.getItem(TOKEN_NAME);
+    const userStore = useUserStore();
+    const { token } = userStore;
+
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
       (config as Recordable).headers.Authorization = options.authenticationScheme

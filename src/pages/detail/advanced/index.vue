@@ -170,16 +170,16 @@ onMounted(() => {
 });
 
 const visible = ref(false);
-const sortChange = (val) => {
+const sortChange = (val: unknown) => {
   console.log(val);
 };
-const rehandleChange = (changeParams, triggerAndData) => {
+const rehandleChange = (changeParams: unknown, triggerAndData: unknown) => {
   console.log('统一Change', changeParams, triggerAndData);
 };
 const listClick = () => {
   visible.value = true;
 };
-const deleteClickOp = (columns) => {
+const deleteClickOp = (columns: { rowIndex: number }) => {
   data.value.splice(columns.rowIndex, 1);
 };
 const onConfirm = () => {
