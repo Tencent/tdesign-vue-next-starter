@@ -28,7 +28,7 @@ const generateLangModuleMap = () => {
 const importMessages = computed(() => {
   generateLangModuleMap();
 
-  const message = {};
+  const message: Recordable = {};
   langModuleMap.forEach((value: any, key) => {
     message[key] = value.default;
   });
@@ -54,6 +54,6 @@ export const langList = computed(() => {
 
   return list;
 });
-
+// @ts-ignore
 export const { t } = i18n.global;
 export default i18n;
