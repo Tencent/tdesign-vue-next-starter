@@ -118,6 +118,21 @@ export class VAxios {
     };
   }
 
+  // 支持params数组参数格式化
+  supportParamsStringify(config: AxiosRequestConfig) {
+    const headers = config.headers || this.options.headers;
+    const contentType = headers?.['Content-Type'] || headers?.['content-type'];
+
+    if (contentType === ContentTypeEnum.FormURLEncoded || !Reflect.has(config, 'params')) {
+      return config;
+    }
+
+    return {
+      ...config,
+      paramsSerializer: (params: any) => stringify(params, { arrayFormat: 'brackets' }),
+    };
+  }
+
   get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     return this.request({ ...config, method: 'GET' }, options);
   }
@@ -154,6 +169,8 @@ export class VAxios {
     conf.requestOptions = opt;
 
     conf = this.supportFormData(conf);
+    // 支持params数组参数格式化，因axios默认的toFormData即为brackets方式，无需配置paramsSerializer为qs，有需要可解除注释，参数参考qs文档
+    // conf = this.supportParamsStringify(conf);
 
     return new Promise((resolve, reject) => {
       this.instance
