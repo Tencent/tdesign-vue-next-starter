@@ -170,6 +170,9 @@ const dynamicColor = computed(() => {
 <!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
 <style lang="less">
 .setting-drawer-container {
+  .t-drawer__mask {
+    background: none;
+  }
   .t-drawer__body {
     padding: var(--td-comp-paddingTB-s) var(--td-comp-paddingLR-s);
     background-color: var(--td-bg-color-secondarycontainer);
@@ -212,6 +215,7 @@ const dynamicColor = computed(() => {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-radius: var(--td-radius-medium);
     }
   }
   .setting-group-title {
