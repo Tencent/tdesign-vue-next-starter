@@ -1,6 +1,6 @@
 module.exports = {
   defaultSeverity: 'error',
-  extends: ['stylelint-config-prettier'],
+  extends: ['stylelint-config-standard'],
   plugins: ['stylelint-less'],
   overrides: [
     {
