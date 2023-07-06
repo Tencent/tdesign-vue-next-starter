@@ -187,7 +187,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 是否加入时间戳
           joinTime: true,
           // 忽略重复请求
-          ignoreRepeatRequest: true,
+          ignoreCancelToken: true,
           // 是否携带token
           withToken: true,
           // 重试
