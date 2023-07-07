@@ -1,4 +1,4 @@
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AxiosError } from 'axios';
 
 import type { RequestOptions, Result } from '@/types/axios';
@@ -30,7 +30,7 @@ export abstract class AxiosTransform {
   /**
    * 请求前钩子
    */
-  beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => InternalAxiosRequestConfig;
+  beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig;
 
   /**
    * 数据处理前钩子
