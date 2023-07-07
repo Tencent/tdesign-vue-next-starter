@@ -186,7 +186,9 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           formatDate: true,
           // 是否加入时间戳
           joinTime: true,
-          // 忽略重复请求
+          // 是否忽略请求取消令牌
+          // 如果启用，则重复请求时不进行处理
+          // 如果禁用，则重复请求时会取消当前请求
           ignoreCancelToken: true,
           // 是否携带token
           withToken: true,
