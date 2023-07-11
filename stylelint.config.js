@@ -1,7 +1,6 @@
 module.exports = {
   defaultSeverity: 'error',
   extends: ['stylelint-config-standard'],
-  plugins: ['stylelint-less'],
   overrides: [
     {
       files: ['**/*.html', '**/*.vue'],
