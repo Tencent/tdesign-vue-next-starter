@@ -26,6 +26,7 @@ module.exports = {
     'color-function-notation': 'legacy',
     'value-keyword-case': null,
     'property-no-unknown': [true, { checkPrefixed: true }],
+    'import-notation': 'string',
   },
   overrides: [
     {
