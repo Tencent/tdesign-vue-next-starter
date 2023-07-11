@@ -66,6 +66,7 @@
     "postcss-less": "^6.0.0",
     "prettier": "^2.8.8",
     "stylelint": "~15.10.0",
+    "stylelint-config-standard": "^34.0.0",
     "stylelint-order": "~6.0.3",
     "typescript": "~5.1.6",
     "vite": "^4.3.9",
