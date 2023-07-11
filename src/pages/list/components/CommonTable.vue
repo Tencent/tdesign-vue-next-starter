@@ -22,6 +22,7 @@
                   class="form-item-content"
                   :options="CONTRACT_STATUS_OPTIONS"
                   placeholder="请选择合同状态"
+                  clearable
                 />
               </t-form-item>
             </t-col>
@@ -43,6 +44,7 @@
                   class="form-item-content"
                   :options="CONTRACT_TYPE_OPTIONS"
                   placeholder="请选择合同类型"
+                  clearable
                 />
               </t-form-item>
             </t-col>
@@ -120,6 +122,13 @@ import {
 } from '@/constants';
 import { useSettingStore } from '@/store';
 
+interface FormData {
+  name: string;
+  no: string;
+  status?: number;
+  type: string;
+}
+
 const store = useSettingStore();
 
 const COLUMNS: PrimaryTableCol[] = [
@@ -168,11 +177,10 @@ const COLUMNS: PrimaryTableCol[] = [
 const searchForm = {
   name: '',
   no: '',
-  status: typeof CONTRACT_STATUS,
   type: '',
 };
 
-const formData = ref({ ...searchForm });
+const formData = ref<FormData>({ ...searchForm });
 const rowKey = 'index';
 const verticalAlign = 'top' as const;
 const hover = true;
@@ -242,6 +250,7 @@ const onReset = (val: unknown) => {
 };
 const onSubmit = (val: unknown) => {
   console.log(val);
+  console.log(formData.value);
 };
 const rehandlePageChange = (pageInfo: PageInfo, newDataSource: TableRowData[]) => {
   console.log('分页变化', pageInfo, newDataSource);
@@ -281,6 +290,7 @@ const headerAffixedTop = computed(
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
   .expand {
     .t-button__text {
       display: flex;
