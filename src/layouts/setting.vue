@@ -206,7 +206,6 @@ watchEffect(() => {
   position: fixed;
   bottom: 200px;
   right: 0;
-  transition: transform 0.3s cubic-bezier(0.7, 0.3, 0.1, 1), visibility 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
   height: 40px;
   width: 40px;
   border-radius: 20px 0 0 20px;
@@ -252,9 +251,9 @@ watchEffect(() => {
 .setting-group-title {
   font-size: 14px;
   line-height: 22px;
-  margin: 32px 0 24px 0;
+  margin: 32px 0 24px;
   text-align: left;
-  font-family: PingFang SC;
+  font-family: 'PingFang SC', var(--td-font-family);
   font-style: normal;
   font-weight: 500;
   color: var(--td-text-color-primary);
@@ -283,6 +282,7 @@ watchEffect(() => {
   .setting-container {
     padding-bottom: 100px;
   }
+
   .t-radio-group.t-size-m {
     min-height: 32px;
     width: 100%;
@@ -306,6 +306,7 @@ watchEffect(() => {
       padding: 8px;
       border-radius: var(--td-radius-default);
       border: 2px solid var(--td-component-border);
+
       > .t-radio-button__label {
         display: inline-flex;
       }

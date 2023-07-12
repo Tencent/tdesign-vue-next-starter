@@ -1,38 +1,64 @@
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AxiosError } from 'axios';
 
 import type { RequestOptions, Result } from '@/types/axios';
 
-// 创建Axios选项
+/**
+ * @description 创建Axios实例配置
+ */
 export interface CreateAxiosOptions extends AxiosRequestConfig {
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
+  /**
+   * 请求验证方案
+   *
+   * https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
+   */
   authenticationScheme?: string;
-  // 数据处理
+  /**
+   * 请求数据处理
+   */
   transform?: AxiosTransform;
-  // 请求选项
+  /**
+   * 请求配置
+   */
   requestOptions?: RequestOptions;
 }
 
-// Axios 数据处理
+/**
+ * Axios请求数据处理 抽象类
+ */
 export abstract class AxiosTransform {
-  // 请求前Hook
+  /**
+   * 请求前钩子
+   */
   beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig;
 
-  // 转换前Hook
-  transformRequestHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any;
+  /**
+   * 数据处理前钩子
+   */
+  transformRequestHook?: <T = any>(res: AxiosResponse<Result>, options: RequestOptions) => T;
 
-  // 请求失败处理
-  requestCatchHook?: (e: Error | AxiosError, options: RequestOptions) => Promise<any>;
+  /**
+   * 请求失败钩子
+   */
+  requestCatchHook?: <T = any>(e: Error | AxiosError, options: RequestOptions) => Promise<T>;
 
-  // 请求前的拦截器
-  requestInterceptors?: (config: AxiosRequestConfig, options: CreateAxiosOptions) => InternalAxiosRequestConfig;
+  /**
+   * 请求拦截器
+   */
+  requestInterceptors?: (config: AxiosRequestConfig, options: CreateAxiosOptions) => AxiosRequestConfig;
 
-  // 请求后的拦截器
+  /**
+   * 响应拦截器
+   */
   responseInterceptors?: (res: AxiosResponse) => AxiosResponse;
 
-  // 请求前的拦截器错误处理
+  /**
+   * 请求拦截器错误处理
+   */
   requestInterceptorsCatch?: (error: AxiosError) => void;
 
-  // 请求后的拦截器错误处理
+  /**
+   * 响应拦截器错误处理
+   */
   responseInterceptorsCatch?: (error: AxiosError, instance: AxiosInstance) => void;
 }
