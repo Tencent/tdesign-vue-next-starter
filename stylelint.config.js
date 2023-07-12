@@ -27,6 +27,12 @@ module.exports = {
     'value-keyword-case': null,
     'property-no-unknown': [true, { checkPrefixed: true }],
     'import-notation': 'string',
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['deep'],
+      },
+    ],
   },
   overrides: [
     {
