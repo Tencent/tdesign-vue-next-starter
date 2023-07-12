@@ -3,7 +3,6 @@ module.exports = {
   extends: ['stylelint-config-standard'],
   rules: {
     'no-duplicate-selectors': null,
-    'number-leading-zero': 'never',
     'block-no-empty': null,
     'selector-class-pattern': null,
     'declaration-block-no-redundant-longhand-properties': [true, { ignoreShorthands: ['/flex/'] }],
