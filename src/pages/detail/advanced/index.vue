@@ -87,8 +87,10 @@
         </template>
 
         <template #op="slotProps">
-          <a :class="prefix + '-link'" @click="listClick()">管理</a>
-          <a :class="prefix + '-link'" @click="deleteClickOp(slotProps)">删除</a>
+          <t-space>
+            <t-link theme="primary" @click="listClick()">管理</t-link>
+            <t-link theme="danger" @click="deleteClickOp(slotProps)">删除</t-link>
+          </t-space>
         </template>
 
         <template #op-column>
@@ -128,7 +130,6 @@ export default {
 import { onMounted, ref } from 'vue';
 
 import { getPurchaseList } from '@/api/detail';
-import { prefix } from '@/config/global';
 
 import Product from './components/Product.vue';
 import { BASE_INFO_DATA, PRODUCT_LIST, TABLE_COLUMNS_DATA as columns } from './constants';
@@ -188,5 +189,5 @@ const onConfirm = () => {
 </script>
 
 <style lang="less" scoped>
-@import url('./index.less');
+@import './index.less';
 </style>
