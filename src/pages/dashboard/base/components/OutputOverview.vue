@@ -17,12 +17,7 @@
               @change="onStokeDataChange"
             />
           </template>
-          <div
-            id="stokeContainer"
-            ref="stokeContainer"
-            style="width: 100%; height: 351px"
-            class="dashboard-chart-container"
-          ></div>
+          <div id="stokeContainer" style="width: 100%; height: 351px" class="dashboard-chart-container"></div>
         </t-card>
       </t-col>
       <t-col :xs="12" :xl="3">
