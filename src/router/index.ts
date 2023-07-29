@@ -1,6 +1,8 @@
 import uniq from 'lodash/uniq';
 import { createRouter, createWebHistory, RouteRecordRaw, useRoute } from 'vue-router';
 
+import { useSettingStore } from '@/store';
+
 const env = import.meta.env.MODE || 'development';
 
 // 导入homepage相关固定路由
@@ -60,9 +62,16 @@ export const getRoutesExpanded = () => {
 
 export const getActive = (maxLevel = 3): string => {
   const route = useRoute();
+  const settingStore = useSettingStore();
+
   if (!route.path) {
     return '';
   }
+
+  if (settingStore.layout === 'top') {
+    return route.path.split('/').slice(0, 2).join('/');
+  }
+
   return route.path
     .split('/')
     .filter((_item: string, index: number) => index <= maxLevel && index > 0)
