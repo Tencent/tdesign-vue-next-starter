@@ -67,7 +67,7 @@ const props = defineProps({
 });
 
 const formVisible = ref(false);
-const formData = ref(props.data);
+const formData = ref();
 const textareaValue = ref('');
 
 const onSubmit = ({ validateResult, firstError }: SubmitContext<Data>) => {
