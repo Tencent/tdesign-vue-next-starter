@@ -35,10 +35,20 @@
 </template>
 
 <script setup lang="ts">
-import { Data, FormRule, MessagePlugin, SubmitContext } from 'tdesign-vue-next';
+import { FormRules, MessagePlugin, SubmitContext } from 'tdesign-vue-next';
+import type { PropType } from 'vue';
 import { ref, watch } from 'vue';
 
-const INITIAL_DATA = {
+export interface FormData {
+  name: string;
+  status: string;
+  description: string;
+  type: string;
+  mark: string;
+  amount: number;
+}
+
+const INITIAL_DATA: FormData = {
   name: '',
   status: '',
   description: '',
@@ -58,19 +68,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  data: {
-    type: Object,
-    default: () => {
-      return {};
-    },
-  },
+  data: Object as PropType<FormData>,
 });
-
 const formVisible = ref(false);
-const formData = ref();
+const formData = ref({ ...INITIAL_DATA });
 const textareaValue = ref('');
 
-const onSubmit = ({ validateResult, firstError }: SubmitContext<Data>) => {
+const onSubmit = ({ validateResult, firstError }: SubmitContext<FormData>) => {
   if (!firstError) {
     MessagePlugin.success('提交成功');
     formVisible.value = false;
@@ -107,7 +111,7 @@ watch(
   },
 );
 
-const rules: Record<string, FormRule[]> = {
+const rules: FormRules<FormData> = {
   name: [{ required: true, message: '请输入产品名称', type: 'error' }],
 };
 </script>
