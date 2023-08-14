@@ -2,7 +2,7 @@
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="9">
       <t-card title="统计数据" :subtitle="`(万元)${currentMonth}`" class="dashboard-chart-card" :bordered="false">
-        <template #option>
+        <template #actions>
           <div class="dashboard-chart-title-container">
             <t-date-range-picker
               class="card-date-picker-container"
