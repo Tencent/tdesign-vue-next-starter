@@ -31,7 +31,7 @@
 
     <!-- 产品目录 -->
     <t-card title="产品目录" class="container-base-margin-top" :bordered="false">
-      <template #option>
+      <template #actions>
         <t-radio-group default-value="dateVal">
           <t-radio-button value="dateVal"> 季度 </t-radio-button>
           <t-radio-button value="monthVal"> 月份 </t-radio-button>

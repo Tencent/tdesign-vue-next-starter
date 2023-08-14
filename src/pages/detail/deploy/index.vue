@@ -10,7 +10,7 @@
       </t-col>
       <t-col :lg="6" :xs="12">
         <t-card title="告警情况" :bordered="false">
-          <template #option>
+          <template #actions>
             <t-radio-group default-value="dateVal" @change="onAlertChange">
               <t-radio-button value="dateVal"> 本周 </t-radio-button>
               <t-radio-button value="monthVal"> 本月 </t-radio-button>
