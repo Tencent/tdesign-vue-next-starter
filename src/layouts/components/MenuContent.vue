@@ -8,7 +8,7 @@
           </template>
           {{ item.title }}
         </t-menu-item>
-        <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path" :router="router">
+        <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
           <template #icon>
             <component :is="menuIcon(item)" class="t-icon"></component>
           </template>
@@ -27,14 +27,11 @@
 <script setup lang="tsx">
 import type { PropType } from 'vue';
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
 
 import { getActive } from '@/router';
 import type { MenuRoute } from '@/types/interface';
 
 type ListItemType = MenuRoute & { icon?: string };
-
-const router = useRouter();
 
 const props = defineProps({
   navData: {
