@@ -68,7 +68,7 @@
     "stylelint": "~15.10.2",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-order": "~6.0.3",
-    "typescript": "~5.1.6",
+    "typescript": "~5.2.2",
     "vite": "^4.4.7",
     "vite-plugin-mock": "^3.0.0",
     "vite-svg-loader": "^4.0.0",
