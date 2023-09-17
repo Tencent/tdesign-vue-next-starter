@@ -25,14 +25,8 @@
           <img src="https://tdesign.gtimg.com/pro-template/personal/nothing.png" alt="空" />
           <p>暂无通知</p>
         </div>
-        <div class="header-msg-bottom">
-          <t-button
-            v-if="unreadMsg.length > 0"
-            class="header-msg-bottom-link"
-            variant="text"
-            theme="default"
-            block
-            @click="goDetail"
+        <div v-if="unreadMsg.length > 0" class="header-msg-bottom">
+          <t-button class="header-msg-bottom-link" variant="text" theme="default" block @click="goDetail"
             >查看全部</t-button
           >
         </div>
@@ -85,9 +79,9 @@ const goDetail = () => {
   margin: calc(0px - var(--td-comp-paddingTB-xs)) calc(0px - var(--td-comp-paddingLR-s));
 
   .empty-list {
-    height: calc(100% - 120px);
+    // height: calc(100% - 120px);
     text-align: center;
-    padding-top: 135px;
+    padding: var(--td-comp-paddingTB-xxl) 0;
     font: var(--td-font-body-medium);
     color: var(--td-text-color-secondary);
 
@@ -96,7 +90,7 @@ const goDetail = () => {
     }
 
     p {
-      margin-top: var(--td-comp-margin-xxl);
+      margin-top: var(--td-comp-margin-xs);
     }
   }
 
