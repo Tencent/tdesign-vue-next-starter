@@ -33,6 +33,20 @@
               <t-icon name="help-circle" />
             </t-button>
           </t-tooltip>
+          <t-dropdown trigger="click">
+            <t-button theme="default" shape="square" variant="text">
+              <translate-icon />
+            </t-button>
+            <t-dropdown-menu>
+              <t-dropdown-item
+                v-for="(lang, index) in langList"
+                :key="index"
+                :value="lang.value"
+                :on-click="changeLang"
+                >{{ lang.content }}</t-dropdown-item
+              ></t-dropdown-menu
+            >
+          </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
             <template #dropdown>
               <t-dropdown-menu>
@@ -49,7 +63,7 @@
                 <t-icon class="header-user-avatar" name="user-circle" />
               </template>
               <div class="header-user-account">{{ user.userInfo.name }}</div>
-              <template #suffix><t-icon name="chevron-down" /></template>
+              <template #suffix><chevron-down-icon /></template>
             </t-button>
           </t-dropdown>
           <t-tooltip placement="bottom" content="系统设置">
@@ -64,12 +78,15 @@
 </template>
 
 <script setup lang="ts">
+import { ChevronDownIcon, TranslateIcon } from 'tdesign-icons-vue-next';
 import type { PropType } from 'vue';
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 import { useRouter } from 'vue-router';
 
 import LogoFull from '@/assets/assets-logo-full.svg?component';
 import { prefix } from '@/config/global';
+import { langList } from '@/locales/index';
+import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
 import { useSettingStore, useUserStore } from '@/store';
 import type { MenuRoute } from '@/types/interface';
@@ -118,6 +135,7 @@ const toggleSettingPanel = () => {
     showSettingPanel: true,
   });
 };
+const reload = inject('reload');
 
 const active = computed(() => getActive());
 
@@ -135,6 +153,16 @@ const menuCls = computed(() => {
   ];
 });
 const menuTheme = computed(() => props.theme as 'light' | 'dark');
+
+const { changeLocale } = useLocale();
+// 切换语言
+const changeLang = ({ value: lang }: { value: string }) => {
+  changeLocale(lang);
+  if (typeof reload === 'function') {
+    reload();
+  }
+};
+
 const changeCollapsed = () => {
   settingStore.updateConfig({
     isSidebarCompact: !settingStore.isSidebarCompact,
@@ -177,6 +205,7 @@ const navToHelper = () => {
       z-index: 10;
       width: auto;
       transition: all 0.3s;
+
       &-compact {
         left: 64px;
       }
@@ -188,6 +217,7 @@ const navToHelper = () => {
     display: inline-flex;
   }
 }
+
 .header-menu {
   flex: 1 1 1;
   display: inline-flex;
@@ -229,6 +259,7 @@ const navToHelper = () => {
   .t-logo {
     width: 100%;
     height: 100%;
+
     &:hover {
       cursor: pointer;
     }
@@ -254,12 +285,14 @@ const navToHelper = () => {
     color: var(--td-text-color-primary);
   }
 }
+
 .t-menu--dark {
   .t-head-menu__inner {
     border-bottom: 1px solid var(--td-gray-color-10);
   }
+
   .header-user-account {
-    color: rgba(255, 255, 255, 0.55);
+    color: rgb(255 255 255 / 55%);
   }
 }
 
@@ -280,8 +313,9 @@ const navToHelper = () => {
 
   :deep(.t-dropdown__item) {
     width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
+
   &:last-child {
     :deep(.t-dropdown__item) {
       margin-bottom: 8px;
