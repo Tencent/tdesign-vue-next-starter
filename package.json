@@ -87,5 +87,8 @@
     "*.{html,vue,css,sass,less}": [
       "npm run stylelint:fix"
     ]
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
