@@ -4,7 +4,7 @@ export default {
   select: 'select',
   items: 'items',
   contractName: 'Name',
-  contractStates: 'Status',
+  contractStatus: 'Status',
   contractNum: 'Number',
   contractType: 'Type',
   contractPayType: 'Pay Type',

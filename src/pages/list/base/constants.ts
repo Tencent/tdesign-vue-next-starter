@@ -11,7 +11,7 @@ export const COLUMNS: PrimaryTableCol<TableRowData>[] = [
     colKey: 'name',
     fixed: 'left',
   },
-  { title: t('pages.listBase.contractStates'), colKey: 'status', width: 160 },
+  { title: t('pages.listBase.contractStatus'), colKey: 'status', width: 160 },
   {
     title: t('pages.listBase.contractNum'),
     width: 160,

@@ -60,5 +60,7 @@ export const langList = computed(() => {
   return list;
 });
 
+// @ts-ignore
 export const { t } = i18n.global;
+
 export default i18n;
