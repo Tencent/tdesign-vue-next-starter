@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { EChartsOption } from 'echarts';
 
 import { TChartColor } from '@/config/color';
+import { t } from '@/locales/index';
 import { getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
 
@@ -347,7 +348,7 @@ export function getPieChartDataSet({
         label: {
           show: true,
           position: 'center',
-          formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
+          formatter: ['{value|{d}%}', '{name|{b}}'].join('\n'),
           rich: {
             value: {
               color: textColor,
@@ -388,9 +389,9 @@ export function getPieChartDataSet({
         data: [
           {
             value: 1048,
-            name: '线上',
+            name: t('pages.dashboardBase.topPanel.analysis.channel1'),
           },
-          { value: radius * 7, name: '门店' },
+          { value: radius * 7, name: t('pages.dashboardBase.topPanel.analysis.channel2') },
         ],
       },
     ],

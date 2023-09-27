@@ -1,32 +1,34 @@
+import { t } from '@/locales';
+
 export const PANE_LIST_DATA = [
   {
-    title: '总申请数（次）',
+    title: t('pages.dashboardDetail.topPanel.paneList.totalRequest'),
     number: '1126',
     upTrend: '10%',
   },
   {
-    title: '供应商数量（个）',
+    title: t('pages.dashboardDetail.topPanel.paneList.suppliers'),
     number: '13',
     downTrend: '13%',
   },
   {
-    title: '采购商品品类（类）',
+    title: t('pages.dashboardDetail.topPanel.paneList.productCategory'),
     number: '4',
     upTrend: '10%',
   },
   {
-    title: '申请人数量（人）',
+    title: t('pages.dashboardDetail.topPanel.paneList.applicant'),
     number: 90,
     downTrend: '44%',
     leftType: 'icon-file-paste',
   },
   {
-    title: '申请完成率（%）',
+    title: t('pages.dashboardDetail.topPanel.paneList.completionRate'),
     number: 80.5,
     upTrend: '70%',
   },
   {
-    title: '到货及时率（%）',
+    title: t('pages.dashboardDetail.topPanel.paneList.arrivalRate'),
     number: 78,
     upTrend: '16%',
   },
@@ -34,17 +36,17 @@ export const PANE_LIST_DATA = [
 
 export const PRODUCT_LIST = [
   {
-    description: 'SSL证书又叫服务器证书，腾讯云为您提供证书的一站式服务，包括免费、付费证书的申请、管理及部',
+    description: t('pages.dashboardDetail.sslDescription'),
     index: 1,
     isSetup: true,
-    name: 'SSL证书',
+    name: t('pages.dashboardDetail.ssl'),
     type: 4,
   },
   {
-    description: 'SSL证书又叫服务器证书，腾讯云为您提供证书的一站式服务，包括免费、付费证书的申请、管理及部',
+    description: t('pages.dashboardDetail.sslDescription'),
     index: 1,
     isSetup: true,
-    name: 'SSL证书',
+    name: t('pages.dashboardDetail.ssl'),
     type: 4,
   },
 ];

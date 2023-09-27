@@ -23,12 +23,12 @@
           <!-- 全局通知 -->
           <notice />
 
-          <t-tooltip placement="bottom" content="代码仓库">
+          <t-tooltip placement="bottom" :content="$t('layout.header.code')">
             <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
               <t-icon name="logo-github" />
             </t-button>
           </t-tooltip>
-          <t-tooltip placement="bottom" content="帮助文档">
+          <t-tooltip placement="bottom" :content="$t('layout.header.help')">
             <t-button theme="default" shape="square" variant="text" @click="navToHelper">
               <t-icon name="help-circle" />
             </t-button>
@@ -38,23 +38,19 @@
               <translate-icon />
             </t-button>
             <t-dropdown-menu>
-              <t-dropdown-item
-                v-for="(lang, index) in langList"
-                :key="index"
-                :value="lang.value"
-                :on-click="changeLang"
-                >{{ lang.content }}</t-dropdown-item
-              ></t-dropdown-menu
+              <t-dropdown-item v-for="(lang, index) in langList" :key="index" :value="lang.value" @click="changeLang">{{
+                lang.content
+              }}</t-dropdown-item></t-dropdown-menu
             >
           </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
             <template #dropdown>
               <t-dropdown-menu>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
-                  <t-icon name="user-circle"></t-icon>个人中心
+                  <user-circle-icon />{{ $t('layout.header.user') }}
                 </t-dropdown-item>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
-                  <t-icon name="poweroff"></t-icon>退出登录
+                  <poweroff-icon />{{ $t('layout.header.signOut') }}
                 </t-dropdown-item>
               </t-dropdown-menu>
             </template>
@@ -66,9 +62,9 @@
               <template #suffix><chevron-down-icon /></template>
             </t-button>
           </t-dropdown>
-          <t-tooltip placement="bottom" content="系统设置">
+          <t-tooltip placement="bottom" :content="$t('layout.header.setting')">
             <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
-              <t-icon name="setting" />
+              <setting-icon />
             </t-button>
           </t-tooltip>
         </div>
@@ -78,9 +74,9 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronDownIcon, TranslateIcon } from 'tdesign-icons-vue-next';
+import { ChevronDownIcon, PoweroffIcon, SettingIcon, TranslateIcon, UserCircleIcon } from 'tdesign-icons-vue-next';
 import type { PropType } from 'vue';
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 import LogoFull from '@/assets/assets-logo-full.svg?component';
@@ -135,7 +131,6 @@ const toggleSettingPanel = () => {
     showSettingPanel: true,
   });
 };
-const reload = inject('reload');
 
 const active = computed(() => getActive());
 
@@ -154,13 +149,10 @@ const menuCls = computed(() => {
 });
 const menuTheme = computed(() => props.theme as 'light' | 'dark');
 
-const { changeLocale } = useLocale();
 // 切换语言
+const { changeLocale } = useLocale();
 const changeLang = ({ value: lang }: { value: string }) => {
   changeLocale(lang);
-  if (typeof reload === 'function') {
-    reload();
-  }
 };
 
 const changeCollapsed = () => {

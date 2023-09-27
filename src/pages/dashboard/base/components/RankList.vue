@@ -1,11 +1,11 @@
 <template>
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="6">
-      <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
+      <t-card :title="$t('pages.dashboardBase.rankList.title')" class="dashboard-rank-card" :bordered="false">
         <template #actions>
           <t-radio-group default-value="dateVal" variant="default-filled">
-            <t-radio-button value="dateVal">本周</t-radio-button>
-            <t-radio-button value="monthVal">近三个月</t-radio-button>
+            <t-radio-button value="dateVal">{{ $t('pages.dashboardBase.rankList.week') }}</t-radio-button>
+            <t-radio-button value="monthVal">{{ $t('pages.dashboardBase.rankList.month') }}</t-radio-button>
           </t-radio-group>
         </template>
         <t-table :data="SALE_TEND_LIST" :columns="SALE_COLUMNS" row-key="productName">
@@ -20,17 +20,19 @@
             </span>
           </template>
           <template #operation="slotProps">
-            <t-link theme="primary" @click="rehandleClickOp(slotProps)">详情</t-link>
+            <t-link theme="primary" @click="rehandleClickOp(slotProps)">{{
+              $t('pages.dashboardBase.rankList.info')
+            }}</t-link>
           </template>
         </t-table>
       </t-card>
     </t-col>
     <t-col :xs="12" :xl="6">
-      <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
+      <t-card :title="$t('pages.dashboardBase.rankList.title')" class="dashboard-rank-card" :bordered="false">
         <template #actions>
           <t-radio-group default-value="dateVal" variant="default-filled">
-            <t-radio-button value="dateVal">本周</t-radio-button>
-            <t-radio-button value="monthVal">近三个月</t-radio-button>
+            <t-radio-button value="dateVal">{{ $t('pages.dashboardBase.rankList.week') }}</t-radio-button>
+            <t-radio-button value="monthVal">{{ $t('pages.dashboardBase.rankList.month') }}</t-radio-button>
           </t-radio-group>
         </template>
         <t-table :data="BUY_TEND_LIST" :columns="BUY_COLUMNS" row-key="productName">
@@ -43,7 +45,9 @@
             <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
           </template>
           <template #operation="slotProps">
-            <t-link theme="primary" @click="rehandleClickOp(slotProps)">详情</t-link>
+            <t-link theme="primary" @click="rehandleClickOp(slotProps)">{{
+              $t('pages.dashboardBase.rankList.info')
+            }}</t-link>
           </template>
         </t-table>
       </t-card>
@@ -52,7 +56,6 @@
 </template>
 
 <script setup lang="ts">
-// 导入样式
 import Trend from '@/components/trend/index.vue';
 
 import { BUY_COLUMNS, BUY_TEND_LIST, SALE_COLUMNS, SALE_TEND_LIST } from '../constants';

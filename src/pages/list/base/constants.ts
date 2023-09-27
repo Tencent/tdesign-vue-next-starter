@@ -1,35 +1,37 @@
 import { PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
 
+import { t } from '@/locales';
+
 export const COLUMNS: PrimaryTableCol<TableRowData>[] = [
   { colKey: 'row-select', type: 'multiple', width: 64, fixed: 'left' },
   {
-    title: '合同名称',
+    title: t('pages.listBase.contractName'),
     align: 'left',
     width: 320,
     colKey: 'name',
     fixed: 'left',
   },
-  { title: '合同状态', colKey: 'status', width: 160 },
+  { title: t('pages.listBase.contractStates'), colKey: 'status', width: 160 },
   {
-    title: '合同编号',
+    title: t('pages.listBase.contractNum'),
     width: 160,
     ellipsis: true,
     colKey: 'no',
   },
   {
-    title: '合同类型',
+    title: t('pages.listBase.contractType'),
     width: 160,
     ellipsis: true,
     colKey: 'contractType',
   },
   {
-    title: '合同收付类型',
+    title: t('pages.listBase.contractPayType'),
     width: 160,
     ellipsis: true,
     colKey: 'paymentType',
   },
   {
-    title: '合同金额 (元)',
+    title: t('pages.listBase.contractAmount'),
     width: 160,
     ellipsis: true,
     colKey: 'amount',
@@ -39,6 +41,6 @@ export const COLUMNS: PrimaryTableCol<TableRowData>[] = [
     fixed: 'right',
     width: 160,
     colKey: 'op',
-    title: '操作',
+    title: t('pages.listBase.operation'),
   },
 ];

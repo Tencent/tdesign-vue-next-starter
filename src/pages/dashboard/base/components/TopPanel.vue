@@ -32,7 +32,7 @@
         <template #footer>
           <div class="dashboard-item-bottom">
             <div class="dashboard-item-block">
-              自从上周以来
+              {{ $t('pages.dashboardBase.topPanel.cardTips') }}
               <trend
                 class="dashboard-item-trend"
                 :type="item.upTrend ? 'up' : 'down'"

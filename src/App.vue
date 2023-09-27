@@ -1,10 +1,10 @@
 <template>
   <t-config-provider :global-config="getComponentsLocale">
-    <router-view v-if="isRouterAlive" :class="[mode]"
+    <router-view :key="locale" :class="[mode]"
   /></t-config-provider>
 </template>
 <script setup lang="ts">
-import { computed, nextTick, provide, ref } from 'vue';
+import { computed } from 'vue';
 
 import { useLocale } from '@/locales/useLocale';
 import { useSettingStore } from '@/store';
@@ -15,16 +15,7 @@ const mode = computed(() => {
   return store.displayMode;
 });
 
-const { getComponentsLocale } = useLocale();
-const isRouterAlive = ref(true);
-const reload = () => {
-  isRouterAlive.value = false;
-  nextTick(() => {
-    isRouterAlive.value = true;
-  });
-};
-
-provide('reload', reload);
+const { getComponentsLocale, locale } = useLocale();
 </script>
 <style lang="less" scoped>
 #nprogress .bar {

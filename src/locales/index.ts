@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { createI18n } from 'vue-i18n';
 
 // 导入语言文件
-const langModules = import.meta.glob('./lang/**/*.ts', { eager: true });
+const langModules = import.meta.glob('./lang/**/index.ts', { eager: true });
 
 const langModuleMap = new Map<string, Object>();
 
@@ -20,7 +20,7 @@ const generateLangModuleMap = () => {
   fullPaths.forEach((fullPath) => {
     const k = fullPath.replace('./lang', '');
     const startIndex = 1;
-    const lastIndex = k.lastIndexOf('.');
+    const lastIndex = k.lastIndexOf('/');
     const code = k.substring(startIndex, lastIndex);
     langCode.push(code);
     langModuleMap.set(code, langModules[fullPath]);
@@ -43,6 +43,7 @@ export const i18n = createI18n({
   locale: localStorage.getItem(localeConfigKey) || browserLanguage || 'zh_CN',
   fallbackLocale: 'zh_CN',
   messages: importMessages.value,
+  globalInjection: true,
 });
 
 export const langList = computed(() => {

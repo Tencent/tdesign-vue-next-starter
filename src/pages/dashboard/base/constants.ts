@@ -1,5 +1,7 @@
 import { TdBaseTableProps } from 'tdesign-vue-next';
 
+import { t } from '@/locales';
+
 interface DashboardPanel {
   title: string;
   number: string | number;
@@ -17,25 +19,25 @@ interface TendItem {
 
 export const PANE_LIST: Array<DashboardPanel> = [
   {
-    title: '总收入',
+    title: t('pages.dashboardBase.topPanel.card1'),
     number: '¥ 28,425.00',
     upTrend: '20.5%',
     leftType: 'echarts-line',
   },
   {
-    title: '总退款',
+    title: t('pages.dashboardBase.topPanel.card2'),
     number: '¥ 768.00',
     downTrend: '20.5%',
     leftType: 'echarts-bar',
   },
   {
-    title: '活跃用户（个）',
+    title: t('pages.dashboardBase.topPanel.card3'),
     number: '1126',
     upTrend: '20.5%',
     leftType: 'icon-usergroup',
   },
   {
-    title: '产生订单（个）',
+    title: t('pages.dashboardBase.topPanel.card4'),
     number: 527,
     downTrend: '20.5%',
     leftType: 'icon-file-paste',
@@ -124,7 +126,7 @@ export const SALE_COLUMNS: TdBaseTableProps['columns'] = [
   {
     align: 'center',
     colKey: 'index',
-    title: '排名',
+    title: t('pages.dashboardBase.saleColumns.index'),
     width: 70,
     fixed: 'left',
   },
@@ -132,25 +134,25 @@ export const SALE_COLUMNS: TdBaseTableProps['columns'] = [
     align: 'left',
     ellipsis: true,
     colKey: 'productName',
-    title: '客户名称',
+    title: t('pages.dashboardBase.saleColumns.productName'),
     width: 150,
   },
   {
     align: 'center',
     colKey: 'growUp',
     width: 70,
-    title: '较上周',
+    title: t('pages.dashboardBase.saleColumns.growUp'),
   },
   {
     align: 'center',
     colKey: 'count',
-    title: '订单量',
+    title: t('pages.dashboardBase.saleColumns.count'),
     width: 70,
   },
   {
     align: 'center',
     colKey: 'operation',
-    title: '操作',
+    title: t('pages.dashboardBase.saleColumns.operation'),
     width: 70,
     fixed: 'right',
   },
@@ -160,7 +162,7 @@ export const BUY_COLUMNS: TdBaseTableProps['columns'] = [
   {
     align: 'center',
     colKey: 'index',
-    title: '排名',
+    title: t('pages.dashboardBase.buyColumns.index'),
     width: 70,
     fixed: 'left',
   },
@@ -169,24 +171,24 @@ export const BUY_COLUMNS: TdBaseTableProps['columns'] = [
     ellipsis: true,
     colKey: 'productName',
     width: 150,
-    title: '供应商名称',
+    title: t('pages.dashboardBase.buyColumns.productName'),
   },
   {
     align: 'center',
     colKey: 'growUp',
     width: 70,
-    title: '较上周',
+    title: t('pages.dashboardBase.buyColumns.growUp'),
   },
   {
     align: 'center',
     colKey: 'count',
-    title: '订单量',
+    title: t('pages.dashboardBase.buyColumns.count'),
     width: 70,
   },
   {
     align: 'center',
     colKey: 'operation',
-    title: '操作',
+    title: t('pages.dashboardBase.buyColumns.operation'),
     width: 70,
     fixed: 'right',
   },
