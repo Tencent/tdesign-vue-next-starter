@@ -56,5 +56,7 @@ export default {
     week7: 'SUN',
     max: 'Max',
     min: 'Min',
+    thisMonth: 'this month',
+    lastMonth: 'last month',
   },
 };

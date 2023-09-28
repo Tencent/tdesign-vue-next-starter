@@ -13,7 +13,12 @@ export default {
   },
   procurement: {
     title: 'Trends in purchase requisitions for goods',
-    goods: ['cup', 'tea', 'honey', 'flour'],
+    goods: {
+      cup: 'cup',
+      tea: 'tea',
+      honey: 'honey',
+      flour: 'flour',
+    },
   },
   ssl: 'SSL certificate',
   sslDescription:
@@ -21,5 +26,18 @@ export default {
   satisfaction: {
     title: 'distribution of satisfaction levels for purchased goods',
     export: 'export data',
+  },
+  chart: {
+    week1: 'MON',
+    week2: 'TUE',
+    week3: 'WED',
+    week4: 'THU',
+    week5: 'FRI',
+    week6: 'SAT',
+    week7: 'SUN',
+    max: 'Max',
+    min: 'Min',
+    thisMonth: 'this month',
+    lastMonth: 'last month',
   },
 };

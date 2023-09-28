@@ -1,3 +1,4 @@
+import { t } from '@/locales';
 // 合同状态枚举
 export const CONTRACT_STATUS = {
   FAIL: 0,
@@ -8,11 +9,11 @@ export const CONTRACT_STATUS = {
 };
 
 export const CONTRACT_STATUS_OPTIONS = [
-  { value: CONTRACT_STATUS.FAIL, label: '审核失败' },
-  { value: CONTRACT_STATUS.AUDIT_PENDING, label: '待审核' },
-  { value: CONTRACT_STATUS.EXEC_PENDING, label: '待履行' },
-  { value: CONTRACT_STATUS.EXECUTING, label: '审核成功' },
-  { value: CONTRACT_STATUS.FINISH, label: '已完成' },
+  { value: CONTRACT_STATUS.FAIL, label: t('components.commonTable.contractStatusEnum.fail') },
+  { value: CONTRACT_STATUS.AUDIT_PENDING, label: t('components.commonTable.contractStatusEnum.audit') },
+  { value: CONTRACT_STATUS.EXEC_PENDING, label: t('components.commonTable.contractStatusEnum.pending') },
+  { value: CONTRACT_STATUS.EXECUTING, label: t('components.commonTable.contractStatusEnum.executing') },
+  { value: CONTRACT_STATUS.FINISH, label: t('components.commonTable.contractStatusEnum.finish') },
 ];
 
 // 合同类型枚举
@@ -23,9 +24,9 @@ export const CONTRACT_TYPES = {
 };
 
 export const CONTRACT_TYPE_OPTIONS = [
-  { value: CONTRACT_TYPES.MAIN, label: '主合同' },
-  { value: CONTRACT_TYPES.SUB, label: '子合同' },
-  { value: CONTRACT_TYPES.SUPPLEMENT, label: '补充合同' },
+  { value: CONTRACT_TYPES.MAIN, label: t('components.commonTable.contractTypeEnum.main') },
+  { value: CONTRACT_TYPES.SUB, label: t('components.commonTable.contractTypeEnum.sub') },
+  { value: CONTRACT_TYPES.SUPPLEMENT, label: t('components.commonTable.contractTypeEnum.supplement') },
 ];
 
 // 合同收付类型枚举

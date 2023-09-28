@@ -15,7 +15,7 @@ export default {
   pay: 'pay',
   receive: 'received',
   placeholder: 'please enter to search',
-  contractTypeEnum: {
+  contractStatusEnum: {
     fail: 'fail',
     audit: 'audit',
     executing: 'executing',

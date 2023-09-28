@@ -15,7 +15,7 @@ export default {
   pay: '付款',
   receive: '收款',
   placeholder: '请输入内容搜索',
-  contractTypeEnum: {
+  contractStatusEnum: {
     fail: '审核失败',
     audit: '待审核',
     executing: '履行中',

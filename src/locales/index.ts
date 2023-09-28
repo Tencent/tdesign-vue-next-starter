@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { createI18n } from 'vue-i18n';
 
 // 导入语言文件
-const langModules = import.meta.glob('./lang/**/index.ts', { eager: true });
+const langModules = import.meta.glob('./lang/*/index.ts', { eager: true });
 
 const langModuleMap = new Map<string, Object>();
 
@@ -17,12 +17,14 @@ const browserLanguage = navigator.language.replace('-', '_');
 // 生成语言模块列表
 const generateLangModuleMap = () => {
   const fullPaths = Object.keys(langModules);
+  console.log(langModules, 'langModules');
   fullPaths.forEach((fullPath) => {
     const k = fullPath.replace('./lang', '');
     const startIndex = 1;
     const lastIndex = k.lastIndexOf('/');
     const code = k.substring(startIndex, lastIndex);
     langCode.push(code);
+    console.log(langCode, 'langCode');
     langModuleMap.set(code, langModules[fullPath]);
   });
 };

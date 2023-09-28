@@ -52,8 +52,10 @@
         </t-col>
 
         <t-col :span="2" class="operation-container">
-          <t-button theme="primary" type="submit" :style="{ marginLeft: 'var(--td-comp-margin-s)' }"> 查询 </t-button>
-          <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
+          <t-button theme="primary" type="submit" :style="{ marginLeft: 'var(--td-comp-margin-s)' }">
+            {{ $t('components.commonTable.query') }}
+          </t-button>
+          <t-button type="reset" variant="base" theme="default"> {{ $t('components.commonTable.reset') }} </t-button>
         </t-col>
       </t-row>
     </t-form>
@@ -73,26 +75,26 @@
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
-            {{ $t('components.commonTable.contractTypeEnum.fail') }}
+            {{ $t('components.commonTable.contractStatusEnum.fail') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light">
-            {{ $t('components.commonTable.contractTypeEnum.audit') }}
+            {{ $t('components.commonTable.contractStatusEnum.audit') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light">
-            {{ $t('components.commonTable.contractTypeEnum.pending') }}
+            {{ $t('components.commonTable.contractStatusEnum.pending') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light">
-            {{ $t('components.commonTable.contractTypeEnum.executing') }}
+            {{ $t('components.commonTable.contractStatusEnum.executing') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light">
-            {{ $t('components.commonTable.contractTypeEnum.finish') }}
+            {{ $t('components.commonTable.contractStatusEnum.finish') }}
           </t-tag>
         </template>
         <template #contractType="{ row }">
-          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ $t('pages.listBase.contractTypeEnum.fail') }}</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ $t('pages.listBase.contractTypeEnum.audit') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ $t('pages.listBase.contractStatusEnum.fail') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ $t('pages.listBase.contractStatusEnum.audit') }}</p>
           <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">
-            {{ $t('pages.listBase.contractTypeEnum.pending') }}
+            {{ $t('pages.listBase.contractStatusEnum.pending') }}
           </p>
         </template>
         <template #paymentType="{ row }">

@@ -13,7 +13,12 @@ export default {
   },
   procurement: {
     title: '采购商品申请趋势',
-    goods: ['杯子', '茶叶', '蜂蜜', '面粉'],
+    goods: {
+      cup: '杯子',
+      tea: '茶叶',
+      honey: '蜂蜜',
+      flour: '面粉',
+    },
   },
   ssl: 'SSL证书',
   sslDescription: 'SSL证书又叫服务器证书，腾讯云为您提供证书的一站式服务，包括免费、付费证书的申请、管理及部署',

@@ -35,26 +35,26 @@
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
-            {{ $t('pages.listBase.contractTypeEnum.fail') }}</t-tag
+            {{ $t('pages.listBase.contractStatusEnum.fail') }}</t-tag
           >
           <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light">
-            {{ $t('pages.listBase.contractTypeEnum.audit') }}
+            {{ $t('pages.listBase.contractStatusEnum.audit') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light">
-            {{ $t('pages.listBase.contractTypeEnum.pending') }}
+            {{ $t('pages.listBase.contractStatusEnum.pending') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light">
-            {{ $t('pages.listBase.contractTypeEnum.executing') }}
+            {{ $t('pages.listBase.contractStatusEnum.executing') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light">
-            {{ $t('pages.listBase.contractTypeEnum.finish') }}
+            {{ $t('pages.listBase.contractStatusEnum.finish') }}
           </t-tag>
         </template>
         <template #contractType="{ row }">
-          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ $t('pages.listBase.contractTypeEnum.fail') }}</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ $t('pages.listBase.contractTypeEnum.audit') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ $t('pages.listBase.contractStatusEnum.fail') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ $t('pages.listBase.contractStatusEnum.audit') }}</p>
           <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">
-            {{ $t('pages.listBase.contractTypeEnum.pending') }}
+            {{ $t('pages.listBase.contractStatusEnum.pending') }}
           </p>
         </template>
         <template #paymentType="{ row }">
@@ -93,7 +93,7 @@ export default {
 
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
-import { MessagePlugin } from 'tdesign-vue-next';
+import { MessagePlugin, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -101,11 +101,53 @@ import { getList } from '@/api/list';
 import Trend from '@/components/trend/index.vue';
 import { prefix } from '@/config/global';
 import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 
-import { COLUMNS } from './constants';
-
 const store = useSettingStore();
+
+const COLUMNS: PrimaryTableCol<TableRowData>[] = [
+  { colKey: 'row-select', type: 'multiple', width: 64, fixed: 'left' },
+  {
+    title: t('pages.listBase.contractName'),
+    align: 'left',
+    width: 320,
+    colKey: 'name',
+    fixed: 'left',
+  },
+  { title: t('pages.listBase.contractStatus'), colKey: 'status', width: 160 },
+  {
+    title: t('pages.listBase.contractNum'),
+    width: 160,
+    ellipsis: true,
+    colKey: 'no',
+  },
+  {
+    title: t('pages.listBase.contractType'),
+    width: 160,
+    ellipsis: true,
+    colKey: 'contractType',
+  },
+  {
+    title: t('pages.listBase.contractPayType'),
+    width: 160,
+    ellipsis: true,
+    colKey: 'paymentType',
+  },
+  {
+    title: t('pages.listBase.contractAmount'),
+    width: 160,
+    ellipsis: true,
+    colKey: 'amount',
+  },
+  {
+    title: t('pages.listBase.operation'),
+    align: 'left',
+    fixed: 'right',
+    width: 160,
+    colKey: 'op',
+  },
+];
 
 const data = ref([]);
 const pagination = ref({

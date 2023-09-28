@@ -57,5 +57,7 @@ export default {
     week7: '周日',
     max: '最大值',
     min: '最小值',
+    thisMonth: '本月',
+    lastMonth: '上月',
   },
 };

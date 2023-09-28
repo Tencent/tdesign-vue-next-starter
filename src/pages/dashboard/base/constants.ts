@@ -2,47 +2,12 @@ import { TdBaseTableProps } from 'tdesign-vue-next';
 
 import { t } from '@/locales';
 
-interface DashboardPanel {
-  title: string;
-  number: string | number;
-  leftType: string;
-  upTrend?: string;
-  downTrend?: string;
-}
-
 interface TendItem {
   growUp?: number;
   productName: string;
   count: number;
   date: string;
 }
-
-export const PANE_LIST: Array<DashboardPanel> = [
-  {
-    title: t('pages.dashboardBase.topPanel.card1'),
-    number: '¥ 28,425.00',
-    upTrend: '20.5%',
-    leftType: 'echarts-line',
-  },
-  {
-    title: t('pages.dashboardBase.topPanel.card2'),
-    number: '¥ 768.00',
-    downTrend: '20.5%',
-    leftType: 'echarts-bar',
-  },
-  {
-    title: t('pages.dashboardBase.topPanel.card3'),
-    number: '1126',
-    upTrend: '20.5%',
-    leftType: 'icon-usergroup',
-  },
-  {
-    title: t('pages.dashboardBase.topPanel.card4'),
-    number: 527,
-    downTrend: '20.5%',
-    leftType: 'icon-file-paste',
-  },
-];
 
 export const SALE_TEND_LIST: Array<TendItem> = [
   {

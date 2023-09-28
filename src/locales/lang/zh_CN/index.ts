@@ -1,4 +1,4 @@
-import componentsLocale from 'tdesign-vue-next/es/locale/en_US';
+import componentsLocale from 'tdesign-vue-next/es/locale/zh_CN';
 
 import components from './components';
 import layout from './layout';

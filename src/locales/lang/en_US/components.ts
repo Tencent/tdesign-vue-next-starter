@@ -19,12 +19,19 @@ export default {
     operation: 'Operation',
     detail: 'detail',
     delete: 'delete',
-    contractTypeEnum: {
+    contractStatusEnum: {
       fail: 'fail',
       audit: 'audit',
       executing: 'executing',
       pending: 'pending',
       finish: 'finish',
     },
+    contractTypeEnum: {
+      main: 'main',
+      sub: 'sub',
+      supplement: 'supplement',
+    },
+    reset: 'reset',
+    query: 'query',
   },
 };

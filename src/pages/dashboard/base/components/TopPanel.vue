@@ -63,16 +63,43 @@ import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 
 // 导入样式
 import Trend from '@/components/trend/index.vue';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
-import { PANE_LIST } from '../constants';
 import { constructInitDashboardDataset } from '../index';
 
 echarts.use([LineChart, BarChart, CanvasRenderer]);
 
 const store = useSettingStore();
 const resizeTime = ref(1);
+
+const PANE_LIST = [
+  {
+    title: t('pages.dashboardBase.topPanel.card1'),
+    number: '¥ 28,425.00',
+    upTrend: '20.5%',
+    leftType: 'echarts-line',
+  },
+  {
+    title: t('pages.dashboardBase.topPanel.card2'),
+    number: '¥ 768.00',
+    downTrend: '20.5%',
+    leftType: 'echarts-bar',
+  },
+  {
+    title: t('pages.dashboardBase.topPanel.card3'),
+    number: '1126',
+    upTrend: '20.5%',
+    leftType: 'icon-usergroup',
+  },
+  {
+    title: t('pages.dashboardBase.topPanel.card4'),
+    number: 527,
+    downTrend: '20.5%',
+    leftType: 'icon-file-paste',
+  },
+];
 
 // moneyCharts
 let moneyContainer: HTMLElement;

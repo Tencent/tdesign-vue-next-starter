@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import { TChartColor } from '@/config/color';
+import { t } from '@/locales';
 import { getDateArray, getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
 /**
@@ -53,7 +54,6 @@ export function getScatterDataSet({
     },
     yAxis: {
       type: 'value',
-      // splitLine: { show: false},
       axisLabel: {
         color: placeholderColor,
       },
@@ -119,7 +119,10 @@ export function getFolderLineDataSet({
   placeholderColor,
   borderColor,
 }: { dateTime?: Array<string> } & TChartColor) {
-  let dateArray: Array<string> = ['', '周二', '周三', '周四', '周五', '周六', '周日'];
+  let dateArray = [];
+  for (let i = 1; i < 7; i++) {
+    dateArray.push(t(`pages.dashboardDetail.chart.week${i}`));
+  }
   if (dateTime.length > 0) {
     const divideNum = 7;
     dateArray = getDateArray(dateTime, divideNum);
