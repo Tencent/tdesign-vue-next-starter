@@ -15,6 +15,12 @@ export default {
     viewAll: '查看全部',
   },
   searchPlaceholder: '请输入搜索内容',
+  tagTabs: {
+    closeOther: '关闭其他',
+    closeLeft: '关闭左侧',
+    closeRight: '关闭右侧',
+    refresh: '刷新',
+  },
   setting: {
     title: '页面配置',
     theme: {

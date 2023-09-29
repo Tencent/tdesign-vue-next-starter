@@ -14,6 +14,12 @@ export default {
     emptyNotice: 'No Notice',
     viewAll: 'View All',
   },
+  tagTabs: {
+    closeOther: 'close other',
+    closeLeft: 'close left',
+    closeRight: 'close right',
+    refresh: 'refresh',
+  },
   searchPlaceholder: 'Enter search content',
   setting: {
     title: 'Setting',
