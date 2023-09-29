@@ -18,6 +18,8 @@ export default {
       tea: 'tea',
       honey: 'honey',
       flour: 'flour',
+      coffeeMachine: 'coffee machine',
+      massageMachine: 'massage machine',
     },
   },
   ssl: 'SSL certificate',

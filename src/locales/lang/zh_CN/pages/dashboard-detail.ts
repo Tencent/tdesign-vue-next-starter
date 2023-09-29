@@ -18,6 +18,8 @@ export default {
       tea: '茶叶',
       honey: '蜂蜜',
       flour: '面粉',
+      coffeeMachine: '咖啡机',
+      massageMachine: '按摩仪',
     },
   },
   ssl: 'SSL证书',

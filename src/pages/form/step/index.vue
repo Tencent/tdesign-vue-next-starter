@@ -38,7 +38,7 @@
             </t-option>
           </t-select>
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step1.fapiaoType')" name="type">
+        <t-form-item :label="$t('pages.formStep.step1.invoiceType')" name="type">
           <t-select v-model="formData1.type" :style="{ width: '480px' }" class="demo-select-base" clearable>
             <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
@@ -61,11 +61,11 @@
         @reset="onReset(0)"
         @submit="(result: SubmitContext) => onSubmit(result, 2)"
       >
-        <t-form-item :label="$t('pages.formStep.step2.fapiaoTitle')" name="title">
+        <t-form-item :label="$t('pages.formStep.step2.invoiceTitle')" name="title">
           <t-input
             v-model="formData2.title"
             :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.fapiaoTitlePlaceholder')"
+            :placeholder="$t('pages.formStep.step2.invoiceTitlePlaceholder')"
           />
         </t-form-item>
         <t-form-item :label="$t('pages.formStep.step2.taxNum')" name="taxNum">
