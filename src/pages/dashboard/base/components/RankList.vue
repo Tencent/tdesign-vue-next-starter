@@ -56,12 +56,14 @@
 </template>
 
 <script setup lang="ts">
+import type { TdBaseTableProps } from 'tdesign-vue-next';
+
 import Trend from '@/components/trend/index.vue';
 import { t } from '@/locales';
 
 import { BUY_TEND_LIST, SALE_TEND_LIST } from '../constants';
 
-const SALE_COLUMNS = [
+const SALE_COLUMNS: TdBaseTableProps['columns'] = [
   {
     align: 'center',
     colKey: 'index',
@@ -97,7 +99,7 @@ const SALE_COLUMNS = [
   },
 ];
 
-const BUY_COLUMNS = [
+const BUY_COLUMNS: TdBaseTableProps['columns'] = [
   {
     align: 'center',
     colKey: 'index',
