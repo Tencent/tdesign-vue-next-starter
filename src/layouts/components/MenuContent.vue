@@ -6,16 +6,16 @@
           <template #icon>
             <component :is="menuIcon(item)" class="t-icon"></component>
           </template>
-          {{ item.title }}
+          {{ renderMenuTitle(item.title) }}
         </t-menu-item>
         <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
           <template #icon>
             <component :is="menuIcon(item)" class="t-icon"></component>
           </template>
-          {{ item.title }}
+          {{ renderMenuTitle(item.title) }}
         </t-menu-item>
       </template>
-      <t-submenu v-else :name="item.path" :value="item.path" :title="item.title">
+      <t-submenu v-else :name="item.path" :value="item.path" :title="renderMenuTitle(item.title)">
         <template #icon>
           <component :is="menuIcon(item)" class="t-icon"></component>
         </template>
@@ -28,6 +28,7 @@
 import type { PropType } from 'vue';
 import { computed } from 'vue';
 
+import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
 import type { MenuRoute } from '@/types/interface';
 
@@ -39,8 +40,10 @@ const props = defineProps({
     default: () => [],
   },
 });
+
 const active = computed(() => getActive());
 
+const { locale } = useLocale();
 const list = computed(() => {
   const { navData } = props;
   return getMenuList(navData);
@@ -50,6 +53,11 @@ const menuIcon = (item: ListItemType) => {
   if (typeof item.icon === 'string') return <t-icon name={item.icon} />;
   const RenderIcon = item.icon;
   return RenderIcon;
+};
+
+const renderMenuTitle = (title: string | Record<string, string>) => {
+  if (typeof title === 'string') return title;
+  return title[locale.value];
 };
 
 const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {

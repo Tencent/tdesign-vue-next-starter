@@ -11,25 +11,19 @@
   >
     <div class="form-basic-container">
       <div class="form-basic-item">
-        <div class="form-basic-container-title">合同信息</div>
+        <div class="form-basic-container-title">{{ $t('pages.formBase.title') }}</div>
         <!-- 表单内容 -->
 
         <!-- 合同名称,合同类型 -->
         <t-row class="row-gap" :gutter="[32, 24]">
           <t-col :span="6">
-            <t-form-item label="合同名称" name="name">
+            <t-form-item :label="$t('pages.formBase.contractName')" name="name">
               <t-input v-model="formData.name" :style="{ width: '322px' }" placeholder="请输入内容" />
             </t-form-item>
           </t-col>
           <t-col :span="6">
-            <t-form-item label="合同类型" name="type">
-              <t-select
-                v-model="formData.type"
-                :style="{ width: '322px' }"
-                placeholder="请选择类型"
-                class="demo-select-base"
-                clearable
-              >
+            <t-form-item :label="$t('pages.formBase.contractType')" name="type">
+              <t-select v-model="formData.type" :style="{ width: '322px' }" class="demo-select-base" clearable>
                 <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
                   {{ item.label }}
                 </t-option>
@@ -39,25 +33,25 @@
 
           <!-- 合同收付类型 -->
           <t-col :span="8">
-            <t-form-item label="合同收付类型" name="payment">
+            <t-form-item :label="$t('pages.formBase.contractPayType')" name="payment">
               <t-radio-group v-model="formData.payment">
-                <t-radio value="1"> 收款 </t-radio>
-                <t-radio value="2"> 付款 </t-radio>
+                <t-radio value="1"> {{ $t('pages.formBase.receive') }} </t-radio>
+                <t-radio value="2"> {{ $t('pages.formBase.pay') }} </t-radio>
               </t-radio-group>
               <span class="space-item" />
               <div>
-                <t-input placeholder="请输入金额" :style="{ width: '160px' }" />
+                <t-input :placeholder="$t('pages.formBase.contractAmountPlaceholder')" :style="{ width: '160px' }" />
               </div>
             </t-form-item>
           </t-col>
 
           <t-col :span="6">
-            <t-form-item label="甲方" name="partyA">
+            <t-form-item :label="$t('pages.formBase.company')" name="partyA">
               <t-select
                 v-model="formData.partyA"
                 :style="{ width: '322px' }"
                 class="demo-select-base"
-                placeholder="请选择类型"
+                :placeholder="$t('pages.formBase.contractTypePlaceholder')"
                 clearable
               >
                 <t-option v-for="(item, index) in PARTY_A_OPTIONS" :key="index" :value="item.value" :label="item.label">
@@ -67,11 +61,11 @@
             </t-form-item>
           </t-col>
           <t-col :span="6">
-            <t-form-item label="乙方" name="partyB">
+            <t-form-item :label="$t('pages.formBase.employee')" name="partyB">
               <t-select
                 v-model="formData.partyB"
                 :style="{ width: '322px' }"
-                placeholder="请选择类型"
+                :placeholder="$t('pages.formBase.contractTypePlaceholder')"
                 class="demo-select-base"
                 clearable
               >
@@ -82,7 +76,7 @@
             </t-form-item>
           </t-col>
           <t-col :span="6">
-            <t-form-item label="合同签订日期" name="signDate">
+            <t-form-item :label="$t('pages.formBase.contractSignDate')" name="signDate">
               <t-date-picker
                 v-model="formData.signDate"
                 :style="{ width: '322px' }"
@@ -93,7 +87,7 @@
             </t-form-item>
           </t-col>
           <t-col :span="6">
-            <t-form-item label="合同生效日期" name="startDate">
+            <t-form-item :label="$t('pages.formBase.contractEffectiveDate')" name="startDate">
               <t-date-picker
                 v-model="formData.startDate"
                 :style="{ width: '322px' }"
@@ -104,7 +98,7 @@
             </t-form-item>
           </t-col>
           <t-col :span="6">
-            <t-form-item label="合同结束日期" name="endDate">
+            <t-form-item :label="$t('pages.formBase.contractEndDate')" name="endDate">
               <t-date-picker
                 v-model="formData.endDate"
                 :style="{ width: '322px' }"
@@ -115,28 +109,30 @@
             </t-form-item>
           </t-col>
           <t-col :span="6">
-            <t-form-item label="上传文件" name="files">
+            <t-form-item :label="$t('pages.formBase.upload')" name="files">
               <t-upload
                 v-model="formData.files"
                 action="https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
-                tips="请上传pdf文件，大小在60M以内"
+                :tips="$t('pages.formBase.uploadTips')"
                 :size-limit="{ size: 60, unit: 'MB' }"
                 :format-response="formatResponse"
                 :before-upload="beforeUpload"
                 @fail="handleFail"
               >
-                <t-button class="form-submit-upload-btn" variant="outline"> 上传合同文件 </t-button>
+                <t-button class="form-submit-upload-btn" variant="outline">
+                  {{ $t('pages.formBase.uploadFile') }}
+                </t-button>
               </t-upload>
             </t-form-item>
           </t-col>
         </t-row>
 
-        <div class="form-basic-container-title form-title-gap">其它信息</div>
+        <div class="form-basic-container-title form-title-gap">{{ $t('pages.formBase.otherInfo') }}</div>
 
-        <t-form-item label="备注" name="comment">
-          <t-textarea v-model="formData.comment" :height="124" placeholder="请输入备注" />
+        <t-form-item :label="$t('pages.formBase.remark')" name="comment">
+          <t-textarea v-model="formData.comment" :height="124" :placeholder="$t('pages.formBase.remarkPlaceholder')" />
         </t-form-item>
-        <t-form-item label="公证人">
+        <t-form-item :label="$t('pages.formBase.notaryPublic')">
           <t-avatar-group>
             <t-avatar>D</t-avatar>
             <t-avatar>S</t-avatar>
@@ -149,8 +145,12 @@
     <div class="form-submit-container">
       <div class="form-submit-sub">
         <div class="form-submit-left">
-          <t-button theme="primary" class="form-submit-confirm" type="submit"> 确认提交 </t-button>
-          <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
+          <t-button theme="primary" class="form-submit-confirm" type="submit">
+            {{ $t('pages.formBase.confirm') }}
+          </t-button>
+          <t-button type="reset" class="form-submit-cancel" theme="default" variant="base">
+            {{ $t('pages.formBase.cancel') }}
+          </t-button>
         </div>
       </div>
     </div>
@@ -201,5 +201,5 @@ const formatResponse = (res: any) => {
 </script>
 
 <style lang="less" scoped>
-@import url('./index.less');
+@import './index.less';
 </style>

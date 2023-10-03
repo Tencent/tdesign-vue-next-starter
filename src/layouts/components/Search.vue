@@ -2,7 +2,7 @@
   <div v-if="layout === 'side'" class="header-menu-search">
     <t-input
       :class="['header-search', { 'hover-active': isSearchFocus }]"
-      placeholder="请输入搜索内容"
+      :placeholder="$t('layout.searchPlaceholder')"
       @blur="changeSearchFocus(false)"
       @focus="changeSearchFocus(true)"
     >
@@ -56,6 +56,7 @@ const changeSearchFocus = (value: boolean) => {
 .header-menu-search {
   display: flex;
   margin-left: 16px;
+
   .hover-active {
     background: var(--td-bg-color-secondarycontainer);
   }
@@ -63,20 +64,22 @@ const changeSearchFocus = (value: boolean) => {
   .t-icon {
     color: var(--td-text-color-primary) !important;
   }
+
   .header-search {
     :deep(.t-input) {
       border: none;
       outline: none;
       box-shadow: none;
       transition: background @anim-duration-base linear;
+
       .t-input__inner {
         transition: background @anim-duration-base linear;
-      }
-      .t-input__inner {
         background: none;
       }
+
       &:hover {
         background: var(--td-bg-color-secondarycontainer);
+
         .t-input__inner {
           background: var(--td-bg-color-secondarycontainer);
         }
@@ -91,14 +94,17 @@ const changeSearchFocus = (value: boolean) => {
 
   .t-icon {
     font-size: 20px;
+
     &.general {
       margin-right: 16px;
     }
   }
 }
+
 .search-icon-hide {
   opacity: 0;
 }
+
 .header-menu-search-left {
   display: flex;
   align-items: center;
@@ -106,12 +112,15 @@ const changeSearchFocus = (value: boolean) => {
   .header-search {
     width: 200px;
     transition: width @anim-duration-base @anim-time-fn-easing;
+
     :deep(.t-input) {
       border: 0;
+
       &:focus {
         box-shadow: none;
       }
     }
+
     &.width-zero {
       width: 0;
       opacity: 0;

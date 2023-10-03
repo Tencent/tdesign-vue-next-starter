@@ -1,6 +1,10 @@
 <template>
-  <result title="系统维护中" tip="系统维护中，请稍后再试" type="maintenance">
-    <t-button theme="primary" @click="() => $router.push('/')">返回首页</t-button>
+  <result
+    :title="$t('pages.result.maintenance.title')"
+    :tip="$t('pages.result.maintenance.subtitle')"
+    type="maintenance"
+  >
+    <t-button theme="primary" @click="() => $router.push('/')">{{ $t('pages.result.maintenance.back') }}</t-button>
   </result>
 </template>
 

@@ -7,5 +7,5 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import CommonTable from '../components/CommonTable.vue';
+import CommonTable from '@/components/common-table/index.vue';
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <result title="403 Forbidden" tip="抱歉，您无权限访问此页面，企业微信联系创建者xiaolaoshi">
-    <t-button @click="() => $router.push('/')">返回首页</t-button>
+  <result title="403 Forbidden" :tip="$t('pages.result.403.tips')">
+    <t-button @click="() => $router.push('/')">{{ $t('pages.result.403.back') }}</t-button>
   </result>
 </template>
 <script lang="ts">
