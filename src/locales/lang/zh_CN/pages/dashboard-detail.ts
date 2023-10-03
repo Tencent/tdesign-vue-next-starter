@@ -28,4 +28,17 @@ export default {
     title: '采购商品满意度分布',
     export: '导出数据',
   },
+  chart: {
+    week1: '周一',
+    week2: '周二',
+    week3: '周三',
+    week4: '周四',
+    week5: '周五',
+    week6: '周六',
+    week7: '周日',
+    max: '最大值',
+    min: '最小值',
+    thisMonth: '本月',
+    lastMonth: '上月',
+  },
 };

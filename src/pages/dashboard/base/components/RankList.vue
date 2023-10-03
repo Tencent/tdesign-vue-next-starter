@@ -57,8 +57,81 @@
 
 <script setup lang="ts">
 import Trend from '@/components/trend/index.vue';
+import { t } from '@/locales';
 
-import { BUY_COLUMNS, BUY_TEND_LIST, SALE_COLUMNS, SALE_TEND_LIST } from '../constants';
+import { BUY_TEND_LIST, SALE_TEND_LIST } from '../constants';
+
+const SALE_COLUMNS = [
+  {
+    align: 'center',
+    colKey: 'index',
+    title: t('pages.dashboardBase.saleColumns.index'),
+    width: 70,
+    fixed: 'left',
+  },
+  {
+    align: 'left',
+    ellipsis: true,
+    colKey: 'productName',
+    title: t('pages.dashboardBase.saleColumns.productName'),
+    width: 150,
+  },
+  {
+    align: 'center',
+    colKey: 'growUp',
+    width: 70,
+    title: t('pages.dashboardBase.saleColumns.growUp'),
+  },
+  {
+    align: 'center',
+    colKey: 'count',
+    title: t('pages.dashboardBase.saleColumns.count'),
+    width: 70,
+  },
+  {
+    align: 'center',
+    colKey: 'operation',
+    title: t('pages.dashboardBase.saleColumns.operation'),
+    width: 70,
+    fixed: 'right',
+  },
+];
+
+const BUY_COLUMNS = [
+  {
+    align: 'center',
+    colKey: 'index',
+    title: t('pages.dashboardBase.buyColumns.index'),
+    width: 70,
+    fixed: 'left',
+  },
+  {
+    align: 'left',
+    ellipsis: true,
+    colKey: 'productName',
+    width: 150,
+    title: t('pages.dashboardBase.buyColumns.productName'),
+  },
+  {
+    align: 'center',
+    colKey: 'growUp',
+    width: 70,
+    title: t('pages.dashboardBase.buyColumns.growUp'),
+  },
+  {
+    align: 'center',
+    colKey: 'count',
+    title: t('pages.dashboardBase.buyColumns.count'),
+    width: 70,
+  },
+  {
+    align: 'center',
+    colKey: 'operation',
+    title: t('pages.dashboardBase.buyColumns.operation'),
+    width: 70,
+    fixed: 'right',
+  },
+];
 
 const rehandleClickOp = (val: MouseEvent) => {
   console.log(val);

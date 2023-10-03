@@ -130,13 +130,7 @@ import { useRouter } from 'vue-router';
 import { getList } from '@/api/list';
 import Trend from '@/components/trend/index.vue';
 import { prefix } from '@/config/global';
-import {
-  CONTRACT_PAYMENT_TYPES,
-  CONTRACT_STATUS,
-  CONTRACT_STATUS_OPTIONS,
-  CONTRACT_TYPE_OPTIONS,
-  CONTRACT_TYPES,
-} from '@/constants';
+import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
 import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 
@@ -150,6 +144,19 @@ interface FormData {
 const store = useSettingStore();
 const router = useRouter();
 
+const CONTRACT_STATUS_OPTIONS = [
+  { value: CONTRACT_STATUS.FAIL, label: t('components.commonTable.contractStatusEnum.fail') },
+  { value: CONTRACT_STATUS.AUDIT_PENDING, label: t('components.commonTable.contractStatusEnum.audit') },
+  { value: CONTRACT_STATUS.EXEC_PENDING, label: t('components.commonTable.contractStatusEnum.pending') },
+  { value: CONTRACT_STATUS.EXECUTING, label: t('components.commonTable.contractStatusEnum.executing') },
+  { value: CONTRACT_STATUS.FINISH, label: t('components.commonTable.contractStatusEnum.finish') },
+];
+
+const CONTRACT_TYPE_OPTIONS = [
+  { value: CONTRACT_TYPES.MAIN, label: t('components.commonTable.contractTypeEnum.main') },
+  { value: CONTRACT_TYPES.SUB, label: t('components.commonTable.contractTypeEnum.sub') },
+  { value: CONTRACT_TYPES.SUPPLEMENT, label: t('components.commonTable.contractTypeEnum.supplement') },
+];
 const COLUMNS: PrimaryTableCol[] = [
   {
     title: t('components.commonTable.contractName'),
