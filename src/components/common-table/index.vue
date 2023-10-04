@@ -5,45 +5,45 @@
         <t-col :span="10">
           <t-row :gutter="[24, 24]">
             <t-col :span="4">
-              <t-form-item label="合同名称" name="name">
+              <t-form-item :label="$t('components.commonTable.contractName')" name="name">
                 <t-input
                   v-model="formData.name"
                   class="form-item-content"
                   type="search"
-                  placeholder="请输入合同名称"
+                  :placeholder="$t('components.commonTable.contractNamePlaceholder')"
                   :style="{ minWidth: '134px' }"
                 />
               </t-form-item>
             </t-col>
             <t-col :span="4">
-              <t-form-item label="合同状态" name="status">
+              <t-form-item :label="$t('components.commonTable.contractStatus')" name="status">
                 <t-select
                   v-model="formData.status"
                   class="form-item-content"
                   :options="CONTRACT_STATUS_OPTIONS"
-                  placeholder="请选择合同状态"
+                  :placeholder="$t('components.commonTable.contractStatusPlaceholder')"
                   clearable
                 />
               </t-form-item>
             </t-col>
             <t-col :span="4">
-              <t-form-item label="合同编号" name="no">
+              <t-form-item :label="$t('components.commonTable.contractNum')" name="no">
                 <t-input
                   v-model="formData.no"
                   class="form-item-content"
-                  placeholder="请输入合同编号"
+                  :placeholder="$t('components.commonTable.contractNumPlaceholder')"
                   :style="{ minWidth: '134px' }"
                 />
               </t-form-item>
             </t-col>
             <t-col :span="4">
-              <t-form-item label="合同类型" name="type">
+              <t-form-item :label="$t('components.commonTable.contractType')" name="type">
                 <t-select
                   v-model="formData.type"
                   style="display: inline-block"
                   class="form-item-content"
                   :options="CONTRACT_TYPE_OPTIONS"
-                  placeholder="请选择合同类型"
+                  :placeholder="$t('components.commonTable.contractTypePlaceholder')"
                   clearable
                 />
               </t-form-item>
@@ -52,8 +52,10 @@
         </t-col>
 
         <t-col :span="2" class="operation-container">
-          <t-button theme="primary" type="submit" :style="{ marginLeft: 'var(--td-comp-margin-s)' }"> 查询 </t-button>
-          <t-button type="reset" variant="base" theme="default"> 重置 </t-button>
+          <t-button theme="primary" type="submit" :style="{ marginLeft: 'var(--td-comp-margin-s)' }">
+            {{ $t('components.commonTable.query') }}
+          </t-button>
+          <t-button type="reset" variant="base" theme="default"> {{ $t('components.commonTable.reset') }} </t-button>
         </t-col>
       </t-row>
     </t-form>
@@ -72,28 +74,42 @@
         @change="rehandleChange"
       >
         <template #status="{ row }">
-          <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light"> 审核失败 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light"> 待审核 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light"> 待履行 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light"> 履行中 </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light"> 已完成 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
+            {{ $t('components.commonTable.contractStatusEnum.fail') }}
+          </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light">
+            {{ $t('components.commonTable.contractStatusEnum.audit') }}
+          </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light">
+            {{ $t('components.commonTable.contractStatusEnum.pending') }}
+          </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light">
+            {{ $t('components.commonTable.contractStatusEnum.executing') }}
+          </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light">
+            {{ $t('components.commonTable.contractStatusEnum.finish') }}
+          </t-tag>
         </template>
         <template #contractType="{ row }">
-          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">审核失败</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUB">待审核</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">待履行</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ $t('pages.listBase.contractStatusEnum.fail') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ $t('pages.listBase.contractStatusEnum.audit') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">
+            {{ $t('pages.listBase.contractStatusEnum.pending') }}
+          </p>
         </template>
         <template #paymentType="{ row }">
-          <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-            付款<trend class="dashboard-item-trend" type="up" />
-          </p>
-          <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECEIPT" class="payment-col">
-            收款<trend class="dashboard-item-trend" type="down" />
-          </p>
+          <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
+            {{ $t('pages.listBase.pay') }}<trend class="dashboard-item-trend" type="up" />
+          </div>
+          <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECEIPT" class="payment-col">
+            {{ $t('pages.listBase.receive') }}<trend class="dashboard-item-trend" type="down" />
+          </div>
         </template>
         <template #op="slotProps">
-          <a class="t-button-link" @click="rehandleClickOp(slotProps)">管理</a>
-          <a class="t-button-link" @click="handleClickDelete(slotProps)">删除</a>
+          <t-space>
+            <t-link theme="primary" @click="handleClickDetail()"> {{ $t('pages.listBase.detail') }}</t-link>
+            <t-link theme="danger" @click="handleClickDelete(slotProps)"> {{ $t('pages.listBase.delete') }}</t-link>
+          </t-space>
         </template>
       </t-table>
       <t-dialog
@@ -109,17 +125,13 @@
 <script setup lang="ts">
 import { MessagePlugin, PageInfo, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { getList } from '@/api/list';
 import Trend from '@/components/trend/index.vue';
 import { prefix } from '@/config/global';
-import {
-  CONTRACT_PAYMENT_TYPES,
-  CONTRACT_STATUS,
-  CONTRACT_STATUS_OPTIONS,
-  CONTRACT_TYPE_OPTIONS,
-  CONTRACT_TYPES,
-} from '@/constants';
+import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 
 interface FormData {
@@ -130,37 +142,51 @@ interface FormData {
 }
 
 const store = useSettingStore();
+const router = useRouter();
 
+const CONTRACT_STATUS_OPTIONS = [
+  { value: CONTRACT_STATUS.FAIL, label: t('components.commonTable.contractStatusEnum.fail') },
+  { value: CONTRACT_STATUS.AUDIT_PENDING, label: t('components.commonTable.contractStatusEnum.audit') },
+  { value: CONTRACT_STATUS.EXEC_PENDING, label: t('components.commonTable.contractStatusEnum.pending') },
+  { value: CONTRACT_STATUS.EXECUTING, label: t('components.commonTable.contractStatusEnum.executing') },
+  { value: CONTRACT_STATUS.FINISH, label: t('components.commonTable.contractStatusEnum.finish') },
+];
+
+const CONTRACT_TYPE_OPTIONS = [
+  { value: CONTRACT_TYPES.MAIN, label: t('components.commonTable.contractTypeEnum.main') },
+  { value: CONTRACT_TYPES.SUB, label: t('components.commonTable.contractTypeEnum.sub') },
+  { value: CONTRACT_TYPES.SUPPLEMENT, label: t('components.commonTable.contractTypeEnum.supplement') },
+];
 const COLUMNS: PrimaryTableCol[] = [
   {
-    title: '合同名称',
+    title: t('components.commonTable.contractName'),
     fixed: 'left',
     width: 280,
     ellipsis: true,
     align: 'left',
     colKey: 'name',
   },
-  { title: '合同状态', colKey: 'status', width: 160 },
+  { title: t('components.commonTable.contractStatus'), colKey: 'status', width: 160 },
   {
-    title: '合同编号',
+    title: t('components.commonTable.contractNum'),
     width: 160,
     ellipsis: true,
     colKey: 'no',
   },
   {
-    title: '合同类型',
+    title: t('components.commonTable.contractType'),
     width: 160,
     ellipsis: true,
     colKey: 'contractType',
   },
   {
-    title: '合同收付类型',
+    title: t('components.commonTable.contractPayType'),
     width: 160,
     ellipsis: true,
     colKey: 'paymentType',
   },
   {
-    title: '合同金额 (元)',
+    title: t('components.commonTable.contractAmount'),
     width: 160,
     ellipsis: true,
     colKey: 'amount',
@@ -170,7 +196,7 @@ const COLUMNS: PrimaryTableCol[] = [
     fixed: 'right',
     width: 160,
     colKey: 'op',
-    title: '操作',
+    title: t('components.commonTable.operation'),
   },
 ];
 
@@ -248,6 +274,10 @@ const handleClickDelete = (slot: { row: { rowIndex: number } }) => {
 const onReset = (val: unknown) => {
   console.log(val);
 };
+
+const handleClickDetail = () => {
+  router.push('/detail/base');
+};
 const onSubmit = (val: unknown) => {
   console.log(val);
   console.log(formData.value);
@@ -257,9 +287,6 @@ const rehandlePageChange = (pageInfo: PageInfo, newDataSource: TableRowData[]) =
 };
 const rehandleChange = (changeParams: unknown, triggerAndData: unknown) => {
   console.log('统一Change', changeParams, triggerAndData);
-};
-const rehandleClickOp = (ctx: unknown) => {
-  console.log(ctx);
 };
 
 const headerAffixedTop = computed(

@@ -1,6 +1,6 @@
 <template>
   <div class="detail-advanced">
-    <t-card title="基本信息" :bordered="false">
+    <t-card :title="$t('pages.detailCard.baseInfo.title')" :bordered="false">
       <div class="info-block">
         <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
           <h1>{{ item.name }}</h1>
@@ -18,23 +18,32 @@
     </t-card>
 
     <!-- 发票进度 -->
-    <t-card title="发票进度" class="container-base-margin-top" :bordered="false">
+    <t-card :title="$t('pages.detailCard.invoice.title')" class="container-base-margin-top" :bordered="false">
       <t-row justify="space-between">
         <t-steps :current="updateCurrent">
-          <t-step-item title="申请提交" content="已于12月21日提交" />
-          <t-step-item title="电子发票" content="预计1～3个工作日" />
-          <t-step-item title="发票已邮寄" content="电子发票开出后7个工作日联系" />
-          <t-step-item title="完成" content="" />
+          <t-step-item
+            :title="$t('pages.detailCard.invoice.step1.title')"
+            :content="$t('pages.detailCard.invoice.step1.content')"
+          />
+          <t-step-item
+            :title="$t('pages.detailCard.invoice.step2.title')"
+            :content="$t('pages.detailCard.invoice.step2.content')"
+          />
+          <t-step-item
+            :title="$t('pages.detailCard.invoice.step3.title')"
+            :content="$t('pages.detailCard.invoice.step3.content')"
+          />
+          <t-step-item :title="$t('pages.detailCard.invoice.step4.title')" />
         </t-steps>
       </t-row>
     </t-card>
 
     <!-- 产品目录 -->
-    <t-card title="产品目录" class="container-base-margin-top" :bordered="false">
-      <template #option>
+    <t-card :title="$t('pages.detailCard.product.title')" class="container-base-margin-top" :bordered="false">
+      <template #actions>
         <t-radio-group default-value="dateVal">
-          <t-radio-button value="dateVal"> 季度 </t-radio-button>
-          <t-radio-button value="monthVal"> 月份 </t-radio-button>
+          <t-radio-button value="dateVal"> {{ $t('pages.detailCard.product.quarter') }} </t-radio-button>
+          <t-radio-button value="monthVal"> {{ $t('pages.detailCard.product.month') }} </t-radio-button>
         </t-radio-group>
       </template>
       <t-row :gutter="16" class="product-block-container">
@@ -42,7 +51,7 @@
           <div class="product-add">
             <div class="product-sub">
               <t-icon name="add" class="product-sub-icon" />
-              <span>新增产品</span>
+              <span>{{ $t('pages.detailCard.product.add') }}</span>
             </div>
           </div>
         </t-col>
@@ -53,7 +62,7 @@
     </t-card>
 
     <!-- 产品采购明细 -->
-    <t-card title="产品采购明细" class="container-base-margin-top" :bordered="false">
+    <t-card :title="$t('pages.detailCard.detail.title')" class="container-base-margin-top" :bordered="false">
       <t-table
         :columns="columns"
         :data="data"
@@ -87,8 +96,12 @@
         </template>
 
         <template #op="slotProps">
-          <a :class="prefix + '-link'" @click="listClick()">管理</a>
-          <a :class="prefix + '-link'" @click="deleteClickOp(slotProps)">删除</a>
+          <t-space>
+            <t-link theme="primary" @click="listClick()">{{ t('pages.detailCard.detail.form.manage') }}</t-link>
+            <t-link theme="danger" @click="deleteClickOp(slotProps)">{{
+              t('pages.detailCard.detail.form.delete')
+            }}</t-link>
+          </t-space>
         </template>
 
         <template #op-column>
@@ -97,7 +110,7 @@
       </t-table>
     </t-card>
 
-    <t-dialog v-model:visible="visible" header="基本信息" @confirm="onConfirm">
+    <t-dialog v-model:visible="visible" :header="$t('pages.detailCard.baseInfo.title')" @confirm="onConfirm">
       <template #body>
         <div class="dialog-info-block">
           <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
@@ -128,10 +141,61 @@ export default {
 import { onMounted, ref } from 'vue';
 
 import { getPurchaseList } from '@/api/detail';
-import { prefix } from '@/config/global';
+import { t } from '@/locales';
 
 import Product from './components/Product.vue';
-import { BASE_INFO_DATA, PRODUCT_LIST, TABLE_COLUMNS_DATA as columns } from './constants';
+import { BASE_INFO_DATA, PRODUCT_LIST } from './constants';
+
+const columns = [
+  {
+    width: 280,
+    ellipsis: true,
+    colKey: 'index',
+    title: t('pages.detailCard.detail.form.applyNo'),
+    sorter: (a: any, b: any) => a.index.substr(3) - b.index.substr(3),
+  },
+  {
+    width: 200,
+    ellipsis: true,
+    colKey: 'pdName',
+    title: t('pages.detailCard.detail.form.product'),
+    sorter: (a: any, b: any) => a.pdName.length - b.pdName.length,
+  },
+  {
+    width: 200,
+    ellipsis: true,
+    colKey: 'pdNum',
+    title: t('pages.detailCard.detail.form.productNo'),
+  },
+  {
+    width: 160,
+    ellipsis: true,
+    colKey: 'purchaseNum',
+    title: t('pages.detailCard.detail.form.num'),
+    sorter: (a: any, b: any) => a.purchaseNum - b.purchaseNum,
+  },
+  {
+    width: 160,
+    ellipsis: true,
+    colKey: 'adminName',
+    title: t('pages.detailCard.detail.form.department'),
+  },
+  {
+    width: 200,
+    ellipsis: true,
+    colKey: 'updateTime',
+    title: t('pages.detailCard.detail.form.createTime'),
+    sorter: (a: any, b: any) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
+  },
+  {
+    align: 'left' as const,
+    fixed: 'right' as const,
+    width: 200,
+    className: 'test2',
+    colKey: 'op',
+    title: t('pages.detailCard.detail.form.operation'),
+  },
+];
 
 const data = ref([]);
 const pagination = ref({
@@ -188,5 +252,5 @@ const onConfirm = () => {
 </script>
 
 <style lang="less" scoped>
-@import url('./index.less');
+@import './index.less';
 </style>

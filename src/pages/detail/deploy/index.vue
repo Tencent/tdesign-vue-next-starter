@@ -2,18 +2,18 @@
   <div class="detail-deploy">
     <t-row :gutter="16">
       <t-col :lg="6" :xs="12">
-        <t-card title="部署趋势" :bordered="false">
+        <t-card :title="$t('pages.detailDeploy.deployTrend.title')" :bordered="false">
           <div class="deploy-panel-left">
             <div id="monitorContainer" style="width: 100%; height: 265px" />
           </div>
         </t-card>
       </t-col>
       <t-col :lg="6" :xs="12">
-        <t-card title="告警情况" :bordered="false">
-          <template #option>
+        <t-card :title="$t('pages.detailDeploy.deployTrend.warning')" :bordered="false">
+          <template #actions>
             <t-radio-group default-value="dateVal" @change="onAlertChange">
-              <t-radio-button value="dateVal"> 本周 </t-radio-button>
-              <t-radio-button value="monthVal"> 本月 </t-radio-button>
+              <t-radio-button value="dateVal"> {{ $t('pages.detailDeploy.deployTrend.thisWeek') }} </t-radio-button>
+              <t-radio-button value="monthVal"> {{ $t('pages.detailDeploy.deployTrend.thisMonth') }} </t-radio-button>
             </t-radio-group>
           </template>
           <div id="dataContainer" style="width: 100%; height: 265px" />
@@ -22,7 +22,7 @@
     </t-row>
 
     <!-- 项目列表 -->
-    <t-card title="项目列表" class="container-base-margin-top" :bordered="false">
+    <t-card :title="$t('pages.detailDeploy.projectList.title')" class="container-base-margin-top" :bordered="false">
       <t-table
         :columns="columns"
         :data="data"
@@ -40,8 +40,14 @@
           </span>
         </template>
         <template #op="slotProps">
-          <a :class="prefix + '-link'" @click="listClick()">管理</a>
-          <a :class="prefix + '-link'" @click="deleteClickOp(slotProps)">删除</a>
+          <t-space>
+            <t-link theme="primary" @click="listClick()">{{
+              $t('pages.detailDeploy.projectList.table.manage')
+            }}</t-link>
+            <t-link theme="danger" @click="deleteClickOp(slotProps)">{{
+              $t('pages.detailDeploy.projectList.table.delete')
+            }}</t-link>
+          </t-space>
         </template>
         <template #op-column>
           <t-icon name="descending-order" />
@@ -49,7 +55,11 @@
       </t-table>
     </t-card>
 
-    <t-dialog v-model:visible="visible" header="基本信息" @confirm="onConfirm">
+    <t-dialog
+      v-model:visible="visible"
+      :header="$t('pages.detailDeploy.projectList.dialog.title')"
+      @confirm="onConfirm"
+    >
       <template #body>
         <div class="dialog-info-block">
           <div class="dialog-info-block">
@@ -84,12 +94,45 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import { getProjectList } from '@/api/detail';
-import { prefix } from '@/config/global';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
-import { BASE_INFO_DATA, TABLE_COLUMNS as columns } from './constants';
+import { BASE_INFO_DATA } from './constants';
 import { get2ColBarChartDataSet, getSmoothLineDataSet } from './index';
+
+const columns = [
+  {
+    width: '280',
+    ellipsis: true,
+    colKey: 'name',
+    title: t('pages.detailDeploy.projectList.table.name'),
+    sorter: (a: any, b: any) => a.name.substr(10) - b.name.substr(10),
+  },
+  {
+    width: '280',
+    ellipsis: true,
+    title: t('pages.detailDeploy.projectList.table.admin'),
+    colKey: 'adminName',
+  },
+  {
+    width: '280',
+    className: 'test',
+    ellipsis: true,
+    colKey: 'updateTime',
+    title: t('pages.detailDeploy.projectList.table.createTime'),
+    sorter: (a: any, b: any) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
+  },
+  {
+    align: 'left' as const,
+    width: '200',
+    className: 'test2',
+    ellipsis: true,
+    colKey: 'op',
+    fixed: 'right' as const,
+    title: t('pages.detailDeploy.projectList.table.operation'),
+  },
+];
 
 echarts.use([
   TitleComponent,
@@ -197,7 +240,7 @@ const deleteClickOp = (e: { rowIndex: number }) => {
 </script>
 
 <style lang="less" scoped>
-@import url('../base/index.less');
+@import '../base/index.less';
 
 .detail-deploy {
   :deep(.t-card) {

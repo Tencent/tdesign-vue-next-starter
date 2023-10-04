@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="list-card-operation">
-      <t-button @click="formDialogVisible = true"> 新建产品 </t-button>
+      <t-button @click="formDialogVisible = true"> {{ $t('pages.listCard.create') }} </t-button>
       <div class="search-input">
-        <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
+        <t-input v-model="searchValue" :placeholder="$t('pages.listCard.placeholder')" clearable>
           <template #suffix-icon>
             <search-icon v-if="searchValue === ''" size="var(--td-comp-size-xxxs)" />
           </template>
@@ -76,23 +76,14 @@ import { getCardList } from '@/api/list';
 import type { CardProductType } from '@/components/product-card/index.vue';
 import ProductCard from '@/components/product-card/index.vue';
 
+import type { FormData } from './components/DialogForm.vue';
 import DialogForm from './components/DialogForm.vue';
-
-interface FormData {
-  name: string;
-  status: string;
-  description: string;
-  type: number;
-  mark: string;
-  amount: number;
-  [key: string]: unknown;
-}
 
 const INITIAL_DATA: FormData = {
   name: '',
   status: '',
   description: '',
-  type: 0,
+  type: '0',
   mark: '',
   amount: 0,
 };
@@ -158,7 +149,7 @@ const handleManageProduct = (product: CardProductType) => {
     name: product.name,
     status: product?.isSetup ? '1' : '0',
     description: product.description,
-    type: product.type,
+    type: product.type.toString(),
     mark: '',
     amount: 0,
   };

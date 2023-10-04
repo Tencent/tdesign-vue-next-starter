@@ -25,7 +25,7 @@ const settingStore = useSettingStore();
 
 const getWrapStyle = computed((): CSSProperties => {
   return {
-    height: `${unref(heightRef)}px`,
+    height: `${heightRef.value}px`,
   };
 });
 
