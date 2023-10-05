@@ -9,7 +9,7 @@
   >
     <template v-if="type == 'password'">
       <t-form-item name="account">
-        <t-input v-model="formData.account" size="large" placeholder="请输入账号：admin">
+        <t-input v-model="formData.account" size="large" :placeholder="`${$t('pages.login.input.account')}：admin`">
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -22,7 +22,7 @@
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
-          placeholder="请输入登录密码：admin"
+          :placeholder="`${$t('pages.login.input.password')}：admin`"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
@@ -34,24 +34,24 @@
       </t-form-item>
 
       <div class="check-container remember-pwd">
-        <t-checkbox>记住账号</t-checkbox>
-        <span class="tip">忘记账号？</span>
+        <t-checkbox>{{ $t('pages.login.remember') }}</t-checkbox>
+        <span class="tip">{{ $t('pages.login.forget') }}</span>
       </div>
     </template>
 
-    <!-- 扫码登陆 -->
+    <!-- 扫码登录 -->
     <template v-else-if="type == 'qrcode'">
       <div class="tip-container">
-        <span class="tip">请使用微信扫一扫登录</span>
-        <span class="refresh">刷新 <t-icon name="refresh" /> </span>
+        <span class="tip">{{ $t('pages.login.wechatLogin') }}</span>
+        <span class="refresh">{{ $t('pages.login.refresh') }} <t-icon name="refresh" /> </span>
       </div>
       <qrcode-vue value="" :size="160" level="H" />
     </template>
 
-    <!-- 手机号登陆 -->
+    <!-- 手机号登录 -->
     <template v-else>
       <t-form-item name="phone">
-        <t-input v-model="formData.phone" size="large" placeholder="请输入手机号码">
+        <t-input v-model="formData.phone" size="large" :placeholder="$t('pages.login.input.phone')">
           <template #prefix-icon>
             <t-icon name="mobile" />
           </template>
@@ -59,21 +59,25 @@
       </t-form-item>
 
       <t-form-item class="verification-code" name="verifyCode">
-        <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
+        <t-input v-model="formData.verifyCode" size="large" :placeholder="$t('pages.login.input.verification')" />
         <t-button size="large" variant="outline" :disabled="countDown > 0" @click="sendCode">
-          {{ countDown == 0 ? '发送验证码' : `${countDown}秒后可重发` }}
+          {{ countDown == 0 ? $t('pages.login.sendVerification') : `${countDown}秒后可重发` }}
         </t-button>
       </t-form-item>
     </template>
 
     <t-form-item v-if="type !== 'qrcode'" class="btn-container">
-      <t-button block size="large" type="submit"> 登录 </t-button>
+      <t-button block size="large" type="submit"> {{ $t('pages.login.signIn') }} </t-button>
     </t-form-item>
 
     <div class="switch-container">
-      <span v-if="type !== 'password'" class="tip" @click="switchType('password')">使用账号密码登录</span>
-      <span v-if="type !== 'qrcode'" class="tip" @click="switchType('qrcode')">使用微信扫码登录</span>
-      <span v-if="type !== 'phone'" class="tip" @click="switchType('phone')">使用手机号登录</span>
+      <span v-if="type !== 'password'" class="tip" @click="switchType('password')">{{
+        $t('pages.login.accountLogin')
+      }}</span>
+      <span v-if="type !== 'qrcode'" class="tip" @click="switchType('qrcode')">{{
+        $t('pages.login.wechatLogin')
+      }}</span>
+      <span v-if="type !== 'phone'" class="tip" @click="switchType('phone')">{{ $t('pages.login.phoneLogin') }}</span>
     </div>
   </t-form>
 </template>
@@ -86,6 +90,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import { useCounter } from '@/hooks';
+import { t } from '@/locales';
 import { useUserStore } from '@/store';
 
 const userStore = useUserStore();
@@ -99,10 +104,10 @@ const INITIAL_DATA = {
 };
 
 const FORM_RULES: Record<string, FormRule[]> = {
-  phone: [{ required: true, message: '手机号必填', type: 'error' }],
-  account: [{ required: true, message: '账号必填', type: 'error' }],
-  password: [{ required: true, message: '密码必填', type: 'error' }],
-  verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
+  phone: [{ required: true, message: t('pages.login.required.phone'), type: 'error' }],
+  account: [{ required: true, message: t('pages.login.required.account'), type: 'error' }],
+  password: [{ required: true, message: t('pages.login.required.password'), type: 'error' }],
+  verifyCode: [{ required: true, message: t('pages.login.required.verification'), type: 'error' }],
 };
 
 const type = ref('password');
@@ -136,7 +141,7 @@ const onSubmit = async (ctx: SubmitContext) => {
     try {
       await userStore.login(formData.value);
 
-      MessagePlugin.success('登陆成功');
+      MessagePlugin.success('登录成功');
       const redirect = route.query.redirect as string;
       const redirectUrl = redirect ? decodeURIComponent(redirect) : '/dashboard';
       router.push(redirectUrl);
@@ -149,5 +154,5 @@ const onSubmit = async (ctx: SubmitContext) => {
 </script>
 
 <style lang="less" scoped>
-@import url('../index.less');
+@import '../index.less';
 </style>

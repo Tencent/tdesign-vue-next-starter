@@ -1,8 +1,13 @@
 <template>
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="9">
-      <t-card title="统计数据" :subtitle="`(万元)${currentMonth}`" class="dashboard-chart-card" :bordered="false">
-        <template #option>
+      <t-card
+        :title="$t('pages.dashboardBase.topPanel.analysis.title')"
+        :subtitle="currentMonth"
+        class="dashboard-chart-card"
+        :bordered="false"
+      >
+        <template #actions>
           <div class="dashboard-chart-title-container">
             <t-date-range-picker
               class="card-date-picker-container"
@@ -21,11 +26,16 @@
       </t-card>
     </t-col>
     <t-col :xs="12" :xl="3">
-      <t-card title="销售渠道" :subtitle="currentMonth" class="dashboard-chart-card" :bordered="false">
+      <t-card
+        :title="$t('pages.dashboardBase.topPanel.analysis.channels')"
+        :subtitle="currentMonth"
+        class="dashboard-chart-card"
+        :bordered="false"
+      >
         <div
           id="countContainer"
-          :style="{ width: `${resizeTime * 326}px`, height: `${resizeTime * 326}px`, margin: '0 auto' }"
           class="dashboard-chart-container"
+          :style="{ width: `${resizeTime * 326}px`, height: `${resizeTime * 326}px`, margin: '0 auto' }"
         />
       </t-card>
     </t-col>

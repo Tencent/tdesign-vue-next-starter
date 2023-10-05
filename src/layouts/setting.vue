@@ -3,14 +3,14 @@
     v-model:visible="showSettingPanel"
     size="408px"
     :footer="false"
-    header="页面配置"
+    :header="$t('layout.setting.title')"
     :close-btn="true"
     class="setting-drawer-container"
     @close-btn-click="handleCloseDrawer"
   >
     <div class="setting-container">
       <t-form ref="form" :data="formData" label-align="left">
-        <div class="setting-group-title">主题模式</div>
+        <div class="setting-group-title">{{ $t('layout.setting.theme.mode') }}</div>
         <t-radio-group v-model="formData.mode">
           <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
             <div>
@@ -21,7 +21,7 @@
             </div>
           </div>
         </t-radio-group>
-        <div class="setting-group-title">主题色</div>
+        <div class="setting-group-title">{{ $t('layout.setting.theme.color') }}</div>
         <t-radio-group v-model="formData.brandTheme">
           <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
@@ -53,7 +53,7 @@
           </div>
         </t-radio-group>
 
-        <div class="setting-group-title">导航布局</div>
+        <div class="setting-group-title">{{ $t('layout.setting.navigationLayout') }}</div>
         <t-radio-group v-model="formData.layout">
           <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item">
@@ -70,23 +70,29 @@
           <t-switch v-model="formData.isSidebarFixed" />
         </t-form-item>
 
-        <div class="setting-group-title">元素开关</div>
-        <t-form-item v-show="formData.layout === 'side'" label="显示 Header" name="showHeader">
+        <div class="setting-group-title">{{ $t('layout.setting.element.title') }}</div>
+        <t-form-item
+          v-show="formData.layout === 'side'"
+          :label="$t('layout.setting.element.showHeader')"
+          name="showHeader"
+        >
           <t-switch v-model="formData.showHeader" />
         </t-form-item>
-        <t-form-item label="显示 Breadcrumbs" name="showBreadcrumb">
+        <t-form-item :label="$t('layout.setting.element.showBreadcrumb')" name="showBreadcrumb">
           <t-switch v-model="formData.showBreadcrumb" />
         </t-form-item>
-        <t-form-item label="显示 Footer" name="showFooter">
+        <t-form-item :label="$t('layout.setting.element.showFooter')" name="showFooter">
           <t-switch v-model="formData.showFooter" />
         </t-form-item>
-        <t-form-item label="使用 多标签Tab页" name="isUseTabsRouter">
+        <t-form-item :label="$t('layout.setting.element.useTagTabs')" name="isUseTabsRouter">
           <t-switch v-model="formData.isUseTabsRouter"></t-switch>
         </t-form-item>
       </t-form>
       <div class="setting-info">
-        <p>请复制后手动修改配置文件: /src/config/style.ts</p>
-        <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
+        <p>{{ $t('layout.setting.tips') }}</p>
+        <t-button theme="primary" variant="text" @click="handleCopy">
+          {{ $t('layout.setting.copy.title') }}
+        </t-button>
       </div>
     </div>
   </t-drawer>
@@ -104,6 +110,7 @@ import ColorContainer from '@/components/color/index.vue';
 import Thumbnail from '@/components/thumbnail/index.vue';
 import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 
 const settingStore = useSettingStore();
@@ -111,9 +118,9 @@ const settingStore = useSettingStore();
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
 
 const MODE_OPTIONS = [
-  { type: 'light', text: '明亮' },
-  { type: 'dark', text: '暗黑' },
-  { type: 'auto', text: '跟随系统' },
+  { type: 'light', text: t('layout.setting.theme.options.light') },
+  { type: 'dark', text: t('layout.setting.theme.options.dark') },
+  { type: 'auto', text: t('layout.setting.theme.options.auto') },
 ];
 
 const initStyleConfig = () => {

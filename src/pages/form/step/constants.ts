@@ -1,26 +1,26 @@
 import { FormRule } from 'tdesign-vue-next';
 
 export const FORM_RULES: Record<string, FormRule[]> = {
-  name: [{ required: true, message: '请选择合同名称', type: 'error' }],
-  type: [{ required: true, message: '请选择发票类型', type: 'error' }],
-  title: [{ required: true, message: '请输入发票抬头', type: 'error' }],
-  taxNum: [{ required: true, message: '请输入纳税人识别号', type: 'error' }],
-  consignee: [{ required: true, message: '请输入收货人', type: 'error' }],
-  mobileNum: [{ required: true, message: '请输入手机号码', type: 'error' }],
-  deliveryAddress: [{ required: true, message: '请选择收货地址', type: 'error' }],
-  fullAddress: [{ required: true, message: '请输入详细地址', type: 'error' }],
+  name: [{ required: true, type: 'error' }],
+  type: [{ required: true, type: 'error' }],
+  title: [{ required: true, type: 'error' }],
+  taxNum: [{ required: true, type: 'error' }],
+  consignee: [{ required: true, type: 'error' }],
+  mobileNum: [{ required: true, type: 'error' }],
+  deliveryAddress: [{ required: true, type: 'error' }],
+  fullAddress: [{ required: true, type: 'error' }],
 };
 
 export const NAME_OPTIONS = [
-  { label: '合同A', value: '1' },
-  { label: '合同B', value: '2' },
-  { label: '合同C', value: '3' },
+  { label: 'A', value: '1' },
+  { label: 'B', value: '2' },
+  { label: 'C', value: '3' },
 ];
 
 export const TYPE_OPTIONS = [
-  { label: '类型A', value: '1' },
-  { label: '类型B', value: '2' },
-  { label: '类型C', value: '3' },
+  { label: 'Type A', value: '1' },
+  { label: 'Type B', value: '2' },
+  { label: 'Type C', value: '3' },
 ];
 
 export const ADDRESS_OPTIONS = [

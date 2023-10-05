@@ -1,46 +1,9 @@
-import { TdBaseTableProps } from 'tdesign-vue-next';
-
-interface DashboardPanel {
-  title: string;
-  number: string | number;
-  leftType: string;
-  upTrend?: string;
-  downTrend?: string;
-}
-
 interface TendItem {
   growUp?: number;
   productName: string;
   count: number;
   date: string;
 }
-
-export const PANE_LIST: Array<DashboardPanel> = [
-  {
-    title: '总收入',
-    number: '¥ 28,425.00',
-    upTrend: '20.5%',
-    leftType: 'echarts-line',
-  },
-  {
-    title: '总退款',
-    number: '¥ 768.00',
-    downTrend: '20.5%',
-    leftType: 'echarts-bar',
-  },
-  {
-    title: '活跃用户（个）',
-    number: '1126',
-    upTrend: '20.5%',
-    leftType: 'icon-usergroup',
-  },
-  {
-    title: '产生订单（个）',
-    number: 527,
-    downTrend: '20.5%',
-    leftType: 'icon-file-paste',
-  },
-];
 
 export const SALE_TEND_LIST: Array<TendItem> = [
   {
@@ -117,77 +80,5 @@ export const BUY_TEND_LIST: Array<TendItem> = [
     productName: '新余市办公用户采购项目',
     count: 2015,
     date: '2021-09-12',
-  },
-];
-
-export const SALE_COLUMNS: TdBaseTableProps['columns'] = [
-  {
-    align: 'center',
-    colKey: 'index',
-    title: '排名',
-    width: 70,
-    fixed: 'left',
-  },
-  {
-    align: 'left',
-    ellipsis: true,
-    colKey: 'productName',
-    title: '客户名称',
-    width: 150,
-  },
-  {
-    align: 'center',
-    colKey: 'growUp',
-    width: 70,
-    title: '较上周',
-  },
-  {
-    align: 'center',
-    colKey: 'count',
-    title: '订单量',
-    width: 70,
-  },
-  {
-    align: 'center',
-    colKey: 'operation',
-    title: '操作',
-    width: 70,
-    fixed: 'right',
-  },
-];
-
-export const BUY_COLUMNS: TdBaseTableProps['columns'] = [
-  {
-    align: 'center',
-    colKey: 'index',
-    title: '排名',
-    width: 70,
-    fixed: 'left',
-  },
-  {
-    align: 'left',
-    ellipsis: true,
-    colKey: 'productName',
-    width: 150,
-    title: '供应商名称',
-  },
-  {
-    align: 'center',
-    colKey: 'growUp',
-    width: 70,
-    title: '较上周',
-  },
-  {
-    align: 'center',
-    colKey: 'count',
-    title: '订单量',
-    width: 70,
-  },
-  {
-    align: 'center',
-    colKey: 'operation',
-    title: '操作',
-    width: 70,
-    fixed: 'right',
   },
 ];

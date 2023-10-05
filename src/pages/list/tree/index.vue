@@ -2,7 +2,7 @@
   <div class="table-tree-container">
     <div class="list-tree-wrapper">
       <div class="list-tree-operator">
-        <t-input v-model="filterText" placeholder="请输入关键词" @change="onInput">
+        <t-input v-model="filterText" :placeholder="$t('pages.listTree.placeholder')" @change="onInput">
           <template #suffix-icon>
             <search-icon size="var(--td-comp-size-xxxs)" />
           </template>
@@ -27,7 +27,8 @@ import { SearchIcon } from 'tdesign-icons-vue-next';
 import type { TreeNodeModel } from 'tdesign-vue-next';
 import { ref } from 'vue';
 
-import CommonTable from '../components/CommonTable.vue';
+import CommonTable from '@/components/common-table/index.vue';
+
 import { TREE_DATA } from './constants';
 
 const filterByText = ref();

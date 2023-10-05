@@ -4,12 +4,12 @@
 
     <div class="login-container">
       <div class="title-container">
-        <h1 class="title margin-no">登录到</h1>
+        <h1 class="title margin-no">{{ $t('pages.login.loginTitle') }}</h1>
         <h1 class="title">TDesign Starter</h1>
         <div class="sub-title">
-          <p class="tip">{{ type == 'register' ? '已有账号?' : '没有账号吗?' }}</p>
+          <p class="tip">{{ type == 'register' ? $t('pages.login.existAccount') : $t('pages.login.noAccount') }}</p>
           <p class="tip" @click="switchType(type == 'register' ? 'login' : 'register')">
-            {{ type == 'register' ? '登录' : '注册新账号' }}
+            {{ type == 'register' ? $t('pages.login.signIn') : $t('pages.login.createAccount') }}
           </p>
         </div>
       </div>
@@ -18,7 +18,7 @@
       <register v-else @register-success="switchType('login')" />
     </div>
 
-    <footer class="copyright">Copyright @ 2021-2022 Tencent. All Rights Reserved</footer>
+    <footer class="copyright">Copyright @ 2021-2023 Tencent. All Rights Reserved</footer>
   </div>
 </template>
 <script lang="ts">
@@ -40,5 +40,5 @@ const switchType = (val: string) => {
 </script>
 
 <style lang="less" scoped>
-@import url('./index.less');
+@import './index.less';
 </style>

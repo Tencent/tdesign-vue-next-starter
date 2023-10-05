@@ -1,6 +1,6 @@
 <template>
-  <result title="500 Internal Server Error" type="500" tip="抱歉，服务器出错啦">
-    <t-button @click="() => $router.push('/')">返回首页</t-button>
+  <result title="500 Internal Server Error" type="500" :tip="$t('pages.result.500.subtitle')">
+    <t-button @click="() => $router.push('/')">{{ $t('pages.result.500.back') }}</t-button>
   </result>
 </template>
 <script lang="ts">

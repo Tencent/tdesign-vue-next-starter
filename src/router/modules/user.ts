@@ -9,13 +9,13 @@ export default [
     name: 'user',
     component: Layout,
     redirect: '/user/index',
-    meta: { title: '个人页', icon: 'user-circle' },
+    meta: { title: { zh_CN: '个人中心', en_US: 'User Center' }, icon: 'user-circle' },
     children: [
       {
         path: 'index',
         name: 'UserIndex',
         component: () => import('@/pages/user/index.vue'),
-        meta: { title: '个人中心' },
+        meta: { title: { zh_CN: '个人中心', en_US: 'User Center' } },
       },
     ],
   },
@@ -23,14 +23,14 @@ export default [
     path: '/loginRedirect',
     name: 'loginRedirect',
     redirect: '/login',
-    meta: { title: '登录页', icon: shallowRef(LogoutIcon) },
+    meta: { title: { zh_CN: '登录页', en_US: 'Login' }, icon: shallowRef(LogoutIcon) },
     component: () => import('@/layouts/blank.vue'),
     children: [
       {
         path: 'index',
         redirect: '/login',
         component: () => import('@/layouts/blank.vue'),
-        meta: { title: '登录中心' },
+        meta: { title: { zh_CN: '登录页', en_US: 'Login' } },
       },
     ],
   },

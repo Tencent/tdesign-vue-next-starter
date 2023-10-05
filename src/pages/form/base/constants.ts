@@ -27,19 +27,19 @@ export const INITIAL_DATA = {
 };
 
 export const TYPE_OPTIONS = [
-  { label: '类型A', value: '1' },
-  { label: '类型B', value: '2' },
-  { label: '类型C', value: '3' },
+  { label: 'Type A', value: '1' },
+  { label: 'Type B', value: '2' },
+  { label: 'Type C', value: '3' },
 ];
 
 export const PARTY_A_OPTIONS = [
-  { label: '公司A', value: '1' },
-  { label: '公司B', value: '2' },
-  { label: '公司C', value: '3' },
+  { label: 'Company A', value: '1' },
+  { label: 'Company B', value: '2' },
+  { label: 'Company C', value: '3' },
 ];
 
 export const PARTY_B_OPTIONS = [
-  { label: '公司A', value: '1' },
-  { label: '公司B', value: '2' },
-  { label: '公司C', value: '3' },
+  { label: 'Company A', value: '1' },
+  { label: 'Company B', value: '2' },
+  { label: 'Company C', value: '3' },
 ];
