@@ -18,7 +18,7 @@ export interface RouteMeta {
 
 export interface MenuRoute {
   path: string;
-  title?: string;
+  title?: string | Record<string, string>;
   name?: string;
   icon?:
     | string
