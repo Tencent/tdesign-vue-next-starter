@@ -1,7 +1,8 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { shallowRef } from 'vue';
 
-import { RouteItem, RouteMeta } from '@/api/model/permissionModel';
+import { RouteItem } from '@/api/model/permissionModel';
+import { RouteMeta } from '@/types/interface';
 import {
   BLANK_LAYOUT,
   EXCEPTION_COMPONENT,
