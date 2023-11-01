@@ -37,7 +37,7 @@
     "vue-router": "~4.2.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.7",
+    "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^17.6.7",
     "@types/echarts": "^4.9.18",
     "@types/lodash": "^4.14.196",
