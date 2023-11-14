@@ -15,7 +15,7 @@ export default {
     title: '创建失败',
     subtitle: '抱歉，您的项目创建失败，企业微信联系检查创建者权限，或返回修改。',
     back: '回到首页',
-    progress: '返回修改',
+    modify: '返回修改',
   },
   success: {
     title: '项目已创建成功',
