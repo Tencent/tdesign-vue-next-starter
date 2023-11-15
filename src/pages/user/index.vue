@@ -105,11 +105,12 @@ import ProductAIcon from '@/assets/assets-product-1.svg';
 import ProductBIcon from '@/assets/assets-product-2.svg';
 import ProductCIcon from '@/assets/assets-product-3.svg';
 import ProductDIcon from '@/assets/assets-product-4.svg';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';
 
-import { PRODUCT_LIST, TEAM_MEMBERS, USER_INFO_LIST } from './constants';
+import { PRODUCT_LIST, TEAM_MEMBERS, UserInfoListType } from './constants';
 import { getFolderLineDataSet } from './index';
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
@@ -118,6 +119,46 @@ let lineContainer: HTMLElement;
 let lineChart: echarts.ECharts;
 const store = useSettingStore();
 const chartColors = computed(() => store.chartColors);
+
+const USER_INFO_LIST: Array<UserInfoListType> = [
+  {
+    title: t('pages.user.personalInfo.desc.mobile'),
+    content: '+86 13923734567',
+  },
+  {
+    title: t('pages.user.personalInfo.desc.phone'),
+    content: '734567',
+  },
+  {
+    title: t('pages.user.personalInfo.desc.email'),
+    content: 'Account@qq.com',
+  },
+  {
+    title: t('pages.user.personalInfo.desc.seat'),
+    content: 'T32F 012',
+  },
+  {
+    title: t('pages.user.personalInfo.desc.entity'),
+    content: '腾讯集团',
+  },
+  {
+    title: t('pages.user.personalInfo.desc.leader'),
+    content: 'Michael Wang',
+  },
+  {
+    title: t('pages.user.personalInfo.desc.position'),
+    content: '高级 UI 设计师',
+  },
+  {
+    title: t('pages.user.personalInfo.desc.joinDay'),
+    content: '2021-07-01',
+  },
+  {
+    title: t('pages.user.personalInfo.desc.group'),
+    content: '腾讯/腾讯公司/某事业群/某产品部/某运营中心/商户服务组',
+    span: 6,
+  },
+];
 
 const onLineChange = (value: DateRangeValue) => {
   lineChart.setOption(
