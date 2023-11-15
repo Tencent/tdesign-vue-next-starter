@@ -65,12 +65,15 @@
       </t-form>
       <div class="setting-info">
         <p>请复制后手动修改配置文件: /src/config/style.ts</p>
+        <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
       </div>
     </div>
   </t-drawer>
 </template>
 <script setup lang="ts">
+import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref, watchEffect } from 'vue';
+import useClipboard from 'vue-clipboard3';
 
 import LayoutMixIcon from '@/assets/assets-layout-mix.svg';
 import LayoutSideIcon from '@/assets/assets-layout-side.svg';
@@ -140,6 +143,20 @@ const handleCloseDrawer = () => {
   settingStore.updateConfig({
     showSettingPanel: false,
   });
+};
+
+const handleCopy = () => {
+  const text = JSON.stringify(formData.value, null, 4);
+  const { toClipboard } = useClipboard();
+  toClipboard(text)
+    .then(() => {
+      MessagePlugin.closeAll();
+      MessagePlugin.success('复制成功');
+    })
+    .catch(() => {
+      MessagePlugin.closeAll();
+      MessagePlugin.error('复制失败');
+    });
 };
 
 watchEffect(() => {
