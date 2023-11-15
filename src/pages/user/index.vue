@@ -16,7 +16,7 @@
           </t-button>
         </template>
         <t-row class="content" justify="space-between">
-          <t-col v-for="(item, index) in USER_INFO_LIST" :key="index" class="contract" :span="item.span ?? 3">
+          <t-col v-for="(item, index) in userInfoList" :key="index" class="contract" :span="item.span ?? 3">
             <div class="contract-title">
               {{ item.title }}
             </div>
@@ -118,6 +118,7 @@ let lineContainer: HTMLElement;
 let lineChart: echarts.ECharts;
 const store = useSettingStore();
 const chartColors = computed(() => store.chartColors);
+const userInfoList = computed(() => USER_INFO_LIST);
 
 const onLineChange = (value: DateRangeValue) => {
   lineChart.setOption(
