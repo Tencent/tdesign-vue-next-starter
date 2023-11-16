@@ -242,7 +242,7 @@ const headerAffixedTop = computed(
     ({
       offsetTop: store.isUseTabsRouter ? 48 : 0,
       container: `.${prefix}-layout`,
-    } as any),
+    }) as any,
 );
 </script>
 
