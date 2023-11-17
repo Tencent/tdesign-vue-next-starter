@@ -19,6 +19,7 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
+    "@vueuse/core": "^10.6.1",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
     "echarts": "5.1.2",
@@ -32,7 +33,6 @@
     "tdesign-vue-next": "^1.6.8",
     "tvision-color": "^1.6.0",
     "vue": "^3.3.8",
-    "vue-clipboard3": "^2.0.0",
     "vue-i18n": "^9.6.5",
     "vue-router": "~4.2.4"
   },
