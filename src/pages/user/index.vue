@@ -18,7 +18,7 @@
         <t-row class="content" justify="space-between">
           <t-col v-for="(item, index) in USER_INFO_LIST" :key="index" class="contract" :span="item.span ?? 3">
             <div class="contract-title">
-              {{ t(item.title) }}
+              {{ $t(item.title) }}
             </div>
             <div class="contract-detail">
               {{ item.content }}
@@ -105,7 +105,6 @@ import ProductAIcon from '@/assets/assets-product-1.svg';
 import ProductBIcon from '@/assets/assets-product-2.svg';
 import ProductCIcon from '@/assets/assets-product-3.svg';
 import ProductDIcon from '@/assets/assets-product-4.svg';
-import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';
