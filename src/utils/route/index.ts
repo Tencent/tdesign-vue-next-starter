@@ -24,7 +24,7 @@ LayoutMap.set('IFRAME', IFRAME);
 let dynamicViewsModules: Record<string, () => Promise<Recordable>>;
 
 // 动态从包内引入单个Icon
-async function getMenuIcon(iconName: string) {
+async function getMenuIcon(iconName: string): Promise<string> {
   const RenderIcon = iconsPath[`../../../node_modules/tdesign-icons-vue-next/esm/components/${iconName}.js`];
 
   const Icon = await RenderIcon();
