@@ -70,11 +70,12 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { useWindowSize } from '@vueuse/core';
 import { LineChart } from 'echarts/charts';
 import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 // 导入样式
 import Trend from '@/components/trend/index.vue';
@@ -127,11 +128,11 @@ onMounted(() => {
   nextTick(() => {
     updateContainer();
   });
-  window.addEventListener('resize', updateContainer, false);
 });
 
-onUnmounted(() => {
-  window.removeEventListener('resize', updateContainer);
+const { width, height } = useWindowSize();
+watch([width, height], () => {
+  updateContainer();
 });
 
 watch(
