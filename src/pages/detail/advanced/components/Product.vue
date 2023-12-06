@@ -21,7 +21,7 @@
       </div>
       <div class="operator-item">
         <span class="operator-item-info">{{ data.info }}</span>
-        <t-icon class="operator-item-icon" name="chevron-right" size="small" style="color: rgba(0, 0, 0, 0.26)" />
+        <t-icon class="operator-item-icon" name="chevron-right" size="small" style="color: rgb(0 0 0 / 26%)" />
       </div>
     </div>
     <div class="operator-footer">
@@ -70,6 +70,9 @@ export default defineComponent({
       font-size: var(--td-comp-size-xxxl);
       padding: calc(var(--td-comp-size-xxxl) - var(--td-comp-size-xl));
       border-radius: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
 
     .operator-title {
@@ -93,12 +96,6 @@ export default defineComponent({
         margin-top: var(--td-comp-margin-l);
         margin-left: unset;
         border: unset;
-      }
-
-      &-icon {
-        position: absolute;
-        top: 0px;
-        right: 0px;
       }
 
       svg {
@@ -136,7 +133,7 @@ export default defineComponent({
   .operator-footer {
     position: absolute;
     width: 100%;
-    bottom: 0px;
+    bottom: 0;
     left: 0;
 
     .t-progress--thin {
@@ -158,11 +155,11 @@ export default defineComponent({
       display: unset;
 
       :deep(.t-progress__bar) {
-        border-radius: 0px 0px var(--td-radius-medium) var(--td-radius-medium);
+        border-radius: 0 0 var(--td-radius-medium) var(--td-radius-medium);
       }
 
       :deep(.t-progress__inner) {
-        border-radius: 0px 0px 0px var(--td-radius-medium);
+        border-radius: 0 0 0 var(--td-radius-medium);
       }
 
       :deep(.t-progress__info) {
