@@ -51,7 +51,8 @@ function asyncImportRoute(routes: RouteItem[] | undefined) {
     } else if (name) {
       item.component = PARENT_LAYOUT();
     }
-    if (item.meta.icon) item.meta.icon = (await getMenuIcon(item.meta.icon)).value;
+
+    if (item.meta.icon) item.meta.icon = await getMenuIcon(item.meta.icon);
 
     // eslint-disable-next-line no-unused-expressions
     children && asyncImportRoute(children);
@@ -102,7 +103,7 @@ export function transformObjectToRoute<T = RouteItem>(routeList: RouteItem[]): T
     }
     // eslint-disable-next-line no-unused-expressions
     route.children && asyncImportRoute(route.children);
-    if (route.meta.icon) route.meta.icon = (await getMenuIcon(route.meta.icon)).value;
+    if (route.meta.icon) route.meta.icon = await getMenuIcon(route.meta.icon);
   });
 
   return [PAGE_NOT_FOUND_ROUTE, ...routeList] as unknown as T[];
