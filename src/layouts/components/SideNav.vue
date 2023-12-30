@@ -124,4 +124,14 @@ const getLogo = () => {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.t-menu--dark {
+  .@{starter-prefix} {
+    &-side-nav-logo {
+      &-tdesign-logo {
+        color: white;
+      }
+    }
+  }
+}
+</style>

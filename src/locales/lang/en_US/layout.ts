@@ -32,6 +32,7 @@ export default {
         auto: 'Follow System',
       },
     },
+    sideIsDark: 'Side Menu Is Dark',
     navigationLayout: 'Navigation Layout',
     splitMenu: 'Split Menu（Only Mix mode）',
     fixedSidebar: 'Fixed Sidebar',
