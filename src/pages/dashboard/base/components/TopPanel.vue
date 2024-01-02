@@ -2,7 +2,7 @@
   <t-row :gutter="[16, 16]">
     <t-col v-for="(item, index) in PANE_LIST" :key="item.title" :xs="6" :xl="3">
       <t-card
-        :title="item.title"
+        :title="t(item.title)"
         :bordered="false"
         :class="{ 'dashboard-item': true, 'dashboard-item--main-color': index == 0 }"
       >
@@ -55,11 +55,12 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { useWindowSize } from '@vueuse/core';
 import { BarChart, LineChart } from 'echarts/charts';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { FileIcon, UsergroupIcon } from 'tdesign-icons-vue-next';
-import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+import { nextTick, onMounted, ref, watch } from 'vue';
 
 // 导入样式
 import Trend from '@/components/trend/index.vue';
@@ -76,25 +77,25 @@ const resizeTime = ref(1);
 
 const PANE_LIST = [
   {
-    title: t('pages.dashboardBase.topPanel.card1'),
+    title: 'pages.dashboardBase.topPanel.card1',
     number: '¥ 28,425.00',
     upTrend: '20.5%',
     leftType: 'echarts-line',
   },
   {
-    title: t('pages.dashboardBase.topPanel.card2'),
+    title: 'pages.dashboardBase.topPanel.card2',
     number: '¥ 768.00',
     downTrend: '20.5%',
     leftType: 'echarts-bar',
   },
   {
-    title: t('pages.dashboardBase.topPanel.card3'),
+    title: 'pages.dashboardBase.topPanel.card3',
     number: '1126',
     upTrend: '20.5%',
     leftType: 'icon-usergroup',
   },
   {
-    title: t('pages.dashboardBase.topPanel.card4'),
+    title: 'pages.dashboardBase.topPanel.card4',
     number: 527,
     downTrend: '20.5%',
     leftType: 'icon-file-paste',
@@ -152,11 +153,11 @@ onMounted(() => {
   nextTick(() => {
     updateContainer();
   });
-  window.addEventListener('resize', updateContainer, false);
 });
 
-onUnmounted(() => {
-  window.removeEventListener('resize', updateContainer);
+const { width, height } = useWindowSize();
+watch([width, height], () => {
+  updateContainer();
 });
 
 watch(

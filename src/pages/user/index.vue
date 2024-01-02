@@ -18,7 +18,7 @@
         <t-row class="content" justify="space-between">
           <t-col v-for="(item, index) in USER_INFO_LIST" :key="index" class="contract" :span="item.span ?? 3">
             <div class="contract-title">
-              {{ item.title }}
+              {{ $t(item.title) }}
             </div>
             <div class="contract-detail">
               {{ item.content }}

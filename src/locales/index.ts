@@ -1,3 +1,4 @@
+import { useLocalStorage, usePreferredLanguages } from '@vueuse/core';
 import { DropdownOption } from 'tdesign-vue-next';
 import { computed } from 'vue';
 import { createI18n } from 'vue-i18n';
@@ -12,19 +13,17 @@ export const langCode: Array<string> = [];
 export const localeConfigKey = 'tdesign-starter-locale';
 
 // 获取浏览器默认语言环境
-const browserLanguage = navigator.language.replace('-', '_');
+const languages = usePreferredLanguages();
 
 // 生成语言模块列表
 const generateLangModuleMap = () => {
   const fullPaths = Object.keys(langModules);
-  console.log(langModules, 'langModules');
   fullPaths.forEach((fullPath) => {
     const k = fullPath.replace('./lang', '');
     const startIndex = 1;
     const lastIndex = k.lastIndexOf('/');
     const code = k.substring(startIndex, lastIndex);
     langCode.push(code);
-    console.log(langCode, 'langCode');
     langModuleMap.set(code, langModules[fullPath]);
   });
 };
@@ -42,7 +41,7 @@ const importMessages = computed(() => {
 
 export const i18n = createI18n({
   legacy: false,
-  locale: localStorage.getItem(localeConfigKey) || browserLanguage || 'zh_CN',
+  locale: useLocalStorage(localeConfigKey, 'zh_CN').value || languages.value[0] || 'zh_CN',
   fallbackLocale: 'zh_CN',
   messages: importMessages.value,
   globalInjection: true,
