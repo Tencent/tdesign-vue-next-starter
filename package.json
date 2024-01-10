@@ -34,7 +34,7 @@
     "tdesign-site-components": "^0.12.9",
     "tdesign-theme-generator": "^1.0.5",
     "tvision-color": "^1.6.0",
-    "vue": "^3.3.8",
+    "vue": "~3.3.8",
     "vue-i18n": "^9.6.5",
     "vue-router": "~4.2.4"
   },
