@@ -103,7 +103,7 @@ export function transformObjectToRoute<T = RouteItem>(routeList: RouteItem[]): T
     }
     // eslint-disable-next-line no-unused-expressions
     route.children && asyncImportRoute(route.children);
-    if (route.meta.icon) route.meta.icon = (await getMenuIcon(route.meta.icon)).value;
+    if (route.meta.icon) route.meta.icon = await getMenuIcon(route.meta.icon);
   });
 
   return [PAGE_NOT_FOUND_ROUTE, ...routeList] as unknown as T[];
