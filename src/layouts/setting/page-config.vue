@@ -71,9 +71,9 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref, watchEffect } from 'vue';
-import useClipboard from 'vue-clipboard3';
 
 import LayoutMixIcon from '@/assets/assets-layout-mix.svg';
 import LayoutSideIcon from '@/assets/assets-layout-side.svg';
@@ -147,8 +147,8 @@ const handleCloseDrawer = () => {
 
 const handleCopy = () => {
   const text = JSON.stringify(formData.value, null, 4);
-  const { toClipboard } = useClipboard();
-  toClipboard(text)
+  const { copy } = useClipboard({ source: text });
+  copy(text)
     .then(() => {
       MessagePlugin.closeAll();
       MessagePlugin.success('复制成功');
@@ -190,6 +190,7 @@ const dynamicColor = computed(() => {
   .t-drawer__mask {
     background: none;
   }
+
   .t-drawer__body {
     padding: var(--td-comp-paddingTB-s) var(--td-comp-paddingLR-s);
     background-color: var(--td-bg-color-secondarycontainer);
@@ -215,6 +216,7 @@ const dynamicColor = computed(() => {
     padding: var(--td-comp-paddingTB-l) var(--td-comp-paddingLR-l);
     border-radius: var(--td-radius-extraLarge);
     height: 100%;
+
     &-subgroup {
       margin: var(--td-comp-margin-m) 0;
     }
@@ -224,6 +226,7 @@ const dynamicColor = computed(() => {
     background-color: var(--td-bg-color-secondarycontainer);
     border-radius: var(--td-radius-large);
     padding: var(--td-comp-paddingTB-xs) var(--td-comp-paddingLR-xs);
+
     > .t-form__item {
       background-color: var(--td-bg-color-container);
       margin-bottom: var(--td-comp-margin-xs);
@@ -235,6 +238,7 @@ const dynamicColor = computed(() => {
       border-radius: var(--td-radius-medium);
     }
   }
+
   .setting-group-title {
     text-align: left;
     font: var(--td-font-title-medium);
@@ -252,13 +256,16 @@ const dynamicColor = computed(() => {
       padding: 0;
       border-radius: var(--td-radius-default);
       border: none;
+
       > .t-radio-button__label {
         display: inline-flex;
         position: relative;
+
         .mode-img,
         .layout-img {
           border-radius: 9px;
         }
+
         .picked {
           position: absolute;
           right: 0;
