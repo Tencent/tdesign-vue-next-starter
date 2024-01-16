@@ -1,7 +1,7 @@
 <template>
   <t-config-provider :global-config="getComponentsLocale">
-    <router-view :key="locale" :class="[mode]"
-  /></t-config-provider>
+    <router-view :key="locale" :class="[mode]" />
+  </t-config-provider>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
