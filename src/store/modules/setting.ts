@@ -33,6 +33,9 @@ export const useSettingStore = defineStore('setting', {
       }
       return state.mode as 'dark' | 'light';
     },
+    displaySideMode: (state): 'dark' | 'light' => {
+      return state.sideIsDark as 'dark' | 'light';
+    },
   },
   actions: {
     async changeMode(mode: 'dark' | 'light' | 'auto') {
@@ -71,6 +74,9 @@ export const useSettingStore = defineStore('setting', {
       insertThemeStylesheet(brandTheme, colorMap, mode as 'light' | 'dark');
       document.documentElement.setAttribute('theme-color', brandTheme);
     },
+    changeSideTheme(sideTheme: string) {
+      this.sideIsDark = sideTheme;
+    },
     updateConfig(payload: Partial<TState>) {
       for (const key in payload) {
         if (payload[key as TStateKey] !== undefined) {
@@ -81,6 +87,9 @@ export const useSettingStore = defineStore('setting', {
         }
         if (key === 'brandTheme') {
           this.changeBrandTheme(payload[key]);
+        }
+        if (key === 'sideIsDark') {
+          this.changeSideTheme(payload[key]);
         }
       }
     },

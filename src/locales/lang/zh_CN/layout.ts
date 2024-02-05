@@ -32,6 +32,7 @@ export default {
         auto: '跟随系统',
       },
     },
+    sideIsDark: '侧边栏深色',
     navigationLayout: '导航布局',
     splitMenu: '分割菜单（混合模式下有效）',
     fixedSidebar: '固定侧边栏',

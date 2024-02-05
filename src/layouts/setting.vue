@@ -62,6 +62,9 @@
           </div>
         </t-radio-group>
 
+        <t-form-item :label="$t('layout.setting.sideIsDark')" name="sideIsDark">
+          <t-switch v-model="formData.sideIsDark" :custom-value="['dark', 'light']" />
+        </t-form-item>
         <t-form-item v-show="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
           <t-switch v-model="formData.splitMenu" />
         </t-form-item>
