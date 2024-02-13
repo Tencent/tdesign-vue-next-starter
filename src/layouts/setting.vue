@@ -25,7 +25,7 @@
         <t-radio-group v-model="formData.sideMode">
           <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
             <div>
-              <t-radio-button :key="index" :value="item.type"
+              <t-radio-button :key="index" :value="item.type" :disabled="item.type === 'auto'"
                 ><component :is="getModeIcon(item.type)"
               /></t-radio-button>
               <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>

@@ -34,13 +34,6 @@ export const useSettingStore = defineStore('setting', {
       return state.mode as 'dark' | 'light';
     },
     displaySideMode: (state): 'dark' | 'light' => {
-      if (state.sideMode === 'auto') {
-        const media = window.matchMedia('(prefers-color-scheme:dark)');
-        if (media.matches) {
-          return 'dark';
-        }
-        return 'light';
-      }
       return state.sideMode as 'dark' | 'light';
     },
   },
@@ -57,13 +50,8 @@ export const useSettingStore = defineStore('setting', {
 
       this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
     },
-    async changeSideMode(mode: 'dark' | 'light' | 'auto') {
-      let sideMode = mode;
-
-      if (mode === 'auto') {
-        sideMode = this.getMediaColor();
-      }
-      const isDarkMode = sideMode === 'dark';
+    async changeSideMode(mode: 'dark' | 'light') {
+      const isDarkMode = mode === 'dark';
 
       document.documentElement.setAttribute('side-mode', isDarkMode ? 'dark' : '');
     },
