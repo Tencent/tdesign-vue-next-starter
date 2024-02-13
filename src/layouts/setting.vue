@@ -62,11 +62,15 @@
           </div>
         </t-radio-group>
 
-        <t-form-item v-show="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
+        <t-form-item v-show="formData.layout === 'mix'" :label="$t('layout.setting.splitMenu')" name="splitMenu">
           <t-switch v-model="formData.splitMenu" />
         </t-form-item>
 
-        <t-form-item v-show="formData.layout === 'mix'" label="固定 Sidebar" name="isSidebarFixed">
+        <t-form-item
+          v-show="formData.layout === 'mix'"
+          :label="$t('layout.setting.fixedSidebar')"
+          name="isSidebarFixed"
+        >
           <t-switch v-model="formData.isSidebarFixed" />
         </t-form-item>
 
