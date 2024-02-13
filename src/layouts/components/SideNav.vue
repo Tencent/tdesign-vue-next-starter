@@ -3,12 +3,12 @@
     <t-menu :class="menuCls" :theme="theme" :value="active" :collapsed="collapsed" :default-expanded="defaultExpanded">
       <template #logo>
         <span v-if="showLogo" :class="`${prefix}-side-nav-logo-wrapper`" @click="goHome">
-          <component :is="getLogo()" :class="`${prefix}-side-nav-logo-${collapsed ? 't' : 'tdesign'}-logo`" />
+          <component :is="getLogo()" :class="logoCls" />
         </span>
       </template>
       <menu-content :nav-data="menu" />
       <template #operations>
-        <span class="version-container"> {{ !collapsed ? 'TDesign Starter' : '' }} {{ pgk.version }} </span>
+        <span :class="versionCls"> {{ !collapsed ? 'TDesign Starter' : '' }} {{ pgk.version }} </span>
       </template>
     </t-menu>
     <div :class="`${prefix}-side-nav-placeholder${collapsed ? '-hidden' : ''}`"></div>
@@ -75,6 +75,10 @@ const defaultExpanded = computed(() => {
   return union(expanded, parentPath === '' ? [] : [parentPath]);
 });
 
+const sideMode = computed(() => {
+  const { theme } = props;
+  return theme === 'dark';
+});
 const sideNavCls = computed(() => {
   const { isCompact } = props;
   return [
@@ -84,7 +88,22 @@ const sideNavCls = computed(() => {
     },
   ];
 });
-
+const logoCls = computed(() => {
+  return [
+    `${prefix}-side-nav-logo-${collapsed.value ? 't' : 'tdesign'}-logo`,
+    {
+      [`${prefix}-side-nav-dark`]: sideMode.value,
+    },
+  ];
+});
+const versionCls = computed(() => {
+  return [
+    `version-container`,
+    {
+      [`${prefix}-side-nav-dark`]: sideMode.value,
+    },
+  ];
+});
 const menuCls = computed(() => {
   const { showLogo, isFixed, layout } = props;
   return [

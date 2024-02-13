@@ -21,6 +21,17 @@
             </div>
           </div>
         </t-radio-group>
+        <div class="setting-group-title">{{ $t('layout.setting.sideMode') }}</div>
+        <t-radio-group v-model="formData.sideMode">
+          <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
+            <div>
+              <t-radio-button :key="index" :value="item.type"
+                ><component :is="getModeIcon(item.type)"
+              /></t-radio-button>
+              <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
+            </div>
+          </div>
+        </t-radio-group>
         <div class="setting-group-title">{{ $t('layout.setting.theme.color') }}</div>
         <t-radio-group v-model="formData.brandTheme">
           <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
@@ -52,7 +63,6 @@
             </t-popup>
           </div>
         </t-radio-group>
-
         <div class="setting-group-title">{{ $t('layout.setting.navigationLayout') }}</div>
         <t-radio-group v-model="formData.layout">
           <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
@@ -65,7 +75,6 @@
         <t-form-item v-show="formData.layout === 'mix'" :label="$t('layout.setting.splitMenu')" name="splitMenu">
           <t-switch v-model="formData.splitMenu" />
         </t-form-item>
-
         <t-form-item
           v-show="formData.layout === 'mix'"
           :label="$t('layout.setting.fixedSidebar')"
