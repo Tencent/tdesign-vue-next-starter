@@ -33,24 +33,35 @@ export const useSettingStore = defineStore('setting', {
       }
       return state.mode as 'dark' | 'light';
     },
+    displaySideMode: (state): 'dark' | 'light' => {
+      return state.sideMode as 'dark' | 'light';
+    },
   },
   actions: {
     async changeMode(mode: 'dark' | 'light' | 'auto') {
       let theme = mode;
 
       if (mode === 'auto') {
-        const media = window.matchMedia('(prefers-color-scheme:dark)');
-        if (media.matches) {
-          theme = 'dark';
-        } else {
-          theme = 'light';
-        }
+        theme = this.getMediaColor();
       }
       const isDarkMode = theme === 'dark';
 
       document.documentElement.setAttribute('theme-mode', isDarkMode ? 'dark' : '');
 
       this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
+    },
+    async changeSideMode(mode: 'dark' | 'light') {
+      const isDarkMode = mode === 'dark';
+
+      document.documentElement.setAttribute('side-mode', isDarkMode ? 'dark' : '');
+    },
+    getMediaColor() {
+      const media = window.matchMedia('(prefers-color-scheme:dark)');
+
+      if (media.matches) {
+        return 'dark';
+      }
+      return 'light';
     },
     changeBrandTheme(brandTheme: string) {
       const mode = this.displayMode;
@@ -78,6 +89,9 @@ export const useSettingStore = defineStore('setting', {
         }
         if (key === 'mode') {
           this.changeMode(payload[key]);
+        }
+        if (key === 'sideMode') {
+          this.changeSideMode(payload[key]);
         }
         if (key === 'brandTheme') {
           this.changeBrandTheme(payload[key]);
