@@ -21,17 +21,6 @@
             </div>
           </div>
         </t-radio-group>
-        <div class="setting-group-title">{{ $t('layout.setting.sideMode') }}</div>
-        <t-radio-group v-model="formData.sideMode">
-          <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
-            <div>
-              <t-radio-button :key="index" :value="item.type" :disabled="item.type === 'auto'"
-                ><component :is="getModeIcon(item.type)"
-              /></t-radio-button>
-              <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
-            </div>
-          </div>
-        </t-radio-group>
         <div class="setting-group-title">{{ $t('layout.setting.theme.color') }}</div>
         <t-radio-group v-model="formData.brandTheme">
           <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
@@ -84,6 +73,12 @@
         </t-form-item>
 
         <div class="setting-group-title">{{ $t('layout.setting.element.title') }}</div>
+        <t-form-item :label="$t('layout.setting.sideMode')" name="sideMode">
+          <t-radio-group v-model="formData.sideMode" class="side-mode-radio">
+            <t-radio-button key="light" value="light" :label="$t('layout.setting.theme.options.light')" />
+            <t-radio-button key="dark" value="dark" :label="$t('layout.setting.theme.options.dark')" />
+          </t-radio-group>
+        </t-form-item>
         <t-form-item
           v-show="formData.layout === 'side'"
           :label="$t('layout.setting.element.showHeader')"
@@ -308,6 +303,10 @@ watchEffect(() => {
     width: 100%;
     justify-content: space-between;
     align-items: center;
+
+    &.side-mode-radio {
+      justify-content: end;
+    }
   }
 
   .t-radio-group.t-size-m .t-radio-button {
