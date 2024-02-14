@@ -367,8 +367,8 @@ export function getPieChartDataSet({
         emphasis: {
           scale: true,
           label: {
-            show: true,
-            formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
+            show: false,
+            // formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'), 就是这个东西造成文字重叠
             rich: {
               value: {
                 color: textColor,
