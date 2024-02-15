@@ -97,6 +97,25 @@ const renderCountChart = () => {
   }
   countChart = echarts.init(countContainer);
   countChart.setOption(getPieChartDataSet(chartColors.value));
+
+  // 取消之前高亮的图形
+  countChart.dispatchAction({
+    type: 'downplay',
+    seriesIndex: 0,
+    dataIndex: -1,
+  });
+  // 高亮当前图形
+  countChart.dispatchAction({
+    type: 'highlight',
+    seriesIndex: 0,
+    dataIndex: 1,
+  });
+  // 显示 tooltip
+  countChart.dispatchAction({
+    type: 'showTip',
+    seriesIndex: 0,
+    dataIndex: 1,
+  });
 };
 
 const renderCharts = () => {
