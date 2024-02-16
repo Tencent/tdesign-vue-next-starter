@@ -17,7 +17,9 @@
       "@/*": ["src/*"]
     },
     "noImplicitAny": true,
-    "noImplicitThis": true
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
   },
   "include": [
     "**/*.ts",
