@@ -85,7 +85,7 @@ import { langList } from '@/locales/index';
 import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
 import { useSettingStore, useUserStore } from '@/store';
-import type { MenuRoute } from '@/types/interface';
+import type { MenuRoute, ModeType } from '@/types/interface';
 
 import MenuContent from './MenuContent.vue';
 import Notice from './Notice.vue';
@@ -147,7 +147,7 @@ const menuCls = computed(() => {
     },
   ];
 });
-const menuTheme = computed(() => props.theme as 'light' | 'dark');
+const menuTheme = computed(() => props.theme as ModeType);
 
 // 切换语言
 const { changeLocale } = useLocale();
