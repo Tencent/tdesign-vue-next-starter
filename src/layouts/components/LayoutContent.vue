@@ -7,7 +7,7 @@
       :class="`${prefix}-layout-tabs-nav`"
       :value="$route.path"
       :style="{ position: 'sticky', top: 0, width: '100%' }"
-      @change="handleChangeCurrentTab"
+      @change="(value) => handleChangeCurrentTab(value as string)"
       @remove="handleRemove"
       @drag-sort="handleDragend"
     >

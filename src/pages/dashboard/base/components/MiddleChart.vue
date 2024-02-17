@@ -14,7 +14,7 @@
               theme="primary"
               mode="date"
               :default-value="LAST_7_DAYS"
-              @change="onCurrencyChange"
+              @change="(value) => onCurrencyChange(value as string[])"
             />
           </div>
         </template>
