@@ -16,7 +16,11 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
   },
   "include": [
     "**/*.ts",

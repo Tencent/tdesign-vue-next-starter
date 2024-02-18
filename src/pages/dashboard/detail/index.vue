@@ -26,7 +26,7 @@
               theme="primary"
               mode="date"
               style="width: 248px"
-              @change="onMaterialChange"
+              @change="(value) => onMaterialChange(value as string[])"
             />
           </template>
           <div id="lineContainer" style="width: 100%; height: 416px" />

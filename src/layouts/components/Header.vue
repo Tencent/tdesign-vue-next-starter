@@ -38,9 +38,13 @@
               <translate-icon />
             </t-button>
             <t-dropdown-menu>
-              <t-dropdown-item v-for="(lang, index) in langList" :key="index" :value="lang.value" @click="changeLang">{{
-                lang.content
-              }}</t-dropdown-item></t-dropdown-menu
+              <t-dropdown-item
+                v-for="(lang, index) in langList"
+                :key="index"
+                :value="lang.value"
+                @click="(options) => changeLang(options.value as string)"
+                >{{ lang.content }}</t-dropdown-item
+              ></t-dropdown-menu
             >
           </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
@@ -85,7 +89,7 @@ import { langList } from '@/locales/index';
 import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
 import { useSettingStore, useUserStore } from '@/store';
-import type { MenuRoute } from '@/types/interface';
+import type { MenuRoute, ModeType } from '@/types/interface';
 
 import MenuContent from './MenuContent.vue';
 import Notice from './Notice.vue';
@@ -147,11 +151,11 @@ const menuCls = computed(() => {
     },
   ];
 });
-const menuTheme = computed(() => props.theme as 'light' | 'dark');
+const menuTheme = computed(() => props.theme as ModeType);
 
 // 切换语言
 const { changeLocale } = useLocale();
-const changeLang = ({ value: lang }: { value: string }) => {
+const changeLang = (lang: string) => {
   changeLocale(lang);
 };
 

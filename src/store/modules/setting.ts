@@ -2,15 +2,16 @@ import keys from 'lodash/keys';
 import { defineStore } from 'pinia';
 import { Color } from 'tvision-color';
 
-import { DARK_CHART_COLORS, LIGHT_CHART_COLORS } from '@/config/color';
+import { DARK_CHART_COLORS, LIGHT_CHART_COLORS, TColorSeries } from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
+import { ModeType } from '@/types/interface';
 import { generateColorMap, insertThemeStylesheet } from '@/utils/color';
 
-const state = {
+const state: Record<string, any> = {
   ...STYLE_CONFIG,
   showSettingPanel: false,
-  colorList: {},
+  colorList: {} as TColorSeries,
   chartColors: LIGHT_CHART_COLORS,
 };
 
@@ -23,7 +24,7 @@ export const useSettingStore = defineStore('setting', {
     showSidebar: (state) => state.layout !== 'top',
     showSidebarLogo: (state) => state.layout === 'side',
     showHeaderLogo: (state) => state.layout !== 'side',
-    displayMode: (state): 'dark' | 'light' => {
+    displayMode: (state): ModeType => {
       if (state.mode === 'auto') {
         const media = window.matchMedia('(prefers-color-scheme:dark)');
         if (media.matches) {
@@ -31,14 +32,14 @@ export const useSettingStore = defineStore('setting', {
         }
         return 'light';
       }
-      return state.mode as 'dark' | 'light';
+      return state.mode as ModeType;
     },
-    displaySideMode: (state): 'dark' | 'light' => {
-      return state.sideMode as 'dark' | 'light';
+    displaySideMode: (state): ModeType => {
+      return state.sideMode as ModeType;
     },
   },
   actions: {
-    async changeMode(mode: 'dark' | 'light' | 'auto') {
+    async changeMode(mode: ModeType | 'auto') {
       let theme = mode;
 
       if (mode === 'auto') {
@@ -50,7 +51,7 @@ export const useSettingStore = defineStore('setting', {
 
       this.chartColors = isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS;
     },
-    async changeSideMode(mode: 'dark' | 'light') {
+    async changeSideMode(mode: ModeType) {
       const isDarkMode = mode === 'dark';
 
       document.documentElement.setAttribute('side-mode', isDarkMode ? 'dark' : '');
@@ -75,23 +76,23 @@ export const useSettingStore = defineStore('setting', {
           step: 10,
           remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
         });
-        colorMap = generateColorMap(brandTheme, newPalette, mode as 'light' | 'dark', brandColorIndex);
+        colorMap = generateColorMap(brandTheme, newPalette, mode, brandColorIndex);
         this.colorList[colorKey] = colorMap;
       }
       // TODO 需要解决不停切换时有反复插入 style 的问题
-      insertThemeStylesheet(brandTheme, colorMap, mode as 'light' | 'dark');
+      insertThemeStylesheet(brandTheme, colorMap, mode);
       document.documentElement.setAttribute('theme-color', brandTheme);
     },
     updateConfig(payload: Partial<TState>) {
       for (const key in payload) {
         if (payload[key as TStateKey] !== undefined) {
-          this[key] = payload[key as TStateKey];
+          this[key as TStateKey] = payload[key as TStateKey];
         }
         if (key === 'mode') {
-          this.changeMode(payload[key]);
+          this.changeMode(payload[key] as ModeType);
         }
         if (key === 'sideMode') {
-          this.changeSideMode(payload[key]);
+          this.changeSideMode(payload[key] as ModeType);
         }
         if (key === 'brandTheme') {
           this.changeBrandTheme(payload[key]);

@@ -31,7 +31,7 @@
         :header-affixed-top="headerAffixedTop"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
-        @select-change="rehandleSelectChange"
+        @select-change="(value) => rehandleSelectChange(value as number[])"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
