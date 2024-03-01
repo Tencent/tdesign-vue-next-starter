@@ -45,7 +45,7 @@
     "@types/lodash": "^4.14.201",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.9.11",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
