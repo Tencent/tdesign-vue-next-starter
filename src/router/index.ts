@@ -1,5 +1,5 @@
 import uniq from 'lodash/uniq';
-import { createRouter, createWebHistory, RouteRecordRaw, useRoute } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 const env = import.meta.env.MODE || 'development';
 
@@ -59,7 +59,8 @@ export const getRoutesExpanded = () => {
 };
 
 export const getActive = (maxLevel = 3): string => {
-  const route = useRoute();
+  // 非组件内调用必须通过Router实例获取当前路由
+  const route = router.currentRoute.value;
 
   if (!route.path) {
     return '';
