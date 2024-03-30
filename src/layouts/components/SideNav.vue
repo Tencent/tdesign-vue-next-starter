@@ -6,7 +6,7 @@
           <component :is="getLogo()" :class="logoCls" />
         </span>
       </template>
-      <menu-content :nav-data="menu" />
+      <menu-content :nav-data="menu" v-model:active="active"/>
       <template #operations>
         <span :class="versionCls"> {{ !collapsed ? 'TDesign Starter' : '' }} {{ pgk.version }} </span>
       </template>
