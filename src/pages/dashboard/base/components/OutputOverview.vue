@@ -14,7 +14,7 @@
               theme="primary"
               mode="date"
               :default-value="LAST_7_DAYS"
-              @change="onStokeDataChange"
+              @change="(value) => onStokeDataChange(value as string[])"
             />
           </template>
           <div id="stokeContainer" style="width: 100%; height: 351px" class="dashboard-chart-container"></div>

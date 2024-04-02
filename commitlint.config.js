@@ -1,5 +1,5 @@
 // commit-lint config
-module.exports = {
+export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'type-enum': [
