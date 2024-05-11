@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   defaultSeverity: 'error',
   extends: ['stylelint-config-standard'],
   rules: {
@@ -13,6 +13,7 @@ module.exports = {
         ignorePseudoClasses: ['deep'],
       },
     ],
+    'media-query-no-invalid': null, // 官方表示此规则应当仅对于原生CSS启用，对于预处理器（Less）不应启用
   },
   overrides: [
     {

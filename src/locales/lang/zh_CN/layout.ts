@@ -33,6 +33,7 @@ export default {
       },
     },
     navigationLayout: '导航布局',
+    sideMode: '侧边栏模式',
     splitMenu: '分割菜单（混合模式下有效）',
     fixedSidebar: '固定侧边栏',
     element: {

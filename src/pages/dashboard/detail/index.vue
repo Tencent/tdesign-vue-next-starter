@@ -26,7 +26,7 @@
               theme="primary"
               mode="date"
               style="width: 248px"
-              @change="onMaterialChange"
+              @change="(value) => onMaterialChange(value as string[])"
             />
           </template>
           <div id="lineContainer" style="width: 100%; height: 416px" />
@@ -69,11 +69,12 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { useWindowSize } from '@vueuse/core';
 import { LineChart, ScatterChart } from 'echarts/charts';
 import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
-import { computed, nextTick, onDeactivated, onMounted, onUnmounted, watch } from 'vue';
+import { computed, nextTick, onDeactivated, onMounted, watch } from 'vue';
 
 import ProductCard from '@/components/product-card/index.vue';
 import Trend from '@/components/trend/index.vue';
@@ -126,14 +127,14 @@ const renderCharts = () => {
 
 onMounted(() => {
   renderCharts();
-  window.addEventListener('resize', updateContainer, false);
   nextTick(() => {
     updateContainer();
   });
 });
 
-onUnmounted(() => {
-  window.removeEventListener('resize', updateContainer);
+const { width, height } = useWindowSize();
+watch([width, height], () => {
+  updateContainer();
 });
 
 onDeactivated(() => {

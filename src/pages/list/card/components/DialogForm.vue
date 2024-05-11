@@ -74,7 +74,7 @@ const formVisible = ref(false);
 const formData = ref({ ...INITIAL_DATA });
 const textareaValue = ref('');
 
-const onSubmit = ({ validateResult, firstError }: SubmitContext<FormData>) => {
+const onSubmit = ({ validateResult, firstError }: SubmitContext) => {
   if (!firstError) {
     MessagePlugin.success('提交成功');
     formVisible.value = false;

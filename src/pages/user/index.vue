@@ -15,16 +15,11 @@
             <t-icon name="ellipsis" />
           </t-button>
         </template>
-        <t-row class="content" justify="space-between">
-          <t-col v-for="(item, index) in USER_INFO_LIST" :key="index" class="contract" :span="item.span ?? 3">
-            <div class="contract-title">
-              {{ item.title }}
-            </div>
-            <div class="contract-detail">
-              {{ item.content }}
-            </div>
-          </t-col>
-        </t-row>
+        <t-descriptions :column="4" item-layout="vertical">
+          <t-descriptions-item v-for="(item, index) in USER_INFO_LIST" :key="index" :label="$t(item.title)">
+            {{ item.content }}
+          </t-descriptions-item>
+        </t-descriptions>
       </t-card>
 
       <t-card class="content-container" :bordered="false">
@@ -185,4 +180,8 @@ watch(
 
 <style lang="less" scoped>
 @import './index.less';
+
+.t-descriptions {
+  margin-top: 24px;
+}
 </style>

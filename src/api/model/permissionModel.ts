@@ -1,5 +1,7 @@
 import { defineComponent } from 'vue';
 
+import { RouteMeta } from '@/types/interface';
+
 export interface MenuListResult {
   list: Array<RouteItem>;
 }
@@ -17,16 +19,4 @@ export interface RouteItem {
   redirect?: string;
   meta: RouteMeta;
   children?: Array<RouteItem>;
-}
-export interface RouteMeta {
-  title: string;
-  icon?: string;
-  expanded?: boolean;
-  orderNo?: number;
-  hidden?: boolean;
-  hiddenBreadcrumb?: boolean;
-  single?: boolean;
-  keepAlive?: boolean;
-  frameSrc?: string;
-  frameBlank?: boolean;
 }

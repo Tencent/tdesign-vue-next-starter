@@ -3,4 +3,8 @@
 [ -n "$CI" ] && exit 0
 . "$(dirname "$0")/_/husky.sh"
 
-exec < /dev/tty && npx git-cz --hook || true
+if [[ "$OS" == "Windows_NT" ]]; then
+  exec < /dev/tty && npx.cmd git-cz --hook || true
+else
+  exec < /dev/tty && npx git-cz --hook || true
+fi

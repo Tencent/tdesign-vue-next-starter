@@ -145,7 +145,7 @@ export default [
     },
   },
   {
-    url: '/api/get-menu-list',
+    url: '/api/get-menu-list-i18n',
     method: 'get',
     timeout: 2000,
     response: {
@@ -159,7 +159,10 @@ export default [
               component: 'LAYOUT',
               redirect: '/list/base',
               meta: {
-                title: '列表页',
+                title: {
+                  zh_CN: '列表页',
+                  en_US: 'List',
+                },
                 icon: 'view-list',
               },
               children: [
@@ -168,7 +171,10 @@ export default [
                   name: 'ListBase',
                   component: '/list/base/index',
                   meta: {
-                    title: '基础列表页',
+                    title: {
+                      zh_CN: '基础列表页',
+                      en_US: 'Base List',
+                    },
                   },
                 },
                 {
@@ -176,7 +182,10 @@ export default [
                   name: 'ListCard',
                   component: '/list/card/index',
                   meta: {
-                    title: '卡片列表页',
+                    title: {
+                      zh_CN: '卡片列表页',
+                      en_US: 'Card List',
+                    },
                   },
                 },
                 {
@@ -184,7 +193,10 @@ export default [
                   name: 'ListFilter',
                   component: '/list/filter/index',
                   meta: {
-                    title: '筛选列表页',
+                    title: {
+                      zh_CN: '筛选列表页',
+                      en_US: 'Filter List',
+                    },
                   },
                 },
                 {
@@ -192,7 +204,10 @@ export default [
                   name: 'ListTree',
                   component: '/list/tree/index',
                   meta: {
-                    title: '树状筛选列表页',
+                    title: {
+                      zh_CN: '树状筛选列表页',
+                      en_US: 'Tree List',
+                    },
                   },
                 },
               ],
@@ -203,7 +218,10 @@ export default [
               component: 'LAYOUT',
               redirect: '/form/base',
               meta: {
-                title: '表单页',
+                title: {
+                  zh_CN: '表单页',
+                  en_US: 'Form',
+                },
                 icon: 'edit-1',
               },
               children: [
@@ -212,7 +230,10 @@ export default [
                   name: 'FormBase',
                   component: '/form/base/index',
                   meta: {
-                    title: '基础表单页',
+                    title: {
+                      zh_CN: '基础表单页',
+                      en_US: 'Base Form',
+                    },
                   },
                 },
                 {
@@ -220,8 +241,10 @@ export default [
                   name: 'FormStep',
                   component: '/form/step/index',
                   meta: {
-                    title: '分步表单页',
-                    keepAlive: false,
+                    title: {
+                      zh_CN: '分步表单页',
+                      en_US: 'Step Form',
+                    },
                   },
                 },
               ],
@@ -232,7 +255,10 @@ export default [
               component: 'LAYOUT',
               redirect: '/detail/base',
               meta: {
-                title: '详情页',
+                title: {
+                  zh_CN: '详情页',
+                  en_US: 'Detail',
+                },
                 icon: 'layers',
               },
               children: [
@@ -241,7 +267,10 @@ export default [
                   name: 'DetailBase',
                   component: '/detail/base/index',
                   meta: {
-                    title: '基础详情页',
+                    title: {
+                      zh_CN: '基础详情页',
+                      en_US: 'Base Detail',
+                    },
                   },
                 },
                 {
@@ -249,7 +278,10 @@ export default [
                   name: 'DetailAdvanced',
                   component: '/detail/advanced/index',
                   meta: {
-                    title: '多卡片详情页',
+                    title: {
+                      zh_CN: '多卡片详情页',
+                      en_US: 'Card Detail',
+                    },
                   },
                 },
                 {
@@ -257,7 +289,10 @@ export default [
                   name: 'DetailDeploy',
                   component: '/detail/deploy/index',
                   meta: {
-                    title: '数据详情页',
+                    title: {
+                      zh_CN: '数据详情页',
+                      en_US: 'Data Detail',
+                    },
                   },
                 },
                 {
@@ -265,7 +300,10 @@ export default [
                   name: 'DetailSecondary',
                   component: '/detail/secondary/index',
                   meta: {
-                    title: '二级详情页',
+                    title: {
+                      zh_CN: '二级详情页',
+                      en_US: 'Secondary Detail',
+                    },
                   },
                 },
               ],
@@ -277,7 +315,10 @@ export default [
               redirect: '/frame/doc',
               meta: {
                 icon: 'internet',
-                title: '外部页面',
+                title: {
+                  zh_CN: '外部页面',
+                  en_US: 'External',
+                },
               },
               children: [
                 {
@@ -286,7 +327,10 @@ export default [
                   component: 'IFrame',
                   meta: {
                     frameSrc: 'https://tdesign.tencent.com/starter/docs/vue-next/get-started',
-                    title: '使用文档（内嵌）',
+                    title: {
+                      zh_CN: '使用文档（内嵌）',
+                      en_US: 'Documentation(IFrame)',
+                    },
                   },
                 },
                 {
@@ -295,7 +339,10 @@ export default [
                   component: 'IFrame',
                   meta: {
                     frameSrc: 'https://tdesign.tencent.com/vue-next/getting-started',
-                    title: 'TDesign 文档（内嵌）',
+                    title: {
+                      zh_CN: 'TDesign 文档（内嵌）',
+                      en_US: 'TDesign (IFrame)',
+                    },
                   },
                 },
                 {
@@ -305,7 +352,10 @@ export default [
                   meta: {
                     frameSrc: 'https://tdesign.tencent.com/vue-next/getting-started',
                     frameBlank: true,
-                    title: 'TDesign 文档（外链）',
+                    title: {
+                      zh_CN: 'TDesign 文档（外链',
+                      en_US: 'TDesign Doc(Link)',
+                    },
                   },
                 },
               ],

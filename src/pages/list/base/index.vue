@@ -31,7 +31,7 @@
         :header-affixed-top="headerAffixedTop"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
-        @select-change="rehandleSelectChange"
+        @select-change="(value: number[]) => rehandleSelectChange(value)"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
@@ -242,7 +242,7 @@ const headerAffixedTop = computed(
     ({
       offsetTop: store.isUseTabsRouter ? 48 : 0,
       container: `.${prefix}-layout`,
-    } as any),
+    }) as any,
 );
 </script>
 

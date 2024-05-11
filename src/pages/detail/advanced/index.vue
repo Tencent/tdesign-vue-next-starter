@@ -1,9 +1,8 @@
 <template>
   <div class="detail-advanced">
-    <t-card :title="$t('pages.detailCard.baseInfo.title')" :bordered="false">
-      <div class="info-block">
-        <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
-          <h1>{{ item.name }}</h1>
+    <t-card :bordered="false">
+      <t-descriptions :title="$t('pages.detailCard.baseInfo.title')">
+        <t-descriptions-item v-for="(item, index) in BASE_INFO_DATA" :key="index" :label="item.name">
           <span
             :class="{
               ['inProgress']: item.type && item.type.value === 'inProgress',
@@ -13,8 +12,8 @@
             <i v-if="item.type && item.type.key === 'contractStatus'" />
             {{ item.value }}
           </span>
-        </div>
-      </div>
+        </t-descriptions-item>
+      </t-descriptions>
     </t-card>
 
     <!-- 发票进度 -->
@@ -113,18 +112,19 @@
     <t-dialog v-model:visible="visible" :header="$t('pages.detailCard.baseInfo.title')" @confirm="onConfirm">
       <template #body>
         <div class="dialog-info-block">
-          <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
-            <h1>{{ item.name }}</h1>
-            <span
-              :class="{
-                ['inProgress']: item.type && item.type.value === 'inProgress',
-                ['pdf']: item.type && item.type.value === 'pdf',
-              }"
-            >
-              <i v-if="item.type && item.type.key === 'contractStatus'" />
-              {{ item.value }}
-            </span>
-          </div>
+          <t-descriptions :column="1">
+            <t-descriptions-item v-for="(item, index) in BASE_INFO_DATA" :key="index" :label="item.name">
+              <span
+                :class="{
+                  ['inProgress']: item.type && item.type.value === 'inProgress',
+                  ['pdf']: item.type && item.type.value === 'pdf',
+                }"
+              >
+                <i v-if="item.type && item.type.key === 'contractStatus'" />
+                {{ item.value }}
+              </span>
+            </t-descriptions-item>
+          </t-descriptions>
         </div>
       </template>
     </t-dialog>
