@@ -21,7 +21,6 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
-    "@types/mockjs": "^1.0.10",
     "@vueuse/core": "^10.7.2",
     "axios": "^1.6.7",
     "dayjs": "^1.11.10",
@@ -66,6 +65,7 @@
     "less": "^4.2.0",
     "lint-staged": "^15.2.2",
     "mockjs": "^1.1.0",
+    "@types/mockjs": "^1.0.10",
     "postcss-html": "^1.6.0",
     "postcss-less": "^6.0.0",
     "prettier": "^3.2.5",
