@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import union from 'lodash/union';
+import uniq from 'lodash/uniq';
 import { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
 import { computed, onMounted, ref, watch } from 'vue';
@@ -32,8 +32,8 @@ import { useRouter } from 'vue-router';
 import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
 import AssetLogo from '@/assets/assets-t-logo.svg?component';
 import { prefix } from '@/config/global';
-import { getActive, getRoutesExpanded } from '@/router';
-import { useSettingStore } from '@/store';
+import { getActive } from '@/router';
+import { useSettingStore, useTabsRouterStore } from '@/store';
 import type { MenuRoute, ModeType } from '@/types/interface';
 
 import pgk from '../../../package.json';
@@ -73,14 +73,16 @@ const props = defineProps({
 });
 
 const collapsed = computed(() => useSettingStore().isSidebarCompact);
+const tabsRouterStore = useTabsRouterStore();
 
 const active = computed(() => getActive());
 
 const getExpanded = (): MenuValue[] => {
-  const path = getActive();
-  const parentPath = path.substring(0, path.lastIndexOf('/'));
-  const expanded = getRoutesExpanded();
-  return union(expanded, parentPath === '' ? [] : [parentPath]);
+  console.log(tabsRouterStore.tabRouterList);
+  const parentPaths = tabsRouterStore.tabRouterList.map((item) => {
+    return item.path.substring(0, item.path.lastIndexOf('/'));
+  });
+  return uniq(parentPaths);
 };
 
 const expanded = ref<MenuValue[]>(getExpanded());
