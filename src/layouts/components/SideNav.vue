@@ -1,6 +1,13 @@
 <template>
   <div :class="sideNavCls">
-    <t-menu :class="menuCls" :theme="theme" :value="active" :collapsed="collapsed" :default-expanded="defaultExpanded">
+    <t-menu
+      :class="menuCls"
+      :theme="theme"
+      :value="active"
+      :collapsed="collapsed"
+      :expanded="expanded"
+      @expand="handExpanded"
+    >
       <template #logo>
         <span v-if="showLogo" :class="`${prefix}-side-nav-logo-wrapper`" @click="goHome">
           <component :is="getLogo()" :class="logoCls" />
@@ -17,8 +24,9 @@
 
 <script setup lang="ts">
 import union from 'lodash/union';
+import { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
@@ -68,12 +76,25 @@ const collapsed = computed(() => useSettingStore().isSidebarCompact);
 
 const active = computed(() => getActive());
 
-const defaultExpanded = computed(() => {
+const getExpanded = (): MenuValue[] => {
   const path = getActive();
   const parentPath = path.substring(0, path.lastIndexOf('/'));
   const expanded = getRoutesExpanded();
   return union(expanded, parentPath === '' ? [] : [parentPath]);
-});
+};
+
+const expanded = ref<MenuValue[]>(getExpanded());
+
+watch(
+  () => getActive(),
+  () => {
+    expanded.value = getExpanded();
+  },
+);
+
+const handExpanded = (val: MenuValue[]) => {
+  expanded.value = val;
+};
 
 const sideMode = computed(() => {
   const { theme } = props;
