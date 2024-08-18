@@ -42,6 +42,7 @@ export default {
       showBreadcrumb: '显示面包屑',
       showFooter: '显示页脚',
       useTagTabs: '展示多标签Tab页',
+      menuAutoCollapsed: '菜单自动折叠',
     },
     tips: '请复制后手动修改配置文件: /src/config/style.ts',
     copy: {

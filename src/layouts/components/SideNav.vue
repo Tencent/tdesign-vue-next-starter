@@ -6,6 +6,7 @@
       :value="active"
       :collapsed="collapsed"
       :expanded="expanded"
+      :expand-mutex="menuAutoCollapsed"
       @expand="onExpanded"
     >
       <template #logo>
@@ -73,6 +74,7 @@ const props = defineProps({
 });
 
 const collapsed = computed(() => useSettingStore().isSidebarCompact);
+const menuAutoCollapsed = computed(() => useSettingStore().menuAutoCollapsed);
 
 const active = computed(() => getActive());
 
@@ -83,7 +85,7 @@ watch(
   () => {
     const path = getActive();
     const parentPath = path.substring(0, path.lastIndexOf('/'));
-    expanded.value = union([parentPath], expanded.value);
+    expanded.value = menuAutoCollapsed.value ? [parentPath] : union([parentPath], expanded.value);
   },
 );
 
