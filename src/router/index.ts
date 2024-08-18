@@ -39,6 +39,10 @@ export function mapModuleRouterList(modules: Record<string, unknown>): Array<Rou
   return routerList;
 }
 
+/**
+ *
+ * @deprecated 未使用
+ */
 export const getRoutesExpanded = () => {
   const expandedRoutes: Array<string> = [];
 
