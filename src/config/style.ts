@@ -13,4 +13,5 @@ export default {
   isUseTabsRouter: false,
   showHeader: true,
   brandTheme: '#0052D9',
+  toggleHeadVisible: false,
 };

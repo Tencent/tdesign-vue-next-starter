@@ -98,6 +98,9 @@
         <t-form-item :label="$t('layout.setting.element.menuAutoCollapsed')" name="menuAutoCollapsed">
           <t-switch v-model="formData.menuAutoCollapsed"></t-switch>
         </t-form-item>
+        <t-form-item :label="$t('layout.setting.element.toggleHeadVisible')" name="toggleHeadVisible">
+          <t-switch v-model="formData.toggleHeadVisible"></t-switch>
+        </t-form-item>
       </t-form>
       <div class="setting-info">
         <p>{{ $t('layout.setting.tips') }}</p>

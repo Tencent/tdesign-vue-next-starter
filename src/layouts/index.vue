@@ -59,8 +59,46 @@ const appendNewRoute = () => {
   tabsRouterStore.appendTabRouterList({ path, query, title: title as string, name, isAlive: true, meta: route.meta });
 };
 
+const toggleHeadVisible = () => {
+  const layoutElement = document.querySelector(`.${prefix}-layout`);
+
+  if (layoutElement) {
+    const { scrollTop } = layoutElement;
+    const headerMenuFixedElement = document.querySelector(`.${prefix}-header-menu-fixed`);
+    const headerMenuFixedElementHeight = headerMenuFixedElement.scrollHeight;
+
+    // 面包屑fixed在头部
+    if (settingStore.showBreadcrumb) {
+      document.querySelector(`.t-layout__header`)?.setAttribute('style', `position:relative;`);
+      const breadcrumbElement = document.querySelector(`.t-breadcrumb`);
+
+      if (scrollTop > headerMenuFixedElementHeight && settingStore.toggleHeadVisible) {
+        headerMenuFixedElement.setAttribute('style', 'display: none;');
+        breadcrumbElement.setAttribute('style', 'position:absolute;top:18px;');
+      } else {
+        headerMenuFixedElement.setAttribute('style', null);
+        breadcrumbElement.setAttribute('style', null);
+      }
+    } else {
+      const headerElement = document.querySelector(`.t-layout__header`);
+
+      if (scrollTop > headerMenuFixedElementHeight && settingStore.toggleHeadVisible) {
+        headerElement.setAttribute('style', 'display: none;');
+        (layoutElement as HTMLElement).style.height = '100vh';
+      } else {
+        headerElement.setAttribute('style', null);
+        (layoutElement as HTMLElement).style.height = 'calc(100vh - var(--td-comp-size-xxxl))';
+      }
+    }
+  }
+};
+
 onMounted(() => {
   appendNewRoute();
+  const targetElement = document.querySelector(`.${prefix}-layout`);
+  if (targetElement) {
+    targetElement.addEventListener('scroll', toggleHeadVisible);
+  }
 });
 
 watch(

@@ -40,6 +40,7 @@ export default {
       title: '元素开关',
       showHeader: '显示顶栏',
       showBreadcrumb: '显示面包屑',
+      toggleHeadVisible: '切换顶栏显示',
       showFooter: '显示页脚',
       useTagTabs: '展示多标签Tab页',
       menuAutoCollapsed: '菜单自动折叠',
