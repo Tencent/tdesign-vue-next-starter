@@ -27,7 +27,7 @@
 import '@/style/layout.less';
 
 import { storeToRefs } from 'pinia';
-import { computed, onMounted, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { prefix } from '@/config/global';
@@ -60,6 +60,7 @@ const appendNewRoute = () => {
 };
 
 const toggleHeadVisible = () => {
+  console.log('toggleHeadVisible');
   const layoutElement = document.querySelector(`.${prefix}-layout`);
 
   if (layoutElement) {
@@ -81,24 +82,42 @@ const toggleHeadVisible = () => {
       }
     } else {
       const headerElement = document.querySelector(`.t-layout__header`);
+      const sideNavMixFixedElement = document.querySelector(`.${prefix}-side-nav-mix-fixed`);
 
       if (scrollTop > headerMenuFixedElementHeight && settingStore.toggleHeadVisible) {
         headerElement.setAttribute('style', 'display: none;');
         (layoutElement as HTMLElement).style.height = '100vh';
+        sideNavMixFixedElement?.setAttribute('style', 'top: 0;');
       } else {
         headerElement.setAttribute('style', null);
         (layoutElement as HTMLElement).style.height = 'calc(100vh - var(--td-comp-size-xxxl))';
+        sideNavMixFixedElement?.setAttribute('style', null);
       }
     }
   }
 };
 
-onMounted(() => {
-  appendNewRoute();
+const toggleHeadVisibleScrollListener = () => {
   const targetElement = document.querySelector(`.${prefix}-layout`);
   if (targetElement) {
     targetElement.addEventListener('scroll', toggleHeadVisible);
   }
+};
+
+onMounted(() => {
+  appendNewRoute();
+
+  toggleHeadVisibleScrollListener();
+  const observer = new MutationObserver(() => {
+    toggleHeadVisibleScrollListener();
+    console.log('MutationObserver');
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  onBeforeUnmount(() => {
+    observer.disconnect();
+  });
 });
 
 watch(
