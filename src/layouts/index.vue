@@ -60,7 +60,6 @@ const appendNewRoute = () => {
 };
 
 const toggleHeadVisible = () => {
-  console.log('toggleHeadVisible');
   const layoutElement = document.querySelector(`.${prefix}-layout`);
 
   if (layoutElement) {
@@ -110,7 +109,6 @@ onMounted(() => {
   toggleHeadVisibleScrollListener();
   const observer = new MutationObserver(() => {
     toggleHeadVisibleScrollListener();
-    console.log('MutationObserver');
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
