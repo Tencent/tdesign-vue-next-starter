@@ -1,11 +1,11 @@
 <template>
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="6">
-      <t-card :title="$t('pages.dashboardBase.rankList.title')" class="dashboard-rank-card" :bordered="false">
+      <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
         <template #actions>
           <t-radio-group default-value="dateVal" variant="default-filled">
-            <t-radio-button value="dateVal">{{ $t('pages.dashboardBase.rankList.week') }}</t-radio-button>
-            <t-radio-button value="monthVal">{{ $t('pages.dashboardBase.rankList.month') }}</t-radio-button>
+            <t-radio-button value="dateVal">本周</t-radio-button>
+            <t-radio-button value="monthVal">近三月</t-radio-button>
           </t-radio-group>
         </template>
         <t-table :data="SALE_TEND_LIST" :columns="SALE_COLUMNS" row-key="productName">
@@ -20,19 +20,17 @@
             </span>
           </template>
           <template #operation="slotProps">
-            <t-link theme="primary" @click="rehandleClickOp(slotProps)">{{
-              $t('pages.dashboardBase.rankList.info')
-            }}</t-link>
+            <t-link theme="primary" @click="rehandleClickOp(slotProps)">详情</t-link>
           </template>
         </t-table>
       </t-card>
     </t-col>
     <t-col :xs="12" :xl="6">
-      <t-card :title="$t('pages.dashboardBase.rankList.title')" class="dashboard-rank-card" :bordered="false">
+      <t-card title="销售订单排名" class="dashboard-rank-card" :bordered="false">
         <template #actions>
           <t-radio-group default-value="dateVal" variant="default-filled">
-            <t-radio-button value="dateVal">{{ $t('pages.dashboardBase.rankList.week') }}</t-radio-button>
-            <t-radio-button value="monthVal">{{ $t('pages.dashboardBase.rankList.month') }}</t-radio-button>
+            <t-radio-button value="dateVal">本周</t-radio-button>
+            <t-radio-button value="monthVal">近三月</t-radio-button>
           </t-radio-group>
         </template>
         <t-table :data="BUY_TEND_LIST" :columns="BUY_COLUMNS" row-key="productName">
@@ -45,9 +43,7 @@
             <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
           </template>
           <template #operation="slotProps">
-            <t-link theme="primary" @click="rehandleClickOp(slotProps)">{{
-              $t('pages.dashboardBase.rankList.info')
-            }}</t-link>
+            <t-link theme="primary" @click="rehandleClickOp(slotProps)">详情</t-link>
           </template>
         </t-table>
       </t-card>
@@ -59,7 +55,6 @@
 import type { TdBaseTableProps } from 'tdesign-vue-next';
 
 import Trend from '@/components/trend/index.vue';
-import { t } from '@/locales';
 
 import { BUY_TEND_LIST, SALE_TEND_LIST } from '../constants';
 
@@ -67,7 +62,7 @@ const SALE_COLUMNS: TdBaseTableProps['columns'] = [
   {
     align: 'center',
     colKey: 'index',
-    title: t('pages.dashboardBase.saleColumns.index'),
+    title: '排名',
     width: 70,
     fixed: 'left',
   },
@@ -75,25 +70,25 @@ const SALE_COLUMNS: TdBaseTableProps['columns'] = [
     align: 'left',
     ellipsis: true,
     colKey: 'productName',
-    title: t('pages.dashboardBase.saleColumns.productName'),
+    title: '客户名称',
     width: 150,
   },
   {
     align: 'center',
     colKey: 'growUp',
     width: 70,
-    title: t('pages.dashboardBase.saleColumns.growUp'),
+    title: '较上周',
   },
   {
     align: 'center',
     colKey: 'count',
-    title: t('pages.dashboardBase.saleColumns.count'),
+    title: '订单量',
     width: 70,
   },
   {
     align: 'center',
     colKey: 'operation',
-    title: t('pages.dashboardBase.saleColumns.operation'),
+    title: '操作',
     width: 70,
     fixed: 'right',
   },
@@ -103,7 +98,7 @@ const BUY_COLUMNS: TdBaseTableProps['columns'] = [
   {
     align: 'center',
     colKey: 'index',
-    title: t('pages.dashboardBase.buyColumns.index'),
+    title: '排名',
     width: 70,
     fixed: 'left',
   },
@@ -112,24 +107,24 @@ const BUY_COLUMNS: TdBaseTableProps['columns'] = [
     ellipsis: true,
     colKey: 'productName',
     width: 150,
-    title: t('pages.dashboardBase.buyColumns.productName'),
+    title: '客户名称',
   },
   {
     align: 'center',
     colKey: 'growUp',
     width: 70,
-    title: t('pages.dashboardBase.buyColumns.growUp'),
+    title: '较上周',
   },
   {
     align: 'center',
     colKey: 'count',
-    title: t('pages.dashboardBase.buyColumns.count'),
+    title: '订单量',
     width: 70,
   },
   {
     align: 'center',
     colKey: 'operation',
-    title: t('pages.dashboardBase.buyColumns.operation'),
+    title: '操作',
     width: 70,
     fixed: 'right',
   },

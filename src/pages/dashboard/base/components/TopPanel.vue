@@ -32,7 +32,7 @@
         <template #footer>
           <div class="dashboard-item-bottom">
             <div class="dashboard-item-block">
-              {{ $t('pages.dashboardBase.topPanel.cardTips') }}
+              自从上周以来
               <trend
                 class="dashboard-item-trend"
                 :type="item.upTrend ? 'up' : 'down'"
@@ -64,7 +64,6 @@ import { nextTick, onMounted, ref, watch } from 'vue';
 
 // 导入样式
 import Trend from '@/components/trend/index.vue';
-import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
