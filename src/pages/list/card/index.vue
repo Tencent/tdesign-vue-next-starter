@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="list-card-operation">
-      <t-button @click="formDialogVisible = true"> {{ $t('pages.listCard.create') }} </t-button>
+      <t-button @click="formDialogVisible = true"> 新建产品 </t-button>
       <div class="search-input">
-        <t-input v-model="searchValue" :placeholder="$t('pages.listCard.placeholder')" clearable>
+        <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
           <template #suffix-icon>
             <search-icon v-if="searchValue === ''" size="var(--td-comp-size-xxxs)" />
           </template>

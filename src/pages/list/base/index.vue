@@ -3,16 +3,12 @@
     <t-card class="list-card-container" :bordered="false">
       <t-row justify="space-between">
         <div class="left-operation-container">
-          <t-button @click="handleSetupContract"> {{ $t('pages.listBase.create') }} </t-button>
-          <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length">
-            {{ $t('pages.listBase.export') }}</t-button
-          >
-          <p v-if="!!selectedRowKeys.length" class="selected-count">
-            {{ $t('pages.listBase.select') }} {{ selectedRowKeys.length }} {{ $t('pages.listBase.items') }}
-          </p>
+          <t-button @click="handleSetupContract"> 新建合同 </t-button>
+          <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length"> 导出合同 </t-button>
+          <p v-if="!!selectedRowKeys.length" class="selected-count">已选{{ selectedRowKeys.length }}项</p>
         </div>
         <div class="search-input">
-          <t-input v-model="searchValue" :placeholder="$t('pages.listBase.placeholder')" clearable>
+          <t-input v-model="searchValue" placeholder="请输入你需要搜索的内容" clearable>
             <template #suffix-icon>
               <search-icon size="16px" />
             </template>
@@ -31,45 +27,33 @@
         :header-affixed-top="headerAffixedTop"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
-        @select-change="(value: number[]) => rehandleSelectChange(value)"
+        @select-change="rehandleSelectChange"
       >
         <template #status="{ row }">
-          <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.fail') }}</t-tag
-          >
-          <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.audit') }}
-          </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.pending') }}
-          </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.executing') }}
-          </t-tag>
-          <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.finish') }}
-          </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light"> 审核失败 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light"> 待审核 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light"> 待履行 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light"> 履行中 </t-tag>
+          <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light"> 已完成 </t-tag>
         </template>
         <template #contractType="{ row }">
-          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ $t('pages.listBase.contractStatusEnum.fail') }}</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ $t('pages.listBase.contractStatusEnum.audit') }}</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">
-            {{ $t('pages.listBase.contractStatusEnum.pending') }}
-          </p>
+          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">审核失败</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUB">待审核</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">待履行</p>
         </template>
         <template #paymentType="{ row }">
           <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-            {{ $t('pages.listBase.pay') }}<trend class="dashboard-item-trend" type="up" />
+            付款<trend class="dashboard-item-trend" type="up" />
           </div>
           <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECEIPT" class="payment-col">
-            {{ $t('pages.listBase.receive') }}<trend class="dashboard-item-trend" type="down" />
+            收款<trend class="dashboard-item-trend" type="down" />
           </div>
         </template>
 
         <template #op="slotProps">
           <t-space>
-            <t-link theme="primary" @click="handleClickDetail()"> {{ $t('pages.listBase.detail') }}</t-link>
-            <t-link theme="danger" @click="handleClickDelete(slotProps)"> {{ $t('pages.listBase.delete') }}</t-link>
+            <t-link theme="primary" @click="handleClickDetail()">详情</t-link>
+            <t-link theme="danger" @click="handleClickDelete(slotProps)">删除</t-link>
           </t-space>
         </template>
       </t-table>
@@ -93,7 +77,7 @@ export default {
 
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
-import { MessagePlugin, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -101,53 +85,11 @@ import { getList } from '@/api/list';
 import Trend from '@/components/trend/index.vue';
 import { prefix } from '@/config/global';
 import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
-import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 
-const store = useSettingStore();
+import { COLUMNS } from './constants';
 
-const COLUMNS: PrimaryTableCol<TableRowData>[] = [
-  { colKey: 'row-select', type: 'multiple', width: 64, fixed: 'left' },
-  {
-    title: t('pages.listBase.contractName'),
-    align: 'left',
-    width: 320,
-    colKey: 'name',
-    fixed: 'left',
-  },
-  { title: t('pages.listBase.contractStatus'), colKey: 'status', width: 160 },
-  {
-    title: t('pages.listBase.contractNum'),
-    width: 160,
-    ellipsis: true,
-    colKey: 'no',
-  },
-  {
-    title: t('pages.listBase.contractType'),
-    width: 160,
-    ellipsis: true,
-    colKey: 'contractType',
-  },
-  {
-    title: t('pages.listBase.contractPayType'),
-    width: 160,
-    ellipsis: true,
-    colKey: 'paymentType',
-  },
-  {
-    title: t('pages.listBase.contractAmount'),
-    width: 160,
-    ellipsis: true,
-    colKey: 'amount',
-  },
-  {
-    title: t('pages.listBase.operation'),
-    align: 'left',
-    fixed: 'right',
-    width: 160,
-    colKey: 'op',
-  },
-];
+const store = useSettingStore();
 
 const data = ref([]);
 const pagination = ref({

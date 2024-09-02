@@ -1,29 +1,29 @@
 <template>
-  <t-dialog v-model:visible="formVisible" :header="$t('pages.listCard.create')" :width="680" :footer="false">
+  <t-dialog v-model:visible="formVisible" header="新建产品" :width="680" :footer="false">
     <template #body>
       <!-- 表单内容 -->
       <t-form ref="form" :data="formData" :rules="rules" :label-width="100" @submit="onSubmit">
-        <t-form-item :label="$t('pages.listCard.productName')" name="name">
-          <t-input v-model="formData.name" :style="{ width: '480px' }" />
+        <t-form-item label="产品名称" name="name">
+          <t-input v-model="formData.name" :style="{ width: '480px' }" placeholder="请输入产品名称" />
         </t-form-item>
-        <t-form-item :label="$t('pages.listCard.productStatus')" name="status">
+        <t-form-item label="产品状态" name="status">
           <t-radio-group v-model="formData.status">
-            <t-radio value="0">{{ $t('pages.listCard.productStatusEnum.off') }}</t-radio>
-            <t-radio value="1">{{ $t('pages.listCard.productStatusEnum.on') }}</t-radio>
+            <t-radio value="0">已停用</t-radio>
+            <t-radio value="1">已启用</t-radio>
           </t-radio-group>
         </t-form-item>
-        <t-form-item :label="$t('pages.listCard.productDescription')" name="description">
-          <t-input v-model="formData.description" :style="{ width: '480px' }" />
+        <t-form-item label="产品描述" name="description">
+          <t-input v-model="formData.description" :style="{ width: '480px' }" placeholder="请输入产品描述" />
         </t-form-item>
-        <t-form-item :label="$t('pages.listCard.productType')" name="type">
+        <t-form-item label="产品类型" name="type">
           <t-select v-model="formData.type" clearable :style="{ width: '480px' }">
             <t-option v-for="(item, index) in SELECT_OPTIONS" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
         </t-form-item>
-        <t-form-item :label="$t('pages.listCard.productRemark')" name="mark">
-          <t-textarea v-model="textareaValue" :style="{ width: '480px' }" name="description" />
+        <t-form-item label="备注" name="mark">
+          <t-textarea v-model="textareaValue" :style="{ width: '480px' }" placeholder="请输入内容" name="description" />
         </t-form-item>
         <t-form-item style="float: right">
           <t-button variant="outline" @click="onClickCloseBtn">取消</t-button>
