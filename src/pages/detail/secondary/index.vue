@@ -18,14 +18,14 @@
                   <t-tooltip
                     class="set-read-icon"
                     :overlay-style="{ margin: '6px' }"
-                    :content="item.status ? $t('pages.detailSecondary.setRead') : $t('pages.detailSecondary.setUnread')"
+                    :content="item.status ? '设为已读' : '设为未读'"
                   >
                     <span class="msg-action-icon" @click="setReadStatus(item)">
                       <t-icon v-if="!!item.status" name="queue" size="16px" />
                       <t-icon v-else name="chat" />
                     </span>
                   </t-tooltip>
-                  <t-tooltip :content="t('pages.detailSecondary.delete')" :overlay-style="{ margin: '6px' }">
+                  <t-tooltip content="删除通知" :overlay-style="{ margin: '6px' }">
                     <span @click="handleClickDeleteBtn(item)">
                       <t-icon name="delete" size="16px" />
                     </span>
@@ -36,7 +36,7 @@
           </t-list>
           <div v-else class="secondary-msg-list__empty-list">
             <empty-icon></empty-icon>
-            <p>{{ t('pages.detailSecondary.empty') }}</p>
+            <p>暂无通知</p>
           </div>
         </t-tab-panel>
       </t-tabs>
@@ -62,21 +62,20 @@ import { computed, ref } from 'vue';
 
 import EmptyIcon from '@/assets/assets-empty.svg?component';
 import { NOTIFICATION_TYPES } from '@/constants';
-import { t } from '@/locales';
 import { useNotificationStore } from '@/store';
 import type { NotificationItem } from '@/types/interface';
 
 const TAB_LIST = [
   {
-    label: t('pages.detailSecondary.all'),
+    label: '全部通知',
     value: 'msgData',
   },
   {
-    label: t('pages.detailSecondary.unread'),
+    label: '未读通知',
     value: 'unreadMsg',
   },
   {
-    label: t('pages.detailSecondary.read'),
+    label: '已读通知',
     value: 'readMsg',
   },
 ];

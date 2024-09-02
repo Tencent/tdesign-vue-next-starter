@@ -1,5 +1,4 @@
 import { TChartColor } from '@/config/color';
-import { t } from '@/locales/index';
 import { getDateArray, getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
 
@@ -53,7 +52,7 @@ export function getSmoothLineDataSet({
       },
     },
     legend: {
-      data: [t('pages.detailDeploy.deployTrend.thisMonth'), t('pages.detailDeploy.deployTrend.lastMonth')],
+      data: ['本月', '上月'],
       icon: 'circle',
       bottom: '0',
       itemGap: 48,
@@ -66,7 +65,7 @@ export function getSmoothLineDataSet({
     },
     series: [
       {
-        name: t('pages.detailDeploy.deployTrend.lastMonth'),
+        name: '上月',
         data: [
           getRandomArray(),
           getRandomArray(),
@@ -87,7 +86,7 @@ export function getSmoothLineDataSet({
         },
       },
       {
-        name: t('pages.detailDeploy.deployTrend.thisMonth'),
+        name: '本月',
         data: [
           getRandomArray(),
           getRandomArray(),
@@ -130,11 +129,6 @@ export function get2ColBarChartDataSet({
     thisYearListCopy = thisYearListCopy.reverse();
   }
 
-  const data = [];
-  for (let i = 1; i < 7; i++) {
-    data.push(t(`pages.detailDeploy.deployTrend.week${i}`));
-  }
-
   return {
     color: getChartListColor(),
     tooltip: {
@@ -150,7 +144,7 @@ export function get2ColBarChartDataSet({
     xAxis: [
       {
         type: 'category',
-        data,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
         axisTick: {
           alignWithLabel: true,
         },
@@ -179,7 +173,7 @@ export function get2ColBarChartDataSet({
       },
     ],
     legend: {
-      data: [t('pages.detailDeploy.deployTrend.lastYear'), t('pages.detailDeploy.deployTrend.thisYear')],
+      data: ['去年', '今年'],
       bottom: '0',
       icon: 'rect',
       itemGap: 48,
@@ -192,7 +186,7 @@ export function get2ColBarChartDataSet({
     },
     series: [
       {
-        name: t('pages.detailDeploy.deployTrend.lastYear'),
+        name: '去年',
         type: 'bar',
         barWidth: '30%',
         data: lastYearListCopy,
@@ -201,7 +195,7 @@ export function get2ColBarChartDataSet({
         },
       },
       {
-        name: t('pages.detailDeploy.deployTrend.thisYear'),
+        name: '今年',
         type: 'bar',
         barWidth: '30%',
         data: thisYearListCopy,

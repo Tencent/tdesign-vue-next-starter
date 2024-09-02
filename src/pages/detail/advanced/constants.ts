@@ -1,13 +1,11 @@
-import { t } from '@/locales';
-
 export const BASE_INFO_DATA = [
   {
-    name: t('constants.contract.name'),
+    name: '合同名称',
     value: '总部办公用品采购项目',
     type: null,
   },
   {
-    name: t('constants.contract.status'),
+    name: '合同状态',
     value: '履行中',
     type: {
       key: 'contractStatus',
@@ -15,52 +13,52 @@ export const BASE_INFO_DATA = [
     },
   },
   {
-    name: t('constants.contract.num'),
+    name: '合同编号',
     value: 'BH00010',
     type: null,
   },
   {
-    name: t('constants.contract.type'),
-    value: t('constants.contract.typeOptions.main'),
+    name: '合同类型',
+    value: '主合同',
     type: null,
   },
   {
-    name: t('constants.contract.payType'),
-    value: t('constants.contract.pay'),
+    name: '合同收付类型',
+    value: '付款',
     type: null,
   },
   {
-    name: t('constants.contract.amount'),
-    value: '¥ 5,000,000',
+    name: '合同金额',
+    value: '5,000,000元',
     type: null,
   },
   {
-    name: t('constants.contract.company'),
+    name: '甲方',
     value: '腾讯科技（深圳）有限公司',
     type: null,
   },
   {
-    name: t('constants.contract.employee'),
+    name: '乙方',
     value: '欧尚',
     type: null,
   },
   {
-    name: t('constants.contract.signDate'),
+    name: '合同签订日期',
     value: '2020-12-20',
     type: null,
   },
   {
-    name: t('constants.contract.effectiveDate'),
+    name: '合同生效日期',
     value: '2021-01-20',
     type: null,
   },
   {
-    name: t('constants.contract.endDate'),
+    name: '合同结束日期',
     value: '2022-12-20',
     type: null,
   },
   {
-    name: t('constants.contract.attachment'),
+    name: '合同附件',
     value: '总部办公用品采购项目合同.pdf',
     type: {
       key: 'contractAnnex',
@@ -68,14 +66,65 @@ export const BASE_INFO_DATA = [
     },
   },
   {
-    name: t('constants.contract.remark'),
+    name: '备注',
     value: '--',
     type: null,
   },
   {
-    name: t('constants.contract.createDate'),
+    name: '创建时间',
     value: '2020-12-22 10:00:00',
     type: null,
+  },
+];
+
+export const TABLE_COLUMNS_DATA = [
+  {
+    width: 280,
+    ellipsis: true,
+    colKey: 'index',
+    title: '申请号',
+    sorter: (a: any, b: any) => a.index.substr(3) - b.index.substr(3),
+  },
+  {
+    width: 200,
+    ellipsis: true,
+    colKey: 'pdName',
+    title: '产品名称',
+    sorter: (a: any, b: any) => a.pdName.length - b.pdName.length,
+  },
+  {
+    width: 200,
+    ellipsis: true,
+    colKey: 'pdNum',
+    title: '产品编号',
+  },
+  {
+    width: 160,
+    ellipsis: true,
+    colKey: 'purchaseNum',
+    title: '采购数量',
+    sorter: (a: any, b: any) => a.purchaseNum - b.purchaseNum,
+  },
+  {
+    width: 160,
+    ellipsis: true,
+    colKey: 'adminName',
+    title: '申请部门',
+  },
+  {
+    width: 200,
+    ellipsis: true,
+    colKey: 'updateTime',
+    title: '创建时间',
+    sorter: (a: any, b: any) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
+  },
+  {
+    align: 'left' as const,
+    fixed: 'right' as const,
+    width: 200,
+    className: 'test2',
+    colKey: 'op',
+    title: '操作',
   },
 ];
 

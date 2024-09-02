@@ -80,3 +80,36 @@ export const BASE_INFO_DATA = [
     type: null,
   },
 ];
+
+export const TABLE_COLUMNS = [
+  {
+    width: '280',
+    ellipsis: true,
+    colKey: 'name',
+    title: '项目名称',
+    sorter: (a: any, b: any) => a.name.substr(10) - b.name.substr(10),
+  },
+  {
+    width: '280',
+    ellipsis: true,
+    colKey: 'adminName',
+    title: '管理员',
+  },
+  {
+    width: '280',
+    className: 'test',
+    ellipsis: true,
+    colKey: 'updateTime',
+    title: '创建时间',
+    sorter: (a: any, b: any) => Date.parse(a.updateTime) - Date.parse(b.updateTime),
+  },
+  {
+    align: 'left' as const,
+    width: '200',
+    className: 'test2',
+    ellipsis: true,
+    colKey: 'op',
+    fixed: 'right' as const,
+    title: '操作',
+  },
+];
