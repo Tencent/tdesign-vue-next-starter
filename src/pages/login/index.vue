@@ -4,12 +4,12 @@
 
     <div class="login-container">
       <div class="title-container">
-        <h1 class="title margin-no">{{ $t('pages.login.loginTitle') }}</h1>
+        <h1 class="title margin-no">登录到</h1>
         <h1 class="title">TDesign Starter</h1>
         <div class="sub-title">
-          <p class="tip">{{ type == 'register' ? $t('pages.login.existAccount') : $t('pages.login.noAccount') }}</p>
+          <p class="tip">{{ type == 'register' ? '已有账号?' : '没有账号吗?' }}</p>
           <p class="tip" @click="switchType(type == 'register' ? 'login' : 'register')">
-            {{ type == 'register' ? $t('pages.login.signIn') : $t('pages.login.createAccount') }}
+            {{ type == 'register' ? '登录' : '注册新账号' }}
           </p>
         </div>
       </div>
