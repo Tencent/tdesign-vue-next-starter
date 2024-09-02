@@ -21,7 +21,7 @@ const { width, height } = useWindowSize();
 
 const loading = ref(true);
 const heightRef = ref(window.innerHeight);
-const frameRef = ref<HTMLFrameElement>();
+const frameRef = ref<HTMLIFrameElement>();
 const prefixCls = computed(() => [`${prefix}-iframe-page`]);
 const settingStore = useSettingStore();
 
