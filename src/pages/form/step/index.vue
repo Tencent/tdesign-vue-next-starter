@@ -4,22 +4,22 @@
       <!-- 简单步骤条 -->
       <t-card :bordered="false">
         <t-steps class="step-container" :current="1" status="process">
-          <t-step-item :title="$t('pages.formStep.step1.title')" :content="$t('pages.formStep.step1.subtitle')" />
-          <t-step-item :title="$t('pages.formStep.step2.title')" :content="$t('pages.formStep.step2.subtitle')" />
-          <t-step-item :title="$t('pages.formStep.step3.title')" :content="$t('pages.formStep.step3.subtitle')" />
-          <t-step-item :title="$t('pages.formStep.step4.title')" :content="$t('pages.formStep.step4.subtitle')" />
+          <t-step-item title="提交申请" content="已于12月21日提交" />
+          <t-step-item title="电子信息" content="预计1-3个工作日" />
+          <t-step-item title="发票已邮寄" content="电子发票开出后联系" />
+          <t-step-item title="完成申请" content="如有疑问联系客服" />
         </t-steps>
       </t-card>
 
       <!-- 分步表单1 -->
       <div v-show="activeForm === 0" class="rule-tips">
-        <t-alert theme="info" :title="$t('pages.formStep.step1.rules')" :close="true">
+        <t-alert theme="info" title="发票开具规则：" :close="true">
           <template #message>
             <p>
-              {{ $t('pages.formStep.step1.rule1') }}
+              1、申请开票后，电子发票在1～3个工作日内开具；增值税专用发票（纸质）如资质审核通过，将在电子发票开具后10个工作日内为您寄出；
             </p>
-            <p>{{ $t('pages.formStep.step1.rule2') }}</p>
-            <p>{{ $t('pages.formStep.step1.rule3') }}</p>
+            <p>2、开票金额为您实际支付金额；</p>
+            <p>3、如有疑问请直接联系：13300001111。</p>
           </template>
         </t-alert>
       </div>
@@ -31,23 +31,23 @@
         label-align="right"
         @submit="(result: SubmitContext) => onSubmit(result, 1)"
       >
-        <t-form-item :label="$t('pages.formStep.step1.contractName')" name="name">
+        <t-form-item label="合同名称" name="name">
           <t-select v-model="formData1.name" :style="{ width: '480px' }" class="demo-select-base" clearable>
             <t-option v-for="(item, index) in NAME_OPTIONS" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step1.invoiceType')" name="type">
+        <t-form-item label="发票类型" name="type">
           <t-select v-model="formData1.type" :style="{ width: '480px' }" class="demo-select-base" clearable>
             <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step1.amount')"> ¥ {{ amount }} </t-form-item>
+        <t-form-item label="开票金额"> {{ amount }} 元 </t-form-item>
         <t-form-item>
-          <t-button theme="primary" type="submit"> {{ $t('pages.formStep.step1.submit') }} </t-button>
+          <t-button theme="primary" type="submit"> 提交申请 </t-button>
         </t-form-item>
       </t-form>
 
@@ -61,58 +61,30 @@
         @reset="onReset(0)"
         @submit="(result: SubmitContext) => onSubmit(result, 2)"
       >
-        <t-form-item :label="$t('pages.formStep.step2.invoiceTitle')" name="title">
-          <t-input
-            v-model="formData2.title"
-            :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.invoiceTitlePlaceholder')"
-          />
+        <t-form-item label="发票抬头" name="title">
+          <t-input v-model="formData2.title" :style="{ width: '480px' }" placeholder="请输入发票抬头" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.taxNum')" name="taxNum">
-          <t-input
-            v-model="formData2.taxNum"
-            :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.taxNumPlaceholder')"
-          />
+        <t-form-item label="纳税人识别号" name="taxNum">
+          <t-input v-model="formData2.taxNum" :style="{ width: '480px' }" placeholder="请输入纳税人识别号" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.address')" name="address">
-          <t-input
-            v-model="formData2.address"
-            :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.addressPlaceholder')"
-          />
+        <t-form-item label="单位地址" name="address">
+          <t-input v-model="formData2.address" :style="{ width: '480px' }" placeholder="请输入单位地址" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.bank')" name="bank">
-          <t-input
-            v-model="formData2.bank"
-            :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.bankPlaceholder')"
-          />
+        <t-form-item label="开户行" name="bank">
+          <t-input v-model="formData2.bank" :style="{ width: '480px' }" placeholder="请输入开户行" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.bankAccount')" name="bankAccount">
-          <t-input
-            v-model="formData2.bankAccount"
-            :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.bankAccountPlaceholder')"
-          />
+        <t-form-item label="银行账号" name="bankAccount">
+          <t-input v-model="formData2.bankAccount" :style="{ width: '480px' }" placeholder="请输入银行账号" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.email')" name="email">
-          <t-input
-            v-model="formData2.email"
-            :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.emailPlaceholder')"
-          />
+        <t-form-item label="通知邮箱" name="email">
+          <t-input v-model="formData2.email" :style="{ width: '480px' }" placeholder="请输入通知邮箱" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.tel')" name="tel">
-          <t-input
-            v-model="formData2.tel"
-            :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.telPlaceholder')"
-          />
+        <t-form-item label="通知手机" name="tel">
+          <t-input v-model="formData2.tel" :style="{ width: '480px' }" placeholder="请输入通知手机" />
         </t-form-item>
         <t-form-item>
-          <t-button type="reset" theme="default" variant="base"> {{ $t('pages.formStep.preStep') }} </t-button>
-          <t-button theme="primary" type="submit"> {{ $t('pages.formStep.nextStep') }} </t-button>
+          <t-button type="reset" theme="default" variant="base"> 上一步 </t-button>
+          <t-button theme="primary" type="submit"> 下一步 </t-button>
         </t-form-item>
       </t-form>
 
@@ -126,41 +98,43 @@
         @reset="onReset(1)"
         @submit="(result: SubmitContext) => onSubmit(result, 6)"
       >
-        <t-form-item :label="$t('pages.formStep.step3.consignee')" name="consignee">
-          <t-input v-model="formData3.consignee" :style="{ width: '480px' }" />
+        <t-form-item label="收货人" name="consignee">
+          <t-input v-model="formData3.consignee" :style="{ width: '480px' }" placeholder="请输入收货人" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step3.mobileNum')" name="mobileNum">
-          <t-input v-model="formData3.mobileNum" :style="{ width: '480px' }" />
+        <t-form-item label="手机号码" name="mobileNum">
+          <t-input v-model="formData3.mobileNum" :style="{ width: '480px' }" placeholder="请输入手机号码" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step3.deliveryAddress')" name="deliveryAddress">
-          <t-select v-model="formData3.deliveryAddress" :style="{ width: '480px' }" class="demo-select-base" clearable>
+        <t-form-item label="收货地址" name="deliveryAddress">
+          <t-select
+            v-model="formData3.deliveryAddress"
+            :style="{ width: '480px' }"
+            placeholder="请选择收货地址"
+            class="demo-select-base"
+            clearable
+          >
             <t-option v-for="(item, index) in ADDRESS_OPTIONS" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step3.fullAddress')" name="fullAddress">
-          <t-textarea v-model="formData3.fullAddress" :style="{ width: '480px' }" />
+        <t-form-item label="详细地址" name="fullAddress">
+          <t-textarea v-model="formData3.fullAddress" :style="{ width: '480px' }" placeholder="请输入详细地址" />
         </t-form-item>
         <t-form-item>
-          <t-button type="reset" theme="default" variant="base"> {{ $t('pages.formStep.preStep') }} </t-button>
-          <t-button theme="primary" type="submit"> {{ $t('pages.formStep.nextStep') }} </t-button>
+          <t-button type="reset" theme="default" variant="base"> 上一步 </t-button>
+          <t-button theme="primary" type="submit"> 下一步 </t-button>
         </t-form-item>
       </t-form>
 
       <!-- 分步表单4 -->
       <div v-show="activeForm === 6" class="step-form-4">
-        <t-space direction="vertical" style="align-items: center">
-          <t-icon name="check-circle-filled" style="color: green" size="52px" />
-          <p class="text">{{ $t('pages.formStep.step4.finishTitle') }}</p>
-          <p class="tips">{{ $t('pages.formStep.step4.finishTips') }}</p>
-          <div class="button-group">
-            <t-button theme="primary" @click="onReset(0)"> {{ $t('pages.formStep.step4.reapply') }} </t-button>
-            <t-button variant="base" theme="default" @click="complete">
-              {{ $t('pages.formStep.step4.check') }}
-            </t-button>
-          </div>
-        </t-space>
+        <t-icon name="check-circle-filled" style="color: green" size="52px" />
+        <p class="text">完成开票申请</p>
+        <p class="tips">预计1～3个工作日会将电子发票发至邮箱，发票邮寄请耐心等待</p>
+        <div class="button-group">
+          <t-button theme="primary" @click="onReset(0)"> 再次申请 </t-button>
+          <t-button variant="base" theme="default" @click="complete"> 查看进度 </t-button>
+        </div>
       </div>
     </div>
   </div>
