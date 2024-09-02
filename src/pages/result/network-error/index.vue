@@ -1,8 +1,8 @@
 <template>
-  <result :title="$t('pages.result.networkError.title')" :tip="$t('pages.result.networkError.subtitle')" type="wifi">
+  <result title="网络异常" tip="网络异常，请稍后再试" type="wifi">
     <div>
-      <t-button theme="default" @click="() => $router.push('/')">{{ $t('pages.result.networkError.back') }}</t-button>
-      <t-button @click="() => $router.push('/')">{{ $t('pages.result.networkError.reload') }}</t-button>
+      <t-button theme="default" @click="() => $router.push('/')">返回首页</t-button>
+      <t-button @click="() => $router.push('/')">重新加载</t-button>
     </div>
   </result>
 </template>

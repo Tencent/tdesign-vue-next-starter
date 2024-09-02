@@ -1,15 +1,9 @@
 <template>
-  <result
-    :title="$t('pages.result.browserIncompatible.title')"
-    type="ie"
-    :tip="$t('pages.result.browserIncompatible.subtitle')"
-  >
+  <result title="浏览器不兼容" type="ie" tip="抱歉，您正在使用的浏览器版本过低，无法打开当前网页。">
     <div class="result-slot-container">
-      <t-button class="result-button" @click="() => $router.push('/')">{{
-        $t('pages.result.browserIncompatible.back')
-      }}</t-button>
+      <t-button class="result-button" @click="() => $router.push('/')">返回首页</t-button>
       <div class="recommend-container">
-        <div>{{ $t('pages.result.browserIncompatible.recommend') }}</div>
+        <div>TDesign Starter 推荐以下主流浏览器</div>
         <div class="recommend-browser">
           <div>
             <thumbnail class="browser-icon" url="https://tdesign.gtimg.com/starter/result-page/chorme.png" />
