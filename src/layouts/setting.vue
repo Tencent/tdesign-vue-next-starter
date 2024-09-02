@@ -3,14 +3,14 @@
     v-model:visible="showSettingPanel"
     size="408px"
     :footer="false"
-    :header="$t('layout.setting.title')"
+    header="页面配置"
     :close-btn="true"
     class="setting-drawer-container"
     @close-btn-click="handleCloseDrawer"
   >
     <div class="setting-container">
       <t-form ref="form" :data="formData" label-align="left">
-        <div class="setting-group-title">{{ $t('layout.setting.theme.mode') }}</div>
+        <div class="setting-group-title">主题模式</div>
         <t-radio-group v-model="formData.mode">
           <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
             <div>
@@ -21,7 +21,7 @@
             </div>
           </div>
         </t-radio-group>
-        <div class="setting-group-title">{{ $t('layout.setting.theme.color') }}</div>
+        <div class="setting-group-title">主题色</div>
         <t-radio-group v-model="formData.brandTheme">
           <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
@@ -52,7 +52,7 @@
             </t-popup>
           </div>
         </t-radio-group>
-        <div class="setting-group-title">{{ $t('layout.setting.navigationLayout') }}</div>
+        <div class="setting-group-title">导航布局</div>
         <t-radio-group v-model="formData.layout">
           <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item">
@@ -60,50 +60,38 @@
             </t-radio-button>
           </div>
         </t-radio-group>
-
-        <t-form-item v-show="formData.layout === 'mix'" :label="$t('layout.setting.splitMenu')" name="splitMenu">
+        <t-form-item v-show="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
           <t-switch v-model="formData.splitMenu" />
         </t-form-item>
-        <t-form-item
-          v-show="formData.layout === 'mix'"
-          :label="$t('layout.setting.fixedSidebar')"
-          name="isSidebarFixed"
-        >
+        <t-form-item v-show="formData.layout === 'mix'" label="固定 Sidebar" name="isSidebarFixed">
           <t-switch v-model="formData.isSidebarFixed" />
         </t-form-item>
-
-        <div class="setting-group-title">{{ $t('layout.setting.element.title') }}</div>
-        <t-form-item :label="$t('layout.setting.sideMode')" name="sideMode">
+        <div class="setting-group-title">元素开关</div>
+        <t-form-item label="侧边栏模式" name="sideMode">
           <t-radio-group v-model="formData.sideMode" class="side-mode-radio">
-            <t-radio-button key="light" value="light" :label="$t('layout.setting.theme.options.light')" />
-            <t-radio-button key="dark" value="dark" :label="$t('layout.setting.theme.options.dark')" />
+            <t-radio-button key="light" value="light" label="明亮" />
+            <t-radio-button key="dark" value="dark" label="暗黑" />
           </t-radio-group>
         </t-form-item>
-        <t-form-item
-          v-show="formData.layout === 'side'"
-          :label="$t('layout.setting.element.showHeader')"
-          name="showHeader"
-        >
+        <t-form-item v-show="formData.layout === 'side'" label="显示 Header" name="showHeader">
           <t-switch v-model="formData.showHeader" />
         </t-form-item>
-        <t-form-item :label="$t('layout.setting.element.showBreadcrumb')" name="showBreadcrumb">
+        <t-form-item label="显示 Breadcrumbs" name="showBreadcrumb">
           <t-switch v-model="formData.showBreadcrumb" />
         </t-form-item>
-        <t-form-item :label="$t('layout.setting.element.showFooter')" name="showFooter">
+        <t-form-item label="显示 Footer" name="showFooter">
           <t-switch v-model="formData.showFooter" />
         </t-form-item>
-        <t-form-item :label="$t('layout.setting.element.useTagTabs')" name="isUseTabsRouter">
+        <t-form-item label="使用 多标签Tab页" name="isUseTabsRouter">
           <t-switch v-model="formData.isUseTabsRouter"></t-switch>
         </t-form-item>
-        <t-form-item :label="$t('layout.setting.element.menuAutoCollapsed')" name="menuAutoCollapsed">
+        <t-form-item label="菜单自动折叠" name="menuAutoCollapsed">
           <t-switch v-model="formData.menuAutoCollapsed"></t-switch>
         </t-form-item>
       </t-form>
       <div class="setting-info">
-        <p>{{ $t('layout.setting.tips') }}</p>
-        <t-button theme="primary" variant="text" @click="handleCopy">
-          {{ $t('layout.setting.copy.title') }}
-        </t-button>
+        <p>请复制后手动修改配置文件: /src/config/style.ts</p>
+        <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
       </div>
     </div>
   </t-drawer>
@@ -121,7 +109,6 @@ import ColorContainer from '@/components/color/index.vue';
 import Thumbnail from '@/components/thumbnail/index.vue';
 import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
-import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 
 const settingStore = useSettingStore();
@@ -129,9 +116,9 @@ const settingStore = useSettingStore();
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
 
 const MODE_OPTIONS = [
-  { type: 'light', text: t('layout.setting.theme.options.light') },
-  { type: 'dark', text: t('layout.setting.theme.options.dark') },
-  { type: 'auto', text: t('layout.setting.theme.options.auto') },
+  { type: 'light', text: '明亮' },
+  { type: 'dark', text: '暗黑' },
+  { type: 'auto', text: '跟随系统' },
 ];
 
 const initStyleConfig = () => {
