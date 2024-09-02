@@ -4,19 +4,19 @@
       <div class="user-left-greeting">
         <div>
           Hi，Image
-          <span class="regular"> {{ $t('pages.user.markDay') }}</span>
+          <span class="regular"> 下午好，今天是你加入鹅厂的第 100 天～</span>
         </div>
         <img src="@/assets/assets-tencent-logo.png" class="logo" />
       </div>
 
-      <t-card class="user-info-list" :title="$t('pages.user.personalInfo.title')" :bordered="false">
+      <t-card class="user-info-list" title="个人信息" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="ellipsis" />
           </t-button>
         </template>
         <t-descriptions :column="4" item-layout="vertical">
-          <t-descriptions-item v-for="(item, index) in USER_INFO_LIST" :key="index" :label="$t(item.title)">
+          <t-descriptions-item v-for="(item, index) in USER_INFO_LIST" :key="index" :label="item.title">
             {{ item.content }}
           </t-descriptions-item>
         </t-descriptions>
@@ -24,11 +24,11 @@
 
       <t-card class="content-container" :bordered="false">
         <t-tabs value="second">
-          <t-tab-panel value="first" :label="$t('pages.user.contentList')">
-            <p>{{ $t('pages.user.contentList') }}</p>
+          <t-tab-panel value="first" label="内容列表">
+            <p>内容列表</p>
           </t-tab-panel>
-          <t-tab-panel value="second" :label="$t('pages.user.contentList')">
-            <t-card :bordered="false" class="card-padding-no" :title="$t('pages.user.visitData')" describe="（次）">
+          <t-tab-panel value="second" label="内容列表">
+            <t-card :bordered="false" class="card-padding-no" title="主页访问数据" describe="（次）">
               <template #actions>
                 <t-date-range-picker
                   class="card-date-picker-container"
@@ -41,8 +41,8 @@
               <div id="lineContainer" style="width: 100%; height: 328px" />
             </t-card>
           </t-tab-panel>
-          <t-tab-panel value="third" :label="$t('pages.user.contentList')">
-            <p>{{ $t('pages.user.contentList') }}</p>
+          <t-tab-panel value="third" label="内容列表">
+            <p>内容列表</p>
           </t-tab-panel>
         </t-tabs>
       </t-card>
@@ -52,10 +52,10 @@
       <t-card class="user-intro" :bordered="false">
         <t-avatar size="80px">T</t-avatar>
         <div class="name">My Account</div>
-        <div class="position">{{ $t('pages.user.personalInfo.position') }}</div>
+        <div class="position">XXG 港澳业务拓展组员工 直客销售</div>
       </t-card>
 
-      <t-card :title="$t('pages.user.teamMember')" class="user-team" :bordered="false">
+      <t-card title="团队成员" class="user-team" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="ellipsis" />
@@ -68,7 +68,7 @@
         </t-list>
       </t-card>
 
-      <t-card :title="$t('pages.user.serviceProduction')" class="product-container" :bordered="false">
+      <t-card title="服务产品" class="product-container" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="ellipsis" />

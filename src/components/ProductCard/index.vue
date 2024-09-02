@@ -13,7 +13,7 @@
     </template>
     <template #status>
       <t-tag :theme="product.isSetup ? 'success' : 'default'" :disabled="!product.isSetup">{{
-        product.isSetup ? $t('components.isSetup.on') : $t('components.isSetup.off')
+        product.isSetup ? '已启用' : '已停用'
       }}</t-tag>
     </template>
     <template #content>
@@ -36,12 +36,12 @@
         trigger="click"
         :options="[
           {
-            content: $t('components.manage'),
+            content: '管理',
             value: 'manage',
             onClick: () => handleClickManage(product),
           },
           {
-            content: $t('components.delete'),
+            content: '删除',
             value: 'delete',
             onClick: () => handleClickDelete(product),
           },

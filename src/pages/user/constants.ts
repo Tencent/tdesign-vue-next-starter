@@ -6,39 +6,39 @@ export interface UserInfoListType {
 
 export const USER_INFO_LIST: Array<UserInfoListType> = [
   {
-    title: 'pages.user.personalInfo.desc.mobile',
+    title: '手机',
     content: '+86 13923734567',
   },
   {
-    title: 'pages.user.personalInfo.desc.phone',
+    title: '座机',
     content: '734567',
   },
   {
-    title: 'pages.user.personalInfo.desc.email',
+    title: '办公室邮箱',
     content: 'Account@qq.com',
   },
   {
-    title: 'pages.user.personalInfo.desc.seat',
+    title: '座位',
     content: 'T32F 012',
   },
   {
-    title: 'pages.user.personalInfo.desc.entity',
+    title: '管理主体',
     content: '腾讯集团',
   },
   {
-    title: 'pages.user.personalInfo.desc.leader',
+    title: '直属上级',
     content: 'Michael Wang',
   },
   {
-    title: 'pages.user.personalInfo.desc.position',
+    title: '职位',
     content: '高级 UI 设计师',
   },
   {
-    title: 'pages.user.personalInfo.desc.joinDay',
+    title: '入职时间',
     content: '2021-07-01',
   },
   {
-    title: 'pages.user.personalInfo.desc.group',
+    title: '所属团队',
     content: '腾讯/腾讯公司/某事业群/某产品部/某运营中心/商户服务组',
     span: 6,
   },

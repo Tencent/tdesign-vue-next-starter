@@ -73,8 +73,8 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 
 import { getCardList } from '@/api/list';
-import type { CardProductType } from '@/components/product-card/index.vue';
-import ProductCard from '@/components/product-card/index.vue';
+import type { CardProductType } from '@/components/ProductCard/index.vue';
+import ProductCard from '@/components/ProductCard/index.vue';
 
 import type { FormData } from './components/DialogForm.vue';
 import DialogForm from './components/DialogForm.vue';

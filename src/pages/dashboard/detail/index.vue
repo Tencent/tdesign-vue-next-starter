@@ -72,7 +72,7 @@ import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { computed, nextTick, onDeactivated, onMounted, watch } from 'vue';
 
-import ProductCard from '@/components/product-card/index.vue';
+import ProductCard from '@/components/ProductCard/index.vue';
 import Trend from '@/components/trend/index.vue';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
