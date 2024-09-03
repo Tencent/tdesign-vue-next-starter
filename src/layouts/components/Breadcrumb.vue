@@ -12,13 +12,13 @@ import { useRoute } from 'vue-router';
 
 import { RouteMeta } from '@/types/interface';
 
-const crumbs = computed(() => {
-  const route = useRoute();
+const route = useRoute();
 
+const crumbs = computed(() => {
   const pathArray = route.path.split('/');
   pathArray.shift();
 
-  const breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
+  return pathArray.reduce((breadcrumbArray, path, idx) => {
     // 如果路由下有hiddenBreadcrumb或当前遍历到参数则隐藏
     const meta = route.matched[idx]?.meta as RouteMeta;
     if (meta?.hiddenBreadcrumb || Object.values(route.params).includes(path)) {
@@ -32,7 +32,6 @@ const crumbs = computed(() => {
     });
     return breadcrumbArray;
   }, []);
-  return breadcrumbs;
 });
 </script>
 <style scoped>
