@@ -172,7 +172,7 @@ export function constructInitDataset({
         type: 'bar',
       },
       {
-        name: '本月',
+        name: '上月',
         data: inArray,
         type: 'bar',
       },
