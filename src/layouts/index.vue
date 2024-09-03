@@ -66,31 +66,50 @@ const toggleHeadVisible = () => {
     const { scrollTop } = layoutElement;
     const headerMenuFixedElement = document.querySelector(`.${prefix}-header-menu-fixed`);
     const headerMenuFixedElementHeight = headerMenuFixedElement.scrollHeight;
+    // 在操作监听过程中，如果已经隐藏了，就不再进行隐藏的dom操作// 如果已经显示了，就不再进行显示的dom操作
+    let alreadyHidden = false;
+    let alreadyShow = false;
 
-    // 面包屑fixed在头部
+    // 当面包屑存在时 fixed在头部
     if (settingStore.showBreadcrumb) {
       document.querySelector(`.t-layout__header`)?.setAttribute('style', `position:relative;`);
       const breadcrumbElement = document.querySelector(`.t-breadcrumb`);
 
       if (scrollTop > headerMenuFixedElementHeight && settingStore.toggleHeadVisible) {
-        headerMenuFixedElement.setAttribute('style', 'display: none;');
-        breadcrumbElement.setAttribute('style', 'position:absolute;top:18px;');
+        if (!alreadyHidden) {
+          headerMenuFixedElement.setAttribute('style', 'display: none;');
+          breadcrumbElement.setAttribute('style', 'position:absolute;top:18px;');
+        }
+        alreadyHidden = true;
+        alreadyShow = false;
       } else {
-        headerMenuFixedElement.setAttribute('style', null);
-        breadcrumbElement.setAttribute('style', null);
+        if (!alreadyShow) {
+          headerMenuFixedElement.setAttribute('style', null);
+          breadcrumbElement.setAttribute('style', null);
+        }
+        alreadyHidden = false;
+        alreadyShow = true;
       }
     } else {
       const headerElement = document.querySelector(`.t-layout__header`);
       const sideNavMixFixedElement = document.querySelector(`.${prefix}-side-nav-mix-fixed`);
 
       if (scrollTop > headerMenuFixedElementHeight && settingStore.toggleHeadVisible) {
-        headerElement.setAttribute('style', 'display: none;');
-        (layoutElement as HTMLElement).style.height = '100vh';
-        sideNavMixFixedElement?.setAttribute('style', 'top: 0;');
+        if (!alreadyHidden) {
+          headerElement.setAttribute('style', 'display: none;');
+          (layoutElement as HTMLElement).style.height = '100vh';
+          sideNavMixFixedElement?.setAttribute('style', 'top: 0;');
+        }
+        alreadyHidden = true;
+        alreadyShow = false;
       } else {
-        headerElement.setAttribute('style', null);
-        (layoutElement as HTMLElement).style.height = 'calc(100vh - var(--td-comp-size-xxxl))';
-        sideNavMixFixedElement?.setAttribute('style', null);
+        if (!alreadyShow) {
+          headerElement.setAttribute('style', null);
+          (layoutElement as HTMLElement).style.height = 'calc(100vh - var(--td-comp-size-xxxl))';
+          sideNavMixFixedElement?.setAttribute('style', null);
+        }
+        alreadyHidden = false;
+        alreadyShow = true;
       }
     }
   }
