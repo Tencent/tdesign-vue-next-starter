@@ -2,7 +2,7 @@
   <t-row :gutter="[16, 16]">
     <t-col v-for="(item, index) in PANE_LIST" :key="item.title" :xs="6" :xl="3">
       <t-card
-        :title="t(item.title)"
+        :title="item.title"
         :bordered="false"
         :class="{ 'dashboard-item': true, 'dashboard-item--main-color': index == 0 }"
       >
@@ -67,39 +67,13 @@ import Trend from '@/components/trend/index.vue';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
+import { PANE_LIST } from '../constants';
 import { constructInitDashboardDataset } from '../index';
 
 echarts.use([LineChart, BarChart, CanvasRenderer]);
 
 const store = useSettingStore();
 const resizeTime = ref(1);
-
-const PANE_LIST = [
-  {
-    title: 'pages.dashboardBase.topPanel.card1',
-    number: '¥ 28,425.00',
-    upTrend: '20.5%',
-    leftType: 'echarts-line',
-  },
-  {
-    title: 'pages.dashboardBase.topPanel.card2',
-    number: '¥ 768.00',
-    downTrend: '20.5%',
-    leftType: 'echarts-bar',
-  },
-  {
-    title: 'pages.dashboardBase.topPanel.card3',
-    number: '1126',
-    upTrend: '20.5%',
-    leftType: 'icon-usergroup',
-  },
-  {
-    title: 'pages.dashboardBase.topPanel.card4',
-    number: 527,
-    downTrend: '20.5%',
-    leftType: 'icon-file-paste',
-  },
-];
 
 // moneyCharts
 let moneyContainer: HTMLElement;

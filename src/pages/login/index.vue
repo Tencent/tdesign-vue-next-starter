@@ -19,7 +19,7 @@
       <tdesign-setting />
     </div>
 
-    <footer class="copyright">Copyright @ 2021-2023 Tencent. All Rights Reserved</footer>
+    <footer class="copyright">Copyright @ 2021-2024 Tencent. All Rights Reserved</footer>
   </div>
 </template>
 <script lang="ts">

@@ -1,9 +1,8 @@
 <template>
   <div class="detail-advanced">
-    <t-card title="基本信息" :bordered="false">
-      <div class="info-block">
-        <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
-          <h1>{{ item.name }}</h1>
+    <t-card :bordered="false">
+      <t-descriptions title="基本信息" table-layout="auto">
+        <t-descriptions-item v-for="(item, index) in BASE_INFO_DATA" :key="index" :label="item.name">
           <span
             :class="{
               ['inProgress']: item.type && item.type.value === 'inProgress',
@@ -13,8 +12,8 @@
             <i v-if="item.type && item.type.key === 'contractStatus'" />
             {{ item.value }}
           </span>
-        </div>
-      </div>
+        </t-descriptions-item>
+      </t-descriptions>
     </t-card>
 
     <!-- 发票进度 -->
