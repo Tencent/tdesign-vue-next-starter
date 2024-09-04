@@ -59,6 +59,10 @@ const appendNewRoute = () => {
   tabsRouterStore.appendTabRouterList({ path, query, title: title as string, name, isAlive: true, meta: route.meta });
 };
 
+// 在操作监听过程中，如果已经隐藏了，就不再进行隐藏的dom操作// 如果已经显示了，就不再进行显示的dom操作
+let alreadyHidden = false;
+let alreadyShow = false;
+
 const toggleHeadVisible = () => {
   const layoutElement = document.querySelector(`.${prefix}-layout`);
 
@@ -66,9 +70,6 @@ const toggleHeadVisible = () => {
     const { scrollTop } = layoutElement;
     const headerMenuFixedElement = document.querySelector(`.${prefix}-header-menu-fixed`);
     const headerMenuFixedElementHeight = headerMenuFixedElement.scrollHeight;
-    // 在操作监听过程中，如果已经隐藏了，就不再进行隐藏的dom操作// 如果已经显示了，就不再进行显示的dom操作
-    let alreadyHidden = false;
-    let alreadyShow = false;
 
     // 当面包屑存在时 fixed在头部
     if (settingStore.showBreadcrumb) {
@@ -97,7 +98,8 @@ const toggleHeadVisible = () => {
       if (scrollTop > headerMenuFixedElementHeight && settingStore.toggleHeadVisible) {
         if (!alreadyHidden) {
           headerElement.setAttribute('style', 'display: none;');
-          (layoutElement as HTMLElement).style.height = '100vh';
+          // (layoutElement as HTMLElement).style.height = '100vh';
+
           sideNavMixFixedElement?.setAttribute('style', 'top: 0;');
         }
         alreadyHidden = true;
@@ -105,7 +107,7 @@ const toggleHeadVisible = () => {
       } else {
         if (!alreadyShow) {
           headerElement.setAttribute('style', null);
-          (layoutElement as HTMLElement).style.height = 'calc(100vh - var(--td-comp-size-xxxl))';
+          // (layoutElement as HTMLElement).style.height = 'calc(100vh - var(--td-comp-size-xxxl))';
           sideNavMixFixedElement?.setAttribute('style', null);
         }
         alreadyHidden = false;
