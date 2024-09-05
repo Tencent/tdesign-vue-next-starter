@@ -46,7 +46,6 @@ const route = useRoute();
 const settingStore = useSettingStore();
 const tabsRouterStore = useTabsRouterStore();
 const setting = storeToRefs(settingStore);
-const showHeader = ref(true);
 
 const mainLayoutCls = computed(() => [
   {
