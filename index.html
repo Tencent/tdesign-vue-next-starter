@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TDesign Vue Next Starter</title>
+    <title>%VITE_BASE_TITLE%</title>
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
     <script language="javascript">
       if (window.location.host === 'tdesign.tencent.com') {
+        window.global = window;
         const aegis = new Aegis({
           id: 'rDISNMyXgqWDFPyHMB', // 项目ID，即上报key
           reportAssetSpeed: true, // 静态资源测速
@@ -18,8 +19,4 @@
       }
     </script>
   </body>
-  
-  <script>
-    window.global = window;
-  </script>
 </html>
