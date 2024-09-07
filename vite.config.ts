@@ -6,11 +6,12 @@ import { ConfigEnv, loadEnv, UserConfig } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 import svgLoader from 'vite-svg-loader';
 
-const CWD = process.cwd();
+const cwd = process.cwd();
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
-  const { VITE_BASE_URL, VITE_API_URL_PREFIX } = loadEnv(mode, CWD);
+  const { VITE_BASE_PORT, VITE_BASE_URL, VITE_USE_MOCK, VITE_API_URL, VITE_API_URL_PREFIX }: Partial<ImportMetaEnv> =
+    loadEnv(mode, cwd);
   return {
     base: VITE_BASE_URL,
     resolve: {
@@ -18,7 +19,22 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         '@': path.resolve(__dirname, './src'),
       },
     },
-
+    server: {
+      port: Number(VITE_BASE_PORT),
+      host: '0.0.0.0',
+      proxy: {
+        [VITE_API_URL_PREFIX]: VITE_API_URL,
+      },
+    },
+    plugins: [
+      vue(),
+      vueJsx(),
+      viteMockServe({
+        mockPath: 'mock',
+        enable: VITE_USE_MOCK === 'true',
+      }),
+      svgLoader(),
+    ],
     css: {
       preprocessorOptions: {
         less: {
@@ -28,24 +44,6 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           math: 'strict',
           javascriptEnabled: true,
         },
-      },
-    },
-
-    plugins: [
-      vue(),
-      vueJsx(),
-      viteMockServe({
-        mockPath: 'mock',
-        enable: true,
-      }),
-      svgLoader(),
-    ],
-
-    server: {
-      port: 3002,
-      host: '0.0.0.0',
-      proxy: {
-        [VITE_API_URL_PREFIX]: 'http://127.0.0.1:3000/',
       },
     },
   };
