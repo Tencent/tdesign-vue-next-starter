@@ -19,8 +19,8 @@ export default [
     },
     children: [
       {
-        path: 'base',
-        name: 'DashboardBase',
+        path: 'base-1',
+        name: 'DashboardBase-1',
         // component: () => import('@/pages/dashboard/base/index.vue'),
         meta: {
           title: {
@@ -30,8 +30,8 @@ export default [
         },
         children: [
           {
-            path: 'base-1',
-            name: 'DashboardBase-1',
+            path: 'base',
+            name: 'DashboardBase',
             component: () => import('@/pages/dashboard/base/index.vue'),
             meta: {
               title: {
