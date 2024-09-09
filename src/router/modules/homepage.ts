@@ -19,19 +19,30 @@ export default [
     },
     children: [
       {
-        path: 'base-1',
-        name: 'DashboardBase-1',
-        // component: () => import('@/pages/dashboard/base/index.vue'),
+        path: 'base',
+        name: 'DashboardBase',
+        component: () => import('@/pages/dashboard/base/index.vue'),
         meta: {
           title: {
             zh_CN: '概览仪表盘',
             en_US: 'Overview',
           },
         },
+      },
+      {
+        path: 'detail',
+        name: 'DashboardDetail',
+        // component: () => import('@/pages/dashboard/detail/index.vue'),
+        meta: {
+          title: {
+            zh_CN: '统计报表',
+            en_US: 'Dashboard Detail',
+          },
+        },
         children: [
           {
-            path: 'base',
-            name: 'DashboardBase',
+            path: 'base-1',
+            name: 'DashboardBase-1',
             component: () => import('@/pages/dashboard/base/index.vue'),
             meta: {
               title: {
@@ -52,17 +63,6 @@ export default [
             },
           },
         ],
-      },
-      {
-        path: 'detail',
-        name: 'DashboardDetail',
-        component: () => import('@/pages/dashboard/detail/index.vue'),
-        meta: {
-          title: {
-            zh_CN: '统计报表',
-            en_US: 'Dashboard Detail',
-          },
-        },
       },
     ],
   },
