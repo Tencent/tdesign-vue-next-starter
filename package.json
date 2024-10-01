@@ -68,7 +68,7 @@
     "@types/mockjs": "^1.0.10",
     "postcss-html": "^1.6.0",
     "postcss-less": "^6.0.0",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.3",
     "stylelint": "~16.2.1",
     "stylelint-config-standard": "^36.0.0",
     "stylelint-order": "~6.0.4",
