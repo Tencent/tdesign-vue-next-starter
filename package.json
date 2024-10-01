@@ -70,7 +70,7 @@
     "postcss-less": "^6.0.0",
     "prettier": "^3.2.5",
     "stylelint": "~16.2.1",
-    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard": "^36.0.1",
     "stylelint-order": "~6.0.4",
     "typescript": "~5.4.3",
     "vite": "^5.1.0",
