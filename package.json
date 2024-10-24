@@ -2,6 +2,7 @@
   "name": "@tencent/tdesign-vue-next-starter",
   "version": "0.10.0",
   "type": "module",
+  "descriptions":"test for Tencent group security check",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
