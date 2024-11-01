@@ -4,19 +4,19 @@
       <div class="user-left-greeting">
         <div>
           Hi，Image
-          <span class="regular"> {{ $t('pages.user.markDay') }}</span>
+          <span class="regular"> {{ t('pages.user.markDay') }}</span>
         </div>
         <img src="@/assets/assets-tencent-logo.png" class="logo" />
       </div>
 
-      <t-card class="user-info-list" :title="$t('pages.user.personalInfo.title')" :bordered="false">
+      <t-card class="user-info-list" :title="t('pages.user.personalInfo.title')" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="ellipsis" />
           </t-button>
         </template>
         <t-descriptions :column="4" item-layout="vertical">
-          <t-descriptions-item v-for="(item, index) in USER_INFO_LIST" :key="index" :label="$t(item.title)">
+          <t-descriptions-item v-for="(item, index) in USER_INFO_LIST" :key="index" :label="t(item.title)">
             {{ item.content }}
           </t-descriptions-item>
         </t-descriptions>
@@ -24,11 +24,11 @@
 
       <t-card class="content-container" :bordered="false">
         <t-tabs value="second">
-          <t-tab-panel value="first" :label="$t('pages.user.contentList')">
-            <p>{{ $t('pages.user.contentList') }}</p>
+          <t-tab-panel value="first" :label="t('pages.user.contentList')">
+            <p>{{ t('pages.user.contentList') }}</p>
           </t-tab-panel>
-          <t-tab-panel value="second" :label="$t('pages.user.contentList')">
-            <t-card :bordered="false" class="card-padding-no" :title="$t('pages.user.visitData')" describe="（次）">
+          <t-tab-panel value="second" :label="t('pages.user.contentList')">
+            <t-card :bordered="false" class="card-padding-no" :title="t('pages.user.visitData')" describe="（次）">
               <template #actions>
                 <t-date-range-picker
                   class="card-date-picker-container"
@@ -41,8 +41,8 @@
               <div id="lineContainer" style="width: 100%; height: 328px" />
             </t-card>
           </t-tab-panel>
-          <t-tab-panel value="third" :label="$t('pages.user.contentList')">
-            <p>{{ $t('pages.user.contentList') }}</p>
+          <t-tab-panel value="third" :label="t('pages.user.contentList')">
+            <p>{{ t('pages.user.contentList') }}</p>
           </t-tab-panel>
         </t-tabs>
       </t-card>
@@ -52,10 +52,10 @@
       <t-card class="user-intro" :bordered="false">
         <t-avatar size="80px">T</t-avatar>
         <div class="name">My Account</div>
-        <div class="position">{{ $t('pages.user.personalInfo.position') }}</div>
+        <div class="position">{{ t('pages.user.personalInfo.position') }}</div>
       </t-card>
 
-      <t-card :title="$t('pages.user.teamMember')" class="user-team" :bordered="false">
+      <t-card :title="t('pages.user.teamMember')" class="user-team" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="ellipsis" />
@@ -68,7 +68,7 @@
         </t-list>
       </t-card>
 
-      <t-card :title="$t('pages.user.serviceProduction')" class="product-container" :bordered="false">
+      <t-card :title="t('pages.user.serviceProduction')" class="product-container" :bordered="false">
         <template #actions>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="ellipsis" />
@@ -100,6 +100,7 @@ import ProductAIcon from '@/assets/assets-product-1.svg';
 import ProductBIcon from '@/assets/assets-product-2.svg';
 import ProductCIcon from '@/assets/assets-product-3.svg';
 import ProductDIcon from '@/assets/assets-product-4.svg';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';

@@ -18,7 +18,7 @@
                   <t-tooltip
                     class="set-read-icon"
                     :overlay-style="{ margin: '6px' }"
-                    :content="item.status ? $t('pages.detailSecondary.setRead') : $t('pages.detailSecondary.setUnread')"
+                    :content="item.status ? t('pages.detailSecondary.setRead') : t('pages.detailSecondary.setUnread')"
                   >
                     <span class="msg-action-icon" @click="setReadStatus(item)">
                       <t-icon v-if="!!item.status" name="queue" size="16px" />
