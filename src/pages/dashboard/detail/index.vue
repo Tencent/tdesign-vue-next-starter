@@ -1,13 +1,13 @@
 <template>
   <div class="dashboard-panel-detail">
-    <t-card :title="$t('pages.dashboardDetail.topPanel.title')" class="dashboard-detail-card" :bordered="false">
+    <t-card :title="t('pages.dashboardDetail.topPanel.title')" class="dashboard-detail-card" :bordered="false">
       <t-row :gutter="[16, 16]">
         <t-col v-for="(item, index) in PANE_LIST_DATA" :key="index" :xs="6" :xl="3">
           <t-card class="dashboard-list-card" :description="item.title">
             <div class="dashboard-list-card__number">{{ item.number }}</div>
             <div class="dashboard-list-card__text">
               <div class="dashboard-list-card__text-left">
-                {{ $t('pages.dashboardDetail.topPanel.quarter') }}
+                {{ t('pages.dashboardDetail.topPanel.quarter') }}
                 <trend class="icon" :type="item.upTrend ? 'up' : 'down'" :describe="item.upTrend || item.downTrend" />
               </div>
               <t-icon name="chevron-right" />
@@ -18,7 +18,7 @@
     </t-card>
     <t-row :gutter="[16, 16]" class="row-margin">
       <t-col :xs="12" :xl="9">
-        <t-card class="dashboard-detail-card" :title="$t('pages.dashboardDetail.procurement.title')" :bordered="false">
+        <t-card class="dashboard-detail-card" :title="t('pages.dashboardDetail.procurement.title')" :bordered="false">
           <template #actions>
             <t-date-range-picker
               class="card-date-picker-container"
@@ -43,7 +43,7 @@
     </t-row>
     <t-card
       :class="['dashboard-detail-card', 'row-margin']"
-      :title="$t('pages.dashboardDetail.satisfaction.title')"
+      :title="t('pages.dashboardDetail.satisfaction.title')"
       :bordered="false"
     >
       <template #actions>
@@ -55,7 +55,7 @@
           style="display: inline-block; margin-right: var(--td-comp-margin-s); width: 248px"
           @change="onSatisfyChange"
         />
-        <t-button class="card-date-button"> {{ $t('pages.dashboardDetail.satisfaction.export') }} </t-button>
+        <t-button class="card-date-button"> {{ t('pages.dashboardDetail.satisfaction.export') }} </t-button>
       </template>
       <div id="scatterContainer" style="width: 100%; height: 434px" />
     </t-card>
@@ -78,6 +78,7 @@ import { computed, nextTick, onDeactivated, onMounted, watch } from 'vue';
 
 import ProductCard from '@/components/product-card/index.vue';
 import Trend from '@/components/trend/index.vue';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';

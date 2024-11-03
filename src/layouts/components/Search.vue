@@ -2,7 +2,7 @@
   <div v-if="layout === 'side'" class="header-menu-search">
     <t-input
       :class="['header-search', { 'hover-active': isSearchFocus }]"
-      :placeholder="$t('layout.searchPlaceholder')"
+      :placeholder="t('layout.searchPlaceholder')"
       @blur="changeSearchFocus(false)"
       @focus="changeSearchFocus(true)"
     >
@@ -38,6 +38,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+
+import { t } from '@/locales';
 
 defineProps({
   layout: String,
