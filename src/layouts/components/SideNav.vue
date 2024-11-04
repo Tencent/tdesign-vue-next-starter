@@ -82,14 +82,8 @@ const expanded = ref<MenuValue[]>([]);
 
 const getExpanded = () => {
   const path = getActive();
-  const parts = path.split('/');
-  const result = [];
-  let currentPath = '';
-
-  for (let i = 1; i < parts.length - 1; i++) {
-    currentPath += `/${parts[i]}`;
-    result.push(currentPath);
-  }
+  const parts = path.split('/').slice(1);
+  const result = parts.map((_, index) => `/${parts.slice(0, index + 1).join('/')}`);
 
   expanded.value = menuAutoCollapsed.value ? result : union(result, expanded.value);
 };
