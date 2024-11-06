@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="list-card-operation">
-      <t-button @click="formDialogVisible = true"> {{ $t('pages.listCard.create') }} </t-button>
+      <t-button @click="formDialogVisible = true"> {{ t('pages.listCard.create') }} </t-button>
       <div class="search-input">
-        <t-input v-model="searchValue" :placeholder="$t('pages.listCard.placeholder')" clearable>
+        <t-input v-model="searchValue" :placeholder="t('pages.listCard.placeholder')" clearable>
           <template #suffix-icon>
             <search-icon v-if="searchValue === ''" size="var(--td-comp-size-xxxs)" />
           </template>
@@ -75,6 +75,7 @@ import { computed, onMounted, ref } from 'vue';
 import { getCardList } from '@/api/list';
 import type { CardProductType } from '@/components/product-card/index.vue';
 import ProductCard from '@/components/product-card/index.vue';
+import { t } from '@/locales';
 
 import type { FormData } from './components/DialogForm.vue';
 import DialogForm from './components/DialogForm.vue';
