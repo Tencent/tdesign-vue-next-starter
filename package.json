@@ -2,6 +2,7 @@
   "name": "@tencent/tdesign-vue-next-starter",
   "version": "0.11.0",
   "type": "module",
+  "description":"test new preview address",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
