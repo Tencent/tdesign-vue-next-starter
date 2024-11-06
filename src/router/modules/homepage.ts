@@ -30,15 +30,27 @@ export default [
         },
       },
       {
-        path: 'detail',
-        name: 'DashboardDetail',
-        component: () => import('@/pages/dashboard/detail/index.vue'),
+        path: 'dashboard',
+        name: 'Dashboard',
         meta: {
           title: {
-            zh_CN: '统计报表',
-            en_US: 'Dashboard Detail',
+            zh_CN: '报表',
+            en_US: 'Dashboard',
           },
         },
+        children: [
+          {
+            path: 'detail',
+            name: 'Detail',
+            component: () => import('@/pages/dashboard/detail/index.vue'),
+            meta: {
+              title: {
+                zh_CN: '统计报表',
+                en_US: 'Dashboard Detail',
+              },
+            },
+          },
+        ],
       },
     ],
   },
