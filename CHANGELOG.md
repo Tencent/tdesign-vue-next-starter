@@ -5,6 +5,19 @@ toc: false
 docClass: timeline
 ---
 
+## 🌈 0.11.0 `2024-11-06` 
+### 🚀 Features
+- `feat`: 调整默认lock文件配置 @timi137137 ([#717](https://github.com/Tencent/tdesign-vue-next-starter/pull/717))
+- `Router`: 路由跳转携带参数 @SuxueCode ([#720](https://github.com/Tencent/tdesign-vue-next-starter/pull/720))
+- `feat`: 新增菜单自动折叠 @RSS1102 ([#744](https://github.com/Tencent/tdesign-vue-next-starter/pull/744))
+### 🐞 Bug Fixes
+- `breadcrumb`: 修复多层级路由指向错误 @lz6060788 ([#749](https://github.com/Tencent/tdesign-vue-next-starter/pull/749))
+- `deps`: 修正因锁文件错误导致的编译失败 @timi137137 ([#777](https://github.com/Tencent/tdesign-vue-next-starter/pull/777))
+### 🚧 Others
+- `revert`: 回退Vue 3.3 @timi137137 ([#709](https://github.com/Tencent/tdesign-vue-next-starter/pull/709))
+- build(deps-dev): bump @types/lodash from 4.14.202 to 4.17.6 @dependabot[bot] ([#732](https://github.com/Tencent/tdesign-vue-next-starter/pull/732))
+- build(deps): bump tdesign-vue-next from 1.9.3 to 1.9.9 @dependabot[bot] ([#748](https://github.com/Tencent/tdesign-vue-next-starter/pull/748))
+
 ## 🌈 0.10.0 `2024-04-02`
 ### 🚀  Features
 - 优化整体代码风格 by @timi137137 (https://github.com/Tencent/tdesign-vue-next-starter/pull/638 https://github.com/Tencent/tdesign-vue-next-starter/pull/650 https://github.com/Tencent/tdesign-vue-next-starter/pull/680 https://github.com/Tencent/tdesign-vue-next-starter/pull/684)
