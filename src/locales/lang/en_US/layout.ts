@@ -40,6 +40,7 @@ export default {
       title: 'Element Switch',
       showHeader: 'Show Header',
       showBreadcrumb: 'Show Breadcrumb',
+      toggleHeadVisible: 'Toggle Header Display',
       showFooter: 'Show Footer',
       useTagTabs: 'Use Tag Tabs',
       menuAutoCollapsed: 'Menu Auto Collapsed',
