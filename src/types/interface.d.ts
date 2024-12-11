@@ -15,7 +15,8 @@ export interface RouteMeta {
 }
 
 export interface MenuRoute {
-  path: string;
+  // menuitem 组件支持 string 类型但是类型错误
+  path: any;
   title?: string | Record<string, string>;
   name?: string;
   icon?:
