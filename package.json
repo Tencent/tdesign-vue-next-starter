@@ -1,6 +1,6 @@
 {
   "name": "@tencent/tdesign-vue-next-starter",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "type": "module",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
@@ -32,16 +32,16 @@
     "qrcode.vue": "^3.4.1",
     "qs": "^6.13.0",
     "tdesign-icons-vue-next": "^0.2.6",
-    "tdesign-vue-next": "^1.9.9",
+    "tdesign-vue-next": "^1.10.5",
     "tvision-color": "^1.6.0",
-    "vue": "3.5.0",
+    "vue": "^3.5.0",
     "vue-router": "^4.4.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "@types/echarts": "^4.9.22",
     "@types/lodash": "^4.17.7",
+    "@types/echarts": "^4.9.22",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.9.15",
     "@typescript-eslint/eslint-plugin": "^6.21.0",

@@ -14,6 +14,7 @@ export default {
   name: 'ResultFail',
 };
 </script>
+
 <style lang="less" scoped>
 .result-success {
   display: flex;
