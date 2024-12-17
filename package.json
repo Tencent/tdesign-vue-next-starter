@@ -15,7 +15,7 @@
     "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
     "stylelint": "stylelint src/**/*.{html,vue,sass,less}",
     "stylelint:fix": "stylelint --fix src/**/*.{html,vue,css,sass,less}",
-    "prepare": "husky install",
+    "prepare": "husky",
     "site:preview": "npm run build && cp -r dist _site",
     "test": "echo \"no test specified,work in process\"",
     "test:coverage": "echo \"no test:coverage specified,work in process\""
