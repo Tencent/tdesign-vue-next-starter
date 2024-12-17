@@ -4,7 +4,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-const props = defineProps({
+const { type } = defineProps({
   url: String,
   type: {
     type: String,
@@ -13,7 +13,6 @@ const props = defineProps({
 });
 
 const className = computed(() => {
-  const { type } = props;
   return [
     'thumbnail-container',
     {
