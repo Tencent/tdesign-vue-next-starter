@@ -18,7 +18,7 @@ import ResultIeIcon from '@/assets/assets-result-ie.svg?component';
 import ResultMaintenanceIcon from '@/assets/assets-result-maintenance.svg?component';
 import ResultWifiIcon from '@/assets/assets-result-wifi.svg?component';
 
-const props = defineProps({
+const { type } = defineProps({
   bgUrl: String,
   title: String,
   tip: String,
@@ -26,7 +26,7 @@ const props = defineProps({
 });
 
 const dynamicComponent = computed(() => {
-  switch (props.type) {
+  switch (type) {
     case '403':
       return Result403Icon;
     case '404':
