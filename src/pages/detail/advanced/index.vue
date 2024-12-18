@@ -1,9 +1,8 @@
 <template>
   <div class="detail-advanced">
-    <t-card :title="$t('pages.detailCard.baseInfo.title')" :bordered="false">
-      <div class="info-block">
-        <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
-          <h1>{{ item.name }}</h1>
+    <t-card :bordered="false">
+      <t-descriptions :title="t('pages.detailCard.baseInfo.title')">
+        <t-descriptions-item v-for="(item, index) in BASE_INFO_DATA" :key="index" :label="item.name">
           <span
             :class="{
               ['inProgress']: item.type && item.type.value === 'inProgress',
@@ -13,37 +12,37 @@
             <i v-if="item.type && item.type.key === 'contractStatus'" />
             {{ item.value }}
           </span>
-        </div>
-      </div>
+        </t-descriptions-item>
+      </t-descriptions>
     </t-card>
 
     <!-- 发票进度 -->
-    <t-card :title="$t('pages.detailCard.invoice.title')" class="container-base-margin-top" :bordered="false">
+    <t-card :title="t('pages.detailCard.invoice.title')" class="container-base-margin-top" :bordered="false">
       <t-row justify="space-between">
         <t-steps :current="updateCurrent">
           <t-step-item
-            :title="$t('pages.detailCard.invoice.step1.title')"
-            :content="$t('pages.detailCard.invoice.step1.content')"
+            :title="t('pages.detailCard.invoice.step1.title')"
+            :content="t('pages.detailCard.invoice.step1.content')"
           />
           <t-step-item
-            :title="$t('pages.detailCard.invoice.step2.title')"
-            :content="$t('pages.detailCard.invoice.step2.content')"
+            :title="t('pages.detailCard.invoice.step2.title')"
+            :content="t('pages.detailCard.invoice.step2.content')"
           />
           <t-step-item
-            :title="$t('pages.detailCard.invoice.step3.title')"
-            :content="$t('pages.detailCard.invoice.step3.content')"
+            :title="t('pages.detailCard.invoice.step3.title')"
+            :content="t('pages.detailCard.invoice.step3.content')"
           />
-          <t-step-item :title="$t('pages.detailCard.invoice.step4.title')" />
+          <t-step-item :title="t('pages.detailCard.invoice.step4.title')" />
         </t-steps>
       </t-row>
     </t-card>
 
     <!-- 产品目录 -->
-    <t-card :title="$t('pages.detailCard.product.title')" class="container-base-margin-top" :bordered="false">
+    <t-card :title="t('pages.detailCard.product.title')" class="container-base-margin-top" :bordered="false">
       <template #actions>
         <t-radio-group default-value="dateVal">
-          <t-radio-button value="dateVal"> {{ $t('pages.detailCard.product.quarter') }} </t-radio-button>
-          <t-radio-button value="monthVal"> {{ $t('pages.detailCard.product.month') }} </t-radio-button>
+          <t-radio-button value="dateVal"> {{ t('pages.detailCard.product.quarter') }} </t-radio-button>
+          <t-radio-button value="monthVal"> {{ t('pages.detailCard.product.month') }} </t-radio-button>
         </t-radio-group>
       </template>
       <t-row :gutter="16" class="product-block-container">
@@ -51,7 +50,7 @@
           <div class="product-add">
             <div class="product-sub">
               <t-icon name="add" class="product-sub-icon" />
-              <span>{{ $t('pages.detailCard.product.add') }}</span>
+              <span>{{ t('pages.detailCard.product.add') }}</span>
             </div>
           </div>
         </t-col>
@@ -62,7 +61,7 @@
     </t-card>
 
     <!-- 产品采购明细 -->
-    <t-card :title="$t('pages.detailCard.detail.title')" class="container-base-margin-top" :bordered="false">
+    <t-card :title="t('pages.detailCard.detail.title')" class="container-base-margin-top" :bordered="false">
       <t-table
         :columns="columns"
         :data="data"
@@ -110,21 +109,22 @@
       </t-table>
     </t-card>
 
-    <t-dialog v-model:visible="visible" :header="$t('pages.detailCard.baseInfo.title')" @confirm="onConfirm">
+    <t-dialog v-model:visible="visible" :header="t('pages.detailCard.baseInfo.title')" @confirm="onConfirm">
       <template #body>
         <div class="dialog-info-block">
-          <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
-            <h1>{{ item.name }}</h1>
-            <span
-              :class="{
-                ['inProgress']: item.type && item.type.value === 'inProgress',
-                ['pdf']: item.type && item.type.value === 'pdf',
-              }"
-            >
-              <i v-if="item.type && item.type.key === 'contractStatus'" />
-              {{ item.value }}
-            </span>
-          </div>
+          <t-descriptions :column="1">
+            <t-descriptions-item v-for="(item, index) in BASE_INFO_DATA" :key="index" :label="item.name">
+              <span
+                :class="{
+                  ['inProgress']: item.type && item.type.value === 'inProgress',
+                  ['pdf']: item.type && item.type.value === 'pdf',
+                }"
+              >
+                <i v-if="item.type && item.type.key === 'contractStatus'" />
+                {{ item.value }}
+              </span>
+            </t-descriptions-item>
+          </t-descriptions>
         </div>
       </template>
     </t-dialog>

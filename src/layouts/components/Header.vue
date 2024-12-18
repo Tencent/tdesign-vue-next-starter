@@ -23,12 +23,12 @@
           <!-- 全局通知 -->
           <notice />
 
-          <t-tooltip placement="bottom" :content="$t('layout.header.code')">
+          <t-tooltip placement="bottom" :content="t('layout.header.code')">
             <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
               <t-icon name="logo-github" />
             </t-button>
           </t-tooltip>
-          <t-tooltip placement="bottom" :content="$t('layout.header.help')">
+          <t-tooltip placement="bottom" :content="t('layout.header.help')">
             <t-button theme="default" shape="square" variant="text" @click="navToHelper">
               <t-icon name="help-circle" />
             </t-button>
@@ -38,19 +38,23 @@
               <translate-icon />
             </t-button>
             <t-dropdown-menu>
-              <t-dropdown-item v-for="(lang, index) in langList" :key="index" :value="lang.value" @click="changeLang">{{
-                lang.content
-              }}</t-dropdown-item></t-dropdown-menu
+              <t-dropdown-item
+                v-for="(lang, index) in langList"
+                :key="index"
+                :value="lang.value"
+                @click="(options) => changeLang(options.value as string)"
+                >{{ lang.content }}</t-dropdown-item
+              ></t-dropdown-menu
             >
           </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
             <template #dropdown>
               <t-dropdown-menu>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
-                  <user-circle-icon />{{ $t('layout.header.user') }}
+                  <user-circle-icon />{{ t('layout.header.user') }}
                 </t-dropdown-item>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
-                  <poweroff-icon />{{ $t('layout.header.signOut') }}
+                  <poweroff-icon />{{ t('layout.header.signOut') }}
                 </t-dropdown-item>
               </t-dropdown-menu>
             </template>
@@ -62,7 +66,7 @@
               <template #suffix><chevron-down-icon /></template>
             </t-button>
           </t-dropdown>
-          <t-tooltip placement="bottom" :content="$t('layout.header.setting')">
+          <t-tooltip placement="bottom" :content="t('layout.header.setting')">
             <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
               <setting-icon />
             </t-button>
@@ -81,11 +85,11 @@ import { useRouter } from 'vue-router';
 
 import LogoFull from '@/assets/assets-logo-full.svg?component';
 import { prefix } from '@/config/global';
-import { langList } from '@/locales/index';
+import { langList, t } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
 import { useSettingStore, useUserStore } from '@/store';
-import type { MenuRoute } from '@/types/interface';
+import type { MenuRoute, ModeType } from '@/types/interface';
 
 import MenuContent from './MenuContent.vue';
 import Notice from './Notice.vue';
@@ -147,11 +151,11 @@ const menuCls = computed(() => {
     },
   ];
 });
-const menuTheme = computed(() => props.theme as 'light' | 'dark');
+const menuTheme = computed(() => props.theme as ModeType);
 
 // 切换语言
 const { changeLocale } = useLocale();
-const changeLang = ({ value: lang }: { value: string }) => {
+const changeLang = (lang: string) => {
   changeLocale(lang);
 };
 
@@ -238,7 +242,6 @@ const navToHelper = () => {
   display: flex;
   align-items: normal;
   line-height: 0;
-  padding-left: var(--td-comp-margin-xl);
 }
 
 .header-logo-container {

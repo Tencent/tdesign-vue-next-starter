@@ -39,7 +39,7 @@ router.beforeEach(async (to, from, next) => {
           next({ path: to.fullPath, replace: true, query: to.query });
         } else {
           const redirect = decodeURIComponent((from.query.redirect || to.path) as string);
-          next(to.path === redirect ? { ...to, replace: true } : { path: redirect });
+          next(to.path === redirect ? { ...to, replace: true } : { path: redirect, query: to.query });
           return;
         }
       }

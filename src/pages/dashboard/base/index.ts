@@ -367,8 +367,7 @@ export function getPieChartDataSet({
         emphasis: {
           scale: true,
           label: {
-            show: true,
-            formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
+            show: false,
             rich: {
               value: {
                 color: textColor,

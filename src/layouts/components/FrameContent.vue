@@ -6,16 +6,18 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useWindowSize } from '@vueuse/core';
 import debounce from 'lodash/debounce';
 import { computed, CSSProperties, ref, unref, watch } from 'vue';
 
 import { prefix } from '@/config/global';
-import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn';
 import { useSettingStore } from '@/store';
 
 defineProps({
   frameSrc: String,
 });
+
+const { width, height } = useWindowSize();
 
 const loading = ref(true);
 const heightRef = ref(window.innerHeight);
@@ -69,8 +71,8 @@ function hideLoading() {
   calcHeight();
 }
 
-useWindowSizeFn(calcHeight, { immediate: true });
-
+// 如果窗口大小发生变化
+watch([width, height], debounce(calcHeight, 250));
 watch(
   [() => settingStore.showFooter, () => settingStore.isUseTabsRouter, () => settingStore.showBreadcrumb],
   debounce(calcHeight, 250),

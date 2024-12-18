@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatility"></a>
+  <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatibility"></a>
   <a href="https://github.com/Tencent/tdesign-vue-next/blob/develop/LICENSE">
     <img src="https://img.shields.io/npm/l/tdesign-vue-next.svg?sanitize=true" alt="License">
   </a>

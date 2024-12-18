@@ -1,9 +1,8 @@
 <template>
   <div class="detail-base">
-    <t-card :title="$t('pages.detailBase.baseInfo.title')" :bordered="false">
-      <div class="info-block">
-        <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
-          <h1>{{ item.name }}</h1>
+    <t-card :bordered="false">
+      <t-descriptions :title="t('pages.detailBase.baseInfo.title')">
+        <t-descriptions-item v-for="(item, index) in BASE_INFO_DATA" :key="index" :label="item.name">
           <span
             :class="{
               ['inProgress']: item.type && item.type.value === 'inProgress',
@@ -13,23 +12,23 @@
             <i v-if="item.type && item.type.key === 'contractStatus'" />
             {{ item.value }}
           </span>
-        </div>
-      </div>
+        </t-descriptions-item>
+      </t-descriptions>
     </t-card>
 
-    <t-card :title="$t('pages.detailBase.changelog.title')" class="container-base-margin-top" :bordered="false">
+    <t-card :title="t('pages.detailBase.changelog.title')" class="container-base-margin-top" :bordered="false">
       <t-steps class="detail-base-info-steps" layout="vertical" theme="dot" :current="1">
         <t-step-item
-          :title="$t('pages.detailBase.changelog.step1.title')"
-          :content="$t('pages.detailBase.changelog.step1.subtitle')"
+          :title="t('pages.detailBase.changelog.step1.title')"
+          :content="t('pages.detailBase.changelog.step1.subtitle')"
         />
         <t-step-item
-          :title="$t('pages.detailBase.changelog.step2.title')"
-          :content="$t('pages.detailBase.changelog.step2.subtitle')"
+          :title="t('pages.detailBase.changelog.step2.title')"
+          :content="t('pages.detailBase.changelog.step2.subtitle')"
         />
         <t-step-item
-          :title="$t('pages.detailBase.changelog.step3.title')"
-          :content="$t('pages.detailBase.changelog.step3.desc')"
+          :title="t('pages.detailBase.changelog.step3.title')"
+          :content="t('pages.detailBase.changelog.step3.desc')"
         />
       </t-steps>
     </t-card>

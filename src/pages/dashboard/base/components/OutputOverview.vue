@@ -4,8 +4,8 @@
       <t-col :xs="12" :xl="9">
         <t-card
           :bordered="false"
-          :title="$t('pages.dashboardBase.outputOverview.title')"
-          :subtitle="$t('pages.dashboardBase.outputOverview.subtitle')"
+          :title="t('pages.dashboardBase.outputOverview.title')"
+          :subtitle="t('pages.dashboardBase.outputOverview.subtitle')"
           :class="{ 'dashboard-overview-card': true, 'overview-panel': true }"
         >
           <template #actions>
@@ -14,7 +14,7 @@
               theme="primary"
               mode="date"
               :default-value="LAST_7_DAYS"
-              @change="onStokeDataChange"
+              @change="(value) => onStokeDataChange(value as string[])"
             />
           </template>
           <div id="stokeContainer" style="width: 100%; height: 351px" class="dashboard-chart-container"></div>
@@ -23,19 +23,19 @@
       <t-col :xs="12" :xl="3">
         <t-card :bordered="false" :class="{ 'dashboard-overview-card': true, 'export-panel': true }">
           <template #actions>
-            <t-button>{{ $t('pages.dashboardBase.outputOverview.export') }}</t-button>
+            <t-button>{{ t('pages.dashboardBase.outputOverview.export') }}</t-button>
           </template>
           <t-row>
             <t-col :xs="6" :xl="12">
               <t-card
                 :bordered="false"
-                :subtitle="$t('pages.dashboardBase.outputOverview.month.input')"
+                :subtitle="t('pages.dashboardBase.outputOverview.month.input')"
                 class="inner-card"
               >
                 <div class="inner-card__content">
                   <div class="inner-card__content-title">1726</div>
                   <div class="inner-card__content-footer">
-                    {{ $t('pages.dashboardBase.outputOverview.since') }}
+                    {{ t('pages.dashboardBase.outputOverview.since') }}
                     <trend class="trend-tag" type="down" :is-reverse-color="false" describe="20.3%" />
                   </div>
                 </div>
@@ -44,13 +44,13 @@
             <t-col :xs="6" :xl="12">
               <t-card
                 :bordered="false"
-                :subtitle="$t('pages.dashboardBase.outputOverview.month.output')"
+                :subtitle="t('pages.dashboardBase.outputOverview.month.output')"
                 class="inner-card"
               >
                 <div class="inner-card__content">
                   <div class="inner-card__content-title">226</div>
                   <div class="inner-card__content-footer">
-                    {{ $t('pages.dashboardBase.outputOverview.since') }}
+                    {{ t('pages.dashboardBase.outputOverview.since') }}
                     <trend class="trend-tag" type="down" :is-reverse-color="false" describe="20.3%" />
                   </div>
                 </div>
@@ -79,6 +79,7 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 // 导入样式
 import Trend from '@/components/trend/index.vue';
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';

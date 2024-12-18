@@ -3,16 +3,16 @@
     <t-card class="list-card-container" :bordered="false">
       <t-row justify="space-between">
         <div class="left-operation-container">
-          <t-button @click="handleSetupContract"> {{ $t('pages.listBase.create') }} </t-button>
+          <t-button @click="handleSetupContract"> {{ t('pages.listBase.create') }} </t-button>
           <t-button variant="base" theme="default" :disabled="!selectedRowKeys.length">
-            {{ $t('pages.listBase.export') }}</t-button
+            {{ t('pages.listBase.export') }}</t-button
           >
           <p v-if="!!selectedRowKeys.length" class="selected-count">
-            {{ $t('pages.listBase.select') }} {{ selectedRowKeys.length }} {{ $t('pages.listBase.items') }}
+            {{ t('pages.listBase.select') }} {{ selectedRowKeys.length }} {{ t('pages.listBase.items') }}
           </p>
         </div>
         <div class="search-input">
-          <t-input v-model="searchValue" :placeholder="$t('pages.listBase.placeholder')" clearable>
+          <t-input v-model="searchValue" :placeholder="t('pages.listBase.placeholder')" clearable>
             <template #suffix-icon>
               <search-icon size="16px" />
             </template>
@@ -31,45 +31,45 @@
         :header-affixed-top="headerAffixedTop"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
-        @select-change="rehandleSelectChange"
+        @select-change="(value: number[]) => rehandleSelectChange(value)"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.fail') }}</t-tag
+            {{ t('pages.listBase.contractStatusEnum.fail') }}</t-tag
           >
           <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.audit') }}
+            {{ t('pages.listBase.contractStatusEnum.audit') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.pending') }}
+            {{ t('pages.listBase.contractStatusEnum.pending') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.executing') }}
+            {{ t('pages.listBase.contractStatusEnum.executing') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light">
-            {{ $t('pages.listBase.contractStatusEnum.finish') }}
+            {{ t('pages.listBase.contractStatusEnum.finish') }}
           </t-tag>
         </template>
         <template #contractType="{ row }">
-          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ $t('pages.listBase.contractStatusEnum.fail') }}</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ $t('pages.listBase.contractStatusEnum.audit') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ t('pages.listBase.contractStatusEnum.fail') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ t('pages.listBase.contractStatusEnum.audit') }}</p>
           <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">
-            {{ $t('pages.listBase.contractStatusEnum.pending') }}
+            {{ t('pages.listBase.contractStatusEnum.pending') }}
           </p>
         </template>
         <template #paymentType="{ row }">
           <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-            {{ $t('pages.listBase.pay') }}<trend class="dashboard-item-trend" type="up" />
+            {{ t('pages.listBase.pay') }}<trend class="dashboard-item-trend" type="up" />
           </div>
           <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECEIPT" class="payment-col">
-            {{ $t('pages.listBase.receive') }}<trend class="dashboard-item-trend" type="down" />
+            {{ t('pages.listBase.receive') }}<trend class="dashboard-item-trend" type="down" />
           </div>
         </template>
 
         <template #op="slotProps">
           <t-space>
-            <t-link theme="primary" @click="handleClickDetail()"> {{ $t('pages.listBase.detail') }}</t-link>
-            <t-link theme="danger" @click="handleClickDelete(slotProps)"> {{ $t('pages.listBase.delete') }}</t-link>
+            <t-link theme="primary" @click="handleClickDetail()"> {{ t('pages.listBase.detail') }}</t-link>
+            <t-link theme="danger" @click="handleClickDelete(slotProps)"> {{ t('pages.listBase.delete') }}</t-link>
           </t-space>
         </template>
       </t-table>
