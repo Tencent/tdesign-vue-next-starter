@@ -5,6 +5,12 @@ toc: false
 docClass: timeline
 ---
 
+## 🌈 0.12.0 `2025-01-06` 
+### 🐞 Bug Fixes
+- `Vue`: 修复升级至 Vue 3.4 及 3.5 的生产模式下的问题 @uyarn ([#796](https://github.com/Tencent/tdesign-vue-next-starter/pull/796))
+### 📈 Performance
+- defineProps改为Vue3.5解构语法 @liect ([#799](https://github.com/Tencent/tdesign-vue-next-starter/pull/799))
+
 ## 🌈 0.11.0 `2024-11-06` 
 ### 🚀 Features
 - `feat`: 调整默认lock文件配置 @timi137137 ([#717](https://github.com/Tencent/tdesign-vue-next-starter/pull/717))

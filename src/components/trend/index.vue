@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-const props = defineProps({
+const { type, isReverseColor } = defineProps({
   type: String,
   describe: [String, Number],
   isReverseColor: {
@@ -33,7 +33,6 @@ const props = defineProps({
 });
 
 const containerCls = computed(() => {
-  const { isReverseColor, type } = props;
   return [
     'trend-container',
     {

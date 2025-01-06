@@ -65,7 +65,7 @@ const SELECT_OPTIONS = [
   { label: 'CVM', value: '3' },
 ];
 
-const props = defineProps({
+const { visible, data } = defineProps({
   visible: {
     type: Boolean,
     default: false,
@@ -100,14 +100,14 @@ watch(
 );
 
 watch(
-  () => props.visible,
+  () => visible,
   (val) => {
     formVisible.value = val;
   },
 );
 
 watch(
-  () => props.data,
+  () => data,
   (val) => {
     formData.value = val;
   },

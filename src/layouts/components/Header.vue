@@ -95,7 +95,7 @@ import MenuContent from './MenuContent.vue';
 import Notice from './Notice.vue';
 import Search from './Search.vue';
 
-const props = defineProps({
+const { theme, layout, showLogo, menu, isFixed, isCompact } = defineProps({
   theme: {
     type: String,
     default: 'light',
@@ -141,7 +141,6 @@ const active = computed(() => getActive());
 const layoutCls = computed(() => [`${prefix}-header-layout`]);
 
 const menuCls = computed(() => {
-  const { isFixed, layout, isCompact } = props;
   return [
     {
       [`${prefix}-header-menu`]: !isFixed,
@@ -151,7 +150,7 @@ const menuCls = computed(() => {
     },
   ];
 });
-const menuTheme = computed(() => props.theme as ModeType);
+const menuTheme = computed(() => theme as ModeType);
 
 // 切换语言
 const { changeLocale } = useLocale();

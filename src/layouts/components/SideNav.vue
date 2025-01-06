@@ -42,7 +42,7 @@ import MenuContent from './MenuContent.vue';
 
 const MIN_POINT = 992 - 1;
 
-const props = defineProps({
+const { menu, showLogo, isFixed, layout, theme, isCompact } = defineProps({
   menu: {
     type: Array as PropType<MenuRoute[]>,
     default: () => [],
@@ -97,11 +97,9 @@ const onExpanded = (value: MenuValue[]) => {
 };
 
 const sideMode = computed(() => {
-  const { theme } = props;
   return theme === 'dark';
 });
 const sideNavCls = computed(() => {
-  const { isCompact } = props;
   return [
     `${prefix}-sidebar-layout`,
     {
@@ -126,7 +124,6 @@ const versionCls = computed(() => {
   ];
 });
 const menuCls = computed(() => {
-  const { showLogo, isFixed, layout } = props;
   return [
     `${prefix}-side-nav`,
     {
