@@ -33,7 +33,7 @@
     "qs": "^6.11.2",
     "tdesign-icons-vue-next": "^0.3.3",
     "tdesign-vue-next": "^1.10.6",
-      "tdesign-site-components": "^0.12.9",
+    "tdesign-site-components": "^0.12.9",
     "tdesign-theme-generator": "^1.0.5",
     "tvision-color": "^1.6.0",
     "vue": "^3.5.0",

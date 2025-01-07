@@ -29,6 +29,8 @@ export default {
 <script setup lang="ts">
 import { ref } from 'vue';
 
+import { t } from '@/locales';
+
 import LoginHeader from './components/Header.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';

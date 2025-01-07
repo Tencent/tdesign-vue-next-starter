@@ -17,9 +17,11 @@ const settingStore = useSettingStore();
 
 onMounted(() => {
   const themeGenerator = document.querySelector('td-theme-generator');
+  // @ts-ignore
   themeGenerator.addEventListener('click-setting', () => {
     settingStore.showSettingPanel = true;
   });
+  // @ts-ignore
   themeGenerator.addEventListener('panel-drawer-visible', (v: CustomEvent) => {
     if (v?.detail?.[0]) settingStore.showSettingPanel = false;
   });

@@ -34,4 +34,5 @@ yarn-error.log
 
 # lock文件 请根据自身项目或团队需求选择具体的包管理工具 并移除具体的ignore的lock文件
 yarn.lock
+package-lock.json
 pnpm-lock.yaml
