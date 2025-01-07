@@ -33,6 +33,7 @@ export default {
       },
     },
     navigationLayout: 'Navigation Layout',
+    sideMode: 'Side Menu Mode',
     splitMenu: 'Split Menu（Only Mix mode）',
     fixedSidebar: 'Fixed Sidebar',
     element: {
@@ -41,6 +42,7 @@ export default {
       showBreadcrumb: 'Show Breadcrumb',
       showFooter: 'Show Footer',
       useTagTabs: 'Use Tag Tabs',
+      menuAutoCollapsed: 'Menu Auto Collapsed',
     },
     tips: 'Please copy and manually modify the configuration file: /src/config/style.ts',
     copy: {

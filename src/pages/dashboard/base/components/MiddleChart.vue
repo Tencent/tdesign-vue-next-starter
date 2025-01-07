@@ -2,7 +2,7 @@
   <t-row :gutter="16" class="row-container">
     <t-col :xs="12" :xl="9">
       <t-card
-        :title="$t('pages.dashboardBase.topPanel.analysis.title')"
+        :title="t('pages.dashboardBase.topPanel.analysis.title')"
         :subtitle="currentMonth"
         class="dashboard-chart-card"
         :bordered="false"
@@ -14,7 +14,7 @@
               theme="primary"
               mode="date"
               :default-value="LAST_7_DAYS"
-              @change="onCurrencyChange"
+              @change="(value) => onCurrencyChange(value as string[])"
             />
           </div>
         </template>
@@ -27,7 +27,7 @@
     </t-col>
     <t-col :xs="12" :xl="3">
       <t-card
-        :title="$t('pages.dashboardBase.topPanel.analysis.channels')"
+        :title="t('pages.dashboardBase.topPanel.analysis.channels')"
         :subtitle="currentMonth"
         class="dashboard-chart-card"
         :bordered="false"
@@ -50,6 +50,7 @@ import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { computed, nextTick, onDeactivated, onMounted, ref, watch } from 'vue';
 
+import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';
@@ -97,6 +98,25 @@ const renderCountChart = () => {
   }
   countChart = echarts.init(countContainer);
   countChart.setOption(getPieChartDataSet(chartColors.value));
+
+  // 取消之前高亮的图形
+  countChart.dispatchAction({
+    type: 'downplay',
+    seriesIndex: 0,
+    dataIndex: -1,
+  });
+  // 高亮当前图形
+  countChart.dispatchAction({
+    type: 'highlight',
+    seriesIndex: 0,
+    dataIndex: 1,
+  });
+  // 显示 tooltip
+  countChart.dispatchAction({
+    type: 'showTip',
+    seriesIndex: 0,
+    dataIndex: 1,
+  });
 };
 
 const renderCharts = () => {

@@ -1,112 +1,28 @@
-.detail-base {
-  :deep(.t-card) {
-    padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
-  }
-
-  :deep(.t-card__header) {
-    padding: 0;
-    margin-bottom: var(--td-comp-margin-m);
-  }
-
-  :deep(.t-card__body) {
-    padding: 0;
-  }
-
-  :deep(.t-card__title) {
-    font: var(--td-font-title-large);
-    font-weight: 400;
-  }
-
-  &-info-steps {
-    padding-top: var(--td-comp-margin-xl);
-  }
-}
-
-.info-block {
-  column-count: 2;
-
-  .info-item {
-    padding-top: var(--td-comp-margin-xxl);
-    display: flex;
-    color: var(--td-text-color-primary);
-
-    h1 {
-      width: 160px;
-      font: var(--td-font-body-medium);
-      color: var(--td-text-color-secondary);
-      font-weight: normal;
-      text-align: left;
-
-      @media (max-width: @screen-sm-max) {
-        width: 80px;
-      }
-
-      @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-        width: 120px;
-      }
-    }
-
+.t-descriptions {
     span {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      margin-left: var(--td-comp-margin-xxl);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-left: var(--td-comp-margin-xxl);
     }
 
     i {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: var(--td-radius-circle);
-      background: var(--td-success-color);
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: var(--td-radius-circle);
+        background: var(--td-success-color);
     }
 
     .inProgress {
-      color: var(--td-success-color);
+        color: var(--td-success-color);
     }
 
     .pdf {
-      color: var(--td-brand-color);
+        color: var(--td-brand-color);
 
-      &:hover {
-        cursor: pointer;
-      }
+        &:hover {
+            cursor: pointer;
+        }
     }
-  }
-}
-
-.dialog-info-block {
-  .info-item {
-    padding: 12px 0;
-    display: flex;
-
-    h1 {
-      width: 84px;
-      font-family: var(--td-font-family);
-      font-size: 14px;
-      color: var(--td-text-color-secondary);
-      text-align: left;
-      line-height: 22px;
-    }
-
-    span {
-      margin-left: var(--td-comp-margin-xxl);
-    }
-
-    i {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: var(--td-radius-circle);
-      background: var(--td-success-color);
-    }
-
-    .green {
-      color: var(--td-success-color);
-    }
-
-    .blue {
-      color: var(--td-brand-color);
-    }
-  }
 }

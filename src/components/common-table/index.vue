@@ -5,45 +5,45 @@
         <t-col :span="10">
           <t-row :gutter="[24, 24]">
             <t-col :span="4">
-              <t-form-item :label="$t('components.commonTable.contractName')" name="name">
+              <t-form-item :label="t('components.commonTable.contractName')" name="name">
                 <t-input
                   v-model="formData.name"
                   class="form-item-content"
                   type="search"
-                  :placeholder="$t('components.commonTable.contractNamePlaceholder')"
+                  :placeholder="t('components.commonTable.contractNamePlaceholder')"
                   :style="{ minWidth: '134px' }"
                 />
               </t-form-item>
             </t-col>
             <t-col :span="4">
-              <t-form-item :label="$t('components.commonTable.contractStatus')" name="status">
+              <t-form-item :label="t('components.commonTable.contractStatus')" name="status">
                 <t-select
                   v-model="formData.status"
                   class="form-item-content"
                   :options="CONTRACT_STATUS_OPTIONS"
-                  :placeholder="$t('components.commonTable.contractStatusPlaceholder')"
+                  :placeholder="t('components.commonTable.contractStatusPlaceholder')"
                   clearable
                 />
               </t-form-item>
             </t-col>
             <t-col :span="4">
-              <t-form-item :label="$t('components.commonTable.contractNum')" name="no">
+              <t-form-item :label="t('components.commonTable.contractNum')" name="no">
                 <t-input
                   v-model="formData.no"
                   class="form-item-content"
-                  :placeholder="$t('components.commonTable.contractNumPlaceholder')"
+                  :placeholder="t('components.commonTable.contractNumPlaceholder')"
                   :style="{ minWidth: '134px' }"
                 />
               </t-form-item>
             </t-col>
             <t-col :span="4">
-              <t-form-item :label="$t('components.commonTable.contractType')" name="type">
+              <t-form-item :label="t('components.commonTable.contractType')" name="type">
                 <t-select
                   v-model="formData.type"
                   style="display: inline-block"
                   class="form-item-content"
                   :options="CONTRACT_TYPE_OPTIONS"
-                  :placeholder="$t('components.commonTable.contractTypePlaceholder')"
+                  :placeholder="t('components.commonTable.contractTypePlaceholder')"
                   clearable
                 />
               </t-form-item>
@@ -53,9 +53,9 @@
 
         <t-col :span="2" class="operation-container">
           <t-button theme="primary" type="submit" :style="{ marginLeft: 'var(--td-comp-margin-s)' }">
-            {{ $t('components.commonTable.query') }}
+            {{ t('components.commonTable.query') }}
           </t-button>
-          <t-button type="reset" variant="base" theme="default"> {{ $t('components.commonTable.reset') }} </t-button>
+          <t-button type="reset" variant="base" theme="default"> {{ t('components.commonTable.reset') }} </t-button>
         </t-col>
       </t-row>
     </t-form>
@@ -75,40 +75,40 @@
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
-            {{ $t('components.commonTable.contractStatusEnum.fail') }}
+            {{ t('components.commonTable.contractStatusEnum.fail') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.AUDIT_PENDING" theme="warning" variant="light">
-            {{ $t('components.commonTable.contractStatusEnum.audit') }}
+            {{ t('components.commonTable.contractStatusEnum.audit') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.EXEC_PENDING" theme="warning" variant="light">
-            {{ $t('components.commonTable.contractStatusEnum.pending') }}
+            {{ t('components.commonTable.contractStatusEnum.pending') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.EXECUTING" theme="success" variant="light">
-            {{ $t('components.commonTable.contractStatusEnum.executing') }}
+            {{ t('components.commonTable.contractStatusEnum.executing') }}
           </t-tag>
           <t-tag v-if="row.status === CONTRACT_STATUS.FINISH" theme="success" variant="light">
-            {{ $t('components.commonTable.contractStatusEnum.finish') }}
+            {{ t('components.commonTable.contractStatusEnum.finish') }}
           </t-tag>
         </template>
         <template #contractType="{ row }">
-          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ $t('pages.listBase.contractStatusEnum.fail') }}</p>
-          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ $t('pages.listBase.contractStatusEnum.audit') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.MAIN">{{ t('pages.listBase.contractStatusEnum.fail') }}</p>
+          <p v-if="row.contractType === CONTRACT_TYPES.SUB">{{ t('pages.listBase.contractStatusEnum.audit') }}</p>
           <p v-if="row.contractType === CONTRACT_TYPES.SUPPLEMENT">
-            {{ $t('pages.listBase.contractStatusEnum.pending') }}
+            {{ t('pages.listBase.contractStatusEnum.pending') }}
           </p>
         </template>
         <template #paymentType="{ row }">
           <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-            {{ $t('pages.listBase.pay') }}<trend class="dashboard-item-trend" type="up" />
+            {{ t('pages.listBase.pay') }}<trend class="dashboard-item-trend" type="up" />
           </div>
           <div v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECEIPT" class="payment-col">
-            {{ $t('pages.listBase.receive') }}<trend class="dashboard-item-trend" type="down" />
+            {{ t('pages.listBase.receive') }}<trend class="dashboard-item-trend" type="down" />
           </div>
         </template>
         <template #op="slotProps">
           <t-space>
-            <t-link theme="primary" @click="handleClickDetail()"> {{ $t('pages.listBase.detail') }}</t-link>
-            <t-link theme="danger" @click="handleClickDelete(slotProps)"> {{ $t('pages.listBase.delete') }}</t-link>
+            <t-link theme="primary" @click="handleClickDetail()"> {{ t('pages.listBase.detail') }}</t-link>
+            <t-link theme="danger" @click="handleClickDelete(slotProps)"> {{ t('pages.listBase.delete') }}</t-link>
           </t-space>
         </template>
       </t-table>

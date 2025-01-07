@@ -4,22 +4,22 @@
       <!-- 简单步骤条 -->
       <t-card :bordered="false">
         <t-steps class="step-container" :current="1" status="process">
-          <t-step-item :title="$t('pages.formStep.step1.title')" :content="$t('pages.formStep.step1.subtitle')" />
-          <t-step-item :title="$t('pages.formStep.step2.title')" :content="$t('pages.formStep.step2.subtitle')" />
-          <t-step-item :title="$t('pages.formStep.step3.title')" :content="$t('pages.formStep.step3.subtitle')" />
-          <t-step-item :title="$t('pages.formStep.step4.title')" :content="$t('pages.formStep.step4.subtitle')" />
+          <t-step-item :title="t('pages.formStep.step1.title')" :content="t('pages.formStep.step1.subtitle')" />
+          <t-step-item :title="t('pages.formStep.step2.title')" :content="t('pages.formStep.step2.subtitle')" />
+          <t-step-item :title="t('pages.formStep.step3.title')" :content="t('pages.formStep.step3.subtitle')" />
+          <t-step-item :title="t('pages.formStep.step4.title')" :content="t('pages.formStep.step4.subtitle')" />
         </t-steps>
       </t-card>
 
       <!-- 分步表单1 -->
       <div v-show="activeForm === 0" class="rule-tips">
-        <t-alert theme="info" :title="$t('pages.formStep.step1.rules')" :close="true">
+        <t-alert theme="info" :title="t('pages.formStep.step1.rules')" :close="true">
           <template #message>
             <p>
-              {{ $t('pages.formStep.step1.rule1') }}
+              {{ t('pages.formStep.step1.rule1') }}
             </p>
-            <p>{{ $t('pages.formStep.step1.rule2') }}</p>
-            <p>{{ $t('pages.formStep.step1.rule3') }}</p>
+            <p>{{ t('pages.formStep.step1.rule2') }}</p>
+            <p>{{ t('pages.formStep.step1.rule3') }}</p>
           </template>
         </t-alert>
       </div>
@@ -31,23 +31,23 @@
         label-align="right"
         @submit="(result: SubmitContext) => onSubmit(result, 1)"
       >
-        <t-form-item :label="$t('pages.formStep.step1.contractName')" name="name">
+        <t-form-item :label="t('pages.formStep.step1.contractName')" name="name">
           <t-select v-model="formData1.name" :style="{ width: '480px' }" class="demo-select-base" clearable>
             <t-option v-for="(item, index) in NAME_OPTIONS" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step1.invoiceType')" name="type">
+        <t-form-item :label="t('pages.formStep.step1.invoiceType')" name="type">
           <t-select v-model="formData1.type" :style="{ width: '480px' }" class="demo-select-base" clearable>
             <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step1.amount')"> ¥ {{ amount }} </t-form-item>
+        <t-form-item :label="t('pages.formStep.step1.amount')"> ¥ {{ amount }} </t-form-item>
         <t-form-item>
-          <t-button theme="primary" type="submit"> {{ $t('pages.formStep.step1.submit') }} </t-button>
+          <t-button theme="primary" type="submit"> {{ t('pages.formStep.step1.submit') }} </t-button>
         </t-form-item>
       </t-form>
 
@@ -61,58 +61,58 @@
         @reset="onReset(0)"
         @submit="(result: SubmitContext) => onSubmit(result, 2)"
       >
-        <t-form-item :label="$t('pages.formStep.step2.invoiceTitle')" name="title">
+        <t-form-item :label="t('pages.formStep.step2.invoiceTitle')" name="title">
           <t-input
             v-model="formData2.title"
             :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.invoiceTitlePlaceholder')"
+            :placeholder="t('pages.formStep.step2.invoiceTitlePlaceholder')"
           />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.taxNum')" name="taxNum">
+        <t-form-item :label="t('pages.formStep.step2.taxNum')" name="taxNum">
           <t-input
             v-model="formData2.taxNum"
             :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.taxNumPlaceholder')"
+            :placeholder="t('pages.formStep.step2.taxNumPlaceholder')"
           />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.address')" name="address">
+        <t-form-item :label="t('pages.formStep.step2.address')" name="address">
           <t-input
             v-model="formData2.address"
             :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.addressPlaceholder')"
+            :placeholder="t('pages.formStep.step2.addressPlaceholder')"
           />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.bank')" name="bank">
+        <t-form-item :label="t('pages.formStep.step2.bank')" name="bank">
           <t-input
             v-model="formData2.bank"
             :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.bankPlaceholder')"
+            :placeholder="t('pages.formStep.step2.bankPlaceholder')"
           />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.bankAccount')" name="bankAccount">
+        <t-form-item :label="t('pages.formStep.step2.bankAccount')" name="bankAccount">
           <t-input
             v-model="formData2.bankAccount"
             :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.bankAccountPlaceholder')"
+            :placeholder="t('pages.formStep.step2.bankAccountPlaceholder')"
           />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.email')" name="email">
+        <t-form-item :label="t('pages.formStep.step2.email')" name="email">
           <t-input
             v-model="formData2.email"
             :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.emailPlaceholder')"
+            :placeholder="t('pages.formStep.step2.emailPlaceholder')"
           />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step2.tel')" name="tel">
+        <t-form-item :label="t('pages.formStep.step2.tel')" name="tel">
           <t-input
             v-model="formData2.tel"
             :style="{ width: '480px' }"
-            :placeholder="$t('pages.formStep.step2.telPlaceholder')"
+            :placeholder="t('pages.formStep.step2.telPlaceholder')"
           />
         </t-form-item>
         <t-form-item>
-          <t-button type="reset" theme="default" variant="base"> {{ $t('pages.formStep.preStep') }} </t-button>
-          <t-button theme="primary" type="submit"> {{ $t('pages.formStep.nextStep') }} </t-button>
+          <t-button type="reset" theme="default" variant="base"> {{ t('pages.formStep.preStep') }} </t-button>
+          <t-button theme="primary" type="submit"> {{ t('pages.formStep.nextStep') }} </t-button>
         </t-form-item>
       </t-form>
 
@@ -126,25 +126,25 @@
         @reset="onReset(1)"
         @submit="(result: SubmitContext) => onSubmit(result, 6)"
       >
-        <t-form-item :label="$t('pages.formStep.step3.consignee')" name="consignee">
+        <t-form-item :label="t('pages.formStep.step3.consignee')" name="consignee">
           <t-input v-model="formData3.consignee" :style="{ width: '480px' }" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step3.mobileNum')" name="mobileNum">
+        <t-form-item :label="t('pages.formStep.step3.mobileNum')" name="mobileNum">
           <t-input v-model="formData3.mobileNum" :style="{ width: '480px' }" />
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step3.deliveryAddress')" name="deliveryAddress">
+        <t-form-item :label="t('pages.formStep.step3.deliveryAddress')" name="deliveryAddress">
           <t-select v-model="formData3.deliveryAddress" :style="{ width: '480px' }" class="demo-select-base" clearable>
             <t-option v-for="(item, index) in ADDRESS_OPTIONS" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
         </t-form-item>
-        <t-form-item :label="$t('pages.formStep.step3.fullAddress')" name="fullAddress">
+        <t-form-item :label="t('pages.formStep.step3.fullAddress')" name="fullAddress">
           <t-textarea v-model="formData3.fullAddress" :style="{ width: '480px' }" />
         </t-form-item>
         <t-form-item>
-          <t-button type="reset" theme="default" variant="base"> {{ $t('pages.formStep.preStep') }} </t-button>
-          <t-button theme="primary" type="submit"> {{ $t('pages.formStep.nextStep') }} </t-button>
+          <t-button type="reset" theme="default" variant="base"> {{ t('pages.formStep.preStep') }} </t-button>
+          <t-button theme="primary" type="submit"> {{ t('pages.formStep.nextStep') }} </t-button>
         </t-form-item>
       </t-form>
 
@@ -152,12 +152,12 @@
       <div v-show="activeForm === 6" class="step-form-4">
         <t-space direction="vertical" style="align-items: center">
           <t-icon name="check-circle-filled" style="color: green" size="52px" />
-          <p class="text">{{ $t('pages.formStep.step4.finishTitle') }}</p>
-          <p class="tips">{{ $t('pages.formStep.step4.finishTips') }}</p>
+          <p class="text">{{ t('pages.formStep.step4.finishTitle') }}</p>
+          <p class="tips">{{ t('pages.formStep.step4.finishTips') }}</p>
           <div class="button-group">
-            <t-button theme="primary" @click="onReset(0)"> {{ $t('pages.formStep.step4.reapply') }} </t-button>
+            <t-button theme="primary" @click="onReset(0)"> {{ t('pages.formStep.step4.reapply') }} </t-button>
             <t-button variant="base" theme="default" @click="complete">
-              {{ $t('pages.formStep.step4.check') }}
+              {{ t('pages.formStep.step4.check') }}
             </t-button>
           </div>
         </t-space>
@@ -176,6 +176,8 @@ export default {
 import { SubmitContext } from 'tdesign-vue-next';
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
+
+import { t } from '@/locales';
 
 import {
   ADDRESS_OPTIONS,

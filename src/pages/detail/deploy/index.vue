@@ -2,18 +2,18 @@
   <div class="detail-deploy">
     <t-row :gutter="16">
       <t-col :lg="6" :xs="12">
-        <t-card :title="$t('pages.detailDeploy.deployTrend.title')" :bordered="false">
+        <t-card :title="t('pages.detailDeploy.deployTrend.title')" :bordered="false">
           <div class="deploy-panel-left">
             <div id="monitorContainer" style="width: 100%; height: 265px" />
           </div>
         </t-card>
       </t-col>
       <t-col :lg="6" :xs="12">
-        <t-card :title="$t('pages.detailDeploy.deployTrend.warning')" :bordered="false">
+        <t-card :title="t('pages.detailDeploy.deployTrend.warning')" :bordered="false">
           <template #actions>
             <t-radio-group default-value="dateVal" @change="onAlertChange">
-              <t-radio-button value="dateVal"> {{ $t('pages.detailDeploy.deployTrend.thisWeek') }} </t-radio-button>
-              <t-radio-button value="monthVal"> {{ $t('pages.detailDeploy.deployTrend.thisMonth') }} </t-radio-button>
+              <t-radio-button value="dateVal"> {{ t('pages.detailDeploy.deployTrend.thisWeek') }} </t-radio-button>
+              <t-radio-button value="monthVal"> {{ t('pages.detailDeploy.deployTrend.thisMonth') }} </t-radio-button>
             </t-radio-group>
           </template>
           <div id="dataContainer" style="width: 100%; height: 265px" />
@@ -22,7 +22,7 @@
     </t-row>
 
     <!-- 项目列表 -->
-    <t-card :title="$t('pages.detailDeploy.projectList.title')" class="container-base-margin-top" :bordered="false">
+    <t-card :title="t('pages.detailDeploy.projectList.title')" class="container-base-margin-top" :bordered="false">
       <t-table
         :columns="columns"
         :data="data"
@@ -41,11 +41,9 @@
         </template>
         <template #op="slotProps">
           <t-space>
-            <t-link theme="primary" @click="listClick()">{{
-              $t('pages.detailDeploy.projectList.table.manage')
-            }}</t-link>
+            <t-link theme="primary" @click="listClick()">{{ t('pages.detailDeploy.projectList.table.manage') }}</t-link>
             <t-link theme="danger" @click="deleteClickOp(slotProps)">{{
-              $t('pages.detailDeploy.projectList.table.delete')
+              t('pages.detailDeploy.projectList.table.delete')
             }}</t-link>
           </t-space>
         </template>
@@ -55,11 +53,7 @@
       </t-table>
     </t-card>
 
-    <t-dialog
-      v-model:visible="visible"
-      :header="$t('pages.detailDeploy.projectList.dialog.title')"
-      @confirm="onConfirm"
-    >
+    <t-dialog v-model:visible="visible" :header="t('pages.detailDeploy.projectList.dialog.title')" @confirm="onConfirm">
       <template #body>
         <div class="dialog-info-block">
           <div class="dialog-info-block">
