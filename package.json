@@ -63,7 +63,7 @@
     "eslint-plugin-vue": "^9.21.1",
     "eslint-plugin-vue-scoped-css": "^2.7.2",
     "husky": "^9.1.7",
-    "less": "^4.2.0",
+    "less": "^4.2.2",
     "lint-staged": "^15.2.2",
     "mockjs": "^1.1.0",
     "postcss-html": "^1.6.0",
