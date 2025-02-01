@@ -21,7 +21,7 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
-    "@vueuse/core": "^12.3.0",
+    "@vueuse/core": "^12.5.0",
     "axios": "^1.7.9",
     "dayjs": "^1.11.13",
     "echarts": "5.4.3",
