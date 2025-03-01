@@ -29,7 +29,7 @@
     "nprogress": "^0.2.0",
     "pinia": "2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
-    "qrcode.vue": "^3.4.1",
+    "qrcode.vue": "^3.6.0",
     "qs": "^6.13.1",
     "tdesign-icons-vue-next": "^0.3.3",
     "tdesign-vue-next": "^1.10.6",
