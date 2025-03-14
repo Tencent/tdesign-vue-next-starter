@@ -31,7 +31,7 @@
         :header-affixed-top="headerAffixedTop"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
-        @select-change="(value: number[]) => rehandleSelectChange(value)"
+        @select-change="(value: RowKeys) => rehandleSelectChange(value)"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
@@ -103,6 +103,8 @@ import { prefix } from '@/config/global';
 import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
 import { t } from '@/locales';
 import { useSettingStore } from '@/store';
+
+type RowKeys = Array<string | number>;
 
 const store = useSettingStore();
 
@@ -190,7 +192,7 @@ onMounted(() => {
 
 const confirmVisible = ref(false);
 
-const selectedRowKeys = ref([1, 2]);
+const selectedRowKeys = ref<RowKeys>([1, 2]);
 
 const router = useRouter();
 
@@ -217,7 +219,7 @@ const onCancel = () => {
 
 const rowKey = 'index';
 
-const rehandleSelectChange = (val: number[]) => {
+const rehandleSelectChange = (val: RowKeys) => {
   selectedRowKeys.value = val;
 };
 const rehandlePageChange = (curr: unknown, pageInfo: unknown) => {
