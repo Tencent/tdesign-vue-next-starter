@@ -1,6 +1,7 @@
 export default {
   defaultSeverity: 'error',
   extends: ['stylelint-config-standard'],
+  plugins: ['stylelint-order'],
   rules: {
     'no-descending-specificity': null,
     'import-notation': 'string',
