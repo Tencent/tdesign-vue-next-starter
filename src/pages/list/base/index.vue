@@ -190,7 +190,7 @@ onMounted(() => {
 
 const confirmVisible = ref(false);
 
-const selectedRowKeys = ref<RowKeys>([1, 2]);
+const selectedRowKeys = ref<(string | number)[]>([1, 2]);
 
 const router = useRouter();
 
