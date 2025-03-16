@@ -1,5 +1,5 @@
-import { TChartColor } from '@/config/color';
-import { t } from '@/locales/index';
+import type { TChartColor } from '@/config/color';
+import { t } from '@/locales';
 import { getDateArray, getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
 
@@ -114,8 +114,8 @@ export const lastYearList: Array<any> = [100, 120, 140, 160, 180, 200, 210];
  * 柱状图数据结构
  *
  * @export
- * @param {boolean} [isMonth=false]
- * @returns {*}
+ * @param {boolean} [isMonth]
+ * @returns {*} dataSet
  */
 export function get2ColBarChartDataSet({
   isMonth = false,

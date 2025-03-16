@@ -6,7 +6,7 @@
           :bordered="false"
           :title="t('pages.dashboardBase.outputOverview.title')"
           :subtitle="t('pages.dashboardBase.outputOverview.subtitle')"
-          :class="{ 'dashboard-overview-card': true, 'overview-panel': true }"
+          class="dashboard-overview-card overview-panel"
         >
           <template #actions>
             <t-date-range-picker
@@ -21,7 +21,7 @@
         </t-card>
       </t-col>
       <t-col :xs="12" :xl="3">
-        <t-card :bordered="false" :class="{ 'dashboard-overview-card': true, 'export-panel': true }">
+        <t-card :bordered="false" class="dashboard-overview-card export-panel">
           <template #actions>
             <t-button>{{ t('pages.dashboardBase.outputOverview.export') }}</t-button>
           </template>

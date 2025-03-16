@@ -10,9 +10,12 @@ import typescript from 'typescript-eslint';
 
 export default antfu(
   {
-    formatters: true,
     typescript: true,
     vue: true,
+    jsonc: false,
+    yaml: false,
+    markdown: false,
+    formatters: false,
   },
   [
     ...typescript.configs.recommended,
@@ -51,11 +54,16 @@ export default antfu(
       },
 
       rules: {
+        /* Closed due to template running
+         * (Recommended to open!)
+         */
+        'no-console': 'off',
         'ts/no-explicit-any': 'off',
 
         /* Disallow person rules */
         'antfu/top-level-function': 'off',
         'antfu/if-newline': 'off',
+        'n/prefer-global/process': 'off',
 
         /* If you need control the imports sequence, must be off
          *  https://github.com/vuejs/vue-eslint-parser/issues/58
@@ -100,16 +108,27 @@ export default antfu(
 
       rules: {
         'vue/component-name-in-template-casing': ['error', 'kebab-case'],
+        'vue/custom-event-name-casing': ['error', 'kebab-case'],
         'vue/block-order': [
           'error',
           {
             order: ['template', 'script', 'style'],
           },
         ],
+        'vue/block-lang': [
+          'error',
+          {
+            script: {
+              lang: ['ts', 'tsx'],
+            },
+          },
+        ],
         'vue/multi-word-component-names': 'off',
         'vue/no-reserved-props': 'off',
         'vue/no-v-html': 'off',
 
+        'vue-scoped-css/no-parsing-error': 'off',
+        'vue-scoped-css/no-unused-selector': 'off',
         'vue-scoped-css/enforce-style-type': [
           'error',
           {

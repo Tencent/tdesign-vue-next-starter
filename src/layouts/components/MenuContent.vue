@@ -24,6 +24,7 @@
     </template>
   </div>
 </template>
+
 <script setup lang="tsx">
 import type { PropType } from 'vue';
 import { computed } from 'vue';
@@ -86,7 +87,7 @@ const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
 const getHref = (item: MenuRoute) => {
   const { frameSrc, frameBlank } = item.meta;
   if (frameSrc && frameBlank) {
-    return frameSrc.match(/(http|https):\/\/([\w.]+\/?)\S*/);
+    return frameSrc.match(/(https?):\/\/([\w.]+)(?:\/\S*)?/);
   }
   return null;
 };

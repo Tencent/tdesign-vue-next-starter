@@ -13,7 +13,7 @@
     "preview": "vite preview",
     "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0",
     "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
-    "stylelint": "stylelint src/**/*.{html,vue,sass,less}",
+    "stylelint": "stylelint src/**/*.{html,vue,css,sass,less}",
     "stylelint:fix": "stylelint --fix src/**/*.{html,vue,css,sass,less}",
     "prepare": "husky install",
     "site:preview": "npm run build && cp -r dist _site",
@@ -55,7 +55,6 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-format": "^1.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vue": "^10.0.0",
@@ -94,5 +93,5 @@
   },
   "engines": {
     "node": ">=18.18.0"
-  },
+  }
 }

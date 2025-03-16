@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { difference, remove, union } from 'lodash';
-import { MenuValue } from 'tdesign-vue-next';
+import type { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
@@ -39,8 +39,6 @@ import type { MenuRoute, ModeType } from '@/types/interface';
 
 import pgk from '../../../package.json';
 import MenuContent from './MenuContent.vue';
-
-const MIN_POINT = 992 - 1;
 
 const { menu, showLogo, isFixed, layout, theme, isCompact } = defineProps({
   menu: {
@@ -72,6 +70,8 @@ const { menu, showLogo, isFixed, layout, theme, isCompact } = defineProps({
     default: false,
   },
 });
+
+const MIN_POINT = 992 - 1;
 
 const collapsed = computed(() => useSettingStore().isSidebarCompact);
 const menuAutoCollapsed = computed(() => useSettingStore().menuAutoCollapsed);

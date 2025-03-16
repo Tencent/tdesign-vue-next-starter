@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 
-import { RouteItem } from '@/api/model/permissionModel';
+import type { RouteItem } from '@/api/model/permissionModel';
 import { getMenuList } from '@/api/permission';
 import router, { fixedRouterList, homepageRouterList } from '@/router';
 import { store } from '@/store';
@@ -33,7 +33,7 @@ export const usePermissionStore = defineStore('permission', {
         await this.initRoutes();
         return this.asyncRoutes;
       } catch (error) {
-        throw new Error("Can't build routes");
+        throw new Error("Can't build routes", error);
       }
     },
     async restoreRoutes() {

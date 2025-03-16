@@ -2,7 +2,7 @@
   <t-dialog v-model:visible="formVisible" :header="t('pages.listCard.create')" :width="680" :footer="false">
     <template #body>
       <!-- 表单内容 -->
-      <t-form ref="form" :data="formData" :rules="rules" :label-width="100" @submit="onSubmit">
+      <t-form :data="formData" :rules="rules" :label-width="100" @submit="onSubmit">
         <t-form-item :label="t('pages.listCard.productName')" name="name">
           <t-input v-model="formData.name" :style="{ width: '480px' }" />
         </t-form-item>
@@ -35,7 +35,8 @@
 </template>
 
 <script setup lang="ts">
-import { FormRules, MessagePlugin, SubmitContext } from 'tdesign-vue-next';
+import type { FormRules, SubmitContext } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
 import { ref, watch } from 'vue';
 
@@ -49,6 +50,19 @@ export interface FormData {
   mark: string;
   amount: number;
 }
+
+const { visible, data } = defineProps({
+  visible: {
+    type: Boolean,
+    default: false,
+  },
+  data: {
+    type: Object as PropType<FormData>,
+    default: undefined,
+  },
+});
+
+const emit = defineEmits(['update:visible']);
 
 const INITIAL_DATA: FormData = {
   name: '',
@@ -65,13 +79,6 @@ const SELECT_OPTIONS = [
   { label: 'CVM', value: '3' },
 ];
 
-const { visible, data } = defineProps({
-  visible: {
-    type: Boolean,
-    default: false,
-  },
-  data: Object as PropType<FormData>,
-});
 const formVisible = ref(false);
 const formData = ref({ ...INITIAL_DATA });
 const textareaValue = ref('');
@@ -91,7 +98,6 @@ const onClickCloseBtn = () => {
   formData.value = { ...INITIAL_DATA };
 };
 
-const emit = defineEmits(['update:visible']);
 watch(
   () => formVisible.value,
   (val) => {

@@ -37,26 +37,24 @@
             <t-button theme="default" shape="square" variant="text">
               <translate-icon />
             </t-button>
-            <t-dropdown-menu>
+            <t-dropdown>
               <t-dropdown-item
                 v-for="(lang, index) in langList"
                 :key="index"
                 :value="lang.value"
                 @click="(options) => changeLang(options.value as string)"
                 >{{ lang.content }}</t-dropdown-item
-              ></t-dropdown-menu
+              ></t-dropdown
             >
           </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
             <template #dropdown>
-              <t-dropdown-menu>
-                <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
-                  <user-circle-icon />{{ t('layout.header.user') }}
-                </t-dropdown-item>
-                <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
-                  <poweroff-icon />{{ t('layout.header.signOut') }}
-                </t-dropdown-item>
-              </t-dropdown-menu>
+              <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
+                <user-circle-icon />{{ t('layout.header.user') }}
+              </t-dropdown-item>
+              <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
+                <poweroff-icon />{{ t('layout.header.signOut') }}
+              </t-dropdown-item>
             </template>
             <t-button class="header-user-btn" theme="default" variant="text">
               <template #icon>
@@ -183,6 +181,7 @@ const navToHelper = () => {
   window.open('http://tdesign.tencent.com/starter/docs/get-started');
 };
 </script>
+
 <style lang="less" scoped>
 .@{starter-prefix}-header {
   &-menu-fixed {
@@ -214,7 +213,7 @@ const navToHelper = () => {
 }
 
 .header-menu {
-  flex: 1 1 1;
+  flex: 1 1 auto;
   display: inline-flex;
 
   :deep(.t-menu__item) {

@@ -39,7 +39,7 @@ const expanded = ['0', '0-0', '0-1', '0-2', '0-3', '0-4'];
 
 const onInput = () => {
   filterByText.value = (node: TreeNodeModel) => {
-    return node.label.indexOf(filterText.value) >= 0;
+    return node.label.includes(filterText.value);
   };
 };
 </script>

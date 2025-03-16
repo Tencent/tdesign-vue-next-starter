@@ -48,6 +48,7 @@ const isRefreshing = computed(() => {
   return refreshing;
 });
 </script>
+
 <style lang="less" scoped>
 .fade-leave-active,
 .fade-enter-active {

@@ -1,8 +1,8 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { shallowRef } from 'vue';
 
-import { RouteItem } from '@/api/model/permissionModel';
-import { RouteMeta } from '@/types/interface';
+import type { RouteItem } from '@/api/model/permissionModel';
+import type { RouteMeta } from '@/types/interface';
 import {
   BLANK_LAYOUT,
   EXCEPTION_COMPONENT,
@@ -28,7 +28,8 @@ async function getMenuIcon(iconName: string): Promise<string> {
   const RenderIcon = iconsPath[`../../../node_modules/tdesign-icons-vue-next/esm/components/${iconName}.js`];
 
   const Icon = await RenderIcon();
-  // @ts-ignore
+
+  // @ts-expect-error 图标无法直接编写类型
   return shallowRef(Icon.default);
 }
 
@@ -54,7 +55,6 @@ function asyncImportRoute(routes: RouteItem[] | undefined) {
 
     if (item.meta.icon) item.meta.icon = await getMenuIcon(item.meta.icon);
 
-    // eslint-disable-next-line no-unused-expressions
     children && asyncImportRoute(children);
   });
 }
@@ -101,7 +101,7 @@ export function transformObjectToRoute<T = RouteItem>(routeList: RouteItem[]): T
     } else {
       throw new Error('component is undefined');
     }
-    // eslint-disable-next-line no-unused-expressions
+
     route.children && asyncImportRoute(route.children);
     if (route.meta.icon) route.meta.icon = await getMenuIcon(route.meta.icon);
   });
