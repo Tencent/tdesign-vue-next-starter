@@ -1,12 +1,12 @@
 import { useLocalStorage, usePreferredLanguages } from '@vueuse/core';
-import { DropdownOption } from 'tdesign-vue-next';
+import type { DropdownOption } from 'tdesign-vue-next';
 import { computed } from 'vue';
-import { createI18n } from 'vue-i18n';
+import {createI18n, I18nOptions} from 'vue-i18n';
 
 // 导入语言文件
 const langModules = import.meta.glob('./lang/*/index.ts', { eager: true });
 
-const langModuleMap = new Map<string, Object>();
+const langModuleMap = new Map<string, unknown>();
 
 export const langCode: Array<string> = [];
 
@@ -32,7 +32,7 @@ const generateLangModuleMap = () => {
 const importMessages = computed(() => {
   generateLangModuleMap();
 
-  const message: Recordable = {};
+  const message: I18nOptions['messages'] = {};
   langModuleMap.forEach((value: any, key) => {
     message[key] = value.default;
   });
@@ -61,7 +61,6 @@ export const langList = computed(() => {
   return list;
 });
 
-// @ts-ignore
 export const { t } = i18n.global;
 
 export default i18n;
