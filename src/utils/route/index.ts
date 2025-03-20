@@ -20,7 +20,6 @@ import {
 //   const RenderIcon = iconsPath[`../../../node_modules/tdesign-icons-vue-next/esm/components/${iconName}.js`];
 
 //   const Icon = await RenderIcon();
-//   // @ts-ignore
 //   return shallowRef(Icon.default);
 // }
 
