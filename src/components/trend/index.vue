@@ -20,12 +20,19 @@
     <span>{{ describe }}</span>
   </span>
 </template>
+
 <script setup lang="ts">
 import { computed } from 'vue';
 
 const { type, isReverseColor } = defineProps({
-  type: String,
-  describe: [String, Number],
+  type: {
+    type: String,
+    default: '',
+  },
+  describe: {
+    type: [String, Number],
+    default: undefined,
+  },
   isReverseColor: {
     type: Boolean,
     default: false,

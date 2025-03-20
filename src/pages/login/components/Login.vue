@@ -1,13 +1,14 @@
 <template>
   <t-form
     ref="form"
-    :class="['item-container', `login-${type}`]"
+    class="item-container"
+    :class="[`login-${type}`]"
     :data="formData"
     :rules="FORM_RULES"
     label-width="0"
     @submit="onSubmit"
   >
-    <template v-if="type == 'password'">
+    <template v-if="type === 'password'">
       <t-form-item name="account">
         <t-input v-model="formData.account" size="large" :placeholder="`${t('pages.login.input.account')}：admin`">
           <template #prefix-icon>
@@ -40,7 +41,7 @@
     </template>
 
     <!-- 扫码登录 -->
-    <template v-else-if="type == 'qrcode'">
+    <template v-else-if="type === 'qrcode'">
       <div class="tip-container">
         <span class="tip">{{ t('pages.login.wechatLogin') }}</span>
         <span class="refresh">{{ t('pages.login.refresh') }} <t-icon name="refresh" /> </span>
@@ -61,7 +62,7 @@
       <t-form-item class="verification-code" name="verifyCode">
         <t-input v-model="formData.verifyCode" size="large" :placeholder="t('pages.login.input.verification')" />
         <t-button size="large" variant="outline" :disabled="countDown > 0" @click="sendCode">
-          {{ countDown == 0 ? t('pages.login.sendVerification') : `${countDown}秒后可重发` }}
+          {{ countDown === 0 ? t('pages.login.sendVerification') : `${countDown}秒后可重发` }}
         </t-button>
       </t-form-item>
     </template>

@@ -1,6 +1,5 @@
 <template>
   <t-form
-    ref="form"
     class="base-form"
     :data="formData"
     :rules="FORM_RULES"
@@ -183,7 +182,7 @@ const onSubmit = (ctx: SubmitContext) => {
   }
 };
 const beforeUpload = (file: UploadFile) => {
-  if (!/\.(pdf)$/.test(file.name)) {
+  if (!/\.pdf$/.test(file.name)) {
     MessagePlugin.warning('请上传pdf文件');
     return false;
   }

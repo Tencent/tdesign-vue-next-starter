@@ -1,4 +1,5 @@
 import { useLocalStorage } from '@vueuse/core';
+import type { GlobalConfigProvider } from 'tdesign-vue-next';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
@@ -17,7 +18,7 @@ export function useLocale() {
   }
 
   const getComponentsLocale = computed(() => {
-    return i18n.global.getLocaleMessage(locale.value).componentsLocale;
+    return i18n.global.getLocaleMessage(locale.value).componentsLocale as GlobalConfigProvider;
   });
 
   return {

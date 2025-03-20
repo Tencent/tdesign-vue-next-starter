@@ -4,7 +4,8 @@
       <t-card
         :title="t(item.title)"
         :bordered="false"
-        :class="{ 'dashboard-item': true, 'dashboard-item--main-color': index == 0 }"
+        class="dashboard-item"
+        :class="{ 'dashboard-item--main-color': index === 0 }"
       >
         <div class="dashboard-item-top">
           <span :style="{ fontSize: `${resizeTime * 28}px` }">{{ item.number }}</span>
@@ -268,7 +269,7 @@ watch(
     }
   }
 
-  // 针对第一个卡片需要反色处理
+  /* 针对第一个卡片需要反色处理 */
   &--main-color {
     background: var(--td-brand-color);
     color: var(--td-text-color-primary);

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { EChartsOption } from 'echarts';
+import type { EChartsOption } from 'echarts';
 
-import { TChartColor } from '@/config/color';
+import type { TChartColor } from '@/config/color';
 import { t } from '@/locales/index';
 import { getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
@@ -187,8 +187,8 @@ export function constructInitDataset({
  *  线性图表数据源
  *
  * @export
- * @param {Array<string>} [dateTime=[]]
- * @returns {*}
+ * @param {Array<string>} [dateTime]
+ * @returns {*} dataSet
  */
 export function getLineChartDataSet({
   dateTime = [],
@@ -302,8 +302,8 @@ export function getLineChartDataSet({
  * 获取饼图数据
  *
  * @export
- * @param {number} [radius=1]
- * @returns {*}
+ * @param {number} [radius]
+ * @returns {*} dataSet
  */
 export function getPieChartDataSet({
   radius = 42,
