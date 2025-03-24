@@ -34,7 +34,7 @@ import type { MenuRoute } from '@/types/interface';
 
 type ListItemType = MenuRoute & { icon?: string };
 
-const props = defineProps({
+const { navData } = defineProps({
   navData: {
     type: Array as PropType<MenuRoute[]>,
     default: () => [],
@@ -45,7 +45,6 @@ const active = computed(() => getActive());
 
 const { locale } = useLocale();
 const list = computed(() => {
-  const { navData } = props;
   return getMenuList(navData);
 });
 
