@@ -31,7 +31,7 @@
         :header-affixed-top="headerAffixedTop"
         @page-change="rehandlePageChange"
         @change="rehandleChange"
-        @select-change="(value: number[]) => rehandleSelectChange(value)"
+        @select-change="(value: (string | number)[]) => rehandleSelectChange(value)"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">
@@ -190,7 +190,7 @@ onMounted(() => {
 
 const confirmVisible = ref(false);
 
-const selectedRowKeys = ref([1, 2]);
+const selectedRowKeys = ref<(string | number)[]>([1, 2]);
 
 const router = useRouter();
 
@@ -217,7 +217,7 @@ const onCancel = () => {
 
 const rowKey = 'index';
 
-const rehandleSelectChange = (val: number[]) => {
+const rehandleSelectChange = (val: (string | number)[]) => {
   selectedRowKeys.value = val;
 };
 const rehandlePageChange = (curr: unknown, pageInfo: unknown) => {

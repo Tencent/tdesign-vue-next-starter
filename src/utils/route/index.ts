@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { shallowRef } from 'vue';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+import { h, shallowRef } from 'vue';
 
 import { RouteItem } from '@/api/model/permissionModel';
 import { RouteMeta } from '@/types/interface';
@@ -12,8 +13,15 @@ import {
   PARENT_LAYOUT,
 } from '@/utils/route/constant';
 
-// vite 3+ support dynamic import from node_modules
-const iconsPath = import.meta.glob('../../../node_modules/tdesign-icons-vue-next/esm/components/*.js');
+// 动态从包内引入单个Icon,如果没有网络环境可以使用这种方式 但是会导致产物存在多个chunk
+// const iconsPath = import.meta.glob('../../../node_modules/tdesign-icons-vue-next/esm/components/*.js');
+
+// async function getMenuIcon(iconName: string): Promise<string> {
+//   const RenderIcon = iconsPath[`../../../node_modules/tdesign-icons-vue-next/esm/components/${iconName}.js`];
+
+//   const Icon = await RenderIcon();
+//   return shallowRef(Icon.default);
+// }
 
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>();
 
@@ -22,15 +30,6 @@ LayoutMap.set('BLANK', BLANK_LAYOUT);
 LayoutMap.set('IFRAME', IFRAME);
 
 let dynamicViewsModules: Record<string, () => Promise<Recordable>>;
-
-// 动态从包内引入单个Icon
-async function getMenuIcon(iconName: string): Promise<string> {
-  const RenderIcon = iconsPath[`../../../node_modules/tdesign-icons-vue-next/esm/components/${iconName}.js`];
-
-  const Icon = await RenderIcon();
-  // @ts-ignore
-  return shallowRef(Icon.default);
-}
 
 // 动态引入路由组件
 function asyncImportRoute(routes: RouteItem[] | undefined) {
@@ -52,7 +51,8 @@ function asyncImportRoute(routes: RouteItem[] | undefined) {
       item.component = PARENT_LAYOUT();
     }
 
-    if (item.meta.icon) item.meta.icon = await getMenuIcon(item.meta.icon);
+    // 动态从包内引入单个Icon,如果没有网络环境可以使用这种方式 但是会导致产物存在多个chunk
+    // if (item.meta.icon) item.meta.icon = await getMenuIcon(item.meta.icon);
 
     // eslint-disable-next-line no-unused-expressions
     children && asyncImportRoute(children);
@@ -103,7 +103,10 @@ export function transformObjectToRoute<T = RouteItem>(routeList: RouteItem[]): T
     }
     // eslint-disable-next-line no-unused-expressions
     route.children && asyncImportRoute(route.children);
-    if (route.meta.icon) route.meta.icon = await getMenuIcon(route.meta.icon);
+
+    // 动态从包内引入单个Icon,如果没有网络环境可以使用这种方式 但是会导致产物存在多个chunk
+    // if (route.meta.icon)
+    // route.meta.icon = await getMenuIcon(route.meta.icon);
   });
 
   return [PAGE_NOT_FOUND_ROUTE, ...routeList] as unknown as T[];
