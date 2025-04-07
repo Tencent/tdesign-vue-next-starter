@@ -360,6 +360,27 @@ export default [
                 },
               ],
             },
+            {
+              path: '/chat',
+              name: 'chat',
+              component: 'LAYOUT',
+              redirect: '/chat/base',
+              meta: { title: { zh_CN: 'AI对话', en_US: 'AI Chat' }, icon: 'chat' },
+              children: [
+                {
+                  path: 'base',
+                  name: 'ChatIndex',
+                  component: '/chat/base/index',
+                  meta: { title: { zh_CN: '基础对话', en_US: 'Basic Chat' } },
+                },
+                {
+                  path: 'reasoning',
+                  name: 'ChatReasoning',
+                  component: '/chat/reasoning/index',
+                  meta: { title: { zh_CN: '推理对话', en_US: 'Reasoning Chat' } },
+                },
+              ],
+            },
           ],
         }),
       },
