@@ -1,0 +1,11 @@
+main:
+  push:
+    - stages:
+        - name: Sync to GitHub
+          image: tencentcom/git-sync
+          settings:
+            target_url: https://github.com/Tencent/tdesign-vue-next-starter.git
+            auth_type: https
+            username: ${GIT_USERNAME}
+            password: ${GIT_ACCESS_TOKEN}
+            push_tags: true
