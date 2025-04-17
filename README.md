@@ -19,7 +19,7 @@ English | [简体中文](./README-zh_CN.md)
   &nbsp|&nbsp
   📃 <a href="https://tdesign.tencent.com/starter/"><b>使用文档</b></a>
   &nbsp|&nbsp
-  <img src="https://cnb.cool/images/favicon.png" width="21" style="vertical-align: -3px" alt="CNB Logo">
+  <img src="https://cnb.cool/images/favicon.png" width="21" align="top" alt="CNB Logo">
   &nbsp<a href="https://cnb.cool/tencent/tdesign/tdesign-vue-next-starter/"><b>cnb.cool</b></a>
 </p>
 
