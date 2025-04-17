@@ -9,15 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://nodejs.org/en/about/releases/">
-    <img src="https://img.shields.io/node/v/vite.svg" alt="node compatibility">
-  </a>
-  <a href="https://github.com/Tencent/tdesign-vue-next-starter/releases">
-    <img src="https://img.shields.io/github/v/release/Tencent/tdesign-vue-next-starter" alt="Version">
-  </a>
-  <a href="https://github.com/Tencent/tdesign-vue-next/blob/develop/LICENSE">
-    <img src="https://img.shields.io/npm/l/tdesign-vue-next.svg?sanitize=true" alt="License">
-  </a>
+  <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatibility"></a>
+  <a href="https://github.com/Tencent/tdesign-vue-next-starter/releases"><img src="https://img.shields.io/github/v/release/Tencent/tdesign-vue-next-starter" alt="Version"></a>
+  <a href="https://github.com/Tencent/tdesign-vue-next/blob/develop/LICENSE"><img src="https://img.shields.io/npm/l/tdesign-vue-next.svg?sanitize=true" alt="License"></a>
 </p>
 
 <p align="center">
@@ -25,7 +19,7 @@
   &nbsp|&nbsp
   📃 <a href="https://tdesign.tencent.com/starter/"><b>使用文档</b></a>
   &nbsp|&nbsp
-  <img src="https://cnb.cool/images/favicon.png" width="16" style="vertical-align: -3px" alt="CNB Logo">
+  <img src="https://cnb.cool/images/favicon.png" width="21" style="vertical-align: -3px" alt="CNB Logo">
   &nbsp<a href="https://cnb.cool/tencent/tdesign/tdesign-vue-next-starter/"><b>cnb.cool</b></a>
 </p>
 
