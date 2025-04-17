@@ -1,0 +1,24 @@
+name: Sync to CNB
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Sync to CNB Repository
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:${{ github.workspace }} \
+            -w ${{ github.workspace }} \
+            -e PLUGIN_TARGET_URL="https://cnb.cool/tencent/tdesign/tdesign-vue-next-starter.git" \
+            -e PLUGIN_AUTH_TYPE="https" \
+            -e PLUGIN_USERNAME=${{ secrets.CNB_USERNAME }} \
+            -e PLUGIN_PASSWORD=${{ secrets.CNB_ACCESS_TOKEN }} \
+            -e PLUGIN_PUSH_TAGS="true" \
+            tencentcom/git-sync

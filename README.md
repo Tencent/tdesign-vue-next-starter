@@ -1,29 +1,31 @@
+English | [简体中文](./README-zh_CN.md)
 <p style="display:flex; justify-content: center">
 
 </p>
 <p align="center">
   <a href="https://tdesign.tencent.com/starter/vue-next/#/dashboard/base" target="_blank">
-    <img alt="TDesign Logo" width="200" src="https://tdesign.gtimg.com/starter/brand-logo.svg">
+    <img alt="TDesign Logo" width="300" src="https://tdesign.gtimg.com/starter/brand-logo.svg">
   </a>
 </p>
 
 <p align="center">
   <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatibility"></a>
-  <a href="https://github.com/Tencent/tdesign-vue-next/blob/develop/LICENSE">
-    <img src="https://img.shields.io/npm/l/tdesign-vue-next.svg?sanitize=true" alt="License">
-  </a>
+  <a href="https://github.com/Tencent/tdesign-vue-next-starter/releases"><img src="https://img.shields.io/github/v/release/Tencent/tdesign-vue-next-starter" alt="Version"></a>
+  <a href="https://github.com/Tencent/tdesign-vue-next/blob/develop/LICENSE"><img src="https://img.shields.io/npm/l/tdesign-vue-next.svg?sanitize=true" alt="License"></a>
 </p>
 
-English | [简体中文](./README-zh_CN.md) 
+<p align="center">
+  💻 <a href="http://tdesign.tencent.com/starter/vue-next/"><b>实时预览</b></a>
+  &nbsp|&nbsp
+  📃 <a href="https://tdesign.tencent.com/starter/"><b>使用文档</b></a>
+  &nbsp|&nbsp
+  <img src="https://cnb.cool/images/favicon.png" width="21" align="top" alt="CNB Logo">
+  &nbsp<a href="https://cnb.cool/tencent/tdesign/tdesign-vue-next-starter/"><b>cnb.cool</b></a>
+</p>
+
 ### Introduction
 
 TDesign Vue Next Starter is a TDesign-based developed with `Vue 3`, `Vite`, `Pinia`, `TypeScript`. It can be customized theme configuration, and aims to provide project out-of-the-box, configuration-style middle and background projects.
-
-<p>
-  <a href="http://tdesign.tencent.com/starter/vue-next/">Live Preview</a>
-  ·
-  <a href="https://tdesign.tencent.com/starter/">Documentation</a>
-</p>
 
 <img src="docs/starter.png">
 
