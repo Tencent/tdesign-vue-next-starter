@@ -9,7 +9,6 @@
     :is-compact="settingStore.isSidebarCompact"
   />
 </template>
-
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { computed } from 'vue';

@@ -48,13 +48,11 @@
     </t-col>
   </t-row>
 </template>
-
 <script lang="ts">
 export default {
   name: 'DashboardBase',
 };
 </script>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { BarChart, LineChart } from 'echarts/charts';
@@ -179,7 +177,6 @@ watch(
   },
 );
 </script>
-
 <style lang="less" scoped>
 .dashboard-item {
   padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingLR-xxl);

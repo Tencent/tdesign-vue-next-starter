@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 // 合同状态枚举
 export const CONTRACT_STATUS = {
   FAIL: 0,

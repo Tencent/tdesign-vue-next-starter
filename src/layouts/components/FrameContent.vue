@@ -5,7 +5,6 @@
     </t-loading>
   </div>
 </template>
-
 <script lang="ts" setup>
 import { useWindowSize } from '@vueuse/core';
 import debounce from 'lodash/debounce';
@@ -83,7 +82,6 @@ watch(
   debounce(calcHeight, 250),
 );
 </script>
-
 <style lang="less" scoped>
 @prefix-cls: ~'@{starter-prefix}-iframe-page';
 

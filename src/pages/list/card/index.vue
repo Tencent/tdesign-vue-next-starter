@@ -60,13 +60,11 @@
     />
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'ListCard',
 };
 </script>
-
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -156,7 +154,6 @@ const handleManageProduct = (product: CardProductType) => {
   };
 };
 </script>
-
 <style lang="less" scoped>
 .list-card {
   height: 100%;

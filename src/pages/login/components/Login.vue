@@ -80,7 +80,6 @@
     </div>
   </t-form>
 </template>
-
 <script setup lang="ts">
 import QrcodeVue from 'qrcode.vue';
 import type { FormInstanceFunctions, FormRule, SubmitContext } from 'tdesign-vue-next';
@@ -151,7 +150,6 @@ const onSubmit = async (ctx: SubmitContext) => {
   }
 };
 </script>
-
 <style lang="less" scoped>
 @import '../index.less';
 </style>

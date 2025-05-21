@@ -37,7 +37,6 @@
     </t-input>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -59,7 +58,6 @@ const changeSearchFocus = (value: boolean) => {
   isSearchFocus.value = value;
 };
 </script>
-
 <style lang="less" scoped>
 .header-menu-search {
   display: flex;

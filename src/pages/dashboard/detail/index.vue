@@ -62,13 +62,11 @@
     </t-card>
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'DashboardDetail',
 };
 </script>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { LineChart, ScatterChart } from 'echarts/charts';
@@ -167,7 +165,6 @@ const onMaterialChange = (value: string[]) => {
   lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors.value }));
 };
 </script>
-
 <style lang="less" scoped>
 .row-margin {
   margin-top: 16px;

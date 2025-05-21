@@ -15,13 +15,11 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'ListTree',
 };
 </script>
-
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import type { TreeNodeModel } from 'tdesign-vue-next';
@@ -43,7 +41,6 @@ const onInput = () => {
   };
 };
 </script>
-
 <style lang="less" scoped>
 .table-tree-container {
   background-color: var(--td-bg-color-container);

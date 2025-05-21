@@ -70,7 +70,6 @@
     </div>
   </t-form>
 </template>
-
 <script setup lang="ts">
 import type { FormRule, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -123,7 +122,6 @@ const switchType = (val: string) => {
   type.value = val;
 };
 </script>
-
 <style lang="less" scoped>
 @import '../index.less';
 </style>

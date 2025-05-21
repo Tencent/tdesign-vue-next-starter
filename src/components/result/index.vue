@@ -8,7 +8,6 @@
     <slot />
   </div>
 </template>
-
 <script setup lang="ts">
 import { computed } from 'vue';
 
@@ -57,7 +56,6 @@ const dynamicComponent = computed(() => {
   }
 });
 </script>
-
 <style lang="less" scoped>
 .result {
   &-link {

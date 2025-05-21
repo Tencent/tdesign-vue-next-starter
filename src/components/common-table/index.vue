@@ -122,7 +122,6 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import type { PageInfo, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -299,7 +298,6 @@ const headerAffixedTop = computed(
     }) as any, // TO BE FIXED
 );
 </script>
-
 <style lang="less" scoped>
 .list-common-table {
   background-color: var(--td-bg-color-container);

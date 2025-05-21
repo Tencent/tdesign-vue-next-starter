@@ -20,7 +20,6 @@
     <span>{{ describe }}</span>
   </span>
 </template>
-
 <script setup lang="ts">
 import { computed } from 'vue';
 
@@ -52,7 +51,6 @@ const containerCls = computed(() => {
 
 const iconCls = computed(() => ['trend-icon-container']);
 </script>
-
 <style lang="less" scoped>
 .trend {
   &-container {

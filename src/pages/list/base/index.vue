@@ -84,13 +84,11 @@
     />
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'ListBase',
 };
 </script>
-
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import type { PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
@@ -246,7 +244,6 @@ const headerAffixedTop = computed(
     }) as any,
 );
 </script>
-
 <style lang="less" scoped>
 .payment-col {
   display: flex;

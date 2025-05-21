@@ -10,20 +10,17 @@
     <output-overview class="row-container" />
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'DashboardBase',
 };
 </script>
-
 <script setup lang="ts">
 import MiddleChart from './components/MiddleChart.vue';
 import OutputOverview from './components/OutputOverview.vue';
 import RankList from './components/RankList.vue';
 import TopPanel from './components/TopPanel.vue';
 </script>
-
 <style scoped>
 .row-container:not(:last-child) {
   margin-bottom: 16px;

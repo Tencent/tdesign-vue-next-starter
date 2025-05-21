@@ -1,7 +1,6 @@
 <template>
   <img :class="className" :src="url" />
 </template>
-
 <script setup lang="ts">
 import { computed } from 'vue';
 
@@ -26,7 +25,6 @@ const className = computed(() => {
   ];
 });
 </script>
-
 <style lang="less" scoped>
 @import '@/style/index.less';
 

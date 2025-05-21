@@ -74,7 +74,6 @@
     </t-head-menu>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ChevronDownIcon, PoweroffIcon, SettingIcon, TranslateIcon, UserCircleIcon } from 'tdesign-icons-vue-next';
 import type { PropType } from 'vue';
@@ -181,7 +180,6 @@ const navToHelper = () => {
   window.open('http://tdesign.tencent.com/starter/docs/get-started');
 };
 </script>
-
 <style lang="less" scoped>
 .@{starter-prefix}-header {
   &-menu-fixed {
@@ -316,7 +314,6 @@ const navToHelper = () => {
   }
 }
 </style>
-
 <!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
 <style lang="less">
 .operations-dropdown-container-item {

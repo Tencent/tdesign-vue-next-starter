@@ -5,7 +5,6 @@
     </t-breadcrumbItem>
   </t-breadcrumb>
 </template>
-
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
@@ -45,7 +44,6 @@ const crumbs = computed(() => {
   return breadcrumbs;
 });
 </script>
-
 <style scoped>
 .tdesign-breadcrumb {
   margin-bottom: 24px;

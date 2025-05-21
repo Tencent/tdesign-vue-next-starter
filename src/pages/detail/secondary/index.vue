@@ -49,13 +49,11 @@
     />
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'DetailSecondary',
 };
 </script>
-
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { computed, ref } from 'vue';
@@ -123,7 +121,6 @@ const deleteMsg = () => {
   store.setMsgData(changeMsg);
 };
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 </style>

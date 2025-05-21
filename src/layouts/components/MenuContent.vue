@@ -24,7 +24,6 @@
     </template>
   </div>
 </template>
-
 <script setup lang="tsx">
 import type { PropType } from 'vue';
 import { computed } from 'vue';

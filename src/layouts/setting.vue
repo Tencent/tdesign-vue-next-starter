@@ -104,7 +104,6 @@
     </div>
   </t-drawer>
 </template>
-
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core';
 import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
@@ -213,7 +212,6 @@ watchEffect(() => {
   if (formData.value.brandTheme) settingStore.updateConfig(formData.value);
 });
 </script>
-
 <!-- teleport导致drawer 内 scoped样式问题无法生效 先规避下 -->
 <!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
 <style lang="less">

@@ -33,7 +33,6 @@
     </template>
   </t-dialog>
 </template>
-
 <script setup lang="ts">
 import type { FormRules, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';

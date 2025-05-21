@@ -46,7 +46,6 @@
     </t-badge>
   </t-popup>
 </template>
-
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
@@ -79,7 +78,6 @@ const goDetail = () => {
   router.push('/detail/secondary');
 };
 </script>
-
 <style lang="less" scoped>
 .header-msg {
   width: 400px;

@@ -155,13 +155,11 @@
     </div>
   </t-form>
 </template>
-
 <script lang="ts">
 export default {
   name: 'FormBase',
 };
 </script>
-
 <script setup lang="ts">
 import type { SubmitContext, UploadFailContext, UploadFile } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -200,7 +198,6 @@ const formatResponse = (res: any) => {
   return { ...res, error: '上传失败，请重试', url: res.url };
 };
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 </style>

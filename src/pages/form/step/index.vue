@@ -165,13 +165,11 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'FormStep',
 };
 </script>
-
 <script setup lang="ts">
 import type { SubmitContext } from 'tdesign-vue-next';
 import { computed, ref } from 'vue';
@@ -220,7 +218,6 @@ const complete = () => {
   router.replace({ path: '/detail/advanced' });
 };
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 </style>

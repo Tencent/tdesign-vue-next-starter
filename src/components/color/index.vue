@@ -1,7 +1,6 @@
 <template>
   <div :style="style" class="color-container" />
 </template>
-
 <script setup lang="ts">
 import { computed } from 'vue';
 
@@ -23,7 +22,6 @@ const style = computed(() => {
   };
 });
 </script>
-
 <style lang="less" scoped>
 .color-container {
   width: 24px;

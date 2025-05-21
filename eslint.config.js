@@ -84,13 +84,8 @@ export default antfu(
             ignorePattern: '^_',
           },
         ],
-        'no-unused-vars': [
-          'error',
-          {
-            argsIgnorePattern: '^_',
-            varsIgnorePattern: '^_',
-          },
-        ],
+        // Using ts/no-unused-vars instead
+        'no-unused-vars': 'off',
 
         /* Some variables are initialized in the function */
         '@typescript-eslint/no-use-before-define': 'off',
@@ -101,6 +96,9 @@ export default antfu(
         'perfectionist/sort-named-imports': 'off',
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
+        // Disable unused-imports rules in other presets
+        'unused-imports/no-unused-imports': 'off',
+        'unused-imports/no-unused-vars': 'off',
       },
     },
     {
@@ -135,6 +133,7 @@ export default antfu(
             allows: ['scoped'],
           },
         ],
+        'vue/padding-line-between-blocks': ['error', 'never'],
       },
     },
     globalIgnores([

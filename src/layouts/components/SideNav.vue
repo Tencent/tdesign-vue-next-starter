@@ -22,7 +22,6 @@
     <div :class="`${prefix}-side-nav-placeholder${collapsed ? '-hidden' : ''}`"></div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { difference, remove, union } from 'lodash';
 import type { MenuValue } from 'tdesign-vue-next';
@@ -163,5 +162,4 @@ const getLogo = () => {
   return AssetLogoFull;
 };
 </script>
-
 <style lang="less" scoped></style>

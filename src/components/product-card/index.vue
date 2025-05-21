@@ -54,7 +54,6 @@
     </template>
   </t-card>
 </template>
-
 <script setup lang="ts">
 import {
   AddIcon,
@@ -95,7 +94,6 @@ const handleClickDelete = (product: CardProductType) => {
   emit('delete-item', product);
 };
 </script>
-
 <style lang="less" scoped>
 .list-card-item {
   display: flex;

@@ -11,17 +11,14 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'ResultSuccess',
 };
 </script>
-
 <script setup lang="ts">
 import { t } from '@/locales';
 </script>
-
 <style lang="less" scoped>
 .result-success {
   display: flex;

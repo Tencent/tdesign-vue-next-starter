@@ -73,13 +73,11 @@
     </t-dialog>
   </div>
 </template>
-
 <script lang="ts">
 export default {
   name: 'DetailDeploy',
 };
 </script>
-
 <script setup lang="ts">
 import { BarChart, LineChart } from 'echarts/charts';
 import { GridComponent, LegendComponent, TitleComponent, ToolboxComponent, TooltipComponent } from 'echarts/components';
@@ -232,7 +230,6 @@ const deleteClickOp = (e: { rowIndex: number }) => {
   data.value.splice(e.rowIndex, 1);
 };
 </script>
-
 <style lang="less" scoped>
 @import '../base/index.less';
 

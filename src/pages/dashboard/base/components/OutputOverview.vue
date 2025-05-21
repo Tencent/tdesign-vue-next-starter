@@ -62,13 +62,11 @@
     </t-row>
   </t-card>
 </template>
-
 <script lang="ts">
 export default {
   name: 'DashboardBase',
 };
 </script>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { LineChart } from 'echarts/charts';
@@ -158,7 +156,6 @@ const onStokeDataChange = (checkedValues: string[]) => {
   stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors.value }));
 };
 </script>
-
 <style lang="less" scoped>
 :deep(.t-card__body) {
   padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
