@@ -16,12 +16,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'ListTree',
-};
-</script>
-
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import type { TreeNodeModel } from 'tdesign-vue-next';
@@ -31,6 +25,10 @@ import CommonTable from '@/components/common-table/index.vue';
 import { t } from '@/locales';
 
 import { TREE_DATA } from './constants';
+
+defineOptions({
+  name: 'ListTree',
+});
 
 const filterByText = ref();
 const filterText = ref();
