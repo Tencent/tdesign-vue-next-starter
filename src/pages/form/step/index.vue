@@ -166,12 +166,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'FormStep',
-};
-</script>
-
 <script setup lang="ts">
 import { SubmitContext } from 'tdesign-vue-next';
 import { computed, ref } from 'vue';
@@ -188,6 +182,10 @@ import {
   NAME_OPTIONS,
   TYPE_OPTIONS,
 } from './constants';
+
+defineOptions({
+  name: 'FormStep',
+});
 
 const formData1 = ref({ ...INITIAL_DATA1 });
 const formData2 = ref({ ...INITIAL_DATA2 });

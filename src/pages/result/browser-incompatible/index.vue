@@ -24,15 +24,15 @@
     </div>
   </result>
 </template>
-<script lang="ts">
-export default {
-  name: 'ResultBrowserIncompatible',
-};
-</script>
+
 <script setup lang="ts">
 import Result from '@/components/result/index.vue';
 import Thumbnail from '@/components/thumbnail/index.vue';
 import { t } from '@/locales';
+
+defineOptions({
+  name: 'ResultBrowserIncompatible',
+});
 </script>
 
 <style lang="less" scoped>

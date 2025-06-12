@@ -74,12 +74,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DetailDeploy',
-};
-</script>
-
 <script setup lang="ts">
 import { BarChart, LineChart } from 'echarts/charts';
 import { GridComponent, LegendComponent, TitleComponent, ToolboxComponent, TooltipComponent } from 'echarts/components';
@@ -94,6 +88,10 @@ import { changeChartsTheme } from '@/utils/color';
 
 import { BASE_INFO_DATA } from './constants';
 import { get2ColBarChartDataSet, getSmoothLineDataSet } from './index';
+
+defineOptions({
+  name: 'DetailDeploy',
+});
 
 const columns = [
   {

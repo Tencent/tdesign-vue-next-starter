@@ -62,12 +62,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'DashboardDetail',
-};
-</script>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { LineChart, ScatterChart } from 'echarts/charts';
@@ -86,6 +80,9 @@ import { LAST_7_DAYS } from '@/utils/date';
 import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
 import { getFolderLineDataSet, getScatterDataSet } from './index';
 
+defineOptions({
+  name: 'DashboardDetail',
+});
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 
 const store = useSettingStore();
