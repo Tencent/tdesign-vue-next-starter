@@ -1,9 +1,7 @@
 import antfu from '@antfu/eslint-config';
-import { defineConfigWithVueTs as vueTsConverter, vueTsConfigs as vueTs } from '@vue/eslint-config-typescript';
 import { globalIgnores } from 'eslint/config';
 import prettier from 'eslint-plugin-prettier/recommended';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import vue from 'eslint-plugin-vue';
 import vueCss from 'eslint-plugin-vue-scoped-css';
 import globals from 'globals';
 import typescript from 'typescript-eslint';
@@ -18,9 +16,6 @@ export default antfu(
     formatters: false,
   },
   [
-    ...typescript.configs.recommended,
-    ...vueTsConverter(vueTs.recommended),
-    ...vue.configs['flat/recommended'],
     ...vueCss.configs['flat/recommended'],
     prettier,
     {
