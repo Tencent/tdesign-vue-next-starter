@@ -69,7 +69,6 @@
     </t-footer>
   </t-layout>
 </template>
-
 <script setup lang="ts">
 import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { computed, nextTick, ref } from 'vue';

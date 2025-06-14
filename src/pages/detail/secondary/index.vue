@@ -5,7 +5,7 @@
         <t-tab-panel v-for="(tab, tabIndex) in TAB_LIST" :key="tabIndex" :value="tab.value" :label="tab.label">
           <t-list v-if="msgDataList.length > 0" class="secondary-msg-list" :split="true">
             <t-list-item v-for="(item, index) in msgDataList" :key="index">
-              <p :class="['content', { unread: item.status }]" @click="setReadStatus(item)">
+              <p class="content" :class="[{ unread: item.status }]" @click="setReadStatus(item)">
                 <t-tag size="medium" :theme="NOTIFICATION_TYPES.get(item.quality)" variant="light">
                   {{ item.type }}
                 </t-tag>
@@ -49,7 +49,6 @@
     />
   </div>
 </template>
-
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { computed, ref } from 'vue';
@@ -121,7 +120,6 @@ const deleteMsg = () => {
   store.setMsgData(changeMsg);
 };
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 </style>

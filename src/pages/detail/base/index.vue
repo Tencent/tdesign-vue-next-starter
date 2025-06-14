@@ -34,7 +34,6 @@
     </t-card>
   </div>
 </template>
-
 <script setup lang="ts">
 import { t } from '@/locales';
 
@@ -116,7 +115,6 @@ const BASE_INFO_DATA = [
   },
 ];
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 </style>

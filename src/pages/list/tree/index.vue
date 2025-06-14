@@ -15,7 +15,6 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import type { TreeNodeModel } from 'tdesign-vue-next';
@@ -37,11 +36,10 @@ const expanded = ['0', '0-0', '0-1', '0-2', '0-3', '0-4'];
 
 const onInput = () => {
   filterByText.value = (node: TreeNodeModel) => {
-    return node.label.indexOf(filterText.value) >= 0;
+    return node.label.includes(filterText.value);
   };
 };
 </script>
-
 <style lang="less" scoped>
 .table-tree-container {
   background-color: var(--td-bg-color-container);

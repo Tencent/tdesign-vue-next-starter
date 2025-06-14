@@ -3,7 +3,6 @@
     <t-button theme="primary" @click="() => $router.push('/')">{{ t('pages.result.maintenance.back') }}</t-button>
   </result>
 </template>
-
 <script setup lang="ts">
 import Result from '@/components/result/index.vue';
 import { t } from '@/locales';

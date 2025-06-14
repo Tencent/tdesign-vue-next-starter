@@ -3,22 +3,22 @@
     <template #avatar>
       <t-avatar size="56px">
         <template #icon>
-          <shop-icon v-if="product.type === 1" />
-          <calendar-icon v-if="product.type === 2" />
-          <service-icon v-if="product.type === 3" />
-          <user-avatar-icon v-if="product.type === 4" />
-          <laptop-icon v-if="product.type === 5" />
+          <shop-icon v-if="props.product.type === 1" />
+          <calendar-icon v-if="props.product.type === 2" />
+          <service-icon v-if="props.product.type === 3" />
+          <user-avatar-icon v-if="props.product.type === 4" />
+          <laptop-icon v-if="props.product.type === 5" />
         </template>
       </t-avatar>
     </template>
     <template #status>
-      <t-tag :theme="product.isSetup ? 'success' : 'default'" :disabled="!product.isSetup">{{
-        product.isSetup ? t('components.isSetup.on') : t('components.isSetup.off')
-      }}</t-tag>
+      <t-tag :theme="props.product.isSetup ? 'success' : 'default'" :disabled="!props.product.isSetup">
+        {{ props.product.isSetup ? t('components.isSetup.on') : t('components.isSetup.off') }}
+      </t-tag>
     </template>
     <template #content>
-      <p class="list-card-item_detail--name">{{ product.name }}</p>
-      <p class="list-card-item_detail--desc">{{ product.description }}</p>
+      <p class="list-card-item_detail--name">{{ props.product.name }}</p>
+      <p class="list-card-item_detail--desc">{{ props.product.description }}</p>
     </template>
     <template #footer>
       <t-avatar-group cascading="left-up" :max="2">
@@ -32,22 +32,22 @@
     </template>
     <template #actions>
       <t-dropdown
-        :disabled="!product.isSetup"
+        :disabled="!props.product.isSetup"
         trigger="click"
         :options="[
           {
             content: t('components.manage'),
             value: 'manage',
-            onClick: () => handleClickManage(product),
+            onClick: () => handleClickManage(props.product),
           },
           {
             content: t('components.delete'),
             value: 'delete',
-            onClick: () => handleClickDelete(product),
+            onClick: () => handleClickDelete(props.product),
           },
         ]"
       >
-        <t-button theme="default" :disabled="!product.isSetup" shape="square" variant="text">
+        <t-button theme="default" :disabled="!props.product.isSetup" shape="square" variant="text">
           <more-icon />
         </t-button>
       </t-dropdown>
@@ -75,10 +75,10 @@ export interface CardProductType {
   name: string;
 }
 
-// eslint-disable-next-line
 const props = defineProps({
   product: {
     type: Object as PropType<CardProductType>,
+    default: undefined,
   },
 });
 
@@ -94,7 +94,6 @@ const handleClickDelete = (product: CardProductType) => {
   emit('delete-item', product);
 };
 </script>
-
 <style lang="less" scoped>
 .list-card-item {
   display: flex;

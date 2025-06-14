@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
  * @export
  * @param {string[]} dateTime
  * @param {number} divideNum
- * @returns {string[]}
+ * @returns {string[]} timeArray
  */
 export function getDateArray(dateTime: string[] = [], divideNum = 10): string[] {
   const timeArray: string[] = [];
@@ -24,10 +24,8 @@ export function getDateArray(dateTime: string[] = [], divideNum = 10): string[] 
 /**
  * 获取随机数
  *
- * @param {number} [num=100]
- * @returns
- *
- * @memberOf DashboardBase
+ * @param {number} [num]
+ * @returns {number} resultNum
  */
 export function getRandomArray(num = 100): number {
   let resultNum = Number((Math.random() * num).toFixed(0));

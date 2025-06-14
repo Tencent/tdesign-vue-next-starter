@@ -1,4 +1,4 @@
-import { FormRule } from 'tdesign-vue-next';
+import type { FormRule } from 'tdesign-vue-next';
 
 export const FORM_RULES: Record<string, FormRule[]> = {
   name: [{ required: true, type: 'error' }],

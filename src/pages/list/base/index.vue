@@ -84,10 +84,10 @@
     />
   </div>
 </template>
-
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
-import { MessagePlugin, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+import type { PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -243,7 +243,6 @@ const headerAffixedTop = computed(
     }) as any,
 );
 </script>
-
 <style lang="less" scoped>
 .payment-col {
   display: flex;

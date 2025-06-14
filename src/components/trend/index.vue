@@ -24,8 +24,14 @@
 import { computed } from 'vue';
 
 const { type, isReverseColor } = defineProps({
-  type: String,
-  describe: [String, Number],
+  type: {
+    type: String,
+    default: '',
+  },
+  describe: {
+    type: [String, Number],
+    default: undefined,
+  },
   isReverseColor: {
     type: Boolean,
     default: false,
@@ -45,7 +51,6 @@ const containerCls = computed(() => {
 
 const iconCls = computed(() => ['trend-icon-container']);
 </script>
-
 <style lang="less" scoped>
 .trend {
   &-container {

@@ -5,7 +5,10 @@
 import { computed } from 'vue';
 
 const { type } = defineProps({
-  url: String,
+  url: {
+    type: String,
+    default: '',
+  },
   type: {
     type: String,
     default: 'layout',

@@ -1,6 +1,5 @@
 <template>
   <t-form
-    ref="form"
     class="base-form"
     :data="formData"
     :rules="FORM_RULES"
@@ -156,7 +155,6 @@
     </div>
   </t-form>
 </template>
-
 <script setup lang="ts">
 import type { SubmitContext, UploadFailContext, UploadFile } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -181,7 +179,7 @@ const onSubmit = (ctx: SubmitContext) => {
   }
 };
 const beforeUpload = (file: UploadFile) => {
-  if (!/\.(pdf)$/.test(file.name)) {
+  if (!/\.pdf$/.test(file.name)) {
     MessagePlugin.warning('请上传pdf文件');
     return false;
   }
@@ -199,7 +197,6 @@ const formatResponse = (res: any) => {
   return { ...res, error: '上传失败，请重试', url: res.url };
 };
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 </style>

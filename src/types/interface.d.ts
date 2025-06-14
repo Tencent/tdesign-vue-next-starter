@@ -1,5 +1,5 @@
 import type { TabValue } from 'tdesign-vue-next';
-import { LocationQueryRaw, RouteRecordName } from 'vue-router';
+import type { LocationQueryRaw, RouteRecordName } from 'vue-router';
 
 export interface RouteMeta {
   title?: string | Record<string, string>;

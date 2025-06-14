@@ -10,7 +10,6 @@
     <output-overview class="row-container" />
   </div>
 </template>
-
 <script setup lang="ts">
 import MiddleChart from './components/MiddleChart.vue';
 import OutputOverview from './components/OutputOverview.vue';
@@ -21,7 +20,6 @@ defineOptions({
   name: 'DashboardBase',
 });
 </script>
-
 <style scoped>
 .row-container:not(:last-child) {
   margin-bottom: 16px;

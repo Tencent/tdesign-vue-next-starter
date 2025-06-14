@@ -37,26 +37,24 @@
             <t-button theme="default" shape="square" variant="text">
               <translate-icon />
             </t-button>
-            <t-dropdown-menu>
+            <t-dropdown>
               <t-dropdown-item
                 v-for="(lang, index) in langList"
                 :key="index"
                 :value="lang.value"
                 @click="(options) => changeLang(options.value as string)"
                 >{{ lang.content }}</t-dropdown-item
-              ></t-dropdown-menu
+              ></t-dropdown
             >
           </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
             <template #dropdown>
-              <t-dropdown-menu>
-                <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
-                  <user-circle-icon />{{ t('layout.header.user') }}
-                </t-dropdown-item>
-                <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
-                  <poweroff-icon />{{ t('layout.header.signOut') }}
-                </t-dropdown-item>
-              </t-dropdown-menu>
+              <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
+                <user-circle-icon />{{ t('layout.header.user') }}
+              </t-dropdown-item>
+              <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
+                <poweroff-icon />{{ t('layout.header.signOut') }}
+              </t-dropdown-item>
             </template>
             <t-button class="header-user-btn" theme="default" variant="text">
               <template #icon>
@@ -76,7 +74,6 @@
     </t-head-menu>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ChevronDownIcon, PoweroffIcon, SettingIcon, TranslateIcon, UserCircleIcon } from 'tdesign-icons-vue-next';
 import type { PropType } from 'vue';
@@ -214,7 +211,7 @@ const navToHelper = () => {
 }
 
 .header-menu {
-  flex: 1 1 1;
+  flex: 1 1 auto;
   display: inline-flex;
 
   :deep(.t-menu__item) {
@@ -317,7 +314,6 @@ const navToHelper = () => {
   }
 }
 </style>
-
 <!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
 <style lang="less">
 .operations-dropdown-container-item {

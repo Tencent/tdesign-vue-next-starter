@@ -1,6 +1,6 @@
 <template>
   <div class="list-common-table">
-    <t-form ref="form" :data="formData" :label-width="80" colon @reset="onReset" @submit="onSubmit">
+    <t-form :data="formData" :label-width="80" colon @reset="onReset" @submit="onSubmit">
       <t-row>
         <t-col :span="10">
           <t-row :gutter="[24, 24]">
@@ -123,7 +123,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { MessagePlugin, PageInfo, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+import type { PageInfo, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -297,7 +298,6 @@ const headerAffixedTop = computed(
     }) as any, // TO BE FIXED
 );
 </script>
-
 <style lang="less" scoped>
 .list-common-table {
   background-color: var(--td-bg-color-container);

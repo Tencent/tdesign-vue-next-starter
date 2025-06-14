@@ -1,9 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-import { h, shallowRef } from 'vue';
 
-import { RouteItem } from '@/api/model/permissionModel';
-import { RouteMeta } from '@/types/interface';
+import type { RouteItem } from '@/api/model/permissionModel';
+import type { RouteMeta } from '@/types/interface';
 import {
   BLANK_LAYOUT,
   EXCEPTION_COMPONENT,
@@ -54,7 +52,6 @@ function asyncImportRoute(routes: RouteItem[] | undefined) {
     // 动态从包内引入单个Icon,如果没有网络环境可以使用这种方式 但是会导致产物存在多个chunk
     // if (item.meta.icon) item.meta.icon = await getMenuIcon(item.meta.icon);
 
-    // eslint-disable-next-line no-unused-expressions
     children && asyncImportRoute(children);
   });
 }
@@ -101,7 +98,7 @@ export function transformObjectToRoute<T = RouteItem>(routeList: RouteItem[]): T
     } else {
       throw new Error('component is undefined');
     }
-    // eslint-disable-next-line no-unused-expressions
+
     route.children && asyncImportRoute(route.children);
 
     // 动态从包内引入单个Icon,如果没有网络环境可以使用这种方式 但是会导致产物存在多个chunk

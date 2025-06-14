@@ -2,7 +2,7 @@
 // 如果需要前端 roles 控制菜单权限 请使用此文件代码替换 permission.ts 的内容
 
 import { defineStore } from 'pinia';
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 
 import router, { allRoutes } from '@/router';
 import { store } from '@/store';
@@ -14,7 +14,7 @@ function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<un
     const children: Array<RouteRecordRaw> = [];
     route.children?.forEach((childRouter) => {
       const roleCode = childRouter.meta?.roleCode || childRouter.name;
-      if (roles.indexOf(roleCode) !== -1) {
+      if (roles.includes(roleCode)) {
         children.push(childRouter);
       } else {
         removeRoutes.push(childRouter);

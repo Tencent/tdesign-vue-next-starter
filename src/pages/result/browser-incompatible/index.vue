@@ -24,7 +24,6 @@
     </div>
   </result>
 </template>
-
 <script setup lang="ts">
 import Result from '@/components/result/index.vue';
 import Thumbnail from '@/components/thumbnail/index.vue';
@@ -34,7 +33,6 @@ defineOptions({
   name: 'ResultBrowserIncompatible',
 });
 </script>
-
 <style lang="less" scoped>
 .result-slot-container {
   position: relative;

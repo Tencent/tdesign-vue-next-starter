@@ -14,7 +14,6 @@
     </div>
   </header>
 </template>
-
 <script setup lang="ts">
 import LogoFullIcon from '@/assets/assets-logo-full.svg?component';
 import { useSettingStore } from '@/store';
@@ -34,7 +33,6 @@ const navToHelper = () => {
   window.open('http://tdesign.tencent.com/starter/docs/get-started');
 };
 </script>
-
 <style lang="less" scoped>
 .login-header {
   padding: 0 var(--td-comp-paddingLR-xl);

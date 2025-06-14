@@ -83,7 +83,6 @@
     </t-col>
   </t-row>
 </template>
-
 <script setup lang="ts">
 import { LineChart } from 'echarts/charts';
 import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
@@ -178,7 +177,6 @@ watch(
   },
 );
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 

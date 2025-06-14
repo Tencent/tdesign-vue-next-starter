@@ -165,9 +165,8 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
-import { SubmitContext } from 'tdesign-vue-next';
+import type { SubmitContext } from 'tdesign-vue-next';
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -218,7 +217,6 @@ const complete = () => {
   router.replace({ path: '/detail/advanced' });
 };
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 </style>

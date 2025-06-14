@@ -11,7 +11,6 @@
     </div>
   </div>
 </template>
-
 <script lang="ts" setup>
 import { t } from '@/locales';
 
@@ -19,7 +18,6 @@ defineOptions({
   name: 'ResultFail',
 });
 </script>
-
 <style lang="less" scoped>
 .result-success {
   display: flex;
