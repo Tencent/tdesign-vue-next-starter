@@ -48,11 +48,6 @@
     </t-col>
   </t-row>
 </template>
-<script lang="ts">
-export default {
-  name: 'DashboardBase',
-};
-</script>
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { BarChart, LineChart } from 'echarts/charts';
@@ -68,6 +63,10 @@ import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
 import { constructInitDashboardDataset } from '../index';
+
+defineOptions({
+  name: 'DashboardBase',
+});
 
 echarts.use([LineChart, BarChart, CanvasRenderer]);
 

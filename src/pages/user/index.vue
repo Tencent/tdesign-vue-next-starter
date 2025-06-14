@@ -83,11 +83,6 @@
     </t-col>
   </t-row>
 </template>
-<script lang="ts">
-export default {
-  name: 'UserIndex',
-};
-</script>
 <script setup lang="ts">
 import { LineChart } from 'echarts/charts';
 import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
@@ -107,6 +102,10 @@ import { LAST_7_DAYS } from '@/utils/date';
 
 import { PRODUCT_LIST, TEAM_MEMBERS, USER_INFO_LIST } from './constants';
 import { getFolderLineDataSet } from './index';
+
+defineOptions({
+  name: 'UserIndex',
+});
 
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
 

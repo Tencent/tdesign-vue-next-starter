@@ -60,11 +60,6 @@
     />
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'ListCard',
-};
-</script>
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
@@ -77,6 +72,10 @@ import { t } from '@/locales';
 
 import type { FormData } from './components/DialogForm.vue';
 import DialogForm from './components/DialogForm.vue';
+
+defineOptions({
+  name: 'ListCard',
+});
 
 const INITIAL_DATA: FormData = {
   name: '',

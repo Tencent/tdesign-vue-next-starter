@@ -141,7 +141,7 @@ docClass: timeline
 - 升级相关依赖 `vite`需升级至`3.0`以上，支持图标后端配置等场景需求  by @timi137137 @uyarn (https://github.com/Tencent/tdesign-vue-next-starter/pull/394)
 
 ### 🐞 Bug Fixes
-- 修复自定义颜色切换明亮暗黑模式时无法沿用的缺陷 by @uyarn (https://github.com/Tencent/tdesign-vue-next-starter/pull/392)
+- 修复自定义颜色切换明亮深色模式时无法沿用的缺陷 by @uyarn (https://github.com/Tencent/tdesign-vue-next-starter/pull/392)
 
 `Tips: 此次发布 较 0.6.x 版本 删除了此前大量内置项目的色彩生成逻辑，权限控制相关逻辑也发生巨大变动 若打开预览无法访问请清除 localStorage 等缓存再尝试 跟进升级请慎重`
 
@@ -276,7 +276,7 @@ docClass: timeline
 - 模板中使用颜色变量全部改造为CSS Token by @kerwin612 ([#157](https://github.com/Tencent/tdesign-vue-next-starter/pull/157))
 
 ### 🐞 Bug Fixes
--  升级组件库至0.15.4，修复菜单字重及顶部菜单箭头翻转方向、暗黑模式的颜色问题 by @uyarn @leejim ([#159](https://github.com/Tencent/tdesign-vue-next-starter/pull/159))  [tdesign-vue-next#916](https://github.com/Tencent/tdesign-vue-next/pull/916)
+-  升级组件库至0.15.4，修复菜单字重及顶部菜单箭头翻转方向、深色模式的颜色问题 by @uyarn @leejim ([#159](https://github.com/Tencent/tdesign-vue-next-starter/pull/159))  [tdesign-vue-next#916](https://github.com/Tencent/tdesign-vue-next/pull/916)
 
 ## 🌈 0.3.2 `2022-05-27`
 ### 🚀  Features

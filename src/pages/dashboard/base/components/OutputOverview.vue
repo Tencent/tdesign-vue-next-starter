@@ -62,11 +62,6 @@
     </t-row>
   </t-card>
 </template>
-<script lang="ts">
-export default {
-  name: 'DashboardBase',
-};
-</script>
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { LineChart } from 'echarts/charts';
@@ -83,6 +78,10 @@ import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';
 
 import { constructInitDataset } from '../index';
+
+defineOptions({
+  name: 'DashboardBase',
+});
 
 echarts.use([TooltipComponent, LegendComponent, GridComponent, LineChart, CanvasRenderer]);
 

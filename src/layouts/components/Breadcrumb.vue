@@ -13,10 +13,9 @@ import { useLocale } from '@/locales/useLocale';
 import type { RouteMeta } from '@/types/interface';
 
 const { locale } = useLocale();
+const route = useRoute();
 
 const crumbs = computed(() => {
-  const route = useRoute();
-
   const pathArray = route.path.split('/');
   pathArray.shift();
 

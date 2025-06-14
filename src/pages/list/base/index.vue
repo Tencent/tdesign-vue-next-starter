@@ -84,11 +84,6 @@
     />
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'ListBase',
-};
-</script>
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import type { PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
@@ -102,6 +97,10 @@ import { prefix } from '@/config/global';
 import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
 import { t } from '@/locales';
 import { useSettingStore } from '@/store';
+
+defineOptions({
+  name: 'ListBase',
+});
 
 const store = useSettingStore();
 

@@ -34,13 +34,12 @@
     </t-card>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'DetailBase',
-};
-</script>
 <script setup lang="ts">
 import { t } from '@/locales';
+
+defineOptions({
+  name: 'DetailBase',
+});
 
 const BASE_INFO_DATA = [
   {

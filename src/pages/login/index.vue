@@ -22,11 +22,6 @@
     <footer class="copyright">Copyright @ 2021-2025 Tencent. All Rights Reserved</footer>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'LoginIndex',
-};
-</script>
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -37,6 +32,9 @@ import LoginHeader from './components/Header.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 
+defineOptions({
+  name: 'LoginIndex',
+});
 const type = ref('login');
 const switchType = (val: string) => {
   type.value = val;

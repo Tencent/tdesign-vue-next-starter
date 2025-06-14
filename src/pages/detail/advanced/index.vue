@@ -130,11 +130,6 @@
     </t-dialog>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: 'DetailAdvanced',
-};
-</script>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
@@ -143,6 +138,10 @@ import { t } from '@/locales';
 
 import Product from './components/Product.vue';
 import { BASE_INFO_DATA, PRODUCT_LIST } from './constants';
+
+defineOptions({
+  name: 'DetailAdvanced',
+});
 
 const columns = [
   {
