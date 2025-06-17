@@ -1,5 +1,6 @@
 import * as echarts from 'echarts/core';
-import { onMounted, onUnmounted, Ref, ref, ShallowRef, shallowRef } from 'vue';
+import type { Ref, ShallowRef } from 'vue';
+import { onMounted, onUnmounted, ref, shallowRef } from 'vue';
 
 /**
  * eChart hook
@@ -34,7 +35,7 @@ export const useChart = (domId: string): ShallowRef<echarts.ECharts> => {
 /**
  * counter utils
  * @param duration
- * @returns
+ * @returns counter
  */
 export const useCounter = (duration = 60): [Ref<number>, () => void] => {
   let intervalTimer: ReturnType<typeof setInterval>;

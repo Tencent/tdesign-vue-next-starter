@@ -19,10 +19,22 @@ import ResultMaintenanceIcon from '@/assets/assets-result-maintenance.svg?compon
 import ResultWifiIcon from '@/assets/assets-result-wifi.svg?component';
 
 const { type } = defineProps({
-  bgUrl: String,
-  title: String,
-  tip: String,
-  type: String,
+  bgUrl: {
+    type: String,
+    default: '',
+  },
+  title: {
+    type: String,
+    default: '',
+  },
+  tip: {
+    type: String,
+    default: '',
+  },
+  type: {
+    type: String,
+    default: '',
+  },
 });
 
 const dynamicComponent = computed(() => {

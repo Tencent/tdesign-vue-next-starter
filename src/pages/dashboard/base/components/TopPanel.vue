@@ -4,7 +4,8 @@
       <t-card
         :title="t(item.title)"
         :bordered="false"
-        :class="{ 'dashboard-item': true, 'dashboard-item--main-color': index == 0 }"
+        class="dashboard-item"
+        :class="{ 'dashboard-item--main-color': index === 0 }"
       >
         <div class="dashboard-item-top">
           <span :style="{ fontSize: `${resizeTime * 28}px` }">{{ item.number }}</span>
@@ -47,13 +48,6 @@
     </t-col>
   </t-row>
 </template>
-
-<script lang="ts">
-export default {
-  name: 'DashboardBase',
-};
-</script>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { BarChart, LineChart } from 'echarts/charts';
@@ -69,6 +63,10 @@ import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
 import { constructInitDashboardDataset } from '../index';
+
+defineOptions({
+  name: 'DashboardBase',
+});
 
 echarts.use([LineChart, BarChart, CanvasRenderer]);
 
@@ -178,7 +176,6 @@ watch(
   },
 );
 </script>
-
 <style lang="less" scoped>
 .dashboard-item {
   padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingLR-xxl);
@@ -268,7 +265,7 @@ watch(
     }
   }
 
-  // 针对第一个卡片需要反色处理
+  /* 针对第一个卡片需要反色处理 */
   &--main-color {
     background: var(--td-brand-color);
     color: var(--td-text-color-primary);

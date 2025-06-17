@@ -1,16 +1,15 @@
-import * as echarts from 'echarts/core';
+import type * as echarts from 'echarts/core';
 import trim from 'lodash/trim';
 import { Color } from 'tvision-color';
 
-import { TColorToken } from '@/config/color';
-import { ModeType } from '@/types/interface';
+import type { TColorToken } from '@/config/color';
+import type { ModeType } from '@/types/interface';
 
 /**
  * 依据主题类型获取颜色
  *
  * @export
- * @param {string} theme
- * @returns {}
+ * @returns {Array<string>} themeColorList
  */
 export function getColorFromTheme(): Array<string> {
   const theme = trim(getComputedStyle(document.documentElement).getPropertyValue('--td-brand-color'));
@@ -25,9 +24,7 @@ export function getColorFromTheme(): Array<string> {
 
 /** 图表颜色 */
 export function getChartListColor(): Array<string> {
-  const res = getColorFromTheme();
-
-  return res;
+  return getColorFromTheme();
 }
 
 /**
@@ -35,7 +32,6 @@ export function getChartListColor(): Array<string> {
  *
  * @export
  * @param {Array<string>} chartsList
- * @param {string} theme
  */
 export function changeChartsTheme(chartsList: echarts.EChartsType[]): void {
   if (chartsList && chartsList.length) {
@@ -63,7 +59,6 @@ export function generateColorMap(theme: string, colorPalette: Array<string>, mod
   const isDarkMode = mode === 'dark';
 
   if (isDarkMode) {
-    // eslint-disable-next-line no-use-before-define
     colorPalette.reverse().map((color) => {
       const [h, s, l] = Color.colorTransform(color, 'hex', 'hsl');
       return Color.colorTransform([h, Number(s) - 4, l], 'hsl', 'hex');
@@ -97,7 +92,7 @@ export function insertThemeStylesheet(theme: string, colorMap: TColorToken, mode
 
   const styleSheet = document.createElement('style');
   styleSheet.type = 'text/css';
-  styleSheet.innerText = `${root}{
+  styleSheet.textContent = `${root}{
     --td-brand-color: ${colorMap['--td-brand-color']};
     --td-brand-color-1: ${colorMap['--td-brand-color-1']};
     --td-brand-color-2: ${colorMap['--td-brand-color-2']};

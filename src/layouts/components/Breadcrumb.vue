@@ -1,23 +1,21 @@
 <template>
-  <t-breadcrumb :max-item-width="'150'" class="tdesign-breadcrumb">
+  <t-breadcrumb max-item-width="150" class="tdesign-breadcrumb">
     <t-breadcrumbItem v-for="item in crumbs" :key="item.to" :to="item.to">
       {{ item.title }}
     </t-breadcrumbItem>
   </t-breadcrumb>
 </template>
-
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { useLocale } from '@/locales/useLocale';
-import { RouteMeta } from '@/types/interface';
+import type { RouteMeta } from '@/types/interface';
 
 const { locale } = useLocale();
+const route = useRoute();
 
 const crumbs = computed(() => {
-  const route = useRoute();
-
   const pathArray = route.path.split('/');
   pathArray.shift();
 

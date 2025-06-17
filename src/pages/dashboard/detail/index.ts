@@ -1,14 +1,15 @@
 import dayjs from 'dayjs';
 
-import { TChartColor } from '@/config/color';
+import type { TChartColor } from '@/config/color';
 import { t } from '@/locales';
 import { getDateArray, getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
+
 /**
  * 散点图数据
  *
  * @export
- * @returns {}
+ * @returns {*} dataSet
  */
 export function getScatterDataSet({
   dateTime = [],

@@ -2,10 +2,11 @@ import keys from 'lodash/keys';
 import { defineStore } from 'pinia';
 import { Color } from 'tvision-color';
 
-import { DARK_CHART_COLORS, LIGHT_CHART_COLORS, TColorSeries } from '@/config/color';
+import type { TColorSeries } from '@/config/color';
+import { DARK_CHART_COLORS, LIGHT_CHART_COLORS } from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
-import { ModeType } from '@/types/interface';
+import type { ModeType } from '@/types/interface';
 import { generateColorMap, insertThemeStylesheet } from '@/utils/color';
 
 const state: Record<string, any> = {

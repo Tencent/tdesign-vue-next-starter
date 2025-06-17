@@ -9,7 +9,7 @@
     @close-btn-click="handleCloseDrawer"
   >
     <div class="setting-container">
-      <t-form ref="form" :data="formData" label-align="left">
+      <t-form :data="formData" label-align="left">
         <div class="setting-group-title">{{ t('layout.setting.theme.mode') }}</div>
         <t-radio-group v-model="formData.mode">
           <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
@@ -142,7 +142,7 @@ const initStyleConfig = () => {
 };
 
 const dynamicColor = computed(() => {
-  const isDynamic = DEFAULT_COLOR_OPTIONS.indexOf(formData.value.brandTheme) === -1;
+  const isDynamic = DEFAULT_COLOR_OPTIONS.includes(formData.value.brandTheme);
   return isDynamic ? formData.value.brandTheme : '';
 });
 const formData = ref({ ...initStyleConfig() });

@@ -41,7 +41,6 @@
     </t-col>
   </t-row>
 </template>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { LineChart, PieChart } from 'echarts/charts';
@@ -202,7 +201,6 @@ const onCurrencyChange = (checkedValues: string[]) => {
   monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors.value }));
 };
 </script>
-
 <style lang="less" scoped>
 .dashboard-chart-card {
   padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);

@@ -84,16 +84,10 @@
     />
   </div>
 </template>
-
-<script lang="ts">
-export default {
-  name: 'ListBase',
-};
-</script>
-
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
-import { MessagePlugin, PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+import type { PrimaryTableCol, TableRowData } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -103,6 +97,10 @@ import { prefix } from '@/config/global';
 import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
 import { t } from '@/locales';
 import { useSettingStore } from '@/store';
+
+defineOptions({
+  name: 'ListBase',
+});
 
 const store = useSettingStore();
 
@@ -245,7 +243,6 @@ const headerAffixedTop = computed(
     }) as any,
 );
 </script>
-
 <style lang="less" scoped>
 .payment-col {
   display: flex;

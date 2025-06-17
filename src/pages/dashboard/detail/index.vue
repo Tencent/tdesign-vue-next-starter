@@ -37,12 +37,13 @@
           v-for="(item, index) in PRODUCT_LIST"
           :key="index"
           :product="item"
-          :class="{ 'row-margin': index !== 0, 'product-card': true }"
+          class="product-card"
+          :class="{ 'row-margin': index !== 0 }"
         />
       </t-col>
     </t-row>
     <t-card
-      :class="['dashboard-detail-card', 'row-margin']"
+      class="dashboard-detail-card row-margin"
       :title="t('pages.dashboardDetail.satisfaction.title')"
       :bordered="false"
     >
@@ -61,13 +62,6 @@
     </t-card>
   </div>
 </template>
-
-<script lang="ts">
-export default {
-  name: 'DashboardDetail',
-};
-</script>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { LineChart, ScatterChart } from 'echarts/charts';
@@ -86,6 +80,9 @@ import { LAST_7_DAYS } from '@/utils/date';
 import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
 import { getFolderLineDataSet, getScatterDataSet } from './index';
 
+defineOptions({
+  name: 'DashboardDetail',
+});
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 
 const store = useSettingStore();
@@ -166,7 +163,6 @@ const onMaterialChange = (value: string[]) => {
   lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors.value }));
 };
 </script>
-
 <style lang="less" scoped>
 .row-margin {
   margin-top: 16px;
@@ -189,7 +185,8 @@ const onMaterialChange = (value: string[]) => {
     padding: 0;
   }
 }
-// 统一增加8px;
+
+/* 统一增加8px */
 .dashboard-detail-card {
   padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
 
