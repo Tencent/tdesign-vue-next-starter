@@ -26,7 +26,7 @@
 import { difference, remove, union } from 'lodash';
 import type { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
@@ -79,12 +79,18 @@ const active = computed(() => getActive());
 
 const expanded = ref<MenuValue[]>([]);
 
+const getExpanded = () => {
+  const path = getActive();
+  const parts = path.split('/').slice(1);
+  const result = parts.map((_, index) => `/${parts.slice(0, index + 1).join('/')}`);
+
+  expanded.value = menuAutoCollapsed.value ? result : union(result, expanded.value);
+};
+
 watch(
   () => active.value,
   () => {
-    const path = getActive();
-    const parentPath = path.substring(0, path.lastIndexOf('/'));
-    expanded.value = menuAutoCollapsed.value ? [parentPath] : union([parentPath], expanded.value);
+    getExpanded();
   },
 );
 
@@ -144,13 +150,14 @@ const autoCollapsed = () => {
 };
 
 onMounted(() => {
-  const path = getActive();
-  const parentPath = path.substring(0, path.lastIndexOf('/'));
-  expanded.value = union([parentPath], expanded.value);
+  getExpanded();
   autoCollapsed();
-  window.onresize = () => {
-    autoCollapsed();
-  };
+
+  window.addEventListener('resize', autoCollapsed);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', autoCollapsed);
 });
 
 const goHome = () => {
