@@ -5,6 +5,18 @@ toc: false
 docClass: timeline
 ---
 
+## 🌈 0.13.1 `2025-06-17` 
+### 🚀 Features
+- `feat`: 使用 `defineOptions` 定义组件 @liweijie0812 ([#849](https://github.com/Tencent/tdesign-vue-next-starter/pull/849))
+### 🐞 Bug Fixes
+- `types`: 修复 @select-change 的事件类型 @calandnong ([#825](https://github.com/Tencent/tdesign-vue-next-starter/pull/825))
+- `Breadcrumb`: 修复面包屑的状态异常 @izoyo ([#840](https://github.com/Tencent/tdesign-vue-next-starter/pull/840))
+- `frame`: 修复内嵌网页时不能正常显示的问题 @timi137137 ([#851](https://github.com/Tencent/tdesign-vue-next-starter/pull/851))
+### 📈 Performance
+- `ESLint`: 迁移ESLint至v9 @timi137137 ([#826](https://github.com/Tencent/tdesign-vue-next-starter/pull/826))
+### 🚧 Others
+- `deps`: 升级组件库版本 @calandnong ([#825](https://github.com/Tencent/tdesign-vue-next-starter/pull/825))
+
 ## 🌈 0.12.0 `2025-01-06` 
 ### 🐞 Bug Fixes
 - `Vue`: 修复升级至 Vue 3.4 及 3.5 的生产模式下的问题 @uyarn ([#796](https://github.com/Tencent/tdesign-vue-next-starter/pull/796))
