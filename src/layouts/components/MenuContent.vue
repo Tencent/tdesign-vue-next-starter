@@ -8,7 +8,7 @@
           </template>
           {{ renderMenuTitle(item.title) }}
         </t-menu-item>
-        <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
+        <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path" @click="doMenuItemClick(item)">
           <template #icon>
             <component :is="menuIcon(item)" class="t-icon"></component>
           </template>
@@ -41,7 +41,8 @@ const { navData } = defineProps({
   },
 });
 
-const active = computed(() => getActive());
+const active = defineModel<string>({ default: '' });
+//const active = computed(() => getActive());
 
 const { locale } = useLocale();
 const list = computed(() => {
@@ -103,6 +104,11 @@ const getPath = (item: ListItemType) => {
   }
 
   return item.meta?.single ? item.redirect : item.path;
+};
+
+const doMenuItemClick = (item: ListItemType) => {
+  //window.open(url);
+  active.value= item.path;
 };
 
 const openHref = (url: string) => {
