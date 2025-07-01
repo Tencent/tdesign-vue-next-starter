@@ -48,7 +48,7 @@
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.9.17",
     "@vitejs/plugin-vue": "^5.0.4",
-    "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "@vitejs/plugin-vue-jsx": "^5.0.1",
     "@vue/compiler-sfc": "~3.3.8",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
