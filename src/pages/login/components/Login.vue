@@ -46,7 +46,7 @@
         <span class="tip">{{ t('pages.login.wechatLogin') }}</span>
         <span class="refresh">{{ t('pages.login.refresh') }} <t-icon name="refresh" /> </span>
       </div>
-      <q-r-code-component value="" :size="160" level="H" />
+      <t-qrcode value="tdesign" :size="160" level="H" />
     </template>
 
     <!-- 手机号登录 -->
@@ -83,7 +83,6 @@
 <script setup lang="ts">
 import type { FormInstanceFunctions, FormRule, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { QRCode } from 'tdesign-vue-next/es/qrcode';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -92,9 +91,6 @@ import { t } from '@/locales';
 import { useUserStore } from '@/store';
 
 const userStore = useUserStore();
-
-// Define the QRCode component for use in template
-const QRCodeComponent = QRCode;
 
 const INITIAL_DATA = {
   phone: '',
