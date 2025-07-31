@@ -9,9 +9,6 @@
           password: ${GIT_ACCESS_TOKEN}
           push_tags: true
 
-main:
-  push:
-    - <<: *sync
-develop:
+"(main|develop)":
   push:
     - <<: *sync
