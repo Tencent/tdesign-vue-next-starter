@@ -18,7 +18,7 @@ jobs:
             -w ${{ github.workspace }} \
             -e PLUGIN_TARGET_URL="https://cnb.cool/tencent/tdesign/tdesign-vue-next-starter.git" \
             -e PLUGIN_AUTH_TYPE="https" \
-            -e PLUGIN_USERNAME=${{ secrets.CNB_USERNAME }} \
-            -e PLUGIN_PASSWORD=${{ secrets.CNB_ACCESS_TOKEN }} \
+            -e PLUGIN_USERNAME="cnb" \
+            -e PLUGIN_PASSWORD=${{ secrets.CNB_TOKEN }} \
             -e PLUGIN_PUSH_TAGS="true" \
             tencentcom/git-sync
