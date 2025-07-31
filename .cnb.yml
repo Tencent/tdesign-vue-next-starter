@@ -1,5 +1,7 @@
 .sync: &sync
-  - stages:
+  - imports:
+      - https://cnb.cool/tencent/tdesign/tdesign-private/-/blob/main/cnb-envs.yml
+    stages:
       - name: Sync to GitHub
         image: tencentcom/git-sync
         settings:
