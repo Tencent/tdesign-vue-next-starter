@@ -1,7 +1,8 @@
 <template>
   <div v-if="layout === 'side'" class="header-menu-search">
     <t-input
-      :class="['header-search', { 'hover-active': isSearchFocus }]"
+      class="header-search"
+      :class="[{ 'hover-active': isSearchFocus }]"
       :placeholder="t('layout.searchPlaceholder')"
       @blur="changeSearchFocus(false)"
       @focus="changeSearchFocus(true)"
@@ -24,7 +25,8 @@
     </t-button>
     <t-input
       v-model="searchData"
-      :class="['header-search', { 'width-zero': !isSearchFocus }]"
+      class="header-search"
+      :class="[{ 'width-zero': !isSearchFocus }]"
       placeholder="输入要搜索内容"
       :autofocus="isSearchFocus"
       @blur="changeSearchFocus(false)"
@@ -35,14 +37,16 @@
     </t-input>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 
 import { t } from '@/locales';
 
 defineProps({
-  layout: String,
+  layout: {
+    type: String,
+    default: '',
+  },
 });
 
 const isSearchFocus = ref(false);

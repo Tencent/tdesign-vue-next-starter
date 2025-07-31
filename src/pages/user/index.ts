@@ -1,4 +1,4 @@
-import { TChartColor } from '@/config/color';
+import type { TChartColor } from '@/config/color';
 import { getDateArray, getRandomArray } from '@/utils/charts';
 import { getChartListColor } from '@/utils/color';
 

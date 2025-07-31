@@ -54,7 +54,6 @@
     </t-col>
   </t-row>
 </template>
-
 <script setup lang="ts">
 import type { TdBaseTableProps } from 'tdesign-vue-next';
 
@@ -142,7 +141,6 @@ const getRankClass = (index: number) => {
   return ['dashboard-rank', { 'dashboard-rank__top': index < 3 }];
 };
 </script>
-
 <style lang="less" scoped>
 .dashboard-rank-card {
   padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);

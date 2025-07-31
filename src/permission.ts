@@ -2,7 +2,7 @@ import 'nprogress/nprogress.css'; // progress bar style
 
 import NProgress from 'nprogress'; // progress bar
 import { MessagePlugin } from 'tdesign-vue-next';
-import { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 
 import router from '@/router';
 import { getPermissionStore, useUserStore } from '@/store';
@@ -58,7 +58,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     /* white list router */
-    if (whiteListRouters.indexOf(to.path) !== -1) {
+    if (whiteListRouters.includes(to.path)) {
       next();
     } else {
       next({

@@ -22,7 +22,6 @@
     <setting-com />
   </div>
 </template>
-
 <script setup lang="ts">
 import '@/style/layout.less';
 
@@ -71,5 +70,4 @@ watch(
   },
 );
 </script>
-
 <style lang="less" scoped></style>

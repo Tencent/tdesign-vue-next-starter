@@ -49,14 +49,12 @@
           </t-dropdown>
           <t-dropdown :min-column-width="120" trigger="click">
             <template #dropdown>
-              <t-dropdown-menu>
-                <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
-                  <user-circle-icon />{{ t('layout.header.user') }}
-                </t-dropdown-item>
-                <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
-                  <poweroff-icon />{{ t('layout.header.signOut') }}
-                </t-dropdown-item>
-              </t-dropdown-menu>
+              <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
+                <user-circle-icon />{{ t('layout.header.user') }}
+              </t-dropdown-item>
+              <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
+                <poweroff-icon />{{ t('layout.header.signOut') }}
+              </t-dropdown-item>
             </template>
             <t-button class="header-user-btn" theme="default" variant="text">
               <template #icon>
@@ -76,7 +74,6 @@
     </t-head-menu>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ChevronDownIcon, PoweroffIcon, SettingIcon, TranslateIcon, UserCircleIcon } from 'tdesign-icons-vue-next';
 import type { PropType } from 'vue';
@@ -95,7 +92,7 @@ import MenuContent from './MenuContent.vue';
 import Notice from './Notice.vue';
 import Search from './Search.vue';
 
-const props = defineProps({
+const { theme, layout, showLogo, menu, isFixed, isCompact } = defineProps({
   theme: {
     type: String,
     default: 'light',
@@ -141,7 +138,6 @@ const active = computed(() => getActive());
 const layoutCls = computed(() => [`${prefix}-header-layout`]);
 
 const menuCls = computed(() => {
-  const { isFixed, layout, isCompact } = props;
   return [
     {
       [`${prefix}-header-menu`]: !isFixed,
@@ -151,7 +147,7 @@ const menuCls = computed(() => {
     },
   ];
 });
-const menuTheme = computed(() => props.theme as ModeType);
+const menuTheme = computed(() => theme as ModeType);
 
 // 切换语言
 const { changeLocale } = useLocale();
@@ -215,7 +211,7 @@ const navToHelper = () => {
 }
 
 .header-menu {
-  flex: 1 1 1;
+  flex: 1 1 auto;
   display: inline-flex;
 
   :deep(.t-menu__item) {
@@ -318,7 +314,6 @@ const navToHelper = () => {
   }
 }
 </style>
-
 <!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
 <style lang="less">
 .operations-dropdown-container-item {

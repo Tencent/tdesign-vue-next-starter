@@ -8,13 +8,17 @@
 <script lang="ts" setup>
 import { useWindowSize } from '@vueuse/core';
 import debounce from 'lodash/debounce';
-import { computed, CSSProperties, ref, unref, watch } from 'vue';
+import type { CSSProperties } from 'vue';
+import { computed, ref, unref, watch } from 'vue';
 
 import { prefix } from '@/config/global';
 import { useSettingStore } from '@/store';
 
 defineProps({
-  frameSrc: String,
+  frameSrc: {
+    type: String,
+    default: '',
+  },
 });
 
 const { width, height } = useWindowSize();
@@ -38,10 +42,10 @@ const paddingTBXxl = computedStyle.getPropertyValue('--td-comp-paddingTB-xxl');
 function getOuterHeight(dom: Element) {
   let height = dom.clientHeight;
   const computedStyle = window.getComputedStyle(dom);
-  height += parseInt(computedStyle.marginTop, 10);
-  height += parseInt(computedStyle.marginBottom, 10);
-  height += parseInt(computedStyle.borderTopWidth, 10);
-  height += parseInt(computedStyle.borderBottomWidth, 10);
+  height += Number.parseInt(computedStyle.marginTop, 10);
+  height += Number.parseInt(computedStyle.marginBottom, 10);
+  height += Number.parseInt(computedStyle.borderTopWidth, 10);
+  height += Number.parseInt(computedStyle.borderBottomWidth, 10);
   return height;
 }
 
@@ -52,12 +56,12 @@ function calcHeight() {
   }
   let clientHeight = 0;
   const { showFooter, isUseTabsRouter, showBreadcrumb } = settingStore;
-  const headerHeight = parseFloat(sizeXxxl);
+  const headerHeight = Number.parseFloat(sizeXxxl);
   const navDom = document.querySelector('.t-tabs__nav');
   const navHeight = isUseTabsRouter ? getOuterHeight(navDom) : 0;
   const breadcrumbDom = document.querySelector('.t-breadcrumb');
   const breadcrumbHeight = showBreadcrumb ? getOuterHeight(breadcrumbDom) : 0;
-  const contentPadding = parseFloat(paddingTBXxl) * 2;
+  const contentPadding = Number.parseFloat(paddingTBXxl) * 2;
   const footerDom = document.querySelector('.t-layout__footer');
   const footerHeight = showFooter ? getOuterHeight(footerDom) : 0;
   const top = headerHeight + navHeight + breadcrumbHeight + contentPadding + footerHeight + 2;

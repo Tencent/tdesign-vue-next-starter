@@ -165,15 +165,8 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-export default {
-  name: 'FormStep',
-};
-</script>
-
 <script setup lang="ts">
-import { SubmitContext } from 'tdesign-vue-next';
+import type { SubmitContext } from 'tdesign-vue-next';
 import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -188,6 +181,10 @@ import {
   NAME_OPTIONS,
   TYPE_OPTIONS,
 } from './constants';
+
+defineOptions({
+  name: 'FormStep',
+});
 
 const formData1 = ref({ ...INITIAL_DATA1 });
 const formData2 = ref({ ...INITIAL_DATA2 });
@@ -220,7 +217,6 @@ const complete = () => {
   router.replace({ path: '/detail/advanced' });
 };
 </script>
-
 <style lang="less" scoped>
 @import './index.less';
 </style>

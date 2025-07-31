@@ -1,4 +1,4 @@
-import axios, {
+import type {
   AxiosError,
   AxiosInstance,
   AxiosRequestConfig,
@@ -6,6 +6,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
+import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 import debounce from 'lodash/debounce';
 import isFunction from 'lodash/isFunction';
@@ -13,10 +14,10 @@ import throttle from 'lodash/throttle';
 import { stringify } from 'qs';
 
 import { ContentTypeEnum } from '@/constants';
-import { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
+import type { AxiosRequestConfigRetry, RequestOptions, Result } from '@/types/axios';
 
 import { AxiosCanceler } from './AxiosCancel';
-import { CreateAxiosOptions } from './AxiosTransform';
+import type { CreateAxiosOptions } from './AxiosTransform';
 
 /**
  * Axios 模块
@@ -98,7 +99,7 @@ export class VAxios {
     // 请求拦截器
     this.instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       // 如果忽略取消令牌，则不会取消重复的请求
-      // @ts-ignore
+      // @ts-expect-error 请求参数通过嵌套赋值
       const { ignoreCancelToken } = config.requestOptions;
       const ignoreCancel = ignoreCancelToken ?? this.options.requestOptions?.ignoreCancelToken;
       if (!ignoreCancel) axiosCanceler.addPending(config);

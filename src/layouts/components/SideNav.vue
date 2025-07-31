@@ -22,10 +22,9 @@
     <div :class="`${prefix}-side-nav-placeholder${collapsed ? '-hidden' : ''}`"></div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { difference, remove, union } from 'lodash';
-import { MenuValue } from 'tdesign-vue-next';
+import type { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
@@ -40,9 +39,7 @@ import type { MenuRoute, ModeType } from '@/types/interface';
 import pgk from '../../../package.json';
 import MenuContent from './MenuContent.vue';
 
-const MIN_POINT = 992 - 1;
-
-const props = defineProps({
+const { menu, showLogo, isFixed, layout, theme, isCompact } = defineProps({
   menu: {
     type: Array as PropType<MenuRoute[]>,
     default: () => [],
@@ -72,6 +69,8 @@ const props = defineProps({
     default: false,
   },
 });
+
+const MIN_POINT = 992 - 1;
 
 const collapsed = computed(() => useSettingStore().isSidebarCompact);
 const menuAutoCollapsed = computed(() => useSettingStore().menuAutoCollapsed);
@@ -103,11 +102,9 @@ const onExpanded = (value: MenuValue[]) => {
 };
 
 const sideMode = computed(() => {
-  const { theme } = props;
   return theme === 'dark';
 });
 const sideNavCls = computed(() => {
-  const { isCompact } = props;
   return [
     `${prefix}-sidebar-layout`,
     {
@@ -132,7 +129,6 @@ const versionCls = computed(() => {
   ];
 });
 const menuCls = computed(() => {
-  const { showLogo, isFixed, layout } = props;
   return [
     `${prefix}-side-nav`,
     {
@@ -173,5 +169,4 @@ const getLogo = () => {
   return AssetLogoFull;
 };
 </script>
-
 <style lang="less" scoped></style>

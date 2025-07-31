@@ -21,13 +21,11 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "noImplicitThis": true,
-    "alwaysStrict": true,
+    "alwaysStrict": true
   },
   "include": [
     "**/*.ts",
     "src/**/*.d.ts",
-    "src/types/**/*.d.ts",
-    "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "node_modules/tdesign-vue-next/global.d.ts"

@@ -6,7 +6,7 @@
           :bordered="false"
           :title="t('pages.dashboardBase.outputOverview.title')"
           :subtitle="t('pages.dashboardBase.outputOverview.subtitle')"
-          :class="{ 'dashboard-overview-card': true, 'overview-panel': true }"
+          class="dashboard-overview-card overview-panel"
         >
           <template #actions>
             <t-date-range-picker
@@ -21,7 +21,7 @@
         </t-card>
       </t-col>
       <t-col :xs="12" :xl="3">
-        <t-card :bordered="false" :class="{ 'dashboard-overview-card': true, 'export-panel': true }">
+        <t-card :bordered="false" class="dashboard-overview-card export-panel">
           <template #actions>
             <t-button>{{ t('pages.dashboardBase.outputOverview.export') }}</t-button>
           </template>
@@ -62,13 +62,6 @@
     </t-row>
   </t-card>
 </template>
-
-<script lang="ts">
-export default {
-  name: 'DashboardBase',
-};
-</script>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { LineChart } from 'echarts/charts';
@@ -85,6 +78,10 @@ import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';
 
 import { constructInitDataset } from '../index';
+
+defineOptions({
+  name: 'DashboardBase',
+});
 
 echarts.use([TooltipComponent, LegendComponent, GridComponent, LineChart, CanvasRenderer]);
 
@@ -158,7 +155,6 @@ const onStokeDataChange = (checkedValues: string[]) => {
   stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors.value }));
 };
 </script>
-
 <style lang="less" scoped>
 :deep(.t-card__body) {
   padding: var(--td-comp-paddingTB-xxl) var(--td-comp-paddingLR-xxl);
