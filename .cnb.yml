@@ -17,7 +17,11 @@
 $:
   vscode:
     - docker:
-        build: .cnb/Dockerfile
+        build: 
+          dockerfile: .cnb/Dockerfile
+          by:
+            .cnb/mcp-servers.json
+        
         volumes:
           - node_modules:copy-on-write
       env:
