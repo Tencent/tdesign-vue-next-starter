@@ -15,7 +15,7 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh \
 RUN apt-get update && apt-get install -y wget unzip openssh-server
 
 # 设置mcp
-RUN echo '{"mcpServers": {"tdesign-mcp-server": { "command": "npx","args": ["-y","tdesign-mcp-server"]}}}' > /root/.local/share/CodeBuddyExtension/Cache/web-VSCode/mcp/settings.json
+RUN echo "{'mcpServers': {'tdesign-mcp-server': { 'command': 'npx','args': ['-y','tdesign-mcp-server']}}}" > /root/.local/share/CodeBuddyExtension/Cache/web-VSCode/mcp/settings.json
 
 # 指定字符集支持命令行输入中文（根据需要选择字符集）
 ENV LANG C.UTF-8
