@@ -18,6 +18,9 @@ $:
   vscode:
     - docker:
         build: .cnb/Dockerfile
+        volumes:
+          - node_modules:copy-on-write
+          - .cnb/preset_mcp_settings.json:/root/.local/share/CodeBuddyExtension/Cache/web-VSCode/mcp/settings.json
       env:
         CNB_WELCOME_CMD: |
           sleep 10
