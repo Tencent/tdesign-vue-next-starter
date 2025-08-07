@@ -1,16 +1,17 @@
-name: Sync to CNB
-on:
-  push:
-    branches: [main, develop]
+name: sync-cnb
+on: 
+ - push
+ - delete
 
 jobs:
-  sync:
+  sync-push:
+    if: ${{ github.repository == 'Tencent/tdesign-vue-next-starter' && github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
+      
       - name: Sync to CNB Repository
         run: |
           docker run --rm \
@@ -20,5 +21,16 @@ jobs:
             -e PLUGIN_AUTH_TYPE="https" \
             -e PLUGIN_USERNAME="cnb" \
             -e PLUGIN_PASSWORD=${{ secrets.CNB_TOKEN }} \
-            -e PLUGIN_PUSH_TAGS="true" \
+            -e PLUGIN_FORCE="true" \
             tencentcom/git-sync
+
+  sync-delete-branch:
+    if: ${{ github.repository == 'Tencent/tdesign-vue-next-starter' && github.event_name == 'delete' && github.event.ref_type == 'branch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: TDesignOteam//tdesign-pr-trigger-action@develop
+        with:
+          repo: 'tencent/tdesign/tdesign-vue-next-starter'
+          token: ${{ secrets.CNB_TOKEN }}
+          branch: ${{ github.event.ref }}
+          trigger: '/delete-cnb-branch'          

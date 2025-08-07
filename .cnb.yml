@@ -11,6 +11,21 @@
           password: ${GIT_ACCESS_TOKEN}
           push_tags: true
 
-"(main|develop)":
+"(**)":
   push:
     - <<: *sync
+$:
+  vscode:
+    - docker:
+        build: .cnb/Dockerfile
+        volumes:
+          - node_modules:cow
+      env:
+        CNB_WELCOME_CMD: npm run dev
+      services:
+        - vscode
+        - docker
+      stages:
+        - name: install dependencies
+          script: 
+          - npm install
