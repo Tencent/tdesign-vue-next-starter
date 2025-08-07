@@ -1,4 +1,4 @@
-name: sync-cnb
+name: Sync to CNB
 on: 
  - push
  - delete
