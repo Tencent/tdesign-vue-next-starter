@@ -19,7 +19,9 @@ $:
     - docker:
         build: .cnb/Dockerfile
       env:
-        CNB_WELCOME_CMD: npm run dev
+        CNB_WELCOME_CMD: |
+          sleep 5
+          npm run dev
       services:
         - vscode
         - docker
