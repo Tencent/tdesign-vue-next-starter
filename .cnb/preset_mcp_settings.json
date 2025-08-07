@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "tdesign-mcp-server": {
-      "command": "npx",
-      "args": ["-y", "tdesign-mcp-server"]
-    }
-  }
-}
