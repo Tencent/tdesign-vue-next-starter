@@ -14,7 +14,7 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh \
 # 安装 ssh 服务，用于支持 VSCode 等客户端通过 Remote-SSH 访问开发环境
 RUN apt-get update && apt-get install -y wget unzip openssh-server
 
-cat .cnb/preset_mcp_settings.json
+RUN cat .cnb/preset_mcp_settings.json
 # 设置mcp
 COPY .cnb/preset_mcp_settings.json /root/.local/share/CodeBuddyExtension/Cache/web-VSCode/mcp/settings.json
 
