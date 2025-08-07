@@ -7,7 +7,7 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh \
   && code-server --install-extension waderyan.gitblame \
   && code-server --install-extension mhutchie.git-graph \
   && code-server --install-extension donjayamanne.githistory \
-  && code-server --install-extension tencent-cloud.coding-copilot@3.1.20 \
+  && code-server --install-extension tencent-cloud.coding-copilot@3.1.19 \
   && code-server --install-extension vue.volar \
   && echo done
 
@@ -23,5 +23,3 @@ COPY .cnb/mcp-servers.json /root/.local/share/code-server/User/globalStorage/ten
 # 指定字符集支持命令行输入中文（根据需要选择字符集）
 ENV LANG C.UTF-8
 ENV LANGUAGE C.UTF-8
-
-
