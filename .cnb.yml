@@ -26,7 +26,6 @@ $:
           - node_modules:copy-on-write
       env:
         CNB_WELCOME_CMD: |
-          sleep 8
           npm run dev
       services:
         - vscode
@@ -35,3 +34,4 @@ $:
         - name: install dependencies
           script: 
           - npm install
+          - sleep 8
