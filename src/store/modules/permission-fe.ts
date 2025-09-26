@@ -1,6 +1,7 @@
 // 前端 roles 控制菜单权限 通过登录后的角色对菜单就行过滤处理
 // 如果需要前端 roles 控制菜单权限 请使用此文件代码替换 permission.ts 的内容
 
+import { cloneDeep } from 'lodash';
 import { defineStore } from 'pinia';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -41,7 +42,7 @@ export const usePermissionStore = defineStore('permission', {
       let removeRoutes: Array<RouteRecordRaw> = [];
       // special token
       if (roles.includes('all')) {
-        accessedRouters = allRoutes;
+        accessedRouters = cloneDeep(allRoutes);
       } else {
         const res = filterPermissionsRouters(allRoutes, roles);
         accessedRouters = res.accessedRouters;
