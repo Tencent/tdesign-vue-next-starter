@@ -84,7 +84,12 @@ const getExpanded = () => {
   const parts = path.split('/').slice(1);
   const result = parts.map((_, index) => `/${parts.slice(0, index + 1).join('/')}`);
 
-  expanded.value = menuAutoCollapsed.value ? result : union(result, expanded.value);
+  const allRoutes = router.getRoutes();
+  const allRoutesExpanded = allRoutes.filter((item) => item.meta?.expanded).map((item) => item.path);
+
+  expanded.value = menuAutoCollapsed.value
+    ? union(result, allRoutesExpanded)
+    : union(result, expanded.value, allRoutesExpanded);
 };
 
 watch(
