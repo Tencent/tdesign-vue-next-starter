@@ -1,4 +1,5 @@
 import type { TabValue } from 'tdesign-vue-next';
+import type { Component, DefineComponent, FunctionalComponent } from 'vue';
 import type { LocationQueryRaw, RouteMeta, RouteRecordName } from 'vue-router';
 
 export interface MenuRoute {
@@ -6,11 +7,7 @@ export interface MenuRoute {
   path: any;
   title?: string | Record<string, string>;
   name?: string;
-  icon?:
-    | string
-    | {
-        render: () => void;
-      };
+  icon?: string | Component | FunctionalComponent | DefineComponent;
   redirect?: string;
   children: MenuRoute[];
   meta: RouteMeta;

@@ -32,7 +32,7 @@ import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
 import type { MenuRoute } from '@/types/interface';
 
-type ListItemType = MenuRoute & { icon?: string };
+type ListItemType = MenuRoute;
 
 const { navData } = defineProps({
   navData: {
