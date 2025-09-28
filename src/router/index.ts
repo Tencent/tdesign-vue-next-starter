@@ -1,3 +1,4 @@
+import isObject from 'lodash/isObject';
 import uniq from 'lodash/uniq';
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -32,10 +33,11 @@ export const allRoutes = [...homepageRouterList, ...fixedRouterList, ...defaultR
 export function mapModuleRouterList(modules: Record<string, unknown>): Array<RouteRecordRaw> {
   const routerList: Array<RouteRecordRaw> = [];
   Object.keys(modules).forEach((key) => {
-    // @ts-expect-error 外部赋值不太好直接写类型
-    const mod = modules[key].default || {};
-    const modList = Array.isArray(mod) ? [...mod] : [mod];
-    routerList.push(...modList);
+    if (isObject(modules[key]) && 'default' in modules[key]) {
+      const mod = modules[key].default;
+      const modList = Array.isArray(mod) ? [...mod] : [mod];
+      routerList.push(...modList);
+    }
   });
   return routerList;
 }

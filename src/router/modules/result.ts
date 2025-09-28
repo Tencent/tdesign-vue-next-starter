@@ -1,3 +1,5 @@
+import type { RouteRecordRaw } from 'vue-router';
+
 import Layout from '@/layouts/index.vue';
 
 export default [
@@ -79,4 +81,4 @@ export default [
       },
     ],
   },
-];
+] satisfies RouteRecordRaw[];

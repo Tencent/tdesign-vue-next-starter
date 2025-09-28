@@ -1,10 +1,12 @@
 import 'vue-router';
 
+import type { Component, DefineComponent, FunctionalComponent } from 'vue';
+
 export {};
 declare module 'vue-router' {
   interface RouteMeta {
     title?: string | Record<string, string>;
-    icon?: string;
+    icon?: string | Component | FunctionalComponent | DefineComponent;
     expanded?: boolean;
     orderNo?: number;
     hidden?: boolean;
