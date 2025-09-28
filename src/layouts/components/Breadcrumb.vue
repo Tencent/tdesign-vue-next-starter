@@ -10,7 +10,6 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { useLocale } from '@/locales/useLocale';
-import type { RouteMeta } from '@/types/interface';
 
 const { locale } = useLocale();
 const route = useRoute();
@@ -21,7 +20,7 @@ const crumbs = computed(() => {
 
   const breadcrumbs = pathArray.reduce((breadcrumbArray, path, idx) => {
     // 如果路由下有hiddenBreadcrumb或当前遍历到参数则隐藏
-    const meta = route.matched[idx]?.meta as RouteMeta;
+    const meta = route.matched[idx]?.meta;
     if (meta?.hiddenBreadcrumb || Object.values(route.params).includes(path)) {
       return breadcrumbArray;
     }
