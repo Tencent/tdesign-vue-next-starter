@@ -33,10 +33,11 @@ export const allRoutes = [...homepageRouterList, ...fixedRouterList, ...defaultR
 export function mapModuleRouterList(modules: Record<string, unknown>): Array<RouteRecordRaw> {
   const routerList: Array<RouteRecordRaw> = [];
   Object.keys(modules).forEach((key) => {
-    if (isObject(modules[key]) && 'default' in modules[key]) {
-      const mod = modules[key].default;
-      const modList = Array.isArray(mod) ? [...mod] : [mod];
-      routerList.push(...modList);
+    const routeModule = modules[key];
+    if (isObject(routeModule) && 'default' in routeModule) {
+      const route = routeModule.default;
+      const routes = Array.isArray(route) ? [...route] : [route];
+      routerList.push(...routes);
     }
   });
   return routerList;
