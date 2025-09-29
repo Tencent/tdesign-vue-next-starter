@@ -177,7 +177,7 @@ const navToGitHub = () => {
 };
 
 const navToHelper = () => {
-  window.open('http://tdesign.tencent.com/starter/docs/get-started');
+  window.open('https://tdesign.tencent.com/starter/docs/vue-next/get-started');
 };
 </script>
 <style lang="less" scoped>
