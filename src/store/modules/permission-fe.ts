@@ -42,14 +42,14 @@ export const usePermissionStore = defineStore('permission', {
       let removeRoutes: Array<RouteRecordRaw> = [];
       // special token
       if (roles.includes('all')) {
-        accessedRouters = cloneDeep(allRoutes);
+        accessedRouters = allRoutes;
       } else {
         const res = filterPermissionsRouters(allRoutes, roles);
         accessedRouters = res.accessedRouters;
         removeRoutes = res.removeRoutes;
       }
 
-      this.routers = accessedRouters;
+      this.routers = cloneDeep(accessedRouters);
       this.removeRoutes = removeRoutes;
 
       removeRoutes.forEach((item: RouteRecordRaw) => {
