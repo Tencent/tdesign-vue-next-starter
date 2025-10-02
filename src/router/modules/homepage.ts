@@ -1,5 +1,6 @@
 import { DashboardIcon } from 'tdesign-icons-vue-next';
 import { shallowRef } from 'vue';
+import type { RouteRecordRaw } from 'vue-router';
 
 import Layout from '@/layouts/index.vue';
 
@@ -54,4 +55,4 @@ export default [
       },
     ],
   },
-];
+] satisfies RouteRecordRaw[];
