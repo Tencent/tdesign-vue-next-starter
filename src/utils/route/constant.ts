@@ -1,3 +1,5 @@
+import type { RouteRecordRaw } from 'vue-router';
+
 export const LAYOUT = () => import('@/layouts/index.vue');
 export const BLANK_LAYOUT = () => import('@/layouts/blank.vue');
 export const IFRAME = () => import('@/layouts/components/FrameBlank.vue');
@@ -7,8 +9,8 @@ export const PARENT_LAYOUT = () =>
     resolve({ name: 'ParentLayout' });
   });
 
-export const PAGE_NOT_FOUND_ROUTE = {
-  path: '/:w+',
+export const PAGE_NOT_FOUND_ROUTE: RouteRecordRaw = {
+  path: '/:pathMatch(.*)*',
   name: '404Page',
   redirect: '/result/404',
 };
