@@ -48,7 +48,6 @@ export const usePermissionStore = defineStore('permission', {
         accessedRouters = res.accessedRouters;
         removeRoutes = res.removeRoutes;
       }
-
       this.routers = cloneDeep(accessedRouters);
       this.removeRoutes = removeRoutes;
 

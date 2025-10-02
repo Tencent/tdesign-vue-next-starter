@@ -26,8 +26,8 @@ router.beforeEach(async (to, from, next) => {
     try {
       await userStore.getUserInfo();
 
+      // 后端权限控制
       const { asyncRoutes } = permissionStore;
-
       if (asyncRoutes && asyncRoutes.length === 0) {
         const routeList = await permissionStore.buildAsyncRoutes();
         routeList.forEach((item: RouteRecordRaw) => {
@@ -43,10 +43,23 @@ router.beforeEach(async (to, from, next) => {
           return;
         }
       }
+
+      // 前端权限控制
+      // const permissionStore = getPermissionStore();
+      // const { routers } = permissionStore;
+      // if (routers.length === 0) {
+      //   await permissionStore.initRoutes(userStore.roles);
+      // }
+
       if (router.hasRoute(to.name)) {
         next();
       } else {
-        next(`/`);
+        // 动态添加404 page
+        // router.addRoute(PAGE_NOT_FOUND_ROUTE);
+        // next(to.fullPath);
+
+        // 不添加404 page，重定向到首页
+        next({ path: '/' });
       }
     } catch (error) {
       MessagePlugin.error(error.message);
@@ -73,10 +86,11 @@ router.beforeEach(async (to, from, next) => {
 router.afterEach((to) => {
   if (to.path === '/login') {
     const userStore = useUserStore();
-    const permissionStore = getPermissionStore();
 
     userStore.logout();
-    permissionStore.restoreRoutes();
+    // 后端权限控制
+    // const permissionStore = getPermissionStore();
+    // permissionStore.restoreRoutes();
   }
   NProgress.done();
 });
