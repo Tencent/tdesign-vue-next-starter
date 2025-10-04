@@ -86,11 +86,10 @@ router.beforeEach(async (to, from, next) => {
 router.afterEach((to) => {
   if (to.path === '/login') {
     const userStore = useUserStore();
-
     userStore.logout();
-    // 后端权限控制
-    // const permissionStore = getPermissionStore();
-    // permissionStore.restoreRoutes();
+
+    const permissionStore = getPermissionStore();
+    permissionStore.restoreRoutes();
   }
   NProgress.done();
 });

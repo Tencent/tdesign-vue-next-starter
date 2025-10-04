@@ -17,6 +17,7 @@ export default [
       },
       icon: shallowRef(DashboardIcon),
       orderNo: 0,
+      roleCode: 'dev',
     },
     children: [
       {
@@ -28,6 +29,7 @@ export default [
             zh_CN: '概览仪表盘',
             en_US: 'Overview',
           },
+          roleCode: 'dev',
         },
       },
       {

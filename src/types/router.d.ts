@@ -15,6 +15,6 @@ declare module 'vue-router' {
     keepAlive?: boolean;
     frameSrc?: string;
     frameBlank?: boolean;
-    // roleCode?: string; // 前端 roles 控制菜单权限
+    roleCode?: string; // 前端 roles 控制菜单权限
   }
 }

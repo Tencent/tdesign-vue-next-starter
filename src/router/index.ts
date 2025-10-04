@@ -16,11 +16,13 @@ const defaultRouterList: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
+    meta: { roleCode: 'dev' },
     component: () => import('@/pages/login/index.vue'),
   },
   {
     path: '/',
     redirect: '/dashboard/base',
+    meta: { roleCode: 'dev' },
   },
 ];
 // 存放固定路由

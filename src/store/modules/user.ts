@@ -63,7 +63,7 @@ export const useUserStore = defineStore('user', {
         }
         return {
           name: 'td_dev',
-          roles: ['UserIndex', 'DashboardBase', 'login'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
+          roles: ['dev'], // 前端权限模型使用 如果使用请配置modules/permission-fe.ts使用
         };
       };
       const res = await mockRemoteUserInfo(this.token);

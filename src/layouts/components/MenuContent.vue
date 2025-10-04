@@ -37,7 +37,7 @@ type ListItemType = MenuRoute;
 const { navData } = defineProps({
   navData: {
     type: Array as PropType<MenuRoute[]>,
-    default: () => [],
+    default: (): MenuRoute[] => [],
   },
 });
 
@@ -80,7 +80,7 @@ const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
         redirect: item.redirect,
       };
     })
-    .filter((item) => item.meta && item.meta.hidden !== true);
+    .filter((item) => item.meta && item.meta.hidden !== true && item.meta.title);
 };
 
 const getHref = (item: MenuRoute) => {
