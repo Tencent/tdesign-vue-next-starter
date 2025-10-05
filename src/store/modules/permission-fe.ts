@@ -8,6 +8,8 @@ import type { RouteRecordName, RouteRecordRaw } from 'vue-router';
 import router, { allRoutes } from '@/router';
 import { store } from '@/store';
 
+// 严格模式 默认所有路由不可访问
+const CHECK_ROLE_STRICT = false;
 function filterPermissionsRouters(
   routes: Array<RouteRecordRaw>,
   roles: Array<unknown>,
@@ -20,7 +22,8 @@ function filterPermissionsRouters(
   const removedRoutes: Array<RouteRecordRaw> = [];
   routes.forEach((route) => {
     const roleCode = route.meta?.roleCode;
-    if (roles.includes(roleCode)) {
+    const hasPermission = CHECK_ROLE_STRICT ? roles.includes(roleCode) : !roleCode || roles.includes(roleCode);
+    if (hasPermission) {
       if (route.children) {
         const { accessedRouters: accessedChildren, removedRoutes: removedChildren } = filterPermissionsRouters(
           route.children,
