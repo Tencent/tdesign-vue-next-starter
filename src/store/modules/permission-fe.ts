@@ -13,6 +13,7 @@ const CHECK_ROLE_STRICT = false;
 function filterPermissionsRouters(
   routes: Array<RouteRecordRaw>,
   roles: Array<unknown>,
+  whiteListRouters: Array<string>,
 ): {
   accessedRouters: Array<RouteRecordRaw>;
   removedRoutes: Array<RouteRecordRaw>;
@@ -23,11 +24,14 @@ function filterPermissionsRouters(
   routes.forEach((route) => {
     const roleCode = route.meta?.roleCode;
     const hasPermission = CHECK_ROLE_STRICT ? roles.includes(roleCode) : !roleCode || roles.includes(roleCode);
-    if (hasPermission) {
+    const resolvedRoute = router.resolve(route);
+    const inWhiteList = whiteListRouters.includes(resolvedRoute.path);
+    if (hasPermission || inWhiteList) {
       if (route.children) {
         const { accessedRouters: accessedChildren, removedRoutes: removedChildren } = filterPermissionsRouters(
           route.children,
           roles,
+          whiteListRouters,
         );
         route.children = accessedChildren;
         accessedRouters.push(route);
@@ -62,7 +66,7 @@ export const usePermissionStore = defineStore('permission', {
       if (roles.includes('all')) {
         accessedRouters = allRoutes;
       } else {
-        const res = filterPermissionsRouters(allRoutes, roles);
+        const res = filterPermissionsRouters(allRoutes, roles, this.whiteListRouters);
         accessedRouters = res.accessedRouters;
         removedRoutes = res.removedRoutes;
       }
