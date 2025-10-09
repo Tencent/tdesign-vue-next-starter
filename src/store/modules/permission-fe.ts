@@ -26,26 +26,26 @@ function filterPermissionsRouters(
     const hasPermission = CHECK_ROLE_STRICT ? roles.includes(roleCode) : !roleCode || roles.includes(roleCode);
     const resolvedRoute = router.resolve(route);
     const inWhiteList = whiteListRouters.includes(resolvedRoute.path);
-    if (hasPermission || inWhiteList) {
-      if (route.children) {
-        const { accessedRouters: accessedChildren, removedRoutes: removedChildren } = filterPermissionsRouters(
-          route.children,
-          roles,
-          whiteListRouters,
-        );
-        route.children = accessedChildren;
-        accessedRouters.push(route);
-
-        if (removedChildren.length > 0) {
-          const removedRoute = cloneDeep(route);
-          removedRoute.children = removedChildren;
-          removedRoutes.push(removedRoute);
-        }
-      } else {
-        accessedRouters.push(route);
-      }
-    } else {
+    if (!hasPermission && !inWhiteList) {
       const removedRoute = cloneDeep(route);
+      removedRoutes.push(removedRoute);
+      return;
+    }
+    if (!route.children || route.children.length === 0) {
+      accessedRouters.push(route);
+      return;
+    }
+    const { accessedRouters: accessedChildren, removedRoutes: removedChildren } = filterPermissionsRouters(
+      route.children,
+      roles,
+      whiteListRouters,
+    );
+    route.children = accessedChildren;
+    accessedRouters.push(route);
+
+    if (removedChildren.length > 0) {
+      const removedRoute = cloneDeep(route);
+      removedRoute.children = removedChildren;
       removedRoutes.push(removedRoute);
     }
   });
@@ -79,10 +79,11 @@ export const usePermissionStore = defineStore('permission', {
           if (route.name === name) {
             return true;
           }
-          if (route.children && route.children.length > 0) {
-            if (checkNameInRoutes(name, route.children)) {
-              return true;
-            }
+          if (!route.children || route.children.length === 0) {
+            return false;
+          }
+          if (checkNameInRoutes(name, route.children)) {
+            return true;
           }
         }
         return false;
@@ -103,7 +104,6 @@ export const usePermissionStore = defineStore('permission', {
     async restoreRoutes() {
       function addRemovedRoutes(routes: Array<RouteRecordRaw>, parentName?: RouteRecordName) {
         for (const route of routes) {
-          console.log(parentName, route);
           if (!router.hasRoute(route.name)) {
             if (parentName) {
               router.addRoute(parentName, route);
