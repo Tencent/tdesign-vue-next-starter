@@ -48,7 +48,7 @@ function filterPermissionsRouters(
   return { accessedRouters, removedRoutes };
 }
 
-const remvoeRouteFnSet = new Set<() => void>();
+const removeRouteFnSet = new Set<() => void>();
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
     routers: [],
@@ -67,16 +67,16 @@ export const usePermissionStore = defineStore('permission', {
         removedRoutes = res.removedRoutes;
       }
       for (const route of accessedRouters) {
-        remvoeRouteFnSet.add(router.addRoute(route));
+        removeRouteFnSet.add(router.addRoute(route));
       }
       this.routers = cloneDeep(accessedRouters);
       this.removeRoutes = removedRoutes;
     },
     async restoreRoutes() {
-      for (const removeRoute of remvoeRouteFnSet) {
+      for (const removeRoute of removeRouteFnSet) {
         removeRoute();
       }
-      remvoeRouteFnSet.clear();
+      removeRouteFnSet.clear();
       this.removeRoutes = [];
       this.routers = [];
     },

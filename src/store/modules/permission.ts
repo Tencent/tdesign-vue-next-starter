@@ -7,7 +7,7 @@ import router, { fixedRouterList, homepageRouterList } from '@/router';
 import { store } from '@/store';
 import { transformObjectToRoute } from '@/utils/route';
 
-const remvoeRouteFnSet = new Set<() => void>();
+const removeRouteFnSet = new Set<() => void>();
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
@@ -22,7 +22,7 @@ export const usePermissionStore = defineStore('permission', {
 
       const allRoutes = [...homepageRouterList, ...fixedRouterList, ...accessedRouters];
       for (const route of allRoutes) {
-        remvoeRouteFnSet.add(router.addRoute(route));
+        removeRouteFnSet.add(router.addRoute(route));
       }
       // 在菜单展示全部路由
       this.routers = cloneDeep(allRoutes);
@@ -44,10 +44,10 @@ export const usePermissionStore = defineStore('permission', {
     },
     async restoreRoutes() {
       // 不需要在此额外调用initRoutes更新侧边导肮内容，在登录后asyncRoutes为空会调用
-      for (const removeRoute of remvoeRouteFnSet) {
+      for (const removeRoute of removeRouteFnSet) {
         removeRoute();
       }
-      remvoeRouteFnSet.clear();
+      removeRouteFnSet.clear();
       this.routers = [];
       this.removeRoutes = [];
       this.asyncRoutes = [];
