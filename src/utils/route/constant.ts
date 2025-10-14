@@ -4,6 +4,7 @@ export const LAYOUT = () => import('@/layouts/index.vue');
 export const BLANK_LAYOUT = () => import('@/layouts/blank.vue');
 export const IFRAME = () => import('@/layouts/components/FrameBlank.vue');
 export const EXCEPTION_COMPONENT = () => import('@/pages/result/500/index.vue');
+export const PAGE_NOT_FOUND_COMPONENT = () => import('@/pages/result/404/index.vue');
 export const PARENT_LAYOUT = () =>
   new Promise((resolve) => {
     resolve({ name: 'ParentLayout' });
@@ -12,5 +13,5 @@ export const PARENT_LAYOUT = () =>
 export const PAGE_NOT_FOUND_ROUTE: RouteRecordRaw = {
   path: '/:pathMatch(.*)*',
   name: '404Page',
-  redirect: '/result/404',
+  component: PAGE_NOT_FOUND_COMPONENT,
 };
