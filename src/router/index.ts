@@ -18,16 +18,14 @@ const defaultRouterList: Array<RouteRecordRaw> = [
     name: 'login',
     component: () => import('@/pages/login/index.vue'),
   },
-  {
-    path: '/',
-    redirect: '/dashboard/base',
-  },
 ];
+
 // 存放固定路由
 export const homepageRouterList: Array<RouteRecordRaw> = mapModuleRouterList(homepageModules);
 export const fixedRouterList: Array<RouteRecordRaw> = mapModuleRouterList(fixedModules);
 
 export const allRoutes = [...homepageRouterList, ...fixedRouterList, ...defaultRouterList];
+export const whiteListRoutePath = uniq(defaultRouterList.map((item) => item.path));
 
 // 固定路由模块转换为路由
 export function mapModuleRouterList(modules: Record<string, unknown>): Array<RouteRecordRaw> {
@@ -83,7 +81,7 @@ export const getActive = (maxLevel = 3): string => {
 
 const router = createRouter({
   history: createWebHistory(env === 'site' ? '/starter/vue-next/' : import.meta.env.VITE_BASE_URL),
-  routes: allRoutes,
+  routes: defaultRouterList,
   scrollBehavior() {
     return {
       el: '#app',

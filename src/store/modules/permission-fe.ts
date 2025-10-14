@@ -3,9 +3,9 @@
 
 import cloneDeep from 'lodash/cloneDeep';
 import { defineStore } from 'pinia';
-import type { RouteRecordName, RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
 
-import router, { allRoutes } from '@/router';
+import router, { fixedRouterList, homepageRouterList } from '@/router';
 import { store } from '@/store';
 
 // 严格模式 默认所有路由不可访问
@@ -13,7 +13,6 @@ const CHECK_ROLE_STRICT = false;
 function filterPermissionsRouters(
   routes: Array<RouteRecordRaw>,
   roles: Array<unknown>,
-  whiteListRouters: Array<string>,
 ): {
   accessedRouters: Array<RouteRecordRaw>;
   removedRoutes: Array<RouteRecordRaw>;
@@ -24,9 +23,7 @@ function filterPermissionsRouters(
   routes.forEach((route) => {
     const roleCode = route.meta?.roleCode;
     const hasPermission = CHECK_ROLE_STRICT ? roles.includes(roleCode) : !roleCode || roles.includes(roleCode);
-    const resolvedRoute = router.resolve(route);
-    const inWhiteList = whiteListRouters.includes(resolvedRoute.path);
-    if (!hasPermission && !inWhiteList) {
+    if (!hasPermission) {
       const removedRoute = cloneDeep(route);
       removedRoutes.push(removedRoute);
       return;
@@ -38,7 +35,6 @@ function filterPermissionsRouters(
     const { accessedRouters: accessedChildren, removedRoutes: removedChildren } = filterPermissionsRouters(
       route.children,
       roles,
-      whiteListRouters,
     );
     route.children = accessedChildren;
     accessedRouters.push(route);
@@ -52,9 +48,9 @@ function filterPermissionsRouters(
   return { accessedRouters, removedRoutes };
 }
 
+const remvoeRouteFnSet = new Set<() => void>();
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
-    whiteListRouters: ['/login'],
     routers: [],
     removeRoutes: [],
   }),
@@ -64,59 +60,23 @@ export const usePermissionStore = defineStore('permission', {
       let removedRoutes: Array<RouteRecordRaw> = [];
       // special token
       if (roles.includes('all')) {
-        accessedRouters = allRoutes;
+        accessedRouters = [...homepageRouterList, ...fixedRouterList];
       } else {
-        const res = filterPermissionsRouters(allRoutes, roles, this.whiteListRouters);
+        const res = filterPermissionsRouters([...homepageRouterList, ...fixedRouterList], roles);
         accessedRouters = res.accessedRouters;
         removedRoutes = res.removedRoutes;
       }
+      for (const route of accessedRouters) {
+        remvoeRouteFnSet.add(router.addRoute(route));
+      }
       this.routers = cloneDeep(accessedRouters);
       this.removeRoutes = removedRoutes;
-
-      function checkNameInRoutes(name: RouteRecordName, routes: Array<RouteRecordRaw>) {
-        if (routes.length === 0) return false;
-        for (const route of routes) {
-          if (route.name === name) {
-            return true;
-          }
-          if (!route.children || route.children.length === 0) {
-            return false;
-          }
-          if (checkNameInRoutes(name, route.children)) {
-            return true;
-          }
-        }
-        return false;
-      }
-      function removeRoutes(routes: Array<RouteRecordRaw>) {
-        for (const route of routes) {
-          if (route.children && route.children.length > 0) {
-            removeRoutes(route.children);
-          }
-          const canRemoveRoute = !checkNameInRoutes(route.name, accessedRouters);
-          if (canRemoveRoute && router.hasRoute(route.name)) {
-            router.removeRoute(route.name);
-          }
-        }
-      }
-      removeRoutes(removedRoutes);
     },
     async restoreRoutes() {
-      function addRemovedRoutes(routes: Array<RouteRecordRaw>, parentName?: RouteRecordName) {
-        for (const route of routes) {
-          if (!router.hasRoute(route.name)) {
-            if (parentName) {
-              router.addRoute(parentName, route);
-            } else {
-              router.addRoute(route);
-            }
-          }
-          if (route.children && route.children.length > 0) {
-            addRemovedRoutes(route.children, route.name);
-          }
-        }
+      for (const removeRoute of remvoeRouteFnSet) {
+        removeRoute();
       }
-      addRemovedRoutes(this.removeRoutes);
+      remvoeRouteFnSet.clear();
       this.removeRoutes = [];
       this.routers = [];
     },

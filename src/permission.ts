@@ -2,9 +2,9 @@ import 'nprogress/nprogress.css'; // progress bar style
 
 import NProgress from 'nprogress'; // progress bar
 import { MessagePlugin } from 'tdesign-vue-next';
-import type { RouteRecordRaw } from 'vue-router';
 
-import router from '@/router';
+// import type { RouteRecordRaw } from 'vue-router';
+import router, { whiteListRoutePath } from '@/router';
 import { getPermissionStore, useUserStore } from '@/store';
 import { PAGE_NOT_FOUND_ROUTE } from '@/utils/route/constant';
 
@@ -12,9 +12,6 @@ NProgress.configure({ showSpinner: false });
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
-
-  const permissionStore = getPermissionStore();
-  const { whiteListRouters } = permissionStore;
 
   const userStore = useUserStore();
 
@@ -25,14 +22,12 @@ router.beforeEach(async (to, from, next) => {
     }
     try {
       await userStore.getUserInfo();
+      const permissionStore = getPermissionStore();
 
       // 后端权限控制
       const { asyncRoutes } = permissionStore;
       if (asyncRoutes && asyncRoutes.length === 0) {
-        const routeList = await permissionStore.buildAsyncRoutes();
-        routeList.forEach((item: RouteRecordRaw) => {
-          router.addRoute(item);
-        });
+        await permissionStore.buildAsyncRoutes();
 
         if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
           // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
@@ -45,22 +40,14 @@ router.beforeEach(async (to, from, next) => {
       }
 
       // 前端权限控制
-      // const permissionStore = getPermissionStore();
       // const { routers } = permissionStore;
       // if (routers.length === 0) {
       //   await permissionStore.initRoutes(userStore.roles);
+      //   next({ ...to, replace: true });
+      //   return;
       // }
 
-      if (router.hasRoute(to.name)) {
-        next();
-      } else {
-        // 动态添加404 page
-        // router.addRoute(PAGE_NOT_FOUND_ROUTE);
-        // next(to.fullPath);
-
-        // 不添加404 page，重定向到首页
-        next({ path: '/' });
-      }
+      next();
     } catch (error) {
       MessagePlugin.error(error.message);
       next({
@@ -70,8 +57,7 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done();
     }
   } else {
-    /* white list router */
-    if (whiteListRouters.includes(to.path)) {
+    if (whiteListRoutePath.includes(to.path)) {
       next();
     } else {
       next({
