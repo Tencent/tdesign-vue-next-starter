@@ -11,9 +11,7 @@ const removeRouteFnSet = new Set<() => void>();
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
-    whiteListRouters: ['/login'],
     routers: [],
-    removeRoutes: [],
     asyncRoutes: [],
   }),
   actions: {
@@ -49,7 +47,6 @@ export const usePermissionStore = defineStore('permission', {
       }
       removeRouteFnSet.clear();
       this.routers = [];
-      this.removeRoutes = [];
       this.asyncRoutes = [];
     },
   },
