@@ -10,7 +10,7 @@ import { store } from '@/store';
 
 // 严格模式 true: 路由无roleCode不可访问 false: 路由无roleCode可访问
 const CHECK_ROLE_STRICT = false;
-function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<unknown>): Array<RouteRecordRaw> {
+function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<string>): Array<RouteRecordRaw> {
   if (routes.length === 0) return [];
   const accessedRouters: Array<RouteRecordRaw> = [];
   routes.forEach((route) => {
@@ -36,7 +36,7 @@ export const usePermissionStore = defineStore('permission', {
     routers: [],
   }),
   actions: {
-    async initRoutes(roles: Array<unknown>) {
+    async initRoutes(roles: Array<string>) {
       let accessedRouters: Array<RouteRecordRaw> = [];
       const allRoutes = cloneDeep([...homepageRouterList, ...fixedRouterList]);
       // special token
