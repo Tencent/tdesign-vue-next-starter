@@ -3,6 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
+    "jsxImportSource": "vue",
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,

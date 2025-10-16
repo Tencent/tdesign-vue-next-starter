@@ -1,4 +1,4 @@
-import { useRoute, createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import uniq from 'lodash/uniq';
 
 // 自动导入modules文件夹下所有ts文件
@@ -58,7 +58,9 @@ export const getRoutesExpanded = () => {
 };
 
 export const getActive = (maxLevel = 3): string => {
-  const route = useRoute();
+  // 非组件内调用必须通过Router实例获取当前路由
+  const route = router.currentRoute.value;
+
   if (!route.path) {
     return '';
   }
