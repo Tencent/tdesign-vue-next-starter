@@ -138,7 +138,7 @@ const onSubmit = async (ctx: SubmitContext) => {
     try {
       await userStore.login(formData.value);
 
-      MessagePlugin.success('登录成功');
+      MessagePlugin.success(t('pages.login.loginSuccess'));
       const redirect = route.query.redirect as string;
       const redirectUrl = redirect ? decodeURIComponent(redirect) : '/dashboard';
       router.push(redirectUrl);

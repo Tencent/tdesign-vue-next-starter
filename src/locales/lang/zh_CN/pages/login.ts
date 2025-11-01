@@ -11,6 +11,7 @@ export default {
   wechatLogin: '使用微信扫一扫登录',
   accountLogin: '使用账号登录',
   phoneLogin: '使用手机号登录',
+  loginSuccess: '登录成功',
   input: {
     account: '请输入账号',
     password: '请输入登录密码',

@@ -33,20 +33,7 @@
               <t-icon name="help-circle" />
             </t-button>
           </t-tooltip>
-          <t-dropdown trigger="click">
-            <t-button theme="default" shape="square" variant="text">
-              <translate-icon />
-            </t-button>
-            <t-dropdown-menu>
-              <t-dropdown-item
-                v-for="(lang, index) in langList"
-                :key="index"
-                :value="lang.value"
-                @click="(options) => changeLang(options.value as string)"
-                >{{ lang.content }}</t-dropdown-item
-              ></t-dropdown-menu
-            >
-          </t-dropdown>
+          <language-switcher />
           <t-dropdown :min-column-width="120" trigger="click">
             <template #dropdown>
               <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
@@ -75,15 +62,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ChevronDownIcon, PoweroffIcon, SettingIcon, TranslateIcon, UserCircleIcon } from 'tdesign-icons-vue-next';
+import { ChevronDownIcon, PoweroffIcon, SettingIcon, UserCircleIcon } from 'tdesign-icons-vue-next';
 import type { PropType } from 'vue';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
 import LogoFull from '@/assets/assets-logo-full.svg?component';
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 import { prefix } from '@/config/global';
-import { langList, t } from '@/locales';
-import { useLocale } from '@/locales/useLocale';
+import { t } from '@/locales';
 import { getActive } from '@/router';
 import { useSettingStore, useUserStore } from '@/store';
 import type { MenuRoute, ModeType } from '@/types/interface';
@@ -150,11 +137,6 @@ const menuCls = computed(() => {
 const menuTheme = computed(() => theme as ModeType);
 
 // 切换语言
-const { changeLocale } = useLocale();
-const changeLang = (lang: string) => {
-  changeLocale(lang);
-};
-
 const changeCollapsed = () => {
   settingStore.updateConfig({
     isSidebarCompact: !settingStore.isSidebarCompact,
