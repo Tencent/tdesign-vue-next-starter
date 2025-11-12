@@ -10,6 +10,7 @@ export default {
   wechatLogin: 'Login with WeChat',
   accountLogin: 'Login with Account',
   phoneLogin: 'Login with Mobile Phone',
+  loginSuccess: 'Login successful',
   input: {
     account: 'please enter account',
     password: 'please enter password',

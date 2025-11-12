@@ -8,6 +8,7 @@
       <t-button theme="default" shape="square" variant="text" @click="navToHelper">
         <t-icon name="help-circle" class="icon" />
       </t-button>
+      <language-switcher />
       <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
         <t-icon name="setting" class="icon" />
       </t-button>
@@ -16,9 +17,11 @@
 </template>
 <script setup lang="ts">
 import LogoFullIcon from '@/assets/assets-logo-full.svg?component';
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 import { useSettingStore } from '@/store';
 
 const settingStore = useSettingStore();
+
 const toggleSettingPanel = () => {
   settingStore.updateConfig({
     showSettingPanel: true,
