@@ -5,7 +5,7 @@
       drag-sort
       theme="card"
       :class="`${prefix}-layout-tabs-nav`"
-      :value="$route.path"
+      :value="route.path"
       :style="{ position: 'sticky', top: 0, width: '100%' }"
       @change="(value) => handleChangeCurrentTab(value as string)"
       @remove="handleRemove"
