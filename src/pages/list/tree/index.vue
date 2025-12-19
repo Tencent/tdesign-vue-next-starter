@@ -35,6 +35,10 @@ const filterText = ref();
 const expanded = ['0', '0-0', '0-1', '0-2', '0-3', '0-4'];
 
 const onInput = () => {
+  if (!filterText.value) {
+    filterByText.value = null;
+    return;
+  }
   filterByText.value = (node: TreeNodeModel) => {
     return node.label.includes(filterText.value);
   };
