@@ -163,11 +163,12 @@ const visible = ref(false);
 // monitorChart logic
 let monitorContainer: HTMLElement;
 let monitorChart: echarts.ECharts;
+const intervalId = ref();
 onMounted(() => {
   monitorContainer = document.getElementById('monitorContainer');
   monitorChart = echarts.init(monitorContainer);
   monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
-  setInterval(() => {
+  intervalId.value = setInterval(() => {
     monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
   }, 3000);
 });
@@ -194,6 +195,9 @@ const updateContainer = () => {
 };
 
 onUnmounted(() => {
+  if (intervalId.value) {
+    clearInterval(intervalId.value);
+  }
   window.removeEventListener('resize', updateContainer);
 });
 
