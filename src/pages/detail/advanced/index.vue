@@ -131,7 +131,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 import { getPurchaseList } from '@/api/detail';
 import { t } from '@/locales';
@@ -203,8 +203,9 @@ const pagination = ref({
 
 const updateCurrent = ref(0);
 
+const intervalId = ref();
 const stepUpdate = () => {
-  setInterval(() => {
+  intervalId.value = setInterval(() => {
     if (updateCurrent.value > 5) {
       updateCurrent.value = -1;
     }
@@ -224,6 +225,12 @@ const fetchData = async () => {
     console.log(e);
   }
 };
+
+onUnmounted(() => {
+  if (intervalId.value) {
+    clearInterval(intervalId.value);
+  }
+});
 
 onMounted(() => {
   stepUpdate();
