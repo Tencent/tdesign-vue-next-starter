@@ -67,7 +67,7 @@
     "rspack-resolver": "^1.1.1",
     "stylelint": "~16.16.0",
     "stylelint-config-standard": "^37.0.0",
-    "stylelint-order": "~6.0.4",
+    "stylelint-order": "~7.0.1",
     "typescript": "~5.4.3",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.2.2",
