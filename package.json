@@ -31,14 +31,14 @@
     "pinia-plugin-persistedstate": "^4.7.1",
     "qs": "^6.13.1",
     "tdesign-icons-vue-next": "^0.4.1",
-    "tdesign-vue-next": "^1.17.7",
+    "tdesign-vue-next": "^1.18.0",
     "tvision-color": "^1.6.0",
     "vue": "^3.5.18",
     "vue-i18n": "^9.9.1",
     "vue-router": "^4.6.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.10.1",
+    "@antfu/eslint-config": "~4.10.1",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@types/echarts": "^4.9.21",
