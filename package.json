@@ -40,7 +40,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "~4.10.1",
     "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/config-conventional": "^20.4.0",
     "@types/echarts": "^4.9.21",
     "@types/lodash": "^4.17.6",
     "@types/mockjs": "^1.0.10",
