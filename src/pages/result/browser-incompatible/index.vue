@@ -5,7 +5,7 @@
     :tip="t('pages.result.browserIncompatible.subtitle')"
   >
     <div class="result-slot-container">
-      <t-button class="result-button" @click="() => $router.push('/')">{{
+      <t-button class="result-button" @click="() => router.push('/')">{{
         t('pages.result.browserIncompatible.back')
       }}</t-button>
       <div class="recommend-container">
@@ -25,6 +25,8 @@
   </result>
 </template>
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+
 import Result from '@/components/result/index.vue';
 import Thumbnail from '@/components/thumbnail/index.vue';
 import { t } from '@/locales';
@@ -32,6 +34,8 @@ import { t } from '@/locales';
 defineOptions({
   name: 'ResultBrowserIncompatible',
 });
+
+const router = useRouter();
 </script>
 <style lang="less" scoped>
 .result-slot-container {
