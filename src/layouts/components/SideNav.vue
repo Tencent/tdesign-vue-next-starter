@@ -109,7 +109,17 @@ const changeCollapsed = () => {
     isSidebarCompact: !settingStore.isSidebarCompact,
   });
 };
-
+const sideMode = computed(() => {
+  return theme === 'dark';
+});
+const logoCls = computed(() => {
+  return [
+    `${prefix}-side-nav-logo-${collapsed.value ? 't' : 'tdesign'}-logo`,
+    {
+      [`${prefix}-side-nav-dark`]: sideMode.value,
+    },
+  ];
+});
 const sideNavCls = computed(() => {
   return [
     `${prefix}-sidebar-layout`,
