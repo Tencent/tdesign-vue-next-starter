@@ -19,7 +19,7 @@
         <t-button variant="text" shape="square" @click="changeCollapsed">
           <template #icon><t-icon name="view-list" /></template>
         </t-button>
-        <span v-show="!collapsed" :class="versionCls"> TDesign Starter {{ pgk.version }} </span>
+        <t-typography-text v-show="!collapsed" theme="primary"> TDesign Starter {{ pgk.version }} </t-typography-text>
       </template>
     </t-menu>
     <div :class="`${prefix}-side-nav-placeholder${collapsed ? '-hidden' : ''}`"></div>
@@ -110,31 +110,11 @@ const changeCollapsed = () => {
   });
 };
 
-const sideMode = computed(() => {
-  return theme === 'dark';
-});
 const sideNavCls = computed(() => {
   return [
     `${prefix}-sidebar-layout`,
     {
       [`${prefix}-sidebar-compact`]: isCompact,
-    },
-  ];
-});
-const logoCls = computed(() => {
-  return [
-    `${prefix}-side-nav-logo-${collapsed.value ? 't' : 'tdesign'}-logo`,
-    {
-      [`${prefix}-side-nav-dark`]: sideMode.value,
-    },
-  ];
-});
-
-const versionCls = computed(() => {
-  return [
-    `version-container`,
-    {
-      [`${prefix}-side-nav-dark`]: sideMode.value,
     },
   ];
 });
