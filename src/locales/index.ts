@@ -4,63 +4,49 @@ import { computed } from 'vue';
 import type { I18nOptions } from 'vue-i18n';
 import { createI18n } from 'vue-i18n';
 
-// 导入语言文件
-const langModules = import.meta.glob('./lang/*/index.ts', { eager: true });
-
-const langModuleMap = new Map<string, unknown>();
-
-export const langCode: Array<string> = [];
+// 导入语言文件 (JSON 方式)
+const langModules = import.meta.glob<{ default: Record<string, unknown> }>('./lang/*.json', { eager: true });
 
 export const localeConfigKey = 'tdesign-starter-locale';
 
 // 获取浏览器默认语言环境
 const languages = usePreferredLanguages();
 
-// 生成语言模块列表
-const generateLangModuleMap = () => {
-  const fullPaths = Object.keys(langModules);
-  fullPaths.forEach((fullPath) => {
-    const k = fullPath.replace('./lang', '');
-    const startIndex = 1;
-    const lastIndex = k.lastIndexOf('/');
-    const code = k.substring(startIndex, lastIndex);
-    langCode.push(code);
-    langModuleMap.set(code, langModules[fullPath]);
+// 解析语言模块
+const parseLangModules = () => {
+  const langCode: string[] = [];
+  const messages: I18nOptions['messages'] = {};
+  const langList: DropdownOption[] = [];
+
+  Object.entries(langModules).forEach(([path, module]) => {
+    const match = path.match(/\.\/lang\/([^.]+)\.json$/);
+    if (match) {
+      const code = match[1];
+      langCode.push(code);
+      messages[code] = module.default;
+      langList.push({
+        content: module.default.lang as string,
+        value: code,
+      });
+    }
   });
+
+  return { langCode, messages, langList };
 };
 
-// 导出 Message
-const importMessages = computed(() => {
-  generateLangModuleMap();
+const { langCode, messages, langList } = parseLangModules();
 
-  const message: I18nOptions['messages'] = {};
-  langModuleMap.forEach((value: any, key) => {
-    message[key] = value.default;
-  });
-  return message;
-});
+export { langCode };
 
 export const i18n = createI18n({
   legacy: false,
   locale: useLocalStorage(localeConfigKey, 'zh_CN').value || languages.value[0] || 'zh_CN',
   fallbackLocale: 'zh_CN',
-  messages: importMessages.value,
+  messages,
   globalInjection: true,
 });
 
-export const langList = computed(() => {
-  if (langModuleMap.size === 0) generateLangModuleMap();
-
-  const list: DropdownOption[] = [];
-  langModuleMap.forEach((value: any, key) => {
-    list.push({
-      content: value.default.lang,
-      value: key,
-    });
-  });
-
-  return list;
-});
+export const languageList = computed(() => langList);
 
 export const { t } = i18n.global;
 
