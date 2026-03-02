@@ -25,7 +25,7 @@
     "axios": "^1.12.2",
     "dayjs": "^1.11.13",
     "echarts": "5.4.3",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
@@ -42,7 +42,7 @@
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^20.4.2",
     "@types/echarts": "^4.9.21",
-    "@types/lodash": "^4.17.6",
+    "@types/lodash": "^4.17.24",
     "@types/mockjs": "^1.0.10",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.9.17",
@@ -73,7 +73,7 @@
     "vite": "^6.2.2",
     "vite-plugin-mock": "^3.0.1",
     "vite-svg-loader": "^5.1.0",
-    "vue-tsc": "^3.1.8"
+    "vue-tsc": "^3.2.5"
   },
   "config": {
     "commitizen": {
