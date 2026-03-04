@@ -22,14 +22,14 @@
   },
   "dependencies": {
     "@vueuse/core": "^14.2.0",
-    "axios": "^1.12.2",
+    "axios": "^1.13.6",
     "dayjs": "^1.11.13",
     "echarts": "5.4.3",
     "lodash": "^4.17.23",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
-    "qs": "^6.13.1",
+    "qs": "^6.15.0",
     "tdesign-icons-vue-next": "^0.4.1",
     "tdesign-vue-next": "^1.18.2",
     "tvision-color": "^1.6.0",
@@ -38,7 +38,7 @@
     "vue-router": "^4.6.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "~4.10.1",
+    "@antfu/eslint-config": "^7.6.1",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^20.4.2",
     "@types/echarts": "^4.9.21",
@@ -51,7 +51,7 @@
     "@vue/compiler-sfc": "~3.5.18",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^9.22.0",
+    "eslint": "^9.39.3",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -90,6 +90,6 @@
     ]
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=20.19.0"
   }
 }
