@@ -256,7 +256,7 @@ const onConfirmDelete = () => {
   data.value.splice(deleteIdx.value, 1);
   pagination.value.total = data.value.length;
   confirmVisible.value = false;
-  MessagePlugin.success('删除成功');
+  MessagePlugin.success(t('components.deleteSuccess'));
   resetIdx();
 };
 

@@ -27,20 +27,20 @@
         v-show="activeForm === 0"
         class="step-form"
         :data="formData1"
-        :rules="FORM_RULES"
+        :rules="formRules"
         label-align="right"
         @submit="(result: SubmitContext) => onSubmit(result, 1)"
       >
         <t-form-item :label="t('pages.formStep.step1.contractName')" name="name">
           <t-select v-model="formData1.name" :style="{ width: '480px' }" class="demo-select-base" clearable>
-            <t-option v-for="(item, index) in NAME_OPTIONS" :key="index" :value="item.value" :label="item.label">
+            <t-option v-for="(item, index) in nameOptions" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
         </t-form-item>
         <t-form-item :label="t('pages.formStep.step1.invoiceType')" name="type">
           <t-select v-model="formData1.type" :style="{ width: '480px' }" class="demo-select-base" clearable>
-            <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
+            <t-option v-for="(item, index) in typeOptions" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
@@ -56,7 +56,7 @@
         v-show="activeForm === 1"
         class="step-form"
         :data="formData2"
-        :rules="FORM_RULES"
+        :rules="formRules"
         label-align="left"
         @reset="onReset(0)"
         @submit="(result: SubmitContext) => onSubmit(result, 2)"
@@ -121,7 +121,7 @@
         v-show="activeForm === 2"
         class="step-form"
         :data="formData3"
-        :rules="FORM_RULES"
+        :rules="formRules"
         label-align="left"
         @reset="onReset(1)"
         @submit="(result: SubmitContext) => onSubmit(result, 6)"
@@ -134,7 +134,7 @@
         </t-form-item>
         <t-form-item :label="t('pages.formStep.step3.deliveryAddress')" name="deliveryAddress">
           <t-select v-model="formData3.deliveryAddress" :style="{ width: '480px' }" class="demo-select-base" clearable>
-            <t-option v-for="(item, index) in ADDRESS_OPTIONS" :key="index" :value="item.value" :label="item.label">
+            <t-option v-for="(item, index) in addressOptions" :key="index" :value="item.value" :label="item.label">
               {{ item.label }}
             </t-option>
           </t-select>
@@ -173,13 +173,13 @@ import { useRouter } from 'vue-router';
 import { t } from '@/locales';
 
 import {
-  ADDRESS_OPTIONS,
-  FORM_RULES,
+  getAddressOptions,
+  getFormRules,
+  getNameOptions,
+  getTypeOptions,
   INITIAL_DATA1,
   INITIAL_DATA2,
   INITIAL_DATA3,
-  NAME_OPTIONS,
-  TYPE_OPTIONS,
 } from './constants';
 
 defineOptions({
@@ -190,6 +190,11 @@ const formData1 = ref({ ...INITIAL_DATA1 });
 const formData2 = ref({ ...INITIAL_DATA2 });
 const formData3 = ref({ ...INITIAL_DATA3 });
 const activeForm = ref(0);
+
+const formRules = computed(() => getFormRules());
+const nameOptions = computed(() => getNameOptions());
+const typeOptions = computed(() => getTypeOptions());
+const addressOptions = computed(() => getAddressOptions());
 
 const amount = computed(() => {
   if (formData1.value.name === '1') {

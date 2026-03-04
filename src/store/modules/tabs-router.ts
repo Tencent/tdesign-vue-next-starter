@@ -7,7 +7,7 @@ const homeRoute: Array<TRouterInfo> = [
   {
     path: '/dashboard/base',
     routeIdx: 0,
-    title: '仪表盘',
+    title: { zh_CN: '仪表盘', en_US: 'Dashboard' },
     name: 'DashboardBase',
     isHome: true,
   },

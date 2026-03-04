@@ -7,6 +7,10 @@
     },
     "manage": "Manage",
     "delete": "Delete",
+    "deleteSuccess": "Deleted successfully",
+    "copySuccess": "Copied successfully",
+    "copyFail": "Copy failed",
+    "submitSuccess": "Submitted successfully",
     "commonTable": {
       "contractName": "Name",
       "contractStatus": "Status",
@@ -327,6 +331,25 @@
           "manage": "manage",
           "delete": "delete"
         }
+      },
+      "baseInfo": {
+        "clusterName": "Cluster Name",
+        "clusterId": "Cluster ID",
+        "status": "Status",
+        "running": "Running",
+        "k8sVersion": "K8S Version",
+        "config": "Config",
+        "region": "Region",
+        "guangzhou": "Guangzhou",
+        "project": "Resource Project",
+        "defaultProject": "Default Project",
+        "nodeCount": "Node Count",
+        "nodeNetwork": "Node Network",
+        "containerNetwork": "Container Network",
+        "clusterCredential": "Cluster Credential",
+        "showCredential": "Show Credential",
+        "createUpdate": "Create/Update",
+        "description": "Description"
       }
     },
     "detailSecondary": {
@@ -336,11 +359,14 @@
       "setRead": "set as read",
       "setUnread": "set as unread",
       "delete": "delete",
+      "deleteConfirm": "Delete notification",
+      "deleteTip": "Confirm delete notification: {content}?",
       "empty": "Empty"
     },
     "formBase": {
       "title": "Contract Info",
       "contractName": "Name",
+      "contractNamePlaceholder": "Please enter contract name",
       "contractStatus": "Status",
       "contractNum": "Number",
       "contractType": "Type",
@@ -362,10 +388,57 @@
       "remark": "Remark",
       "remarkPlaceholder": "please enter remark",
       "notaryPublic": "Notary Public",
+      "fileSizeExceed": "File size cannot exceed 60MB",
+      "uploadFail": "Upload failed",
       "confirm": "confirm",
-      "cancel": "cancel"
+      "cancel": "cancel",
+      "validation": {
+        "name": "Please enter contract name",
+        "type": "Please select contract type",
+        "payment": "Please select payment type",
+        "amount": "Please enter amount",
+        "partyA": "Please select Party A",
+        "partyB": "Please select Party B",
+        "signDate": "Please select date",
+        "startDate": "Please select date",
+        "endDate": "Please select date"
+      },
+      "typeOptions": {
+        "typeA": "Type A",
+        "typeB": "Type B",
+        "typeC": "Type C"
+      },
+      "partyOptions": {
+        "companyA": "Company A",
+        "companyB": "Company B",
+        "companyC": "Company C"
+      }
     },
     "formStep": {
+      "validation": {
+        "name": "Please select contract name",
+        "type": "Please select type",
+        "title": "Please enter invoice title",
+        "taxNum": "Please enter tax number",
+        "consignee": "Please enter consignee",
+        "mobileNum": "Please enter mobile number",
+        "deliveryAddress": "Please select delivery address",
+        "fullAddress": "Please enter full address"
+      },
+      "options": {
+        "nameA": "Contract A",
+        "nameB": "Contract B",
+        "nameC": "Contract C",
+        "typeA": "Type A",
+        "typeB": "Type B",
+        "typeC": "Type C",
+        "address1": "Nanshan District, Shenzhen, Guangdong",
+        "address2": "Haidian District, Beijing",
+        "address3": "Xuhui District, Shanghai",
+        "address4": "High-tech Zone, Chengdu, Sichuan",
+        "address5": "Tianhe District, Guangzhou, Guangdong",
+        "address6": "High-tech Zone, Xi'an, Shaanxi"
+      },
       "step1": {
         "title": "Submit Application",
         "subtitle": "Submitted on December 21st",
@@ -444,6 +517,10 @@
     "listCard": {
       "create": "Create Product",
       "placeholder": "please enter to search",
+      "loading": "Loading data...",
+      "deleteConfirm": "Confirm delete selected products?",
+      "deleteSuccess": "Deleted successfully",
+      "deleteTip": "After confirmation, all product information of {name} will be cleared and cannot be recovered",
       "productName": "Name",
       "productStatus": "Status",
       "productDescription": "Description",
@@ -456,7 +533,22 @@
     },
     "listFilter": {},
     "listTree": {
-      "placeholder": "please enter to search"
+      "placeholder": "please enter to search",
+      "treeData": {
+        "shenzhen": "Shenzhen HQ",
+        "beijing": "Beijing HQ",
+        "shanghai": "Shanghai HQ",
+        "hunan": "Hunan",
+        "hubei": "Hubei",
+        "generalOffice": "General Office",
+        "marketing": "Marketing",
+        "technology": "Technology",
+        "finance": "Finance",
+        "purchase1": "Purchasing Team 1",
+        "purchase2": "Purchasing Team 2",
+        "finance1": "Finance Team 1",
+        "finance2": "Finance Team 2"
+      }
     },
     "login": {
       "loginTitle": "Login in",
@@ -472,6 +564,7 @@
       "accountLogin": "Login with Account",
       "phoneLogin": "Login with Mobile Phone",
       "loginSuccess": "Login successful",
+      "countdown": "Resend after {count} seconds",
       "input": {
         "account": "please enter account",
         "password": "please enter password",
@@ -544,7 +637,9 @@
           "entity": "Entity",
           "joinDay": "Day of join",
           "group": "Group"
-        }
+        },
+        "tencentGroup": "Tencent Group",
+        "seniorDesigner": "Senior UI Designer"
       },
       "contentList": "Content List",
       "visitData": "Visit Data",

@@ -1,11 +1,13 @@
-export const BASE_INFO_DATA = [
+import { t } from '@/locales';
+
+export const getBaseInfoData = () => [
   {
-    name: '集群名',
+    name: t('pages.detailDeploy.baseInfo.clusterName'),
     value: 'helloworld',
     type: null,
   },
   {
-    name: '集群ID',
+    name: t('pages.detailDeploy.baseInfo.clusterId'),
     value: 'cls - 2ntelvxw',
     type: {
       key: 'color',
@@ -13,40 +15,40 @@ export const BASE_INFO_DATA = [
     },
   },
   {
-    name: '状态',
-    value: '运行中',
+    name: t('pages.detailDeploy.baseInfo.status'),
+    value: t('pages.detailDeploy.baseInfo.running'),
     type: {
       key: 'color',
       value: 'green',
     },
   },
   {
-    name: 'K8S版本',
+    name: t('pages.detailDeploy.baseInfo.k8sVersion'),
     value: '1.7.8',
     type: null,
   },
   {
-    name: '配置',
+    name: t('pages.detailDeploy.baseInfo.config'),
     value: '6.73 核 10.30 GB',
     type: null,
   },
   {
-    name: '所在地域',
-    value: '广州',
+    name: t('pages.detailDeploy.baseInfo.region'),
+    value: t('pages.detailDeploy.baseInfo.guangzhou'),
     type: null,
   },
   {
-    name: '新增资源所属项目',
-    value: '默认项目',
+    name: t('pages.detailDeploy.baseInfo.project'),
+    value: t('pages.detailDeploy.baseInfo.defaultProject'),
     type: null,
   },
   {
-    name: '节点数量',
+    name: t('pages.detailDeploy.baseInfo.nodeCount'),
     value: '4 个',
     type: null,
   },
   {
-    name: '节点网络',
+    name: t('pages.detailDeploy.baseInfo.nodeNetwork'),
     value: 'vpc - 5frmkm1x',
     type: {
       key: 'color',
@@ -54,20 +56,20 @@ export const BASE_INFO_DATA = [
     },
   },
   {
-    name: '容器网络',
+    name: t('pages.detailDeploy.baseInfo.containerNetwork'),
     value: '172.16.0.0 / 16',
     type: null,
   },
   {
-    name: '集群凭证',
-    value: '显示凭证',
+    name: t('pages.detailDeploy.baseInfo.clusterCredential'),
+    value: t('pages.detailDeploy.baseInfo.showCredential'),
     type: {
       key: 'color',
       value: 'blue',
     },
   },
   {
-    name: '创建/更新',
+    name: t('pages.detailDeploy.baseInfo.createUpdate'),
     value: '2018-05-31 22:11:44 2018-05-31 22:11:44',
     type: {
       key: 'contractAnnex',
@@ -75,7 +77,7 @@ export const BASE_INFO_DATA = [
     },
   },
   {
-    name: '描述',
+    name: t('pages.detailDeploy.baseInfo.description'),
     value: 'istio_test',
     type: null,
   },

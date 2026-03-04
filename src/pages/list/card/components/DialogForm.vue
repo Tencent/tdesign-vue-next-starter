@@ -84,7 +84,7 @@ const textareaValue = ref('');
 
 const onSubmit = ({ validateResult, firstError }: SubmitContext) => {
   if (!firstError) {
-    MessagePlugin.success('提交成功');
+    MessagePlugin.success(t('components.submitSuccess'));
     formVisible.value = false;
   } else {
     console.log('Errors: ', validateResult);

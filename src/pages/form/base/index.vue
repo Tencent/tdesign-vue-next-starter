@@ -2,7 +2,7 @@
   <t-form
     class="base-form"
     :data="formData"
-    :rules="FORM_RULES"
+    :rules="formRules"
     label-align="top"
     :label-width="100"
     @reset="onReset"
@@ -17,13 +17,17 @@
         <t-row class="row-gap" :gutter="[32, 24]">
           <t-col :span="6">
             <t-form-item :label="t('pages.formBase.contractName')" name="name">
-              <t-input v-model="formData.name" :style="{ width: '322px' }" placeholder="请输入内容" />
+              <t-input
+                v-model="formData.name"
+                :style="{ width: '322px' }"
+                :placeholder="t('pages.formBase.contractNamePlaceholder')"
+              />
             </t-form-item>
           </t-col>
           <t-col :span="6">
             <t-form-item :label="t('pages.formBase.contractType')" name="type">
               <t-select v-model="formData.type" :style="{ width: '322px' }" class="demo-select-base" clearable>
-                <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                <t-option v-for="(item, index) in typeOptions" :key="index" :value="item.value" :label="item.label">
                   {{ item.label }}
                 </t-option>
               </t-select>
@@ -53,7 +57,7 @@
                 :placeholder="t('pages.formBase.contractTypePlaceholder')"
                 clearable
               >
-                <t-option v-for="(item, index) in PARTY_A_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                <t-option v-for="(item, index) in partyAOptions" :key="index" :value="item.value" :label="item.label">
                   {{ item.label }}
                 </t-option>
               </t-select>
@@ -68,7 +72,7 @@
                 class="demo-select-base"
                 clearable
               >
-                <t-option v-for="(item, index) in PARTY_B_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                <t-option v-for="(item, index) in partyBOptions" :key="index" :value="item.value" :label="item.label">
                   {{ item.label }}
                 </t-option>
               </t-select>
@@ -158,43 +162,47 @@
 <script setup lang="ts">
 import type { SubmitContext, UploadFailContext, UploadFile } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import { t } from '@/locales';
 
-import { FORM_RULES, INITIAL_DATA, PARTY_A_OPTIONS, PARTY_B_OPTIONS, TYPE_OPTIONS } from './constants';
+import { getFormRules, getPartyAOptions, getPartyBOptions, getTypeOptions, INITIAL_DATA } from './constants';
 
 defineOptions({
   name: 'FormBase',
 });
 
 const formData = ref({ ...INITIAL_DATA });
+const formRules = computed(() => getFormRules());
+const typeOptions = computed(() => getTypeOptions());
+const partyAOptions = computed(() => getPartyAOptions());
+const partyBOptions = computed(() => getPartyBOptions());
 
 const onReset = () => {
-  MessagePlugin.warning('取消新建');
+  MessagePlugin.warning(t('pages.formBase.cancel'));
 };
 const onSubmit = (ctx: SubmitContext) => {
   if (ctx.validateResult === true) {
-    MessagePlugin.success('新建成功');
+    MessagePlugin.success(t('pages.result.success.title'));
   }
 };
 const beforeUpload = (file: UploadFile) => {
   if (!/\.pdf$/.test(file.name)) {
-    MessagePlugin.warning('请上传pdf文件');
+    MessagePlugin.warning(t('pages.formBase.uploadTips'));
     return false;
   }
   if (file.size > 60 * 1024 * 1024) {
-    MessagePlugin.warning('上传文件不能大于60M');
+    MessagePlugin.warning(t('pages.formBase.fileSizeExceed'));
     return false;
   }
   return true;
 };
 const handleFail = (options: UploadFailContext) => {
-  MessagePlugin.error(`文件 ${options.file.name} 上传失败`);
+  MessagePlugin.error(`${options.file.name} ${t('pages.formBase.uploadFail')}`);
 };
 // 用于格式化接口响应值，error 会被用于上传失败的提示文字；url 表示文件/图片地址
 const formatResponse = (res: any) => {
-  return { ...res, error: '上传失败，请重试', url: res.url };
+  return { ...res, error: t('pages.formBase.uploadFail'), url: res.url };
 };
 </script>
 <style lang="less" scoped>

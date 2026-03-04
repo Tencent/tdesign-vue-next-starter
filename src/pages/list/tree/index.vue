@@ -7,7 +7,7 @@
             <search-icon size="var(--td-comp-size-xxxs)" />
           </template>
         </t-input>
-        <t-tree :data="TREE_DATA" hover expand-on-click-node :default-expanded="expanded" :filter="filterByText" />
+        <t-tree :data="treeData" hover expand-on-click-node :default-expanded="expanded" :filter="filterByText" />
       </div>
       <div class="list-tree-content">
         <common-table />
@@ -18,12 +18,12 @@
 <script setup lang="ts">
 import { SearchIcon } from 'tdesign-icons-vue-next';
 import type { TreeNodeModel } from 'tdesign-vue-next';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import CommonTable from '@/components/common-table/index.vue';
 import { t } from '@/locales';
 
-import { TREE_DATA } from './constants';
+import { getTreeData } from './constants';
 
 defineOptions({
   name: 'ListTree',
@@ -31,6 +31,7 @@ defineOptions({
 
 const filterByText = ref();
 const filterText = ref();
+const treeData = computed(() => getTreeData());
 
 const expanded = ['0', '0-0', '0-1', '0-2', '0-3', '0-4'];
 

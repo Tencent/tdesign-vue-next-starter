@@ -16,7 +16,7 @@
           </t-button>
         </template>
         <t-descriptions :column="4" item-layout="vertical">
-          <t-descriptions-item v-for="(item, index) in USER_INFO_LIST" :key="index" :label="t(item.title)">
+          <t-descriptions-item v-for="(item, index) in userInfoList" :key="index" :label="t(item.title)">
             {{ item.content }}
           </t-descriptions-item>
         </t-descriptions>
@@ -62,7 +62,7 @@
           </t-button>
         </template>
         <t-list :split="false">
-          <t-list-item v-for="(item, index) in TEAM_MEMBERS" :key="index">
+          <t-list-item v-for="(item, index) in teamMembers" :key="index">
             <t-list-item-meta :image="item.avatar" :title="item.title" :description="item.description" />
           </t-list-item>
         </t-list>
@@ -100,7 +100,7 @@ import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';
 
-import { PRODUCT_LIST, TEAM_MEMBERS, USER_INFO_LIST } from './constants';
+import { getTeamMembers, getUserInfoList, PRODUCT_LIST } from './constants';
 import { getFolderLineDataSet } from './index';
 
 defineOptions({
@@ -169,6 +169,9 @@ const getIcon = (type: string) => {
       return ProductAIcon;
   }
 };
+
+const userInfoList = computed(() => getUserInfoList());
+const teamMembers = computed(() => getTeamMembers());
 
 watch(
   () => store.brandTheme,

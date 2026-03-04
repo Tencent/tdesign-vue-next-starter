@@ -205,7 +205,7 @@ const onConfirmDelete = () => {
     selectedRowKeys.value.splice(selectedIdx, 1);
   }
   confirmVisible.value = false;
-  MessagePlugin.success('删除成功');
+  MessagePlugin.success(t('components.deleteSuccess'));
   resetIdx();
 };
 

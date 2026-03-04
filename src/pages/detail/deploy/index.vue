@@ -57,7 +57,7 @@
       <template #body>
         <div class="dialog-info-block">
           <div class="dialog-info-block">
-            <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
+            <div v-for="(item, index) in baseInfoData" :key="index" class="info-item">
               <h1>{{ item.name }}</h1>
               <span
                 :class="{
@@ -85,7 +85,7 @@ import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
-import { BASE_INFO_DATA } from './constants';
+import { getBaseInfoData } from './constants';
 import { get2ColBarChartDataSet, getSmoothLineDataSet } from './index';
 
 defineOptions({
@@ -159,6 +159,7 @@ const fetchData = async () => {
   }
 };
 const visible = ref(false);
+const baseInfoData = computed(() => getBaseInfoData());
 
 // monitorChart logic
 let monitorContainer: HTMLElement;

@@ -7,6 +7,10 @@
     },
     "manage": "管理",
     "delete": "删除",
+    "deleteSuccess": "删除成功",
+    "copySuccess": "复制成功",
+    "copyFail": "复制失败",
+    "submitSuccess": "提交成功",
     "commonTable": {
       "contractName": "合同名称",
       "contractNamePlaceholder": "请输入合同名称",
@@ -327,6 +331,25 @@
           "manage": "管理",
           "delete": "删除"
         }
+      },
+      "baseInfo": {
+        "clusterName": "集群名",
+        "clusterId": "集群ID",
+        "status": "状态",
+        "running": "运行中",
+        "k8sVersion": "K8S版本",
+        "config": "配置",
+        "region": "所在地域",
+        "guangzhou": "广州",
+        "project": "新增资源所属项目",
+        "defaultProject": "默认项目",
+        "nodeCount": "节点数量",
+        "nodeNetwork": "节点网络",
+        "containerNetwork": "容器网络",
+        "clusterCredential": "集群凭证",
+        "showCredential": "显示凭证",
+        "createUpdate": "创建/更新",
+        "description": "描述"
       }
     },
     "detailSecondary": {
@@ -336,11 +359,14 @@
       "setRead": "设为已读",
       "setUnread": "设为未读",
       "delete": "删除通知",
+      "deleteConfirm": "删除通知",
+      "deleteTip": "确认删除通知：{content}吗？",
       "empty": "暂无通知"
     },
     "formBase": {
       "title": "合同信息",
       "contractName": "合同名称",
+      "contractNamePlaceholder": "请输入合同名称",
       "contractStatus": "合同状态",
       "contractNum": "合同编号",
       "contractType": "合同类型",
@@ -362,10 +388,57 @@
       "remark": "备注",
       "remarkPlaceholder": "请输入备注",
       "notaryPublic": "公证人",
+      "fileSizeExceed": "上传文件不能大于60M",
+      "uploadFail": "上传失败",
       "confirm": "确认提交",
-      "cancel": "取消"
+      "cancel": "取消",
+      "validation": {
+        "name": "请输入合同名称",
+        "type": "请选择合同类型",
+        "payment": "请选择合同收付类型",
+        "amount": "请输入合同金额",
+        "partyA": "请选择甲方",
+        "partyB": "请选择乙方",
+        "signDate": "请选择日期",
+        "startDate": "请选择日期",
+        "endDate": "请选择日期"
+      },
+      "typeOptions": {
+        "typeA": "类型A",
+        "typeB": "类型B",
+        "typeC": "类型C"
+      },
+      "partyOptions": {
+        "companyA": "甲方公司",
+        "companyB": "乙方公司",
+        "companyC": "丙方公司"
+      }
     },
     "formStep": {
+      "validation": {
+        "name": "请选择合同名称",
+        "type": "请选择类型",
+        "title": "请输入发票抬头",
+        "taxNum": "请输入纳税人识别号",
+        "consignee": "请输入收货人",
+        "mobileNum": "请输入手机号码",
+        "deliveryAddress": "请选择收货地址",
+        "fullAddress": "请输入详细地址"
+      },
+      "options": {
+        "nameA": "合同A",
+        "nameB": "合同B",
+        "nameC": "合同C",
+        "typeA": "类型A",
+        "typeB": "类型B",
+        "typeC": "类型C",
+        "address1": "广东省深圳市南山区",
+        "address2": "北京市海淀区",
+        "address3": "上海市徐汇区",
+        "address4": "四川省成都市高新区",
+        "address5": "广东省广州市天河区",
+        "address6": "陕西省西安市高新区"
+      },
       "step1": {
         "title": "提交申请",
         "subtitle": "已于12月21日提交",
@@ -446,6 +519,10 @@
     "listCard": {
       "create": "新建产品",
       "placeholder": "请输入内容搜索",
+      "loading": "加载数据中...",
+      "deleteConfirm": "确认删除所选产品？",
+      "deleteSuccess": "删除成功",
+      "deleteTip": "确认删除后{name}的所有产品信息将被清空, 且无法恢复",
       "productName": "产品名称",
       "productStatus": "产品状态",
       "productDescription": "产品描述",
@@ -458,7 +535,22 @@
     },
     "listFilter": {},
     "listTree": {
-      "placeholder": "请输入内容进行搜索"
+      "placeholder": "请输入内容进行搜索",
+      "treeData": {
+        "shenzhen": "深圳总部",
+        "beijing": "北京总部",
+        "shanghai": "上海总部",
+        "hunan": "湖南",
+        "hubei": "湖北",
+        "generalOffice": "总办",
+        "marketing": "市场部",
+        "technology": "技术部",
+        "finance": "财务部",
+        "purchase1": "采购1组",
+        "purchase2": "采购2组",
+        "finance1": "财务1组",
+        "finance2": "财务2组"
+      }
     },
     "login": {
       "loginTitle": "登录到",
@@ -474,6 +566,7 @@
       "accountLogin": "使用账号登录",
       "phoneLogin": "使用手机号登录",
       "loginSuccess": "登录成功",
+      "countdown": "{count}秒后可重发",
       "input": {
         "account": "请输入账号",
         "password": "请输入登录密码",
@@ -546,7 +639,9 @@
           "entity": "主体",
           "joinDay": "入职时间",
           "group": "所属团队"
-        }
+        },
+        "tencentGroup": "腾讯集团",
+        "seniorDesigner": "高级 UI 设计师"
       },
       "visitData": "首页访问数据",
       "contentList": "内容列表",

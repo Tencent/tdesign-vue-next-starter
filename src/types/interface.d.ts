@@ -34,7 +34,7 @@ export interface TRouterInfo {
   path: string;
   query?: LocationQueryRaw;
   routeIdx?: number;
-  title?: string;
+  title?: Record<string, string>;
   name?: RouteRecordName;
   isAlive?: boolean;
   isHome?: boolean;

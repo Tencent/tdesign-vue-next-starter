@@ -43,8 +43,8 @@
     </div>
     <t-dialog
       v-model:visible="visible"
-      header="删除通知"
-      :body="`确认删除通知：${selectedItem && selectedItem.content}吗？`"
+      :header="t('pages.detailSecondary.deleteConfirm')"
+      :body="t('pages.detailSecondary.deleteTip', { content: selectedItem && selectedItem.content })"
       :on-confirm="deleteMsg"
     />
   </div>
