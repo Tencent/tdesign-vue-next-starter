@@ -41,7 +41,7 @@ export const getUserInfoList = (): Array<UserInfoListType> => [
   },
   {
     title: 'pages.user.personalInfo.desc.group',
-    content: '腾讯/腾讯公司/某事业群/某产品部/某运营中心/商户服务组',
+    content: t('pages.user.organization'),
     span: 6,
   },
 ];

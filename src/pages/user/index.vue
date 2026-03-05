@@ -3,7 +3,7 @@
     <t-col :flex="3">
       <div class="user-left-greeting">
         <div>
-          Hi，Image
+          {{ t('pages.user.greeting') }}
           <span class="regular"> {{ t('pages.user.markDay') }}</span>
         </div>
         <img src="@/assets/assets-tencent-logo.png" class="logo" />
@@ -28,7 +28,12 @@
             <p>{{ t('pages.user.contentList') }}</p>
           </t-tab-panel>
           <t-tab-panel value="second" :label="t('pages.user.contentList')">
-            <t-card :bordered="false" class="card-padding-no" :title="t('pages.user.visitData')" describe="（次）">
+            <t-card
+              :bordered="false"
+              class="card-padding-no"
+              :title="t('pages.user.visitData')"
+              :describe="t('pages.user.unit')"
+            >
               <template #actions>
                 <t-date-range-picker
                   class="card-date-picker-container"
@@ -51,7 +56,7 @@
     <t-col :flex="1">
       <t-card class="user-intro" :bordered="false">
         <t-avatar size="80px">T</t-avatar>
-        <div class="name">My Account</div>
+        <div class="name">{{ t('pages.user.account') }}</div>
         <div class="position">{{ t('pages.user.personalInfo.position') }}</div>
       </t-card>
 

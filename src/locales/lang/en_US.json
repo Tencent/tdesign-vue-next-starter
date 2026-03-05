@@ -1,5 +1,11 @@
 {
   "lang": "English",
+  "common": {
+    "appName": "TDesign Starter",
+    "copyright": "Copyright @ 2021-2025 Tencent. All Rights Reserved",
+    "conjunction": "and",
+    "admin": "admin"
+  },
   "components": {
     "isSetup": {
       "on": "Enabled",
@@ -65,6 +71,9 @@
       "refresh": "refresh"
     },
     "searchPlaceholder": "Enter search content",
+    "search": {
+      "placeholder": "Enter search content"
+    },
     "setting": {
       "title": "Setting",
       "theme": {
@@ -180,6 +189,22 @@
         "count": "Count",
         "operation": "Operation"
       },
+      "saleTend": {
+        "item1": "State Grid Corporation of China",
+        "item2": "Shenzhen Gas Group Co., Ltd",
+        "item3": "State Administration of Tobacco Monopoly",
+        "item4": "China Telecom Group Co., Ltd",
+        "item5": "China Mobile Communications Group Co., Ltd",
+        "item6": "Xinyu City Office Supplies Procurement Project"
+      },
+      "buyTend": {
+        "item1": "Tencent Technology (Shenzhen) Co., Ltd",
+        "item2": "Darunfa Co., Ltd",
+        "item3": "Sichuan Haidilao Co., Ltd",
+        "item4": "Sony (China) Co., Ltd",
+        "item5": "Panasonic Electronics (China) Co., Ltd",
+        "item6": "Xinyu City Office Supplies Procurement Project"
+      },
       "chart": {
         "week1": "MON",
         "week2": "TUE",
@@ -242,6 +267,13 @@
       "baseInfo": {
         "title": "Base Info"
       },
+      "sampleData": {
+        "contractName": "Office Supplies Procurement Project",
+        "status": "In Progress",
+        "company": "Tencent Technology (Shenzhen) Co., Ltd",
+        "employee": "Osun",
+        "fileName": "Office Supplies Procurement Contract.pdf"
+      },
       "changelog": {
         "title": "Changelog",
         "step1": {
@@ -288,6 +320,7 @@
       },
       "detail": {
         "title": "Product Procurement Detail",
+        "budgetExceeded": "Budget Exceeded",
         "form": {
           "applyNo": "Apply no",
           "product": "Name",
@@ -298,6 +331,24 @@
           "operation": "Operation",
           "manage": "manage",
           "delete": "delete"
+        }
+      },
+      "products": {
+        "product1": {
+          "name": "MacBook Pro 2021",
+          "company": "Apple Inc.",
+          "size": "13.3 inches",
+          "cpu": "Apple M1",
+          "memory": "RAM 16GB",
+          "info": "Up to 16GB memory · Up to 2TB storage · Battery life up to 18 hours"
+        },
+        "product2": {
+          "name": "Surface Laptop Go",
+          "company": "Microsoft Corporation",
+          "size": "12.4 inches",
+          "cpu": "Core i7",
+          "memory": "RAM 16GB",
+          "info": "Surface regular use, up to 13 hours of battery life, work anytime"
         }
       }
     },
@@ -362,6 +413,15 @@
       "deleteConfirm": "Delete notification",
       "deleteTip": "Confirm delete notification: {content}?",
       "empty": "Empty"
+    },
+    "notification": {
+      "contract": "Contract Updates",
+      "invoice": "Invoice Updates",
+      "meeting": "Meeting Notification",
+      "msg1": "Tencent Building First Floor Renovation Project has passed audit!",
+      "msg2": "Third Quarter Raw Material Procurement Project invoicing successful!",
+      "msg3": "Meeting 【State Grid Offline Signing】at 2021-01-01 10:00 is about to start, please arrive at Conference Room 1 10 minutes early for check-in!",
+      "msg4": "First Quarter Raw Material Procurement Project invoicing successful!"
     },
     "formBase": {
       "title": "Contract Info",
@@ -506,6 +566,8 @@
       "pay": "pay",
       "receive": "received",
       "placeholder": "please enter to search",
+      "deleteConfirm": "Confirm delete selected contracts?",
+      "deleteTip": "After deletion, all contract information of {name} will be cleared and cannot be recovered",
       "contractStatusEnum": {
         "fail": "fail",
         "audit": "audit",
@@ -529,6 +591,17 @@
       "productStatusEnum": {
         "off": "off",
         "on": "on"
+      },
+      "dialogForm": {
+        "productNamePlaceholder": "Please enter product name",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "typeGateway": "Gateway",
+        "typeAI": "Artificial Intelligence",
+        "typeCVM": "CVM",
+        "validation": {
+          "productName": "Please enter product name"
+        }
       }
     },
     "listFilter": {},
@@ -577,7 +650,32 @@
         "password": "password is required",
         "verification": "verification code is require"
       },
-      "sendVerification": "send"
+      "sendVerification": "send",
+      "register": {
+        "phonePlaceholder": "Please enter your phone number",
+        "emailPlaceholder": "Please enter your email",
+        "passwordPlaceholder": "Please enter your password",
+        "verifyCodePlaceholder": "Please enter verification code",
+        "sendVerifyCode": "Send verification code",
+        "resendCountdown": "Resend in {count} seconds",
+        "agreeTerms": "I have read and agree to",
+        "serviceTerms": "TDesign Service Terms",
+        "privacyStatement": "TDesign Privacy Statement",
+        "registerBtn": "Register",
+        "useEmailRegister": "Register with email",
+        "usePhoneRegister": "Register with phone",
+        "validation": {
+          "phone": "Phone number is required",
+          "email": "Email is required",
+          "emailFormat": "Please enter a valid email",
+          "password": "Password is required",
+          "verifyCode": "Verification code is required",
+          "agreeTerms": "You must agree to the service terms and privacy statement"
+        },
+        "messages": {
+          "registerSuccess": "Registration successful"
+        }
+      }
     },
     "result": {
       "403": {
@@ -624,6 +722,10 @@
     },
     "user": {
       "markDay": "Good afternoon, today marks your 100th day at Tencent",
+      "greeting": "Hi, Image",
+      "unit": "(times)",
+      "account": "My Account",
+      "organization": "Tencent / Tencent Company / Business Group / Product Department / Operations Center / Merchant Services Group",
       "personalInfo": {
         "title": "Personal Info",
         "position": "Employee of the Hong Kong and Macau Business Expansion team",
@@ -641,8 +743,8 @@
         "tencentGroup": "Tencent Group",
         "seniorDesigner": "Senior UI Designer"
       },
-      "contentList": "Content List",
       "visitData": "Visit Data",
+      "contentList": "Content List",
       "teamMember": "Team Member",
       "serviceProduction": "Service Product"
     }

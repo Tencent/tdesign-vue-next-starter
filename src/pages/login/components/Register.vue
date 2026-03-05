@@ -10,7 +10,12 @@
   >
     <template v-if="type === 'phone'">
       <t-form-item name="phone">
-        <t-input v-model="formData.phone" :maxlength="11" size="large" placeholder="请输入您的手机号">
+        <t-input
+          v-model="formData.phone"
+          :maxlength="11"
+          size="large"
+          :placeholder="t('pages.login.register.phonePlaceholder')"
+        >
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -20,7 +25,12 @@
 
     <template v-if="type === 'email'">
       <t-form-item name="email">
-        <t-input v-model="formData.email" type="text" size="large" placeholder="请输入您的邮箱">
+        <t-input
+          v-model="formData.email"
+          type="text"
+          size="large"
+          :placeholder="t('pages.login.register.emailPlaceholder')"
+        >
           <template #prefix-icon>
             <t-icon name="mail" />
           </template>
@@ -34,7 +44,7 @@
         size="large"
         :type="showPsw ? 'text' : 'password'"
         clearable
-        placeholder="请输入登录密码"
+        :placeholder="t('pages.login.register.passwordPlaceholder')"
       >
         <template #prefix-icon>
           <t-icon name="lock-on" />
@@ -47,37 +57,50 @@
 
     <template v-if="type === 'phone'">
       <t-form-item class="verification-code" name="verifyCode">
-        <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
+        <t-input
+          v-model="formData.verifyCode"
+          size="large"
+          :placeholder="t('pages.login.register.verifyCodePlaceholder')"
+        />
         <t-button variant="outline" :disabled="countDown > 0" @click="handleCounter">
-          {{ countDown === 0 ? '发送验证码' : `${countDown}秒后可重发` }}
+          {{
+            countDown === 0
+              ? t('pages.login.register.sendVerifyCode')
+              : t('pages.login.register.resendCountdown', { count: countDown })
+          }}
         </t-button>
       </t-form-item>
     </template>
 
     <t-form-item class="check-container" name="checked">
-      <t-checkbox v-model="formData.checked">我已阅读并同意 </t-checkbox> <span>TDesign服务协议</span> 和
-      <span>TDesign 隐私声明</span>
+      <t-checkbox v-model="formData.checked">{{ t('pages.login.register.agreeTerms') }} </t-checkbox>
+      <span>{{ t('pages.login.register.serviceTerms') }}</span>
+      {{ t('common.conjunction') }}
+      <span>{{ t('pages.login.register.privacyStatement') }}</span>
     </t-form-item>
 
     <t-form-item>
-      <t-button block size="large" type="submit"> 注册 </t-button>
+      <t-button block size="large" type="submit"> {{ t('pages.login.register.registerBtn') }} </t-button>
     </t-form-item>
 
     <div class="switch-container">
-      <span class="tip" @click="switchType(type === 'phone' ? 'email' : 'phone')">{{
-        type === 'phone' ? '使用邮箱注册' : '使用手机号注册'
-      }}</span>
+      <span class="tip" @click="switchType(type === 'phone' ? 'email' : 'phone')">
+        {{ type === 'phone' ? t('pages.login.register.useEmailRegister') : t('pages.login.register.usePhoneRegister') }}
+      </span>
     </div>
   </t-form>
 </template>
 <script setup lang="ts">
 import type { FormRule, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 import { useCounter } from '@/hooks';
 
 const emit = defineEmits(['register-success']);
+
+const { t } = useI18n();
 
 const INITIAL_DATA = {
   phone: '',
@@ -87,15 +110,15 @@ const INITIAL_DATA = {
   checked: false,
 };
 
-const FORM_RULES: Record<string, FormRule[]> = {
-  phone: [{ required: true, message: '手机号必填', type: 'error' }],
+const FORM_RULES = computed<Record<string, FormRule[]>>(() => ({
+  phone: [{ required: true, message: t('pages.login.register.validation.phone'), type: 'error' }],
   email: [
-    { required: true, message: '邮箱必填', type: 'error' },
-    { email: true, message: '请输入正确的邮箱', type: 'warning' },
+    { required: true, message: t('pages.login.register.validation.email'), type: 'error' },
+    { email: true, message: t('pages.login.register.validation.emailFormat'), type: 'warning' },
   ],
-  password: [{ required: true, message: '密码必填', type: 'error' }],
-  verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
-};
+  password: [{ required: true, message: t('pages.login.register.validation.password'), type: 'error' }],
+  verifyCode: [{ required: true, message: t('pages.login.register.validation.verifyCode'), type: 'error' }],
+}));
 
 const type = ref('phone');
 
@@ -109,10 +132,10 @@ const [countDown, handleCounter] = useCounter();
 const onSubmit = (ctx: SubmitContext) => {
   if (ctx.validateResult === true) {
     if (!formData.value.checked) {
-      MessagePlugin.error('请同意TDesign服务协议和TDesign 隐私声明');
+      MessagePlugin.error(t('pages.login.register.validation.agreeTerms'));
       return;
     }
-    MessagePlugin.success('注册成功');
+    MessagePlugin.success(t('pages.login.register.messages.registerSuccess'));
     emit('register-success');
   }
 };

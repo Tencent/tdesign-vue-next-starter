@@ -1,5 +1,11 @@
 {
   "lang": "简体中文",
+  "common": {
+    "appName": "TDesign Starter",
+    "copyright": "Copyright @ 2021-2025 Tencent. All Rights Reserved",
+    "conjunction": "和",
+    "admin": "admin"
+  },
   "components": {
     "isSetup": {
       "on": "已启用",
@@ -59,6 +65,9 @@
       "viewAll": "查看全部"
     },
     "searchPlaceholder": "请输入搜索内容",
+    "search": {
+      "placeholder": "输入要搜索内容"
+    },
     "tagTabs": {
       "closeOther": "关闭其他",
       "closeLeft": "关闭左侧",
@@ -180,6 +189,22 @@
         "count": "订单量",
         "operation": "操作"
       },
+      "saleTend": {
+        "item1": "国家电网有限公司",
+        "item2": "深圳燃气集团股份有限公司",
+        "item3": "国家烟草专卖局",
+        "item4": "中国电信集团有限公司",
+        "item5": "中国移动通信集团有限公司",
+        "item6": "新余市办公用户采购项目"
+      },
+      "buyTend": {
+        "item1": "腾讯科技（深圳）有限公司",
+        "item2": "大润发有限公司",
+        "item3": "四川海底捞股份有限公司",
+        "item4": "索尼（中国）有限公司",
+        "item5": "松下电器（中国）有限公司",
+        "item6": "新余市办公用户采购项目"
+      },
       "chart": {
         "week1": "周一",
         "week2": "周二",
@@ -242,6 +267,13 @@
       "baseInfo": {
         "title": "基本信息"
       },
+      "sampleData": {
+        "contractName": "总部办公用品采购项目",
+        "status": "履行中",
+        "company": "腾讯科技（深圳）有限公司",
+        "employee": "欧尚",
+        "fileName": "总部办公用品采购项目合同.pdf"
+      },
       "changelog": {
         "title": "变更记录",
         "step1": {
@@ -288,6 +320,7 @@
       },
       "detail": {
         "title": "产品采购明细",
+        "budgetExceeded": "超预算",
         "form": {
           "applyNo": "申请号",
           "product": "产品名称",
@@ -298,6 +331,24 @@
           "createTime": "创建时间",
           "manage": "管理",
           "delete": "删除"
+        }
+      },
+      "products": {
+        "product1": {
+          "name": "MacBook Pro 2021",
+          "company": "苹果公司（Apple Inc. ）",
+          "size": "13.3 英寸",
+          "cpu": "Apple M1",
+          "memory": "RAM 16GB",
+          "info": "最高可选配 16GB 内存 · 最高可选配 2TB 存储设备 电池续航最长达 18 小时"
+        },
+        "product2": {
+          "name": "Surface Laptop Go",
+          "company": "微软（Microsoft Corporation）",
+          "size": "12.4 英寸",
+          "cpu": "Core i7",
+          "memory": "RAM 16GB",
+          "info": "常规使用 Surface，续航时间最长可达13小时 随时伴您工作"
         }
       }
     },
@@ -362,6 +413,15 @@
       "deleteConfirm": "删除通知",
       "deleteTip": "确认删除通知：{content}吗？",
       "empty": "暂无通知"
+    },
+    "notification": {
+      "contract": "合同动态",
+      "invoice": "票务动态",
+      "meeting": "会议通知",
+      "msg1": "腾讯大厦一楼改造施工项目 已通过审核！",
+      "msg2": "三季度生产原材料采购项目 开票成功！",
+      "msg3": "2021-01-01 10:00的【国家电网线下签约】会议即将开始，请提前10分钟前往 会议室1 进行签到！",
+      "msg4": "一季度生产原材料采购项目 开票成功！"
     },
     "formBase": {
       "title": "合同信息",
@@ -508,6 +568,8 @@
       "pay": "付款",
       "receive": "收款",
       "placeholder": "请输入内容搜索",
+      "deleteConfirm": "确认删除当前所选合同？",
+      "deleteTip": "删除后，{name}的所有合同信息将被清空，且无法恢复",
       "contractStatusEnum": {
         "fail": "审核失败",
         "audit": "待审核",
@@ -531,6 +593,17 @@
       "productStatusEnum": {
         "off": "停用",
         "on": "启用"
+      },
+      "dialogForm": {
+        "productNamePlaceholder": "请输入产品名称",
+        "cancel": "取消",
+        "confirm": "确定",
+        "typeGateway": "网关",
+        "typeAI": "人工智能",
+        "typeCVM": "CVM",
+        "validation": {
+          "productName": "请输入产品名称"
+        }
       }
     },
     "listFilter": {},
@@ -579,7 +652,32 @@
         "password": "密码必填",
         "verification": "验证码必填"
       },
-      "sendVerification": "发送验证码"
+      "sendVerification": "发送验证码",
+      "register": {
+        "phonePlaceholder": "请输入您的手机号",
+        "emailPlaceholder": "请输入您的邮箱",
+        "passwordPlaceholder": "请输入登录密码",
+        "verifyCodePlaceholder": "请输入验证码",
+        "sendVerifyCode": "发送验证码",
+        "resendCountdown": "{count}秒后可重发",
+        "agreeTerms": "我已阅读并同意",
+        "serviceTerms": "TDesign服务协议",
+        "privacyStatement": "TDesign 隐私声明",
+        "registerBtn": "注册",
+        "useEmailRegister": "使用邮箱注册",
+        "usePhoneRegister": "使用手机号注册",
+        "validation": {
+          "phone": "手机号必填",
+          "email": "邮箱必填",
+          "emailFormat": "请输入正确的邮箱",
+          "password": "密码必填",
+          "verifyCode": "验证码必填",
+          "agreeTerms": "请同意TDesign服务协议和TDesign 隐私声明"
+        },
+        "messages": {
+          "registerSuccess": "注册成功"
+        }
+      }
     },
     "result": {
       "403": {
@@ -626,6 +724,10 @@
     },
     "user": {
       "markDay": "下午好，今天是你加入鹅厂的第 100 天",
+      "greeting": "Hi，Image",
+      "unit": "（次）",
+      "account": "My Account",
+      "organization": "腾讯/腾讯公司/某事业群/某产品部/某运营中心/商户服务组",
       "personalInfo": {
         "title": "个人信息",
         "position": "港澳业务拓展组员工 直客销售 ",

@@ -89,7 +89,7 @@
               variant="light"
               size="medium"
               style="margin-left: var(--td-comp-margin-s)"
-              >超预算</t-tag
+              >{{ t('pages.detailCard.detail.budgetExceeded') }}</t-tag
             >
           </span>
         </template>

@@ -26,8 +26,8 @@
           <t-textarea v-model="textareaValue" :style="{ width: '480px' }" name="description" />
         </t-form-item>
         <t-form-item style="float: right">
-          <t-button variant="outline" @click="onClickCloseBtn">取消</t-button>
-          <t-button theme="primary" type="submit">确定</t-button>
+          <t-button variant="outline" @click="onClickCloseBtn">{{ t('pages.listCard.dialogForm.cancel') }}</t-button>
+          <t-button theme="primary" type="submit">{{ t('pages.listCard.dialogForm.confirm') }}</t-button>
         </t-form-item>
       </t-form>
     </template>
@@ -73,9 +73,9 @@ const INITIAL_DATA: FormData = {
 };
 
 const SELECT_OPTIONS = [
-  { label: '网关', value: '1' },
-  { label: '人工智能', value: '2' },
-  { label: 'CVM', value: '3' },
+  { label: t('pages.listCard.dialogForm.typeGateway'), value: '1' },
+  { label: t('pages.listCard.dialogForm.typeAI'), value: '2' },
+  { label: t('pages.listCard.dialogForm.typeCVM'), value: '3' },
 ];
 
 const formVisible = ref(false);
@@ -119,6 +119,6 @@ watch(
 );
 
 const rules: FormRules<FormData> = {
-  name: [{ required: true, message: '请输入产品名称', type: 'error' }],
+  name: [{ required: true, message: t('pages.listCard.dialogForm.validation.productName'), type: 'error' }],
 };
 </script>

@@ -44,12 +44,12 @@ defineOptions({
 const BASE_INFO_DATA = [
   {
     name: t('constants.contract.name'),
-    value: '总部办公用品采购项目',
+    value: t('pages.detailBase.sampleData.contractName'),
     type: null,
   },
   {
     name: t('constants.contract.status'),
-    value: '履行中',
+    value: t('pages.detailBase.sampleData.status'),
     type: {
       key: 'contractStatus',
       value: 'inProgress',
@@ -77,12 +77,12 @@ const BASE_INFO_DATA = [
   },
   {
     name: t('constants.contract.company'),
-    value: '腾讯科技（深圳）有限公司',
+    value: t('pages.detailBase.sampleData.company'),
     type: null,
   },
   {
     name: t('constants.contract.employee'),
-    value: '欧尚',
+    value: t('pages.detailBase.sampleData.employee'),
     type: null,
   },
   {
@@ -102,7 +102,7 @@ const BASE_INFO_DATA = [
   },
   {
     name: t('constants.contract.attachment'),
-    value: '总部办公用品采购项目合同.pdf',
+    value: t('pages.detailBase.sampleData.fileName'),
     type: {
       key: 'contractAnnex',
       value: 'pdf',

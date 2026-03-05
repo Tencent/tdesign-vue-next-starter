@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 
+import { t } from '@/locales';
 import { usePermissionStore } from '@/store';
 import type { UserInfo } from '@/types/interface';
 
@@ -27,13 +28,13 @@ export const useUserStore = defineStore('user', {
         // if (account !== 'td') {
         //   return {
         //     code: 401,
-        //     message: '账号不存在',
+        //     message: t('pages.login.validation.accountNotFound'),
         //   };
         // }
         // if (['main_', 'dev_'].indexOf(password) === -1) {
         //   return {
         //     code: 401,
-        //     message: '密码错误',
+        //     message: t('pages.login.validation.passwordError'),
         //   };
         // }
         // const token = {
@@ -42,7 +43,7 @@ export const useUserStore = defineStore('user', {
         // }[password];
         return {
           code: 200,
-          message: '登录成功',
+          message: t('pages.login.loginSuccess'),
           data: 'main_token',
         };
       };
