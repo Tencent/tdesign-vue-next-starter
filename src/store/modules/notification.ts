@@ -42,7 +42,7 @@ const getMsgData = () => [
   },
 ];
 
-type MsgDataType = typeof getMsgData;
+type MsgDataType = ReturnType<typeof getMsgData>;
 
 export const useNotificationStore = defineStore('notification', {
   state: () => ({
