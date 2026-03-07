@@ -60,5 +60,5 @@ export const useNotificationStore = defineStore('notification', {
       this.msgData = getMsgData();
     },
   },
-  persist: true,
+  persist: false,
 });
