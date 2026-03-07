@@ -104,7 +104,7 @@ defineOptions({
 
 const store = useSettingStore();
 
-const COLUMNS: PrimaryTableCol<TableRowData>[] = [
+const COLUMNS = computed<PrimaryTableCol<TableRowData>[]>(() => [
   { colKey: 'row-select', type: 'multiple', width: 64, fixed: 'left' },
   {
     title: t('pages.listBase.contractName'),
@@ -145,7 +145,7 @@ const COLUMNS: PrimaryTableCol<TableRowData>[] = [
     width: 160,
     colKey: 'op',
   },
-];
+]);
 
 const data = ref([]);
 const pagination = ref({

@@ -83,7 +83,7 @@
 <script setup lang="ts">
 import type { FormInstanceFunctions, FormRule, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import { useCounter } from '@/hooks';
@@ -100,12 +100,12 @@ const INITIAL_DATA = {
   checked: false,
 };
 
-const FORM_RULES: Record<string, FormRule[]> = {
+const FORM_RULES = computed<Record<string, FormRule[]>>(() => ({
   phone: [{ required: true, message: t('pages.login.required.phone'), type: 'error' }],
   account: [{ required: true, message: t('pages.login.required.account'), type: 'error' }],
   password: [{ required: true, message: t('pages.login.required.password'), type: 'error' }],
   verifyCode: [{ required: true, message: t('pages.login.required.verification'), type: 'error' }],
-};
+}));
 
 const type = ref('password');
 

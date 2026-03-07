@@ -37,7 +37,7 @@
 import type { FormRules, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import { t } from '@/locales';
 
@@ -72,11 +72,11 @@ const INITIAL_DATA: FormData = {
   amount: 0,
 };
 
-const SELECT_OPTIONS = [
+const SELECT_OPTIONS = computed(() => [
   { label: t('pages.listCard.dialogForm.typeGateway'), value: '1' },
   { label: t('pages.listCard.dialogForm.typeAI'), value: '2' },
   { label: t('pages.listCard.dialogForm.typeCVM'), value: '3' },
-];
+]);
 
 const formVisible = ref(false);
 const formData = ref({ ...INITIAL_DATA });
@@ -118,7 +118,7 @@ watch(
   },
 );
 
-const rules: FormRules<FormData> = {
+const rules = computed<FormRules<FormData>>(() => ({
   name: [{ required: true, message: t('pages.listCard.dialogForm.validation.productName'), type: 'error' }],
-};
+}));
 </script>

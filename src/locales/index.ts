@@ -1,11 +1,19 @@
 import { useLocalStorage, usePreferredLanguages } from '@vueuse/core';
 import type { DropdownOption } from 'tdesign-vue-next';
+import en_US from 'tdesign-vue-next/es/locale/en_US';
+import zh_CN from 'tdesign-vue-next/es/locale/zh_CN';
 import { computed } from 'vue';
 import type { I18nOptions } from 'vue-i18n';
 import { createI18n } from 'vue-i18n';
 
 // 导入语言文件 (JSON 方式)
 const langModules = import.meta.glob<{ default: Record<string, unknown> }>('./lang/*.json', { eager: true });
+
+// TDesign 组件 locale 映射
+const TDESIGN_LOCALE_MAP: Record<string, Record<string, unknown>> = {
+  zh_CN,
+  en_US,
+};
 
 export const localeConfigKey = 'tdesign-starter-locale';
 
@@ -23,7 +31,11 @@ const parseLangModules = () => {
     if (match) {
       const code = match[1];
       langCode.push(code);
-      messages[code] = module.default;
+      // 合并自定义语言包和 TDesign 组件 locale
+      messages[code] = {
+        ...module.default,
+        componentsLocale: TDESIGN_LOCALE_MAP[code],
+      };
       langList.push({
         content: module.default.lang as string,
         value: code,

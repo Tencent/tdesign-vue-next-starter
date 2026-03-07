@@ -35,13 +35,15 @@
   </div>
 </template>
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import { t } from '@/locales';
 
 defineOptions({
   name: 'DetailBase',
 });
 
-const BASE_INFO_DATA = [
+const BASE_INFO_DATA = computed(() => [
   {
     name: t('constants.contract.name'),
     value: t('pages.detailBase.sampleData.contractName'),
@@ -113,7 +115,7 @@ const BASE_INFO_DATA = [
     value: '2020-12-22 10:00:00',
     type: null,
   },
-];
+]);
 </script>
 <style lang="less" scoped>
 @import './index.less';

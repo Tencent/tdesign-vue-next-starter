@@ -124,11 +124,11 @@ const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
 
-const MODE_OPTIONS = [
+const MODE_OPTIONS = computed(() => [
   { type: 'light', text: t('layout.setting.theme.options.light') },
   { type: 'dark', text: t('layout.setting.theme.options.dark') },
   { type: 'auto', text: t('layout.setting.theme.options.auto') },
-];
+]);
 
 const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;

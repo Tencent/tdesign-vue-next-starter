@@ -114,7 +114,7 @@
       </t-table>
       <t-dialog
         v-model:visible="confirmVisible"
-        :header="t('pages.listCard.deleteConfirm')"
+        :header="t('pages.listBase.deleteConfirm')"
         :body="confirmBody"
         :on-cancel="onCancel"
         @confirm="onConfirmDelete"
@@ -242,7 +242,7 @@ const deleteIdx = ref(-1);
 const confirmBody = computed(() => {
   if (deleteIdx.value > -1) {
     const { name } = data.value[deleteIdx.value];
-    return t('pages.listCard.deleteTip', { name });
+    return t('pages.listBase.deleteTip', { name });
   }
   return '';
 });

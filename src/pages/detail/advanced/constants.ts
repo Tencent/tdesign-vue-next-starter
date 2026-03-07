@@ -1,6 +1,6 @@
 import { t } from '@/locales';
 
-export const BASE_INFO_DATA = [
+export const getBaseInfoData = () => [
   {
     name: t('constants.contract.name'),
     value: t('pages.detailBase.sampleData.contractName'),
@@ -79,7 +79,7 @@ export const BASE_INFO_DATA = [
   },
 ];
 
-export const PRODUCT_LIST = [
+export const getProductList = () => [
   {
     name: t('pages.detailCard.products.product1.name'),
     subtitle: t('pages.detailCard.products.product1.company'),

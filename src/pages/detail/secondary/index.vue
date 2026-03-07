@@ -44,7 +44,7 @@
     <t-dialog
       v-model:visible="visible"
       :header="t('pages.detailSecondary.deleteConfirm')"
-      :body="t('pages.detailSecondary.deleteTip', { content: selectedItem && selectedItem.content })"
+      :body="t('pages.detailSecondary.deleteTip', { content: selectedItem?.content ?? '' })"
       :on-confirm="deleteMsg"
     />
   </div>

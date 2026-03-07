@@ -137,11 +137,14 @@ import { getPurchaseList } from '@/api/detail';
 import { t } from '@/locales';
 
 import Product from './components/Product.vue';
-import { BASE_INFO_DATA, PRODUCT_LIST } from './constants';
+import { getBaseInfoData, getProductList } from './constants';
 
 defineOptions({
   name: 'DetailAdvanced',
 });
+
+const BASE_INFO_DATA = computed(() => getBaseInfoData());
+const PRODUCT_LIST = computed(() => getProductList());
 
 const columns = [
   {
