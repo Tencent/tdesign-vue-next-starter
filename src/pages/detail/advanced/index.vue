@@ -131,7 +131,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 import { getPurchaseList } from '@/api/detail';
 import { t } from '@/locales';
