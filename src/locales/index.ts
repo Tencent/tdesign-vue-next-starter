@@ -40,7 +40,7 @@ export { langCode };
 
 export const i18n = createI18n({
   legacy: false,
-  locale: useLocalStorage(localeConfigKey, 'zh_CN').value || languages.value[0] || 'zh_CN',
+  locale: (useLocalStorage(localeConfigKey, 'zh_CN').value || languages.value[0] || 'zh_CN').replace(/-/g, '_'),
   fallbackLocale: 'zh_CN',
   messages,
   globalInjection: true,
