@@ -75,6 +75,7 @@ import { computed, nextTick, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import { prefix } from '@/config/global';
+import type { LocalizedTitle } from '@/locales';
 import { t } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 import { useSettingStore, useTabsRouterStore } from '@/store';
@@ -108,9 +109,9 @@ const handleRemove = (options: TTabRemoveOptions) => {
   if ((options.value as string) === route.path) router.push({ path: nextRouter.path, query: nextRouter.query });
 };
 
-const renderTitle = (title: string | Record<string, string>) => {
-  if (typeof title === 'string') return title;
-  return title[locale.value];
+const renderTitle = (title?: LocalizedTitle) => {
+  if (!title) return '';
+  return title[locale.value as keyof LocalizedTitle] || '';
 };
 const handleRefresh = (route: TRouterInfo, routeIdx: number) => {
   tabsRouterStore.toggleTabRouterAlive(routeIdx);

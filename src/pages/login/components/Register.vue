@@ -94,13 +94,11 @@
 import type { FormRule, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 
 import { useCounter } from '@/hooks';
+import { t } from '@/locales';
 
 const emit = defineEmits(['register-success']);
-
-const { t } = useI18n();
 
 const INITIAL_DATA = {
   phone: '',
