@@ -27,7 +27,7 @@
       v-model="searchData"
       class="header-search"
       :class="[{ 'width-zero': !isSearchFocus }]"
-      placeholder="输入要搜索内容"
+      :placeholder="t('layout.search.placeholder')"
       :autofocus="isSearchFocus"
       @blur="changeSearchFocus(false)"
     >

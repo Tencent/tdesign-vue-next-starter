@@ -77,7 +77,7 @@
 
     <t-dialog
       v-model:visible="confirmVisible"
-      header="确认删除当前所选合同？"
+      :header="t('pages.listBase.deleteConfirm')"
       :body="confirmBody"
       :on-cancel="onCancel"
       @confirm="onConfirmDelete"
@@ -104,7 +104,7 @@ defineOptions({
 
 const store = useSettingStore();
 
-const COLUMNS: PrimaryTableCol<TableRowData>[] = [
+const COLUMNS = computed<PrimaryTableCol<TableRowData>[]>(() => [
   { colKey: 'row-select', type: 'multiple', width: 64, fixed: 'left' },
   {
     title: t('pages.listBase.contractName'),
@@ -145,7 +145,7 @@ const COLUMNS: PrimaryTableCol<TableRowData>[] = [
     width: 160,
     colKey: 'op',
   },
-];
+]);
 
 const data = ref([]);
 const pagination = ref({
@@ -177,7 +177,7 @@ const deleteIdx = ref(-1);
 const confirmBody = computed(() => {
   if (deleteIdx.value > -1) {
     const { name } = data.value[deleteIdx.value];
-    return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
+    return t('pages.listBase.deleteTip', { name });
   }
   return '';
 });
@@ -205,7 +205,7 @@ const onConfirmDelete = () => {
     selectedRowKeys.value.splice(selectedIdx, 1);
   }
   confirmVisible.value = false;
-  MessagePlugin.success('删除成功');
+  MessagePlugin.success(t('components.deleteSuccess'));
   resetIdx();
 };
 

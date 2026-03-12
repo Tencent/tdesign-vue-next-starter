@@ -3,7 +3,7 @@
     <t-col :flex="3">
       <div class="user-left-greeting">
         <div>
-          Hi，Image
+          {{ t('pages.user.greeting') }}
           <span class="regular"> {{ t('pages.user.markDay') }}</span>
         </div>
         <img src="@/assets/assets-tencent-logo.png" class="logo" />
@@ -16,7 +16,7 @@
           </t-button>
         </template>
         <t-descriptions :column="4" item-layout="vertical">
-          <t-descriptions-item v-for="(item, index) in USER_INFO_LIST" :key="index" :label="t(item.title)">
+          <t-descriptions-item v-for="(item, index) in userInfoList" :key="index" :label="t(item.title)">
             {{ item.content }}
           </t-descriptions-item>
         </t-descriptions>
@@ -28,7 +28,12 @@
             <p>{{ t('pages.user.contentList') }}</p>
           </t-tab-panel>
           <t-tab-panel value="second" :label="t('pages.user.contentList')">
-            <t-card :bordered="false" class="card-padding-no" :title="t('pages.user.visitData')" describe="（次）">
+            <t-card
+              :bordered="false"
+              class="card-padding-no"
+              :title="t('pages.user.visitData')"
+              :describe="t('pages.user.unit')"
+            >
               <template #actions>
                 <t-date-range-picker
                   class="card-date-picker-container"
@@ -51,7 +56,7 @@
     <t-col :flex="1">
       <t-card class="user-intro" :bordered="false">
         <t-avatar size="80px">T</t-avatar>
-        <div class="name">My Account</div>
+        <div class="name">{{ t('pages.user.account') }}</div>
         <div class="position">{{ t('pages.user.personalInfo.position') }}</div>
       </t-card>
 
@@ -62,7 +67,7 @@
           </t-button>
         </template>
         <t-list :split="false">
-          <t-list-item v-for="(item, index) in TEAM_MEMBERS" :key="index">
+          <t-list-item v-for="(item, index) in teamMembers" :key="index">
             <t-list-item-meta :image="item.avatar" :title="item.title" :description="item.description" />
           </t-list-item>
         </t-list>
@@ -100,7 +105,7 @@ import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';
 
-import { PRODUCT_LIST, TEAM_MEMBERS, USER_INFO_LIST } from './constants';
+import { getTeamMembers, getUserInfoList, PRODUCT_LIST } from './constants';
 import { getFolderLineDataSet } from './index';
 
 defineOptions({
@@ -169,6 +174,9 @@ const getIcon = (type: string) => {
       return ProductAIcon;
   }
 };
+
+const userInfoList = computed(() => getUserInfoList());
+const teamMembers = computed(() => getTeamMembers());
 
 watch(
   () => store.brandTheme,

@@ -5,7 +5,7 @@
     </t-button>
     <t-dropdown-menu>
       <t-dropdown-item
-        v-for="(lang, index) in langList"
+        v-for="(lang, index) in languageList"
         :key="index"
         :value="lang.value"
         @click="(options) => changeLang(options.value as string)"
@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { TranslateIcon } from 'tdesign-icons-vue-next';
 
-import { langList } from '@/locales';
+import { languageList } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 
 const { changeLocale } = useLocale();

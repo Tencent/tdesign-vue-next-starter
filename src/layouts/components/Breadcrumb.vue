@@ -9,10 +9,16 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
+import type { LocalizedTitle } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 
 const { locale } = useLocale();
 const route = useRoute();
+
+const renderTitle = (title?: LocalizedTitle, fallback?: string) => {
+  if (!title) return fallback || '';
+  return title[locale.value as keyof LocalizedTitle] || fallback || '';
+};
 
 const crumbs = computed(() => {
   const pathArray = route.path.split('/');
@@ -24,14 +30,7 @@ const crumbs = computed(() => {
     if (meta?.hiddenBreadcrumb || Object.values(route.params).includes(path)) {
       return breadcrumbArray;
     }
-    let title = path;
-    if (meta?.title) {
-      if (typeof meta.title === 'string') {
-        title = meta.title;
-      } else {
-        title = meta.title[locale.value];
-      }
-    }
+    const title = renderTitle(meta?.title as LocalizedTitle, path);
     breadcrumbArray.push({
       path,
       to: breadcrumbArray[idx - 1] ? `${breadcrumbArray[idx - 1].to}/${path}` : `/${path}`,

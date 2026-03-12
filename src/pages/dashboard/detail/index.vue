@@ -77,7 +77,7 @@ import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 import { LAST_7_DAYS } from '@/utils/date';
 
-import { PANE_LIST_DATA, PRODUCT_LIST } from './constants';
+import { getPaneListData, getProductList } from './constants';
 import { getFolderLineDataSet, getScatterDataSet } from './index';
 
 defineOptions({
@@ -87,6 +87,9 @@ echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, Scatte
 
 const store = useSettingStore();
 const chartColors = computed(() => store.chartColors);
+
+const PANE_LIST_DATA = computed(() => getPaneListData());
+const PRODUCT_LIST = computed(() => getProductList());
 
 // lineChart logic
 let lineContainer: HTMLElement;

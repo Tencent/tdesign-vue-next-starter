@@ -1,14 +1,14 @@
 import { t } from '@/locales';
 
-export const BASE_INFO_DATA = [
+export const getBaseInfoData = () => [
   {
     name: t('constants.contract.name'),
-    value: '总部办公用品采购项目',
+    value: t('pages.detailBase.sampleData.contractName'),
     type: null,
   },
   {
     name: t('constants.contract.status'),
-    value: '履行中',
+    value: t('pages.detailBase.sampleData.status'),
     type: {
       key: 'contractStatus',
       value: 'inProgress',
@@ -36,12 +36,12 @@ export const BASE_INFO_DATA = [
   },
   {
     name: t('constants.contract.company'),
-    value: '腾讯科技（深圳）有限公司',
+    value: t('pages.detailBase.sampleData.company'),
     type: null,
   },
   {
     name: t('constants.contract.employee'),
-    value: '欧尚',
+    value: t('pages.detailBase.sampleData.employee'),
     type: null,
   },
   {
@@ -61,7 +61,7 @@ export const BASE_INFO_DATA = [
   },
   {
     name: t('constants.contract.attachment'),
-    value: '总部办公用品采购项目合同.pdf',
+    value: t('pages.detailBase.sampleData.fileName'),
     type: {
       key: 'contractAnnex',
       value: 'pdf',
@@ -79,24 +79,24 @@ export const BASE_INFO_DATA = [
   },
 ];
 
-export const PRODUCT_LIST = [
+export const getProductList = () => [
   {
-    name: 'MacBook Pro 2021',
-    subtitle: '苹果公司（Apple Inc. ）',
-    size: '13.3 英寸',
-    cpu: 'Apple M1',
-    memory: 'RAM 16GB',
-    info: '最高可选配 16GB 内存 · 最高可选配 2TB 存储设备 电池续航最长达 18 小时',
+    name: t('pages.detailCard.products.product1.name'),
+    subtitle: t('pages.detailCard.products.product1.company'),
+    size: t('pages.detailCard.products.product1.size'),
+    cpu: t('pages.detailCard.products.product1.cpu'),
+    memory: t('pages.detailCard.products.product1.memory'),
+    info: t('pages.detailCard.products.product1.info'),
     use: 1420,
     stock: 1500,
   },
   {
-    name: 'Surface Laptop Go',
-    subtitle: '微软（Microsoft Corporation）',
-    size: '12.4 英寸',
-    cpu: 'Core i7',
-    memory: 'RAM 16GB',
-    info: '常规使用 Surface，续航时间最长可达13小时 随时伴您工作',
+    name: t('pages.detailCard.products.product2.name'),
+    subtitle: t('pages.detailCard.products.product2.company'),
+    size: t('pages.detailCard.products.product2.size'),
+    cpu: t('pages.detailCard.products.product2.cpu'),
+    memory: t('pages.detailCard.products.product2.memory'),
+    info: t('pages.detailCard.products.product2.info'),
     use: 120,
     stock: 2000,
   },

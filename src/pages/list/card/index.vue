@@ -48,12 +48,12 @@
     </template>
 
     <div v-else-if="dataLoading" class="list-card-loading">
-      <t-loading size="large" text="加载数据中..." />
+      <t-loading size="large" :text="t('pages.listCard.loading')" />
     </div>
 
     <t-dialog
       v-model:visible="confirmVisible"
-      header="确认删除所选产品？"
+      :header="t('pages.listCard.deleteConfirm')"
       :body="confirmBody"
       :on-cancel="onCancel"
       @confirm="onConfirmDelete"
@@ -108,7 +108,7 @@ const fetchData = async () => {
 };
 
 const confirmBody = computed(() =>
-  deleteProduct.value ? `确认删除后${deleteProduct.value.name}的所有产品信息将被清空, 且无法恢复` : '',
+  deleteProduct.value ? t('pages.listCard.deleteTip', { name: deleteProduct.value.name }) : '',
 );
 
 onMounted(() => {
@@ -135,7 +135,7 @@ const onConfirmDelete = () => {
   const { index } = deleteProduct.value;
   productList.value.splice(index - 1, 1);
   confirmVisible.value = false;
-  MessagePlugin.success('删除成功');
+  MessagePlugin.success(t('pages.listCard.deleteSuccess'));
 };
 const onCancel = () => {
   deleteProduct.value = undefined;
