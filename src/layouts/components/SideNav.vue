@@ -23,7 +23,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { difference, remove, union } from 'lodash';
+import difference from 'lodash/difference';
+import remove from 'lodash/remove';
+import union from 'lodash/union';
 import type { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
