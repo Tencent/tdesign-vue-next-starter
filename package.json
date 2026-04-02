@@ -73,7 +73,7 @@
     "vite": "^6.2.2",
     "vite-plugin-mock": "^3.0.1",
     "vite-svg-loader": "^5.1.0",
-    "vue-tsc": "^3.2.5"
+    "vue-tsc": "^3.2.6"
   },
   "config": {
     "commitizen": {
