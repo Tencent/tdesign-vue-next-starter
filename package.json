@@ -34,7 +34,7 @@
     "tdesign-vue-next": "^1.19.1",
     "tvision-color": "^1.6.0",
     "vue": "^3.5.18",
-    "vue-i18n": "^9.9.1",
+    "vue-i18n": "^11.3.2",
     "vue-router": "^4.6.0"
   },
   "devDependencies": {
