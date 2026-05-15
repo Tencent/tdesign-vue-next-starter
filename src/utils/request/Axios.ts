@@ -223,19 +223,19 @@ export class VAxios {
   request<T = any>(config: AxiosRequestConfigRetry, options?: RequestOptions): Promise<T> {
     const { requestOptions } = this.options;
 
-    if (requestOptions.throttle !== undefined && requestOptions.debounce !== undefined) {
+    if (requestOptions?.throttle !== undefined && requestOptions?.debounce !== undefined) {
       throw new Error('throttle and debounce cannot be set at the same time');
     }
 
-    if (requestOptions.throttle && requestOptions.throttle.delay !== 0) {
+    if (requestOptions?.throttle && requestOptions.throttle.delay !== 0) {
       return new Promise((resolve) => {
-        throttle(() => resolve(this.synthesisRequest(config, options)), requestOptions.throttle.delay);
+        throttle(() => resolve(this.synthesisRequest(config, options)), requestOptions.throttle!.delay);
       });
     }
 
-    if (requestOptions.debounce && requestOptions.debounce.delay !== 0) {
+    if (requestOptions?.debounce && requestOptions.debounce.delay !== 0) {
       return new Promise((resolve) => {
-        debounce(() => resolve(this.synthesisRequest(config, options)), requestOptions.debounce.delay);
+        debounce(() => resolve(this.synthesisRequest(config, options)), requestOptions.debounce!.delay);
       });
     }
 

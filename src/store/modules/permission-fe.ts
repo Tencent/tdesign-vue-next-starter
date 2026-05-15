@@ -32,8 +32,8 @@ function filterPermissionsRouters(routes: Array<RouteRecordRaw>, roles: Array<un
 export const usePermissionStore = defineStore('permission', {
   state: () => ({
     whiteListRouters: ['/login'],
-    routers: [],
-    removeRoutes: [],
+    routers: [] as Array<RouteRecordRaw>,
+    removeRoutes: [] as Array<RouteRecordRaw>,
   }),
   actions: {
     async initRoutes(roles: Array<unknown>) {
@@ -53,8 +53,8 @@ export const usePermissionStore = defineStore('permission', {
       this.removeRoutes = removeRoutes;
 
       removeRoutes.forEach((item: RouteRecordRaw) => {
-        if (router.hasRoute(item.name)) {
-          router.removeRoute(item.name);
+        if (router.hasRoute(item.name!)) {
+          router.removeRoute(item.name!);
         }
       });
     },

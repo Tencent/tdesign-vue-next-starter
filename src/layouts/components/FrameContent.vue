@@ -58,12 +58,12 @@ function calcHeight() {
   const { showFooter, isUseTabsRouter, showBreadcrumb } = settingStore;
   const headerHeight = Number.parseFloat(sizeXxxl);
   const navDom = document.querySelector('.t-tabs__nav');
-  const navHeight = isUseTabsRouter ? getOuterHeight(navDom) : 0;
+  const navHeight = isUseTabsRouter ? getOuterHeight(navDom!) : 0;
   const breadcrumbDom = document.querySelector('.t-breadcrumb');
-  const breadcrumbHeight = showBreadcrumb ? getOuterHeight(breadcrumbDom) : 0;
+  const breadcrumbHeight = showBreadcrumb ? getOuterHeight(breadcrumbDom!) : 0;
   const contentPadding = Number.parseFloat(paddingTBXxl) * 2;
   const footerDom = document.querySelector('.t-layout__footer');
-  const footerHeight = showFooter ? getOuterHeight(footerDom) : 0;
+  const footerHeight = showFooter ? getOuterHeight(footerDom!) : 0;
   const top = headerHeight + navHeight + breadcrumbHeight + contentPadding + footerHeight + 2;
   heightRef.value = window.innerHeight - top;
   clientHeight = document.documentElement.clientHeight - top;

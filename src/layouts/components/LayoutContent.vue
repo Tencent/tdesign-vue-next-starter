@@ -91,14 +91,14 @@ const router = useRouter();
 const settingStore = useSettingStore();
 const tabsRouterStore = useTabsRouterStore();
 const tabRouters = computed(() => tabsRouterStore.tabRouters.filter((route) => route.isAlive || route.isHome));
-const activeTabPath = ref('');
+const activeTabPath = ref<string | null>('');
 
 const { locale } = useLocale();
 
 const handleChangeCurrentTab = (path: string) => {
   const { tabRouters } = tabsRouterStore;
-  const route = tabRouters.find((i) => i.path === path);
-  router.push({ path, query: route.query });
+  const foundRoute = tabRouters.find((i) => i.path === path);
+  router.push({ path, query: foundRoute?.query });
 };
 
 const handleRemove = (options: TTabRemoveOptions) => {

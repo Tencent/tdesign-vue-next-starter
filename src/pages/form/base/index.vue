@@ -187,11 +187,11 @@ const onSubmit = (ctx: SubmitContext) => {
   }
 };
 const beforeUpload = (file: UploadFile) => {
-  if (!/\.pdf$/.test(file.name)) {
+  if (!/\.pdf$/.test(file.name ?? '')) {
     MessagePlugin.warning(t('pages.formBase.uploadTips'));
     return false;
   }
-  if (file.size > 60 * 1024 * 1024) {
+  if ((file.size ?? 0) > 60 * 1024 * 1024) {
     MessagePlugin.warning(t('pages.formBase.fileSizeExceed'));
     return false;
   }

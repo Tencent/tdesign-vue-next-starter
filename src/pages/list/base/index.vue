@@ -92,6 +92,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { getList } from '@/api/list';
+import type { ListModel } from '@/api/model/listModel';
 import Trend from '@/components/trend/index.vue';
 import { prefix } from '@/config/global';
 import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
@@ -147,7 +148,7 @@ const COLUMNS = computed<PrimaryTableCol<TableRowData>[]>(() => [
   },
 ]);
 
-const data = ref([]);
+const data = ref<ListModel[]>([]);
 const pagination = ref({
   defaultPageSize: 20,
   total: 100,

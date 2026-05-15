@@ -126,7 +126,7 @@ const route = useRoute();
  * 发送验证码
  */
 const sendCode = () => {
-  form.value.validate({ fields: ['phone'] }).then((e) => {
+  form.value!.validate({ fields: ['phone'] }).then((e) => {
     if (e === true) {
       handleCounter();
     }
@@ -142,9 +142,9 @@ const onSubmit = async (ctx: SubmitContext) => {
       const redirect = route.query.redirect as string;
       const redirectUrl = redirect ? decodeURIComponent(redirect) : '/dashboard';
       router.push(redirectUrl);
-    } catch (e) {
+    } catch (e: unknown) {
       console.log(e);
-      MessagePlugin.error(e.message);
+      MessagePlugin.error((e as Error).message);
     }
   }
 };

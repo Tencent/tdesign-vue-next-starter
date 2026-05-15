@@ -41,7 +41,7 @@ const onInput = () => {
     return;
   }
   filterByText.value = (node: TreeNodeModel) => {
-    return node.label.includes(filterText.value);
+    return node.label?.includes(filterText.value);
   };
 };
 </script>
