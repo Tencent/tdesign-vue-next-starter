@@ -21,7 +21,6 @@
     "test:coverage": "echo \"no test:coverage specified,work in process\""
   },
   "dependencies": {
-    "@rolldown/binding-linux-x64-gnu": "^1.0.1",
     "@vueuse/core": "^14.3.0",
     "axios": "^1.16.1",
     "dayjs": "^1.11.20",
