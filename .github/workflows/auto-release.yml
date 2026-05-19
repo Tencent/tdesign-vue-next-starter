@@ -81,7 +81,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: develop
-          token: ${{ secrets.PERSONAL_TOKEN }}
+          token: ${{ secrets.TDESIGN_BOT_TOKEN }}
       - uses: TDesignOteam/tdesign-tag-action@main
         id: tag-action
         with:
