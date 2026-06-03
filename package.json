@@ -59,7 +59,7 @@
     "globals": "^16.0.0",
     "husky": "^9.1.7",
     "less": "^4.6.4",
-    "lint-staged": "^15.2.2",
+    "lint-staged": "^17.0.7",
     "mockjs": "^1.1.0",
     "postcss-html": "^1.6.0",
     "postcss-less": "^6.0.0",
