@@ -24,7 +24,7 @@
     "@vueuse/core": "^14.2.0",
     "axios": "^1.13.6",
     "dayjs": "^1.11.13",
-    "echarts": "5.4.3",
+    "echarts": "6.1.0",
     "lodash": "^4.17.23",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.4",
