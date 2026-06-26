@@ -10,6 +10,6 @@ on:
 
 jobs:
   call-preview:
-    uses: Tencent/tdesign/.github/workflows/preview.yml@main
+    uses: TDesignOteam/workflows/.github/workflows/reusable-pr-preview.yml@main
     secrets:
       TDESIGN_SURGE_TOKEN: ${{ secrets.TDESIGN_SURGE_TOKEN }}

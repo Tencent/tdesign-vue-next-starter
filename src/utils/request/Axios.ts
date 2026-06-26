@@ -35,10 +35,25 @@ export class VAxios {
    */
   private readonly options: CreateAxiosOptions;
 
+  /**
+   * 节流/防抖包装后的请求函数
+   * @private
+   */
+  private throttledRequest: ((config: AxiosRequestConfigRetry, options?: RequestOptions) => void) | null = null;
+
+  /**
+   * 待resolve的请求回调队列
+   * @private
+   */
+  private pendingResolvers: {
+    resolve: (value: any) => void;
+  }[] = [];
+
   constructor(options: CreateAxiosOptions) {
     this.options = options;
     this.instance = axios.create(options);
     this.setupInterceptors();
+    this.setupThrottleDebounce();
   }
 
   /**
@@ -216,6 +231,26 @@ export class VAxios {
   }
 
   /**
+   * 初始化节流/防抖
+   * @private
+   */
+  private setupThrottleDebounce() {
+    const { requestOptions } = this.options;
+
+    if (requestOptions?.throttle?.delay) {
+      this.throttledRequest = throttle((config: AxiosRequestConfigRetry, options?: RequestOptions) => {
+        const resolver = this.pendingResolvers.shift();
+        resolver?.resolve(this.synthesisRequest(config, options));
+      }, requestOptions.throttle.delay);
+    } else if (requestOptions?.debounce?.delay) {
+      this.throttledRequest = debounce((config: AxiosRequestConfigRetry, options?: RequestOptions) => {
+        const resolver = this.pendingResolvers.shift();
+        resolver?.resolve(this.synthesisRequest(config, options));
+      }, requestOptions.debounce.delay);
+    }
+  }
+
+  /**
    * 请求封装
    * @param config
    * @param options
@@ -227,15 +262,10 @@ export class VAxios {
       throw new Error('throttle and debounce cannot be set at the same time');
     }
 
-    if (requestOptions?.throttle && requestOptions.throttle.delay !== 0) {
-      return new Promise((resolve) => {
-        throttle(() => resolve(this.synthesisRequest(config, options)), requestOptions.throttle!.delay);
-      });
-    }
-
-    if (requestOptions?.debounce && requestOptions.debounce.delay !== 0) {
-      return new Promise((resolve) => {
-        debounce(() => resolve(this.synthesisRequest(config, options)), requestOptions.debounce!.delay);
+    if (this.throttledRequest) {
+      return new Promise<T>((resolve) => {
+        this.pendingResolvers.push({ resolve });
+        this.throttledRequest!(config, options);
       });
     }
 
