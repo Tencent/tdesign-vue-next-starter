@@ -66,6 +66,7 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 
 import { getCardList } from '@/api/list';
+import type { CardList } from '@/api/model/listModel';
 import type { CardProductType } from '@/components/product-card/index.vue';
 import ProductCard from '@/components/product-card/index.vue';
 import { t } from '@/locales';
@@ -87,9 +88,9 @@ const INITIAL_DATA: FormData = {
 };
 
 const pagination = ref({ current: 1, pageSize: 12, total: 0 });
-const deleteProduct = ref(undefined);
+const deleteProduct = ref<CardProductType | undefined>(undefined);
 
-const productList = ref([]);
+const productList = ref<CardList[]>([]);
 const dataLoading = ref(true);
 
 const fetchData = async () => {
@@ -132,6 +133,7 @@ const handleDeleteItem = (product: CardProductType) => {
   deleteProduct.value = product;
 };
 const onConfirmDelete = () => {
+  if (!deleteProduct.value) return;
   const { index } = deleteProduct.value;
   productList.value.splice(index - 1, 1);
   confirmVisible.value = false;

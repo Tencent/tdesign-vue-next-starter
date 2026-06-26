@@ -1,5 +1,5 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
-import type { AxiosInstance } from 'axios';
+import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 import isString from 'lodash/isString';
 import merge from 'lodash/merge';
 
@@ -23,7 +23,7 @@ const transform: AxiosTransform = {
 
     // 如果204无内容直接返回
     const method = res.config.method?.toLowerCase();
-    if (res.status === 204 && ['put', 'patch', 'delete'].includes(method)) {
+    if (res.status === 204 && ['put', 'patch', 'delete'].includes(method ?? '')) {
       return res;
     }
 
@@ -147,7 +147,7 @@ const transform: AxiosTransform = {
       }, config.requestOptions.retry.delay || 1);
     });
     config.headers = { ...config.headers, 'Content-Type': ContentTypeEnum.Json };
-    return backoff.then((config) => instance.request(config));
+    return backoff.then((config) => instance.request(config as AxiosRequestConfig));
   },
 };
 

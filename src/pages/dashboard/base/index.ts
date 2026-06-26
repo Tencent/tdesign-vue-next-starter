@@ -324,7 +324,7 @@ export function getPieChartDataSet({
     tooltip: {
       show: false,
       trigger: 'axis',
-      position: null,
+      position: undefined,
     },
     grid: {
       top: '0',

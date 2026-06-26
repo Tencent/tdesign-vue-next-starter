@@ -82,7 +82,7 @@ let monitorContainer: HTMLElement;
 let monitorChart: echarts.ECharts;
 const renderMonitorChart = () => {
   if (!monitorContainer) {
-    monitorContainer = document.getElementById('monitorContainer');
+    monitorContainer = document.getElementById('monitorContainer')!;
   }
   monitorChart = echarts.init(monitorContainer);
   monitorChart.setOption(getLineChartDataSet({ ...chartColors.value }));
@@ -93,7 +93,7 @@ let countContainer: HTMLElement;
 let countChart: echarts.ECharts;
 const renderCountChart = () => {
   if (!countContainer) {
-    countContainer = document.getElementById('countContainer');
+    countContainer = document.getElementById('countContainer')!;
   }
   countChart = echarts.init(countContainer);
   countChart.setOption(getPieChartDataSet(chartColors.value));

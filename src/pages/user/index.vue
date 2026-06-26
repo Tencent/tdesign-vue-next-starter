@@ -129,16 +129,16 @@ const onLineChange = (value: DateRangeValue) => {
 };
 
 const initChart = () => {
-  lineContainer = document.getElementById('lineContainer');
+  lineContainer = document.getElementById('lineContainer')!;
   lineChart = echarts.init(lineContainer);
   lineChart.setOption({
+    ...getFolderLineDataSet({ ...chartColors.value }),
     grid: {
       x: 30, // 默认是80px
       y: 30, // 默认是60px
       x2: 10, // 默认80px
       y2: 30, // 默认60px
     },
-    ...getFolderLineDataSet({ ...chartColors.value }),
   });
 };
 

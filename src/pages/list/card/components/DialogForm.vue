@@ -114,7 +114,9 @@ watch(
 watch(
   () => data,
   (val) => {
-    formData.value = val;
+    if (val) {
+      formData.value = { ...val };
+    }
   },
 );
 

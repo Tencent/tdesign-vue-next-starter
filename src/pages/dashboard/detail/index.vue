@@ -95,7 +95,7 @@ const PRODUCT_LIST = computed(() => getProductList());
 let lineContainer: HTMLElement;
 let lineChart: echarts.ECharts;
 const renderLineChart = () => {
-  lineContainer = document.getElementById('lineContainer');
+  lineContainer = document.getElementById('lineContainer')!;
   lineChart = echarts.init(lineContainer);
   lineChart.setOption(getFolderLineDataSet({ ...chartColors.value }));
 };
@@ -104,7 +104,7 @@ const renderLineChart = () => {
 let scatterContainer: HTMLElement;
 let scatterChart: echarts.ECharts;
 const renderScatterChart = () => {
-  scatterContainer = document.getElementById('scatterContainer');
+  scatterContainer = document.getElementById('scatterContainer')!;
   scatterChart = echarts.init(scatterContainer);
   scatterChart.setOption(getScatterDataSet({ ...chartColors.value }));
 };

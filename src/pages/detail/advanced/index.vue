@@ -134,6 +134,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 import { getPurchaseList } from '@/api/detail';
+import type { PurchaseInfo } from '@/api/model/detailModel';
 import { t } from '@/locales';
 
 import Product from './components/Product.vue';
@@ -197,7 +198,7 @@ const columns = [
   },
 ];
 
-const data = ref([]);
+const data = ref<PurchaseInfo[]>([]);
 const pagination = ref({
   defaultPageSize: 10,
   total: 100,

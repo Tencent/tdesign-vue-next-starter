@@ -2,12 +2,12 @@ import { DashboardIcon } from 'tdesign-icons-vue-next';
 import { shallowRef } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 
-import Layout from '@/layouts/index.vue';
+import { LAYOUT } from '@/utils/route/constant';
 
 export default [
   {
     path: '/dashboard',
-    component: Layout,
+    component: LAYOUT,
     redirect: '/dashboard/base',
     name: 'dashboard',
     meta: {
