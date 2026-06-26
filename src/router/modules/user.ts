@@ -1,13 +1,14 @@
 import { LogoutIcon } from 'tdesign-icons-vue-next';
 import { shallowRef } from 'vue';
+import type { RouteRecordRaw } from 'vue-router';
 
-import Layout from '@/layouts/index.vue';
+import { LAYOUT } from '@/utils/route/constant';
 
 export default [
   {
     path: '/user',
     name: 'user',
-    component: Layout,
+    component: LAYOUT,
     redirect: '/user/index',
     meta: { title: { zh_CN: '个人中心', en_US: 'User Center' }, icon: 'user-circle' },
     children: [
@@ -29,9 +30,8 @@ export default [
       {
         path: 'index',
         redirect: '/login',
-        component: () => import('@/layouts/blank.vue'),
         meta: { title: { zh_CN: '登录页', en_US: 'Login' } },
       },
     ],
   },
-];
+] satisfies RouteRecordRaw[];

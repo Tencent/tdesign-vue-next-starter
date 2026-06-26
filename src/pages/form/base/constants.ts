@@ -1,16 +1,18 @@
 import type { FormRule, UploadFile } from 'tdesign-vue-next';
 
-export const FORM_RULES: Record<string, FormRule[]> = {
-  name: [{ required: true, message: '请输入合同名称', type: 'error' }],
-  type: [{ required: true, message: '请选择合同类型', type: 'error' }],
-  payment: [{ required: true, message: '请选择合同收付类型', type: 'error' }],
-  amount: [{ required: true, message: '请输入合同金额', type: 'error' }],
-  partyA: [{ required: true, message: '请选择甲方', type: 'error' }],
-  partyB: [{ required: true, message: '请选择乙方', type: 'error' }],
-  signDate: [{ required: true, message: '请选择日期', type: 'error' }],
-  startDate: [{ required: true, message: '请选择日期', type: 'error' }],
-  endDate: [{ required: true, message: '请选择日期', type: 'error' }],
-};
+import { t } from '@/locales';
+
+export const getFormRules = (): Record<string, FormRule[]> => ({
+  name: [{ required: true, message: t('pages.formBase.validation.name'), type: 'error' }],
+  type: [{ required: true, message: t('pages.formBase.validation.type'), type: 'error' }],
+  payment: [{ required: true, message: t('pages.formBase.validation.payment'), type: 'error' }],
+  amount: [{ required: true, message: t('pages.formBase.validation.amount'), type: 'error' }],
+  partyA: [{ required: true, message: t('pages.formBase.validation.partyA'), type: 'error' }],
+  partyB: [{ required: true, message: t('pages.formBase.validation.partyB'), type: 'error' }],
+  signDate: [{ required: true, message: t('pages.formBase.validation.signDate'), type: 'error' }],
+  startDate: [{ required: true, message: t('pages.formBase.validation.startDate'), type: 'error' }],
+  endDate: [{ required: true, message: t('pages.formBase.validation.endDate'), type: 'error' }],
+});
 
 export const INITIAL_DATA = {
   name: '',
@@ -26,20 +28,20 @@ export const INITIAL_DATA = {
   files: [] as Array<UploadFile>,
 };
 
-export const TYPE_OPTIONS = [
-  { label: 'Type A', value: '1' },
-  { label: 'Type B', value: '2' },
-  { label: 'Type C', value: '3' },
+export const getTypeOptions = () => [
+  { label: t('pages.formBase.typeOptions.typeA'), value: '1' },
+  { label: t('pages.formBase.typeOptions.typeB'), value: '2' },
+  { label: t('pages.formBase.typeOptions.typeC'), value: '3' },
 ];
 
-export const PARTY_A_OPTIONS = [
-  { label: 'Company A', value: '1' },
-  { label: 'Company B', value: '2' },
-  { label: 'Company C', value: '3' },
+export const getPartyAOptions = () => [
+  { label: t('pages.formBase.partyOptions.companyA'), value: '1' },
+  { label: t('pages.formBase.partyOptions.companyB'), value: '2' },
+  { label: t('pages.formBase.partyOptions.companyC'), value: '3' },
 ];
 
-export const PARTY_B_OPTIONS = [
-  { label: 'Company A', value: '1' },
-  { label: 'Company B', value: '2' },
-  { label: 'Company C', value: '3' },
+export const getPartyBOptions = () => [
+  { label: t('pages.formBase.partyOptions.companyA'), value: '1' },
+  { label: t('pages.formBase.partyOptions.companyB'), value: '2' },
+  { label: t('pages.formBase.partyOptions.companyC'), value: '3' },
 ];

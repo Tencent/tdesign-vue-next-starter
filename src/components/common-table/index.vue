@@ -114,7 +114,7 @@
       </t-table>
       <t-dialog
         v-model:visible="confirmVisible"
-        header="确认删除当前所选合同？"
+        :header="t('pages.listBase.deleteConfirm')"
         :body="confirmBody"
         :on-cancel="onCancel"
         @confirm="onConfirmDelete"
@@ -129,6 +129,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 import { getList } from '@/api/list';
+import type { ListModel } from '@/api/model/listModel';
 import Trend from '@/components/trend/index.vue';
 import { prefix } from '@/config/global';
 import { CONTRACT_PAYMENT_TYPES, CONTRACT_STATUS, CONTRACT_TYPES } from '@/constants';
@@ -219,7 +220,7 @@ const pagination = ref({
 });
 const confirmVisible = ref(false);
 
-const data = ref([]);
+const data = ref<ListModel[]>([]);
 
 const dataLoading = ref(false);
 const fetchData = async () => {
@@ -242,7 +243,7 @@ const deleteIdx = ref(-1);
 const confirmBody = computed(() => {
   if (deleteIdx.value > -1) {
     const { name } = data.value[deleteIdx.value];
-    return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
+    return t('pages.listBase.deleteTip', { name });
   }
   return '';
 });
@@ -256,7 +257,7 @@ const onConfirmDelete = () => {
   data.value.splice(deleteIdx.value, 1);
   pagination.value.total = data.value.length;
   confirmVisible.value = false;
-  MessagePlugin.success('删除成功');
+  MessagePlugin.success(t('components.deleteSuccess'));
   resetIdx();
 };
 

@@ -1,3 +1,4 @@
+import isObject from 'lodash/isObject';
 import uniq from 'lodash/uniq';
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -8,7 +9,7 @@ const env = import.meta.env.MODE || 'development';
 const homepageModules = import.meta.glob('./modules/**/homepage.ts', { eager: true });
 
 // 导入modules非homepage相关固定路由
-const fixedModules = import.meta.glob('./modules/**/!(homepage).ts', { eager: true });
+const fixedModules = import.meta.glob(['./modules/**/*.ts', '!./modules/**/homepage.ts'], { eager: true });
 
 // 其他固定路由
 const defaultRouterList: Array<RouteRecordRaw> = [
@@ -32,10 +33,12 @@ export const allRoutes = [...homepageRouterList, ...fixedRouterList, ...defaultR
 export function mapModuleRouterList(modules: Record<string, unknown>): Array<RouteRecordRaw> {
   const routerList: Array<RouteRecordRaw> = [];
   Object.keys(modules).forEach((key) => {
-    // @ts-expect-error 外部赋值不太好直接写类型
-    const mod = modules[key].default || {};
-    const modList = Array.isArray(mod) ? [...mod] : [mod];
-    routerList.push(...modList);
+    const routeModule = modules[key];
+    if (isObject(routeModule) && 'default' in routeModule) {
+      const route = routeModule.default;
+      const routes = Array.isArray(route) ? [...route] : [route];
+      routerList.push(...routes);
+    }
   });
   return routerList;
 }

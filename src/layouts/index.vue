@@ -55,7 +55,8 @@ const appendNewRoute = () => {
     meta: { title },
     name,
   } = route;
-  tabsRouterStore.appendTabRouterList({ path, query, title: title as string, name, isAlive: true, meta: route.meta });
+  const titleObj = typeof title === 'string' ? { zh_CN: title, en_US: title } : title;
+  tabsRouterStore.appendTabRouterList({ path, query, title: titleObj, name, isAlive: true, meta: route.meta });
 };
 
 onMounted(() => {
@@ -66,7 +67,7 @@ watch(
   () => route.path,
   () => {
     appendNewRoute();
-    document.querySelector(`.${prefix}-layout`).scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelector(`.${prefix}-layout`)?.scrollTo({ top: 0, behavior: 'smooth' });
   },
 );
 </script>

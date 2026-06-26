@@ -1,6 +1,6 @@
 import { t } from '@/locales';
 
-export const PANE_LIST_DATA = [
+export const getPaneListData = () => [
   {
     title: t('pages.dashboardDetail.topPanel.paneList.totalRequest'),
     number: '1126',
@@ -34,7 +34,7 @@ export const PANE_LIST_DATA = [
   },
 ];
 
-export const PRODUCT_LIST = [
+export const getProductList = () => [
   {
     description: t('pages.dashboardDetail.sslDescription'),
     index: 1,

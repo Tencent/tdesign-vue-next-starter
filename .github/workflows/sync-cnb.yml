@@ -8,22 +8,18 @@ jobs:
     if: ${{ github.repository == 'Tencent/tdesign-vue-next-starter' && github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      
+
       - name: Sync to CNB Repository
-        run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:${{ github.workspace }} \
-            -w ${{ github.workspace }} \
-            -e PLUGIN_TARGET_URL="https://cnb.cool/tencent/tdesign/tdesign-vue-next-starter.git" \
-            -e PLUGIN_AUTH_TYPE="https" \
-            -e PLUGIN_USERNAME="cnb" \
-            -e PLUGIN_PASSWORD=${{ secrets.CNB_TOKEN }} \
-            -e PLUGIN_PUSH_TAGS="true" \
-            -e PLUGIN_FORCE="true" \
-            tencentcom/git-sync
+        uses: docker://tencentcom/git-sync
+        env:
+          PLUGIN_TARGET_URL: "https://cnb.cool/tencent/tdesign/tdesign-vue-next-starter.git"
+          PLUGIN_AUTH_TYPE: "https"
+          PLUGIN_USERNAME: "cnb"
+          PLUGIN_PASSWORD: ${{ secrets.CNB_TOKEN }}
+          PLUGIN_FORCE: "true"
 
   sync-delete-branch:
     if: ${{ github.repository == 'Tencent/tdesign-vue-next-starter' && github.event_name == 'delete' && github.event.ref_type == 'branch' }}

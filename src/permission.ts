@@ -43,13 +43,13 @@ router.beforeEach(async (to, from, next) => {
           return;
         }
       }
-      if (router.hasRoute(to.name)) {
+      if (router.hasRoute(to.name!)) {
         next();
       } else {
         next(`/`);
       }
     } catch (error) {
-      MessagePlugin.error(error.message);
+      MessagePlugin.error((error as Error).message);
       next({
         path: '/login',
         query: { redirect: encodeURIComponent(to.fullPath) },

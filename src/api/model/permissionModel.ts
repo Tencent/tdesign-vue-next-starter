@@ -1,6 +1,5 @@
 import type { defineComponent } from 'vue';
-
-import type { RouteMeta } from '@/types/interface';
+import type { RouteMeta } from 'vue-router';
 
 export interface MenuListResult {
   list: Array<RouteItem>;

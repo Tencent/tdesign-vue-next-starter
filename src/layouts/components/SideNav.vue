@@ -16,14 +16,21 @@
       </template>
       <menu-content :nav-data="menu" />
       <template #operations>
-        <span :class="versionCls"> {{ !collapsed ? 'TDesign Starter' : '' }} {{ pgk.version }} </span>
+        <t-button variant="text" shape="square" @click="changeCollapsed">
+          <template #icon><t-icon name="view-list" /></template>
+        </t-button>
+        <span v-show="!isCompact" :class="versionCls">
+          {{ !collapsed ? t('common.appName') : '' }} {{ pgk.version }}
+        </span>
       </template>
     </t-menu>
     <div :class="`${prefix}-side-nav-placeholder${collapsed ? '-hidden' : ''}`"></div>
   </div>
 </template>
 <script setup lang="ts">
-import { difference, remove, union } from 'lodash';
+import difference from 'lodash/difference';
+import remove from 'lodash/remove';
+import union from 'lodash/union';
 import type { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
@@ -32,6 +39,7 @@ import { useRouter } from 'vue-router';
 import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
 import AssetLogo from '@/assets/assets-t-logo.svg?component';
 import { prefix } from '@/config/global';
+import { t } from '@/locales';
 import { getActive } from '@/router';
 import { useSettingStore } from '@/store';
 import type { MenuRoute, ModeType } from '@/types/interface';
@@ -106,16 +114,13 @@ const onExpanded = (value: MenuValue[]) => {
   expanded.value = allExpanded;
 };
 
+const changeCollapsed = () => {
+  settingStore.updateConfig({
+    isSidebarCompact: !settingStore.isSidebarCompact,
+  });
+};
 const sideMode = computed(() => {
   return theme === 'dark';
-});
-const sideNavCls = computed(() => {
-  return [
-    `${prefix}-sidebar-layout`,
-    {
-      [`${prefix}-sidebar-compact`]: isCompact,
-    },
-  ];
 });
 const logoCls = computed(() => {
   return [
@@ -130,6 +135,14 @@ const versionCls = computed(() => {
     `version-container`,
     {
       [`${prefix}-side-nav-dark`]: sideMode.value,
+    },
+  ];
+});
+const sideNavCls = computed(() => {
+  return [
+    `${prefix}-sidebar-layout`,
+    {
+      [`${prefix}-sidebar-compact`]: isCompact,
     },
   ];
 });

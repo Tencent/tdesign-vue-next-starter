@@ -1,0 +1,752 @@
+{
+  "lang": "English",
+  "common": {
+    "appName": "TDesign Starter",
+    "copyright": "Copyright @ 2021-2025 Tencent. All Rights Reserved",
+    "conjunction": "and",
+    "admin": "admin"
+  },
+  "components": {
+    "isSetup": {
+      "on": "Enabled",
+      "off": "Disabled"
+    },
+    "manage": "Manage",
+    "delete": "Delete",
+    "deleteSuccess": "Deleted successfully",
+    "copySuccess": "Copied successfully",
+    "copyFail": "Copy failed",
+    "submitSuccess": "Submitted successfully",
+    "commonTable": {
+      "contractName": "Name",
+      "contractStatus": "Status",
+      "contractNum": "Number",
+      "contractType": "Type",
+      "contractPayType": "Pay Type",
+      "contractAmount": "Amount",
+      "contractNamePlaceholder": "enter contract name",
+      "contractStatusPlaceholder": "enter contract status",
+      "contractNumPlaceholder": "enter contract number",
+      "contractTypePlaceholder": "enter contract type",
+      "operation": "Operation",
+      "detail": "detail",
+      "delete": "delete",
+      "placeholder": "please enter to search",
+      "contractStatusEnum": {
+        "fail": "fail",
+        "audit": "audit",
+        "executing": "executing",
+        "pending": "pending",
+        "finish": "finish"
+      },
+      "contractTypeEnum": {
+        "main": "main",
+        "sub": "sub",
+        "supplement": "supplement"
+      },
+      "reset": "reset",
+      "query": "query"
+    }
+  },
+  "layout": {
+    "header": {
+      "code": "Code Repository",
+      "help": "Document",
+      "user": "Profile",
+      "signOut": "Sign Out",
+      "setting": "Setting"
+    },
+    "notice": {
+      "title": "Notification Center",
+      "clear": "Clear",
+      "setRead": "Set Read",
+      "empty": "Empty",
+      "emptyNotice": "No Notice",
+      "viewAll": "View All"
+    },
+    "tagTabs": {
+      "closeOther": "close other",
+      "closeLeft": "close left",
+      "closeRight": "close right",
+      "refresh": "refresh"
+    },
+    "searchPlaceholder": "Enter search content",
+    "search": {
+      "placeholder": "Enter search content"
+    },
+    "setting": {
+      "title": "Setting",
+      "theme": {
+        "mode": "Theme Mode",
+        "color": "Theme Color",
+        "options": {
+          "light": "Light",
+          "dark": "Dark ",
+          "auto": "Follow System"
+        }
+      },
+      "navigationLayout": "Navigation Layout",
+      "sideMode": "Side Menu Mode",
+      "splitMenu": "Split Menu (Only Mix mode)",
+      "fixedSidebar": "Fixed Sidebar",
+      "element": {
+        "title": "Element Switch",
+        "showHeader": "Show Header",
+        "showBreadcrumb": "Show Breadcrumb",
+        "showFooter": "Show Footer",
+        "useTagTabs": "Use Tag Tabs",
+        "menuAutoCollapsed": "Menu Auto Collapsed"
+      },
+      "tips": "Please copy and manually modify the configuration file: /src/config/style.ts",
+      "copy": {
+        "title": "Copy",
+        "success": "copied",
+        "fail": "fail to copy"
+      }
+    }
+  },
+  "constants": {
+    "contract": {
+      "name": "Name",
+      "status": "Status",
+      "num": "Number",
+      "type": "Type",
+      "typePlaceholder": "Please enter type",
+      "payType": "Pay Type",
+      "amount": "Amount",
+      "amountPlaceholder": "Please enter amount",
+      "signDate": "Sign Date",
+      "effectiveDate": "Effective Date",
+      "endDate": "End Date",
+      "createDate": "Create Date",
+      "attachment": "Attachment",
+      "company": "Company",
+      "employee": "Employee",
+      "pay": "pay",
+      "receive": "received",
+      "remark": "remark",
+      "statusOptions": {
+        "fail": "Failure",
+        "auditPending": "Pending audit",
+        "execPending": "Pending performance",
+        "executing": "Successful",
+        "finish": "Finish"
+      },
+      "typeOptions": {
+        "main": "Master contract",
+        "sub": "Subcontract",
+        "supplement": "Supplementary contract"
+      }
+    }
+  },
+  "pages": {
+    "dashboardBase": {
+      "title": "Overview Dashboard",
+      "outputOverview": {
+        "title": "In/Out Overview",
+        "subtitle": "(pieces)",
+        "export": "Export data",
+        "month": {
+          "input": "Total in store this month",
+          "output": "Total out store this month"
+        },
+        "since": "Since last week"
+      },
+      "rankList": {
+        "title": "Sales order ranking",
+        "week": "This week",
+        "month": "Latest 3 months",
+        "info": "Detail"
+      },
+      "topPanel": {
+        "card1": "Total Revenue",
+        "card2": "Total Refund",
+        "card3": "Active User(s)",
+        "card4": "Generate Order(s)",
+        "cardTips": "since last week",
+        "analysis": {
+          "title": "Analysis Data",
+          "unit": "ten thousand yuan",
+          "series1": "this month",
+          "series2": "last month",
+          "channels": "Sales Channels",
+          "channel1": "online",
+          "channel2": "shop",
+          "channelTips": " sales ratio"
+        }
+      },
+      "saleColumns": {
+        "index": "Ranking",
+        "productName": "Customer",
+        "growUp": "Grow up",
+        "count": "Count",
+        "operation": "Operation"
+      },
+      "buyColumns": {
+        "index": "Ranking",
+        "productName": "Supplier",
+        "growUp": "Grow up",
+        "count": "Count",
+        "operation": "Operation"
+      },
+      "saleTend": {
+        "item1": "State Grid Corporation of China",
+        "item2": "Shenzhen Gas Group Co., Ltd",
+        "item3": "State Administration of Tobacco Monopoly",
+        "item4": "China Telecom Group Co., Ltd",
+        "item5": "China Mobile Communications Group Co., Ltd",
+        "item6": "Xinyu City Office Supplies Procurement Project"
+      },
+      "buyTend": {
+        "item1": "Tencent Technology (Shenzhen) Co., Ltd",
+        "item2": "Darunfa Co., Ltd",
+        "item3": "Sichuan Haidilao Co., Ltd",
+        "item4": "Sony (China) Co., Ltd",
+        "item5": "Panasonic Electronics (China) Co., Ltd",
+        "item6": "Xinyu City Office Supplies Procurement Project"
+      },
+      "chart": {
+        "week1": "MON",
+        "week2": "TUE",
+        "week3": "WED",
+        "week4": "THU",
+        "week5": "FRI",
+        "week6": "SAT",
+        "week7": "SUN",
+        "max": "Max",
+        "min": "Min",
+        "thisMonth": "this month",
+        "lastMonth": "last month"
+      }
+    },
+    "dashboardDetail": {
+      "topPanel": {
+        "title": "Purchase applications for this month",
+        "quarter": "Quarter on quarter",
+        "paneList": {
+          "totalRequest": "Apply count",
+          "suppliers": "Number of Suppliers",
+          "productCategory": "Product Category",
+          "applicant": "Number of Application",
+          "completionRate": "Completion Rate(%)",
+          "arrivalRate": "Arrival Rate(%)"
+        }
+      },
+      "procurement": {
+        "title": "Trends in purchase requisitions for goods",
+        "goods": {
+          "cup": "cup",
+          "tea": "tea",
+          "honey": "honey",
+          "flour": "flour",
+          "coffeeMachine": "coffee machine",
+          "massageMachine": "massage machine"
+        }
+      },
+      "ssl": "SSL certificate",
+      "sslDescription": "SSL certificate, also known as a server certificate, is a digital certificate that authenticates the identity of a website and encrypts information sent to the server using SSL technology. Tencent Cloud provides you with a one-stop service for SSL certificates, including application, management, and deployment of both free and paid certificates.",
+      "satisfaction": {
+        "title": "distribution of satisfaction levels for purchased goods",
+        "export": "export data"
+      },
+      "chart": {
+        "week1": "MON",
+        "week2": "TUE",
+        "week3": "WED",
+        "week4": "THU",
+        "week5": "FRI",
+        "week6": "SAT",
+        "week7": "SUN",
+        "max": "Max",
+        "min": "Min",
+        "thisMonth": "this month",
+        "lastMonth": "last month"
+      }
+    },
+    "detailBase": {
+      "baseInfo": {
+        "title": "Base Info"
+      },
+      "sampleData": {
+        "contractName": "Office Supplies Procurement Project",
+        "status": "In Progress",
+        "company": "Tencent Technology (Shenzhen) Co., Ltd",
+        "employee": "Osun",
+        "fileName": "Office Supplies Procurement Contract.pdf"
+      },
+      "changelog": {
+        "title": "Changelog",
+        "step1": {
+          "title": "upload file",
+          "subtitle": "subtitle"
+        },
+        "step2": {
+          "title": "modify contract amount",
+          "subtitle": "subtitle"
+        },
+        "step3": {
+          "title": "create contract",
+          "desc": "administrator"
+        }
+      }
+    },
+    "detailCard": {
+      "baseInfo": {
+        "title": "Base Info"
+      },
+      "invoice": {
+        "title": "Invoice Progress",
+        "step1": {
+          "title": "Apply",
+          "content": "The electronic invoice has been submitted on December 21st"
+        },
+        "step2": {
+          "title": "Electronic invoice",
+          "content": "expected to be processed within 1-3 business days."
+        },
+        "step3": {
+          "title": "Invoice is send",
+          "content": "we will contact you within 7 business days."
+        },
+        "step4": {
+          "title": "Finish"
+        }
+      },
+      "product": {
+        "title": "Product Category",
+        "add": "add production",
+        "month": "month",
+        "quarter": "quarter"
+      },
+      "detail": {
+        "title": "Product Procurement Detail",
+        "budgetExceeded": "Budget Exceeded",
+        "form": {
+          "applyNo": "Apply no",
+          "product": "Name",
+          "productNo": "No.",
+          "department": "Department",
+          "num": "Num",
+          "createTime": "Create time",
+          "operation": "Operation",
+          "manage": "manage",
+          "delete": "delete"
+        }
+      },
+      "products": {
+        "product1": {
+          "name": "MacBook Pro 2021",
+          "company": "Apple Inc.",
+          "size": "13.3 inches",
+          "cpu": "Apple M1",
+          "memory": "RAM 16GB",
+          "info": "Up to 16GB memory · Up to 2TB storage · Battery life up to 18 hours"
+        },
+        "product2": {
+          "name": "Surface Laptop Go",
+          "company": "Microsoft Corporation",
+          "size": "12.4 inches",
+          "cpu": "Core i7",
+          "memory": "RAM 16GB",
+          "info": "Surface regular use, up to 13 hours of battery life, work anytime"
+        }
+      }
+    },
+    "detailDeploy": {
+      "deployTrend": {
+        "title": "Deploy Trend",
+        "warning": "Warning",
+        "thisMonth": "this month",
+        "thisWeek": "this week",
+        "lastMonth": "last month",
+        "thisYear": "this year",
+        "lastYear": "last year",
+        "week1": "MON",
+        "week2": "TUE",
+        "week3": "WED",
+        "week4": "THU",
+        "week5": "FRI",
+        "week6": "SAT",
+        "week7": "SUN"
+      },
+      "projectList": {
+        "title": "Project List",
+        "dialog": {
+          "title": "Base Info"
+        },
+        "table": {
+          "name": "Name",
+          "admin": "Admin",
+          "createTime": "Create time",
+          "operation": "Operation",
+          "manage": "manage",
+          "delete": "delete"
+        }
+      },
+      "baseInfo": {
+        "clusterName": "Cluster Name",
+        "clusterId": "Cluster ID",
+        "status": "Status",
+        "running": "Running",
+        "k8sVersion": "K8S Version",
+        "config": "Config",
+        "region": "Region",
+        "guangzhou": "Guangzhou",
+        "project": "Resource Project",
+        "defaultProject": "Default Project",
+        "nodeCount": "Node Count",
+        "nodeNetwork": "Node Network",
+        "containerNetwork": "Container Network",
+        "clusterCredential": "Cluster Credential",
+        "showCredential": "Show Credential",
+        "createUpdate": "Create/Update",
+        "description": "Description"
+      }
+    },
+    "detailSecondary": {
+      "read": "Read",
+      "unread": "Unread",
+      "all": "All",
+      "setRead": "set as read",
+      "setUnread": "set as unread",
+      "delete": "delete",
+      "deleteConfirm": "Delete notification",
+      "deleteTip": "Confirm delete notification: {content}?",
+      "empty": "Empty"
+    },
+    "notification": {
+      "contract": "Contract Updates",
+      "invoice": "Invoice Updates",
+      "meeting": "Meeting Notification",
+      "msg1": "Tencent Building First Floor Renovation Project has passed audit!",
+      "msg2": "Third Quarter Raw Material Procurement Project invoicing successful!",
+      "msg3": "Meeting 【State Grid Offline Signing】at 2021-01-01 10:00 is about to start, please arrive at Conference Room 1 10 minutes early for check-in!",
+      "msg4": "First Quarter Raw Material Procurement Project invoicing successful!"
+    },
+    "formBase": {
+      "title": "Contract Info",
+      "contractName": "Name",
+      "contractNamePlaceholder": "Please enter contract name",
+      "contractStatus": "Status",
+      "contractNum": "Number",
+      "contractType": "Type",
+      "contractTypePlaceholder": "Please enter type",
+      "contractPayType": "Pay Type",
+      "contractAmount": "Amount",
+      "contractAmountPlaceholder": "Please enter amount",
+      "contractSignDate": "Sign Date",
+      "contractEffectiveDate": "Effective Date",
+      "contractEndDate": "End Date",
+      "company": "Company",
+      "employee": "Employee",
+      "pay": "pay",
+      "receive": "received",
+      "upload": "upload file",
+      "uploadFile": "upload contract file",
+      "uploadTips": "Please upload a PDF file, with a size limit of 60MB.",
+      "otherInfo": "Other Info",
+      "remark": "Remark",
+      "remarkPlaceholder": "please enter remark",
+      "notaryPublic": "Notary Public",
+      "fileSizeExceed": "File size cannot exceed 60MB",
+      "uploadFail": "Upload failed",
+      "confirm": "confirm",
+      "cancel": "cancel",
+      "validation": {
+        "name": "Please enter contract name",
+        "type": "Please select contract type",
+        "payment": "Please select payment type",
+        "amount": "Please enter amount",
+        "partyA": "Please select Party A",
+        "partyB": "Please select Party B",
+        "signDate": "Please select date",
+        "startDate": "Please select date",
+        "endDate": "Please select date"
+      },
+      "typeOptions": {
+        "typeA": "Type A",
+        "typeB": "Type B",
+        "typeC": "Type C"
+      },
+      "partyOptions": {
+        "companyA": "Company A",
+        "companyB": "Company B",
+        "companyC": "Company C"
+      }
+    },
+    "formStep": {
+      "validation": {
+        "name": "Please select contract name",
+        "type": "Please select type",
+        "title": "Please enter invoice title",
+        "taxNum": "Please enter tax number",
+        "consignee": "Please enter consignee",
+        "mobileNum": "Please enter mobile number",
+        "deliveryAddress": "Please select delivery address",
+        "fullAddress": "Please enter full address"
+      },
+      "options": {
+        "nameA": "Contract A",
+        "nameB": "Contract B",
+        "nameC": "Contract C",
+        "typeA": "Type A",
+        "typeB": "Type B",
+        "typeC": "Type C",
+        "address1": "Nanshan District, Shenzhen, Guangdong",
+        "address2": "Haidian District, Beijing",
+        "address3": "Xuhui District, Shanghai",
+        "address4": "High-tech Zone, Chengdu, Sichuan",
+        "address5": "Tianhe District, Guangzhou, Guangdong",
+        "address6": "High-tech Zone, Xi'an, Shaanxi"
+      },
+      "step1": {
+        "title": "Submit Application",
+        "subtitle": "Submitted on December 21st",
+        "rules": "rules",
+        "rule1": "1. After applying for an invoice, the electronic invoice will be issued within 1-3 working days. If the qualification review is passed, the VAT special invoice (paper) will be mailed to you within 10 working days after the electronic invoice is issued;",
+        "rule2": "2. The invoiced amount will be the actual amount you paid;",
+        "rule3": "3. For any questions, please contact us directly at 13300001111.",
+        "contractName": "Name",
+        "contractTips": "Please select a contract name",
+        "invoiceType": "Invoice type",
+        "amount": "Amount",
+        "submit": "Submit Application"
+      },
+      "step2": {
+        "title": "Electronic Information",
+        "subtitle": "Contact Customer Service if you have any questions",
+        "invoiceTitle": "Invoice Title",
+        "taxNum": "Tax Num",
+        "address": "Address",
+        "bank": "Bank",
+        "bankAccount": "Bank Account",
+        "email": "Email",
+        "tel": "Tel",
+        "invoiceTitlePlaceholder": "please enter invoice title",
+        "taxNumPlaceholder": "please enter tax num",
+        "addressPlaceholder": "please enter address",
+        "bankPlaceholder": "please enter bank",
+        "bankAccountPlaceholder": "please enter bank account",
+        "emailPlaceholder": "please enter email",
+        "telPlaceholder": "please enter tel"
+      },
+      "step3": {
+        "title": "Invoice Mailed",
+        "subtitle": "Contact us after the electronic invoice is issued",
+        "consignee": "Consignee",
+        "mobileNum": "Mobile Num",
+        "deliveryAddress": "Address",
+        "fullAddress": "Full Address"
+      },
+      "step4": {
+        "title": "Application Completed",
+        "subtitle": "Contact Customer Service if you have any questions",
+        "finishTitle": "Application is completed.",
+        "finishTips": "The electronic invoice is expected to be sent to your email within 1-3 working days. Please be patient for the delivery of the paper invoice.",
+        "reapply": "reapply",
+        "check": "check progress"
+      },
+      "preStep": "pre step",
+      "nextStep": "next step"
+    },
+    "listBase": {
+      "export": "export",
+      "create": "create",
+      "select": "select",
+      "items": "items",
+      "contractName": "Name",
+      "contractStatus": "Status",
+      "contractNum": "Number",
+      "contractType": "Type",
+      "contractPayType": "Pay Type",
+      "contractAmount": "Amount",
+      "operation": "Operation",
+      "detail": "detail",
+      "delete": "delete",
+      "pay": "pay",
+      "receive": "received",
+      "placeholder": "please enter to search",
+      "deleteConfirm": "Confirm delete selected contracts?",
+      "deleteTip": "After deletion, all contract information of {name} will be cleared and cannot be recovered",
+      "contractStatusEnum": {
+        "fail": "fail",
+        "audit": "audit",
+        "executing": "executing",
+        "pending": "pending",
+        "finish": "finish"
+      }
+    },
+    "listCard": {
+      "create": "Create Product",
+      "placeholder": "please enter to search",
+      "loading": "Loading data...",
+      "deleteConfirm": "Confirm delete selected products?",
+      "deleteSuccess": "Deleted successfully",
+      "deleteTip": "After confirmation, all product information of {name} will be cleared and cannot be recovered",
+      "productName": "Name",
+      "productStatus": "Status",
+      "productDescription": "Description",
+      "productType": "Type",
+      "productRemark": "Remark",
+      "productStatusEnum": {
+        "off": "off",
+        "on": "on"
+      },
+      "dialogForm": {
+        "productNamePlaceholder": "Please enter product name",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "typeGateway": "Gateway",
+        "typeAI": "Artificial Intelligence",
+        "typeCVM": "CVM",
+        "validation": {
+          "productName": "Please enter product name"
+        }
+      }
+    },
+    "listFilter": {},
+    "listTree": {
+      "placeholder": "please enter to search",
+      "treeData": {
+        "shenzhen": "Shenzhen HQ",
+        "beijing": "Beijing HQ",
+        "shanghai": "Shanghai HQ",
+        "hunan": "Hunan",
+        "hubei": "Hubei",
+        "generalOffice": "General Office",
+        "marketing": "Marketing",
+        "technology": "Technology",
+        "finance": "Finance",
+        "purchase1": "Purchasing Team 1",
+        "purchase2": "Purchasing Team 2",
+        "finance1": "Finance Team 1",
+        "finance2": "Finance Team 2"
+      }
+    },
+    "login": {
+      "loginTitle": "Login in",
+      "noAccount": "No Account?",
+      "createAccount": "Create Account",
+      "remember": "Remember Account",
+      "forget": "Forget Account",
+      "signIn": "Sign in",
+      "existAccount": "Exist Account?",
+      "register": "Register",
+      "refresh": "refresh",
+      "wechatLogin": "Login with WeChat",
+      "accountLogin": "Login with Account",
+      "phoneLogin": "Login with Mobile Phone",
+      "loginSuccess": "Login successful",
+      "countdown": "Resend after {count} seconds",
+      "input": {
+        "account": "please enter account",
+        "password": "please enter password",
+        "phone": "please enter phone",
+        "verification": "please enter verification code"
+      },
+      "required": {
+        "account": "account is required",
+        "phone": "phone is required",
+        "password": "password is required",
+        "verification": "verification code is require"
+      },
+      "sendVerification": "send",
+      "register": {
+        "phonePlaceholder": "Please enter your phone number",
+        "emailPlaceholder": "Please enter your email",
+        "passwordPlaceholder": "Please enter your password",
+        "verifyCodePlaceholder": "Please enter verification code",
+        "sendVerifyCode": "Send verification code",
+        "resendCountdown": "Resend in {count} seconds",
+        "agreeTerms": "I have read and agree to",
+        "serviceTerms": "TDesign Service Terms",
+        "privacyStatement": "TDesign Privacy Statement",
+        "registerBtn": "Register",
+        "useEmailRegister": "Register with email",
+        "usePhoneRegister": "Register with phone",
+        "validation": {
+          "phone": "Phone number is required",
+          "email": "Email is required",
+          "emailFormat": "Please enter a valid email",
+          "password": "Password is required",
+          "verifyCode": "Verification code is required",
+          "agreeTerms": "You must agree to the service terms and privacy statement"
+        },
+        "messages": {
+          "registerSuccess": "Registration successful"
+        }
+      }
+    },
+    "result": {
+      "403": {
+        "tips": "sorry, you don not have permission to access this page. Please contact the creator through WeCom",
+        "back": "Back to homepage"
+      },
+      "404": {
+        "subtitle": "Sorry, the page is not found",
+        "back": "Back to homepage"
+      },
+      "500": {
+        "subtitle": "Sorry, the server is error",
+        "back": "Back to homepage"
+      },
+      "fail": {
+        "title": "Create fail",
+        "subtitle": "Sorry, your project creation has failed",
+        "back": "Back to homepage",
+        "modify": "Back to modify"
+      },
+      "success": {
+        "title": "Project is created",
+        "subtitle": "Contact the person in charge of distributing the application",
+        "back": "Back to homepage",
+        "progress": "Check Progress"
+      },
+      "maintenance": {
+        "title": "System maintenance",
+        "subtitle": "Please try again later",
+        "back": "Back to homepage"
+      },
+      "browserIncompatible": {
+        "title": "browser is incompatible",
+        "subtitle": "the browser version you are using is too outdated to open the current webpage.",
+        "back": "Back to homepage",
+        "recommend": "TDesign Starter recommend the following browser"
+      },
+      "networkError": {
+        "title": "Network Error",
+        "subtitle": "Network error, please try again later",
+        "back": "Back to homepage",
+        "reload": "Reload"
+      }
+    },
+    "user": {
+      "markDay": "Good afternoon, today marks your 100th day at Tencent",
+      "greeting": "Hi, Image",
+      "unit": "(times)",
+      "account": "My Account",
+      "organization": "Tencent / Tencent Company / Business Group / Product Department / Operations Center / Merchant Services Group",
+      "personalInfo": {
+        "title": "Personal Info",
+        "position": "Employee of the Hong Kong and Macau Business Expansion team",
+        "desc": {
+          "phone": "Phone",
+          "mobile": "Mobile",
+          "seat": "Seat",
+          "email": "Email",
+          "position": "Position",
+          "leader": "Leader",
+          "entity": "Entity",
+          "joinDay": "Day of join",
+          "group": "Group"
+        },
+        "tencentGroup": "Tencent Group",
+        "seniorDesigner": "Senior UI Designer"
+      },
+      "visitData": "Visit Data",
+      "contentList": "Content List",
+      "teamMember": "Team Member",
+      "serviceProduction": "Service Product"
+    }
+  }
+}
