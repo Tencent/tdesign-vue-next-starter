@@ -88,7 +88,7 @@ function getMenuList(list: MenuRoute[], basePath?: string): MenuRoute[] {
 const getHref = (item: MenuRoute) => {
   const { frameSrc, frameBlank } = item.meta;
   if (frameSrc && frameBlank) {
-    return frameSrc.match(/(https?):\/\/([\w.]+)(?:\/\S*)?/);
+    return frameSrc.match(/(https?):\/\/([\w.-]+)(?:\/\S*)?/);
   }
   return null;
 };
