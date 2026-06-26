@@ -1,50 +1,52 @@
-export const TREE_DATA = [
+import { t } from '@/locales';
+
+export const getTreeData = () => [
   {
-    label: '深圳总部',
+    label: t('pages.listTree.treeData.shenzhen'),
     value: 0,
     children: [
       {
-        label: '总办',
+        label: t('pages.listTree.treeData.generalOffice'),
         value: '0-0',
       },
       {
-        label: '市场部',
+        label: t('pages.listTree.treeData.marketing'),
         value: '0-1',
         children: [
           {
-            label: '采购1组',
+            label: t('pages.listTree.treeData.purchase1'),
             value: '0-1-0',
           },
           {
-            label: '采购2组',
+            label: t('pages.listTree.treeData.purchase2'),
             value: '0-1-1',
           },
         ],
       },
       {
-        label: '技术部',
+        label: t('pages.listTree.treeData.technology'),
         value: '0-2',
       },
     ],
   },
   {
-    label: '北京总部',
+    label: t('pages.listTree.treeData.beijing'),
     value: 1,
     children: [
       {
-        label: '总办',
+        label: t('pages.listTree.treeData.generalOffice'),
         value: '1-0',
       },
       {
-        label: '市场部',
+        label: t('pages.listTree.treeData.marketing'),
         value: '1-1',
         children: [
           {
-            label: '采购1组',
+            label: t('pages.listTree.treeData.purchase1'),
             value: '1-1-0',
           },
           {
-            label: '采购2组',
+            label: t('pages.listTree.treeData.purchase2'),
             value: '1-1-1',
           },
         ],
@@ -52,23 +54,23 @@ export const TREE_DATA = [
     ],
   },
   {
-    label: '上海总部',
+    label: t('pages.listTree.treeData.shanghai'),
     value: 2,
     children: [
       {
-        label: '市场部',
+        label: t('pages.listTree.treeData.marketing'),
         value: '2-0',
       },
       {
-        label: '财务部',
+        label: t('pages.listTree.treeData.finance'),
         value: '2-1',
         children: [
           {
-            label: '财务1组',
+            label: t('pages.listTree.treeData.finance1'),
             value: '2-1-0',
           },
           {
-            label: '财务2组',
+            label: t('pages.listTree.treeData.finance2'),
             value: '2-1-1',
           },
         ],
@@ -76,11 +78,11 @@ export const TREE_DATA = [
     ],
   },
   {
-    label: '湖南',
+    label: t('pages.listTree.treeData.hunan'),
     value: 3,
   },
   {
-    label: '湖北',
+    label: t('pages.listTree.treeData.hubei'),
     value: 4,
   },
 ];

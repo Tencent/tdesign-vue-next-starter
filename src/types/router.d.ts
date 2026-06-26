@@ -2,10 +2,12 @@ import 'vue-router';
 
 import type { Component, DefineComponent, FunctionalComponent } from 'vue';
 
+import type { LocalizedTitle } from '@/locales';
+
 export {};
 declare module 'vue-router' {
   interface RouteMeta {
-    title?: string | Record<string, string>;
+    title?: LocalizedTitle;
     icon?: string | Component | FunctionalComponent | DefineComponent;
     expanded?: boolean;
     orderNo?: number;

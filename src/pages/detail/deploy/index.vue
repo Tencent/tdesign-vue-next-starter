@@ -57,7 +57,7 @@
       <template #body>
         <div class="dialog-info-block">
           <div class="dialog-info-block">
-            <div v-for="(item, index) in BASE_INFO_DATA" :key="index" class="info-item">
+            <div v-for="(item, index) in baseInfoData" :key="index" class="info-item">
               <h1>{{ item.name }}</h1>
               <span
                 :class="{
@@ -81,11 +81,12 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 
 import { getProjectList } from '@/api/detail';
+import type { ProjectInfo } from '@/api/model/detailModel';
 import { t } from '@/locales';
 import { useSettingStore } from '@/store';
 import { changeChartsTheme } from '@/utils/color';
 
-import { BASE_INFO_DATA } from './constants';
+import { getBaseInfoData } from './constants';
 import { get2ColBarChartDataSet, getSmoothLineDataSet } from './index';
 
 defineOptions({
@@ -139,7 +140,7 @@ echarts.use([
 const store = useSettingStore();
 
 const chartColors = computed(() => store.chartColors);
-const data = ref([]);
+const data = ref<ProjectInfo[]>([]);
 const pagination = ref({
   defaultPageSize: 10,
   total: 100,
@@ -159,13 +160,14 @@ const fetchData = async () => {
   }
 };
 const visible = ref(false);
+const baseInfoData = computed(() => getBaseInfoData());
 
 // monitorChart logic
 let monitorContainer: HTMLElement;
 let monitorChart: echarts.ECharts;
 const intervalId = ref();
 onMounted(() => {
-  monitorContainer = document.getElementById('monitorContainer');
+  monitorContainer = document.getElementById('monitorContainer')!;
   monitorChart = echarts.init(monitorContainer);
   monitorChart.setOption(getSmoothLineDataSet({ ...chartColors.value }));
   intervalId.value = setInterval(() => {
@@ -177,7 +179,7 @@ onMounted(() => {
 let dataContainer: HTMLElement;
 let dataChart: echarts.ECharts;
 onMounted(() => {
-  dataContainer = document.getElementById('dataContainer');
+  dataContainer = document.getElementById('dataContainer')!;
   dataChart = echarts.init(dataContainer);
   dataChart.setOption(get2ColBarChartDataSet({ ...chartColors.value }));
 });

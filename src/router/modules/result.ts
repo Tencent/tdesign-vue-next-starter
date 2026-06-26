@@ -1,12 +1,12 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import Layout from '@/layouts/index.vue';
+import { LAYOUT } from '@/utils/route/constant';
 
 export default [
   {
     path: '/result',
     name: 'result',
-    component: Layout,
+    component: LAYOUT,
     redirect: '/result/success',
     meta: {
       title: {

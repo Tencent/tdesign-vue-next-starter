@@ -8,7 +8,15 @@ import { getChartListColor } from '@/utils/color';
 
 /** 首页 dashboard 折线图 */
 export function constructInitDashboardDataset(type: string) {
-  const dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+  const dateArray: Array<string> = [
+    t('pages.dashboardBase.chart.week1'),
+    t('pages.dashboardBase.chart.week2'),
+    t('pages.dashboardBase.chart.week3'),
+    t('pages.dashboardBase.chart.week4'),
+    t('pages.dashboardBase.chart.week5'),
+    t('pages.dashboardBase.chart.week6'),
+    t('pages.dashboardBase.chart.week7'),
+  ];
 
   const datasetAxis = {
     xAxis: {
@@ -41,8 +49,8 @@ export function constructInitDashboardDataset(type: string) {
           symbolSize: 0,
           markPoint: {
             data: [
-              { type: 'max', name: '最大值' },
-              { type: 'min', name: '最小值' },
+              { type: 'max', name: t('pages.dashboardBase.chart.max') },
+              { type: 'min', name: t('pages.dashboardBase.chart.min') },
             ],
           },
           lineStyle: {
@@ -316,7 +324,7 @@ export function getPieChartDataSet({
     tooltip: {
       show: false,
       trigger: 'axis',
-      position: null,
+      position: undefined,
     },
     grid: {
       top: '0',
@@ -336,7 +344,7 @@ export function getPieChartDataSet({
     },
     series: [
       {
-        name: '销售渠道',
+        name: t('pages.dashboardBase.topPanel.analysis.channels'),
         type: 'pie',
         radius: ['48%', '60%'],
         avoidLabelOverlap: true,

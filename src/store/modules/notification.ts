@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
 
+import { t } from '@/locales';
 import type { NotificationItem } from '@/types/interface';
 
-const msgData = [
+const getMsgData = () => [
   {
     id: '123',
-    content: '腾讯大厦一楼改造施工项目 已通过审核！',
-    type: '合同动态',
+    content: t('pages.notification.msg1'),
+    type: t('pages.notification.contract'),
     status: true,
     collected: false,
     date: '2021-01-01 08:00',
@@ -14,8 +15,8 @@ const msgData = [
   },
   {
     id: '124',
-    content: '三季度生产原材料采购项目 开票成功！',
-    type: '票务动态',
+    content: t('pages.notification.msg2'),
+    type: t('pages.notification.invoice'),
     status: true,
     collected: false,
     date: '2021-01-01 08:00',
@@ -23,8 +24,8 @@ const msgData = [
   },
   {
     id: '125',
-    content: '2021-01-01 10:00的【国家电网线下签约】会议即将开始，请提前10分钟前往 会议室1 进行签到！',
-    type: '会议通知',
+    content: t('pages.notification.msg3'),
+    type: t('pages.notification.meeting'),
     status: true,
     collected: false,
     date: '2021-01-01 08:00',
@@ -32,8 +33,8 @@ const msgData = [
   },
   {
     id: '126',
-    content: '一季度生产原材料采购项目 开票成功！',
-    type: '票务动态',
+    content: t('pages.notification.msg4'),
+    type: t('pages.notification.invoice'),
     status: true,
     collected: false,
     date: '2021-01-01 08:00',
@@ -41,11 +42,11 @@ const msgData = [
   },
 ];
 
-type MsgDataType = typeof msgData;
+type MsgDataType = ReturnType<typeof getMsgData>;
 
 export const useNotificationStore = defineStore('notification', {
   state: () => ({
-    msgData,
+    msgData: getMsgData(),
   }),
   getters: {
     unreadMsg: (state) => state.msgData.filter((item: NotificationItem) => item.status),
@@ -55,6 +56,9 @@ export const useNotificationStore = defineStore('notification', {
     setMsgData(data: MsgDataType) {
       this.msgData = data;
     },
+    refreshMsgData() {
+      this.msgData = getMsgData();
+    },
   },
-  persist: true,
+  persist: false,
 });

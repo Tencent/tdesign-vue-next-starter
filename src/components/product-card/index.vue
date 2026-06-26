@@ -73,12 +73,13 @@ export interface CardProductType {
   isSetup: boolean;
   description: string;
   name: string;
+  index: number;
 }
 
 const props = defineProps({
   product: {
     type: Object as PropType<CardProductType>,
-    default: undefined,
+    required: true,
   },
 });
 

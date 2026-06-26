@@ -16,17 +16,16 @@
       </template>
       <menu-content :nav-data="menu" />
       <template #operations>
-        <t-button variant="text" shape="square" @click="changeCollapsed">
-          <template #icon><t-icon name="view-list" /></template>
-        </t-button>
-        <t-typography-text v-show="!collapsed" theme="primary"> TDesign Starter {{ pgk.version }} </t-typography-text>
+        <span :class="versionCls"> {{ !collapsed ? t('common.appName') : '' }} {{ pgk.version }} </span>
       </template>
     </t-menu>
     <div :class="`${prefix}-side-nav-placeholder${collapsed ? '-hidden' : ''}`"></div>
   </div>
 </template>
 <script setup lang="ts">
-import { difference, remove, union } from 'lodash';
+import difference from 'lodash/difference';
+import remove from 'lodash/remove';
+import union from 'lodash/union';
 import type { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
@@ -35,6 +34,7 @@ import { useRouter } from 'vue-router';
 import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
 import AssetLogo from '@/assets/assets-t-logo.svg?component';
 import { prefix } from '@/config/global';
+import { t } from '@/locales';
 import { getActive } from '@/router';
 import { useSettingStore } from '@/store';
 import type { MenuRoute, ModeType } from '@/types/interface';
