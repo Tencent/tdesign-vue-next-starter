@@ -9,7 +9,7 @@ const env = import.meta.env.MODE || 'development';
 const homepageModules = import.meta.glob('./modules/**/homepage.ts', { eager: true });
 
 // 导入modules非homepage相关固定路由
-const fixedModules = import.meta.glob('./modules/**/!(homepage).ts', { eager: true });
+const fixedModules = import.meta.glob(['./modules/**/*.ts', '!./modules/**/homepage.ts'], { eager: true });
 
 // 其他固定路由
 const defaultRouterList: Array<RouteRecordRaw> = [
