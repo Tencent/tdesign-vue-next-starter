@@ -16,7 +16,12 @@
       </template>
       <menu-content :nav-data="menu" />
       <template #operations>
-        <span :class="versionCls"> {{ !collapsed ? t('common.appName') : '' }} {{ pgk.version }} </span>
+        <t-button variant="text" shape="square" @click="changeCollapsed">
+          <template #icon><t-icon name="view-list" /></template>
+        </t-button>
+        <span v-show="!isCompact" :class="versionCls">
+          {{ !collapsed ? t('common.appName') : '' }} {{ pgk.version }}
+        </span>
       </template>
     </t-menu>
     <div :class="`${prefix}-side-nav-placeholder${collapsed ? '-hidden' : ''}`"></div>
@@ -104,16 +109,13 @@ const onExpanded = (value: MenuValue[]) => {
   expanded.value = allExpanded;
 };
 
+const changeCollapsed = () => {
+  settingStore.updateConfig({
+    isSidebarCompact: !settingStore.isSidebarCompact,
+  });
+};
 const sideMode = computed(() => {
   return theme === 'dark';
-});
-const sideNavCls = computed(() => {
-  return [
-    `${prefix}-sidebar-layout`,
-    {
-      [`${prefix}-sidebar-compact`]: isCompact,
-    },
-  ];
 });
 const logoCls = computed(() => {
   return [
@@ -128,6 +130,14 @@ const versionCls = computed(() => {
     `version-container`,
     {
       [`${prefix}-side-nav-dark`]: sideMode.value,
+    },
+  ];
+});
+const sideNavCls = computed(() => {
+  return [
+    `${prefix}-sidebar-layout`,
+    {
+      [`${prefix}-sidebar-compact`]: isCompact,
     },
   ];
 });

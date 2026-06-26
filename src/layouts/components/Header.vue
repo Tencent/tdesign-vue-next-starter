@@ -6,9 +6,6 @@
           <logo-full class="t-logo" />
         </span>
         <div v-else class="header-operate-left">
-          <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
-            <t-icon class="collapsed-icon" name="view-list" />
-          </t-button>
           <search :layout="layout" />
         </div>
       </template>
@@ -135,13 +132,6 @@ const menuCls = computed(() => {
   ];
 });
 const menuTheme = computed(() => theme as ModeType);
-
-// 切换语言
-const changeCollapsed = () => {
-  settingStore.updateConfig({
-    isSidebarCompact: !settingStore.isSidebarCompact,
-  });
-};
 
 const handleNav = (url: string) => {
   router.push(url);
