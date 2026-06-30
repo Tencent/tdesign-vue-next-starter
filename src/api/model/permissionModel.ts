@@ -6,9 +6,7 @@ export interface MenuListResult {
 }
 
 export type Component<T = any> =
-  | ReturnType<typeof defineComponent>
-  | (() => Promise<typeof import('*.vue')>)
-  | (() => Promise<T>);
+  ReturnType<typeof defineComponent> | (() => Promise<typeof import('*.vue')>) | (() => Promise<T>);
 
 export interface RouteItem {
   path: string;

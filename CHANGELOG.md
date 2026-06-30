@@ -5,6 +5,32 @@ toc: false
 docClass: timeline
 ---
 
+## 🌈 0.14.0 `2026-06-30` 
+### ❗️ Breaking Change
+- 修改最低要求Node版本为 `22.12.0` @timi137137  @liweijie0812 ([#951](https://github.com/Tencent/tdesign-vue-next-starter/pull/951))
+
+### 🚀 Features
+- 新增登录页语言切换组件并更新登录成功提示多语言 @RSS1102 ([#902](https://github.com/Tencent/tdesign-vue-next-starter/pull/902))
+- 修复侧边栏与设计稿不符的问题 @timi137137 @liweijie0812 ([#924](https://github.com/Tencent/tdesign-vue-next-starter/pull/924))
+
+### 🐞 Bug Fixes
+- 修复打开Vue Tools时，切换路由导致页面崩溃的问题 @SharerMax ([#888](https://github.com/Tencent/tdesign-vue-next-starter/pull/888))
+- 修复多级菜单下无法正确展开菜单的问题 @RSS1102 ([#755](https://github.com/Tencent/tdesign-vue-next-starter/pull/755))
+- 修复菜单对于 `meta.expand` 属性不响应的问题 @RSS1102 ([#890](https://github.com/Tencent/tdesign-vue-next-starter/pull/890))
+- 修复深色模式下页面背景显示问题 @runoob-coder ([#950](https://github.com/Tencent/tdesign-vue-next-starter/pull/950))
+- 修复路由无法匹配包含短横线的问题 @liweijie0812 ([#948](https://github.com/Tencent/tdesign-vue-next-starter/pull/948))
+- 修复列表树搜索后无法正确收起展开问题(#807) @dingqianwen ([#913](https://github.com/Tencent/tdesign-vue-next-starter/pull/913))
+
+### 📈 Performance
+- 优化Vite环境变量类型声明 @SharerMax ([#889](https://github.com/Tencent/tdesign-vue-next-starter/pull/889))
+- 优化路由相关类型声明 @SharerMax ([#891](https://github.com/Tencent/tdesign-vue-next-starter/pull/891))
+
+### 🚧 Others
+- 重构国际化加载逻辑为 JSON 格式 @RSS1102 ([#936](https://github.com/Tencent/tdesign-vue-next-starter/pull/936))
+- 重构请求节流/防抖逻辑以复用包装函数 @liweijie0812 ([#955](https://github.com/Tencent/tdesign-vue-next-starter/pull/955))
+- 优化组件库类型引入 @liweijie0812 ([#940](https://github.com/Tencent/tdesign-vue-next-starter/pull/940))
+- 升级组件库版本及依赖版本 @timi137137 @liweijie0812 ([#951](https://github.com/Tencent/tdesign-vue-next-starter/pull/951))
+
 ## 🌈 0.13.1 `2025-06-17` 
 ### 🚀 Features
 - `feat`: 使用 `defineOptions` 定义组件 @liweijie0812 ([#849](https://github.com/Tencent/tdesign-vue-next-starter/pull/849))
