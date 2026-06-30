@@ -89,7 +89,7 @@
               variant="light"
               size="medium"
               style="margin-left: var(--td-comp-margin-s)"
-              >超预算</t-tag
+              >{{ t('pages.detailCard.detail.budgetExceeded') }}</t-tag
             >
           </span>
         </template>
@@ -131,17 +131,21 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 import { getPurchaseList } from '@/api/detail';
+import type { PurchaseInfo } from '@/api/model/detailModel';
 import { t } from '@/locales';
 
 import Product from './components/Product.vue';
-import { BASE_INFO_DATA, PRODUCT_LIST } from './constants';
+import { getBaseInfoData, getProductList } from './constants';
 
 defineOptions({
   name: 'DetailAdvanced',
 });
+
+const BASE_INFO_DATA = computed(() => getBaseInfoData());
+const PRODUCT_LIST = computed(() => getProductList());
 
 const columns = [
   {
@@ -194,7 +198,7 @@ const columns = [
   },
 ];
 
-const data = ref([]);
+const data = ref<PurchaseInfo[]>([]);
 const pagination = ref({
   defaultPageSize: 10,
   total: 100,
@@ -203,8 +207,9 @@ const pagination = ref({
 
 const updateCurrent = ref(0);
 
+const intervalId = ref();
 const stepUpdate = () => {
-  setInterval(() => {
+  intervalId.value = setInterval(() => {
     if (updateCurrent.value > 5) {
       updateCurrent.value = -1;
     }
@@ -224,6 +229,12 @@ const fetchData = async () => {
     console.log(e);
   }
 };
+
+onUnmounted(() => {
+  if (intervalId.value) {
+    clearInterval(intervalId.value);
+  }
+});
 
 onMounted(() => {
   stepUpdate();

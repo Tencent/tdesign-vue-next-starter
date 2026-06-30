@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "TDesign MCP Server": {
+      "timeout": 60000,
+      "command": "npx",
+      "args": [
+        "-y",
+        "tdesign-mcp-server"
+      ],
+      "type": "stdio",
+      "disabled": false
+    }
+  }
+}

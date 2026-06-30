@@ -2,7 +2,7 @@
   <div>
     <template v-for="item in list" :key="item.path">
       <template v-if="!item.children || !item.children.length || item.meta?.single">
-        <t-menu-item v-if="getHref(item)" :name="item.path" :value="getPath(item)" @click="openHref(getHref(item)[0])">
+        <t-menu-item v-if="getHref(item)" :name="item.path" :value="getPath(item)" @click="openHref(getHref(item)![0])">
           <template #icon>
             <component :is="menuIcon(item)" class="t-icon"></component>
           </template>
@@ -28,11 +28,12 @@
 import type { PropType } from 'vue';
 import { computed } from 'vue';
 
+import type { LocalizedTitle } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
 import type { MenuRoute } from '@/types/interface';
 
-type ListItemType = MenuRoute & { icon?: string };
+type ListItemType = MenuRoute;
 
 const { navData } = defineProps({
   navData: {
@@ -44,6 +45,7 @@ const { navData } = defineProps({
 const active = computed(() => getActive());
 
 const { locale } = useLocale();
+
 const list = computed(() => {
   return getMenuList(navData);
 });
@@ -54,12 +56,12 @@ const menuIcon = (item: ListItemType) => {
   return RenderIcon;
 };
 
-const renderMenuTitle = (title: string | Record<string, string>) => {
-  if (typeof title === 'string') return title;
-  return title[locale.value];
+const renderMenuTitle = (title?: LocalizedTitle) => {
+  if (!title) return '';
+  return title[locale.value as keyof LocalizedTitle] || '';
 };
 
-const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
+function getMenuList(list: MenuRoute[], basePath?: string): MenuRoute[] {
   if (!list || list.length === 0) {
     return [];
   }
@@ -73,20 +75,20 @@ const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
 
       return {
         path,
-        title: item.meta?.title,
+        title: item.meta?.title as LocalizedTitle | undefined,
         icon: item.meta?.icon,
         children: getMenuList(item.children, path),
         meta: item.meta,
         redirect: item.redirect,
-      };
+      } as MenuRoute;
     })
     .filter((item) => item.meta && item.meta.hidden !== true);
-};
+}
 
 const getHref = (item: MenuRoute) => {
   const { frameSrc, frameBlank } = item.meta;
   if (frameSrc && frameBlank) {
-    return frameSrc.match(/(https?):\/\/([\w.]+)(?:\/\S*)?/);
+    return frameSrc.match(/(https?):\/\/([\w.-]+)(?:\/\S*)?/);
   }
   return null;
 };

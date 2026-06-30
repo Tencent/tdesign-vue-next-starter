@@ -48,12 +48,12 @@
     </template>
 
     <div v-else-if="dataLoading" class="list-card-loading">
-      <t-loading size="large" text="加载数据中..." />
+      <t-loading size="large" :text="t('pages.listCard.loading')" />
     </div>
 
     <t-dialog
       v-model:visible="confirmVisible"
-      header="确认删除所选产品？"
+      :header="t('pages.listCard.deleteConfirm')"
       :body="confirmBody"
       :on-cancel="onCancel"
       @confirm="onConfirmDelete"
@@ -66,6 +66,7 @@ import { MessagePlugin } from 'tdesign-vue-next';
 import { computed, onMounted, ref } from 'vue';
 
 import { getCardList } from '@/api/list';
+import type { CardList } from '@/api/model/listModel';
 import type { CardProductType } from '@/components/product-card/index.vue';
 import ProductCard from '@/components/product-card/index.vue';
 import { t } from '@/locales';
@@ -87,9 +88,9 @@ const INITIAL_DATA: FormData = {
 };
 
 const pagination = ref({ current: 1, pageSize: 12, total: 0 });
-const deleteProduct = ref(undefined);
+const deleteProduct = ref<CardProductType | undefined>(undefined);
 
-const productList = ref([]);
+const productList = ref<CardList[]>([]);
 const dataLoading = ref(true);
 
 const fetchData = async () => {
@@ -108,7 +109,7 @@ const fetchData = async () => {
 };
 
 const confirmBody = computed(() =>
-  deleteProduct.value ? `确认删除后${deleteProduct.value.name}的所有产品信息将被清空, 且无法恢复` : '',
+  deleteProduct.value ? t('pages.listCard.deleteTip', { name: deleteProduct.value.name }) : '',
 );
 
 onMounted(() => {
@@ -132,10 +133,11 @@ const handleDeleteItem = (product: CardProductType) => {
   deleteProduct.value = product;
 };
 const onConfirmDelete = () => {
+  if (!deleteProduct.value) return;
   const { index } = deleteProduct.value;
   productList.value.splice(index - 1, 1);
   confirmVisible.value = false;
-  MessagePlugin.success('删除成功');
+  MessagePlugin.success(t('pages.listCard.deleteSuccess'));
 };
 const onCancel = () => {
   deleteProduct.value = undefined;

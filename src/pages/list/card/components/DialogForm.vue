@@ -26,8 +26,8 @@
           <t-textarea v-model="textareaValue" :style="{ width: '480px' }" name="description" />
         </t-form-item>
         <t-form-item style="float: right">
-          <t-button variant="outline" @click="onClickCloseBtn">取消</t-button>
-          <t-button theme="primary" type="submit">确定</t-button>
+          <t-button variant="outline" @click="onClickCloseBtn">{{ t('pages.listCard.dialogForm.cancel') }}</t-button>
+          <t-button theme="primary" type="submit">{{ t('pages.listCard.dialogForm.confirm') }}</t-button>
         </t-form-item>
       </t-form>
     </template>
@@ -37,7 +37,7 @@
 import type { FormRules, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 import { t } from '@/locales';
 
@@ -72,11 +72,11 @@ const INITIAL_DATA: FormData = {
   amount: 0,
 };
 
-const SELECT_OPTIONS = [
-  { label: '网关', value: '1' },
-  { label: '人工智能', value: '2' },
-  { label: 'CVM', value: '3' },
-];
+const SELECT_OPTIONS = computed(() => [
+  { label: t('pages.listCard.dialogForm.typeGateway'), value: '1' },
+  { label: t('pages.listCard.dialogForm.typeAI'), value: '2' },
+  { label: t('pages.listCard.dialogForm.typeCVM'), value: '3' },
+]);
 
 const formVisible = ref(false);
 const formData = ref({ ...INITIAL_DATA });
@@ -84,7 +84,7 @@ const textareaValue = ref('');
 
 const onSubmit = ({ validateResult, firstError }: SubmitContext) => {
   if (!firstError) {
-    MessagePlugin.success('提交成功');
+    MessagePlugin.success(t('components.submitSuccess'));
     formVisible.value = false;
   } else {
     console.log('Errors: ', validateResult);
@@ -114,11 +114,13 @@ watch(
 watch(
   () => data,
   (val) => {
-    formData.value = val;
+    if (val) {
+      formData.value = { ...val };
+    }
   },
 );
 
-const rules: FormRules<FormData> = {
-  name: [{ required: true, message: '请输入产品名称', type: 'error' }],
-};
+const rules = computed<FormRules<FormData>>(() => ({
+  name: [{ required: true, message: t('pages.listCard.dialogForm.validation.productName'), type: 'error' }],
+}));
 </script>

@@ -46,7 +46,7 @@
         <span class="tip">{{ t('pages.login.wechatLogin') }}</span>
         <span class="refresh">{{ t('pages.login.refresh') }} <t-icon name="refresh" /> </span>
       </div>
-      <qrcode-vue value="" :size="160" level="H" />
+      <t-qrcode value="tdesign" :size="160" level="H" />
     </template>
 
     <!-- 手机号登录 -->
@@ -62,7 +62,7 @@
       <t-form-item class="verification-code" name="verifyCode">
         <t-input v-model="formData.verifyCode" size="large" :placeholder="t('pages.login.input.verification')" />
         <t-button size="large" variant="outline" :disabled="countDown > 0" @click="sendCode">
-          {{ countDown === 0 ? t('pages.login.sendVerification') : `${countDown}秒后可重发` }}
+          {{ countDown === 0 ? t('pages.login.sendVerification') : t('pages.login.countdown', { count: countDown }) }}
         </t-button>
       </t-form-item>
     </template>
@@ -81,10 +81,9 @@
   </t-form>
 </template>
 <script setup lang="ts">
-import QrcodeVue from 'qrcode.vue';
 import type { FormInstanceFunctions, FormRule, SubmitContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import { useCounter } from '@/hooks';
@@ -101,12 +100,12 @@ const INITIAL_DATA = {
   checked: false,
 };
 
-const FORM_RULES: Record<string, FormRule[]> = {
+const FORM_RULES = computed<Record<string, FormRule[]>>(() => ({
   phone: [{ required: true, message: t('pages.login.required.phone'), type: 'error' }],
   account: [{ required: true, message: t('pages.login.required.account'), type: 'error' }],
   password: [{ required: true, message: t('pages.login.required.password'), type: 'error' }],
   verifyCode: [{ required: true, message: t('pages.login.required.verification'), type: 'error' }],
-};
+}));
 
 const type = ref('password');
 
@@ -127,7 +126,7 @@ const route = useRoute();
  * 发送验证码
  */
 const sendCode = () => {
-  form.value.validate({ fields: ['phone'] }).then((e) => {
+  form.value!.validate({ fields: ['phone'] }).then((e) => {
     if (e === true) {
       handleCounter();
     }
@@ -139,13 +138,13 @@ const onSubmit = async (ctx: SubmitContext) => {
     try {
       await userStore.login(formData.value);
 
-      MessagePlugin.success('登录成功');
+      MessagePlugin.success(t('pages.login.loginSuccess'));
       const redirect = route.query.redirect as string;
       const redirectUrl = redirect ? decodeURIComponent(redirect) : '/dashboard';
       router.push(redirectUrl);
-    } catch (e) {
+    } catch (e: unknown) {
       console.log(e);
-      MessagePlugin.error(e.message);
+      MessagePlugin.error((e as Error).message);
     }
   }
 };

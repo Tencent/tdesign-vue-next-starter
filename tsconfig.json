@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "preserve",
     "jsxImportSource": "vue",
     "sourceMap": true,
@@ -11,7 +12,7 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "tdesign-vue-next/global"],
     "noEmit": true,
     "baseUrl": "./",
     "paths": {
@@ -27,8 +28,7 @@
     "**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "node_modules/tdesign-vue-next/global.d.ts"
+    "src/**/*.vue"
   ],
   "compileOnSave": false
 }

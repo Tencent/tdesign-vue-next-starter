@@ -8,7 +8,7 @@
             <t-radio-button value="monthVal">{{ t('pages.dashboardBase.rankList.month') }}</t-radio-button>
           </t-radio-group>
         </template>
-        <t-table :data="SALE_TEND_LIST" :columns="SALE_COLUMNS" row-key="productName">
+        <t-table :data="saleTendData" :columns="SALE_COLUMNS" row-key="productName">
           <template #index="{ rowIndex }">
             <span :class="getRankClass(rowIndex)">
               {{ rowIndex + 1 }}
@@ -35,7 +35,7 @@
             <t-radio-button value="monthVal">{{ t('pages.dashboardBase.rankList.month') }}</t-radio-button>
           </t-radio-group>
         </template>
-        <t-table :data="BUY_TEND_LIST" :columns="BUY_COLUMNS" row-key="productName">
+        <t-table :data="buyTendData" :columns="BUY_COLUMNS" row-key="productName">
           <template #index="{ rowIndex }">
             <span :class="getRankClass(rowIndex)">
               {{ rowIndex + 1 }}
@@ -56,13 +56,28 @@
 </template>
 <script setup lang="ts">
 import type { TdBaseTableProps } from 'tdesign-vue-next';
+import { computed } from 'vue';
 
 import Trend from '@/components/trend/index.vue';
 import { t } from '@/locales';
 
 import { BUY_TEND_LIST, SALE_TEND_LIST } from '../constants';
 
-const SALE_COLUMNS: TdBaseTableProps['columns'] = [
+const saleTendData = computed(() =>
+  SALE_TEND_LIST.map((item) => ({
+    ...item,
+    productName: t(item.productName),
+  })),
+);
+
+const buyTendData = computed(() =>
+  BUY_TEND_LIST.map((item) => ({
+    ...item,
+    productName: t(item.productName),
+  })),
+);
+
+const SALE_COLUMNS = computed<TdBaseTableProps['columns']>(() => [
   {
     align: 'center',
     colKey: 'index',
@@ -96,9 +111,9 @@ const SALE_COLUMNS: TdBaseTableProps['columns'] = [
     width: 70,
     fixed: 'right',
   },
-];
+]);
 
-const BUY_COLUMNS: TdBaseTableProps['columns'] = [
+const BUY_COLUMNS = computed<TdBaseTableProps['columns']>(() => [
   {
     align: 'center',
     colKey: 'index',
@@ -132,7 +147,7 @@ const BUY_COLUMNS: TdBaseTableProps['columns'] = [
     width: 70,
     fixed: 'right',
   },
-];
+]);
 
 const rehandleClickOp = (val: MouseEvent) => {
   console.log(val);

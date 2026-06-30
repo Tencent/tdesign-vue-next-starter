@@ -124,16 +124,16 @@ const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
 
-const MODE_OPTIONS = [
+const MODE_OPTIONS = computed(() => [
   { type: 'light', text: t('layout.setting.theme.options.light') },
   { type: 'dark', text: t('layout.setting.theme.options.dark') },
   { type: 'auto', text: t('layout.setting.theme.options.auto') },
-];
+]);
 
 const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
-    if (Object.prototype.hasOwnProperty.call(styleConfig, key)) {
+    if (Object.hasOwn(styleConfig, key)) {
       (styleConfig[key as keyof typeof STYLE_CONFIG] as any) = settingStore[key as keyof typeof STYLE_CONFIG];
     }
   }
@@ -164,7 +164,7 @@ const changeColor = (hex: string) => {
 };
 
 onMounted(() => {
-  document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+  document.querySelector('.dynamic-color-btn')?.addEventListener('click', () => {
     isColoPickerDisplay.value = true;
   });
 });
@@ -181,11 +181,11 @@ const handleCopy = () => {
   copy()
     .then(() => {
       MessagePlugin.closeAll();
-      MessagePlugin.success('复制成功');
+      MessagePlugin.success(t('components.copySuccess'));
     })
     .catch(() => {
       MessagePlugin.closeAll();
-      MessagePlugin.error('复制失败');
+      MessagePlugin.error(t('components.copyFail'));
     });
 };
 const getModeIcon = (mode: string) => {

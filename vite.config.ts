@@ -45,8 +45,19 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     server: {
       port: 3002,
       host: '0.0.0.0',
+      allowedHosts: true,
       proxy: {
         [VITE_API_URL_PREFIX]: 'http://127.0.0.1:3000/',
+      },
+    },
+
+    // https://github.com/vueuse/vueuse/issues/5387#issuecomment-4734186040
+    build: {
+      rolldownOptions: {
+        onLog(level, log, defaultHandler) {
+          if (log.code === 'INVALID_ANNOTATION') return null;
+          else defaultHandler(level, log);
+        },
       },
     },
   };

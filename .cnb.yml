@@ -1,0 +1,37 @@
+.sync: &sync
+  - imports:
+      - https://cnb.cool/tencent/tdesign/tdesign-private/-/blob/main/cnb-envs.yml
+    stages:
+      - name: Sync to GitHub
+        image: tencentcom/git-sync
+        settings:
+          target_url: https://github.com/Tencent/tdesign-vue-next-starter.git
+          auth_type: https
+          username: ${GIT_USERNAME}
+          password: ${GIT_ACCESS_TOKEN}
+          push_tags: true
+
+"(**)":
+  push:
+    - <<: *sync
+$:
+  vscode:
+    - docker:
+        build: 
+          dockerfile: .cnb/Dockerfile
+          by:
+            .cnb/mcp-servers.json
+        
+        volumes:
+          - node_modules:copy-on-write
+      env:
+        CNB_WELCOME_CMD: |
+          npm run dev
+      services:
+        - vscode
+        - docker
+      stages:
+        - name: install dependencies
+          script: 
+          - npm install
+          - sleep 8

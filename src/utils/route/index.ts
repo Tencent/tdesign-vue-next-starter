@@ -1,7 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 import type { RouteItem } from '@/api/model/permissionModel';
-import type { RouteMeta } from '@/types/interface';
 import {
   BLANK_LAYOUT,
   EXCEPTION_COMPONENT,
@@ -93,7 +92,7 @@ export function transformObjectToRoute<T = RouteItem>(routeList: RouteItem[]): T
         route.component = LAYOUT;
         route.name = `${route.name}Parent`;
         route.path = '';
-        route.meta = (route.meta || {}) as RouteMeta;
+        route.meta = route.meta || {};
       }
     } else {
       throw new Error('component is undefined');

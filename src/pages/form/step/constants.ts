@@ -1,35 +1,37 @@
 import type { FormRule } from 'tdesign-vue-next';
 
-export const FORM_RULES: Record<string, FormRule[]> = {
-  name: [{ required: true, type: 'error' }],
-  type: [{ required: true, type: 'error' }],
-  title: [{ required: true, type: 'error' }],
-  taxNum: [{ required: true, type: 'error' }],
-  consignee: [{ required: true, type: 'error' }],
-  mobileNum: [{ required: true, type: 'error' }],
-  deliveryAddress: [{ required: true, type: 'error' }],
-  fullAddress: [{ required: true, type: 'error' }],
-};
+import { t } from '@/locales';
 
-export const NAME_OPTIONS = [
-  { label: 'A', value: '1' },
-  { label: 'B', value: '2' },
-  { label: 'C', value: '3' },
+export const getFormRules = (): Record<string, FormRule[]> => ({
+  name: [{ required: true, message: t('pages.formStep.validation.name'), type: 'error' }],
+  type: [{ required: true, message: t('pages.formStep.validation.type'), type: 'error' }],
+  title: [{ required: true, message: t('pages.formStep.validation.title'), type: 'error' }],
+  taxNum: [{ required: true, message: t('pages.formStep.validation.taxNum'), type: 'error' }],
+  consignee: [{ required: true, message: t('pages.formStep.validation.consignee'), type: 'error' }],
+  mobileNum: [{ required: true, message: t('pages.formStep.validation.mobileNum'), type: 'error' }],
+  deliveryAddress: [{ required: true, message: t('pages.formStep.validation.deliveryAddress'), type: 'error' }],
+  fullAddress: [{ required: true, message: t('pages.formStep.validation.fullAddress'), type: 'error' }],
+});
+
+export const getNameOptions = () => [
+  { label: t('pages.formStep.options.nameA'), value: '1' },
+  { label: t('pages.formStep.options.nameB'), value: '2' },
+  { label: t('pages.formStep.options.nameC'), value: '3' },
 ];
 
-export const TYPE_OPTIONS = [
-  { label: 'Type A', value: '1' },
-  { label: 'Type B', value: '2' },
-  { label: 'Type C', value: '3' },
+export const getTypeOptions = () => [
+  { label: t('pages.formStep.options.typeA'), value: '1' },
+  { label: t('pages.formStep.options.typeB'), value: '2' },
+  { label: t('pages.formStep.options.typeC'), value: '3' },
 ];
 
-export const ADDRESS_OPTIONS = [
-  { label: '广东省深圳市南山区', value: '1' },
-  { label: '北京市海淀区', value: '2' },
-  { label: '上海市徐汇区', value: '3' },
-  { label: '四川省成都市高新区', value: '4' },
-  { label: '广东省广州市天河区', value: '5' },
-  { label: '陕西省西安市高新区', value: '6' },
+export const getAddressOptions = () => [
+  { label: t('pages.formStep.options.address1'), value: '1' },
+  { label: t('pages.formStep.options.address2'), value: '2' },
+  { label: t('pages.formStep.options.address3'), value: '3' },
+  { label: t('pages.formStep.options.address4'), value: '4' },
+  { label: t('pages.formStep.options.address5'), value: '5' },
+  { label: t('pages.formStep.options.address6'), value: '6' },
 ];
 
 export const INITIAL_DATA1 = {
