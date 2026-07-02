@@ -45,7 +45,7 @@
     "@types/echarts": "^5.0.0",
     "@types/lodash": "^4.17.24",
     "@types/mockjs": "^1.0.10",
-    "@types/node": "^25.9.4",
+    "@types/node": "^26.1.0",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.15.1",
     "@vitejs/plugin-vue": "^6.0.7",
