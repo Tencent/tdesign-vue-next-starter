@@ -81,10 +81,44 @@ export const getActive = (maxLevel = 3): string => {
     .join('');
 };
 
-const router = createRouter({
-  history: createWebHistory(env === 'site' ? '/starter/vue-next/' : import.meta.env.VITE_BASE_URL),
-  routes: allRoutes,
-  scrollBehavior() {
+// 临时拦截 document.addEventListener，丢弃 vue-router 在 createWebHistory 阶段
+// 注册的 visibilitychange 监听。
+// 背景：vue-router(4.x/5.x) 会在窗口最小化时(visibilityState 变为 hidden)
+// 调用 history.replaceState(带非空 state)，在 Edge 下会触发窗口激活 bug，
+// 导致最小化后窗口立即回弹显示。详见 https://github.com/Tencent/tdesign-vue-next-starter/issues/975
+// 副作用：仅不再通过该监听持久化滚动位置，正常路由导航/前进后退的滚动恢复不受影响。
+const createRouterWithScrollFix = () => {
+  const originalAddEventListener = document.addEventListener.bind(document);
+  // 仅屏蔽 vue-router 注册的 visibilitychange，避免最小化时触发 replaceState
+  const patchedAddEventListener = ((
+    type: string,
+    listener: EventListenerOrEventListenerObject,
+    options?: boolean | AddEventListenerOptions,
+  ) => {
+    if (type === 'visibilitychange') return;
+    return originalAddEventListener(type, listener, options);
+  }) as unknown as typeof document.addEventListener;
+  document.addEventListener = patchedAddEventListener;
+  try {
+    return createRouter({
+      history: createWebHistory(env === 'site' ? '/starter/vue-next/' : import.meta.env.VITE_BASE_URL),
+      routes: allRoutes,
+      scrollBehavior() {
+        return {
+          el: '#app',
+          top: 0,
+          behavior: 'smooth',
+        };
+      },
+    });
+  } finally {
+    document.addEventListener = originalAddEventListener;
+  }
+};
+
+const router = createRouterWithScrollFix();
+
+export default router;
     return {
       el: '#app',
       top: 0,
