@@ -38,7 +38,7 @@ router.beforeEach(async (to, from, next) => {
           // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
           next({ path: to.fullPath, replace: true, query: to.query });
         } else {
-          const redirect = decodeURIComponent((from.query.redirect || to.path) as string);
+          const redirect = (from.query.redirect || to.path) as string;
           next(to.path === redirect ? { ...to, replace: true } : { path: redirect, query: to.query });
           return;
         }
@@ -52,7 +52,7 @@ router.beforeEach(async (to, from, next) => {
       MessagePlugin.error((error as Error).message);
       next({
         path: '/login',
-        query: { redirect: encodeURIComponent(to.fullPath) },
+        query: { redirect: to.fullPath },
       });
       NProgress.done();
     }
@@ -63,7 +63,7 @@ router.beforeEach(async (to, from, next) => {
     } else {
       next({
         path: '/login',
-        query: { redirect: encodeURIComponent(to.fullPath) },
+        query: { redirect: to.fullPath },
       });
     }
     NProgress.done();

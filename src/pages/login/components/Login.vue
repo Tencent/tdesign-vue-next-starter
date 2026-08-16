@@ -140,7 +140,7 @@ const onSubmit = async (ctx: SubmitContext) => {
 
       MessagePlugin.success(t('pages.login.loginSuccess'));
       const redirect = route.query.redirect as string;
-      const redirectUrl = redirect ? decodeURIComponent(redirect) : '/dashboard';
+      const redirectUrl = redirect || '/dashboard';
       router.push(redirectUrl);
     } catch (e: unknown) {
       console.log(e);
