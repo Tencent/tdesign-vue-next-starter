@@ -50,7 +50,7 @@
     "@types/qs": "^6.15.1",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitejs/plugin-vue-jsx": "^5.1.6",
-    "@vue/compiler-sfc": "~3.5.39",
+    "@vue/compiler-sfc": "~3.5.42",
     "commitizen": "^4.3.2",
     "cz-conventional-changelog": "^3.3.0",
     "esbuild": "^0.28.1",
