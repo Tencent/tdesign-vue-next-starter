@@ -140,7 +140,7 @@ const handleNav = (url: string) => {
 const handleLogout = () => {
   router.push({
     path: '/login',
-    query: { redirect: encodeURIComponent(router.currentRoute.value.fullPath) },
+    query: { redirect: router.currentRoute.value.fullPath },
   });
 };
 
