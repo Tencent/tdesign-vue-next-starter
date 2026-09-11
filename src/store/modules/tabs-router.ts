@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 
 import { store } from '@/store';
 import type { TRouterInfo, TTabRouterType } from '@/types/interface';
+import { normalizePath } from '@/utils/route';
 
 const homeRoute: Array<TRouterInfo> = [
   {
@@ -38,8 +39,13 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
     appendTabRouterList(newRoute: TRouterInfo) {
       // 不要将判断条件newRoute.meta.keepAlive !== false修改为newRoute.meta.keepAlive，starter默认开启保活，所以meta.keepAlive未定义时也需要进行保活，只有显式说明false才禁用保活。
       const needAlive = !ignoreCacheRoutes.includes(newRoute.name as string) && newRoute.meta?.keepAlive !== false;
-      if (!this.tabRouters.some((route: TRouterInfo) => route.path === newRoute.path)) {
-        this.tabRouterList = this.tabRouterList.concat({ ...newRoute, isAlive: needAlive });
+      const normalizedPath = normalizePath(newRoute.path);
+      const existed = this.tabRouters.some((route: TRouterInfo) => {
+        return route.path === normalizedPath || normalizePath(route.path) === normalizedPath;
+      });
+
+      if (!existed) {
+        this.tabRouterList = this.tabRouterList.concat({ ...newRoute, path: normalizedPath, isAlive: needAlive });
       }
     },
     // 处理关闭当前

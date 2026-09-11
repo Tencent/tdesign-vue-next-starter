@@ -5,7 +5,7 @@
       drag-sort
       theme="card"
       :class="`${prefix}-layout-tabs-nav`"
-      :value="route.path"
+      :value="currentPath"
       :style="{ position: 'sticky', top: 0, width: '100%' }"
       @change="(value) => handleChangeCurrentTab(value as string)"
       @remove="handleRemove"
@@ -80,6 +80,7 @@ import { t } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 import { useSettingStore, useTabsRouterStore } from '@/store';
 import type { TRouterInfo, TTabRemoveOptions } from '@/types/interface';
+import { normalizePath } from '@/utils/route';
 
 import LBreadcrumb from './Breadcrumb.vue';
 import LContent from './Content.vue';
@@ -90,23 +91,32 @@ const router = useRouter();
 
 const settingStore = useSettingStore();
 const tabsRouterStore = useTabsRouterStore();
-const tabRouters = computed(() => tabsRouterStore.tabRouters.filter((route) => route.isAlive || route.isHome));
+const currentPath = computed(() => normalizePath(route.path));
+const tabRouters = computed(() =>
+  tabsRouterStore.tabRouters
+    .filter((item) => item.isAlive || item.isHome)
+    .map((item) => {
+      const path = normalizePath(item.path);
+      return path === item.path ? item : { ...item, path };
+    }),
+);
 const activeTabPath = ref<string | null>('');
 
 const { locale } = useLocale();
 
 const handleChangeCurrentTab = (path: string) => {
-  const { tabRouters } = tabsRouterStore;
-  const foundRoute = tabRouters.find((i) => i.path === path);
+  const foundRoute = tabRouters.value.find((i) => i.path === path);
   router.push({ path, query: foundRoute?.query });
 };
 
 const handleRemove = (options: TTabRemoveOptions) => {
-  const { tabRouters } = tabsRouterStore;
-  const nextRouter = tabRouters[options.index + 1] || tabRouters[options.index - 1];
+  const list = tabRouters.value;
+  const nextRouter = list[options.index + 1] || list[options.index - 1];
 
   tabsRouterStore.subtractCurrentTabRouter({ path: options.value as string, routeIdx: options.index });
-  if ((options.value as string) === route.path) router.push({ path: nextRouter.path, query: nextRouter.query });
+  if (options.value === currentPath.value) {
+    router.push({ path: nextRouter.path, query: nextRouter.query });
+  }
 };
 
 const renderTitle = (title?: LocalizedTitle) => {
@@ -139,10 +149,8 @@ const handleCloseOther = (path: string, routeIdx: number) => {
 
 // 处理非当前路由操作的副作用
 const handleOperationEffect = (type: 'other' | 'ahead' | 'behind', routeIndex: number) => {
-  const currentPath = router.currentRoute.value.path;
-  const { tabRouters } = tabsRouterStore;
-
-  const currentIdx = tabRouters.findIndex((i) => i.path === currentPath);
+  const list = tabRouters.value;
+  const currentIdx = list.findIndex((i) => i.path === currentPath.value);
   // 存在三种情况需要刷新当前路由
   // 点击非当前路由的关闭其他、点击非当前路由的关闭左侧且当前路由小于触发路由、点击非当前路由的关闭右侧且当前路由大于触发路由
   const needRefreshRouter =
@@ -150,8 +158,8 @@ const handleOperationEffect = (type: 'other' | 'ahead' | 'behind', routeIndex: n
     (type === 'ahead' && currentIdx < routeIndex) ||
     (type === 'behind' && currentIdx === -1);
   if (needRefreshRouter) {
-    const nextRouteIdx = type === 'behind' ? tabRouters.length - 1 : 1;
-    const nextRouter = tabRouters[nextRouteIdx];
+    const nextRouteIdx = type === 'behind' ? list.length - 1 : 1;
+    const nextRouter = list[nextRouteIdx];
     router.push({ path: nextRouter.path, query: nextRouter.query });
   }
 

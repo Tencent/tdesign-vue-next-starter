@@ -11,6 +11,7 @@ import { useRoute } from 'vue-router';
 
 import type { LocalizedTitle } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
+import { normalizePath } from '@/utils/route';
 
 const { locale } = useLocale();
 const route = useRoute();
@@ -21,7 +22,7 @@ const renderTitle = (title?: LocalizedTitle, fallback?: string) => {
 };
 
 const crumbs = computed(() => {
-  const pathArray = route.path.split('/');
+  const pathArray = normalizePath(route.path).split('/');
   pathArray.shift();
 
   const breadcrumbs = pathArray.reduce((breadcrumbArray: { path: string; to: string; title: string }[], path, idx) => {

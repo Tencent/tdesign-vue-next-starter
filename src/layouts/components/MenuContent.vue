@@ -32,6 +32,7 @@ import type { LocalizedTitle } from '@/locales';
 import { useLocale } from '@/locales/useLocale';
 import { getActive } from '@/router';
 import type { MenuRoute } from '@/types/interface';
+import { normalizePath } from '@/utils/route';
 
 type ListItemType = MenuRoute;
 
@@ -71,7 +72,7 @@ function getMenuList(list: MenuRoute[], basePath?: string): MenuRoute[] {
   });
   return list
     .map((item) => {
-      const path = basePath && !item.path.includes(basePath) ? `${basePath}/${item.path}` : item.path;
+      const path = normalizePath(basePath && !item.path.includes(basePath) ? `${basePath}/${item.path}` : item.path);
 
       return {
         path,
@@ -94,17 +95,14 @@ const getHref = (item: MenuRoute) => {
 };
 
 const getPath = (item: ListItemType) => {
-  const activeLevel = active.value.split('/').length;
-  const pathLevel = item.path.split('/').length;
-  if (activeLevel > pathLevel && active.value.startsWith(item.path)) {
-    return active.value;
+  const current = active.value;
+  const itemPath = item.path;
+
+  if (current.startsWith(itemPath) && (current.length === itemPath.length || current.charAt(itemPath.length) === '/')) {
+    return current;
   }
 
-  if (active.value === item.path) {
-    return active.value;
-  }
-
-  return item.meta?.single ? item.redirect : item.path;
+  return item.meta?.single ? item.redirect : itemPath;
 };
 
 const openHref = (url: string) => {

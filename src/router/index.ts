@@ -3,6 +3,8 @@ import uniq from 'lodash/uniq';
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
 
+import { normalizePath } from '@/utils/route';
+
 const env = import.meta.env.MODE || 'development';
 
 // 导入homepage相关固定路由
@@ -74,7 +76,7 @@ export const getActive = (maxLevel = 3): string => {
     return '';
   }
 
-  return route.path
+  return normalizePath(route.path)
     .split('/')
     .filter((_item: string, index: number) => index <= maxLevel && index > 0)
     .map((item: string) => `/${item}`)

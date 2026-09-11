@@ -16,6 +16,7 @@ import { useRoute } from 'vue-router';
 
 import { usePermissionStore, useSettingStore } from '@/store';
 import type { MenuRoute } from '@/types/interface';
+import { normalizePath } from '@/utils/route';
 
 import LSideNav from './SideNav.vue';
 
@@ -28,9 +29,14 @@ const sideMenu = computed(() => {
   const { layout, splitMenu } = settingStore;
   let newMenuRouters = menuRouters.value as Array<MenuRoute>;
   if (layout === 'mix' && splitMenu) {
+    const currentPath = normalizePath(route.path);
     newMenuRouters.forEach((menu) => {
-      if (route.path.indexOf(menu.path) === 0) {
-        newMenuRouters = menu.children.map((subMenu) => ({ ...subMenu, path: `${menu.path}/${subMenu.path}` }));
+      const menuPath = normalizePath(menu.path);
+      if (currentPath.startsWith(menuPath)) {
+        newMenuRouters = menu.children.map((subMenu) => ({
+          ...subMenu,
+          path: normalizePath(`${menuPath}/${subMenu.path}`),
+        }));
       }
     });
   }
