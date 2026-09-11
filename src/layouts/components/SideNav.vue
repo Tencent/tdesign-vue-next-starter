@@ -43,6 +43,7 @@ import { t } from '@/locales';
 import { getActive } from '@/router';
 import { useSettingStore } from '@/store';
 import type { MenuRoute, ModeType } from '@/types/interface';
+import { normalizePath } from '@/utils/route';
 
 import pgk from '../../../package.json';
 import MenuContent from './MenuContent.vue';
@@ -93,7 +94,7 @@ const getExpanded = () => {
   const result = parts.map((_, index) => `/${parts.slice(0, index + 1).join('/')}`);
 
   const allRoutes = router.getRoutes();
-  const allRoutesExpanded = allRoutes.filter((item) => item.meta?.expanded).map((item) => item.path);
+  const allRoutesExpanded = allRoutes.filter((item) => item.meta?.expanded).map((item) => normalizePath(item.path));
 
   expanded.value = menuAutoCollapsed.value
     ? union(result, allRoutesExpanded)

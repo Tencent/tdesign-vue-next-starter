@@ -107,3 +107,15 @@ export function transformObjectToRoute<T = RouteItem>(routeList: RouteItem[]): T
 
   return [PAGE_NOT_FOUND_ROUTE, ...routeList] as unknown as T[];
 }
+
+// 统一 path 编解码
+export function normalizePath(path: string): string {
+  if (!path || !path.includes('%')) return path;
+
+  // 遇到非合规 % 参数会抛出错误
+  try {
+    return decodeURIComponent(path);
+  } catch {
+    return path;
+  }
+}

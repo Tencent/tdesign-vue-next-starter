@@ -31,6 +31,7 @@ import { useRoute } from 'vue-router';
 
 import { prefix } from '@/config/global';
 import { useSettingStore, useTabsRouterStore } from '@/store';
+import { normalizePath } from '@/utils/route';
 
 import LayoutContent from './components/LayoutContent.vue';
 import LayoutHeader from './components/LayoutHeader.vue';
@@ -64,7 +65,7 @@ onMounted(() => {
 });
 
 watch(
-  () => route.path,
+  () => normalizePath(route.path),
   () => {
     appendNewRoute();
     document.querySelector(`.${prefix}-layout`)?.scrollTo({ top: 0, behavior: 'smooth' });

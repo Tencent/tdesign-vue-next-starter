@@ -6,6 +6,7 @@ import type { RouteRecordRaw } from 'vue-router';
 
 import router from '@/router';
 import { getPermissionStore, useUserStore } from '@/store';
+import { normalizePath } from '@/utils/route';
 import { PAGE_NOT_FOUND_ROUTE } from '@/utils/route/constant';
 
 NProgress.configure({ showSpinner: false });
@@ -19,7 +20,7 @@ router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
 
   if (userStore.token) {
-    if (to.path === '/login') {
+    if (normalizePath(to.path) === '/login') {
       next();
       return;
     }
@@ -60,7 +61,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     /* white list router */
-    if (whiteListRouters.includes(to.path)) {
+    if (whiteListRouters.includes(normalizePath(to.path))) {
       next();
     } else {
       next({
@@ -73,7 +74,7 @@ router.beforeEach(async (to, from, next) => {
 });
 
 router.afterEach((to) => {
-  if (to.path === '/login') {
+  if (normalizePath(to.path) === '/login') {
     const userStore = useUserStore();
     const permissionStore = getPermissionStore();
 
