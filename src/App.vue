@@ -17,8 +17,3 @@ const mode = computed(() => {
 
 const { getComponentsLocale, locale } = useLocale();
 </script>
-<style lang="less" scoped>
-#nprogress .bar {
-  background: var(--td-brand-color) !important;
-}
-</style>
