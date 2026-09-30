@@ -17,7 +17,9 @@
       <menu-content :nav-data="menu" />
       <template #operations>
         <t-button variant="text" shape="square" @click="changeCollapsed">
-          <template #icon><t-icon name="view-list" /></template>
+          <template #icon>
+            <t-icon :name="collapsed ? 'menu-unfold' : 'menu-fold'" />
+          </template>
         </t-button>
         <span v-show="!isCompact" :class="versionCls">
           {{ !collapsed ? t('common.appName') : '' }} {{ pgk.version }}

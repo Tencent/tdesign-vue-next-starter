@@ -1,2 +1,19 @@
 @import './font-family.less';
 @import './reset.less';
+
+// 顶部进度条（NProgress）跟随品牌色
+// NProgress 的 DOM 由它自己动态挂到 body 上，不带 Vue 的 scoped 属性，
+// 写在组件的 <style scoped> 里会被编译成 #nprogress .bar[data-v-xxx]，选择器永远匹配不上，
+// 因此必须写在全局样式里；!important 用于覆盖 nprogress/nprogress.css 的默认色
+#nprogress .bar {
+  background: var(--td-brand-color) !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--td-brand-color), 0 0 5px var(--td-brand-color) !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--td-brand-color) !important;
+  border-left-color: var(--td-brand-color) !important;
+}
