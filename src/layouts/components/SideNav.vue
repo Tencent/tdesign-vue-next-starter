@@ -30,9 +30,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import difference from 'lodash/difference';
-import remove from 'lodash/remove';
-import union from 'lodash/union';
+import difference from 'lodash-es/difference';
+import remove from 'lodash-es/remove';
+import union from 'lodash-es/union';
 import type { MenuValue } from 'tdesign-vue-next';
 import type { PropType } from 'vue';
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';

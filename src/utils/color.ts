@@ -1,5 +1,5 @@
 import type * as echarts from 'echarts/core';
-import trim from 'lodash/trim';
+import trim from 'lodash-es/trim';
 import { Color } from 'tvision-color';
 
 import type { TColorToken } from '@/config/color';

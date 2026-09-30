@@ -1,7 +1,7 @@
 // axios配置  可自行根据项目进行更改，只需更改该文件即可，其他文件可以不动
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
-import isString from 'lodash/isString';
-import merge from 'lodash/merge';
+import isString from 'lodash-es/isString';
+import merge from 'lodash-es/merge';
 
 import { ContentTypeEnum } from '@/constants';
 import { useUserStore } from '@/store';

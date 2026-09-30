@@ -7,7 +7,7 @@
 </template>
 <script lang="ts" setup>
 import { useWindowSize } from '@vueuse/core';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash-es/debounce';
 import type { CSSProperties } from 'vue';
 import { computed, ref, unref, watch } from 'vue';
 

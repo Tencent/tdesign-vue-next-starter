@@ -7,10 +7,10 @@ import type {
   InternalAxiosRequestConfig,
 } from 'axios';
 import axios from 'axios';
-import cloneDeep from 'lodash/cloneDeep';
-import debounce from 'lodash/debounce';
-import isFunction from 'lodash/isFunction';
-import throttle from 'lodash/throttle';
+import cloneDeep from 'lodash-es/cloneDeep';
+import debounce from 'lodash-es/debounce';
+import isFunction from 'lodash-es/isFunction';
+import throttle from 'lodash-es/throttle';
 import { stringify } from 'qs';
 
 import { ContentTypeEnum } from '@/constants';

@@ -1,5 +1,5 @@
-import isObject from 'lodash/isObject';
-import uniq from 'lodash/uniq';
+import isObject from 'lodash-es/isObject';
+import uniq from 'lodash-es/uniq';
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
 
