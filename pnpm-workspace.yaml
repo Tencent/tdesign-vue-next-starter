@@ -1,0 +1,3 @@
+allowBuilds:
+  core-js-pure: true
+  esbuild: true
