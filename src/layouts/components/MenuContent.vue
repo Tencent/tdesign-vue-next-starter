@@ -1,28 +1,26 @@
 <template>
-  <div>
-    <template v-for="item in list" :key="item.path">
-      <template v-if="!item.children || !item.children.length || item.meta?.single">
-        <t-menu-item v-if="getHref(item)" :name="item.path" :value="getPath(item)" @click="openHref(getHref(item)![0])">
-          <template #icon>
-            <component :is="menuIcon(item)" class="t-icon"></component>
-          </template>
-          {{ renderMenuTitle(item.title) }}
-        </t-menu-item>
-        <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
-          <template #icon>
-            <component :is="menuIcon(item)" class="t-icon"></component>
-          </template>
-          {{ renderMenuTitle(item.title) }}
-        </t-menu-item>
-      </template>
-      <t-submenu v-else :name="item.path" :value="item.path" :title="renderMenuTitle(item.title)">
+  <template v-for="item in list" :key="item.path">
+    <template v-if="!item.children || !item.children.length || item.meta?.single">
+      <t-menu-item v-if="getHref(item)" :name="item.path" :value="getPath(item)" @click="openHref(getHref(item)![0])">
         <template #icon>
           <component :is="menuIcon(item)" class="t-icon"></component>
         </template>
-        <menu-content v-if="item.children" :nav-data="item.children" />
-      </t-submenu>
+        {{ renderMenuTitle(item.title) }}
+      </t-menu-item>
+      <t-menu-item v-else :name="item.path" :value="getPath(item)" :to="item.path">
+        <template #icon>
+          <component :is="menuIcon(item)" class="t-icon"></component>
+        </template>
+        {{ renderMenuTitle(item.title) }}
+      </t-menu-item>
     </template>
-  </div>
+    <t-submenu v-else :name="item.path" :value="item.path" :title="renderMenuTitle(item.title)">
+      <template #icon>
+        <component :is="menuIcon(item)" class="t-icon"></component>
+      </template>
+      <menu-content v-if="item.children" :nav-data="item.children" />
+    </t-submenu>
+  </template>
 </template>
 <script setup lang="tsx">
 import type { PropType } from 'vue';
