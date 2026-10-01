@@ -19,6 +19,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   const { VITE_BASE_URL, VITE_API_URL_PREFIX } = loadEnv(mode, CWD);
   return {
     base: VITE_BASE_URL,
+
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
