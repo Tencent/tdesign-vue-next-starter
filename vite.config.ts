@@ -2,12 +2,17 @@ import path from 'node:path';
 
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import browserslist from 'browserslist';
+import { browserslistToTargets } from 'lightningcss';
 import type { ConfigEnv, UserConfig } from 'vite';
 import { loadEnv } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 import svgLoader from 'vite-svg-loader';
 
 const CWD = process.cwd();
+
+const CSS_BROWSERS_QUERY = ['baseline widely available'];
+const cssTargets = browserslistToTargets(browserslist(CSS_BROWSERS_QUERY));
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
@@ -22,6 +27,11 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     },
 
     css: {
+      transformer: 'lightningcss',
+      lightningcss: {
+        targets: cssTargets,
+      },
+      devSourcemap: true,
       preprocessorOptions: {
         less: {
           modifyVars: {
@@ -54,6 +64,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
 
     // https://github.com/vueuse/vueuse/issues/5387#issuecomment-4734186040
     build: {
+      cssMinify: 'lightningcss',
       rolldownOptions: {
         onLog(level, log, defaultHandler) {
           if (log.code === 'INVALID_ANNOTATION') return null;
