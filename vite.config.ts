@@ -7,8 +7,6 @@ import { loadEnv } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 import svgLoader from 'vite-svg-loader';
 
-import { version } from './package.json';
-
 const CWD = process.cwd();
 
 // https://vitejs.dev/config/
@@ -17,11 +15,6 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   return {
     base: VITE_BASE_URL,
 
-    // 侧边栏版本号：构建期把 package.json 的 version 注入为 import.meta.env.PACKAGE_VERSION，
-    // 业务代码不再 import package.json，整份依赖清单因此绝不会进 layouts chunk。
-    define: {
-      'import.meta.env.PACKAGE_VERSION': JSON.stringify(version),
-    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
