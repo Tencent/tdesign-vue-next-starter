@@ -42,7 +42,7 @@
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
     "@types/echarts": "^5.0.0",
-    "@types/lodash": "^4.17.24",
+    "@types/lodash": "^4.17.25",
     "@types/mockjs": "^1.0.10",
     "@types/node": "^25.9.4",
     "@types/nprogress": "^0.2.3",
