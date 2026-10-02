@@ -1,3 +1,4 @@
+import { usePreferredDark } from '@vueuse/core';
 import keys from 'lodash/keys';
 import { defineStore } from 'pinia';
 import { Color } from 'tvision-color';
@@ -8,6 +9,8 @@ import STYLE_CONFIG from '@/config/style';
 import { store } from '@/store';
 import type { ModeType } from '@/types/interface';
 import { generateColorMap, insertThemeStylesheet } from '@/utils/color';
+
+const systemDark = usePreferredDark();
 
 const state: Record<string, any> = {
   ...STYLE_CONFIG,
@@ -27,11 +30,7 @@ export const useSettingStore = defineStore('setting', {
     showHeaderLogo: (state) => state.layout !== 'side',
     displayMode: (state): ModeType => {
       if (state.mode === 'auto') {
-        const media = window.matchMedia('(prefers-color-scheme:dark)');
-        if (media.matches) {
-          return 'dark';
-        }
-        return 'light';
+        return systemDark.value ? 'dark' : 'light';
       }
       return state.mode as ModeType;
     },
@@ -58,12 +57,7 @@ export const useSettingStore = defineStore('setting', {
       document.documentElement.setAttribute('side-mode', isDarkMode ? 'dark' : '');
     },
     getMediaColor() {
-      const media = window.matchMedia('(prefers-color-scheme:dark)');
-
-      if (media.matches) {
-        return 'dark';
-      }
-      return 'light';
+      return systemDark.value ? 'dark' : 'light';
     },
     changeBrandTheme(brandTheme: string) {
       const mode = this.displayMode;
