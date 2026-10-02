@@ -4,7 +4,7 @@
   </t-config-provider>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 
 import { useLocale } from '@/locales/useLocale';
 import { useSettingStore } from '@/store';
@@ -16,4 +16,14 @@ const mode = computed(() => {
 });
 
 const { getComponentsLocale, locale } = useLocale();
+
+watch(
+  () => store.displayMode,
+  () => {
+    if (store.mode !== 'auto') return;
+
+    store.changeMode('auto');
+    store.changeBrandTheme(store.brandTheme);
+  },
+);
 </script>

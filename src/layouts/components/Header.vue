@@ -10,7 +10,7 @@
         </div>
       </template>
       <template v-if="layout !== 'side'" #default>
-        <menu-content class="header-menu" :nav-data="menu" />
+        <menu-content :nav-data="menu" />
       </template>
       <template #operations>
         <div class="operations-container">
@@ -182,11 +182,11 @@ const navToHelper = () => {
   }
 }
 
-.header-menu {
+:deep(.t-head-menu .t-menu) {
   flex: 1 1 auto;
   display: inline-flex;
 
-  :deep(.t-menu__item) {
+  .t-menu__item {
     min-width: unset;
   }
 }

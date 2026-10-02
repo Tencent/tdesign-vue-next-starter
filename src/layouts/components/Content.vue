@@ -3,11 +3,11 @@
     <router-view v-if="!isFramePage" v-slot="{ Component }">
       <transition name="fade">
         <keep-alive :include="aliveViews">
-          <component :is="Component" />
+          <component :is="Component" v-if="!isFramePage" />
         </keep-alive>
       </transition>
     </router-view>
-    <frame-page v-else />
+    <frame-page v-show="isFramePage" />
   </div>
 
   <t-loading v-else />
