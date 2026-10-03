@@ -53,7 +53,12 @@
       </t-table>
     </t-card>
 
-    <t-dialog v-model:visible="visible" :header="t('pages.detailDeploy.projectList.dialog.title')" @confirm="onConfirm">
+    <t-dialog
+      v-model:visible="visible"
+      placement="center"
+      :header="t('pages.detailDeploy.projectList.dialog.title')"
+      @confirm="onConfirm"
+    >
       <template #body>
         <div class="dialog-info-block">
           <div class="dialog-info-block">

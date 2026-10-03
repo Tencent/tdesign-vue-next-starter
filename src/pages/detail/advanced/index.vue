@@ -109,7 +109,12 @@
       </t-table>
     </t-card>
 
-    <t-dialog v-model:visible="visible" :header="t('pages.detailCard.baseInfo.title')" @confirm="onConfirm">
+    <t-dialog
+      v-model:visible="visible"
+      placement="center"
+      :header="t('pages.detailCard.baseInfo.title')"
+      @confirm="onConfirm"
+    >
       <template #body>
         <div class="dialog-info-block">
           <t-descriptions :column="1">

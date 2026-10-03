@@ -1,5 +1,11 @@
 <template>
-  <t-dialog v-model:visible="formVisible" :header="t('pages.listCard.create')" :width="680" :footer="false">
+  <t-dialog
+    v-model:visible="formVisible"
+    placement="center"
+    :header="t('pages.listCard.create')"
+    :width="680"
+    :footer="false"
+  >
     <template #body>
       <!-- 表单内容 -->
       <t-form :data="formData" :rules="rules" :label-width="100" @submit="onSubmit">

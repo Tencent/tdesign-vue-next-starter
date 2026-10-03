@@ -60,6 +60,11 @@ const isFramePage = computed(() => {
 <style lang="less" scoped>
 .page-container {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.page-container > * {
+  min-width: 0;
 }
 
 .fade-leave-active,
