@@ -3,7 +3,7 @@
     <router-view v-if="!isFramePage" v-slot="{ Component }">
       <transition name="fade">
         <keep-alive :include="aliveViews">
-          <component :is="Component" v-if="!isFramePage" />
+          <component :is="Component" v-if="!isFramePage" :key="route.path" />
         </keep-alive>
       </transition>
     </router-view>
