@@ -2,8 +2,9 @@
   <div v-if="!isRefreshing" class="page-container">
     <router-view v-if="!isFramePage" v-slot="{ Component }">
       <transition name="fade">
+        <!-- keep-alive 内的组件必须带唯一 key，否则 transition 的 leave 过渡失效，切换路由后旧页面节点会残留在 DOM 中 -->
         <keep-alive :include="aliveViews">
-          <component :is="Component" v-if="!isFramePage" />
+          <component :is="Component" v-if="!isFramePage" :key="route.path" />
         </keep-alive>
       </transition>
     </router-view>
