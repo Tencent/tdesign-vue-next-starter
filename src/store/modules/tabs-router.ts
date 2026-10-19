@@ -19,10 +19,6 @@ const state = {
   isRefreshing: false,
 };
 
-// 不需要做多标签tabs页缓存的列表 值为每个页面对应的name 如 DashboardDetail
-// const ignoreCacheRoutes = ['DashboardDetail'];
-const ignoreCacheRoutes = ['login'];
-
 export const useTabsRouterStore = defineStore('tabsRouter', {
   state: () => state,
   getters: {
@@ -37,15 +33,17 @@ export const useTabsRouterStore = defineStore('tabsRouter', {
     },
     // 处理新增
     appendTabRouterList(newRoute: TRouterInfo) {
-      // 不要将判断条件newRoute.meta.keepAlive !== false修改为newRoute.meta.keepAlive，starter默认开启保活，所以meta.keepAlive未定义时也需要进行保活，只有显式说明false才禁用保活。
-      const needAlive = !ignoreCacheRoutes.includes(newRoute.name as string) && newRoute.meta?.keepAlive !== false;
       const normalizedPath = normalizePath(newRoute.path);
-      const existed = this.tabRouters.some((route: TRouterInfo) => {
+      const isExisted = this.tabRouters.some((route: TRouterInfo) => {
         return route.path === normalizedPath || normalizePath(route.path) === normalizedPath;
       });
 
-      if (!existed) {
-        this.tabRouterList = this.tabRouterList.concat({ ...newRoute, path: normalizedPath, isAlive: needAlive });
+      if (!isExisted) {
+        this.tabRouterList = this.tabRouterList.concat({
+          ...newRoute,
+          path: normalizedPath,
+          isAlive: true,
+        });
       }
     },
     // 处理关闭当前
